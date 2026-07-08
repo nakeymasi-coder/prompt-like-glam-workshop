@@ -1636,3 +1636,13 @@ body.light-theme .help-card p {
   font-size: 0.78rem;
   color: rgba(212, 175, 55, 0.85);
 }
+.builder-buttons{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+    gap:10px;
+    margin-top:18px;
+}
+
+.builder-buttons .secondary-btn{
+    width:100%;
+}
