@@ -1523,6 +1523,30 @@ Do NOT generate JavaScript.
 
 Stop after completing the full style.css file.`,
 
+customizeCss: `You are an expert HTML and CSS developer.
+
+Help me customize the appearance of the AI prompt generator I built.
+
+I want to update:
+
+• Color palette
+• Fonts
+• Header image beneath the title
+• Marquee
+• Scrollbar
+• Button styles
+• Copyright
+
+Do not redesign the generator.
+
+Keep the existing HTML structure exactly the same.
+
+Only generate the CSS needed to customize the appearance.
+
+Explain exactly where to paste the CSS into style.css.
+
+Wait for me to tell you my preferred colors, fonts, and branding before generating the CSS.`,
+
 jsPart1: `You are an expert JavaScript developer and front-end application architect specializing in professional AI prompt generators.
 
 If any completed blueprint conflicts with another completed blueprint, preserve all approved information and follow the most specific blueprint rather than inventing a new implementation.

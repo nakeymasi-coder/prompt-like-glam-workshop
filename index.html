@@ -447,69 +447,105 @@ Prompt-Generator/
 <!-- PAGE: DAY TWO -->
 <!-- ============================= -->
 <section class="page" id="day-two">
-<div class="page-header split-header">
-<div>
-<span class="eyebrow">Day 2</span>
-<h1>Add Modules, Publish, and Sell</h1>
-<p>
-                Students turn the basic generator into a premium product by
-                adding high-value outputs, publishing it online, and packaging
-                it for sale.
-              </p>
+  <div class="page-header split-header">
+    <div>
+      <h1>Customize Your Generator</h1>
+      <p>
+        Personalize the generator you built on Day 1 without rebuilding it.
+        Edit only index.html and style.css.
+      </p>
+    </div>
+  </div>
+
+  <div class="lesson-section-grid">
+    <article class="lesson-block">
+      <span class="lesson-tag">Files</span>
+      <h2>Files to Edit</h2>
+      <ul>
+        <li><code>index.html</code></li>
+        <li><code>style.css</code></li>
+      </ul>
+    </article>
+
+    <article class="lesson-block">
+      <span class="lesson-tag">Customize</span>
+      <h2>What You’ll Customize</h2>
+      <ul>
+        <li>Color palette</li>
+        <li>Fonts</li>
+        <li>Header image under the generator title</li>
+        <li>Marquee</li>
+        <li>Scrollbar</li>
+        <li>Button styles</li>
+        <li>Copyright</li>
+      </ul>
+    </article>
+
+    <article class="lesson-block">
+      <span class="lesson-tag">HTML</span>
+      <h2>Add a Header Image</h2>
+      <p>Paste this directly under your main generator title.</p>
+
+      <pre><code>&lt;div class="generator-header-image"&gt;
+  &lt;img src="images/header-image.png" alt="Generator header image" /&gt;
+&lt;/div&gt;</code></pre>
+    </article>
+
+    <article class="lesson-block">
+      <span class="lesson-tag">HTML</span>
+      <h2>Add a Marquee</h2>
+      <p>Paste this under the header image.</p>
+
+      <pre><code>&lt;div class="generator-marquee"&gt;
+  &lt;div class="marquee-track"&gt;
+    &lt;span&gt;Customize your generator ✦ Make it your own ✦ Add your brand style ✦&lt;/span&gt;
+    &lt;span&gt;Customize your generator ✦ Make it your own ✦ Add your brand style ✦&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </article>
+
+    <article class="lesson-block">
+      <span class="lesson-tag">CSS</span>
+      <h2>Style Your Customizations</h2>
+      <p>
+        Update your colors, fonts, header image, marquee, scrollbar, and buttons
+        inside style.css.
+      </p>
+    </article>
+
+    <article class="lesson-block">
+      <span class="lesson-tag">Footer</span>
+      <h2>Update the Copyright</h2>
+      <p>Use a simple copyright footer only. No extra footer clutter.</p>
+
+      <pre><code>&lt;footer class="generator-footer"&gt;
+  &lt;p&gt;© &lt;span id="copyrightYear"&gt;&lt;/span&gt; Your Brand Name. All rights reserved.&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+    </article>
+
+
+    <article class="lesson-block">
+    <span class="lesson-tag">Prompt</span>
+
+    <h2>Customize Your CSS</h2>
+
+    <p>
+        Copy this prompt into ChatGPT. It will generate custom CSS that matches your generator, your branding, and your color palette.
+    </p>
+
+    <button class="secondary-btn copy-snippet-btn" data-snippet="customizeCss">
+  Copy Prompt
+</button>
+</article>
+
+
+
+<div class="lesson-complete-area">
+    <button class="gold-btn" id="markDayTwoCompleteBtn">
+        Mark Lesson Complete
+    </button>
 </div>
-<button class="gold-btn" id="markDayTwoCompleteBtn">
-              Mark Day 2 Complete
-            </button>
-</div>
-<div class="lesson-section-grid">
-<article class="lesson-block">
-<span class="lesson-tag">Step 1</span>
-<h2>Add Premium Modules</h2>
-<p>
-                Add generator outputs for images, videos, music, marketing,
-                Custom GPTs, and sales content.
-              </p>
-</article>
-<article class="lesson-block">
-<span class="lesson-tag">Step 2</span>
-<h2>Polish the Interface</h2>
-<p>
-                Clean up spacing, mobile layout, copy buttons, and the final
-                look.
-              </p>
-</article>
-<article class="lesson-block">
-<span class="lesson-tag">Step 3</span>
-<h2>Save with GitHub</h2>
-<p>
-                Create a repo, commit the files, and push updates so the project
-                is protected and easy to update later.
-              </p>
-</article>
-<article class="lesson-block">
-<span class="lesson-tag">Step 4</span>
-<h2>Publish with Netlify</h2>
-<p>
-                Connect GitHub to Netlify and publish the live generator link.
-              </p>
-</article>
-<article class="lesson-block">
-<span class="lesson-tag">Step 5</span>
-<h2>Create the Product Package</h2>
-<p>
-                Add buyer instructions, screenshots, mockups, and a simple
-                product description.
-              </p>
-</article>
-<article class="lesson-block">
-<span class="lesson-tag">Step 6</span>
-<h2>Launch and Sell</h2>
-<p>
-                Price it, write the sales page, create promo content, and start
-                sharing the link.
-              </p>
-</article>
-</div>
+
 </section>
 <!-- ============================= -->
 <!-- PAGE: BLUEPRINT -->
