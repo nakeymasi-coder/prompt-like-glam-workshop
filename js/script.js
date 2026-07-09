@@ -403,6 +403,15 @@ Follow these rules throughout the project:
 
 Do not make assumptions about the generator. Build only what I request in each prompt.
 
+Do not invent additional features, interface elements, branding, navigation, logos, taglines, version badges, marketing copy, placeholder text, example content, example categories, example presets, example workflows, or sample prompts unless they are explicitly requested.
+
+Only create the exact components requested in each prompt.
+
+If a prompt asks for a blueprint, define only the required structure. Do not invent implementation details, examples, or content that were not requested.
+Do not treat builder prompts as permission to redesign. Builder prompts are only for implementation.
+
+Each completed card becomes part of the source of truth for the next card. Once the Generator Planner, Layout Blueprint, Category Blueprint, Input Builder Blueprint, Logic Blueprint, and Prompt Assembly Blueprint are completed, all builder prompts must follow those approved documents exactly.
+
 Do not generate anything yet.
 
 Wait for my next prompt.`,
@@ -413,59 +422,28 @@ The Generator Foundation has already been established.
 
 We are building a professional AI prompt generator using HTML, CSS, and JavaScript.
 
-Your task is to create the complete blueprint for this generator before writing any code.
+Your task is to create ONLY the Generator Planner for the generator idea I provide.
 
 Using the generator idea I provide, build the complete development blueprint.
 
-Include:
+Include only:
 
-1. Generator Purpose
+1. Generator Name
+2. Generator Purpose
+3. Target Audience
+4. Main Goal
+5. What the generator creates
+6. What problem it solves
+7. What the final prompt should help the user do
 
-* What the generator creates
-* Who it is for
-* The problem it solves
+Do NOT create categories yet.
+Do NOT create inputs yet.
+Do NOT create workflow yet.
+Do NOT create layouts yet.
+Do NOT create presets yet.
+Do NOT create outputs yet.
+Do NOT create features yet.
 
-2. Generator Workflow
-
-* Complete user workflow from opening the generator to copying the finished prompt.
-
-3. Generator Categories
-
-* Every category the generator needs.
-* Organize them in the order they should appear.
-
-4. User Inputs
-
-For every category, specify every required input, including:
-
-* Dropdown menus
-* Chip button groups
-* Text inputs
-* Textareas
-* Lock buttons
-* Randomize support
-* Preset support
-
-5. Generator Outputs
-
-List every output the generator should produce based on the generator's purpose.
-
-6. Core Features
-
-Include every feature required for a professional prompt generator, including:
-
-* Generate Prompt
-* Randomize
-* Lock Fields
-* Clear All
-* Copy Prompt
-* Save Prompt
-* Prompt History
-* Prompt Variations
-* Prompt Quality Checker
-* Character Counter
-
-Design the blueprint so it can be built as a professional, responsive, single-page application.
 
 Do not generate HTML.
 
@@ -477,122 +455,51 @@ Only create the complete development blueprint.
 
 Wait for my next prompt.`,
 
-layout: `You are an expert UI/UX designer, senior front-end developer, and application architect specializing in professional AI prompt generators.
+layout: `You are an expert UI/UX architect and front-end application designer specializing in professional AI prompt generators.
 
 The Generator Foundation has already been completed.
 
 The Generator Planner has already been completed, including the generator name, purpose, target audience, and main goal.
 
-The Reference Image has already been uploaded and analyzed. Use it as the visual inspiration for the overall layout, user experience, spacing, hierarchy, styling, typography, colors, and interface. Do not copy the reference image exactly. Create an original application that follows the same level of quality and professionalism.
+The Reference Image has already been uploaded and analyzed.
 
-Your task is to build the complete Layout Blueprint for the AI prompt generator before any HTML, CSS, or JavaScript is generated.
+Use the completed Generator Foundation, Generator Planner, and Reference Image as the source of truth for this blueprint.
 
-Build the complete application layout.
+The Generator Planner defines the generator's purpose, audience, and goal.
 
-Include:
+The Reference Image defines only the visual direction.
 
-## 1. Overall Application Layout
+Do not use the Reference Image to create generator content.
 
-Build the complete page structure, including:
+Use the Reference Image only for visual inspiration, including layout style, spacing, typography, color direction, card styling, and overall user experience.
 
-* Header
-* Hero section
-* Generator workspace
-* Footer
+Do not copy the Reference Image.
 
-## 2. Generator Sections
+Do not infer categories, presets, branding, content, workflows, examples, or marketing copy from the Reference Image.
 
-Build every major section in the order users should experience them.
+Your task is to build the complete Layout Blueprint for the AI prompt generator.
 
-Include:
+The Layout Blueprint defines ONLY the application's page structure.
 
-* Welcome / Hero
-* Presets
-* Main Controls
-* Generator Categories
-* Prompt Output
-* Prompt Variations
-* Prompt History
-* Prompt Quality Checker
-* Footer
+Do not invent sections that are not listed below.
 
-## 3. Main Controls
+Do not reorganize the page structure.
 
-Build the primary control area containing:
+Only define the location and purpose of each approved section.
 
-* Generate Prompt
-* Randomize
-* Clear All
-* Copy Prompt
-* Save Prompt
+Do not create content.
 
-Define the purpose of each control and how it fits into the user workflow.
+Do not create examples.
 
-## 4. Category Sections
+Do not create categories.
 
-Build reusable collapsible category sections.
+Do not create presets.
 
-Each category must support:
+Do not explain functionality.
 
-* Dropdown menus
-* Chip button groups
-* Custom text box
-* Lock button
+Do not create user workflows.
 
-Explain how each category should be organized and how users interact with it.
-
-## 5. Prompt Output Area
-
-Build the output section containing:
-
-* Final Prompt
-* Copy Prompt button
-* Character Counter
-* Prompt Quality Score
-
-## 6. Prompt Variations
-
-Build a section that displays multiple prompt variations.
-
-Each variation must include its own Copy button.
-
-## 7. Prompt History
-
-Build a history section that stores previously generated prompts.
-
-Each saved prompt must include:
-
-* Preview
-* Date Created
-* Copy button
-* Delete button
-
-## 8. User Workflow
-
-Build the complete user workflow from opening the application to copying the finished prompt.
-
-## 9. Visual Direction
-
-Define the application's visual direction for:
-
-* Layout
-* Cards
-* Typography
-* Color palette
-* Buttons
-* Spacing
-* Hover states
-* Responsive behavior
-
-The interface should be:
-
-* Professional
-* Premium
-* Clean
-* Modern
-* Beginner-friendly
-* Scalable
-* Easy to expand
+Do not create future features.
 
 Do not generate HTML.
 
@@ -600,9 +507,124 @@ Do not generate CSS.
 
 Do not generate JavaScript.
 
-Only build the complete Layout Blueprint.
+Build only the page layout.
 
-Wait for my next prompt.`,
+Include only the following sections.
+
+# 1. Header
+
+Define the Header.
+
+Include only:
+
+• Generator Name
+
+# 2. Hero
+
+Define the Hero section.
+
+Include only:
+
+• Generator Title
+
+# 3. Presets
+
+Define the location of the Presets section.
+
+Do not create preset names.
+
+# 4. Main Controls
+
+Define the Main Controls section.
+
+Include only:
+
+• Generate Prompt
+• Randomize
+• Copy Prompt
+• Save Prompt
+• Clear All
+
+# 5. Generator Categories
+
+Define the location and structure of the Generator Categories section.
+
+Each category card should support:
+
+• Category Title
+• Dropdowns
+• Chip Buttons
+• Multi-Select Chips
+• Text Input
+• Textarea
+• Lock Button
+
+Do not create category names.
+
+The Category Blueprint will define those later.
+
+# 6. Prompt Output
+
+Define the Prompt Output section.
+
+Include only:
+
+• Final Prompt
+• Copy Prompt Button
+• Character Counter
+• Prompt Quality Score
+
+# 7. Prompt Variations
+
+Define the Prompt Variations section.
+
+Include only:
+
+• Variation Output
+• Copy Button
+
+# 8. Prompt History
+
+Define the Prompt History section.
+
+Include only:
+
+• Prompt Preview
+• Date Created
+• Copy Button
+• Delete Button
+
+# 9. Prompt Quality Checker
+
+Define the location of the Prompt Quality Checker.
+
+Do not define scoring logic.
+
+# 10. Footer
+
+Define the Footer.
+
+Include only:
+
+• Generator Name
+
+# 11. Visual Direction
+
+Briefly define:
+
+• Overall Layout
+• Cards
+• Typography
+• Color Direction
+• Buttons
+• Spacing
+• Responsive Behavior
+
+Keep this section brief.
+
+Only build the Layout Blueprint.
+
+Stop after completing the Layout Blueprint.`,
 
 categories: `You are an expert prompt engineer, prompt architect, and AI generator designer.
 
@@ -614,9 +636,19 @@ The Reference Image has already been uploaded and analyzed.
 
 The Layout Blueprint has already been completed and approved.
 
+Use the completed Generator Foundation, Generator Planner, Reference Image, and Layout Blueprint as the source of truth for this blueprint.
+
+The Generator Planner determines what categories exist.
+
+The Layout Blueprint determines where those categories will appear.
+
+The Reference Image influences only the visual direction and must never influence the category system.
+
 Your task is to build the complete Category Blueprint for the AI prompt generator before any HTML, CSS, or JavaScript is generated.
 
-Build every category the generator needs based on the completed Generator Planner.
+Build every category required by the completed Generator Planner.
+
+Do not invent optional categories that are not required to achieve the generator's purpose.
 
 The categories must work together to produce the final prompt output described in the Generator Planner.
 
@@ -646,15 +678,11 @@ Organize the categories in the exact order users should complete them.
 
 Create categories based on the student's generator purpose, audience, goal, and final prompt output.
 
-The category system should include:
+Build only the categories required to accomplish the generator's purpose as defined in the completed Generator Planner.
 
-• Core user information categories
-• Main prompt subject categories
-• Style and tone categories
-• Output format categories
-• Platform or use-case categories if relevant
-• Custom details categories
-• Advanced prompt options if useful
+Do not force common prompt-generator categories into every generator.
+
+Only create categories that are necessary for this specific generator.
 
 For every category, explain:
 
@@ -679,9 +707,22 @@ Do NOT generate JavaScript.
 
 Only build the complete Category Blueprint.
 
-Stop after completing the Category Blueprint. Do not continue to the Input Builder until instructed.`,
+Stop after completing the Category Blueprint. Do not continue to the Input Builder until instructed.
+
+The completed Category Blueprint will become the authoritative source for all future builders.
+
+Every HTML section, CSS style, JavaScript data structure, OPTION_DATA object, PRESET_DATA object, event listener, prompt assembly rule, validation rule, randomization rule, and application feature must be generated directly from this Category Blueprint.
+
+Do not design categories that cannot be implemented later.`,
+
 
 inputs: `You are an expert front-end application architect, UI designer, and prompt engineering specialist.
+
+Use the completed Generator Foundation, Generator Planner, Reference Image, Layout Blueprint, and Category Blueprint as the source of truth for this blueprint.
+
+The Category Blueprint determines what inputs exist.
+
+Do not invent inputs that are not required by the completed Category Blueprint.
 
 The Generator Foundation has already been completed.
 
@@ -730,7 +771,7 @@ For every text input include:
 • Placeholder text
 • Maximum recommended length
 • Validation recommendations
-• Examples of user input
+• Acceptable user input format
 
 Build the input system so it is:
 
@@ -749,7 +790,13 @@ Do NOT generate JavaScript.
 
 Only build the complete Input Builder Blueprint.
 
-Stop after completing the Input Builder Blueprint. Do not continue to the Logic Builder until instructed.`,
+The completed Input Builder Blueprint will become the authoritative source for all future HTML inputs, CSS control styling, JavaScript selectors, validation rules, randomize behavior, preset behavior, and prompt assembly behavior.
+
+Every input ID must be unique, predictable, and easy to reference in JavaScript.
+
+Do not create inputs that cannot be implemented later.
+
+Stop after completing the Input Builder Blueprint. Do not continue to the Logic Blueprint until instructed.`,
 
 
 logic: `You are an expert software architect, front-end developer, and JavaScript engineer specializing in professional AI prompt generators.
@@ -761,7 +808,13 @@ The Generator Planner has already been completed, including the generator name, 
 The Reference Image has already been uploaded and analyzed.
 
 The Layout Blueprint, Category Blueprint, and Input Builder Blueprint have already been completed and approved.
+Use the completed Generator Foundation, Generator Planner, Reference Image, Layout Blueprint, Category Blueprint, and Input Builder Blueprint as the source of truth for this blueprint.
 
+The Category Blueprint determines what categories exist.
+
+The Input Builder Blueprint determines what inputs exist.
+
+Do not invent application logic for categories or inputs that do not exist in the approved blueprints.
 Your task is to build the complete Logic Blueprint for the AI prompt generator before any JavaScript is generated.
 
 Build the complete application logic.
@@ -776,7 +829,7 @@ Build the complete user workflow from opening the generator to copying or saving
 
 Define:
 
-• How every input should be collected.
+• How every approved input should be collected.
 • How the final prompt should be assembled.
 • How missing values should be handled.
 • How duplicate information should be prevented.
@@ -805,7 +858,8 @@ Explain how Lock interacts with:
 ## 5. Preset Logic
 
 Define:
-
+• Presets must populate only approved inputs.
+• Do not create preset values for categories that do not exist.
 • How presets populate inputs.
 • How users switch between presets.
 • How presets interact with locked fields.
@@ -879,8 +933,9 @@ Define how the application responds to:
 
 ## 13. Future Expansion
 
-Build the logic architecture so additional categories, modules, features, and prompt types can be added later without rewriting the application.
+Build the logic architecture so additional approved categories, modules, features, and prompt types can be added later without rewriting the application.
 
+The architecture must remain data-driven so future categories can be added by extending the Category Blueprint and Input Builder Blueprint rather than rewriting application logic.
 The logic should be:
 
 • Modular
@@ -889,6 +944,12 @@ The logic should be:
 • Beginner-friendly
 • Consistent with the completed Layout Blueprint, Category Blueprint, and Input Builder Blueprint
 • Specific to the completed Generator Planner
+
+The completed Logic Blueprint will become the authoritative source for all future JavaScript behavior.
+
+Every function, event listener, validation rule, randomization rule, lock rule, preset rule, prompt assembly rule, Local Storage operation, and application workflow must be generated directly from this Logic Blueprint.
+
+Do not design logic that cannot be implemented later.
 
 Do NOT generate HTML.
 
@@ -934,8 +995,9 @@ Include:
 
 ## 2. Category Assembly
 
-Define how every completed category should be assembled into the final prompt.
+Define how every approved category from the completed Category Blueprint should be assembled into the final prompt.
 
+Do not invent prompt sections for categories that do not exist.
 Explain:
 
 • Category order
@@ -998,8 +1060,7 @@ Ensure every finished prompt is:
 
 ## 11. Scalability
 
-Build the Prompt Assembly Blueprint so additional categories, modules, prompt sections, and future features can be added without rebuilding the existing prompt structure.
-
+Build the Prompt Assembly Blueprint so additional approved categories, modules, prompt sections, and future features can be added by extending the Category Blueprint and Input Builder Blueprint without rebuilding the existing prompt structure.
 The assembly system should be:
 
 • Modular
@@ -1008,6 +1069,12 @@ The assembly system should be:
 • Beginner-friendly
 • Consistent with the completed Layout Blueprint, Category Blueprint, Input Builder Blueprint, and Logic Blueprint
 • Specific to the completed Generator Planner
+
+The completed Prompt Assembly Blueprint will become the authoritative source for all future prompt generation logic.
+
+Every prompt assembly function, prompt formatting rule, duplicate prevention rule, "None" handling rule, preset integration rule, custom text merge rule, and prompt variation must be generated directly from this Prompt Assembly Blueprint.
+
+Do not design prompt assembly rules that cannot be implemented later.
 
 Do NOT generate HTML.
 
@@ -1020,17 +1087,27 @@ Only build the complete Prompt Assembly Blueprint.
 Stop after completing the Prompt Assembly Blueprint. Do not continue to the HTML Builder until instructed.`,
 
 
-htmlPart1: `You are an expert HTML developer and front-end application architect.
+htmlPart1: `You are an expert HTML developer and front-end application architect specializing in professional AI prompt generators.
 
-The Generator Foundation has already been completed.
+If any completed blueprint conflicts with another completed blueprint, preserve all approved information and follow the most specific blueprint rather than inventing a new implementation.
 
-The Generator Planner has already been completed, including the generator name, purpose, target audience, and main goal.
+Never resolve blueprint conflicts by removing functionality or replacing approved components.
+The following completed documents are the SINGLE SOURCE OF TRUTH:
 
-The Reference Image has already been uploaded and analyzed.
+• Generator Foundation
+• Generator Planner
+• Reference Image
+• Layout Blueprint
+• Category Blueprint
+• Input Builder Blueprint
+• Logic Blueprint
+• Prompt Assembly Blueprint
 
-The Layout Blueprint, Category Blueprint, Input Builder Blueprint, Logic Blueprint, and Prompt Assembly Blueprint have all been completed and approved.
+Do NOT redesign, simplify, rename, replace, or invent anything.
 
-Your task is to build the complete external index.html file for the AI prompt generator.
+Do NOT invent categories, sections, inputs, labels, IDs, classes, placeholder content, or generic prompt-generator fields.
+
+Your task is to build the external index.html file.
 
 Output ONLY HTML code.
 
@@ -1038,55 +1115,72 @@ Build the file in multiple parts.
 
 Generate Part 1.
 
-Include:
+Build:
 
 • DOCTYPE
-• html opening tag
-• head section
+• opening html tag
+• complete head section
 • meta tags
-• page title
+• page title from the Generator Planner
 • stylesheet link to style.css
 • script.js link with defer
-• body opening tag
+• opening body tag
 • application wrapper
 • header
 • hero section
 • introduction
-• opening of the generator workspace
+• opening of the main generator workspace
 
 Do NOT generate CSS.
 
 Do NOT generate JavaScript.
 
-Stop after the opening of the main generator workspace.`,
+Stop immediately after opening the main generator workspace.`,
 
 htmlPart2: `Generate Part 2 of the external index.html file.
 
 Output ONLY HTML code.
 
-Continue from Part 1.
+Continue directly from Part 1.
 
 Do NOT repeat previous code.
 
-Use the completed Generator Planner, Category Blueprint, Input Builder Blueprint, Logic Blueprint, and Prompt Assembly Blueprint as the source of truth.
+The following completed documents are the SINGLE SOURCE OF TRUTH:
 
+• Generator Foundation
+• Generator Planner
+• Reference Image
+• Layout Blueprint
+• Category Blueprint
+• Input Builder Blueprint
+• Logic Blueprint
+• Prompt Assembly Blueprint
+
+Do NOT redesign, simplify, rename, replace, or invent anything.
+
+Do NOT invent categories, inputs, dropdowns, chip groups, text boxes, textareas, lock buttons, section names, IDs, classes, or generic placeholders.
+
+Every category, control, label, input, button, and section must match the approved blueprints exactly.
+
+Generate every HTML element required for the future CSS Builder and JavaScript Builder. Do not omit supporting wrapper elements, containers, data attributes, IDs, classes, ARIA attributes, or structural elements needed for implementation.
 Build:
 
-• Preset section
-• Main control buttons
-• Generate button
-• Randomize button
-• Copy button
-• Save button
-• Clear button
-• All collapsible generator category sections
-• Dropdown inputs
-• Chip button groups
-• Multi-select chip groups
-• Text boxes
-• Textareas
-• Lock buttons
-• Clear category buttons where appropriate
+• preset section
+• main control buttons
+• generate button
+• randomize button
+• copy button
+• save button
+• clear button
+• every approved generator category
+• every approved collapsible section
+• every approved dropdown input
+• every approved chip button group
+• every approved multi-select chip group
+• every approved text input
+• every approved textarea
+• every approved lock button
+• every approved clear category button where appropriate
 
 Do NOT generate CSS.
 
@@ -1098,38 +1192,89 @@ htmlPart3: `Generate Part 3 of the external index.html file.
 
 Output ONLY HTML code.
 
-Continue from Part 2.
+Continue directly from Part 2.
 
 Do NOT repeat previous code.
 
-Use the completed Layout Blueprint, Logic Blueprint, and Prompt Assembly Blueprint as the source of truth.
+The following completed documents are the SINGLE SOURCE OF TRUTH:
+
+The completed blueprints define the application.
+
+Implement them exactly as approved.
+
+Do not reinterpret, reorganize, rename, merge, split, or omit any approved section, category, input, control, label, ID, or workflow.
+
+Use the exact category names, input names, labels, IDs, control types, and display order defined by the completed blueprints.
+
+• Generator Foundation
+• Generator Planner
+• Reference Image
+• Layout Blueprint
+• Category Blueprint
+• Input Builder Blueprint
+• Logic Blueprint
+• Prompt Assembly Blueprint
+
+Do NOT redesign, simplify, rename, replace, or invent anything.
+
+Do NOT invent sections, features, controls, IDs, classes, or generic placeholders.
+
+Build only what is defined in the approved blueprints.
 
 Build:
 
-• Final Prompt Output section
-• Copy Final Prompt button
-• Download Prompt button if included in the blueprint
-• Prompt Variations section
-• Copy buttons for prompt variations
-• Prompt History section
-• Prompt Quality Checker
-• Footer
-• Closing main tag
-• Closing wrapper
-• Closing body tag
-• Closing html tag
+• final prompt output section
+• copy final prompt button
+• download prompt button only if defined in the blueprint
+• prompt variations section
+• copy buttons for prompt variations
+• prompt history section
+• prompt quality checker
+• footer
+• closing main tag
+• closing application wrapper
+• closing body tag
+• closing html tag
+
+The finished HTML must be fully compatible with the future CSS Builder and JavaScript Builder.
+
+The completed index.html file will become the authoritative source for all future CSS selectors and JavaScript DOM references.
+
+Every ID, class, data attribute, and structural element must remain stable and implementation-ready.
 
 Do NOT generate CSS.
 
 Do NOT generate JavaScript.
 
 Stop after completing the full index.html file.`,
+cssPart1: `You are an expert CSS developer, UI designer, and front-end architect specializing in professional AI prompt generators.
 
-cssPart1: `You are an expert CSS developer and UI designer.
+If any completed blueprint conflicts with another completed blueprint, preserve all approved information and follow the most specific blueprint rather than inventing a new implementation.
 
-The HTML structure for the AI Marketing Machine has been completed.
+Never resolve blueprint conflicts by removing functionality or replacing approved components.
+The following completed documents are the SINGLE SOURCE OF TRUTH:
 
-Your task is to build the COMPLETE external style.css file.
+The completed blueprints and index.html define the application.
+
+Style the application exactly as implemented.
+
+Do not rename, remove, merge, split, restyle, or reinterpret any approved component.
+
+Use the exact IDs, classes, data attributes, and HTML structure from the completed index.html.
+
+• Generator Foundation
+• Generator Planner
+• Reference Image
+• Layout Blueprint
+• Category Blueprint
+• Input Builder Blueprint
+• Logic Blueprint
+• Prompt Assembly Blueprint
+• Completed index.html
+
+Do NOT redesign, simplify, rename, replace, or invent anything.
+
+Your task is to build the complete external style.css file.
 
 Output ONLY CSS code.
 
@@ -1138,19 +1283,16 @@ Generate Part 1.
 Build:
 
 • CSS variables
-• Color palette
-• Reset
-• Base typography
-• Body styles
-• Utility classes
-• Global layout
+• color palette
+• reset
+• base typography
+• body styles
+• utility classes
+• global layout
 
-Use a luxury visual style with:
+Style the completed HTML exactly as it exists.
 
-• Royal Blue
-• Gold
-• Black
-• Subtle White
+Use the Reference Image only as visual inspiration for colors, spacing, typography, hierarchy, and overall UI quality.
 
 Do NOT generate HTML.
 
@@ -1160,19 +1302,43 @@ cssPart2: `Generate Part 2 of the external style.css file.
 
 Output ONLY CSS code.
 
-Continue from Part 1.
+Continue directly from Part 1.
 
 Do NOT repeat previous code.
 
+The following completed documents are the SINGLE SOURCE OF TRUTH:
+
+The completed blueprints and index.html define the application.
+
+Style the application exactly as implemented.
+
+Do not rename, remove, merge, split, restyle, or reinterpret any approved component.
+
+Use the exact IDs, classes, data attributes, and HTML structure from the completed index.html.
+
+• Generator Foundation
+• Generator Planner
+• Reference Image
+• Layout Blueprint
+• Category Blueprint
+• Input Builder Blueprint
+• Logic Blueprint
+• Prompt Assembly Blueprint
+• Completed index.html
+
+Do NOT redesign, simplify, rename, replace, or invent anything.
+
+Style the existing HTML exactly as implemented.
+
 Build:
 
-• Header
-• Hero section
-• Generator workspace
-• Cards
-• Section titles
-• Navigation
-• Layout containers
+• header
+• hero section
+• generator workspace
+• cards
+• section titles
+• navigation
+• layout containers
 
 Do NOT generate HTML.
 
@@ -1182,24 +1348,55 @@ cssPart3: `Generate Part 3 of the external style.css file.
 
 Output ONLY CSS code.
 
-Continue from Part 2.
+Continue directly from Part 2.
 
 Do NOT repeat previous code.
 
+The following completed documents are the SINGLE SOURCE OF TRUTH:
+
+The completed blueprints and index.html define the application.
+
+Style the application exactly as implemented.
+
+Do not rename, remove, merge, split, restyle, or reinterpret any approved component.
+
+Use the exact IDs, classes, data attributes, and HTML structure from the completed index.html.
+
+• Generator Foundation
+• Generator Planner
+• Reference Image
+• Layout Blueprint
+• Category Blueprint
+• Input Builder Blueprint
+• Logic Blueprint
+• Prompt Assembly Blueprint
+• Completed index.html
+
+Do NOT redesign, simplify, rename, replace, or invent anything.
+
+Style only the controls that exist in the completed HTML.
+
+Preserve a consistent design system across every control.
+
+Controls with similar behavior should share reusable styling while allowing approved visual differences where required.
+
 Build:
 
-• Buttons
-• Dropdowns
-• Text inputs
-• Textareas
-• Chip buttons
-• Lock buttons
-• Preset buttons
-• Generate button
-• Randomize button
-• Copy button
-• Save button
-• Clear button
+• buttons
+• dropdowns
+• text inputs
+• textareas
+• chip buttons
+• multi-select chip groups
+• lock buttons
+• preset buttons
+• generate button
+• randomize button
+• copy buttons
+• save button
+• clear buttons
+
+Every interactive element should be polished, accessible, responsive, and visually consistent with the completed layout and Reference Image.
 
 Do NOT generate HTML.
 
@@ -1209,19 +1406,43 @@ cssPart4: `Generate Part 4 of the external style.css file.
 
 Output ONLY CSS code.
 
-Continue from Part 3.
+Continue directly from Part 3.
 
 Do NOT repeat previous code.
 
+The following completed documents are the SINGLE SOURCE OF TRUTH:
+
+The completed blueprints and index.html define the application.
+
+Style the application exactly as implemented.
+
+Do not rename, remove, merge, split, restyle, or reinterpret any approved component.
+
+Use the exact IDs, classes, data attributes, and HTML structure from the completed index.html.
+
+• Generator Foundation
+• Generator Planner
+• Reference Image
+• Layout Blueprint
+• Category Blueprint
+• Input Builder Blueprint
+• Logic Blueprint
+• Prompt Assembly Blueprint
+• Completed index.html
+
+Do NOT redesign, simplify, rename, replace, or invent anything.
+
+Style only the features that exist in the completed HTML.
+
 Build:
 
-• Prompt Output area
-• Prompt Variations
-• Prompt History
-• Quality Checker
-• Toast notifications
-• Modal styles
-• Loading states
+• prompt output area
+• prompt variations
+• prompt history
+• prompt quality checker
+• toast notifications if implemented
+• modal styles if implemented
+• loading states if implemented
 
 Do NOT generate HTML.
 
@@ -1231,48 +1452,121 @@ cssPart5: `Generate Part 5 of the external style.css file.
 
 Output ONLY CSS code.
 
-Continue from Part 4.
+Continue directly from Part 4.
 
 Do NOT repeat previous code.
 
+The following completed documents are the SINGLE SOURCE OF TRUTH:
+
+The completed blueprints and index.html define the application.
+
+Style the application exactly as implemented.
+
+Do not rename, remove, merge, split, restyle, or reinterpret any approved component.
+
+Use the exact IDs, classes, data attributes, and HTML structure from the completed index.html.
+
+• Generator Foundation
+• Generator Planner
+• Reference Image
+• Layout Blueprint
+• Category Blueprint
+• Input Builder Blueprint
+• Logic Blueprint
+• Prompt Assembly Blueprint
+• Completed index.html
+
+Do NOT redesign, simplify, rename, replace, or invent anything.
+
 Build:
 
-• Footer
-• Tablet responsive styles
-• Mobile responsive styles
-• Animations
-• Hover effects
-• Focus states
-• Scrollbar styling
-• Final polish
+• footer
+• tablet responsive styles
+• mobile responsive styles
+• animations
+• hover effects
+• focus states
+• scrollbar styling
+• final polish
 
-The finished interface should feel like premium software.
+The finished stylesheet must style the completed HTML exactly as built and maintain full compatibility with the future JavaScript Builder.
+
+The completed style.css file will become the authoritative source for the application's visual presentation.
+
+Do not create styles for elements that do not exist.
+
+Do not leave implemented HTML elements unstyled.
+
+Use the Reference Image only for visual inspiration.
 
 Do NOT generate HTML.
 
-Do NOT generate JavaScript.`,
+Do NOT generate JavaScript.
 
+Stop after completing the full style.css file.`,
 
-jsPart1: `You are an expert JavaScript developer and front-end application architect.
+jsPart1: `You are an expert JavaScript developer and front-end application architect specializing in professional AI prompt generators.
 
-The HTML and CSS for the AI Marketing Machine have already been completed.
+If any completed blueprint conflicts with another completed blueprint, preserve all approved information and follow the most specific blueprint rather than inventing a new implementation.
 
-Your task is to build the COMPLETE external script.js file.
+Never resolve blueprint conflicts by removing functionality or replacing approved components.
+
+The following completed documents are the SINGLE SOURCE OF TRUTH:
+
+The completed blueprints, index.html, and style.css define the application.
+
+Implement them exactly as approved.
+
+Do not reinterpret, rename, merge, split, omit, or replace any approved category, input, selector, ID, class, data structure, or workflow.
+
+Use the completed index.html as the authoritative source for DOM structure.
+
+Use the completed style.css as the authoritative source for visual state classes.
+
+Use the completed blueprints as the authoritative source for application behavior.
+
+• Generator Foundation
+• Generator Planner
+• Reference Image
+• Layout Blueprint
+• Category Blueprint
+• Input Builder Blueprint
+• Logic Blueprint
+• Prompt Assembly Blueprint
+• Completed index.html
+• Completed style.css
+
+Do NOT redesign, simplify, rename, replace, or invent anything.
+
+Do NOT invent categories, inputs, OPTION_DATA, PRESET_DATA, IDs, selectors, controls, or application logic.
+
+Build the JavaScript only from the approved blueprints and completed HTML.
+
+Your task is to build the complete external script.js file.
 
 Output ONLY JavaScript code.
+
+Build the file in multiple parts.
 
 Generate Part 1.
 
 Build:
 
 • "use strict"
-• Application constants
-• Global variables
-• Default data
+• application constants
+• global variables
+• default data
 • Local Storage keys
-• Category data structures
-• Preset data structures
-• DOM selector helpers
+• OPTION_DATA generated directly from the approved Category Blueprint
+• PRESET_DATA generated directly from the approved presets
+• category data structures
+• DOM selector helpers based on the completed HTML
+
+• Shared configuration objects
+
+• Shared application state
+
+• Enumerations and constants derived from the approved blueprints
 
 Do NOT generate HTML.
 
@@ -1282,20 +1576,56 @@ jsPart2: `Generate Part 2 of the external script.js file.
 
 Output ONLY JavaScript code.
 
-Continue from Part 1.
+Continue directly from Part 1.
 
 Do NOT repeat previous code.
 
+The following completed documents are the SINGLE SOURCE OF TRUTH:
+
+The completed blueprints, index.html, and style.css define the application.
+
+Implement them exactly as approved.
+
+Do not reinterpret, rename, merge, split, omit, or replace any approved category, input, selector, ID, class, data structure, or workflow.
+
+Use the completed index.html as the authoritative source for DOM structure.
+
+Use the completed style.css as the authoritative source for visual state classes.
+
+Use the completed blueprints as the authoritative source for application behavior.
+
+• Generator Foundation
+• Generator Planner
+• Reference Image
+• Layout Blueprint
+• Category Blueprint
+• Input Builder Blueprint
+• Logic Blueprint
+• Prompt Assembly Blueprint
+• Completed index.html
+• Completed style.css
+
+Do NOT redesign, simplify, rename, replace, or invent anything.
+
+Build helper functions only for controls that exist in the completed HTML.
+
 Build:
 
-• Helper functions
-• Dropdown helpers
-• Chip button helpers
-• Text input helpers
-• Textarea helpers
-• Lock state helpers
-• Validation helpers
-• Utility functions
+• helper functions
+• dropdown helpers
+• chip button helpers
+• multi-select helpers
+• text input helpers
+• textarea helpers
+• lock state helpers
+• validation helpers
+• utility functions
+
+Build reusable helper functions.
+
+Avoid duplicate logic.
+
+Functions should operate from shared configuration data rather than hard-coded category names whenever possible.
 
 Do NOT generate HTML.
 
@@ -1305,9 +1635,38 @@ jsPart3: `Generate Part 3 of the external script.js file.
 
 Output ONLY JavaScript code.
 
-Continue from Part 2.
+Continue directly from Part 2.
 
 Do NOT repeat previous code.
+
+The following completed documents are the SINGLE SOURCE OF TRUTH:
+
+The completed blueprints, index.html, and style.css define the application.
+
+Implement them exactly as approved.
+
+Do not reinterpret, rename, merge, split, omit, or replace any approved category, input, selector, ID, class, data structure, or workflow.
+
+Use the completed index.html as the authoritative source for DOM structure.
+
+Use the completed style.css as the authoritative source for visual state classes.
+
+Use the completed blueprints as the authoritative source for application behavior.
+
+• Generator Foundation
+• Generator Planner
+• Reference Image
+• Layout Blueprint
+• Category Blueprint
+• Input Builder Blueprint
+• Logic Blueprint
+• Prompt Assembly Blueprint
+• Completed index.html
+• Completed style.css
+
+Do NOT redesign, simplify, rename, replace, or invent anything.
+
+Generate prompt assembly exactly as defined in the Prompt Assembly Blueprint.
 
 Build:
 
@@ -1326,15 +1685,44 @@ jsPart4: `Generate Part 4 of the external script.js file.
 
 Output ONLY JavaScript code.
 
-Continue from Part 3.
+Continue directly from Part 3.
 
 Do NOT repeat previous code.
 
+The following completed documents are the SINGLE SOURCE OF TRUTH:
+
+The completed blueprints, index.html, and style.css define the application.
+
+Implement them exactly as approved.
+
+Do not reinterpret, rename, merge, split, omit, or replace any approved category, input, selector, ID, class, data structure, or workflow.
+
+Use the completed index.html as the authoritative source for DOM structure.
+
+Use the completed style.css as the authoritative source for visual state classes.
+
+Use the completed blueprints as the authoritative source for application behavior.
+
+• Generator Foundation
+• Generator Planner
+• Reference Image
+• Layout Blueprint
+• Category Blueprint
+• Input Builder Blueprint
+• Logic Blueprint
+• Prompt Assembly Blueprint
+• Completed index.html
+• Completed style.css
+
+Do NOT redesign, simplify, rename, replace, or invent anything.
+
+Implement functionality only for the approved controls and categories.
+
 Build:
 
-• Randomize function
+• Randomize function using only approved categories
 • Lock support
-• Preset support
+• Preset support using PRESET_DATA
 • Clear All
 • Copy Prompt
 • Save Prompt
@@ -1349,18 +1737,47 @@ jsPart5: `Generate Part 5 of the external script.js file.
 
 Output ONLY JavaScript code.
 
-Continue from Part 4.
+Continue directly from Part 4.
 
 Do NOT repeat previous code.
+
+The following completed documents are the SINGLE SOURCE OF TRUTH:
+
+The completed blueprints, index.html, and style.css define the application.
+
+Implement them exactly as approved.
+
+Do not reinterpret, rename, merge, split, omit, or replace any approved category, input, selector, ID, class, data structure, or workflow.
+
+Use the completed index.html as the authoritative source for DOM structure.
+
+Use the completed style.css as the authoritative source for visual state classes.
+
+Use the completed blueprints as the authoritative source for application behavior.
+
+• Generator Foundation
+• Generator Planner
+• Reference Image
+• Layout Blueprint
+• Category Blueprint
+• Input Builder Blueprint
+• Logic Blueprint
+• Prompt Assembly Blueprint
+• Completed index.html
+• Completed style.css
+
+Do NOT redesign, simplify, rename, replace, or invent anything.
+
+Build only the features defined in the approved blueprints.
 
 Build:
 
 • Prompt History
 • Prompt Variations
 • Prompt Quality Checker
-• Character Counter
-• Toast Notifications
-• Modal support
+• Character Counter if included
+• Toast Notifications if included
+• Modal support if included
 • Error handling
 
 Do NOT generate HTML.
@@ -1371,57 +1788,220 @@ jsPart6: `Generate Part 6 of the external script.js file.
 
 Output ONLY JavaScript code.
 
-Continue from Part 5.
+Continue directly from Part 5.
 
 Do NOT repeat previous code.
+
+The following completed documents are the SINGLE SOURCE OF TRUTH:
+
+The completed blueprints, index.html, and style.css define the application.
+
+Implement them exactly as approved.
+
+Do not reinterpret, rename, merge, split, omit, or replace any approved category, input, selector, ID, class, data structure, or workflow.
+
+Use the completed index.html as the authoritative source for DOM structure.
+
+Use the completed style.css as the authoritative source for visual state classes.
+
+Use the completed blueprints as the authoritative source for application behavior.
+
+• Generator Foundation
+• Generator Planner
+• Reference Image
+• Layout Blueprint
+• Category Blueprint
+• Input Builder Blueprint
+• Logic Blueprint
+• Prompt Assembly Blueprint
+• Completed index.html
+• Completed style.css
+
+Do NOT redesign, simplify, rename, replace, or invent anything.
+
+Connect every existing HTML element exactly as implemented.
 
 Build:
 
 • Event listeners
 • Button connections
 • Collapsible sections
-• Scroll buttons
+• Scroll buttons if implemented
 • Application initialization
 • Startup functions
-• Final application checks
+• Final application validation
 
-Ensure every feature works together correctly.
+Ensure every feature integrates correctly with the completed HTML, CSS, approved categories, approved inputs, approved logic, and approved prompt assembly.
 
-The finished application should be production-ready, responsive, maintainable, and easy to expand.
+Perform a complete integration pass.
+
+Verify that:
+
+• Every approved input has a working event listener.
+
+• Every approved button performs its required function.
+
+• Every approved category participates in prompt generation.
+
+• Every approved selector resolves correctly.
+
+• Every approved feature integrates with Local Storage where required.
+
+• No implemented HTML element is left without JavaScript support.
+
+• No JavaScript references elements that do not exist.
+
+The finished application must be:
+
+• production-ready
+• fully functional
+• responsive
+• modular
+• maintainable
+• easy to expand
 
 Do NOT generate HTML.
 
-Do NOT generate CSS.`,
+Do NOT generate CSS.
 
-testing: `You are an expert front-end QA engineer, JavaScript debugger, and HTML/CSS application tester.
+Stop after completing the full script.js file.`,
 
-The AI Marketing Machine has been fully built.
 
-Your task is to perform a complete quality assurance review before deployment.
+testing: `You are an expert front-end QA engineer, JavaScript debugger, HTML/CSS validator, and application tester specializing in professional AI prompt generators.
 
-Create a complete testing checklist.
+The Generator Foundation has already been completed.
+
+The Generator Planner has already been completed, including the generator name, purpose, target audience, and main goal.
+
+The Reference Image has already been uploaded and analyzed.
+
+The Layout Blueprint, Category Blueprint, Input Builder Blueprint, Logic Blueprint, Prompt Assembly Blueprint, index.html, style.css, and script.js have all been completed.
+
+Your task is to build the complete Testing & Debugging Checklist for the AI prompt generator before final deployment.
+
+Perform a complete quality assurance review of the entire application.
 
 Include:
 
-1. HTML Validation
-2. CSS Validation
-3. JavaScript Validation
-4. Responsive Testing
-5. Browser Compatibility
-6. Accessibility
-7. Performance
-8. Button Testing
-9. Form Testing
-10. Prompt Generation Testing
-11. Randomize Testing
-12. Lock Button Testing
-13. Preset Testing
-14. Copy Button Testing
-15. Save Prompt Testing
-16. Prompt History Testing
-17. Prompt Quality Checker Testing
-18. Error Handling
-19. Final Bug Checklist
+## 1. HTML Validation
+
+Verify:
+
+• Semantic HTML
+• Accessibility structure
+• Proper element hierarchy
+• Missing or invalid attributes
+
+## 2. CSS Validation
+
+Verify:
+
+• Layout consistency
+• Responsive behavior
+• Visual consistency
+• Unused or conflicting styles
+
+## 3. JavaScript Validation
+
+Verify:
+
+• Syntax
+• Runtime errors
+• Console errors
+• Performance
+• Code organization
+
+## 4. Responsive Testing
+
+Verify the application on:
+
+• Desktop
+• Tablet
+• Mobile
+
+## 5. Browser Compatibility
+
+Verify compatibility across modern browsers.
+
+## 6. Accessibility
+
+Verify:
+
+• Keyboard navigation
+• Focus states
+• Labels
+• Color contrast
+• Screen reader support where applicable
+
+## 7. Performance
+
+Check:
+
+• Load speed
+• Rendering performance
+• JavaScript efficiency
+• Local Storage performance
+
+## 8. User Interface Testing
+
+Verify every interactive element including:
+
+• Buttons
+• Dropdowns
+• Chip buttons
+• Multi-select chips
+• Text inputs
+• Textareas
+• Lock buttons
+• Collapsible sections
+
+## 9. Generator Feature Testing
+
+Verify:
+
+• Prompt Generation
+• Prompt Assembly
+• Randomize
+• Lock Support
+• Presets
+• Clear All
+• Copy Prompt
+• Save Prompt
+• Prompt History
+• Prompt Variations
+• Prompt Quality Checker
+• Character Counter
+
+## 10. Validation Testing
+
+Verify:
+
+• Required fields
+• "None" handling
+• Empty inputs
+• Duplicate prevention
+• Invalid selections
+
+## 11. Error Handling
+
+Verify the application's response to:
+
+• Missing required information
+• Invalid data
+• Empty prompt output
+• Copy failures
+• Save failures
+• Unexpected errors
+
+## 12. Final Deployment Checklist
+
+Verify that:
+
+• Every feature functions correctly
+• Every section integrates correctly
+• The completed application matches the Layout Blueprint
+• The completed application follows the Generator Planner
+• The completed application is production-ready
 
 Do NOT generate HTML.
 
@@ -1429,33 +2009,146 @@ Do NOT generate CSS.
 
 Do NOT generate JavaScript.
 
-Only create the complete Testing & Debugging checklist.
+Only build the complete Testing & Debugging Checklist.
 
-Wait for my approval before moving to Final Polish & Export.`,
+Stop after completing the Testing & Debugging Checklist. Do not continue to the Final Polish & Export prompt until instructed.`,
 
-final: `You are an expert front-end developer, UI designer, and software release specialist.
+final: `You are an expert front-end developer, UI designer, software release specialist, and application optimization engineer specializing in professional AI prompt generators.
 
-The AI Marketing Machine has been completely built and tested.
+The Generator Foundation has already been completed.
 
-Your task is to prepare the application for release.
+The Generator Planner has already been completed, including the generator name, purpose, target audience, and main goal.
 
-Create the complete Final Polish & Export checklist.
+The Reference Image has already been uploaded and analyzed.
+
+The Layout Blueprint, Category Blueprint, Input Builder Blueprint, Logic Blueprint, Prompt Assembly Blueprint, index.html, style.css, script.js, and Testing & Debugging Checklist have all been completed.
+
+Your task is to build the complete Final Polish & Release Checklist for the AI prompt generator.
+
+Perform a complete pre-release review to ensure the application is polished, professional, production-ready, and ready to be delivered to customers.
 
 Include:
 
-1. UI Review
-2. Code Cleanup
-3. Performance Improvements
-4. Accessibility Review
-5. Responsive Review
-6. Final Feature Checklist
-7. File Organization
-8. GitHub Preparation
-9. Netlify Deployment
-10. Customer Readiness
-11. Future Update Recommendations
+## 1. User Interface Review
 
-The application should be production-ready and suitable for customers.
+Verify:
+
+• Visual consistency
+• Layout alignment
+• Typography
+• Spacing
+• Icons
+• Button consistency
+• Overall user experience
+
+## 2. Code Cleanup
+
+Verify:
+
+• Remove unused code
+• Remove duplicate code
+• Organize files
+• Improve readability
+• Confirm consistent naming conventions
+
+## 3. Performance Optimization
+
+Review:
+
+• CSS optimization
+• JavaScript optimization
+• Load performance
+• Rendering efficiency
+• Local Storage efficiency
+
+## 4. Accessibility Review
+
+Verify:
+
+• Keyboard navigation
+• Focus indicators
+• Color contrast
+• Labels
+• Semantic structure
+• Screen reader compatibility where appropriate
+
+## 5. Responsive Review
+
+Verify the application performs correctly on:
+
+• Desktop
+• Tablet
+• Mobile
+
+## 6. Final Feature Verification
+
+Confirm every feature functions correctly including:
+
+• Prompt Generation
+• Prompt Assembly
+• Randomize
+• Lock Support
+• Presets
+• Clear All
+• Copy Prompt
+• Save Prompt
+• Prompt History
+• Prompt Variations
+• Prompt Quality Checker
+• Character Counter
+
+## 7. File Organization
+
+Verify:
+
+• Clean project structure
+• Organized assets
+• Proper file naming
+• Consistent folder organization
+
+## 8. GitHub Preparation
+
+Verify the project is ready for version control including:
+
+• Final commit review
+• Repository organization
+• README recommendations
+• Deployment files if required
+
+## 9. Deployment Review
+
+Verify the application is ready for deployment.
+
+Include recommendations for:
+
+• Netlify
+• GitHub Pages
+• Other static hosting platforms
+
+## 10. Customer Readiness
+
+Confirm the application is ready for customer use.
+
+Review:
+
+• Ease of use
+• Documentation recommendations
+• Beginner-friendly workflow
+• Professional presentation
+
+## 11. Future Expansion
+
+Recommend future improvements that can be added without rebuilding the application architecture.
+
+The completed application should be:
+
+• Production-ready
+• Stable
+• Professional
+• Responsive
+• Scalable
+• Easy to maintain
+• Ready for customers
 
 Do NOT generate HTML.
 
@@ -1463,10 +2156,12 @@ Do NOT generate CSS.
 
 Do NOT generate JavaScript.
 
-Only create the complete Final Polish & Export checklist.`
-  };
+Only build the complete Final Polish & Release Checklist.
 
-  return snippets[type] || "Create a useful AI module for this generator.";
+Stop after completing the Final Polish & Release Checklist.`
+};
+
+return snippets[type] || "Create a useful AI module for this generator.";
 }
 
 /* ==========================
