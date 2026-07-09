@@ -1646,3 +1646,22 @@ body.light-theme .help-card p {
 .builder-buttons .secondary-btn{
     width:100%;
 }
+
+.module-card.flip-card {
+  min-height: 520px;
+}
+
+.module-card-inner {
+  min-height: 520px;
+}
+
+.module-card-front,
+.module-card-back {
+  overflow-y: auto;
+}
+
+.builder-buttons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
