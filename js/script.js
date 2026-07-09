@@ -511,29 +511,31 @@ Build only the page layout.
 
 Include only the following sections.
 
-# 1. Header
+# 1. Top Section
 
-Define the Header.
-
-Include only:
-
-• Generator Name
-
-# 2. Hero
-
-Define the Hero section.
+Define the application's top section.
 
 Include only:
 
-• Generator Title
+• One primary application title.
 
-# 3. Presets
+Do not create a separate Generator Name.
+
+Do not create a Hero section.
+
+Do not create a subtitle.
+
+Do not create descriptive text.
+
+Do not duplicate the application title anywhere else in the interface.
+
+# 2. Presets
 
 Define the location of the Presets section.
 
 Do not create preset names.
 
-# 4. Main Controls
+# 3. Main Controls
 
 Define the Main Controls section.
 
@@ -545,7 +547,7 @@ Include only:
 • Save Prompt
 • Clear All
 
-# 5. Generator Categories
+# 4. Generator Categories
 
 Define the location and structure of the Generator Categories section.
 
@@ -563,7 +565,7 @@ Do not create category names.
 
 The Category Blueprint will define those later.
 
-# 6. Prompt Output
+# 5. Prompt Output
 
 Define the Prompt Output section.
 
@@ -574,7 +576,7 @@ Include only:
 • Character Counter
 • Prompt Quality Score
 
-# 7. Prompt Variations
+# 6. Prompt Variations
 
 Define the Prompt Variations section.
 
@@ -583,7 +585,7 @@ Include only:
 • Variation Output
 • Copy Button
 
-# 8. Prompt History
+# 7. Prompt History
 
 Define the Prompt History section.
 
@@ -594,21 +596,37 @@ Include only:
 • Copy Button
 • Delete Button
 
-# 9. Prompt Quality Checker
+# 8. Prompt Quality Checker
 
 Define the location of the Prompt Quality Checker.
 
 Do not define scoring logic.
 
-# 10. Footer
+# 9. Footer
 
 Define the Footer.
 
 Include only:
 
-• Generator Name
+• Copyright area
 
-# 11. Visual Direction
+The footer should contain only a copyright section.
+
+Do not repeat the application title.
+
+Do not repeat the generator name.
+
+Do not add navigation links.
+
+Do not add descriptions.
+
+Do not add marketing copy.
+
+Do not add social media links.
+
+Leave the copyright text customizable so users can insert their own name, business name, brand, or year.
+
+# 10. Visual Direction
 
 Briefly define:
 
