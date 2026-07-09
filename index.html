@@ -4,8 +4,8 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="AI Business Builder Workshop Experience: build, publish, and sell a reusable AI generator." name="description"/>
-<title>AI Business Builder™ | Workshop Experience v7.0</title>
+<meta content="AI Business Builder Workshop: build a reusable prompt generator with HTML, CSS, and JavaScript." name="description"/>
+<title>AI Business Builder™ | Prompt Generator Workshop</title>
 <link href="css/style.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -130,8 +130,8 @@
     <header class="workspace-header">
       <div>
         <span class="eyebrow">AI BUSINESS BUILDER™</span>
-        <h1>Command Center</h1>
-        <p>Continue building your sellable AI generator exactly where you left off.</p>
+        <h1>Prompt Generator Workshop</h1>
+        <p>Follow the cards in order. Each card gives students one clear prompt, one clear action, and one clear next step.</p>
       </div>
 
       <aside class="workspace-progress">
@@ -142,7 +142,7 @@
 
         <div class="progress-meta">
           <h3>Current Progress</h3>
-          <p id="dashboardNextStep">Start Day 1 and build your generator foundation.</p>
+          <p id="dashboardNextStep">Start with Card 1: Generator Foundation.</p>
           <button class="gold-btn hero-btn" id="dashboardContinueBtn">
             Continue Workshop
           </button>
@@ -157,81 +157,126 @@
       </article>
 
       <article class="stat-card">
-        <span>Current Lesson</span>
-        <h2>Day 1</h2>
+        <span>Current Card</span>
+        <h2>Card 1</h2>
       </article>
 
       <article class="stat-card">
-        <span>Achievements</span>
+        <span>Cards Complete</span>
         <h2 id="achievementCount">0</h2>
       </article>
 
       <article class="stat-card">
-        <span>Certificate</span>
-        <h2>Locked</h2>
+        <span>Build Status</span>
+        <h2>Ready</h2>
       </article>
     </section>
 
-    <section class="dashboard-main-grid">
+    <section class="dashboard-main-grid" aria-label="Workshop card flow">
       <article class="card today-card">
-        <span class="eyebrow">STEP 1</span>
+        <span class="eyebrow">CARD 1</span>
         <h2>Generator Foundation</h2>
-        <p>Start with the universal prompt that tells AI what kind of generator to build.</p>
-        <button class="gold-btn" data-open-page="day-one">Open Builder</button>
+        <p>Tell ChatGPT what kind of prompt generator you want to build and set the rules for the full project.</p>
+        <button class="gold-btn" data-open-page="modules">Open Foundation</button>
       </article>
 
       <article class="card quick-actions">
-        <span class="eyebrow">STEP 2</span>
+        <span class="eyebrow">CARD 2</span>
         <h2>Generator Planner</h2>
-        <p>Plan the categories, inputs, outputs, and user experience before coding.</p>
-        <button class="primary-btn" data-open-page="blueprint">Open Planner</button>
-      </article>
-
-      <article class="card continue-card">
-        <span class="eyebrow">STEP 3</span>
-        <h2>UI Layout Builder</h2>
-        <p>Map the page layout, sections, buttons, cards, and generator flow.</p>
-        <button class="primary-btn" data-open-page="code-lab">Open Layout</button>
+        <p>Plan the purpose, audience, categories, inputs, outputs, and final generator experience.</p>
+        <button class="primary-btn" data-open-page="modules">Open Planner</button>
       </article>
 
       <article class="card activity-card">
-        <span class="eyebrow">STEP 4</span>
+        <span class="eyebrow">CARD 3</span>
+        <h2>Reference Image</h2>
+        <p>Upload the workshop reference image so ChatGPT understands the layout style before designing the interface.</p>
+        <button class="primary-btn" data-open-page="modules">Open Reference</button>
+      </article>
+
+      <article class="card continue-card">
+        <span class="eyebrow">CARD 4</span>
+        <h2>Layout Builder</h2>
+        <p>Map the full page structure, generator sections, controls, output areas, and user flow.</p>
+        <button class="primary-btn" data-open-page="modules">Open Layout</button>
+      </article>
+
+      <article class="card activity-card">
+        <span class="eyebrow">CARD 5</span>
         <h2>Category Builder</h2>
-        <p>Create dropdowns, options, custom fields, and organized prompt categories.</p>
+        <p>Design the generator categories, dropdown options, chip groups, custom fields, and lock behavior.</p>
         <button class="primary-btn" data-open-page="modules">Open Categories</button>
       </article>
 
       <article class="card tip-card">
-        <span class="eyebrow">STEP 5</span>
+        <span class="eyebrow">CARD 6</span>
         <h2>Input Builder</h2>
-        <p>Add text boxes, selectors, locks, presets, randomizers, and user controls.</p>
-        <button class="primary-btn" data-open-page="code-lab">Open Inputs</button>
+        <p>Define every dropdown, text box, textarea, button, preset, randomizer, and save/copy control.</p>
+        <button class="primary-btn" data-open-page="modules">Open Inputs</button>
       </article>
 
       <article class="card roadmap-preview">
-        <span class="eyebrow">STEP 6</span>
-        <h2>Output Builder</h2>
-        <p>Build the final prompt output, copy button, quality checker, and saved history.</p>
-        <button class="secondary-btn" data-open-page="journey">Open Outputs</button>
+        <span class="eyebrow">CARD 7</span>
+        <h2>Logic Builder</h2>
+        <p>Plan how Generate, Randomize, Lock, Clear, Copy, Save, History, and Variations should work.</p>
+        <button class="primary-btn" data-open-page="modules">Open Logic</button>
+      </article>
+
+      <article class="card quick-actions">
+        <span class="eyebrow">CARD 8</span>
+        <h2>Prompt Assembly Builder</h2>
+        <p>Design how user choices turn into one complete, polished prompt with no duplicate or messy instructions.</p>
+        <button class="primary-btn" data-open-page="modules">Open Assembly</button>
+      </article>
+
+      <article class="card activity-card">
+        <span class="eyebrow">CARD 9</span>
+        <h2>HTML Builder</h2>
+        <p>Generate the full structure for the prompt generator and paste it into index.html in clean parts.</p>
+        <button class="primary-btn" data-open-page="modules">Open HTML</button>
+      </article>
+
+      <article class="card continue-card">
+        <span class="eyebrow">CARD 10</span>
+        <h2>CSS Builder</h2>
+        <p>Style the generator with a premium responsive layout, strong typography, and clean luxury spacing.</p>
+        <button class="primary-btn" data-open-page="modules">Open CSS</button>
+      </article>
+
+      <article class="card tip-card">
+        <span class="eyebrow">CARD 11</span>
+        <h2>JavaScript Builder</h2>
+        <p>Make every feature functional: prompts, copy buttons, saved history, presets, locks, and randomizer.</p>
+        <button class="primary-btn" data-open-page="modules">Open JavaScript</button>
+      </article>
+
+      <article class="card roadmap-preview">
+        <span class="eyebrow">CARD 12</span>
+        <h2>Final Polish</h2>
+        <p>Test the finished generator, clean the code, confirm mobile layout, and prepare it to publish.</p>
+        <button class="secondary-btn" data-open-page="modules">Open Final Polish</button>
       </article>
     </section>
   </div>
 
   <section class="module-preview-section">
     <div class="section-intro compact">
-      <span class="eyebrow">NEXT MODULES</span>
-      <h2>What students add after the foundation works.</h2>
+      <span class="eyebrow">WORKSHOP FLOW</span>
+      <h2>Build one clean prompt generator from start to finish.</h2>
     </div>
 
     <div class="module-pill-grid">
-      <button data-open-page="modules">Prompt Engine</button>
-      <button data-open-page="modules">Theme Designer</button>
-      <button data-open-page="modules">Randomizer</button>
-      <button data-open-page="modules">Lock System</button>
-      <button data-open-page="modules">Presets</button>
-      <button data-open-page="modules">History</button>
-      <button data-open-page="modules">Copy Tools</button>
-      <button data-open-page="modules">Publishing</button>
+      <button data-open-page="modules">Foundation</button>
+      <button data-open-page="modules">Planner</button>
+      <button data-open-page="modules">Reference</button>
+      <button data-open-page="modules">Layout</button>
+      <button data-open-page="modules">Categories</button>
+      <button data-open-page="modules">Inputs</button>
+      <button data-open-page="modules">Logic</button>
+      <button data-open-page="modules">HTML</button>
+      <button data-open-page="modules">CSS</button>
+      <button data-open-page="modules">JavaScript</button>
+      <button data-open-page="modules">Final Polish</button>
     </div>
   </section>
 </section>
@@ -580,7 +625,6 @@ Wait for my next prompt, where I will describe the type of prompt generator I wa
 </div>
 <div class="module-card-grid">
 
-```html
 <article class="module-card flip-card">
   <div class="module-card-inner">
 
@@ -633,15 +677,18 @@ Wait for my next prompt, where I will describe the type of prompt generator I wa
 
   </div>
 </article>
-```
-
 
 <article class="module-card flip-card">
   <div class="module-card-inner">
+
     <div class="module-card-front">
       <i data-lucide="file-pen-line"></i>
+
       <h2>Generator Planner</h2>
-      <p>Plan the audience, purpose, categories, inputs, and outputs before coding.</p>
+
+      <p>
+        Define exactly what your prompt generator will create before building the application.
+      </p>
 
       <button class="secondary-btn copy-snippet-btn" data-snippet="planner">
         Copy Planner Prompt
@@ -651,26 +698,92 @@ Wait for my next prompt, where I will describe the type of prompt generator I wa
     </div>
 
     <div class="module-card-back">
-      <h3>Planner</h3>
+
+      <h3>Generator Planner</h3>
 
       <h4>Purpose</h4>
-      <p>Create the blueprint for the generator.</p>
+
+      <p>
+        Define your generator's purpose, target audience, required inputs, expected outputs,
+        and core features. This becomes the blueprint for everything you'll build next.
+      </p>
 
       <h4>Why this matters</h4>
+
       <p>
-        This prevents you from randomly adding features later and gives you a roadmap before writing code.
+        A clear blueprint helps you build a focused generator, reduces unnecessary changes,
+        and keeps every HTML, CSS, and JavaScript file working toward the same goal.
       </p>
 
       <h4>What to do with the output</h4>
+
       <ul>
-        <li>Review every section.</li>
-        <li>Delete anything you don't want.</li>
-        <li>Add anything you forgot.</li>
-        <li>This becomes the checklist you'll follow while building.</li>
+        <li>Review the complete blueprint.</li>
+        <li>Remove anything you don't want.</li>
+        <li>Add anything that's missing.</li>
+        <li>Use it as the guide for the remaining cards.</li>
       </ul>
 
       <span class="flip-hint">Click again to flip back</span>
+
     </div>
+
+  </div>
+</article>
+
+<article class="module-card flip-card">
+  <div class="module-card-inner">
+
+    <div class="module-card-front">
+      <i data-lucide="image"></i>
+
+      <h2>Reference Image</h2>
+
+      <p>
+        Download the reference image, upload it into ChatGPT, then continue building your generator.
+      </p>
+
+      <a
+ href="./assets/images/workshop-reference.png"
+  download
+  class="secondary-btn download-reference-btn"
+>
+  Download Reference Image
+</a>
+
+      <span class="flip-hint">Click card for teaching notes</span>
+    </div>
+
+    <div class="module-card-back">
+      <h3>Reference Image</h3>
+
+      <h4>Purpose</h4>
+      <p>
+        Give ChatGPT a visual example before building the layout, styling, and user experience.
+      </p>
+
+      <h4>Why this matters</h4>
+      <p>
+        A reference image helps ChatGPT understand the layout, spacing, visual hierarchy,
+        design style, and overall direction you want.
+      </p>
+
+      <h4>What to do</h4>
+      <ul>
+        <li>Download the reference image.</li>
+        <li>Upload it into the same ChatGPT conversation.</li>
+        <li>Tell ChatGPT to use it as visual inspiration, not to copy it exactly.</li>
+        <li>Keep the same conversation open and continue to Layout Builder.</li>
+      </ul>
+
+      <h4>Reusable Tip</h4>
+      <p>
+        For another generator, replace this reference image with one that matches the new style.
+      </p>
+
+      <span class="flip-hint">Click again to flip back</span>
+    </div>
+
   </div>
 </article>
 

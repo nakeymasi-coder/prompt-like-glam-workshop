@@ -379,11 +379,9 @@ function setupCopyButtons() {
    ========================== */
 
 function getModuleSnippet(type) {
- "use strict";
+  const snippets = {
 
-const snippets = {
-
-foundation: `YYou are an expert HTML, CSS, JavaScript, UI/UX, and prompt engineering developer specializing in building professional AI prompt generators.
+foundation: `You are an expert HTML, CSS, JavaScript, UI/UX, and prompt engineering developer specializing in building professional AI prompt generators.
 
 Throughout this project, act as my senior software engineer, front-end developer, UI/UX designer, and development partner.
 
@@ -411,222 +409,216 @@ Wait for my next prompt.`,
 
 planner: `You are an expert software architect, front-end developer, UI/UX designer, and prompt engineering specialist.
 
-The AI Developer Foundation has already been established.
+The Generator Foundation has already been established.
 
-We are building one complete, production-quality AI Marketing Machine using HTML, CSS, and JavaScript.
+We are building a professional AI prompt generator using HTML, CSS, and JavaScript.
 
-Your task is to create the complete development blueprint for this application before any code is written.
+Your task is to create the complete blueprint for this generator before writing any code.
 
-Design the application as a premium, single-page AI prompt generator that users can customize and resell.
-
-Create the complete project blueprint.
+Using the generator idea I provide, build the complete development blueprint.
 
 Include:
 
-1. Application Overview
-   • Purpose
-   • Target Audience
-   • Primary Goal
+1. Generator Purpose
+
+* What the generator creates
+* Who it is for
+* The problem it solves
 
 2. Generator Workflow
-   • How users move through the application from start to finish.
 
-3. Generator Sections
-   • Every major section of the application in the order they should appear.
+* Complete user workflow from opening the generator to copying the finished prompt.
+
+3. Generator Categories
+
+* Every category the generator needs.
+* Organize them in the order they should appear.
 
 4. User Inputs
-   • Every dropdown
-   • Text field
-   • Textarea
-   • Chip group
-   • Toggle
-   • Lock button
-   • Randomize support
-   • Preset support
+
+For every category, specify every required input, including:
+
+* Dropdown menus
+* Chip button groups
+* Text inputs
+* Textareas
+* Lock buttons
+* Randomize support
+* Preset support
 
 5. Generator Outputs
 
-The generator should be capable of producing:
+List every output the generator should produce based on the generator's purpose.
 
-• Master AI Prompt
-• Video Script
-• Image Prompt
-• Thumbnail Prompt
-• Blog Content
-• Email Campaign
-• Facebook Post
-• Instagram Caption
-• TikTok Caption
-• Pinterest Pin
-• LinkedIn Post
-• X Thread
-• SEO Keywords
-• Hashtags
-• Call-to-Action Variations
-• Landing Page Prompt
-• Sales Page Prompt
-• Lead Magnet Ideas
-• Custom GPT Instructions
-• Suno Music Prompt
+6. Core Features
 
-6. Interactive Features
+Include every feature required for a professional prompt generator, including:
 
-Include:
+* Generate Prompt
+* Randomize
+* Lock Fields
+* Clear All
+* Copy Prompt
+* Save Prompt
+* Prompt History
+* Prompt Variations
+* Prompt Quality Checker
+* Character Counter
 
-• Generate
-• Randomize
-• Lock Fields
-• Clear All
-• Copy Prompt
-• Save Prompt
-• Prompt History
-• Prompt Variations
-• Prompt Quality Checker
+Design the blueprint so it can be built as a professional, responsive, single-page application.
 
-7. Future Expansion
+Do not generate HTML.
 
-Design the architecture so additional modules can be added later without changing the existing application structure.
+Do not generate CSS.
 
-Do NOT generate HTML.
-
-Do NOT generate CSS.
-
-Do NOT generate JavaScript.
+Do not generate JavaScript.
 
 Only create the complete development blueprint.
 
-Wait for my approval before moving to the Layout Builder.`,
+Wait for my next prompt.`,
 
 layout: `You are an expert UI/UX designer, senior front-end developer, and application architect specializing in professional AI prompt generators.
 
-The AI Developer Foundation and Generator Planner have already been completed and approved.
+The Generator Foundation has already been completed.
 
-We are building a premium single-page AI Marketing Machine using HTML, CSS, and JavaScript.
+The Generator Planner has already been completed, including the generator name, purpose, target audience, and main goal.
 
-Your task is to design the complete user interface before any HTML, CSS, or JavaScript is written.
+The Reference Image has already been uploaded and analyzed. Use it as the visual inspiration for the overall layout, user experience, spacing, hierarchy, styling, typography, colors, and interface. Do not copy the reference image exactly. Create an original application that follows the same level of quality and professionalism.
 
-The application should feel like premium software that someone would confidently pay for.
+Your task is to build the complete Layout Blueprint for the AI prompt generator before any HTML, CSS, or JavaScript is generated.
 
-Create the complete layout blueprint.
+Build the complete application layout.
 
-Include the following:
+Include:
 
 ## 1. Overall Application Layout
 
-Design the overall page structure including:
+Build the complete page structure, including:
 
-• Header
-• Hero section
-• Generator workspace
-• Footer
+* Header
+* Hero section
+* Generator workspace
+* Footer
 
 ## 2. Generator Sections
 
-List every major section in the exact order users should experience them.
+Build every major section in the order users should experience them.
 
 Include:
 
-• Welcome / Hero
-• Presets
-• Main Controls
-• Generator Categories
-• Prompt Output
-• Prompt Variations
-• Prompt History
-• Quality Checker
-• Footer
+* Welcome / Hero
+* Presets
+* Main Controls
+* Generator Categories
+* Prompt Output
+* Prompt Variations
+* Prompt History
+* Prompt Quality Checker
+* Footer
 
 ## 3. Main Controls
 
-Include:
+Build the primary control area containing:
 
-• Generate Prompt
-• Randomize
-• Clear All
-• Copy Prompt
-• Save Prompt
+* Generate Prompt
+* Randomize
+* Clear All
+* Copy Prompt
+* Save Prompt
+
+Define the purpose of each control and how it fits into the user workflow.
 
 ## 4. Category Sections
 
-Design collapsible sections.
+Build reusable collapsible category sections.
 
-Each section should support:
+Each category must support:
 
-• Dropdowns
-• Chip Buttons
-• Custom Text Box
-• Lock Button
+* Dropdown menus
+* Chip button groups
+* Custom text box
+* Lock button
+
+Explain how each category should be organized and how users interact with it.
 
 ## 5. Prompt Output Area
 
-Design an area for:
+Build the output section containing:
 
-• Final Prompt
-• Copy Button
-• Character Count
-• Prompt Quality Score
+* Final Prompt
+* Copy Prompt button
+* Character Counter
+* Prompt Quality Score
 
 ## 6. Prompt Variations
 
-Create a section where multiple prompt variations can appear.
+Build a section that displays multiple prompt variations.
 
-Each variation should include its own Copy button.
+Each variation must include its own Copy button.
 
 ## 7. Prompt History
 
-Design a history section that stores previously generated prompts.
+Build a history section that stores previously generated prompts.
 
-Each saved prompt should include:
+Each saved prompt must include:
 
-• Preview
-• Date Created
-• Copy Button
-• Delete Button
+* Preview
+* Date Created
+* Copy button
+* Delete button
 
-## 8. User Experience
+## 8. User Workflow
 
-Recommend the best workflow from opening the generator until copying the finished prompt.
+Build the complete user workflow from opening the application to copying the finished prompt.
 
-## 9. Visual Design
+## 9. Visual Direction
 
-Recommend:
+Define the application's visual direction for:
 
-• Layout
-• Card design
-• Typography
-• Colors
-• Buttons
-• Spacing
-• Hover effects
-• Mobile responsiveness
+* Layout
+* Cards
+* Typography
+* Color palette
+* Buttons
+* Spacing
+* Hover states
+* Responsive behavior
 
-The interface should feel:
+The interface should be:
 
-• Premium
-• Clean
-• Modern
-• Beginner Friendly
-• Easy to Expand
+* Professional
+* Premium
+* Clean
+* Modern
+* Beginner-friendly
+* Scalable
+* Easy to expand
 
-Do NOT generate HTML.
+Do not generate HTML.
 
-Do NOT generate CSS.
+Do not generate CSS.
 
-Do NOT generate JavaScript.
+Do not generate JavaScript.
 
-Only create the complete Layout Blueprint.
+Only build the complete Layout Blueprint.
 
-Wait for my approval before moving to the Category Builder.`,
+Wait for my next prompt.`,
 
 categories: `You are an expert prompt engineer, prompt architect, and AI generator designer.
 
-The AI Developer Foundation, Generator Planner, and Layout Blueprint have already been completed and approved.
+The Generator Foundation has already been completed.
 
-We are building a premium single-page AI Marketing Machine using HTML, CSS, and JavaScript.
+The Generator Planner has already been completed, including the generator name, purpose, target audience, and main goal.
 
-Your task is to design every category the generator will contain before any code is written.
+The Reference Image has already been uploaded and analyzed.
 
-The categories should work together to produce complete AI-powered marketing assets from one set of user inputs.
+The Layout Blueprint has already been completed and approved.
+
+Your task is to build the complete Category Blueprint for the AI prompt generator before any HTML, CSS, or JavaScript is generated.
+
+Build every category the generator needs based on the completed Generator Planner.
+
+The categories must work together to produce the final prompt output described in the Generator Planner.
 
 For every category, include:
 
@@ -652,26 +644,17 @@ None
 
 Organize the categories in the exact order users should complete them.
 
-The generator should include categories such as:
+Create categories based on the student's generator purpose, audience, goal, and final prompt output.
 
-• Business Information
-• Product or Service
-• Target Audience
-• Marketing Goal
-• Platform
-• Brand Voice
-• Tone
-• Writing Style
-• Offer
-• Call-to-Action
-• Keywords
-• SEO
-• Video Settings
-• Image Settings
-• Thumbnail Settings
-• Music Settings
-• Custom GPT Settings
-• Advanced Prompt Options
+The category system should include:
+
+• Core user information categories
+• Main prompt subject categories
+• Style and tone categories
+• Output format categories
+• Platform or use-case categories if relevant
+• Custom details categories
+• Advanced prompt options if useful
 
 For every category, explain:
 
@@ -679,12 +662,14 @@ For every category, explain:
 • How it improves the final prompt
 • Any dependencies on previous categories
 
-Design the category system so it is:
+Build the category system so it is:
 
-• Beginner Friendly
+• Beginner-friendly
 • Professional
-• Easy to Expand
+• Easy to expand
 • Reusable for future generators
+• Specific to the completed Generator Planner
+• Consistent with the completed Layout Blueprint
 
 Do NOT generate HTML.
 
@@ -692,17 +677,23 @@ Do NOT generate CSS.
 
 Do NOT generate JavaScript.
 
-Only create the complete Category Blueprint.
+Only build the complete Category Blueprint.
 
-Wait for my approval before moving to the Input Builder.`,
+Stop after completing the Category Blueprint. Do not continue to the Input Builder until instructed.`,
 
 inputs: `You are an expert front-end application architect, UI designer, and prompt engineering specialist.
 
-The AI Developer Foundation, Generator Planner, Layout Blueprint, and Category Blueprint have already been completed and approved.
+The Generator Foundation has already been completed.
 
-We are building a premium single-page AI Marketing Machine using HTML, CSS, and JavaScript.
+The Generator Planner has already been completed, including the generator name, purpose, target audience, and main goal.
 
-Your task is to design every input required for every category before any HTML, CSS, or JavaScript is written.
+The Reference Image has already been uploaded and analyzed.
+
+The Layout Blueprint and Category Blueprint have already been completed and approved.
+
+Your task is to build the complete Input Builder Blueprint for the AI prompt generator before any HTML, CSS, or JavaScript is generated.
+
+Build every input required for every completed category.
 
 For each category, create a complete input blueprint.
 
@@ -741,12 +732,14 @@ For every text input include:
 • Validation recommendations
 • Examples of user input
 
-Design the input system so it is:
+Build the input system so it is:
 
 • Easy for beginners
 • Consistent across every category
 • Scalable for future updates
 • Easy to implement with HTML, CSS, and JavaScript
+• Specific to the completed Generator Planner
+• Consistent with the completed Category Blueprint
 
 Do NOT generate HTML.
 
@@ -754,60 +747,92 @@ Do NOT generate CSS.
 
 Do NOT generate JavaScript.
 
-Only create the complete Input Builder Blueprint.
+Only build the complete Input Builder Blueprint.
 
-Wait for my approval before moving to the Logic Builder.`,
+Stop after completing the Input Builder Blueprint. Do not continue to the Logic Builder until instructed.`,
+
 
 logic: `You are an expert software architect, front-end developer, and JavaScript engineer specializing in professional AI prompt generators.
 
-The AI Developer Foundation, Generator Planner, Layout Blueprint, Category Blueprint, and Input Builder have already been completed and approved.
+The Generator Foundation has already been completed.
 
-We are building a premium single-page AI Marketing Machine using HTML, CSS, and JavaScript.
+The Generator Planner has already been completed, including the generator name, purpose, target audience, and main goal.
 
-Your task is to design the complete application logic before any JavaScript is written.
+The Reference Image has already been uploaded and analyzed.
 
-Create the complete Logic Blueprint.
+The Layout Blueprint, Category Blueprint, and Input Builder Blueprint have already been completed and approved.
+
+Your task is to build the complete Logic Blueprint for the AI prompt generator before any JavaScript is generated.
+
+Build the complete application logic.
 
 Include:
 
-1. Application Workflow
-• Complete user flow from opening the generator until copying the finished prompt.
+## 1. Application Workflow
 
-2. Generate Prompt Logic
+Build the complete user workflow from opening the generator to copying or saving the finished prompt.
+
+## 2. Generate Prompt Logic
+
+Define:
+
 • How every input should be collected.
 • How the final prompt should be assembled.
 • How missing values should be handled.
+• How duplicate information should be prevented.
 
-3. Randomize Logic
+## 3. Randomize Logic
+
+Define how Randomize should:
+
 • Randomize only unlocked fields.
 • Skip locked fields.
 • Skip custom user text.
-• Produce useful combinations.
+• Produce useful and logical combinations.
+• Respect category dependencies.
 
-4. Lock Logic
-• Explain how locked fields behave.
-• Explain how they interact with Randomize, Presets, and Clear All.
+## 4. Lock Logic
 
-5. Preset Logic
-• How presets populate fields.
-• How users can switch between presets.
+Define how locked fields behave.
+
+Explain how Lock interacts with:
+
+• Randomize
+• Presets
+• Clear All
+• Generate Prompt
+
+## 5. Preset Logic
+
+Define:
+
+• How presets populate inputs.
+• How users switch between presets.
 • How presets interact with locked fields.
+• How presets affect custom user input.
 
-6. Clear All Logic
+## 6. Clear All Logic
+
+Define how Clear All should:
+
 • Reset every unlocked field.
 • Preserve locked values.
 • Reset custom text where appropriate.
+• Restore default values when necessary.
 
-7. Copy Logic
-Design copy functionality for:
+## 7. Copy Logic
+
+Build copy functionality for:
 
 • Final Prompt
 • Prompt Variations
 • Prompt History
 
-8. Save Prompt Logic
+Include successful copy behavior and failure handling.
 
-Explain how prompts should be stored locally.
+## 8. Save Prompt Logic
+
+Define how prompts should be stored locally.
 
 Include:
 
@@ -816,42 +841,54 @@ Include:
 • Full Prompt
 • Delete Function
 
-9. Prompt Variations
+## 9. Prompt Variations
 
-Explain how the generator should create multiple useful prompt variations from the same inputs.
+Define how the generator creates multiple useful prompt variations from the same user inputs while maintaining the original intent.
 
-10. Prompt Quality Checker
+## 10. Prompt Quality Checker
 
-Design a scoring system that evaluates:
+Build a scoring system that evaluates:
 
 • Completeness
 • Clarity
 • Detail
 • Readability
 • Missing Information
+• Prompt Effectiveness
 
-11. Validation Rules
+## 11. Validation Rules
 
-Explain how the generator should prevent:
+Define how the generator prevents:
 
 • Empty prompts
 • Duplicate information
 • Invalid selections
 • Conflicting inputs
+• Missing required information
 
-12. Error Handling
+## 12. Error Handling
 
-Describe how the application should respond to:
+Define how the application responds to:
 
 • Missing required inputs
 • Invalid data
 • Empty output
 • Copy failures
 • Save failures
+• Unexpected errors
 
-13. Future Expansion
+## 13. Future Expansion
 
-Design the logic so additional categories and modules can be added later without rewriting the application.
+Build the logic architecture so additional categories, modules, features, and prompt types can be added later without rewriting the application.
+
+The logic should be:
+
+• Modular
+• Reusable
+• Scalable
+• Beginner-friendly
+• Consistent with the completed Layout Blueprint, Category Blueprint, and Input Builder Blueprint
+• Specific to the completed Generator Planner
 
 Do NOT generate HTML.
 
@@ -859,27 +896,32 @@ Do NOT generate CSS.
 
 Do NOT generate JavaScript.
 
-Only create the complete Logic Blueprint.
+Only build the complete Logic Blueprint.
 
-Wait for my approval before moving to the Prompt Assembly Builder.`,
+Stop after completing the Logic Blueprint. Do not continue to the Prompt Assembly Builder until instructed.`,
+
 
 assembly: `You are an expert prompt engineer and AI prompt architect specializing in professional AI prompt generators.
 
-The AI Developer Foundation, Generator Planner, Layout Blueprint, Category Blueprint, Input Builder, and Logic Blueprint have already been completed and approved.
+The Generator Foundation has already been completed.
 
-We are building a premium single-page AI Marketing Machine using HTML, CSS, and JavaScript.
+The Generator Planner has already been completed, including the generator name, purpose, target audience, and main goal.
 
-Your task is to design the complete Prompt Assembly system before any JavaScript is written.
+The Reference Image has already been uploaded and analyzed.
 
-The Prompt Assembly system is responsible for transforming every user selection into one polished, professional AI prompt.
+The Layout Blueprint, Category Blueprint, Input Builder Blueprint, and Logic Blueprint have already been completed and approved.
 
-Create the complete Prompt Assembly Blueprint.
+Your task is to build the complete Prompt Assembly Blueprint for the AI prompt generator before any JavaScript is generated.
+
+The Prompt Assembly Blueprint is responsible for transforming every user input into one polished, high-quality AI prompt.
+
+Build the complete Prompt Assembly Blueprint.
 
 Include:
 
-1. Final Prompt Structure
+## 1. Final Prompt Structure
 
-Design the overall structure of the finished prompt.
+Build the overall structure of the finished prompt.
 
 Include:
 
@@ -890,53 +932,82 @@ Include:
 • Quality instructions
 • Output instructions
 
-2. Category Assembly
+## 2. Category Assembly
 
-Explain how each category should be inserted into the final prompt.
+Define how every completed category should be assembled into the final prompt.
 
-3. Custom Text Handling
+Explain:
 
-Explain how custom user text should override or supplement selected options.
+• Category order
+• How categories work together
+• How unnecessary information is excluded
 
-4. "None" Handling
+## 3. Custom Text Handling
 
-Ignore every field where the user selected "None."
+Define how custom user text should:
 
-Do not include unnecessary placeholders.
+• Override selected options when appropriate
+• Supplement selected options
+• Merge naturally into the finished prompt
 
-5. Locked Fields
+## 4. "None" Handling
 
-Explain how locked fields remain unchanged during prompt generation and randomization.
+Define how every field with a value of "None" should be ignored.
 
-6. Randomized Fields
+Do not include empty placeholders or unnecessary instructions in the final prompt.
 
-Explain how randomized selections should be merged into the final prompt without creating conflicts.
+## 5. Locked Fields
 
-7. Preset Integration
+Define how locked fields remain unchanged during:
 
-Describe how presets populate the final prompt while still allowing users to customize individual sections.
+• Prompt Generation
+• Randomization
+• Preset Changes
 
-8. Prompt Variations
+## 6. Randomized Fields
 
-Explain how the generator should automatically create multiple high-quality variations of the finished prompt.
+Define how randomized selections are merged into the final prompt while maintaining logical, high-quality results and preventing conflicts.
 
-9. Duplicate Prevention
+## 7. Preset Integration
 
-Prevent repeated wording, conflicting instructions, and duplicate information.
+Define how presets populate the prompt while allowing users to customize individual categories before generating the final prompt.
 
-10. Prompt Formatting
+## 8. Prompt Variations
 
-Ensure the final prompt is:
+Define how the generator automatically creates multiple useful prompt variations from the same user inputs while preserving the original intent.
+
+## 9. Duplicate Prevention
+
+Define how the assembly system prevents:
+
+• Duplicate wording
+• Repeated instructions
+• Conflicting information
+• Redundant context
+
+## 10. Prompt Formatting
+
+Ensure every finished prompt is:
 
 • Clear
 • Professional
 • Organized
 • Easy for AI to understand
+• Optimized for high-quality AI responses
 • Ready to copy and paste
 
-11. Scalability
+## 11. Scalability
 
-Design the assembly system so future categories and modules can be added without rebuilding the existing prompt structure.
+Build the Prompt Assembly Blueprint so additional categories, modules, prompt sections, and future features can be added without rebuilding the existing prompt structure.
+
+The assembly system should be:
+
+• Modular
+• Reusable
+• Scalable
+• Beginner-friendly
+• Consistent with the completed Layout Blueprint, Category Blueprint, Input Builder Blueprint, and Logic Blueprint
+• Specific to the completed Generator Planner
 
 Do NOT generate HTML.
 
@@ -944,16 +1015,22 @@ Do NOT generate CSS.
 
 Do NOT generate JavaScript.
 
-Only create the complete Prompt Assembly Blueprint.
+Only build the complete Prompt Assembly Blueprint.
 
-Wait for my approval before moving to the HTML Builder.`,
+Stop after completing the Prompt Assembly Blueprint. Do not continue to the HTML Builder until instructed.`,
 
 
 htmlPart1: `You are an expert HTML developer and front-end application architect.
 
-The AI Developer Foundation, Generator Planner, Layout Blueprint, Category Blueprint, Input Builder, Logic Blueprint, and Prompt Assembly Blueprint have all been completed and approved.
+The Generator Foundation has already been completed.
 
-Your task is to build the COMPLETE external index.html file.
+The Generator Planner has already been completed, including the generator name, purpose, target audience, and main goal.
+
+The Reference Image has already been uploaded and analyzed.
+
+The Layout Blueprint, Category Blueprint, Input Builder Blueprint, Logic Blueprint, and Prompt Assembly Blueprint have all been completed and approved.
+
+Your task is to build the complete external index.html file for the AI prompt generator.
 
 Output ONLY HTML code.
 
@@ -968,7 +1045,7 @@ Include:
 • head section
 • meta tags
 • page title
-• stylesheet link
+• stylesheet link to style.css
 • script.js link with defer
 • body opening tag
 • application wrapper
@@ -991,6 +1068,8 @@ Continue from Part 1.
 
 Do NOT repeat previous code.
 
+Use the completed Generator Planner, Category Blueprint, Input Builder Blueprint, Logic Blueprint, and Prompt Assembly Blueprint as the source of truth.
+
 Build:
 
 • Preset section
@@ -1001,11 +1080,13 @@ Build:
 • Save button
 • Clear button
 • All collapsible generator category sections
-• Dropdown placeholders
-• Chip button placeholders
+• Dropdown inputs
+• Chip button groups
+• Multi-select chip groups
 • Text boxes
 • Textareas
 • Lock buttons
+• Clear category buttons where appropriate
 
 Do NOT generate CSS.
 
@@ -1021,10 +1102,15 @@ Continue from Part 2.
 
 Do NOT repeat previous code.
 
+Use the completed Layout Blueprint, Logic Blueprint, and Prompt Assembly Blueprint as the source of truth.
+
 Build:
 
 • Final Prompt Output section
+• Copy Final Prompt button
+• Download Prompt button if included in the blueprint
 • Prompt Variations section
+• Copy buttons for prompt variations
 • Prompt History section
 • Prompt Quality Checker
 • Footer
@@ -1035,7 +1121,9 @@ Build:
 
 Do NOT generate CSS.
 
-Do NOT generate JavaScript.`,
+Do NOT generate JavaScript.
+
+Stop after completing the full index.html file.`,
 
 cssPart1: `You are an expert CSS developer and UI designer.
 
@@ -1402,8 +1490,6 @@ function initializeCoreEngine() {
 
   console.log(`AI Business Builder v${APP_CONFIG.version} core loaded.`);
 }
-
-document.addEventListener("DOMContentLoaded", initializeCoreEngine);
 
 /* =========================================================
    SECTION 2: DASHBOARD + PROGRESS ENGINE
@@ -1782,7 +1868,6 @@ function initializeDashboardEngine() {
   console.log("Section 2 loaded: Dashboard + Progress Engine");
 }
 
-document.addEventListener("DOMContentLoaded", initializeDashboardEngine);
 
 /* =========================================================
    SECTION 3: NOTEBOOK + PROFILE + SETTINGS
@@ -2147,8 +2232,6 @@ function initializeProfileNotebookSettings() {
   console.log("Section 3 loaded: Notebook + Profile + Settings");
 }
 
-document.addEventListener("DOMContentLoaded", initializeProfileNotebookSettings);
-
 /* =========================================================
    SECTION 4: DOWNLOADS + REPLAYS + SEARCH
    Paste directly under Section 3
@@ -2159,66 +2242,27 @@ document.addEventListener("DOMContentLoaded", initializeProfileNotebookSettings)
    ========================== */
 
 const DOWNLOAD_RESOURCES = {
-  "master-blueprint": {
-    filename: "ai-business-builder-planning-sheet.txt",
-    title: "AI Business Builder Planning Sheet",
-    content: `
-AI BUSINESS BUILDER™ PLANNING SHEET
+"reference-image": {
+    filename: "reference-image.txt",
+    title: "Reference Image",
+    content: `Reference Image
 
-1. PRODUCT NAME
-Write the name of your generator:
+Upload your inspiration image into ChatGPT before continuing.
 
+Use this image as the visual direction for:
 
-2. TARGET AUDIENCE
-Who is this generator for?
+• Style
+• Composition
+• Colors
+• Lighting
+• Mood
+• Camera Angle
+• Overall Quality
 
+Do not copy the image exactly.
 
-3. PROBLEM IT SOLVES
-What does your audience struggle with?
-
-
-4. MAIN PROMISE
-After using this generator, the buyer can:
-
-
-5. CORE INPUTS
-Choose the dropdown/input fields your generator needs:
-
-- Business type:
-- Audience:
-- Tone:
-- Platform:
-- Output type:
-- Style:
-- Goal:
-
-6. CORE OUTPUTS
-What should the generator create?
-
-- AI image prompt
-- Video script
-- Marketing caption
-- Email copy
-- Product description
-- Custom GPT instructions
-- Sales page copy
-- Lead magnet outline
-
-7. SELLING ANGLE
-Why would someone buy this instead of making it themselves?
-
-
-8. CUSTOMIZATION IDEAS
-How can you reuse this generator for other niches?
-
-
-9. FINAL CHECK
-- Does it solve a clear problem?
-- Is it easy to use?
-- Does it create useful outputs?
-- Can someone understand it without you explaining it?
-`.trim(),
-  },
+Use it only as creative inspiration while building your generator.`
+},
 
   "html-starter": {
     filename: "starter-code-pack.txt",
@@ -2663,7 +2707,6 @@ function initializeDownloadsReplaysSearch() {
   console.log("Section 4 loaded: Downloads + Replays + Search");
 }
 
-document.addEventListener("DOMContentLoaded", initializeDownloadsReplaysSearch);
 
 /* =========================================================
    SECTION 5: CERTIFICATE SYSTEM + FINAL APP POLISH
@@ -2983,16 +3026,7 @@ function initializeFinalPolish() {
   console.log("Section 5 loaded: Certificate System + Final Polish");
 }
 
-document.addEventListener("DOMContentLoaded", initializeFinalPolish);
 
-function setupFlipCards() {
-  document.querySelectorAll(".flip-card").forEach((card) => {
-    card.addEventListener("click", (event) => {
-      if (event.target.closest("button")) return;
-      card.classList.toggle("is-flipped");
-    });
-  });
-}
 
 /* ============================= */
 /* FLIP CARD FUNCTIONALITY */
@@ -3000,8 +3034,6 @@ function setupFlipCards() {
 
 function initializeFlipCards() {
   document.addEventListener("click", function (event) {
-   
-
     const card = event.target.closest(".flip-card");
 
     if (!card) return;
@@ -3020,6 +3052,13 @@ function initializeFlipCards() {
     card.classList.toggle("is-flipped");
   });
 }
+document.addEventListener("DOMContentLoaded", () => {
+  initializeCoreEngine();
+  initializeDashboardEngine();
+  initializeProfileNotebookSettings();
+  initializeDownloadsReplaysSearch();
+  initializeFinalPolish();
+  initializeFlipCards();
 
-document.addEventListener("DOMContentLoaded", initializeFlipCards);
-
+  console.log("AI Business Builder fully initialized.");
+});

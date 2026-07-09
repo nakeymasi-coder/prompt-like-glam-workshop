@@ -1,7 +1,7 @@
 /* ==========================================================
-   AI BUSINESS BUILDER™ — STYLE.CSS v7.0
+   AI BUSINESS BUILDER™ — CLEANED STYLE.CSS v7.1
    Premium Luxury Workshop UI
-   Drop this file into: css/style.css
+   Cleaned: duplicate flip-card rules removed, sections organized
    ========================================================== */
 
 /* =============================
@@ -1329,6 +1329,95 @@ body.light-theme .help-card p {
   color: rgba(17, 19, 31, 0.7);
 }
 
+
+/* =============================
+   FLIP CARDS + BUILDER BUTTONS
+   ============================= */
+
+.flip-card,
+.module-card.flip-card {
+  perspective: 1200px;
+  cursor: pointer;
+  min-height: 520px;
+}
+
+.module-card-inner {
+  position: relative;
+  width: 100%;
+  min-height: 520px;
+  transition: transform 0.7s ease;
+  transform-style: preserve-3d;
+}
+
+.flip-card.is-flipped .module-card-inner,
+.module-card.is-flipped .module-card-inner {
+  transform: rotateY(180deg);
+}
+
+.module-card-front,
+.module-card-back {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  backface-visibility: hidden;
+  overflow-y: auto;
+}
+
+.module-card-front {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.module-card-back {
+  transform: rotateY(180deg);
+  padding: 22px;
+  border: 1px solid rgba(212, 175, 55, 0.42);
+  background: linear-gradient(
+    145deg,
+    rgba(6, 22, 70, 0.96),
+    rgba(5, 5, 10, 0.98)
+  );
+}
+
+.module-card-back h3 {
+  margin: 0 0 14px;
+  color: var(--gold);
+}
+
+.module-card-back h4 {
+  margin: 16px 0 6px;
+  color: var(--white);
+}
+
+.module-card-back p,
+.module-card-back li {
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.55;
+}
+
+.module-card-back ul {
+  padding-left: 20px;
+}
+
+.flip-hint {
+  display: block;
+  margin-top: auto;
+  color: rgba(212, 175, 55, 0.85);
+  font-size: 0.78rem;
+}
+
+.builder-buttons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.builder-buttons .secondary-btn {
+  width: 100%;
+}
+
 /* =============================
    RESPONSIVE
    ============================= */
@@ -1501,167 +1590,4 @@ body.light-theme .help-card p {
     box-shadow: none;
     border: 2px solid #000;
   }
-}
-.module-card {
-  perspective: 1200px;
-  cursor: pointer;
-}
-
-.module-card-inner {
-  position: relative;
-  width: 100%;
-  min-height: 320px;
-  transition: transform 0.7s ease;
-  transform-style: preserve-3d;
-}
-
-.module-card.is-flipped .module-card-inner {
-  transform: rotateY(180deg);
-}
-
-.module-card-front,
-.module-card-back {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  border-radius: inherit;
-}
-
-.module-card-front {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.module-card-back {
-  transform: rotateY(180deg);
-  background: linear-gradient(145deg, rgba(6, 22, 70, 0.96), rgba(5, 5, 10, 0.98));
-  border: 1px solid rgba(212, 175, 55, 0.4);
-  padding: 22px;
-  overflow-y: auto;
-}
-
-.module-card-back h3 {
-  color: var(--gold);
-  margin-bottom: 12px;
-}
-
-.module-card-back h4 {
-  color: #fff;
-  margin: 14px 0 6px;
-}
-
-.module-card-back p,
-.module-card-back li {
-  color: rgba(255, 255, 255, 0.82);
-  line-height: 1.5;
-}
-
-.flip-hint {
-  margin-top: auto;
-  font-size: 0.75rem;
-  color: rgba(212, 175, 55, 0.8);
-}
-
-/* ============================= */
-/* FLIP CARD TEACHING NOTES */
-/* ============================= */
-
-.flip-card {
-  perspective: 1200px;
-  cursor: pointer;
-}
-
-.module-card-inner {
-  position: relative;
-  width: 100%;
-  min-height: 340px;
-  transition: transform 0.7s ease;
-  transform-style: preserve-3d;
-}
-
-.flip-card.is-flipped .module-card-inner {
-  transform: rotateY(180deg);
-}
-
-.module-card-front,
-.module-card-back {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  border-radius: inherit;
-}
-
-.module-card-front {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.module-card-back {
-  transform: rotateY(180deg);
-  background: linear-gradient(
-    145deg,
-    rgba(6, 22, 70, 0.96),
-    rgba(5, 5, 10, 0.98)
-  );
-  border: 1px solid rgba(212, 175, 55, 0.42);
-  padding: 22px;
-  overflow-y: auto;
-}
-
-.module-card-back h3 {
-  color: var(--gold);
-  margin: 0 0 14px;
-}
-
-.module-card-back h4 {
-  color: #ffffff;
-  margin: 16px 0 6px;
-}
-
-.module-card-back p,
-.module-card-back li {
-  color: rgba(255, 255, 255, 0.82);
-  line-height: 1.55;
-}
-
-.module-card-back ul {
-  padding-left: 20px;
-}
-
-.flip-hint {
-  display: block;
-  margin-top: auto;
-  font-size: 0.78rem;
-  color: rgba(212, 175, 55, 0.85);
-}
-.builder-buttons{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-    gap:10px;
-    margin-top:18px;
-}
-
-.builder-buttons .secondary-btn{
-    width:100%;
-}
-
-.module-card.flip-card {
-  min-height: 520px;
-}
-
-.module-card-inner {
-  min-height: 520px;
-}
-
-.module-card-front,
-.module-card-back {
-  overflow-y: auto;
-}
-
-.builder-buttons {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
 }
