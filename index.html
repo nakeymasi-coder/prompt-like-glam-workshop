@@ -1,1790 +1,2135 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="AI Business Builder Workshop: build a reusable prompt generator with HTML, CSS, and JavaScript." name="description"/>
-<title>AI Business Builder™ | Prompt Generator Workshop</title>
-<link href="css/style.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&amp;family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<script src="https://unpkg.com/lucide@latest"></script>
-<meta content="AI Business Builder v7.0" name="generator"/></head>
-<body><a class="skip-link" href="#dashboard">Skip to content</a>
-<div class="app-shell">
-<!-- ============================= -->
-<!-- SIDEBAR -->
-<!-- ============================= -->
-<aside aria-label="Main navigation" class="sidebar">
-<div class="brand-block">
-<div class="brand-mark">AI</div>
-<div>
-<h1>AI Business Builder™</h1>
-<p>Workshop Experience</p>
-</div>
-</div>
-<nav class="sidebar-nav">
-<a class="nav-link active" data-page="dashboard" href="#">
-<i data-lucide="layout-dashboard"></i>
-<span>Command Center</span>
-</a>
-<a class="nav-link" data-page="journey" href="#">
-<i data-lucide="route"></i>
-<span>Workshop Journey</span>
-</a>
-<a class="nav-link" data-page="day-one" href="#">
-<i data-lucide="hammer"></i>
-<span>Day 1: Build</span>
-</a>
-<a class="nav-link" data-page="day-two" href="#">
-<i data-lucide="rocket"></i>
-<span>Day 2: Publish + Sell</span>
-</a>
-<a class="nav-link" data-page="blueprint" href="#">
-<i data-lucide="brain-circuit"></i>
-<span>Generator Blueprint</span>
-</a>
-<a class="nav-link" data-page="modules" href="#">
-<i data-lucide="sparkles"></i>
-<span>AI Modules</span>
-</a>
-<a class="nav-link" data-page="code-lab" href="#">
-<i data-lucide="code-2"></i>
-<span>Code Lab</span>
-</a>
-<a class="nav-link" data-page="publish" href="#">
-<i data-lucide="cloud-upload"></i>
-<span>GitHub + Netlify</span>
-</a>
-<a class="nav-link" data-page="sell" href="#">
-<i data-lucide="badge-dollar-sign"></i>
-<span>Sell Your Generator</span>
-</a>
-<a class="nav-link" data-page="downloads" href="#">
-<i data-lucide="download"></i>
-<span>Downloads</span>
-</a>
-<a class="nav-link" data-page="notebook" href="#">
-<i data-lucide="notebook-pen"></i>
-<span>Notebook</span>
-</a>
-<a class="nav-link" data-page="replays" href="#">
-<i data-lucide="monitor-play"></i>
-<span>Replay Library</span>
-</a>
-<a class="nav-link" data-page="help" href="#">
-<i data-lucide="life-buoy"></i>
-<span>Help Center</span>
-</a>
-<a class="nav-link" data-page="certificate" href="#">
-<i data-lucide="award"></i>
-<span>Certificate</span>
-</a>
-<a class="nav-link" data-page="settings" href="#">
-<i data-lucide="settings"></i>
-<span>Settings</span>
-</a>
-</nav>
-<div class="sidebar-progress-panel">
-<div class="progress-topline">
-<span>Builder Progress</span>
-<strong id="sidebarProgressPercent">0%</strong>
-</div>
-<div class="progress-bar">
-<div class="progress-fill" id="sidebarProgressFill"></div>
-</div>
-<p id="sidebarProgressText">0 of 5 journey steps complete</p>
-</div>
-<div class="sidebar-footer">
-<p>Version 7.0</p>
-<small>Premium Workshop Companion</small>
-</div>
-</aside>
-<!-- ============================= -->
-<!-- MAIN CONTENT -->
-<!-- ============================= -->
-<main class="main-content">
-<header class="topbar">
-<button aria-label="Open menu" class="mobile-menu-btn" id="mobileMenuBtn">
-<i data-lucide="menu"></i>
-</button>
-<div class="topbar-search">
-<i data-lucide="search"></i>
-<input id="globalSearch" placeholder="Search workshop steps, code, modules, downloads..." type="search"/>
-</div>
-<div class="topbar-actions">
-<button class="ghost-btn" data-open-page="notebook">
-<i data-lucide="notebook-pen"></i>
-              Notes
-            </button>
-<button class="gold-btn" id="topbarContinueBtn">Continue</button>
-</div>
-</header>
-<!-- ============================= -->
-<!-- PAGE: DASHBOARD -->
-<!-- ============================= -->
-<section class="page active-page" id="dashboard">
-  <div class="dashboard-shell">
-    <header class="workspace-header">
-      <div>
-        <span class="eyebrow">AI BUSINESS BUILDER™</span>
-        <h1>Prompt Generator Workshop</h1>
-        <p>Follow the cards in order. Each card gives students one clear prompt, one clear action, and one clear next step.</p>
-      </div>
-
-      <aside class="workspace-progress">
-        <div class="progress-circle">
-          <strong id="dashboardProgressPercent">0%</strong>
-          <span>Complete</span>
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta
+      content="Prompt Generator Companion: build a reusable prompt generator with HTML, CSS, and JavaScript."
+      name="description"
+    />
+    <title>Prompt Generator Companion</title>
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&amp;family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <meta content="Prompt Generator Companion v7.0" name="generator" />
+  </head>
+  <body>
+    <a class="skip-link" href="#dashboard">Skip to content</a>
+    <div class="app-shell">
+      <!-- ============================= -->
+      <!-- SIDEBAR -->
+      <!-- ============================= -->
+      <aside aria-label="Main navigation" class="sidebar">
+        <div class="brand-block">
+          <div class="brand-mark">AI</div>
+          <div>
+            <h1>Prompt Generator Companion™</h1>
+            <p>Workshop Experience</p>
+          </div>
         </div>
+        <nav class="sidebar-nav">
+          <a class="nav-link active" data-page="dashboard" href="#">
+            <i data-lucide="layout-dashboard"></i>
+            <span>Generator Studio</span>
+          </a>
+          <a class="nav-link" data-page="journey" href="#">
+            <i data-lucide="route"></i>
+            <span>Workshop Journey</span>
+          </a>
+          <a class="nav-link" data-page="day-one" href="#">
+            <i data-lucide="hammer"></i>
+            <span>Day 1: Build</span>
+          </a>
+          <a class="nav-link" data-page="day-two" href="#">
+            <i data-lucide="rocket"></i>
+            <span>Day 2: Publish + Sell</span>
+          </a>
 
-        <div class="progress-meta">
-          <h3>Current Progress</h3>
-          <p id="dashboardNextStep">Start with Card 1: Generator Foundation.</p>
-          <button class="gold-btn hero-btn" id="dashboardContinueBtn">
-            Continue Workshop
-          </button>
-        </div>
+          <a class="nav-link" data-page="publish" href="#">
+            <i data-lucide="cloud-upload"></i>
+            <span>Tools & Resources</span>
+          </a>
+          <a class="nav-link" data-page="sell" href="#">
+            <i data-lucide="badge-dollar-sign"></i>
+            <span>Sell Your Generator</span>
+          </a>
+          <a class="nav-link" data-page="downloads" href="#">
+            <i data-lucide="download"></i>
+            <span>Downloads</span>
+          </a>
+          <a class="nav-link" data-page="notebook" href="#">
+            <i data-lucide="notebook-pen"></i>
+            <span>Notebook</span>
+          </a>
+          <a class="nav-link" data-page="replays" href="#">
+            <i data-lucide="monitor-play"></i>
+            <span>Replay Library</span>
+          </a>
+
+          <a class="nav-link" data-page="certificate" href="#">
+            <i data-lucide="award"></i>
+            <span>Certificate</span>
+          </a>
+          <a class="nav-link" data-page="settings" href="#">
+            <i data-lucide="settings"></i>
+            <span>Settings</span>
+          </a>
+        </nav>
       </aside>
-    </header>
+      <!-- ============================= -->
+      <!-- MAIN CONTENT -->
+      <!-- ============================= -->
+      <main class="main-content">
+        <header class="topbar">
+          <button
+            aria-label="Open menu"
+            class="mobile-menu-btn"
+            id="mobileMenuBtn"
+          >
+            <i data-lucide="menu"></i>
+          </button>
+          <div class="topbar-search">
+            <i data-lucide="search"></i>
+            <input
+              id="globalSearch"
+              placeholder="Search workshop steps, code, modules, downloads..."
+              type="search"
+            />
+          </div>
+        </header>
 
-    <section class="dashboard-stats">
-      <article class="stat-card">
-        <span>Workshop Progress</span>
-        <h2 id="dashboardStatsProgress">0%</h2>
-      </article>
+        <!-- ============================= -->
+        <!-- PAGE: DASHBOARD -->
+        <!-- ============================= -->
+        <section class="page active-page" id="dashboard">
+          <div class="page-header split-header">
+            <div>
+              <h1>Build Your First Prompt Generator</h1>
+              <p>
+                Use this companion during the live workshop and later when
+                rebuilding your generator.
+              </p>
+            </div>
+          </div>
+          <div class="lesson-section-grid">
+            <article class="lesson-block">
+              <span class="lesson-tag">ROADMAP</span>
+              <h2>Today's Build</h2>
+              <ul class="mission-list">
+                <li><input type="checkbox" /> Create project folder</li>
+                <li><input type="checkbox" /> Create index.html</li>
+                <li><input type="checkbox" /> Create style.css</li>
+                <li><input type="checkbox" /> Create script.js</li>
+                <li><input type="checkbox" /> Connect all files</li>
+                <li><input type="checkbox" /> Build layout</li>
+                <li><input type="checkbox" /> Make Generate work</li>
+                <li><input type="checkbox" /> Make Copy work</li>
+                <li><input type="checkbox" /> Test everything</li>
+              </ul>
+            </article>
+            <article class="lesson-block">
+              <span class="lesson-tag">HELP</span>
+              <h2>Quick Help</h2>
 
-      <article class="stat-card">
-        <span>Current Card</span>
-        <h2>Card 1</h2>
-      </article>
+              <details>
+                <summary>What is HTML?</summary>
+                <p>
+                  HTML creates the structure of your prompt generator. It builds
+                  the headings, buttons, text boxes, cards, and everything users
+                  can see.
+                </p>
+              </details>
 
-      <article class="stat-card">
-        <span>Cards Complete</span>
-        <h2 id="achievementCount">0</h2>
-      </article>
+              <details>
+                <summary>What is CSS?</summary>
+                <p>
+                  CSS controls the appearance of your generator, including
+                  colors, fonts, spacing, layouts, borders, and animations.
+                </p>
+              </details>
 
-      <article class="stat-card">
-        <span>Build Status</span>
-        <h2>Ready</h2>
-      </article>
-    </section>
+              <details>
+                <summary>What is JavaScript?</summary>
+                <p>
+                  JavaScript powers the interactive features like Generate
+                  Prompt, Randomize, Copy, Presets, and other buttons.
+                </p>
+              </details>
 
-    <section class="dashboard-main-grid" aria-label="Workshop card flow">
-      <article class="card today-card">
-        <span class="eyebrow">CARD 1</span>
-        <h2>Generator Foundation</h2>
-        <p>Tell ChatGPT what kind of prompt generator you want to build and set the rules for the full project.</p>
-        <button class="gold-btn" data-open-page="modules">Open Foundation</button>
-      </article>
+              <details>
+                <summary>
+                  What's the difference between HTML, CSS, and JavaScript?
+                </summary>
+                <p>
+                  Think of it like a house: HTML builds it, CSS decorates it,
+                  and JavaScript makes everything work.
+                </p>
+              </details>
 
-      <article class="card quick-actions">
-        <span class="eyebrow">CARD 2</span>
-        <h2>Generator Planner</h2>
-        <p>Plan the purpose, audience, categories, inputs, outputs, and final generator experience.</p>
-        <button class="primary-btn" data-open-page="modules">Open Planner</button>
-      </article>
+              <details>
+                <summary>Where do I paste the ChatGPT prompts?</summary>
+                <p>
+                  Copy the lesson prompt from this companion and paste it into a
+                  new ChatGPT conversation. Then copy the generated code into
+                  the correct file.
+                </p>
+              </details>
 
-      <article class="card activity-card">
-        <span class="eyebrow">CARD 3</span>
-        <h2>Reference Image</h2>
-        <p>Upload the workshop reference image so ChatGPT understands the layout style before designing the interface.</p>
-        <button class="primary-btn" data-open-page="modules">Open Reference</button>
-      </article>
+              <details>
+                <summary>How do I know which file to edit?</summary>
+                <p>
+                  Each lesson tells you whether you're working in
+                  <strong>index.html</strong>, <strong>style.css</strong>, or
+                  <strong>script.js</strong>. Always paste the code into the
+                  matching file.
+                </p>
+              </details>
 
-      <article class="card continue-card">
-        <span class="eyebrow">CARD 4</span>
-        <h2>Layout Builder</h2>
-        <p>Map the full page structure, generator sections, controls, output areas, and user flow.</p>
-        <button class="primary-btn" data-open-page="modules">Open Layout</button>
-      </article>
+              <details>
+                <summary>How do I change my generator's colors?</summary>
+                <p>
+                  Open <strong>style.css</strong>, find the color variables near
+                  the top, and replace them with your own brand colors.
+                </p>
+              </details>
 
-      <article class="card activity-card">
-        <span class="eyebrow">CARD 5</span>
-        <h2>Category Builder</h2>
-        <p>Design the generator categories, dropdown options, chip groups, custom fields, and lock behavior.</p>
-        <button class="primary-btn" data-open-page="modules">Open Categories</button>
-      </article>
+              <details>
+                <summary>How do I add my own header image?</summary>
+                <p>
+                  Add your image to the project folder, then update the image
+                  path in <strong>index.html</strong> to point to your file.
+                </p>
+              </details>
 
-      <article class="card tip-card">
-        <span class="eyebrow">CARD 6</span>
-        <h2>Input Builder</h2>
-        <p>Define every dropdown, text box, textarea, button, preset, randomizer, and save/copy control.</p>
-        <button class="primary-btn" data-open-page="modules">Open Inputs</button>
-      </article>
+              <details>
+                <summary>How do I publish my generator?</summary>
+                <p>
+                  Save your project, commit and push it to GitHub, then deploy
+                  it with Netlify to create your live website.
+                </p>
+              </details>
 
-      <article class="card roadmap-preview">
-        <span class="eyebrow">CARD 7</span>
-        <h2>Logic Builder</h2>
-        <p>Plan how Generate, Randomize, Lock, Clear, Copy, Save, History, and Variations should work.</p>
-        <button class="primary-btn" data-open-page="modules">Open Logic</button>
-      </article>
+              <details>
+                <summary>My generator isn't working. What should I do?</summary>
+                <p>
+                  Make sure your files are saved, the code was pasted into the
+                  correct file, and check your browser's Console for any errors.
+                </p>
+              </details>
+            </article>
 
-      <article class="card quick-actions">
-        <span class="eyebrow">CARD 8</span>
-        <h2>Prompt Assembly Builder</h2>
-        <p>Design how user choices turn into one complete, polished prompt with no duplicate or messy instructions.</p>
-        <button class="primary-btn" data-open-page="modules">Open Assembly</button>
-      </article>
+            <article class="lesson-block">
+              <span class="lesson-tag">REMEMBER</span>
+              <h2>Common Mistakes</h2>
 
-      <article class="card activity-card">
-        <span class="eyebrow">CARD 9</span>
-        <h2>HTML Builder</h2>
-        <p>Generate the full structure for the prompt generator and paste it into index.html in clean parts.</p>
-        <button class="primary-btn" data-open-page="modules">Open HTML</button>
-      </article>
+              <ul>
+                <li>Always save your file before refreshing your browser.</li>
+                <li>
+                  Paste the generated code into the correct file (index.html,
+                  style.css, or script.js).
+                </li>
+                <li>
+                  Never overwrite your entire file unless the lesson tells you
+                  to.
+                </li>
+                <li>
+                  Copy the entire response—don't stop halfway through the code.
+                </li>
+                <li>Only ask ChatGPT to generate one file at a time.</li>
+                <li>Read the lesson instructions before pasting any code.</li>
+                <li>
+                  If something breaks, undo your last change before trying
+                  something else.
+                </li>
+                <li>
+                  One missing quotation mark, bracket, or semicolon can break
+                  your generator.
+                </li>
+                <li>
+                  Check the browser Console for errors before asking for help.
+                </li>
+                <li>
+                  Test your generator after every major change instead of
+                  waiting until the end.
+                </li>
+              </ul>
+            </article>
 
-      <article class="card continue-card">
-        <span class="eyebrow">CARD 10</span>
-        <h2>CSS Builder</h2>
-        <p>Style the generator with a premium responsive layout, strong typography, and clean luxury spacing.</p>
-        <button class="primary-btn" data-open-page="modules">Open CSS</button>
-      </article>
-
-      <article class="card tip-card">
-        <span class="eyebrow">CARD 11</span>
-        <h2>JavaScript Builder</h2>
-        <p>Make every feature functional: prompts, copy buttons, saved history, presets, locks, and randomizer.</p>
-        <button class="primary-btn" data-open-page="modules">Open JavaScript</button>
-      </article>
-
-      <article class="card roadmap-preview">
-        <span class="eyebrow">CARD 12</span>
-        <h2>Final Polish</h2>
-        <p>Test the finished generator, clean the code, confirm mobile layout, and prepare it to publish.</p>
-        <button class="secondary-btn" data-open-page="modules">Open Final Polish</button>
-      </article>
-    </section>
-  </div>
-
-  <section class="module-preview-section">
-    <div class="section-intro compact">
-      <span class="eyebrow">WORKSHOP FLOW</span>
-      <h2>Build one clean prompt generator from start to finish.</h2>
-    </div>
-
-    <div class="module-pill-grid">
-      <button data-open-page="modules">Foundation</button>
-      <button data-open-page="modules">Planner</button>
-      <button data-open-page="modules">Reference</button>
-      <button data-open-page="modules">Layout</button>
-      <button data-open-page="modules">Categories</button>
-      <button data-open-page="modules">Inputs</button>
-      <button data-open-page="modules">Logic</button>
-      <button data-open-page="modules">HTML</button>
-      <button data-open-page="modules">CSS</button>
-      <button data-open-page="modules">JavaScript</button>
-      <button data-open-page="modules">Final Polish</button>
-    </div>
-  </section>
-</section>
-<!-- ============================= -->
-<!-- PAGE: JOURNEY -->
-<!-- ============================= -->
-<section class="page" id="journey">
-<div class="page-header">
-<span class="eyebrow">Workshop Journey</span>
-<h1>One clean path from idea to sellable generator.</h1>
-<p>
-              This is the exact flow students follow so nobody gets lost during
-              the live workshop.
-            </p>
-</div>
-<div class="timeline">
-<article class="timeline-item">
-<span class="timeline-number">01</span>
-<div class="timeline-content">
-<h2>Plan the Generator</h2>
-<p>
+            <article class="lesson-block">
+              <span class="lesson-tag">CHECKPOINT</span>
+              <h2>Before You Leave Today</h2>
+              <ul>
+                <li><input type="checkbox" /> HTML linked</li>
+                <li><input type="checkbox" /> CSS linked</li>
+                <li><input type="checkbox" /> JavaScript linked</li>
+                <li><input type="checkbox" /> Generator works</li>
+                <li><input type="checkbox" /> Copy button works</li>
+                <li><input type="checkbox" /> Ready for Day 2</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+        <!-- ============================= -->
+        <!-- PAGE: JOURNEY -->
+        <!-- ============================= -->
+        <section class="page" id="journey">
+          <div class="page-header">
+            <h1>One clean path from idea to sellable generator</h1>
+          </div>
+          <div class="timeline">
+            <article class="timeline-item">
+              <span class="timeline-number">01</span>
+              <div class="timeline-content">
+                <h2>Plan the Generator</h2>
+                <p>
                   Define the audience, problem, outputs, categories, product
                   name, and the transformation the generator creates.
                 </p>
-<button class="secondary-btn" data-open-page="blueprint">
+                <button class="secondary-btn" data-open-page="blueprint">
                   Open Blueprint
                 </button>
-</div>
-</article>
-<article class="timeline-item">
-<span class="timeline-number">02</span>
-<div class="timeline-content">
-<h2>Build the Foundation</h2>
-<p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <span class="timeline-number">02</span>
+              <div class="timeline-content">
+                <h2>Build the Foundation</h2>
+                <p>
                   Create the project folder, add HTML, CSS, and JavaScript
                   files, then build the core generator interface.
                 </p>
-<button class="secondary-btn" data-open-page="day-one">
+                <button class="secondary-btn" data-open-page="day-one">
                   Open Day 1
                 </button>
-</div>
-</article>
-<article class="timeline-item">
-<span class="timeline-number">03</span>
-<div class="timeline-content">
-<h2>Add AI Modules</h2>
-<p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <span class="timeline-number">03</span>
+              <div class="timeline-content">
+                <h2>Add AI Modules</h2>
+                <p>
                   Add sections for images, video scripts, Suno music, marketing,
                   Custom GPT instructions, lead magnets, and launch copy.
                 </p>
-<button class="secondary-btn" data-open-page="modules">
+                <button class="secondary-btn" data-open-page="day-two">
                   Open Modules
                 </button>
-</div>
-</article>
-<article class="timeline-item">
-<span class="timeline-number">04</span>
-<div class="timeline-content">
-<h2>Publish the Product</h2>
-<p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <span class="timeline-number">04</span>
+              <div class="timeline-content">
+                <h2>Publish the Product</h2>
+                <p>
                   Save the project with GitHub, connect the repo to Netlify, and
                   publish a live link students can share.
                 </p>
-<button class="secondary-btn" data-open-page="publish">
+                <button class="secondary-btn" data-open-page="publish">
                   Open Publish Steps
                 </button>
-</div>
-</article>
-<article class="timeline-item">
-<span class="timeline-number">05</span>
-<div class="timeline-content">
-<h2>Package and Sell</h2>
-<p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <span class="timeline-number">05</span>
+              <div class="timeline-content">
+                <h2>Package and Sell</h2>
+                <p>
                   Create a product mockup, sales description, pricing, FAQ,
                   launch checklist, and simple buyer instructions.
                 </p>
-<button class="secondary-btn" data-open-page="sell">
+                <button class="secondary-btn" data-open-page="sell">
                   Open Selling Kit
                 </button>
-</div>
-</article>
-</div>
-</section>
-<!-- ============================= -->
-<!-- PAGE: DAY ONE -->
-<!-- ============================= -->
-<!-- DAY 1 PREMIUM SECTION -->
-<section class="page" id="day-one">
-<div class="page-header split-header">
-<div>
-<span class="eyebrow">DAY 1</span>
-<h1>Build Your First Prompt Generator</h1>
-<p>Use this companion during the live workshop and later when rebuilding your generator.</p>
-</div>
-<button class="gold-btn" id="markDayOneCompleteBtn">Mark Day 1 Complete</button>
-</div>
-<section class="dashboard-stats">
-<article class="stat-card"><span>Goal</span><h2>Working Generator</h2></article>
-<article class="stat-card"><span>Skill</span><h2>Beginner</h2></article>
-<article class="stat-card"><span>Build</span><h2>Live</h2></article>
-<article class="stat-card"><span>Status</span><h2>Ready</h2></article>
-</section>
-<div class="lesson-section-grid">
-<article class="lesson-block">
-<span class="lesson-tag">ROADMAP</span>
-<h2>Today's Build</h2>
-<ul class="mission-list">
-<li><input type="checkbox"/> Create project folder</li>
-<li><input type="checkbox"/> Create index.html</li>
-<li><input type="checkbox"/> Create style.css</li>
-<li><input type="checkbox"/> Create script.js</li>
-<li><input type="checkbox"/> Connect all files</li>
-<li><input type="checkbox"/> Build layout</li>
-<li><input type="checkbox"/> Make Generate work</li>
-<li><input type="checkbox"/> Make Copy work</li>
-<li><input type="checkbox"/> Test everything</li>
-</ul>
-</article>
-<article class="lesson-block">
-<span class="lesson-tag">PROJECT</span>
-<h2>Project Structure</h2>
-<pre>
-Prompt-Generator/
-│
-├── index.html
-├── style.css
-└── script.js
-</pre>
-</article>
-<article class="lesson-block">
-<span class="lesson-tag">HELP</span>
-<h2>Quick Answers</h2>
-<details><summary>What is HTML?</summary><p>HTML creates the structure of your webpage.</p></details>
-<details><summary>What is CSS?</summary><p>CSS controls how your webpage looks.</p></details>
-<details><summary>What is JavaScript?</summary><p>JavaScript makes buttons, generators and interactive features work.</p></details>
-<details><summary>What's the difference?</summary><p>HTML builds it. CSS styles it. JavaScript makes it work.</p></details>
-</article>
-<article class="lesson-block">
-<span class="lesson-tag">REMEMBER</span>
-<h2>Common Mistakes</h2>
-<ul>
-<li>Save every file before testing.</li>
-<li>Check file names carefully.</li>
-<li>One missing character can break code.</li>
-<li>Fix one error at a time.</li>
-</ul>
-</article>
-<article class="lesson-block">
-<span class="lesson-tag">NOTES</span>
-<h2>Workshop Notes</h2>
-<textarea class="note-editor" placeholder="Write your notes here..."></textarea>
-</article>
-<article class="lesson-block">
-<span class="lesson-tag">CHECKPOINT</span>
-<h2>Before You Leave Today</h2>
-<ul>
-<li><input type="checkbox"/> HTML linked</li>
-<li><input type="checkbox"/> CSS linked</li>
-<li><input type="checkbox"/> JavaScript linked</li>
-<li><input type="checkbox"/> Generator works</li>
-<li><input type="checkbox"/> Copy button works</li>
-<li><input type="checkbox"/> Ready for Day 2</li>
-</ul>
-</article>
-</div>
-</section>
-<!-- ============================= -->
-<!-- PAGE: DAY TWO -->
-<!-- ============================= -->
-<section class="page" id="day-two">
-  <div class="page-header split-header">
-    <div>
-      <h1>Customize Your Generator</h1>
-      <p>
-        Personalize the generator you built on Day 1 without rebuilding it.
-        Edit only index.html and style.css.
-      </p>
-    </div>
-  </div>
+              </div>
+            </article>
+          </div>
+        </section>
 
-  <div class="lesson-section-grid">
-    <article class="lesson-block">
-      <span class="lesson-tag">Files</span>
-      <h2>Files to Edit</h2>
-      <ul>
-        <li><code>index.html</code></li>
-        <li><code>style.css</code></li>
-      </ul>
-    </article>
+        <!-- ============================= -->
+        <!-- PAGE: DAY ONE -->
+        <!-- ============================= -->
+        <section class="page" id="day-one">
+          <div class="page-header">
+            <h1>Premium outputs that make the generator worth selling</h1>
+          </div>
 
-    <article class="lesson-block">
-      <span class="lesson-tag">Customize</span>
-      <h2>What You’ll Customize</h2>
-      <ul>
-        <li>Color palette</li>
-        <li>Fonts</li>
-        <li>Header image under the generator title</li>
-        <li>Marquee</li>
-        <li>Scrollbar</li>
-        <li>Button styles</li>
-        <li>Copyright</li>
-      </ul>
-    </article>
+          <div class="module-card-grid">
+            <article class="module-card flip-card">
+              <div class="module-card-inner">
+                <div class="module-card-front">
+                  <i data-lucide="clipboard-list"></i>
 
-    <article class="lesson-block">
-      <span class="lesson-tag">HTML</span>
-      <h2>Add a Header Image</h2>
-      <p>Paste this directly under your main generator title.</p>
+                  <h2>Generator Foundation</h2>
 
-      <pre><code>&lt;div class="generator-header-image"&gt;
-  &lt;img src="images/header-image.png" alt="Generator header image" /&gt;
-&lt;/div&gt;</code></pre>
-    </article>
+                  <p>
+                    Create the foundation for your AI prompt generator before
+                    building the application.
+                  </p>
 
-    <article class="lesson-block">
-      <span class="lesson-tag">HTML</span>
-      <h2>Add a Marquee</h2>
-      <p>Paste this under the header image.</p>
+                  <button
+                    class="secondary-btn copy-snippet-btn"
+                    data-snippet="foundation"
+                  >
+                    Copy Foundation Prompt
+                  </button>
 
-      <pre><code>&lt;div class="generator-marquee"&gt;
-  &lt;div class="marquee-track"&gt;
-    &lt;span&gt;Customize your generator ✦ Make it your own ✦ Add your brand style ✦&lt;/span&gt;
-    &lt;span&gt;Customize your generator ✦ Make it your own ✦ Add your brand style ✦&lt;/span&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-    </article>
+                  <span class="flip-hint">Click card for teaching notes</span>
+                </div>
 
-    <article class="lesson-block">
-      <span class="lesson-tag">CSS</span>
-      <h2>Style Your Customizations</h2>
-      <p>
-        Update your colors, fonts, header image, marquee, scrollbar, and buttons
-        inside style.css.
-      </p>
-    </article>
+                <div class="module-card-back">
+                  <h3>Generator Foundation</h3>
 
-    <article class="lesson-block">
-      <span class="lesson-tag">Footer</span>
-      <h2>Update the Copyright</h2>
-      <p>Use a simple copyright footer only. No extra footer clutter.</p>
+                  <h4>Purpose</h4>
 
-      <pre><code>&lt;footer class="generator-footer"&gt;
-  &lt;p&gt;© &lt;span id="copyrightYear"&gt;&lt;/span&gt; Your Brand Name. All rights reserved.&lt;/p&gt;
-&lt;/footer&gt;</code></pre>
-    </article>
+                  <p>
+                    Build the project's foundation by defining the generator's
+                    purpose, target users, main objective, and overall
+                    structure. This foundation guides every file created
+                    throughout the rest of the project.
+                  </p>
 
+                  <h4>Why this matters</h4>
 
-    <article class="lesson-block">
-    <span class="lesson-tag">Prompt</span>
+                  <p>
+                    A strong foundation keeps every HTML, CSS, and JavaScript
+                    file focused on the same goal, making the finished generator
+                    more organized, easier to build, easier to customize, and
+                    ready to sell.
+                  </p>
 
-    <h2>Customize Your CSS</h2>
+                  <h4>What to do with the output</h4>
 
-    <p>
-        Copy this prompt into ChatGPT. It will generate custom CSS that matches your generator, your branding, and your color palette.
-    </p>
+                  <ul>
+                    <li>Review the generated foundation.</li>
 
-    <button class="secondary-btn copy-snippet-btn" data-snippet="customizeCss">
-  Copy Prompt
-</button>
-</article>
+                    <li>Confirm it matches your generator idea.</li>
 
+                    <li>Adjust any details before continuing.</li>
 
+                    <li>
+                      Stay in the same ChatGPT conversation for the remaining
+                      cards.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </article>
 
-<div class="lesson-complete-area">
-    <button class="gold-btn" id="markDayTwoCompleteBtn">
-        Mark Lesson Complete
-    </button>
-</div>
+            <article class="module-card flip-card">
+              <div class="module-card-inner">
+                <div class="module-card-front">
+                  <i data-lucide="file-pen-line"></i>
 
-</section>
-<!-- ============================= -->
-<!-- PAGE: BLUEPRINT -->
-<!-- ============================= -->
-<section class="page" id="blueprint">
-<div class="page-header">
-<span class="eyebrow">Generator Blueprint</span>
-<h1>Plan the AI Business Builder before coding.</h1>
-<p>
-              This section gives students the strategy behind the generator so
-              the code has a real product purpose.
-            </p>
-</div>
-<div class="blueprint-grid">
-<article class="card blueprint-card">
-<h2>Product Identity</h2>
-<p>
-                The generator should feel useful immediately, even before
-                students customize it.
+                  <h2>Generator Planner</h2>
+
+                  <p>
+                    Define exactly what your prompt generator will create before
+                    building the application.
+                  </p>
+
+                  <button
+                    class="secondary-btn copy-snippet-btn"
+                    data-snippet="planner"
+                  >
+                    Copy Planner Prompt
+                  </button>
+
+                  <span class="flip-hint">Click card for teaching notes</span>
+                </div>
+
+                <div class="module-card-back">
+                  <h3>Generator Planner</h3>
+
+                  <h4>Purpose</h4>
+
+                  <p>
+                    Define your generator's purpose, target audience, required
+                    inputs, expected outputs, and core features. This becomes
+                    the blueprint for everything you'll build next.
+                  </p>
+
+                  <h4>Why this matters</h4>
+
+                  <p>
+                    A clear blueprint helps you build a focused generator,
+                    reduces unnecessary changes, and keeps every HTML, CSS, and
+                    JavaScript file working toward the same goal.
+                  </p>
+
+                  <h4>What to do with the output</h4>
+
+                  <ul>
+                    <li>Review the complete blueprint.</li>
+
+                    <li>Remove anything you don't want.</li>
+
+                    <li>Add anything that's missing.</li>
+
+                    <li>Use it as the guide for the remaining cards.</li>
+                  </ul>
+
+                  <span class="flip-hint">Click again to flip back</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="module-card flip-card">
+              <div class="module-card-inner">
+                <div class="module-card-front">
+                  <i data-lucide="image"></i>
+
+                  <h2>Reference Image</h2>
+
+                  <p>
+                    Download the reference image, upload it into ChatGPT, then
+                    continue building your generator.
+                  </p>
+
+                  <a
+                    href="./assets/images/workshop-reference.png"
+                    download
+                    class="secondary-btn download-reference-btn"
+                  >
+                    Download Reference Image
+                  </a>
+
+                  <span class="flip-hint">Click card for teaching notes</span>
+                </div>
+
+                <div class="module-card-back">
+                  <h3>Reference Image</h3>
+
+                  <h4>Purpose</h4>
+
+                  <p>
+                    Give ChatGPT a visual example before building the layout,
+                    styling, and user experience.
+                  </p>
+
+                  <h4>Why this matters</h4>
+
+                  <p>
+                    A reference image helps ChatGPT understand the layout,
+                    spacing, visual hierarchy, design style, and overall
+                    direction you want.
+                  </p>
+
+                  <h4>What to do</h4>
+
+                  <ul>
+                    <li>Download the reference image.</li>
+
+                    <li>Upload it into the same ChatGPT conversation.</li>
+
+                    <li>
+                      Tell ChatGPT to use it as visual inspiration, not to copy
+                      it exactly.
+                    </li>
+
+                    <li>
+                      Keep the same conversation open and continue to Layout
+                      Builder.
+                    </li>
+                  </ul>
+
+                  <h4>Reusable Tip</h4>
+
+                  <p>
+                    For another generator, replace this reference image with one
+                    that matches the new style.
+                  </p>
+
+                  <span class="flip-hint">Click again to flip back</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="module-card flip-card">
+              <div class="module-card-inner">
+                <div class="module-card-front">
+                  <i data-lucide="layout-panel-top"></i>
+
+                  <h2>Layout Builder</h2>
+
+                  <p>
+                    Design the complete user interface before writing any HTML,
+                    CSS, or JavaScript.
+                  </p>
+
+                  <button
+                    class="secondary-btn copy-snippet-btn"
+                    data-snippet="layout"
+                  >
+                    Copy Layout Prompt
+                  </button>
+
+                  <span class="flip-hint">Click card for teaching notes</span>
+                </div>
+
+                <div class="module-card-back">
+                  <h3>Layout Builder</h3>
+
+                  <h4>Purpose</h4>
+
+                  <p>
+                    Design the complete layout of your Prompt Generator before
+                    writing code.
+                  </p>
+
+                  <h4>Why this matters</h4>
+
+                  <p>
+                    A well-planned layout makes the generator easier to build,
+                    easier to maintain, and easier for your customers to use.
+                  </p>
+
+                  <h4>What to do with the output</h4>
+
+                  <ul>
+                    <li>Review the suggested layout.</li>
+
+                    <li>Rearrange sections if needed.</li>
+
+                    <li>Remove anything you don't want.</li>
+
+                    <li>Add any missing sections.</li>
+
+                    <li>
+                      Approve the layout before moving to the Category Builder.
+                    </li>
+                  </ul>
+
+                  <span class="flip-hint">Click again to flip back</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="module-card flip-card">
+              <div class="module-card-inner">
+                <div class="module-card-front">
+                  <i data-lucide="folders"></i>
+
+                  <h2>Category Builder</h2>
+
+                  <p>
+                    Design every category your Prompt Generator will use before
+                    writing code.
+                  </p>
+
+                  <button
+                    class="secondary-btn copy-snippet-btn"
+                    data-snippet="categories"
+                  >
+                    Copy Category Prompt
+                  </button>
+
+                  <span class="flip-hint">Click card for teaching notes</span>
+                </div>
+
+                <div class="module-card-back">
+                  <h3>Category Builder</h3>
+
+                  <h4>Purpose</h4>
+
+                  <p>
+                    Plan every category your generator needs to create
+                    high-quality marketing assets.
+                  </p>
+
+                  <h4>Why this matters</h4>
+
+                  <p>
+                    Your categories determine the information users provide.
+                    Better categories lead to better prompts and better
+                    AI-generated results.
+                  </p>
+
+                  <h4>What to do with the output</h4>
+
+                  <ul>
+                    <li>Review every category.</li>
+
+                    <li>Delete categories you don't need.</li>
+
+                    <li>Rename categories to match your project.</li>
+
+                    <li>Add any categories you forgot.</li>
+
+                    <li>
+                      Make sure the categories are in the best order for the
+                      user.
+                    </li>
+                  </ul>
+
+                  <span class="flip-hint">Click again to flip back</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="module-card flip-card">
+              <div class="module-card-inner">
+                <div class="module-card-front">
+                  <i data-lucide="text-cursor-input"></i>
+
+                  <h2>Input Builder</h2>
+
+                  <p>
+                    Design every input your users will interact with before
+                    building the HTML form.
+                  </p>
+
+                  <button
+                    class="secondary-btn copy-snippet-btn"
+                    data-snippet="inputs"
+                  >
+                    Copy Input Builder Prompt
+                  </button>
+
+                  <span class="flip-hint">Click card for teaching notes</span>
+                </div>
+
+                <div class="module-card-back">
+                  <h3>Input Builder</h3>
+
+                  <h4>Purpose</h4>
+
+                  <p>
+                    Design every dropdown, chip button, text field, textarea,
+                    and lock button before writing HTML.
+                  </p>
+
+                  <h4>Why this matters</h4>
+
+                  <p>
+                    This becomes the blueprint for your entire user interface.
+                    Planning your inputs now makes building the HTML much faster
+                    and helps prevent missing fields later.
+                  </p>
+
+                  <h4>What to do with the output</h4>
+
+                  <ul>
+                    <li>Review every input field.</li>
+
+                    <li>Verify each dropdown and its options.</li>
+
+                    <li>Edit placeholder text if needed.</li>
+
+                    <li>Remove unnecessary inputs.</li>
+
+                    <li>
+                      Save this output because you'll use it as your HTML form
+                      checklist.
+                    </li>
+                  </ul>
+
+                  <span class="flip-hint">Click again to flip back</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="module-card flip-card">
+              <div class="module-card-inner">
+                <div class="module-card-front">
+                  <i data-lucide="cpu"></i>
+
+                  <h2>Logic Builder</h2>
+
+                  <p>
+                    Design how every feature in your generator will work before
+                    writing JavaScript.
+                  </p>
+
+                  <button
+                    class="secondary-btn copy-snippet-btn"
+                    data-snippet="logic"
+                  >
+                    Copy Logic Prompt
+                  </button>
+
+                  <span class="flip-hint">Click card for teaching notes</span>
+                </div>
+
+                <div class="module-card-back">
+                  <h3>Logic Builder</h3>
+
+                  <h4>Purpose</h4>
+
+                  <p>
+                    Plan exactly how your Prompt Generator will function before
+                    writing JavaScript.
+                  </p>
+
+                  <h4>Why this matters</h4>
+
+                  <p>
+                    The logic is the brain of your generator. Planning it first
+                    helps prevent broken features, duplicate code, and confusing
+                    workflows.
+                  </p>
+
+                  <h4>What to do with the output</h4>
+
+                  <ul>
+                    <li>Review the application workflow.</li>
+
+                    <li>Verify how Generate Prompt should work.</li>
+
+                    <li>Review Randomize, Lock, Presets, and Clear All.</li>
+
+                    <li>
+                      Confirm how Prompt History and Prompt Variations should
+                      function.
+                    </li>
+
+                    <li>
+                      Save this output because it becomes your JavaScript
+                      blueprint.
+                    </li>
+                  </ul>
+
+                  <span class="flip-hint">Click again to flip back</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="module-card flip-card">
+              <div class="module-card-inner">
+                <div class="module-card-front">
+                  <i data-lucide="wand-sparkles"></i>
+
+                  <h2>Prompt Assembly Builder</h2>
+
+                  <p>
+                    Design how every user selection becomes one polished,
+                    professional AI prompt.
+                  </p>
+
+                  <button
+                    class="secondary-btn copy-snippet-btn"
+                    data-snippet="assembly"
+                  >
+                    Copy Prompt Assembly Prompt
+                  </button>
+
+                  <span class="flip-hint">Click card for teaching notes</span>
+                </div>
+
+                <div class="module-card-back">
+                  <h3>Prompt Assembly Builder</h3>
+
+                  <h4>Purpose</h4>
+
+                  <p>
+                    Design how your Prompt Generator combines every user input
+                    into one polished, high-quality prompt.
+                  </p>
+
+                  <h4>Why this matters</h4>
+
+                  <p>
+                    Even with great categories and inputs, your generator is
+                    only as good as the final prompt it creates. This step
+                    ensures everything flows together naturally and produces
+                    professional results.
+                  </p>
+
+                  <h4>What to do with the output</h4>
+
+                  <ul>
+                    <li>Review the overall prompt structure.</li>
+
+                    <li>Check that the information flows logically.</li>
+
+                    <li>Remove duplicate or conflicting instructions.</li>
+
+                    <li>Verify where custom text should appear.</li>
+
+                    <li>
+                      Save this output because it becomes the blueprint for your
+                      Generate Prompt function.
+                    </li>
+                  </ul>
+
+                  <span class="flip-hint">Click again to flip back</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="module-card flip-card">
+              <div class="module-card-inner">
+                <div class="module-card-front">
+                  <i data-lucide="file-code-2"></i>
+
+                  <h2>HTML Builder</h2>
+
+                  <p>
+                    Generate the complete HTML structure for your Prompt
+                    Generator.
+                  </p>
+
+                  <div class="builder-buttons">
+                    <button
+                      class="secondary-btn copy-snippet-btn"
+                      data-snippet="htmlPart1"
+                    >
+                      HTML Part 1
+                    </button>
+
+                    <button
+                      class="secondary-btn copy-snippet-btn"
+                      data-snippet="htmlPart2"
+                    >
+                      HTML Part 2
+                    </button>
+
+                    <button
+                      class="secondary-btn copy-snippet-btn"
+                      data-snippet="htmlPart3"
+                    >
+                      HTML Part 3
+                    </button>
+                  </div>
+
+                  <span class="flip-hint">Click card for teaching notes</span>
+                </div>
+
+                <div class="module-card-back">
+                  <h3>HTML Builder</h3>
+
+                  <h4>Purpose</h4>
+
+                  <p>
+                    Build the complete HTML structure of your Prompt Generator.
+                  </p>
+
+                  <h4>Why this matters</h4>
+
+                  <p>
+                    This is where your planning turns into a real application.
+                    The HTML creates every section, button, form field, and
+                    output area your users will interact with.
+                  </p>
+
+                  <h4>What to do with the output</h4>
+
+                  <ul>
+                    <li>
+                      Copy the generated HTML into your
+                      <strong>index.html</strong> file.
+                    </li>
+
+                    <li>
+                      Replace only the sections you're currently building.
+                    </li>
+
+                    <li>Check that every ID and class name is present.</li>
+
+                    <li>Verify every section appears in the correct order.</li>
+
+                    <li>
+                      Open the page in your browser before moving on to CSS.
+                    </li>
+                  </ul>
+
+                  <span class="flip-hint">Click again to flip back</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="module-card flip-card">
+              <div class="module-card-inner">
+                <div class="module-card-front">
+                  <i data-lucide="palette"></i>
+
+                  <h2>CSS Builder</h2>
+
+                  <p>
+                    Style your Prompt Generator with a premium, responsive user
+                    interface.
+                  </p>
+
+                  <div class="builder-buttons">
+                    <button
+                      class="secondary-btn copy-snippet-btn"
+                      data-snippet="cssPart1"
+                    >
+                      CSS Part 1
+                    </button>
+
+                    <button
+                      class="secondary-btn copy-snippet-btn"
+                      data-snippet="cssPart2"
+                    >
+                      CSS Part 2
+                    </button>
+
+                    <button
+                      class="secondary-btn copy-snippet-btn"
+                      data-snippet="cssPart3"
+                    >
+                      CSS Part 3
+                    </button>
+
+                    <button
+                      class="secondary-btn copy-snippet-btn"
+                      data-snippet="cssPart4"
+                    >
+                      CSS Part 4
+                    </button>
+
+                    <button
+                      class="secondary-btn copy-snippet-btn"
+                      data-snippet="cssPart5"
+                    >
+                      CSS Part 5
+                    </button>
+                  </div>
+
+                  <span class="flip-hint">Click card for teaching notes</span>
+                </div>
+
+                <div class="module-card-back">
+                  <h3>CSS Builder</h3>
+
+                  <h4>Purpose</h4>
+
+                  <p>
+                    Create the complete visual design for your Prompt Generator.
+                  </p>
+
+                  <h4>Why this matters</h4>
+
+                  <p>
+                    CSS transforms your HTML into a polished, professional
+                    application. Great styling improves usability, creates a
+                    premium experience, and makes your generator feel like real
+                    software instead of a basic webpage.
+                  </p>
+
+                  <h4>What to do with the output</h4>
+
+                  <ul>
+                    <li>
+                      Copy the generated CSS into your
+                      <strong>style.css</strong> file.
+                    </li>
+
+                    <li>
+                      Check that colors, typography, and spacing match your
+                      brand.
+                    </li>
+
+                    <li>Test the layout on desktop, tablet, and mobile.</li>
+
+                    <li>
+                      Verify hover effects, buttons, and responsive behavior.
+                    </li>
+
+                    <li>
+                      Make any design adjustments before moving on to
+                      JavaScript.
+                    </li>
+                  </ul>
+
+                  <span class="flip-hint">Click again to flip back</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="module-card flip-card">
+              <div class="module-card-inner">
+                <div class="module-card-front">
+                  <i data-lucide="file-code"></i>
+
+                  <h2>JavaScript Builder</h2>
+
+                  <p>
+                    Bring your Prompt Generator to life by making every feature
+                    fully functional.
+                  </p>
+
+                  <div class="builder-buttons">
+                    <button
+                      class="secondary-btn copy-snippet-btn"
+                      data-snippet="jsPart1"
+                    >
+                      JS Part 1
+                    </button>
+
+                    <button
+                      class="secondary-btn copy-snippet-btn"
+                      data-snippet="jsPart2"
+                    >
+                      JS Part 2
+                    </button>
+
+                    <button
+                      class="secondary-btn copy-snippet-btn"
+                      data-snippet="jsPart3"
+                    >
+                      JS Part 3
+                    </button>
+
+                    <button
+                      class="secondary-btn copy-snippet-btn"
+                      data-snippet="jsPart4"
+                    >
+                      JS Part 4
+                    </button>
+
+                    <button
+                      class="secondary-btn copy-snippet-btn"
+                      data-snippet="jsPart5"
+                    >
+                      JS Part 5
+                    </button>
+
+                    <button
+                      class="secondary-btn copy-snippet-btn"
+                      data-snippet="jsPart6"
+                    >
+                      JS Part 6
+                    </button>
+                  </div>
+
+                  <span class="flip-hint">Click card for teaching notes</span>
+                </div>
+
+                <div class="module-card-back">
+                  <h3>JavaScript Builder</h3>
+
+                  <h4>Purpose</h4>
+
+                  <p>
+                    Build the functionality that powers every feature in your
+                    Prompt Generator.
+                  </p>
+
+                  <h4>Why this matters</h4>
+
+                  <p>
+                    JavaScript is what transforms your design into a working
+                    application. This is where your buttons, dropdowns, prompt
+                    generation, randomization, copy features, history, and
+                    quality checker become fully functional.
+                  </p>
+
+                  <h4>What to do with the output</h4>
+
+                  <ul>
+                    <li>
+                      Copy the generated JavaScript into your
+                      <strong>script.js</strong> file.
+                    </li>
+
+                    <li>Test every button after each section is added.</li>
+
+                    <li>
+                      Open your browser's Developer Tools (F12) and check for
+                      errors.
+                    </li>
+
+                    <li>
+                      Verify Generate, Randomize, Copy, Save, and Clear All all
+                      work correctly.
+                    </li>
+
+                    <li>
+                      Fix any errors before moving to the final testing phase.
+                    </li>
+                  </ul>
+
+                  <span class="flip-hint">Click again to flip back</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+        <!-- ============================= -->
+        <!-- PAGE: DAY TWO -->
+        <!-- ============================= -->
+        <section class="page" id="day-two">
+          <div class="page-header split-header">
+            <div>
+              <h1>Customize Your Generator</h1>
+            </div>
+          </div>
+
+          <div class="lesson-section-grid">
+            <article class="lesson-block">
+              <span class="lesson-tag">Customize</span>
+              <h2>What You’ll Customize</h2>
+              <ul>
+                <li>Color palette</li>
+                <li>Fonts</li>
+                <li>Header image under the generator title</li>
+                <li>Marquee</li>
+                <li>Scrollbar</li>
+                <li>Button styles</li>
+                <li>Copyright</li>
+              </ul>
+            </article>
+
+            <article class="lesson-block">
+              <span class="lesson-tag">Brand Style</span>
+
+              <h2>Customize the Generator Look</h2>
+
+              <p>
+                Use this prompt to update the visual style of your generator,
+                including colors, brand feel, background animation, floating
+                elements, button styles, and the custom scrollbar.
               </p>
-<ul>
-<li>Name: AI Business Builder</li>
-<li>Purpose: Generate launch-ready business assets</li>
-<li>Audience: creators, coaches, sellers, service providers</li>
-</ul>
-</article>
-<article class="card blueprint-card">
-<h2>Core Inputs</h2>
-<p>These are the simple controls students build first.</p>
-<ul>
-<li>Business type</li>
-<li>Target audience</li>
-<li>Brand tone</li>
-<li>Platform</li>
-<li>Output type</li>
-</ul>
-</article>
-<article class="card blueprint-card">
-<h2>Core Outputs</h2>
-<p>These make the generator valuable enough to sell.</p>
-<ul>
-<li>Business idea</li>
-<li>Brand direction</li>
-<li>Image prompt</li>
-<li>Video script</li>
-<li>Suno music prompt</li>
-<li>Marketing copy</li>
-<li>Custom GPT instructions</li>
-</ul>
-</article>
-<article class="card blueprint-card">
-<h2>Reuse Strategy</h2>
-<p>
-                Students can change the labels and prompt arrays later to create
-                a generator for any niche.
-              </p>
-<ul>
-<li>Beauty business generator</li>
-<li>Teacher resource generator</li>
-<li>Church content generator</li>
-<li>Real estate marketing generator</li>
-<li>Caregiver resource generator</li>
-</ul>
-</article>
-</div>
-<div class="card prompt-card">
-<div class="card-header">
-<div>
-<span class="eyebrow">Copy Prompt</span>
-<h2>AI Developer Foundation Prompt</h2>
-</div>
-<button class="primary-btn copy-btn" data-copy-target="starterPrompt">
+
+              <button
+                class="secondary-btn copy-snippet-btn"
+                data-snippet="customizeGeneratorLook"
+              >
                 Copy Prompt
               </button>
-</div>
-<textarea class="copy-area" id="starterPrompt" readonly>
-You are an expert HTML, CSS, and JavaScript developer who specializes in building professional AI prompt generators.
-
-Throughout this project, act as a senior front-end developer, UI/UX designer, and prompt engineering expert.
-
-Your goal is to help me build a polished, fully functional, single-page AI prompt generator that is visually professional, easy to use, and designed for real-world use.
-
-Follow these rules throughout this project:
-
-* Build clean, organized, and maintainable code.
-* Use HTML, CSS, and JavaScript.
-* Keep all features on a single-page application unless I request otherwise.
-* Make every button, input, dropdown, and interactive feature fully functional.
-* Never remove or overwrite existing features unless I specifically ask.
-* When adding new features, integrate them into the existing application without breaking previous functionality.
-* Prioritize usability, responsiveness, accessibility, and performance.
-* Complete one feature at a time before moving to the next.
-* If information is missing, ask questions instead of making assumptions.
-* Think ahead and build with scalability so the generator can grow over time.
-
-Do not generate the application yet.
-
-Wait for my next prompt, where I will describe the type of prompt generator I want to build.
-</textarea>
-</div>
-</section>
-<!-- ============================= -->
-<!-- PAGE: MODULES -->
-<!-- ============================= -->
-<section class="page" id="modules">
-<div class="page-header">
-<span class="eyebrow">AI Modules</span>
-<h1>Premium outputs that make the generator worth selling.</h1>
-<p>
-              Every module teaches one practical coding pattern while adding
-              real buyer value.
-            </p>
-</div>
-<div class="module-card-grid">
-
-<article class="module-card flip-card">
-  <div class="module-card-inner">
-
-    <div class="module-card-front">
-      <i data-lucide="clipboard-list"></i>
-
-      <h2>Generator Foundation</h2>
-
-      <p>
-        Create the foundation for your AI prompt generator before building the application.
-      </p>
-
-      <button class="secondary-btn copy-snippet-btn" data-snippet="foundation">
-        Copy Foundation Prompt
-      </button>
-
-      <span class="flip-hint">Click card for teaching notes</span>
-    </div>
-
-    <div class="module-card-back">
-
-      <h3>Generator Foundation</h3>
-
-      <h4>Purpose</h4>
-
-      <p>
-        Build the project's foundation by defining the generator's purpose, target users,
-        main objective, and overall structure. This foundation guides every file created
-        throughout the rest of the project.
-      </p>
-
-      <h4>Why this matters</h4>
-
-      <p>
-        A strong foundation keeps every HTML, CSS, and JavaScript file focused on the
-        same goal, making the finished generator more organized, easier to build,
-        easier to customize, and ready to sell.
-      </p>
-
-      <h4>What to do with the output</h4>
-
-      <ul>
-        <li>Review the generated foundation.</li>
-        <li>Confirm it matches your generator idea.</li>
-        <li>Adjust any details before continuing.</li>
-        <li>Stay in the same ChatGPT conversation for the remaining cards.</li>
-      </ul>
-
-    </div>
-
-  </div>
-</article>
-
-<article class="module-card flip-card">
-  <div class="module-card-inner">
-
-    <div class="module-card-front">
-      <i data-lucide="file-pen-line"></i>
-
-      <h2>Generator Planner</h2>
-
-      <p>
-        Define exactly what your prompt generator will create before building the application.
-      </p>
-
-      <button class="secondary-btn copy-snippet-btn" data-snippet="planner">
-        Copy Planner Prompt
-      </button>
-
-      <span class="flip-hint">Click card for teaching notes</span>
-    </div>
-
-    <div class="module-card-back">
-
-      <h3>Generator Planner</h3>
-
-      <h4>Purpose</h4>
-
-      <p>
-        Define your generator's purpose, target audience, required inputs, expected outputs,
-        and core features. This becomes the blueprint for everything you'll build next.
-      </p>
-
-      <h4>Why this matters</h4>
-
-      <p>
-        A clear blueprint helps you build a focused generator, reduces unnecessary changes,
-        and keeps every HTML, CSS, and JavaScript file working toward the same goal.
-      </p>
-
-      <h4>What to do with the output</h4>
-
-      <ul>
-        <li>Review the complete blueprint.</li>
-        <li>Remove anything you don't want.</li>
-        <li>Add anything that's missing.</li>
-        <li>Use it as the guide for the remaining cards.</li>
-      </ul>
-
-      <span class="flip-hint">Click again to flip back</span>
-
-    </div>
-
-  </div>
-</article>
-
-<article class="module-card flip-card">
-  <div class="module-card-inner">
-
-    <div class="module-card-front">
-      <i data-lucide="image"></i>
-
-      <h2>Reference Image</h2>
-
-      <p>
-        Download the reference image, upload it into ChatGPT, then continue building your generator.
-      </p>
-
-      <a
- href="./assets/images/workshop-reference.png"
-  download
-  class="secondary-btn download-reference-btn"
->
-  Download Reference Image
-</a>
-
-      <span class="flip-hint">Click card for teaching notes</span>
-    </div>
-
-    <div class="module-card-back">
-      <h3>Reference Image</h3>
-
-      <h4>Purpose</h4>
-      <p>
-        Give ChatGPT a visual example before building the layout, styling, and user experience.
-      </p>
-
-      <h4>Why this matters</h4>
-      <p>
-        A reference image helps ChatGPT understand the layout, spacing, visual hierarchy,
-        design style, and overall direction you want.
-      </p>
-
-      <h4>What to do</h4>
-      <ul>
-        <li>Download the reference image.</li>
-        <li>Upload it into the same ChatGPT conversation.</li>
-        <li>Tell ChatGPT to use it as visual inspiration, not to copy it exactly.</li>
-        <li>Keep the same conversation open and continue to Layout Builder.</li>
-      </ul>
-
-      <h4>Reusable Tip</h4>
-      <p>
-        For another generator, replace this reference image with one that matches the new style.
-      </p>
-
-      <span class="flip-hint">Click again to flip back</span>
-    </div>
-
-  </div>
-</article>
-
-<article class="module-card flip-card">
-  <div class="module-card-inner">
-    <div class="module-card-front">
-      <i data-lucide="layout-panel-top"></i>
-      <h2>Layout Builder</h2>
-      <p>Design the complete user interface before writing any HTML, CSS, or JavaScript.</p>
-
-      <button class="secondary-btn copy-snippet-btn" data-snippet="layout">
-        Copy Layout Prompt
-      </button>
-
-      <span class="flip-hint">Click card for teaching notes</span>
-    </div>
-
-    <div class="module-card-back">
-      <h3>Layout Builder</h3>
-
-      <h4>Purpose</h4>
-      <p>Design the complete layout of your AI Marketing Machine before writing code.</p>
-
-      <h4>Why this matters</h4>
-      <p>
-        A well-planned layout makes the generator easier to build, easier to maintain, and easier for your customers to use.
-      </p>
-
-      <h4>What to do with the output</h4>
-      <ul>
-        <li>Review the suggested layout.</li>
-        <li>Rearrange sections if needed.</li>
-        <li>Remove anything you don't want.</li>
-        <li>Add any missing sections.</li>
-        <li>Approve the layout before moving to the Category Builder.</li>
-      </ul>
-
-      <span class="flip-hint">Click again to flip back</span>
-    </div>
-  </div>
-</article>
-
- <article class="module-card flip-card">
-  <div class="module-card-inner">
-    <div class="module-card-front">
-      <i data-lucide="folders"></i>
-      <h2>Category Builder</h2>
-      <p>Design every category your AI Marketing Machine will use before writing code.</p>
-
-      <button class="secondary-btn copy-snippet-btn" data-snippet="categories">
-        Copy Category Prompt
-      </button>
-
-      <span class="flip-hint">Click card for teaching notes</span>
-    </div>
-
-    <div class="module-card-back">
-      <h3>Category Builder</h3>
-
-      <h4>Purpose</h4>
-      <p>Plan every category your generator needs to create high-quality marketing assets.</p>
-
-      <h4>Why this matters</h4>
-      <p>
-        Your categories determine the information users provide. Better categories lead to better prompts and better AI-generated results.
-      </p>
-
-      <h4>What to do with the output</h4>
-      <ul>
-        <li>Review every category.</li>
-        <li>Delete categories you don't need.</li>
-        <li>Rename categories to match your project.</li>
-        <li>Add any categories you forgot.</li>
-        <li>Make sure the categories are in the best order for the user.</li>
-      </ul>
-
-      <span class="flip-hint">Click again to flip back</span>
-    </div>
-  </div>
-</article>
-
- <article class="module-card flip-card">
-  <div class="module-card-inner">
-    <div class="module-card-front">
-      <i data-lucide="text-cursor-input"></i>
-      <h2>Input Builder</h2>
-      <p>Design every input your users will interact with before building the HTML form.</p>
-
-      <button class="secondary-btn copy-snippet-btn" data-snippet="inputs">
-        Copy Input Builder Prompt
-      </button>
-
-      <span class="flip-hint">Click card for teaching notes</span>
-    </div>
-
-    <div class="module-card-back">
-      <h3>Input Builder</h3>
-
-      <h4>Purpose</h4>
-      <p>Design every dropdown, chip button, text field, textarea, and lock button before writing HTML.</p>
-
-      <h4>Why this matters</h4>
-      <p>
-        This becomes the blueprint for your entire user interface. Planning your inputs now makes building the HTML much faster and helps prevent missing fields later.
-      </p>
-
-      <h4>What to do with the output</h4>
-      <ul>
-        <li>Review every input field.</li>
-        <li>Verify each dropdown and its options.</li>
-        <li>Edit placeholder text if needed.</li>
-        <li>Remove unnecessary inputs.</li>
-        <li>Save this output because you'll use it as your HTML form checklist.</li>
-      </ul>
-
-      <span class="flip-hint">Click again to flip back</span>
-    </div>
-  </div>
-</article>
-
-<article class="module-card flip-card">
-  <div class="module-card-inner">
-    <div class="module-card-front">
-      <i data-lucide="cpu"></i>
-      <h2>Logic Builder</h2>
-      <p>Design how every feature in your generator will work before writing JavaScript.</p>
-
-      <button class="secondary-btn copy-snippet-btn" data-snippet="logic">
-        Copy Logic Prompt
-      </button>
-
-      <span class="flip-hint">Click card for teaching notes</span>
-    </div>
-
-    <div class="module-card-back">
-      <h3>Logic Builder</h3>
-
-      <h4>Purpose</h4>
-      <p>Plan exactly how your AI Marketing Machine will function before writing JavaScript.</p>
-
-      <h4>Why this matters</h4>
-      <p>
-        The logic is the brain of your generator. Planning it first helps prevent broken features, duplicate code, and confusing workflows.
-      </p>
-
-      <h4>What to do with the output</h4>
-      <ul>
-        <li>Review the application workflow.</li>
-        <li>Verify how Generate Prompt should work.</li>
-        <li>Review Randomize, Lock, Presets, and Clear All.</li>
-        <li>Confirm how Prompt History and Prompt Variations should function.</li>
-        <li>Save this output because it becomes your JavaScript blueprint.</li>
-      </ul>
-
-      <span class="flip-hint">Click again to flip back</span>
-    </div>
-  </div>
-</article>
-
-<article class="module-card flip-card">
-  <div class="module-card-inner">
-    <div class="module-card-front">
-      <i data-lucide="wand-sparkles"></i>
-      <h2>Prompt Assembly Builder</h2>
-      <p>Design how every user selection becomes one polished, professional AI prompt.</p>
-
-      <button class="secondary-btn copy-snippet-btn" data-snippet="assembly">
-        Copy Prompt Assembly Prompt
-      </button>
-
-      <span class="flip-hint">Click card for teaching notes</span>
-    </div>
-
-    <div class="module-card-back">
-      <h3>Prompt Assembly Builder</h3>
-
-      <h4>Purpose</h4>
-      <p>Design how your AI Marketing Machine combines every user input into one polished, high-quality prompt.</p>
-
-      <h4>Why this matters</h4>
-      <p>
-        Even with great categories and inputs, your generator is only as good as the final prompt it creates. This step ensures everything flows together naturally and produces professional results.
-      </p>
-
-      <h4>What to do with the output</h4>
-      <ul>
-        <li>Review the overall prompt structure.</li>
-        <li>Check that the information flows logically.</li>
-        <li>Remove duplicate or conflicting instructions.</li>
-        <li>Verify where custom text should appear.</li>
-        <li>Save this output because it becomes the blueprint for your Generate Prompt function.</li>
-      </ul>
-
-      <span class="flip-hint">Click again to flip back</span>
-    </div>
-  </div>
-</article>
-
- <article class="module-card flip-card">
-  <div class="module-card-inner">
-    <div class="module-card-front">
-      <i data-lucide="file-code-2"></i>
-      <h2>HTML Builder</h2>
-      <p>Generate the complete HTML structure for your AI Marketing Machine.</p>
-
-      <div class="builder-buttons">
-    <button class="secondary-btn copy-snippet-btn" data-snippet="htmlPart1">
-        HTML Part 1
-    </button>
-
-    <button class="secondary-btn copy-snippet-btn" data-snippet="htmlPart2">
-        HTML Part 2
-    </button>
-
-    <button class="secondary-btn copy-snippet-btn" data-snippet="htmlPart3">
-        HTML Part 3
-    </button>
-</div>
-
-      <span class="flip-hint">Click card for teaching notes</span>
-    </div>
-
-    <div class="module-card-back">
-      <h3> HTML Builder</h3>
-
-      <h4>Purpose</h4>
-      <p>Build the complete HTML structure of your AI Marketing Machine.</p>
-
-      <h4>Why this matters</h4>
-      <p>
-        This is where your planning turns into a real application. The HTML creates every section, button, form field, and output area your users will interact with.
-      </p>
-
-      <h4>What to do with the output</h4>
-      <ul>
-        <li>Copy the generated HTML into your <strong>index.html</strong> file.</li>
-        <li>Replace only the sections you're currently building.</li>
-        <li>Check that every ID and class name is present.</li>
-        <li>Verify every section appears in the correct order.</li>
-        <li>Open the page in your browser before moving on to CSS.</li>
-      </ul>
-
-      <span class="flip-hint">Click again to flip back</span>
-    </div>
-  </div>
-</article>
-
-<article class="module-card flip-card">
-  <div class="module-card-inner">
-    <div class="module-card-front">
-      <i data-lucide="palette"></i>
-      <h2>CSS Builder</h2>
-      <p>Style your AI Marketing Machine with a premium, responsive user interface.</p>
-<div class="builder-buttons">
-    <button class="secondary-btn copy-snippet-btn" data-snippet="cssPart1">CSS Part 1</button>
-    <button class="secondary-btn copy-snippet-btn" data-snippet="cssPart2">CSS Part 2</button>
-    <button class="secondary-btn copy-snippet-btn" data-snippet="cssPart3">CSS Part 3</button>
-    <button class="secondary-btn copy-snippet-btn" data-snippet="cssPart4">CSS Part 4</button>
-    <button class="secondary-btn copy-snippet-btn" data-snippet="cssPart5">CSS Part 5</button>
-</div>
-
-      <span class="flip-hint">Click card for teaching notes</span>
-    </div>
-
-    <div class="module-card-back">
-      <h3>CSS Builder</h3>
-
-      <h4>Purpose</h4>
-      <p>Create the complete visual design for your AI Marketing Machine.</p>
-
-      <h4>Why this matters</h4>
-      <p>
-        CSS transforms your HTML into a polished, professional application. Great styling improves usability, creates a premium experience, and makes your generator feel like real software instead of a basic webpage.
-      </p>
-
-      <h4>What to do with the output</h4>
-      <ul>
-        <li>Copy the generated CSS into your <strong>style.css</strong> file.</li>
-        <li>Check that colors, typography, and spacing match your brand.</li>
-        <li>Test the layout on desktop, tablet, and mobile.</li>
-        <li>Verify hover effects, buttons, and responsive behavior.</li>
-        <li>Make any design adjustments before moving on to JavaScript.</li>
-      </ul>
-
-      <span class="flip-hint">Click again to flip back</span>
-    </div>
-  </div>
-</article>
-
-
- <article class="module-card flip-card">
-  <div class="module-card-inner">
-    <div class="module-card-front">
-      <i data-lucide="file-code"></i>
-      <h2>JavaScript Builder</h2>
-      <p>Bring your AI Marketing Machine to life by making every feature fully functional.</p>
-
-     <div class="builder-buttons">
-    <button class="secondary-btn copy-snippet-btn" data-snippet="jsPart1">JS Part 1</button>
-    <button class="secondary-btn copy-snippet-btn" data-snippet="jsPart2">JS Part 2</button>
-    <button class="secondary-btn copy-snippet-btn" data-snippet="jsPart3">JS Part 3</button>
-    <button class="secondary-btn copy-snippet-btn" data-snippet="jsPart4">JS Part 4</button>
-    <button class="secondary-btn copy-snippet-btn" data-snippet="jsPart5">JS Part 5</button>
-    <button class="secondary-btn copy-snippet-btn" data-snippet="jsPart6">JS Part 6</button>
-</div>
-
-      <span class="flip-hint">Click card for teaching notes</span>
-    </div>
-
-    <div class="module-card-back">
-      <h3>JavaScript Builder</h3>
-
-      <h4>Purpose</h4>
-      <p>Build the functionality that powers every feature in your AI Marketing Machine.</p>
-
-      <h4>Why this matters</h4>
-      <p>
-        JavaScript is what transforms your design into a working application. This is where your buttons, dropdowns, prompt generation, randomization, copy features, history, and quality checker become fully functional.
-      </p>
-
-      <h4>What to do with the output</h4>
-      <ul>
-        <li>Copy the generated JavaScript into your <strong>script.js</strong> file.</li>
-        <li>Test every button after each section is added.</li>
-        <li>Open your browser's Developer Tools (F12) and check for errors.</li>
-        <li>Verify Generate, Randomize, Copy, Save, and Clear All all work correctly.</li>
-        <li>Fix any errors before moving to the final testing phase.</li>
-      </ul>
-
-      <span class="flip-hint">Click again to flip back</span>
-    </div>
-  </div>
-</article>
-
-<article class="module-card flip-card">
-  <div class="module-card-inner">
-    <div class="module-card-front">
-      <i data-lucide="bug"></i>
-      <h2>Testing & Debugging</h2>
-      <p>Test every feature, find bugs, and fix issues before publishing your generator.</p>
-
-      <button class="secondary-btn copy-snippet-btn" data-snippet="testing">
-        Copy Testing Prompt
-      </button>
-
-      <span class="flip-hint">Click card for teaching notes</span>
-    </div>
-
-    <div class="module-card-back">
-      <h3>Testing & Debugging</h3>
-
-      <h4>Purpose</h4>
-      <p>Find and fix problems before releasing your AI Marketing Machine.</p>
-
-      <h4>Why this matters</h4>
-      <p>
-        Even small bugs can break the user experience. Testing every feature ensures your generator is reliable, professional, and ready for customers.
-      </p>
-
-      <h4>What to do with the output</h4>
-      <ul>
-        <li>Test every button one at a time.</li>
-        <li>Verify every dropdown and input field.</li>
-        <li>Check the browser console (F12) for JavaScript errors.</li>
-        <li>Test desktop, tablet, and mobile layouts.</li>
-        <li>Fix every issue before moving to the final polish.</li>
-      </ul>
-
-      <span class="flip-hint">Click again to flip back</span>
-    </div>
-  </div>
-</article>
-
-<article class="module-card flip-card">
-  <div class="module-card-inner">
-    <div class="module-card-front">
-      <i data-lucide="rocket"></i>
-      <h2>Final Polish & Export</h2>
-      <p>Prepare your AI Marketing Machine for customers and publish it with confidence.</p>
-
-      <button class="secondary-btn copy-snippet-btn" data-snippet="final">
-        Copy Final Polish Prompt
-      </button>
-
-      <span class="flip-hint">Click card for teaching notes</span>
-    </div>
-
-    <div class="module-card-back">
-      <h3>Final Polish & Export</h3>
-
-      <h4>Purpose</h4>
-      <p>Complete your AI Marketing Machine and prepare it for real users.</p>
-
-      <h4>Why this matters</h4>
-      <p>
-        This final step transforms your project from a working prototype into a polished, professional product that you can confidently publish, demonstrate, or sell.
-      </p>
-
-      <h4>What to do with the output</h4>
-      <ul>
-        <li>Review the entire application one final time.</li>
-        <li>Verify every feature is working correctly.</li>
-        <li>Clean up unused code and comments.</li>
-        <li>Confirm your branding, colors, and layout are consistent.</li>
-        <li>Commit your project to GitHub.</li>
-        <li>Deploy it to Netlify.</li>
-        <li>Package it for your customers or students.</li>
-      </ul>
-
-      <span class="flip-hint">🎉 Congratulations! Your AI Marketing Machine is complete. Click again to flip back.</span>
-    </div>
-  </div>
-</article>
-
-  <article class="module-card">
-    <i data-lucide="history"></i>
-    <h2>Prompt History</h2>
-    <p>Save generated prompts so users can come back, reuse, and copy previous results.</p>
-    <button class="secondary-btn copy-snippet-btn" data-snippet="history">
-      Copy History Prompt
-    </button>
-  </article>
-</div>
-</section>
-<!-- ============================= -->
-<!-- PAGE: CODE LAB -->
-<!-- ============================= -->
-<section class="page" id="code-lab">
-<div class="page-header">
-<span class="eyebrow">Code Lab</span>
-<h1>Copy-ready starter code for teaching.</h1>
-<p>
-              This is where students grab the starter pieces when following the
-              live build.
-            </p>
-</div>
-<div class="code-lab-grid">
-<article class="card code-card">
-<div class="card-header">
-<h2>HTML Starter</h2>
-<button class="primary-btn copy-btn" data-copy-target="htmlStarterCode">
-                  Copy HTML
-                </button>
-</div>
-<textarea class="code-area" id="htmlStarterCode" readonly="">
-&lt;main class="generator"&gt;
-  &lt;h1&gt;AI Business Builder&lt;/h1&gt;
-  &lt;p&gt;Generate business assets in seconds.&lt;/p&gt;
-
-  &lt;label&gt;Business Type&lt;/label&gt;
-  &lt;select id="businessType"&gt;
-    &lt;option&gt;Beauty Brand&lt;/option&gt;
-    &lt;option&gt;Coaching Business&lt;/option&gt;
-    &lt;option&gt;Digital Product Shop&lt;/option&gt;
-  &lt;/select&gt;
-
-  &lt;label&gt;Output Type&lt;/label&gt;
-  &lt;select id="outputType"&gt;
-    &lt;option&gt;Image Prompt&lt;/option&gt;
-    &lt;option&gt;Video Script&lt;/option&gt;
-    &lt;option&gt;Suno Music Prompt&lt;/option&gt;
-  &lt;/select&gt;
-
-  &lt;button id="generateBtn"&gt;Generate&lt;/button&gt;
-  &lt;button id="copyBtn"&gt;Copy&lt;/button&gt;
-
-  &lt;textarea id="output" readonly&gt;&lt;/textarea&gt;
-&lt;/main&gt;</textarea>
-</article>
-<article class="card code-card">
-<div class="card-header">
-<h2>CSS Starter</h2>
-<button class="primary-btn copy-btn" data-copy-target="cssStarterCode">
-                  Copy CSS
-                </button>
-</div>
-<textarea class="code-area" id="cssStarterCode" readonly="">
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #05050a;
-  color: white;
-}
-
-.generator {
-  max-width: 760px;
-  margin: 60px auto;
-  padding: 32px;
-  border: 1px solid rgba(212, 175, 55, 0.35);
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.06);
-}
-
-button {
-  padding: 14px 20px;
-  border: none;
-  border-radius: 999px;
-  background: #d4af37;
-  color: #05050a;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-textarea,
-select {
-  width: 100%;
-  margin: 10px 0 18px;
-  padding: 14px;
-  border-radius: 14px;
-}</textarea>
-</article>
-<article class="card code-card">
-<div class="card-header">
-<h2>JavaScript Starter</h2>
-<button class="primary-btn copy-btn" data-copy-target="jsStarterCode">
-                  Copy JS
-                </button>
-</div>
-<textarea class="code-area" id="jsStarterCode" readonly="">
-const generateBtn = document.getElementById('generateBtn');
-const copyBtn = document.getElementById('copyBtn');
-const businessType = document.getElementById('businessType');
-const outputType = document.getElementById('outputType');
-const output = document.getElementById('output');
-
-generateBtn.addEventListener('click', () =&gt; {
-  output.value = `Create a ${outputType.value} for a ${businessType.value}. Make it polished, useful, and ready to use.`;
-});
-
-copyBtn.addEventListener('click', async () =&gt; {
-  await navigator.clipboard.writeText(output.value);
-  copyBtn.textContent = 'Copied!';
-  setTimeout(() =&gt; (copyBtn.textContent = 'Copy'), 1500);
-});</textarea>
-</article>
-</div>
-</section>
-<!-- ============================= -->
-<!-- PAGE: PUBLISH -->
-<!-- ============================= -->
-<section class="page" id="publish">
-  <div class="page-header">
-    <span class="eyebrow">Creator Toolkit</span>
-    <h1>Open the tools used to build, publish, and create.</h1>
-    <p>
-      One clean hub for the coding, publishing, AI, design, video, research,
-      music, and image enhancement tools used during the workshop.
-    </p>
-  </div>
-
-  <div class="publish-grid">
-    <article class="card publish-card">
-      <span class="lesson-tag">Development</span>
-      <h2>VS Code</h2>
-      <p>Write and edit HTML, CSS, and JavaScript files.</p>
-      <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer" class="gold-btn">Open VS Code →</a>
-    </article>
-
-    <article class="card publish-card">
-      <span class="lesson-tag">Development</span>
-      <h2>GitHub</h2>
-      <p>Save your project, track changes, and manage versions.</p>
-      <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="gold-btn">Open GitHub →</a>
-    </article>
-
-    <article class="card publish-card">
-      <span class="lesson-tag">Publishing</span>
-      <h2>Netlify</h2>
-      <p>Publish your project and get a live website link.</p>
-      <a href="https://app.netlify.com/" target="_blank" rel="noopener noreferrer" class="gold-btn">Open Netlify →</a>
-    </article>
-
-    <article class="card publish-card">
-      <span class="lesson-tag">AI Assistant</span>
-      <h2>ChatGPT</h2>
-      <p>Generate code, content, prompts, and troubleshooting help.</p>
-      <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" class="gold-btn">Open ChatGPT →</a>
-    </article>
-
-    <article class="card publish-card">
-      <span class="lesson-tag">AI Assistant</span>
-      <h2>Gemini</h2>
-      <p>Brainstorm ideas, research topics, and generate content.</p>
-      <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" class="gold-btn">Open Gemini →</a>
-    </article>
-
-    <article class="card publish-card">
-      <span class="lesson-tag">AI Video</span>
-      <h2>Flow</h2>
-      <p>Create cinematic AI videos from prompts and scenes.</p>
-      <a href="https://labs.google/fx/tools/flow" target="_blank" rel="noopener noreferrer" class="gold-btn">Open Flow →</a>
-    </article>
-
-    <article class="card publish-card">
-      <span class="lesson-tag">Design</span>
-      <h2>Canva</h2>
-      <p>Design graphics, presentations, ebooks, and marketing assets.</p>
-      <a href="https://www.canva.com/" target="_blank" rel="noopener noreferrer" class="gold-btn">Open Canva →</a>
-    </article>
-
-    <article class="card publish-card">
-      <span class="lesson-tag">AI Images</span>
-      <h2>ImageFX</h2>
-      <p>Generate high-quality AI images from text prompts.</p>
-      <a href="https://labs.google/fx/tools/image-fx" target="_blank" rel="noopener noreferrer" class="gold-btn">Open ImageFX →</a>
-    </article>
-
-    <article class="card publish-card">
-      <span class="lesson-tag">Image Upscaling</span>
-      <h2>Upscale.media</h2>
-      <p>Increase image resolution and improve image quality.</p>
-      <a href="https://www.upscale.media/" target="_blank" rel="noopener noreferrer" class="gold-btn">Open Upscale.media →</a>
-    </article>
-
-    <article class="card publish-card">
-      <span class="lesson-tag">AI Music</span>
-      <h2>Suno</h2>
-      <p>Generate AI songs, music, and background audio.</p>
-      <a href="https://suno.com/" target="_blank" rel="noopener noreferrer" class="gold-btn">Open Suno →</a>
-    </article>
-
-    <article class="card publish-card">
-      <span class="lesson-tag">Research</span>
-      <h2>Perplexity</h2>
-      <p>Research ideas, verify information, and gather sources.</p>
-      <a href="https://www.perplexity.ai/" target="_blank" rel="noopener noreferrer" class="gold-btn">Open Perplexity →</a>
-    </article>
-  </div>
-</section>
-<!-- ============================= -->
-<!-- PAGE: SELL -->
-<!-- ============================= -->
-<section class="page" id="sell">
-<div class="page-header">
-<span class="eyebrow">Sell Your Generator</span>
-<h1>Package the generator as a product.</h1>
-<p>
-              Students leave with more than a website. They leave with a product
-              framework they can sell, customize, and reuse.
-            </p>
-</div>
-<div class="sell-grid">
-<article class="card sell-card">
-<h2>Product Package</h2>
-<ul>
-<li>Live generator link</li>
-<li>PDF buyer instructions</li>
-<li>Preview screenshots</li>
-<li>Product mockup</li>
-<li>Simple terms of use</li>
-</ul>
-</article>
-<article class="card sell-card">
-<h2>Sales Page Copy</h2>
-<ul>
-<li>Clear product name</li>
-<li>Who it helps</li>
-<li>What it creates</li>
-<li>Why it saves time</li>
-<li>What buyer receives</li>
-</ul>
-</article>
-<article class="card sell-card">
-<h2>Launch Plan</h2>
-<ul>
-<li>Create 3 short videos</li>
-<li>Show the generator working</li>
-<li>Post before/after examples</li>
-<li>Add link to Beacons or Payhip</li>
-<li>Invite buyers to customize it</li>
-</ul>
-</article>
-</div>
-<div class="card prompt-card">
-<div class="card-header">
-<div>
-<span class="eyebrow">Copy Prompt</span>
-<h2>Product Description Prompt</h2>
-</div>
-<button class="primary-btn copy-btn" data-copy-target="productPrompt">
+            </article>
+
+            <article class="lesson-block">
+              <span class="lesson-tag">Options</span>
+
+              <h2>Expand Your Generator Options</h2>
+
+              <p>
+                Add more choices inside every existing category so your
+                generator creates stronger, more detailed prompts.
+              </p>
+
+              <ul>
+                <li>Add more options to every existing category</li>
+                <li>Keep the same category names</li>
+                <li>Do not create new categories</li>
+                <li>Use the new options later to build stronger presets</li>
+              </ul>
+
+              <button
+                class="secondary-btn copy-snippet-btn"
+                data-snippet="expandCategoryOptions"
+              >
                 Copy Prompt
               </button>
-</div>
-<textarea class="copy-area" id="productPrompt" readonly="">
-Write a clear, high-converting product description for my AI Business Builder generator. Explain who it helps, what it creates, why it saves time, what the buyer receives, and how they can use it. Keep the tone confident, simple, polished, and beginner-friendly.</textarea>
-</div>
-</section>
-<!-- ============================= -->
-<!-- PAGE: DOWNLOADS -->
-<!-- ============================= -->
-<section class="page" id="downloads">
-<div class="page-header">
-<span class="eyebrow">Downloads</span>
-<h1>Student files and workshop resources.</h1>
-<p>
+            </article>
+
+            <article class="lesson-block">
+              <span class="lesson-tag">Presets</span>
+
+              <h2>Create Generator Presets</h2>
+
+              <p>
+                Create 15 reusable presets using your generator's existing
+                categories and options. Each preset should produce a unique,
+                high-quality result without changing the generator's structure.
+              </p>
+
+              <button
+                class="secondary-btn copy-snippet-btn"
+                data-snippet="customizePresets"
+              >
+                Copy Prompt
+              </button>
+            </article>
+
+            <article class="lesson-block">
+              <span class="lesson-tag">HTML</span>
+
+              <h2>Add a Header Image</h2>
+
+              <p>
+                Add a branded image directly under your generator title. Use the
+                prompt below so ChatGPT can walk you through the exact steps.
+              </p>
+
+              <ul>
+                <li>Open your generator project folder.</li>
+                <li>Add your image to the images folder.</li>
+                <li>Open index.html.</li>
+                <li>Find your main generator title.</li>
+                <li>Add the image code directly under the title.</li>
+                <li>Open style.css and style the image.</li>
+                <li>Save and refresh your browser.</li>
+              </ul>
+
+              <button
+                class="secondary-btn copy-snippet-btn"
+                data-snippet="addHeaderImage"
+              >
+                Copy Prompt
+              </button>
+            </article>
+
+            <article class="lesson-block">
+              <span class="lesson-tag">HTML</span>
+
+              <h2>Add a Marquee</h2>
+
+              <p>
+                Add a scrolling marquee to your generator that matches your
+                brand and style. Use the prompt below so ChatGPT can guide you
+                through every step.
+              </p>
+
+              <ul>
+                <li>Choose what your marquee should say.</li>
+                <li>Open your generator's index.html file.</li>
+                <li>Find the correct location for the marquee.</li>
+                <li>Add the HTML.</li>
+                <li>Open style.css.</li>
+                <li>Style the marquee.</li>
+                <li>Test the scrolling animation.</li>
+              </ul>
+
+              <button
+                class="secondary-btn copy-snippet-btn"
+                data-snippet="addMarquee"
+              >
+                Copy Prompt
+              </button>
+            </article>
+
+            <article class="lesson-block">
+              <span class="lesson-tag">Footer</span>
+
+              <h2>Update the Copyright</h2>
+
+              <p>
+                Add a simple copyright footer to your generator. The prompt
+                below will walk you through every step and show you exactly
+                where to update the footer in your project.
+              </p>
+
+              <ul>
+                <li>Open the correct HTML file.</li>
+                <li>Find the existing footer.</li>
+                <li>Replace or update the footer.</li>
+                <li>Customize your brand name.</li>
+                <li>Automatically display the current year.</li>
+                <li>Style the footer to match your generator.</li>
+              </ul>
+
+              <button
+                class="secondary-btn copy-snippet-btn"
+                data-snippet="updateCopyright"
+              >
+                Copy Prompt
+              </button>
+            </article>
+
+            <article class="module-card flip-card">
+              <div class="module-card-inner">
+                <!-- FRONT -->
+                <div class="module-card-front">
+                  <i data-lucide="stars"></i>
+
+                  <h2>Premium Output Modules</h2>
+
+                  <p>
+                    Expand your generator with premium outputs like Suno AI
+                    Music, Video Scripts, Marketing builders, and Custom GPT
+                    Builder.
+                  </p>
+
+                  <button
+                    class="secondary-btn copy-snippet-btn"
+                    data-snippet="premiumOutputModules"
+                  >
+                    Copy Premium Output Prompt
+                  </button>
+
+                  <span class="flip-hint"> Click card for teaching notes </span>
+                </div>
+
+                <!-- BACK -->
+                <div class="module-card-back">
+                  <h3>Premium Output Modules</h3>
+
+                  <h4>Purpose</h4>
+
+                  <p>
+                    Expand your completed AI prompt generator by adding premium
+                    output modules that generate additional content from the
+                    same user inputs. These modules increase the value of your
+                    generator without changing its existing structure.
+                  </p>
+
+                  <h4>Why this matters</h4>
+
+                  <p>
+                    Premium output modules transform a single prompt generator
+                    into a complete content creation system. Instead of
+                    producing only one final prompt, your generator can also
+                    create supporting assets that make it more valuable for
+                    customers.
+                  </p>
+
+                  <h4>Premium Modules</h4>
+
+                  <ul>
+                    <li>Suno AI Music Builder</li>
+                    <li>Video Script Builder</li>
+                    <li>Marketing Builder</li>
+                    <li>Custom GPT Builder</li>
+                  </ul>
+
+                  <h4>What to do with the output</h4>
+
+                  <ul>
+                    <li>Copy the generated prompt into ChatGPT.</li>
+                    <li>Choose only the premium modules you want to add.</li>
+                    <li>
+                      Update your existing HTML, CSS, and JavaScript files.
+                    </li>
+                    <li>Reuse your generator's existing inputs.</li>
+                    <li>
+                      Test every premium module before moving to Testing &
+                      Debugging.
+                    </li>
+                  </ul>
+
+                  <span class="flip-hint"> Click again to flip back </span>
+                </div>
+              </div>
+            </article>
+
+            <article class="module-card flip-card">
+              <div class="module-card-inner">
+                <div class="module-card-front">
+                  <i data-lucide="bug"></i>
+
+                  <h2>Testing & Debugging</h2>
+
+                  <p>
+                    Test every feature, find bugs, and fix issues before
+                    publishing your generator.
+                  </p>
+
+                  <button
+                    class="secondary-btn copy-snippet-btn"
+                    data-snippet="testing"
+                  >
+                    Copy Testing Prompt
+                  </button>
+
+                  <span class="flip-hint">Click card for teaching notes</span>
+                </div>
+
+                <div class="module-card-back">
+                  <h3>Testing & Debugging</h3>
+
+                  <h4>Purpose</h4>
+
+                  <p>
+                    Find and fix problems before releasing your Prompt
+                    Generator.
+                  </p>
+
+                  <h4>Why this matters</h4>
+
+                  <p>
+                    Even small bugs can break the user experience. Testing every
+                    feature ensures your generator is reliable, professional,
+                    and ready for customers.
+                  </p>
+
+                  <h4>What to do with the output</h4>
+
+                  <ul>
+                    <li>Test every button one at a time.</li>
+
+                    <li>Verify every dropdown and input field.</li>
+
+                    <li>
+                      Check the browser console (F12) for JavaScript errors.
+                    </li>
+
+                    <li>Test desktop, tablet, and mobile layouts.</li>
+
+                    <li>Fix every issue before moving to the final polish.</li>
+                  </ul>
+
+                  <span class="flip-hint">Click again to flip back</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="module-card flip-card">
+              <div class="module-card-inner">
+                <div class="module-card-front">
+                  <i data-lucide="rocket"></i>
+
+                  <h2>Final Polish & Release Checklist</h2>
+
+                  <p>
+                    Prepare your Prompt Generator for customers and publish it
+                    with confidence.
+                  </p>
+
+                  <button
+                    class="secondary-btn copy-snippet-btn"
+                    data-snippet="final"
+                  >
+                    Copy Final Polish Prompt
+                  </button>
+
+                  <span class="flip-hint">Click card for teaching notes</span>
+                </div>
+
+                <div class="module-card-back">
+                  <h3>Final Polish & Release Checklist</h3>
+
+                  <h4>Purpose</h4>
+
+                  <p>
+                    Complete your Prompt Generator and prepare it for real
+                    users.
+                  </p>
+
+                  <h4>Why this matters</h4>
+
+                  <p>
+                    This final step transforms your project from a working
+                    prototype into a polished, professional product that you can
+                    confidently publish, demonstrate, or sell.
+                  </p>
+
+                  <h4>What to do with the output</h4>
+
+                  <ul>
+                    <li>Review the entire application one final time.</li>
+
+                    <li>Verify every feature is working correctly.</li>
+
+                    <li>Clean up unused code and comments.</li>
+
+                    <li>
+                      Confirm your branding, colors, and layout are consistent.
+                    </li>
+
+                    <li>Commit your project to GitHub.</li>
+
+                    <li>Deploy it to Netlify.</li>
+
+                    <li>Package it for your customers or students.</li>
+                  </ul>
+
+                  <span class="flip-hint"
+                    >🎉 Congratulations! Your Prompt Generator is complete.
+                    Click again to flip back.</span
+                  >
+                </div>
+              </div>
+            </article>
+
+            <div class="lesson-complete-area">
+              <button class="gold-btn" id="markDayTwoCompleteBtn">
+                Mark Lesson Complete
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: PUBLISH -->
+        <!-- ============================= -->
+        <section class="page" id="publish">
+          <div class="page-header">
+            <h1>Open the tools used to build, publish, and create</h1>
+          </div>
+
+          <div class="publish-grid">
+            <article class="card publish-card">
+              <span class="lesson-tag">Development</span>
+              <h2>VS Code</h2>
+              <p>Write and edit HTML, CSS, and JavaScript files.</p>
+              <a
+                href="https://code.visualstudio.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="gold-btn"
+                >Open VS Code →</a
+              >
+            </article>
+
+            <article class="card publish-card">
+              <span class="lesson-tag">Development</span>
+              <h2>GitHub</h2>
+              <p>Save your project, track changes, and manage versions.</p>
+              <a
+                href="https://github.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="gold-btn"
+                >Open GitHub →</a
+              >
+            </article>
+
+            <article class="card publish-card">
+              <span class="lesson-tag">Publishing</span>
+              <h2>Netlify</h2>
+              <p>Publish your project and get a live website link.</p>
+              <a
+                href="https://app.netlify.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="gold-btn"
+                >Open Netlify →</a
+              >
+            </article>
+
+            <article class="card publish-card">
+              <span class="lesson-tag">AI Assistant</span>
+              <h2>ChatGPT</h2>
+              <p>Generate code, content, prompts, and troubleshooting help.</p>
+              <a
+                href="https://chatgpt.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="gold-btn"
+                >Open ChatGPT →</a
+              >
+            </article>
+
+            <article class="card publish-card">
+              <span class="lesson-tag">AI Assistant</span>
+              <h2>Gemini</h2>
+              <p>Brainstorm ideas, research topics, and generate content.</p>
+              <a
+                href="https://gemini.google.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="gold-btn"
+                >Open Gemini →</a
+              >
+            </article>
+
+            <article class="card publish-card">
+              <span class="lesson-tag">AI Video</span>
+              <h2>Flow</h2>
+              <p>Create cinematic AI videos from prompts and scenes.</p>
+              <a
+                href="https://labs.google/fx/tools/flow"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="gold-btn"
+                >Open Flow →</a
+              >
+            </article>
+
+            <article class="card publish-card">
+              <span class="lesson-tag">Design</span>
+              <h2>Canva</h2>
+              <p>
+                Design graphics, presentations, ebooks, and marketing assets.
+              </p>
+              <a
+                href="https://www.canva.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="gold-btn"
+                >Open Canva →</a
+              >
+            </article>
+
+            <article class="card publish-card">
+              <span class="lesson-tag">AI Images</span>
+              <h2>ImageFX</h2>
+              <p>Generate high-quality AI images from text prompts.</p>
+              <a
+                href="https://labs.google/fx/tools/image-fx"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="gold-btn"
+                >Open ImageFX →</a
+              >
+            </article>
+
+            <article class="card publish-card">
+              <span class="lesson-tag">Image Upscaling</span>
+              <h2>I❤️IMG</h2>
+              <p>Increase image resolution and improve image quality.</p>
+              <a
+                href="https://www.iloveimg.com/upscale-image"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="gold-btn"
+                >Open I❤️IMG →</a
+              >
+            </article>
+
+            <article class="card publish-card">
+              <span class="lesson-tag">AI Music</span>
+              <h2>Suno</h2>
+              <p>Generate AI songs, music, and background audio.</p>
+              <a
+                href="https://suno.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="gold-btn"
+                >Open Suno →</a
+              >
+            </article>
+
+            <article class="card publish-card">
+              <span class="lesson-tag">Research</span>
+              <h2>Perplexity</h2>
+              <p>Research ideas, verify information, and gather sources.</p>
+              <a
+                href="https://www.perplexity.ai/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="gold-btn"
+                >Open Perplexity →</a
+              >
+            </article>
+          </div>
+        </section>
+        <!-- ============================= -->
+        <!-- PAGE: SELL -->
+        <!-- ============================= -->
+        <section class="page" id="sell">
+          <div class="page-header">
+            <h1>Launch Your Generator</h1>
+            <p>
+              Your generator is built. Now it’s time to package it, create your
+              product listing, and prepare it for real-world customers.
+            </p>
+          </div>
+
+          <div class="sell-grid">
+            <article class="card sell-card">
+              <h2>Product Checklist</h2>
+              <ul>
+                <li>Live generator link</li>
+                <li>PDF buyer instructions</li>
+                <li>Preview screenshots</li>
+                <li>Product mockup</li>
+                <li>Simple terms of use</li>
+              </ul>
+            </article>
+
+            <article class="card sell-card">
+              <h2>Product Listing</h2>
+              <ul>
+                <li>Clear product title</li>
+                <li>Who the product helps</li>
+                <li>What the generator creates</li>
+                <li>Key features and benefits</li>
+                <li>What the buyer receives</li>
+              </ul>
+            </article>
+
+            <article class="card sell-card">
+              <h2>Launch Plan</h2>
+              <ul>
+                <li>Create 3–5 short videos</li>
+                <li>Show the generator working</li>
+                <li>Share before-and-after examples</li>
+                <li>Add your product link</li>
+                <li>Invite buyers to customize it</li>
+              </ul>
+            </article>
+          </div>
+
+          <!-- QUICK LINKS -->
+          <div class="card selling-links-card">
+            <div class="card-header">
+              <div>
+                <span class="eyebrow">Quick Links</span>
+                <h2>Publish Your Product</h2>
+              </div>
+            </div>
+
+            <div class="selling-links-grid">
+              <a
+                class="selling-platform-link"
+                href="https://payhip.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div>
+                  <h3>Payhip</h3>
+                  <p>Upload, price, and sell your generator.</p>
+                </div>
+                <span>Open Payhip</span>
+              </a>
+
+              <a
+                class="selling-platform-link"
+                href="https://beacons.ai/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div>
+                  <h3>Beacons</h3>
+                  <p>Add your generator to your store or link-in-bio page.</p>
+                </div>
+                <span>Open Beacons</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- PRODUCT DESCRIPTION PROMPT -->
+          <div class="card prompt-card sell-prompt-card">
+            <div class="card-header">
+              <div>
+                <h2>Product Description Prompt</h2>
+              </div>
+
+              <button
+                class="primary-btn copy-btn"
+                data-copy-target="productPrompt"
+              >
+                Copy Prompt
+              </button>
+            </div>
+
+            <textarea class="copy-area" id="productPrompt" readonly>
+Write a clear, polished, and persuasive product listing for my AI prompt generator.
+
+Use the information I provide to create:
+
+• A strong product title
+• A short product description
+• A complete product description
+• Who the product is for
+• The problem it solves
+• What the generator creates
+• Key features
+• Customer benefits
+• What the buyer receives
+• Simple instructions for using it
+• Frequently asked questions
+• A clear call to action
+
+Keep the writing confident, beginner-friendly, easy to understand, and focused on the real value of the generator.
+
+Do not use exaggerated claims, complicated language, or unnecessary filler.
+
+Before writing the listing, ask me for:
+
+1. Generator name
+2. Target audience
+3. What the generator creates
+4. The problem it solves
+5. Main features
+6. What the buyer receives
+7. Product price
+8. Where the product will be sold
+</textarea
+            >
+          </div>
+
+          <!-- Launch Checklist -->
+          <article class="card launch-checklist-card">
+            <div class="launch-checklist-inner">
+              <div class="launch-checklist-front">
+                <span class="eyebrow">Final Step</span>
+
+                <h2>Launch Checklist</h2>
+
+                <p>
+                  Before you publish your generator, make sure you've completed
+                  the final steps.
+                </p>
+
+                <button class="primary-btn">View Checklist</button>
+              </div>
+
+              <div class="launch-checklist-back">
+                <span class="eyebrow">Ready to Launch?</span>
+
+                <h2>Final Checklist</h2>
+
+                <ul class="launch-checklist-list">
+                  <li>✅ Test every feature</li>
+                  <li>✅ Remove placeholder text</li>
+                  <li>✅ Add your branding</li>
+                  <li>✅ Take screenshots</li>
+                  <li>✅ Write your product description</li>
+                  <li>✅ Upload your generator</li>
+                  <li>✅ Test your purchase link</li>
+                  <li>✅ Announce your launch</li>
+                </ul>
+
+                <button class="secondary-btn">Back</button>
+              </div>
+            </div>
+          </article>
+        </section>
+        <!-- ============================= -->
+        <!-- PAGE: DOWNLOADS -->
+        <!-- ============================= -->
+        <section class="page" id="downloads">
+          <div class="page-header">
+            <span class="eyebrow">Downloads</span>
+            <h1>Student files and workshop resources.</h1>
+            <p>
               Use these as downloadable assets or placeholders until final files
               are ready.
             </p>
-</div>
-<div class="download-grid">
-<article class="download-card">
-<i data-lucide="file-text"></i>
-<h2>Generator Planning Sheet</h2>
-<p>Plan audience, categories, outputs, and product promise.</p>
-<button <="" button="" class="primary-btn download-btn" data-download="master-blueprint" download="">
-</button></article>
-<article class="download-card">
-<i data-lucide="folder-code"></i>
-<h2>Starter Code Pack</h2>
-<p>HTML, CSS, and JavaScript starter files.</p>
-<button <="" button="" class="primary-btn download-btn" data-download="html-starter" download="">
-</button></article>
-<article class="download-card">
-<i data-lucide="cloud-upload"></i>
-<h2>Publish Checklist</h2>
-<p>GitHub and Netlify steps for students.</p>
-<button class="primary-btn download-btn" data-download="publish">
+          </div>
+          <div class="download-grid">
+            <article class="download-card">
+              <i data-lucide="file-text"></i>
+              <h2>Generator Planning Sheet</h2>
+              <p>Plan audience, categories, outputs, and product promise.</p>
+              <button
+                type="button"
+                class="primary-btn download-btn"
+                data-download="master-blueprint"
+              >
                 Download
               </button>
-</article>
-<article class="download-card">
-<i data-lucide="badge-dollar-sign"></i>
-<h2>Selling Guide</h2>
-<p>Mockups, pricing, sales copy, and launch checklist.</p>
-<button class="primary-btn download-btn" data-download="selling">
+            </article>
+
+            <article class="download-card">
+              <i data-lucide="folder-code"></i>
+              <h2>Starter Code Pack</h2>
+              <p>HTML, CSS, and JavaScript starter files.</p>
+              <button
+                type="button"
+                class="primary-btn download-btn"
+                data-download="html-starter"
+              >
                 Download
               </button>
-</article>
-</div>
-</section>
-<!-- ============================= -->
-<!-- PAGE: NOTEBOOK -->
-<!-- ============================= -->
-<section class="page" id="notebook">
-<div class="page-header">
-<span class="eyebrow">Notebook</span>
-<h1>Builder notes that save automatically.</h1>
-<p>
+            </article>
+            <article class="download-card">
+              <i data-lucide="cloud-upload"></i>
+              <h2>Publish Checklist</h2>
+              <p>GitHub and Netlify steps for students.</p>
+              <button
+                type="button"
+                class="primary-btn download-btn"
+                data-download="publish"
+              >
+                Download
+              </button>
+            </article>
+            <article class="download-card">
+              <i data-lucide="badge-dollar-sign"></i>
+              <h2>Selling Guide</h2>
+              <p>Mockups, pricing, sales copy, and launch checklist.</p>
+              <button class="primary-btn download-btn" data-download="selling">
+                Download
+              </button>
+            </article>
+          </div>
+        </section>
+        <!-- ============================= -->
+        <!-- PAGE: NOTEBOOK -->
+        <!-- ============================= -->
+        <section class="page" id="notebook">
+          <div class="page-header">
+            <span class="eyebrow">Notebook</span>
+            <h1>Builder notes that save automatically.</h1>
+            <p>
               Students can keep ideas, bugs, questions, and launch notes in one
               place.
             </p>
-</div>
-<div class="notebook-layout">
-<aside class="card note-sidebar">
-<label for="noteCategory">Notebook Category</label>
-<select id="noteCategory">
-<option value="ideas">Generator Ideas</option>
-<option value="categories">Category Ideas</option>
-<option value="html">HTML Notes</option>
-<option value="css">CSS Notes</option>
-<option value="javascript">JavaScript Notes</option>
-<option value="modules">AI Module Notes</option>
-<option value="publish">GitHub + Netlify Notes</option>
-<option value="selling">Selling Notes</option>
-</select>
-<button class="secondary-btn full-width" id="exportNotesBtn">
+          </div>
+          <div class="notebook-layout">
+            <aside class="card note-sidebar">
+              <label for="noteCategory">Notebook Category</label>
+              <select id="noteCategory">
+                <option value="ideas">Generator Ideas</option>
+                <option value="categories">Category Ideas</option>
+                <option value="html">HTML Notes</option>
+                <option value="css">CSS Notes</option>
+                <option value="javascript">JavaScript Notes</option>
+                <option value="modules">AI Module Notes</option>
+                <option value="publish">GitHub + Netlify Notes</option>
+                <option value="selling">Selling Notes</option>
+              </select>
+              <button class="secondary-btn full-width" id="exportNotesBtn">
                 Export Notes
               </button>
-</aside>
-<div class="card note-editor-card">
-<textarea class="note-editor" id="mainNote" placeholder="Type your notes here..."></textarea>
-</div>
-</div>
-</section>
-<!-- ============================= -->
-<!-- PAGE: REPLAYS -->
-<!-- ============================= -->
-<section class="page" id="replays">
-<div class="page-header">
-<span class="eyebrow">Replay Library</span>
-<h1>Two clean replays. No clutter.</h1>
-<p>
+            </aside>
+            <div class="card note-editor-card">
+              <textarea
+                class="note-editor"
+                id="mainNote"
+                placeholder="Type your notes here..."
+              ></textarea>
+            </div>
+          </div>
+        </section>
+        <!-- ============================= -->
+        <!-- PAGE: REPLAYS -->
+        <!-- ============================= -->
+        <section class="page" id="replays">
+          <div class="page-header">
+            <span class="eyebrow">Replay Library</span>
+            <h1>Two clean replays. No clutter.</h1>
+            <p>
               Only Day 1 and Day 2 live here so students know exactly what to
               watch.
             </p>
-</div>
-<div class="replay-grid">
-<article class="card replay-card">
-<span class="status-pill">Day 1</span>
-<h2>Build the AI Business Builder</h2>
-<p>
+          </div>
+          <div class="replay-grid">
+            <article class="card replay-card">
+              <span class="status-pill">Day 1</span>
+              <h2>Build the Prompt Generator Companion</h2>
+              <p>
                 Project setup, HTML, CSS, JavaScript, generator buttons, and
                 testing.
               </p>
-<ul>
-<li>Project folder setup</li>
-<li>Generator layout</li>
-<li>Category dropdowns</li>
-<li>Generate, Randomize, Copy, Clear</li>
-</ul>
-<button class="primary-btn replay-btn" data-replay="day1">
+              <ul>
+                <li>Project folder setup</li>
+                <li>Generator layout</li>
+                <li>Category dropdowns</li>
+                <li>Generate, Randomize, Copy, Clear</li>
+              </ul>
+              <button class="primary-btn replay-btn" data-replay="day1">
                 Watch Day 1 Replay
               </button>
-</article>
-<article class="card replay-card">
-<span class="status-pill">Day 2</span>
-<h2>Publish and Sell the Generator</h2>
-<p>
+            </article>
+            <article class="card replay-card">
+              <span class="status-pill">Day 2</span>
+              <h2>Publish and Sell the Generator</h2>
+              <p>
                 AI modules, GitHub, Netlify, product packaging, and selling
                 strategy.
               </p>
-<ul>
-<li>Premium AI modules</li>
-<li>GitHub workflow</li>
-<li>Netlify deployment</li>
-<li>Sales page and launch plan</li>
-</ul>
-<button class="primary-btn replay-btn" data-replay="day2">
+              <ul>
+                <li>Premium AI modules</li>
+                <li>GitHub workflow</li>
+                <li>Netlify deployment</li>
+                <li>Sales page and launch plan</li>
+              </ul>
+              <button class="primary-btn replay-btn" data-replay="day2">
                 Watch Day 2 Replay
               </button>
-</article>
-</div>
-</section>
-<!-- ============================= -->
-<!-- PAGE: HELP -->
-<!-- ============================= -->
-<section class="page" id="help">
-<div class="page-header">
-<span class="eyebrow">Help Center</span>
-<h1>Fast fixes for common workshop problems.</h1>
-<p>Keep students moving without stopping the whole class.</p>
-</div>
-<div class="help-grid">
-<article class="help-card">
-<h2>CSS is not showing</h2>
-<p>
-                Make sure the file path is exactly <code>css/style.css</code>.
-              </p>
-</article>
-<article class="help-card">
-<h2>JavaScript is not working</h2>
-<p>
-                Make sure the file path is exactly <code>js/script.js</code>.
-              </p>
-</article>
-<article class="help-card">
-<h2>Buttons do nothing</h2>
-<p>
-                Check that the ID in HTML matches the ID used in JavaScript.
-              </p>
-</article>
-<article class="help-card">
-<h2>Netlify page is blank</h2>
-<p>
-                Make sure the homepage file is named <code>index.html</code>.
-              </p>
-</article>
-<article class="help-card">
-<h2>GitHub is not updating</h2>
-<p>
-                Save, commit, and push. Netlify updates after GitHub updates.
-              </p>
-</article>
-<article class="help-card">
-<h2>Copy button fails</h2>
-<p>
-                Use a local server or published site. Some browsers block
-                clipboard on file URLs.
-              </p>
-</article>
-</div>
-</section>
-<!-- ============================= -->
-<!-- PAGE: CERTIFICATE -->
-<!-- ============================= -->
-<section class="page" id="certificate">
-<div class="page-header">
-<span class="eyebrow">Certificate</span>
-<h1>Workshop completion certificate.</h1>
-<p>Unlocks when both workshop days are marked complete.</p>
-</div>
-<div class="card certificate-locked" id="certificateLocked">
-<i data-lucide="lock"></i>
-<h2>Certificate Locked</h2>
-<p>Complete Day 1 and Day 2 to unlock the certificate.</p>
-</div>
-<div class="certificate-wrap hidden" id="certificateUnlocked">
-<div class="certificate-card">
-<p class="certificate-small">Certificate of Completion</p>
-<h2>AI Business Builder™</h2>
-<p>This certifies that</p>
-<h1 id="certificateName">Builder</h1>
-<p>
-                completed the workshop experience and built a sellable AI
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: CERTIFICATE -->
+        <!-- ============================= -->
+        <section class="page" id="certificate">
+          <div class="page-header">
+            <span class="eyebrow">Certificate</span>
+            <h1>Workshop completion certificate.</h1>
+            <p>Unlocks when both workshop days are marked complete.</p>
+          </div>
+          <div class="card certificate-locked" id="certificateLocked">
+            <i data-lucide="lock"></i>
+            <h2>Certificate Locked</h2>
+            <p>Complete Day 1 and Day 2 to unlock the certificate.</p>
+          </div>
+          <div class="certificate-wrap hidden" id="certificateUnlocked">
+            <div class="certificate-card">
+              <p class="certificate-small">Certificate of Completion</p>
+              <h2>Prompt Generator Companion™</h2>
+              <p>This certifies that</p>
+              <h1 id="certificateName">Builder</h1>
+              <p>
+                completed the workshop experience and built a sellable prompt
                 generator.
               </p>
-<span id="certificateDate"></span>
-</div>
-<button class="gold-btn" id="printCertificateBtn">
+              <span id="certificateDate"></span>
+            </div>
+            <button class="gold-btn" id="printCertificateBtn">
               Print Certificate
             </button>
-</div>
-</section>
-<!-- ============================= -->
-<!-- PAGE: SETTINGS -->
-<!-- ============================= -->
-<section class="page" id="settings">
-<div class="page-header">
-<span class="eyebrow">Settings</span>
-<h1>Personalize the builder experience.</h1>
-<p>Save the student name and manage workshop data.</p>
-</div>
-<div class="settings-grid">
-<article class="card settings-card">
-<h2>Student Profile</h2>
-<label for="studentNameInput">Student Name</label>
-<input id="studentNameInput" placeholder="Enter student name" type="text">
-<label for="studentEmailInput">Email</label>
-<input id="studentEmailInput" placeholder="Enter email" type="email">
-<button class="primary-btn" id="saveProfileBtn">
+          </div>
+        </section>
+        <!-- ============================= -->
+        <!-- PAGE: SETTINGS -->
+        <!-- ============================= -->
+        <section class="page" id="settings">
+          <div class="page-header">
+            <span class="eyebrow">Settings</span>
+            <h1>Personalize the builder experience.</h1>
+            <p>Save the student name and manage workshop data.</p>
+          </div>
+          <div class="settings-grid">
+            <article class="card settings-card">
+              <h2>Student Profile</h2>
+              <label for="studentNameInput">Student Name</label>
+              <input
+                id="studentNameInput"
+                placeholder="Enter student name"
+                type="text"
+              />
+              <label for="studentEmailInput">Email</label>
+              <input
+                id="studentEmailInput"
+                placeholder="Enter email"
+                type="email"
+              />
+              <button class="primary-btn" id="saveProfileBtn">
                 Save Profile
               </button>
-</input></input></article>
-<article class="card settings-card">
-<h2>Theme</h2>
-<label for="themeSelect">Appearance</label>
-<select id="themeSelect">
-<option value="dark">Luxury Dark</option>
-<option value="light">Luxury Light</option>
-</select>
-<label for="accentSelect">Accent</label>
-<select id="accentSelect">
-<option value="blue-gold">Royal Blue + Gold</option>
-<option value="black-gold">Black + Gold</option>
-</select>
-</article>
-<article class="card settings-card">
-<h2>Data</h2>
-<button class="secondary-btn full-width" id="exportDataBtn">
+            </article>
+            <article class="card settings-card">
+              <h2>Theme</h2>
+              <label for="themeSelect">Appearance</label>
+              <select id="themeSelect">
+                <option value="dark">Luxury Dark</option>
+                <option value="light">Luxury Light</option>
+              </select>
+              <label for="accentSelect">Accent</label>
+              <select id="accentSelect">
+                <option value="blue-gold">Royal Blue + Gold</option>
+                <option value="black-gold">Black + Gold</option>
+              </select>
+            </article>
+            <article class="card settings-card">
+              <h2>Data</h2>
+              <button class="secondary-btn full-width" id="exportDataBtn">
                 Export Backup
               </button>
-<button class="secondary-btn full-width" id="importDataBtn">
+              <button class="secondary-btn full-width" id="importDataBtn">
                 Import Backup
               </button>
-<input accept=".json" hidden="" id="importDataFile" type="file">
-<button class="danger-btn full-width" id="resetDataBtn">
+              <input accept=".json" hidden id="importDataFile" type="file" />
+
+              <button class="danger-btn full-width" id="resetDataBtn">
                 Reset Everything
               </button>
-</input></article>
-</div>
-</section>
-</main>
-</div>
-<!-- ============================= -->
-<!-- TOAST + POPUPS -->
-<!-- ============================= -->
-<div aria-live="polite" class="toast" id="toast" role="status">Copied!</div>
-<div class="completion-popup hidden" id="completionPopup">
-<div class="completion-card">
-<button aria-label="Close popup" class="close-popup" id="closeCompletionPopup">
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+    <!-- ============================= -->
+    <!-- TOAST + POPUPS -->
+    <!-- ============================= -->
+    <div aria-live="polite" class="toast" id="toast" role="status">Copied!</div>
+    <div class="completion-popup hidden" id="completionPopup">
+      <div class="completion-card">
+        <button
+          aria-label="Close popup"
+          class="close-popup"
+          id="closeCompletionPopup"
+        >
           ×
         </button>
-<span class="eyebrow">Achievement Unlocked</span>
-<h2 id="completionTitle">Workshop Step Complete</h2>
-<p id="completionText">Your progress has been saved.</p>
-<button class="gold-btn" data-open-page="certificate">
+        <span class="eyebrow">Achievement Unlocked</span>
+        <h2 id="completionTitle">Workshop Step Complete</h2>
+        <p id="completionText">Your progress has been saved.</p>
+        <button class="gold-btn" data-open-page="certificate">
           View Certificate
         </button>
-</div>
-</div>
-<script src="js/script.js"></script>
-<script>
+      </div>
+    </div>
+    <script src="js/script.js"></script>
+    <script>
       if (window.lucide) {
         lucide.createIcons();
       }
     </script>
-</body>
+  </body>
 </html>

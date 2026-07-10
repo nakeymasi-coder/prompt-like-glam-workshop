@@ -1,5 +1,5 @@
 /* =========================================================
-   AI BUSINESS BUILDER™ — SCRIPT.JS v7.0
+   PROMPT GENERATOR COMPANION — SCRIPT.JS v7.0
    SECTION 1: CORE ENGINE
    Paste this at the very top of js/script.js
    ========================================================= */
@@ -12,7 +12,7 @@
 
 const APP_CONFIG = {
   version: "7.0",
-  storageKey: "aiBusinessBuilder_v7",
+  storageKey: "promptGeneratorCompanion_v7",
   defaultPage: "dashboard",
   toastDuration: 1800,
 };
@@ -31,7 +31,6 @@ const DEFAULT_APP_DATA = {
     dayOneComplete: false,
     dayTwoComplete: false,
     journeySteps: {
-      blueprint: false,
       dayOne: false,
       modules: false,
       publish: false,
@@ -137,6 +136,7 @@ function saveAppData() {
 
 function resetAppData() {
   localStorage.removeItem(APP_CONFIG.storageKey);
+
   appData = structuredClone(DEFAULT_APP_DATA);
   saveAppData();
 }
@@ -198,7 +198,6 @@ function unlockAchievement(id, title, description = "") {
   });
 
   addActivity(title, description);
-  saveAppData();
 
   showAchievementPopup(title, description);
   updateAchievementCount();
@@ -220,7 +219,8 @@ function showAchievementPopup(title, description) {
   if (!popup) return;
 
   if (popupTitle) popupTitle.textContent = title;
-  if (popupText) popupText.textContent = description || "Your progress has been saved.";
+  if (popupText)
+    popupText.textContent = description || "Your progress has been saved.";
 
   popup.classList.remove("hidden");
 }
@@ -380,8 +380,7 @@ function setupCopyButtons() {
 
 function getModuleSnippet(type) {
   const snippets = {
-
-foundation: `You are an expert HTML, CSS, JavaScript, UI/UX, and prompt engineering developer specializing in building professional AI prompt generators.
+    foundation: `You are an expert HTML, CSS, JavaScript, UI/UX, and prompt engineering developer specializing in building professional AI prompt generators.
 
 Throughout this project, act as my senior software engineer, front-end developer, UI/UX designer, and development partner.
 
@@ -416,7 +415,7 @@ Do not generate anything yet.
 
 Wait for my next prompt.`,
 
-planner: `You are an expert software architect, front-end developer, UI/UX designer, and prompt engineering specialist.
+    planner: `You are an expert software architect, front-end developer, UI/UX designer, and prompt engineering specialist.
 
 The Generator Foundation has already been established.
 
@@ -455,7 +454,7 @@ Only create the complete development blueprint.
 
 Wait for my next prompt.`,
 
-layout: `You are an expert UI/UX architect and front-end application designer specializing in professional AI prompt generators.
+    layout: `You are an expert UI/UX architect and front-end application designer specializing in professional AI prompt generators.
 
 The Generator Foundation has already been completed.
 
@@ -644,7 +643,7 @@ Only build the Layout Blueprint.
 
 Stop after completing the Layout Blueprint.`,
 
-categories: `You are an expert prompt engineer, prompt architect, and AI generator designer.
+    categories: `You are an expert prompt engineer, prompt architect, and AI generator designer.
 
 The Generator Foundation has already been completed.
 
@@ -733,8 +732,7 @@ Every HTML section, CSS style, JavaScript data structure, OPTION_DATA object, PR
 
 Do not design categories that cannot be implemented later.`,
 
-
-inputs: `You are an expert front-end application architect, UI designer, and prompt engineering specialist.
+    inputs: `You are an expert front-end application architect, UI designer, and prompt engineering specialist.
 
 Use the completed Generator Foundation, Generator Planner, Reference Image, Layout Blueprint, and Category Blueprint as the source of truth for this blueprint.
 
@@ -816,8 +814,7 @@ Do not create inputs that cannot be implemented later.
 
 Stop after completing the Input Builder Blueprint. Do not continue to the Logic Blueprint until instructed.`,
 
-
-logic: `You are an expert software architect, front-end developer, and JavaScript engineer specializing in professional AI prompt generators.
+    logic: `You are an expert software architect, front-end developer, and JavaScript engineer specializing in professional AI prompt generators.
 
 The Generator Foundation has already been completed.
 
@@ -979,8 +976,7 @@ Only build the complete Logic Blueprint.
 
 Stop after completing the Logic Blueprint. Do not continue to the Prompt Assembly Builder until instructed.`,
 
-
-assembly: `You are an expert prompt engineer and AI prompt architect specializing in professional AI prompt generators.
+    assembly: `You are an expert prompt engineer and AI prompt architect specializing in professional AI prompt generators.
 
 The Generator Foundation has already been completed.
 
@@ -1104,8 +1100,7 @@ Only build the complete Prompt Assembly Blueprint.
 
 Stop after completing the Prompt Assembly Blueprint. Do not continue to the HTML Builder until instructed.`,
 
-
-htmlPart1: `You are an expert HTML developer and front-end application architect specializing in professional AI prompt generators.
+    htmlPart1: `You are an expert HTML developer and front-end application architect specializing in professional AI prompt generators.
 
 If any completed blueprint conflicts with another completed blueprint, preserve all approved information and follow the most specific blueprint rather than inventing a new implementation.
 
@@ -1155,7 +1150,7 @@ Do NOT generate JavaScript.
 
 Stop immediately after opening the main generator workspace.`,
 
-htmlPart2: `Generate Part 2 of the external index.html file.
+    htmlPart2: `Generate Part 2 of the external index.html file.
 
 Output ONLY HTML code.
 
@@ -1206,7 +1201,7 @@ Do NOT generate JavaScript.
 
 Stop after the final generator category section.`,
 
-htmlPart3: `Generate Part 3 of the external index.html file.
+    htmlPart3: `Generate Part 3 of the external index.html file.
 
 Output ONLY HTML code.
 
@@ -1265,7 +1260,7 @@ Do NOT generate CSS.
 Do NOT generate JavaScript.
 
 Stop after completing the full index.html file.`,
-cssPart1: `You are an expert CSS developer, UI designer, and front-end architect specializing in professional AI prompt generators.
+    cssPart1: `You are an expert CSS developer, UI designer, and front-end architect specializing in professional AI prompt generators.
 
 If any completed blueprint conflicts with another completed blueprint, preserve all approved information and follow the most specific blueprint rather than inventing a new implementation.
 
@@ -1316,7 +1311,7 @@ Do NOT generate HTML.
 
 Do NOT generate JavaScript.`,
 
-cssPart2: `Generate Part 2 of the external style.css file.
+    cssPart2: `Generate Part 2 of the external style.css file.
 
 Output ONLY CSS code.
 
@@ -1362,7 +1357,7 @@ Do NOT generate HTML.
 
 Do NOT generate JavaScript.`,
 
-cssPart3: `Generate Part 3 of the external style.css file.
+    cssPart3: `Generate Part 3 of the external style.css file.
 
 Output ONLY CSS code.
 
@@ -1420,7 +1415,7 @@ Do NOT generate HTML.
 
 Do NOT generate JavaScript.`,
 
-cssPart4: `Generate Part 4 of the external style.css file.
+    cssPart4: `Generate Part 4 of the external style.css file.
 
 Output ONLY CSS code.
 
@@ -1466,7 +1461,7 @@ Do NOT generate HTML.
 
 Do NOT generate JavaScript.`,
 
-cssPart5: `Generate Part 5 of the external style.css file.
+    cssPart5: `Generate Part 5 of the external style.css file.
 
 Output ONLY CSS code.
 
@@ -1523,31 +1518,182 @@ Do NOT generate JavaScript.
 
 Stop after completing the full style.css file.`,
 
-customizeCss: `You are an expert HTML and CSS developer.
+    customizeGeneratorLook: `You are an expert HTML, CSS, and JavaScript developer helping a beginner customize an AI prompt generator.
 
-Help me customize the appearance of the AI prompt generator I built.
+Help me customize the visual look of my generator so it fits my brand.
 
-I want to update:
+I want help with:
 
 • Color palette
 • Fonts
-• Header image beneath the title
-• Marquee
-• Scrollbar
 • Button styles
-• Copyright
+• Background animation
+• Floating background elements
+• Custom scrollbar
+• Overall brand feel
+
+Walk me through this step by step.
+
+Do not redesign my generator.
+
+Do not remove or rename my existing sections, IDs, classes, buttons, categories, or features.
+
+Keep the current generator structure exactly the same.
+
+First, ask me what brand colors, fonts, mood, and style I want.
+
+Then ask me if I want floating elements or background animation.
+
+Then ask me if I want a custom scrollbar.
+
+After I answer, tell me exactly which file to open.
+
+Then generate only the CSS and JavaScript needed for the visual upgrades.
+
+Explain exactly where to paste each piece of code.
+
+Wait for me to describe my brand style before generating any code.`,
+
+    expandCategoryOptions: `You are an expert AI prompt generator architect.
+
+Help me expand the options inside every category of my AI prompt generator.
+
+Do not create new categories.
+
+Do not remove or rename any existing categories.
+
+Keep the existing category structure exactly the same.
+
+Instead, generate additional high-quality options for every existing category.
+
+For each category:
+
+• Generate 25–50 new options that fit naturally with the existing options.
+• Avoid duplicates.
+• Keep the same formatting used in the generator.
+• Make the options creative, useful, and professionally written.
+• Preserve any custom text fields, dropdowns, chip groups, and multi-select groups.
+
+Output the new options grouped under their corresponding category names.
+
+Do not generate HTML, CSS, or JavaScript unless I specifically ask for it.
+
+Wait for me to paste my current generator before generating the new options.`,
+
+    customizePresets: `You are an expert AI prompt generator architect and prompt engineering specialist.
+
+Help me create 15 professional presets for my AI prompt generator.
+
+The presets must use the categories, dropdowns, chip buttons, multi-selects, text fields, and textareas that already exist in my generator.
+
+Do not create new categories.
+
+Do not remove or rename any existing categories.
 
 Do not redesign the generator.
 
-Keep the existing HTML structure exactly the same.
+For each preset:
 
-Only generate the CSS needed to customize the appearance.
+• Create a unique preset name.
+• Select the most appropriate option for every applicable category.
+• Leave categories blank only when appropriate.
+• Make every preset feel different from the others.
+• Ensure the combinations produce high-quality, useful prompts.
+• Avoid duplicate or repetitive presets.
 
-Explain exactly where to paste the CSS into style.css.
+The presets should be realistic, creative, beginner-friendly, and valuable for real-world use.
 
-Wait for me to tell you my preferred colors, fonts, and branding before generating the CSS.`,
+After generating the 15 presets, output them in a format that can easily be converted into a JavaScript presets object.
 
-jsPart1: `You are an expert JavaScript developer and front-end application architect specializing in professional AI prompt generators.
+Wait for me to paste my generator's categories and options before generating the presets.`,
+
+    addHeaderImage: `You are an expert HTML and CSS developer helping a beginner customize an AI prompt generator.
+
+Help me add a professional header image directly beneath my generator title.
+
+Walk me through this step by step.
+
+First, tell me how to add my image file to my project folder.
+
+Then tell me exactly which file to open.
+
+Then tell me how to find my main generator title in index.html.
+
+Then tell me exactly where the header image code should go.
+
+Then generate the HTML needed for the header image.
+
+Then generate the CSS needed to style the image professionally.
+
+Do not redesign my generator.
+
+Do not remove or rename any existing code.
+
+Keep the existing structure exactly the same.
+
+Ask me to paste my current top section or header section before generating the final code.`,
+
+    addMarquee: `You are an expert HTML and CSS developer helping a beginner customize an AI prompt generator.
+
+Help me add a professional scrolling marquee to my generator.
+
+Walk me through this step by step.
+
+First, help me decide what text should appear in the marquee.
+
+Then tell me exactly which file to open.
+
+Next, tell me exactly how to find the correct location in my HTML where the marquee should be added.
+
+After I paste that section of my HTML, generate only the HTML needed for the marquee.
+
+Then generate the CSS needed to style it professionally.
+
+Finally, explain how to customize:
+
+• Text
+• Speed
+• Direction
+• Colors
+• Font
+• Height
+• Background
+
+Do not redesign my generator.
+
+Do not remove or rename any existing code.
+
+Keep the existing structure exactly the same.
+
+Wait for me to paste my current HTML before generating any code.`,
+
+    updateCopyright: `You are an expert HTML, CSS, and JavaScript developer helping a beginner customize an AI prompt generator.
+
+Help me update the copyright section of my generator.
+
+Walk me through this step by step.
+
+First, tell me which file to open.
+
+Then help me find my current footer.
+
+If my generator doesn't already have a footer, tell me where to add one.
+
+After I paste that section of my HTML, generate the updated footer code.
+
+Then generate any CSS needed to style it professionally.
+
+If needed, generate the JavaScript required to automatically display the current year.
+
+Do not redesign my generator.
+
+Do not remove any existing features.
+
+Keep the existing structure exactly the same.
+
+Wait for me to paste my current footer or the bottom section of my HTML before generating any code.`,
+
+    jsPart1: `You are an expert JavaScript developer and front-end application architect specializing in professional AI prompt generators.
 
 If any completed blueprint conflicts with another completed blueprint, preserve all approved information and follow the most specific blueprint rather than inventing a new implementation.
 
@@ -1614,7 +1760,7 @@ Do NOT generate HTML.
 
 Do NOT generate CSS.`,
 
-jsPart2: `Generate Part 2 of the external script.js file.
+    jsPart2: `Generate Part 2 of the external script.js file.
 
 Output ONLY JavaScript code.
 
@@ -1673,7 +1819,7 @@ Do NOT generate HTML.
 
 Do NOT generate CSS.`,
 
-jsPart3: `Generate Part 3 of the external script.js file.
+    jsPart3: `Generate Part 3 of the external script.js file.
 
 Output ONLY JavaScript code.
 
@@ -1723,7 +1869,7 @@ Do NOT generate HTML.
 
 Do NOT generate CSS.`,
 
-jsPart4: `Generate Part 4 of the external script.js file.
+    jsPart4: `Generate Part 4 of the external script.js file.
 
 Output ONLY JavaScript code.
 
@@ -1775,7 +1921,7 @@ Do NOT generate HTML.
 
 Do NOT generate CSS.`,
 
-jsPart5: `Generate Part 5 of the external script.js file.
+    jsPart5: `Generate Part 5 of the external script.js file.
 
 Output ONLY JavaScript code.
 
@@ -1826,7 +1972,7 @@ Do NOT generate HTML.
 
 Do NOT generate CSS.`,
 
-jsPart6: `Generate Part 6 of the external script.js file.
+    jsPart6: `Generate Part 6 of the external script.js file.
 
 Output ONLY JavaScript code.
 
@@ -1908,98 +2054,23 @@ Do NOT generate CSS.
 
 Stop after completing the full script.js file.`,
 
+    testing: `You are an expert HTML, CSS, JavaScript, UI/UX, and debugging specialist helping a complete beginner test a professional AI prompt generator.
 
-testing: `You are an expert front-end QA engineer, JavaScript debugger, HTML/CSS validator, and application tester specializing in professional AI prompt generators.
+The Generator Foundation, Generator Planner, Reference Image, Layout Blueprint, Category Blueprint, Input Builder Blueprint, Logic Blueprint, Prompt Assembly Blueprint, index.html, style.css, and script.js have all been completed.
 
-The Generator Foundation has already been completed.
+Your task is to perform a complete Testing & Debugging Review of the application.
 
-The Generator Planner has already been completed, including the generator name, purpose, target audience, and main goal.
+Assume the user has little or no coding experience.
 
-The Reference Image has already been uploaded and analyzed.
+Walk them through every step in plain English.
 
-The Layout Blueprint, Category Blueprint, Input Builder Blueprint, Logic Blueprint, Prompt Assembly Blueprint, index.html, style.css, and script.js have all been completed.
+Do not skip steps.
 
-Your task is to build the complete Testing & Debugging Checklist for the AI prompt generator before final deployment.
+## 1. Manual Feature Testing
 
-Perform a complete quality assurance review of the entire application.
+Create a complete checklist for testing every feature.
 
 Include:
-
-## 1. HTML Validation
-
-Verify:
-
-• Semantic HTML
-• Accessibility structure
-• Proper element hierarchy
-• Missing or invalid attributes
-
-## 2. CSS Validation
-
-Verify:
-
-• Layout consistency
-• Responsive behavior
-• Visual consistency
-• Unused or conflicting styles
-
-## 3. JavaScript Validation
-
-Verify:
-
-• Syntax
-• Runtime errors
-• Console errors
-• Performance
-• Code organization
-
-## 4. Responsive Testing
-
-Verify the application on:
-
-• Desktop
-• Tablet
-• Mobile
-
-## 5. Browser Compatibility
-
-Verify compatibility across modern browsers.
-
-## 6. Accessibility
-
-Verify:
-
-• Keyboard navigation
-• Focus states
-• Labels
-• Color contrast
-• Screen reader support where applicable
-
-## 7. Performance
-
-Check:
-
-• Load speed
-• Rendering performance
-• JavaScript efficiency
-• Local Storage performance
-
-## 8. User Interface Testing
-
-Verify every interactive element including:
-
-• Buttons
-• Dropdowns
-• Chip buttons
-• Multi-select chips
-• Text inputs
-• Textareas
-• Lock buttons
-• Collapsible sections
-
-## 9. Generator Feature Testing
-
-Verify:
 
 • Prompt Generation
 • Prompt Assembly
@@ -2008,42 +2079,140 @@ Verify:
 • Presets
 • Clear All
 • Copy Prompt
-• Save Prompt
-• Prompt History
 • Prompt Variations
 • Prompt Quality Checker
 • Character Counter
+• Every custom feature added to the generator
 
-## 10. Validation Testing
+For every feature explain:
 
-Verify:
+• What to click
+• What should happen
+• What means something is broken
 
-• Required fields
-• "None" handling
-• Empty inputs
-• Duplicate prevention
-• Invalid selections
+## 2. Browser Console Check
 
-## 11. Error Handling
+Explain exactly how to check for JavaScript errors.
 
-Verify the application's response to:
+Include these beginner-friendly instructions:
 
-• Missing required information
-• Invalid data
-• Empty prompt output
-• Copy failures
-• Save failures
-• Unexpected errors
+1. Open the generator in your browser.
+2. Press F12 on your keyboard.
+3. Click the Console tab.
+4. Look for any messages shown in red.
+5. Explain what red errors usually mean.
+6. If red errors appear, explain how to copy them:
+   • Click inside the Console.
+   • Press Ctrl + A.
+   • Press Ctrl + C.
+   • Return to ChatGPT.
+   • Press Ctrl + V to paste the errors.
 
-## 12. Final Deployment Checklist
+Then provide the exact prompt to ask ChatGPT:
 
-Verify that:
+"What does this error mean, and how do I fix it step by step?"
 
-• Every feature functions correctly
-• Every section integrates correctly
-• The completed application matches the Layout Blueprint
-• The completed application follows the Generator Planner
-• The completed application is production-ready
+## 3. File Review Instructions
+
+If ChatGPT needs to inspect the code, explain exactly how to provide each file.
+
+For index.html:
+
+1. Open VS Code.
+2. Click index.html.
+3. Click anywhere inside the file.
+4. Press Ctrl + A.
+5. Press Ctrl + C.
+6. Return to ChatGPT.
+7. Press Ctrl + V.
+
+Repeat the same instructions for:
+
+• style.css
+• script.js
+
+Then tell the user to ask:
+
+"Review these files for bugs. Tell me exactly what is broken, which file to open, what to search for, what to replace, and exactly where to paste the fix. Explain everything like I'm a beginner."
+
+## 4. Code Review
+
+Review the project for:
+
+• Missing HTML tags
+• Incorrect nesting
+• Broken IDs
+• Missing classes
+• Broken JavaScript
+• Missing event listeners
+• CSS conflicts
+• Responsive layout issues
+• Duplicate code
+• Unused code
+
+Do not redesign the generator.
+
+Do not remove existing features.
+
+Only identify problems and explain how to fix them.
+
+## 5. Responsive Testing
+
+Explain how to test the generator on:
+
+• Desktop
+• Tablet
+• Mobile
+
+Show the user how to use the browser's responsive mode.
+
+## 6. Performance Review
+
+Review:
+
+• CSS efficiency
+• JavaScript efficiency
+• Local Storage
+• Rendering performance
+
+Explain any recommendations in beginner-friendly language.
+
+## 7. Final Testing Checklist
+
+Create a final checklist confirming:
+
+• Every button works.
+• Every dropdown works.
+• Every text box works.
+• Prompt generation works.
+• Copy Prompt works.
+• Randomize works.
+• Presets work.
+• No Console errors remain.
+• The generator works on desktop.
+• The generator works on tablet.
+• The generator works on mobile.
+
+## 8. Troubleshooting Guide
+
+If something does not work, explain how to identify the problem before attempting a fix.
+
+Always tell the user:
+
+• Which file to open
+• What to search for
+• What to replace
+• Exactly where to paste the corrected code
+
+Never assume the user knows where code belongs.
+
+The completed review should be:
+
+• Beginner friendly
+• Step-by-step
+• Thorough
+• Easy to follow
+• Production-ready
 
 Do NOT generate HTML.
 
@@ -2051,11 +2220,94 @@ Do NOT generate CSS.
 
 Do NOT generate JavaScript.
 
-Only build the complete Testing & Debugging Checklist.
+Only build the complete Testing & Debugging Review.
 
-Stop after completing the Testing & Debugging Checklist. Do not continue to the Final Polish & Export prompt until instructed.`,
+Stop after completing the review.`,
 
-final: `You are an expert front-end developer, UI designer, software release specialist, and application optimization engineer specializing in professional AI prompt generators.
+    premiumOutputModules: `You are an expert HTML, CSS, JavaScript, UI/UX, and prompt engineering developer specializing in premium AI prompt generators.
+
+The main AI prompt generator has already been built.
+
+Your task is to add Premium Output Modules to the existing generator by updating the existing:
+
+• index.html
+• style.css
+• script.js
+
+Do not rebuild the generator from scratch.
+Do not remove, rename, or break existing features.
+Do not overwrite existing code unless it is necessary to connect the premium modules correctly.
+
+Add only the premium output modules selected for this generator:
+
+• Suno AI Music Prompt
+• Video Script Prompt
+• Marketing Prompt
+• Custom GPT Builder
+
+For the Custom GPT Builder, do not generate only a single prompt.
+
+Generate the complete Custom GPT configuration, including:
+
+• Complete Custom GPT Instructions
+• Suggested Knowledge files to upload
+• Conversation Starters
+• Suggested Welcome Message
+• Behavior and response guidelines
+• Tone and personality instructions
+• Goals and responsibilities
+• Rules and limitations
+• Best practices for using the GPT
+• Testing checklist
+
+Update the HTML to include:
+
+• A Premium Outputs section
+• Separate output areas or tabs for each selected module
+• A copy button for each premium output
+• Clear labels and beginner-friendly structure
+
+Update the CSS to include:
+
+• Styling for the Premium Outputs section
+• Styling for premium module tabs/cards
+• Styling for premium output boxes
+• Styling for copy buttons
+• Responsive mobile-friendly layout
+• Visual styling that matches the existing generator
+
+Update the JavaScript to include:
+
+• Functions that generate each selected premium output
+• Logic that pulls from the same existing user inputs
+• Logic that prevents empty or broken outputs
+• Copy button functionality for each premium output
+• Integration with the existing Generate Prompt button
+• Integration with existing prompt history if appropriate
+• Error handling and toast messages
+
+Each premium output must:
+
+• Match the generator topic.
+• Use the existing generator selections.
+• Expand on the main prompt instead of repeating it.
+• Produce complete, usable deliverables instead of outlines.
+• Include all supporting content required for that output type.
+• Be professionally formatted.
+• Be immediately copy-and-paste ready.
+
+Generate the updates in this order:
+
+1. HTML code to add
+2. CSS code to add
+3. JavaScript code to add
+4. Exact beginner-friendly instructions for where to paste each code block
+
+Do not skip steps.
+Do not generate placeholder features.
+Make the added modules fully functional.`,
+
+    final: `You are an expert front-end developer, UI designer, software release specialist, and application optimization engineer specializing in professional AI prompt generators.
 
 The Generator Foundation has already been completed.
 
@@ -2063,8 +2315,7 @@ The Generator Planner has already been completed, including the generator name, 
 
 The Reference Image has already been uploaded and analyzed.
 
-The Layout Blueprint, Category Blueprint, Input Builder Blueprint, Logic Blueprint, Prompt Assembly Blueprint, index.html, style.css, script.js, and Testing & Debugging Checklist have all been completed.
-
+The Generator Foundation, Generator Planner, Reference Image, Layout Blueprint, Category Blueprint, Input Builder Blueprint, Logic Blueprint, Prompt Assembly Blueprint, index.html, style.css, script.js, Day 1 Testing & Debugging, Day 2 Customization, and Day 2 Testing & Debugging have all been completed.
 Your task is to build the complete Final Polish & Release Checklist for the AI prompt generator.
 
 Perform a complete pre-release review to ensure the application is polished, professional, production-ready, and ready to be delivered to customers.
@@ -2138,6 +2389,15 @@ Confirm every feature functions correctly including:
 • Prompt Variations
 • Prompt Quality Checker
 • Character Counter
+• Header Image
+• Brand Colors
+• Fonts
+• Button Styling
+• Background Animation
+• Floating Elements
+• Custom Scrollbar
+• Marquee
+• Copyright
 
 ## 7. File Organization
 
@@ -2200,10 +2460,10 @@ Do NOT generate JavaScript.
 
 Only build the complete Final Polish & Release Checklist.
 
-Stop after completing the Final Polish & Release Checklist.`
-};
+Stop after completing the Final Polish & Release Checklist.`,
+  };
 
-return snippets[type] || "Create a useful AI module for this generator.";
+  return snippets[type] || "Create a useful AI module for this generator.";
 }
 
 /* ==========================
@@ -2225,7 +2485,7 @@ function initializeCoreEngine() {
 
   updateAchievementCount();
 
-  console.log(`AI Business Builder v${APP_CONFIG.version} core loaded.`);
+  console.log(`Prompt Generator Companion v${APP_CONFIG.version} core loaded.`);
 }
 
 /* =========================================================
@@ -2262,18 +2522,18 @@ function markJourneyStepComplete(stepName) {
 
     addActivity(
       "Journey step completed",
-      `${formatStepName(stepName)} was marked complete.`
+      `${formatStepName(stepName)} was marked complete.`,
     );
 
     saveAppData();
     renderDashboard();
     updateProgressUI();
+    updateCompletionButtonStates();
   }
 }
 
 function formatStepName(stepName) {
   const labels = {
-    blueprint: "Generator Blueprint",
     dayOne: "Day 1 Build",
     modules: "AI Modules",
     publish: "GitHub + Netlify",
@@ -2301,7 +2561,8 @@ function updateProgressUI() {
 
   if (sidebarPercent) sidebarPercent.textContent = `${percent}%`;
   if (dashboardPercent) dashboardPercent.textContent = `${percent}%`;
-  if (dashboardStatsProgress) dashboardStatsProgress.textContent = `${percent}%`;
+  if (dashboardStatsProgress)
+    dashboardStatsProgress.textContent = `${percent}%`;
 
   if (sidebarText) {
     sidebarText.textContent = `${completed} of ${total} journey steps complete`;
@@ -2320,10 +2581,6 @@ function updateProgressUI() {
 
 function getNextStepMessage() {
   const steps = appData.progress.journeySteps;
-
-  if (!steps.blueprint) {
-    return "Start with the Generator Blueprint so the product has a clear purpose.";
-  }
 
   if (!steps.dayOne) {
     return "Continue Day 1 and build the working generator foundation.";
@@ -2434,7 +2691,6 @@ function escapeHTML(value) {
 function getNextPageId() {
   const steps = appData.progress.journeySteps;
 
-  if (!steps.blueprint) return "blueprint";
   if (!steps.dayOne) return "day-one";
   if (!steps.modules) return "modules";
   if (!steps.publish) return "publish";
@@ -2456,10 +2712,7 @@ function setupContinueButtons() {
 
       openPage(nextPage);
 
-      addActivity(
-        "Continued workshop",
-        `Opened ${getPageTitle(nextPage)}.`
-      );
+      addActivity("Continued workshop", `Opened ${getPageTitle(nextPage)}.`);
     });
   });
 }
@@ -2470,50 +2723,17 @@ function getPageTitle(pageId) {
     journey: "Workshop Journey",
     "day-one": "Day 1",
     "day-two": "Day 2",
-    blueprint: "Generator Blueprint",
-    modules: "AI Modules",
-    "code-lab": "Code Lab",
+
     publish: "GitHub + Netlify",
     sell: "Sell Your Generator",
     downloads: "Downloads",
     notebook: "Notebook",
     replays: "Replay Library",
-    help: "Help Center",
     certificate: "Certificate",
     settings: "Settings",
   };
 
   return labels[pageId] || pageId;
-}
-
-/* ==========================
-   DASHBOARD QUICK ACTION TRACKING
-   ========================== */
-
-function setupDashboardTracking() {
-  $$("[data-open-page]").forEach((button) => {
-    button.addEventListener("click", () => {
-      const pageId = button.dataset.openPage;
-
-      if (!pageId) return;
-
-      if (pageId === "blueprint") {
-        markJourneyStepComplete("blueprint");
-      }
-
-      if (pageId === "modules") {
-        markJourneyStepComplete("modules");
-      }
-
-      if (pageId === "publish") {
-        markJourneyStepComplete("publish");
-      }
-
-      if (pageId === "sell") {
-        markJourneyStepComplete("sell");
-      }
-    });
-  });
 }
 
 /* ==========================
@@ -2532,7 +2752,7 @@ function setupDayCompletionButtons() {
       unlockAchievement(
         "day-one-complete",
         "Day 1 Complete",
-        "You built the generator foundation."
+        "You built the generator foundation.",
       );
 
       saveAppData();
@@ -2552,14 +2772,14 @@ function setupDayCompletionButtons() {
       unlockAchievement(
         "day-two-complete",
         "Day 2 Complete",
-        "You added modules, published, and prepared your generator to sell."
+        "You added modules, published, and prepared your generator to sell.",
       );
 
       if (isWorkshopComplete()) {
         unlockAchievement(
           "workshop-complete",
           "Workshop Complete",
-          "Your AI Business Builder certificate is unlocked."
+          "Prompt Generator Companion v7.0 is ready.",
         );
       }
 
@@ -2597,14 +2817,12 @@ function updateCompletionButtonStates() {
 
 function initializeDashboardEngine() {
   setupContinueButtons();
-  setupDashboardTracking();
   setupDayCompletionButtons();
   updateCompletionButtonStates();
   renderDashboard();
 
   console.log("Section 2 loaded: Dashboard + Progress Engine");
 }
-
 
 /* =========================================================
    SECTION 3: NOTEBOOK + PROFILE + SETTINGS
@@ -2651,7 +2869,7 @@ function exportNotes() {
     })
     .join("\n\n------------------------------\n\n");
 
-  downloadTextFile("ai-business-builder-notes.txt", text);
+  downloadTextFile("prompt-generator-companion-notes.txt", text);
 
   addActivity("Notes exported", "Notebook notes were downloaded.");
   showToast("Notes exported.");
@@ -2670,23 +2888,6 @@ function formatNotebookCategory(category) {
   };
 
   return labels[category] || category;
-}
-
-/* ==========================
-   DAY 1 WORKSHOP NOTEBOX
-   ========================== */
-
-function setupDayOneInlineNotes() {
-  const dayOneNotes = document.querySelector("#day-one .note-editor");
-
-  if (!dayOneNotes) return;
-
-  dayOneNotes.value = appData.notes.dayOneWorkshop || "";
-
-  dayOneNotes.addEventListener("input", () => {
-    appData.notes.dayOneWorkshop = dayOneNotes.value;
-    saveAppData();
-  });
 }
 
 /* ==========================
@@ -2720,13 +2921,13 @@ function setupProfile() {
 
     addActivity(
       "Profile saved",
-      `${appData.profile.name}'s student profile was updated.`
+      `${appData.profile.name}'s student profile was updated.`,
     );
 
     unlockAchievement(
       "profile-saved",
       "Profile Saved",
-      "Your builder profile is ready."
+      "Your profile is ready",
     );
 
     showToast("Profile saved.");
@@ -2773,10 +2974,7 @@ function setupThemeSettings() {
       saveAppData();
       applyTheme();
 
-      addActivity(
-        "Theme updated",
-        `Theme changed to ${themeSelect.value}.`
-      );
+      addActivity("Theme updated", `Theme changed to ${themeSelect.value}.`);
 
       showToast("Theme updated.");
     });
@@ -2790,10 +2988,7 @@ function setupThemeSettings() {
       saveAppData();
       applyAccent();
 
-      addActivity(
-        "Accent updated",
-        `Accent changed to ${accentSelect.value}.`
-      );
+      addActivity("Accent updated", `Accent changed to ${accentSelect.value}.`);
 
       showToast("Accent updated.");
     });
@@ -2853,18 +3048,17 @@ function setupDataTools() {
     resetDataBtn.addEventListener("click", handleResetData);
   }
 }
-
 function exportBackupData() {
   const backup = {
-    app: "AI Business Builder",
+    app: "Prompt Generator Companion",
     version: APP_CONFIG.version,
     exportedAt: new Date().toISOString(),
     data: appData,
   };
 
   downloadTextFile(
-    "ai-business-builder-backup.json",
-    JSON.stringify(backup, null, 2)
+    "prompt-generator-companion-backup.json",
+    JSON.stringify(backup, null, 2),
   );
 
   addActivity("Backup exported", "Workshop data backup was downloaded.");
@@ -2903,7 +3097,7 @@ function importBackupData(event) {
 
 function handleResetData() {
   const confirmReset = window.confirm(
-    "This will erase profile, notes, progress, achievements, and settings. Reset everything?"
+    "This will erase profile, notes, progress, achievements, and settings. Reset everything?",
   );
 
   if (!confirmReset) return;
@@ -2959,7 +3153,7 @@ function setupCertificatePrint() {
 
 function initializeProfileNotebookSettings() {
   setupNotebook();
-  setupDayOneInlineNotes();
+
   setupProfile();
   setupThemeSettings();
   setupDataTools();
@@ -2979,7 +3173,7 @@ function initializeProfileNotebookSettings() {
    ========================== */
 
 const DOWNLOAD_RESOURCES = {
-"reference-image": {
+  "reference-image": {
     filename: "reference-image.txt",
     title: "Reference Image",
     content: `Reference Image
@@ -2998,8 +3192,8 @@ Use this image as the visual direction for:
 
 Do not copy the image exactly.
 
-Use it only as creative inspiration while building your generator.`
-},
+Use it only as creative inspiration while building your generator.`,
+  },
 
   "html-starter": {
     filename: "starter-code-pack.txt",
@@ -3010,14 +3204,14 @@ STARTER CODE PACK
 HTML STARTER
 ------------------------------
 <main class="generator">
-  <h1>AI Business Builder</h1>
-  <p>Generate business assets in seconds.</p>
+  <h1>Prompt Generator Companion</h1>
+  <p>Build polished AI prompt generators with clean HTML, CSS, and JavaScript</p>
 
   <label for="businessType">Business Type</label>
   <select id="businessType">
-    <option>Beauty Brand</option>
+    <option>Image Prompt Generator</option>
     <option>Coaching Business</option>
-    <option>Digital Product Shop</option>
+    <option>Prompt Generator</option>
   </select>
 
   <label for="outputType">Output Type</label>
@@ -3207,15 +3401,12 @@ function setupDownloadButtons() {
 
       downloadTextFile(resource.filename, resource.content);
 
-      addActivity(
-        "Downloaded resource",
-        `${resource.title} was downloaded.`
-      );
+      addActivity("Downloaded resource", `${resource.title} was downloaded.`);
 
       unlockAchievement(
         `download-${downloadKey}`,
         "Resource Downloaded",
-        `${resource.title} is ready to use.`
+        `${resource.title} is ready to use.`,
       );
 
       showToast("Download started.");
@@ -3286,6 +3477,14 @@ function buildSearchIndex() {
 
 let searchIndex = [];
 
+function findSearchMatch(query) {
+  return searchIndex.find((item) => {
+    return (
+      item.text.includes(query) || item.title.toLowerCase().includes(query)
+    );
+  });
+}
+
 function setupGlobalSearch() {
   const searchInput = byId("globalSearch");
 
@@ -3301,9 +3500,7 @@ function setupGlobalSearch() {
       return;
     }
 
-    const match = searchIndex.find((item) => {
-      return item.text.includes(query) || item.title.toLowerCase().includes(query);
-    });
+    const match = findSearchMatch(query);
 
     if (!match) {
       showToast("No matching section found.");
@@ -3320,9 +3517,7 @@ function setupGlobalSearch() {
 
       if (!query) return;
 
-      const match = searchIndex.find((item) => {
-        return item.text.includes(query) || item.title.toLowerCase().includes(query);
-      });
+      const match = findSearchMatch(query);
 
       if (match) {
         openPage(match.id);
@@ -3366,30 +3561,6 @@ function setupHelpTracking() {
 }
 
 /* ==========================
-   CODE LAB TRACKING
-   ========================== */
-
-function setupCodeLabTracking() {
-  const codeCopyButtons = document.querySelectorAll(
-    "#code-lab .copy-btn"
-  );
-
-  codeCopyButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const label = button.textContent.trim() || "Code copied";
-
-      addActivity("Code copied", label);
-
-      unlockAchievement(
-        "code-lab-used",
-        "Code Lab Used",
-        "You copied starter code from the Code Lab."
-      );
-    });
-  });
-}
-
-/* ==========================
    MODULE TRACKING
    ========================== */
 
@@ -3401,7 +3572,7 @@ function setupModuleTracking() {
       unlockAchievement(
         "module-prompt-copied",
         "Module Prompt Copied",
-        "You copied a premium AI module prompt."
+        "You copied a premium AI module prompt.",
       );
     });
   });
@@ -3437,13 +3608,12 @@ function initializeDownloadsReplaysSearch() {
   setupReplayButtons();
   setupGlobalSearch();
   setupHelpTracking();
-  setupCodeLabTracking();
+
   setupModuleTracking();
   injectSearchStyles();
 
   console.log("Section 4 loaded: Downloads + Replays + Search");
 }
-
 
 /* =========================================================
    SECTION 5: CERTIFICATE SYSTEM + FINAL APP POLISH
@@ -3474,18 +3644,12 @@ function renderCertificateState() {
     unlockAchievement(
       "certificate-unlocked",
       "Certificate Unlocked",
-      "Your workshop certificate is ready."
+      "Your workshop certificate is ready.",
     );
   } else {
     locked.classList.remove("hidden");
     unlocked.classList.add("hidden");
   }
-}
-
-function forceCertificateCheck() {
-  updateProgressUI();
-  renderCertificateState();
-  updateCertificateStatusLabel();
 }
 
 /* ==========================
@@ -3510,7 +3674,10 @@ function setupChecklistAutosave() {
       saveAppData();
 
       if (checkbox.checked) {
-        addActivity("Checklist updated", "A workshop checkpoint was completed.");
+        addActivity(
+          "Checklist updated",
+          "A workshop checkpoint was completed.",
+        );
       }
 
       updateChecklistAchievements();
@@ -3521,7 +3688,8 @@ function setupChecklistAutosave() {
 function getCheckboxKey(checkbox, index) {
   const page = checkbox.closest(".page");
   const section = checkbox.closest(".lesson-block, .card, article");
-  const label = checkbox.parentElement?.textContent?.trim() || `checkbox-${index}`;
+  const label =
+    checkbox.parentElement?.textContent?.trim() || `checkbox-${index}`;
 
   const pageId = page?.id || "global";
   const sectionTitle =
@@ -3531,13 +3699,15 @@ function getCheckboxKey(checkbox, index) {
 }
 
 function updateChecklistAchievements() {
-  const checkedCount = Object.values(appData.checklists || {}).filter(Boolean).length;
+  const checkedCount = Object.values(appData.checklists || {}).filter(
+    Boolean,
+  ).length;
 
   if (checkedCount >= 3) {
     unlockAchievement(
       "three-checkpoints",
       "Momentum Started",
-      "You completed your first 3 workshop checkpoints."
+      "You completed your first 3 workshop checkpoints.",
     );
   }
 
@@ -3545,7 +3715,7 @@ function updateChecklistAchievements() {
     unlockAchievement(
       "eight-checkpoints",
       "Builder Mode",
-      "You completed 8 workshop checkpoints."
+      "You completed 8 workshop checkpoints.",
     );
   }
 
@@ -3553,26 +3723,9 @@ function updateChecklistAchievements() {
     unlockAchievement(
       "fifteen-checkpoints",
       "Serious Progress",
-      "You completed 15 workshop checkpoints."
+      "You completed 15 workshop checkpoints.",
     );
   }
-}
-
-/* ==========================
-   SMART COMPLETION WATCHER
-   ========================== */
-
-function setupCompletionWatcher() {
-  document.addEventListener("click", () => {
-    setTimeout(() => {
-      forceCertificateCheck();
-      updateCompletionButtonStates();
-    }, 50);
-  });
-
-  document.addEventListener("input", () => {
-    saveAppData();
-  });
 }
 
 /* ==========================
@@ -3604,17 +3757,13 @@ function setupKeyboardShortcuts() {
       openPage("day-two");
     }
 
-    if (event.key === "5") {
-      openPage("blueprint");
-    }
-
     if (event.key === "n" || event.key === "N") {
       openPage("notebook");
     }
 
-    if (event.key === "/") {
+    if (event.key === "/" && byId("globalSearch")) {
       event.preventDefault();
-      byId("globalSearch")?.focus();
+      byId("globalSearch").focus();
     }
   });
 }
@@ -3659,18 +3808,6 @@ function setupPageVisitTracking() {
       if (!pageId) return;
 
       addActivity("Page opened", getPageTitle(pageId));
-
-      if (pageId === "blueprint") {
-        markJourneyStepComplete("blueprint");
-      }
-
-      if (pageId === "publish") {
-        markJourneyStepComplete("publish");
-      }
-
-      if (pageId === "sell") {
-        markJourneyStepComplete("sell");
-      }
     });
   });
 }
@@ -3684,15 +3821,12 @@ function setupFirstVisit() {
 
   appData.hasVisited = true;
 
-  addActivity(
-    "Workshop started",
-    "AI Business Builder v7.0 is ready."
-  );
+  addActivity("Workshop started", "Prompt Generator Companion v7.0 is ready.");
 
   unlockAchievement(
     "first-open",
-    "Welcome Builder",
-    "You opened the workshop companion."
+    "Welcome",
+    "You opened Prompt Generator Companion. Let's build something amazing together.",
   );
 
   saveAppData();
@@ -3708,15 +3842,12 @@ function runAppHealthCheck() {
     "journey",
     "day-one",
     "day-two",
-    "blueprint",
-    "modules",
-    "code-lab",
+
     "publish",
     "sell",
     "downloads",
     "notebook",
     "replays",
-    "help",
     "certificate",
     "settings",
     "toast",
@@ -3737,10 +3868,6 @@ function runAppHealthCheck() {
 
 function refreshFullUI() {
   renderDashboard();
-  updateProgressUI();
-  updateAchievementCount();
-  updateCertificateName();
-  renderCertificateState();
   updateCompletionButtonStates();
 }
 
@@ -3752,7 +3879,6 @@ function initializeFinalPolish() {
   runAppHealthCheck();
   setupCertificateSystem();
   setupChecklistAutosave();
-  setupCompletionWatcher();
   setupKeyboardShortcuts();
   setupButtonSafety();
   setupEmptyLinkProtection();
@@ -3762,8 +3888,6 @@ function initializeFinalPolish() {
 
   console.log("Section 5 loaded: Certificate System + Final Polish");
 }
-
-
 
 /* ============================= */
 /* FLIP CARD FUNCTIONALITY */
@@ -3789,13 +3913,33 @@ function initializeFlipCards() {
     card.classList.toggle("is-flipped");
   });
 }
+function setupLaunchChecklistCard() {
+  const card = document.querySelector(".launch-checklist-card");
+
+  if (!card) return;
+
+  const viewButton = card.querySelector(".launch-checklist-front .primary-btn");
+
+  const backButton = card.querySelector(
+    ".launch-checklist-back .secondary-btn",
+  );
+
+  viewButton?.addEventListener("click", () => {
+    card.classList.add("is-flipped");
+  });
+
+  backButton?.addEventListener("click", () => {
+    card.classList.remove("is-flipped");
+  });
+}
 document.addEventListener("DOMContentLoaded", () => {
   initializeCoreEngine();
   initializeDashboardEngine();
   initializeProfileNotebookSettings();
   initializeDownloadsReplaysSearch();
-  initializeFinalPolish();
   initializeFlipCards();
+  setupLaunchChecklistCard();
+  initializeFinalPolish();
 
-  console.log("AI Business Builder fully initialized.");
+  console.log("Prompt Generator Companion fully initialized.");
 });
