@@ -1092,7 +1092,13 @@ select option {
 .completion-card h2 {
   margin: 14px 0 10px;
   font-family: var(--font-display);
-  font-size: clamp(28px, 4vw, 48px);
+  font-size: 28px;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
 }
 
 .completion-card p {
@@ -1718,4 +1724,503 @@ body.light-theme .help-card p {
   .launch-checklist-back .secondary-btn {
     width: 100%;
   }
+}
+/* ========================================
+   GETTING STARTED GUIDE
+======================================== */
+
+.getting-started-page {
+  min-height: 100vh;
+  padding: 32px;
+  background: var(--bg);
+}
+
+.getting-started-page[hidden] {
+  display: none;
+}
+
+.getting-started-page .page-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.getting-started-page .page-heading h1 {
+  margin: 6px 0 10px;
+}
+
+.getting-started-page .page-heading p {
+  max-width: 720px;
+  margin: 0;
+}
+
+.getting-started-content {
+  display: grid;
+  gap: 24px;
+  max-width: 1100px;
+}
+
+.guide-step-card,
+.guide-reference-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 22px;
+  padding: 26px;
+}
+
+.guide-step-number {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  border-radius: 16px;
+  background: rgba(212, 175, 55, 0.12);
+  color: var(--gold);
+  font-family: "Cinzel", serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.guide-step-content h2 {
+  margin: 6px 0 12px;
+}
+
+.guide-step-content p {
+  margin: 0 0 16px;
+}
+
+.guide-instructions {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 18px;
+  padding-left: 22px;
+}
+
+.guide-tip,
+.guide-warning {
+  padding: 16px 18px;
+  border-radius: 14px;
+  line-height: 1.6;
+}
+
+.guide-tip {
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  background: rgba(212, 175, 55, 0.08);
+}
+
+.guide-warning {
+  margin-top: 14px;
+  border: 1px solid rgba(255, 193, 7, 0.35);
+  background: rgba(255, 193, 7, 0.08);
+}
+
+.guide-file-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 18px 0;
+}
+
+.guide-file-item {
+  padding: 18px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.guide-file-item h3 {
+  margin: 0 0 8px;
+}
+
+.guide-file-item p {
+  margin: 0;
+}
+
+.guide-reference-card {
+  grid-template-columns: 1fr;
+  overflow-x: auto;
+}
+
+.guide-shortcuts-table {
+  width: 100%;
+  margin-top: 18px;
+  border-collapse: collapse;
+}
+
+.guide-shortcuts-table th,
+.guide-shortcuts-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.18);
+  text-align: left;
+  vertical-align: top;
+}
+
+.guide-shortcuts-table th {
+  color: var(--gold);
+  font-family: "Cinzel", serif;
+}
+
+.guide-shortcuts-table code {
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .getting-started-page {
+    padding: 20px;
+  }
+
+  .getting-started-page .page-heading {
+    flex-direction: column;
+  }
+
+  .guide-step-card,
+  .guide-reference-card {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .guide-file-list {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-shortcuts-table {
+    min-width: 620px;
+  }
+}
+
+/* ========================================
+   BONUS RESOURCES BUTTON FIX
+======================================== */
+
+#bonuses .settings-card > .primary-btn,
+#bonuses .settings-card > .secondary-btn {
+  width: 100%;
+  min-height: 50px;
+  padding: 13px 18px;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.35;
+}
+
+#bonuses .settings-card > .secondary-btn {
+  margin-top: 12px;
+}
+/* ========================================
+   GETTING STARTED SCREENSHOTS
+======================================== */
+
+.guide-screenshot-stack {
+  display: grid;
+  gap: 28px;
+  margin: 24px 0;
+}
+
+.guide-screenshot {
+  margin: 0;
+}
+
+.guide-screenshot img {
+  display: block;
+  width: 100%;
+  border: 2px solid rgba(212, 175, 55, 0.35);
+  border-radius: 18px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+}
+
+.guide-screenshot figcaption {
+  margin-top: 12px;
+  color: var(--gold-light);
+  font-weight: 700;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.guide-video-card {
+  margin-top: 30px;
+}
+
+.guide-video {
+  width: 100%;
+  border-radius: 18px;
+  border: 2px solid rgba(212, 175, 55, 0.35);
+  margin-top: 18px;
+}
+.lesson-complete-area {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-start;
+}
+.saved-note-item {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: 16px;
+  background: linear-gradient(
+    145deg,
+    rgba(20, 44, 92, 0.92),
+    rgba(5, 10, 24, 0.96)
+  );
+  color: white;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.saved-note-item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(212, 175, 55, 0.75);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+.saved-note-item.active {
+  border-color: var(--gold, #d4af37);
+  box-shadow:
+    0 0 0 1px rgba(212, 175, 55, 0.35),
+    0 12px 30px rgba(212, 175, 55, 0.18);
+}
+.saved-notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.saved-note-item strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--gold-pale);
+  font-size: 0.98rem;
+  line-height: 1.3;
+}
+
+.saved-note-item span {
+  display: block;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.82rem;
+}
+.note-sidebar {
+  align-self: start;
+  padding: 20px;
+  border: 1px solid rgba(212, 175, 55, 0.24);
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(212, 175, 55, 0.12),
+      transparent 38%
+    ),
+    linear-gradient(160deg, rgba(11, 30, 68, 0.96), rgba(4, 9, 20, 0.98));
+}
+
+.saved-notes-header {
+  margin-top: 22px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.18);
+}
+
+.saved-notes-header h2 {
+  margin: 0;
+  color: var(--gold-pale);
+  font-size: 1rem;
+}
+.note-editor-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.18);
+}
+
+.note-editor-header h2 {
+  margin: 0 0 6px;
+  color: var(--gold-pale);
+  font-size: 1.25rem;
+}
+
+.note-editor-header p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.85rem;
+}
+.note-editor-card {
+  min-height: 520px;
+  padding: 24px;
+}
+
+.note-editor {
+  min-height: 380px;
+  resize: vertical;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 18px;
+  background: rgba(3, 8, 18, 0.72);
+  color: white;
+  line-height: 1.65;
+}
+
+.note-editor:focus {
+  border-color: rgba(212, 175, 55, 0.75);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.12);
+}
+.note-save-status {
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.82rem;
+  text-align: right;
+}
+.note-editor-header h2 {
+  font-size: 1.05rem;
+}
+#deleteNoteBtn {
+  padding: 10px 18px;
+  font-size: 0.88rem;
+  min-width: auto;
+  border-radius: 999px;
+  align-self: flex-start;
+}
+
+#deleteNoteBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.saved-note-item {
+  padding: 12px 14px;
+}
+
+.saved-note-item strong {
+  margin-bottom: 4px;
+}
+
+.saved-notes-list {
+  gap: 10px;
+}
+
+/* ============================= */
+/* WORKSHOP REQUIREMENTS ALERT */
+/* ============================= */
+
+.important-alert {
+  margin-top: 24px;
+  padding: 22px;
+  border-radius: 18px;
+  border: 2px solid rgba(255, 59, 59, 0.75);
+  background: rgba(95, 0, 0, 0.22);
+  box-shadow:
+    0 0 18px rgba(255, 59, 59, 0.35),
+    inset 0 0 12px rgba(255, 59, 59, 0.12);
+}
+
+.important-alert h3 {
+  margin: 0 0 12px;
+  color: #ff6b6b;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.important-alert p {
+  margin: 0 0 10px;
+}
+
+.important-alert p:last-child {
+  margin-bottom: 0;
+}
+/* ============================= */
+/* SETUP VIDEO BUTTONS */
+/* ============================= */
+
+.lesson-complete-area {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+/* ============================= */
+/* WORKSHOP REQUIREMENTS SIDEBAR */
+/* ============================= */
+
+.requirements-nav-link {
+  border: 1px solid rgba(255, 70, 70, 0.55);
+  background: linear-gradient(
+    135deg,
+    rgba(120, 0, 0, 0.35),
+    rgba(70, 0, 0, 0.18)
+  );
+  color: #ff8a8a;
+  box-shadow: 0 0 18px rgba(255, 70, 70, 0.28);
+  animation: requirementsGlow 2s ease-in-out infinite;
+}
+
+.requirements-nav-link:hover {
+  box-shadow: 0 0 28px rgba(255, 70, 70, 0.55);
+}
+
+@keyframes requirementsGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 12px rgba(255, 70, 70, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 24px rgba(255, 70, 70, 0.55);
+  }
+}
+
+/* ============================= */
+/* WORKSHOP CODE POPUP */
+/* ============================= */
+
+#workshopCodeInput {
+  width: 100%;
+  margin: 20px 0;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 1rem;
+}
+
+#workshopCodeInput:focus {
+  outline: none;
+  border-color: #d4af37;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
+}
+
+#workshopCodeMessage {
+  margin-top: 16px;
+  color: #ff7b7b;
+  font-weight: 600;
+  text-align: center;
+}
+#workshopLockPopup .completion-card h2 {
+  max-width: 440px;
+  white-space: normal;
+  overflow-wrap: break-word;
+  line-height: 1.15;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* ============================= */
+/* WORKSHOP POPUP HELP TEXT */
+/* ============================= */
+
+.workshop-help-text {
+  margin: 18px 0 12px;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.workshop-help-text strong {
+  color: var(--gold-pale);
 }

@@ -14,6 +14,7 @@ const APP_CONFIG = {
   version: "7.0",
   storageKey: "promptGeneratorCompanion_v7",
   defaultPage: "dashboard",
+  workshopCode: "GLAM2026",
   toastDuration: 1800,
 };
 
@@ -22,11 +23,6 @@ const APP_CONFIG = {
    ========================== */
 
 const DEFAULT_APP_DATA = {
-  profile: {
-    name: "Builder",
-    email: "",
-  },
-
   progress: {
     dayOneComplete: false,
     dayTwoComplete: false,
@@ -38,25 +34,13 @@ const DEFAULT_APP_DATA = {
     },
   },
 
-  notes: {
-    ideas: "",
-    categories: "",
-    html: "",
-    css: "",
-    javascript: "",
-    modules: "",
-    publish: "",
-    selling: "",
-  },
-
-  settings: {
-    theme: "dark",
-    accent: "blue-gold",
-  },
+  notebookNotes: [],
+  activeNoteId: null,
 
   achievements: [],
 
   activity: [],
+  workshopUnlocked: false,
 };
 
 /* ==========================
@@ -215,9 +199,9 @@ function showAchievementPopup(title, description) {
   const popup = byId("completionPopup");
   const popupTitle = byId("completionTitle");
   const popupText = byId("completionText");
-
+  const diplomaButton = byId("completionDiplomaButton");
   if (!popup) return;
-
+  if (diplomaButton) diplomaButton.style.display = "none";
   if (popupTitle) popupTitle.textContent = title;
   if (popupText)
     popupText.textContent = description || "Your progress has been saved.";
@@ -267,6 +251,60 @@ function openPage(pageId = APP_CONFIG.defaultPage) {
   saveAppData();
 }
 
+const UNLOCKED_PAGES = ["requirements", "publish"];
+
+function isPageLocked(pageId) {
+  if (appData.workshopUnlocked) return false;
+
+  return !UNLOCKED_PAGES.includes(pageId);
+}
+
+function showWorkshopLockPopup() {
+  const popup = byId("workshopLockPopup");
+  const codeInput = byId("workshopCodeInput");
+  const codeMessage = byId("workshopCodeMessage");
+
+  if (!popup) return;
+
+  if (codeInput) codeInput.value = "";
+  if (codeMessage) codeMessage.textContent = "";
+
+  popup.classList.remove("hidden");
+
+  setTimeout(() => {
+    codeInput?.focus();
+  }, 100);
+}
+
+function setupWorkshopLockPopup() {
+  const popup = byId("workshopLockPopup");
+  const closeButton = byId("closeWorkshopLockPopup");
+  const unlockButton = byId("unlockWorkshopBtn");
+  const codeInput = byId("workshopCodeInput");
+  const codeMessage = byId("workshopCodeMessage");
+
+  closeButton?.addEventListener("click", () => {
+    popup?.classList.add("hidden");
+  });
+
+  unlockButton?.addEventListener("click", () => {
+    const enteredCode = codeInput?.value.trim();
+
+    if (enteredCode === APP_CONFIG.workshopCode) {
+      appData.workshopUnlocked = true;
+      saveAppData();
+
+      popup?.classList.add("hidden");
+      showToast("Workshop unlocked.");
+      return;
+    }
+
+    if (codeMessage) {
+      codeMessage.textContent = "That workshop code is not correct.";
+    }
+  });
+}
+
 function setupRouter() {
   $$(".nav-link").forEach((link) => {
     link.addEventListener("click", (event) => {
@@ -275,6 +313,11 @@ function setupRouter() {
       const pageId = link.dataset.page;
 
       if (pageId) {
+        if (isPageLocked(pageId)) {
+          showWorkshopLockPopup();
+          return;
+        }
+
         openPage(pageId);
       }
     });
@@ -285,6 +328,11 @@ function setupRouter() {
       const pageId = button.dataset.openPage;
 
       if (pageId) {
+        if (isPageLocked(pageId)) {
+          showWorkshopLockPopup();
+          return;
+        }
+
         openPage(pageId);
       }
     });
@@ -2481,17 +2529,17 @@ function initializeCoreEngine() {
     closePopupBtn.addEventListener("click", closeAchievementPopup);
   }
 
-  openPage(appData.lastPage || APP_CONFIG.defaultPage);
+  const savedPage =
+    appData.lastPage === "settings"
+      ? "bonuses"
+      : appData.lastPage || APP_CONFIG.defaultPage;
+
+  openPage(savedPage);
 
   updateAchievementCount();
 
   console.log(`Prompt Generator Companion v${APP_CONFIG.version} core loaded.`);
 }
-
-/* =========================================================
-   SECTION 2: DASHBOARD + PROGRESS ENGINE
-   Paste directly under Section 1
-   ========================================================= */
 
 /* ==========================
    PROGRESS CALCULATION
@@ -2696,7 +2744,7 @@ function getNextPageId() {
   if (!steps.publish) return "publish";
   if (!steps.sell) return "sell";
 
-  return "certificate";
+  return "day-two";
 }
 
 function setupContinueButtons() {
@@ -2729,8 +2777,7 @@ function getPageTitle(pageId) {
     downloads: "Downloads",
     notebook: "Notebook",
     replays: "Replay Library",
-    certificate: "Certificate",
-    settings: "Settings",
+    bonuses: "Bonus Resources",
   };
 
   return labels[pageId] || pageId;
@@ -2757,6 +2804,7 @@ function setupDayCompletionButtons() {
 
       saveAppData();
       renderDashboard();
+      updateCompletionButtonStates();
       showToast("Day 1 marked complete.");
     });
   }
@@ -2785,7 +2833,10 @@ function setupDayCompletionButtons() {
 
       saveAppData();
       renderDashboard();
-      showToast("Day 2 marked complete.");
+      showToast("Opening Sell Your Generator...");
+      setTimeout(() => {
+        openPage("sell");
+      }, 800);
     });
   }
 }
@@ -2800,13 +2851,13 @@ function updateCompletionButtonStates() {
 
   if (dayOneBtn && appData.progress.dayOneComplete) {
     dayOneBtn.textContent = "Day 1 Complete";
-    dayOneBtn.disabled = true;
+    dayOneBtn.disabled = false;
     dayOneBtn.classList.add("is-complete");
   }
 
   if (dayTwoBtn && appData.progress.dayTwoComplete) {
-    dayTwoBtn.textContent = "Day 2 Complete";
-    dayTwoBtn.disabled = true;
+    dayTwoBtn.textContent = "Mark Day 2 Complete & Continue to Selling";
+    dayTwoBtn.disabled = false;
     dayTwoBtn.classList.add("is-complete");
   }
 }
@@ -2834,192 +2885,185 @@ function initializeDashboardEngine() {
    ========================== */
 
 function setupNotebook() {
-  const noteCategory = byId("noteCategory");
   const mainNote = byId("mainNote");
-  const exportNotesBtn = byId("exportNotesBtn");
+  const savedNotesList = byId("savedNotesList");
+  const newNoteBtn = byId("newNoteBtn");
+  const deleteNoteBtn = byId("deleteNoteBtn");
+  const currentNoteTitle = byId("currentNoteTitle");
+  const noteTimestamp = byId("noteTimestamp");
+  const noteSaveStatus = byId("noteSaveStatus");
 
-  if (!noteCategory || !mainNote) return;
-
-  function loadCurrentNote() {
-    const category = noteCategory.value;
-
-    mainNote.value = appData.notes[category] || "";
+  if (
+    !mainNote ||
+    !savedNotesList ||
+    !newNoteBtn ||
+    !deleteNoteBtn ||
+    !currentNoteTitle ||
+    !noteTimestamp ||
+    !noteSaveStatus
+  ) {
+    return;
   }
 
-  noteCategory.addEventListener("change", loadCurrentNote);
+  function formatNoteDate(dateString) {
+    const date = new Date(dateString);
 
-  mainNote.addEventListener("input", () => {
-    const category = noteCategory.value;
-
-    appData.notes[category] = mainNote.value;
-    saveAppData();
-  });
-
-  if (exportNotesBtn) {
-    exportNotesBtn.addEventListener("click", exportNotes);
-  }
-
-  loadCurrentNote();
-}
-
-function exportNotes() {
-  const text = Object.entries(appData.notes)
-    .map(([category, content]) => {
-      return `# ${formatNotebookCategory(category)}\n\n${content || "No notes yet."}`;
-    })
-    .join("\n\n------------------------------\n\n");
-
-  downloadTextFile("prompt-generator-companion-notes.txt", text);
-
-  addActivity("Notes exported", "Notebook notes were downloaded.");
-  showToast("Notes exported.");
-}
-
-function formatNotebookCategory(category) {
-  const labels = {
-    ideas: "Generator Ideas",
-    categories: "Category Ideas",
-    html: "HTML Notes",
-    css: "CSS Notes",
-    javascript: "JavaScript Notes",
-    modules: "AI Module Notes",
-    publish: "GitHub + Netlify Notes",
-    selling: "Selling Notes",
-  };
-
-  return labels[category] || category;
-}
-
-/* ==========================
-   PROFILE SYSTEM
-   ========================== */
-
-function setupProfile() {
-  const nameInput = byId("studentNameInput");
-  const emailInput = byId("studentEmailInput");
-  const saveProfileBtn = byId("saveProfileBtn");
-
-  if (nameInput) {
-    nameInput.value = appData.profile.name || "";
-  }
-
-  if (emailInput) {
-    emailInput.value = appData.profile.email || "";
-  }
-
-  if (!saveProfileBtn) return;
-
-  saveProfileBtn.addEventListener("click", () => {
-    const name = nameInput ? nameInput.value.trim() : "";
-    const email = emailInput ? emailInput.value.trim() : "";
-
-    appData.profile.name = name || "Builder";
-    appData.profile.email = email;
-
-    saveAppData();
-    updateCertificateName();
-
-    addActivity(
-      "Profile saved",
-      `${appData.profile.name}'s student profile was updated.`,
-    );
-
-    unlockAchievement(
-      "profile-saved",
-      "Profile Saved",
-      "Your profile is ready",
-    );
-
-    showToast("Profile saved.");
-  });
-}
-
-/* ==========================
-   CERTIFICATE NAME SUPPORT
-   ========================== */
-
-function updateCertificateName() {
-  const certificateName = byId("certificateName");
-
-  if (certificateName) {
-    certificateName.textContent = appData.profile.name || "Builder";
-  }
-
-  const certificateDate = byId("certificateDate");
-
-  if (certificateDate) {
-    certificateDate.textContent = new Date().toLocaleDateString(undefined, {
-      month: "long",
+    return date.toLocaleString(undefined, {
+      month: "short",
       day: "numeric",
       year: "numeric",
-    });
-  }
-}
-
-/* ==========================
-   THEME SYSTEM
-   ========================== */
-
-function setupThemeSettings() {
-  const themeSelect = byId("themeSelect");
-  const accentSelect = byId("accentSelect");
-
-  applyTheme();
-
-  if (themeSelect) {
-    themeSelect.value = appData.settings.theme || "dark";
-
-    themeSelect.addEventListener("change", () => {
-      appData.settings.theme = themeSelect.value;
-      saveAppData();
-      applyTheme();
-
-      addActivity("Theme updated", `Theme changed to ${themeSelect.value}.`);
-
-      showToast("Theme updated.");
+      hour: "numeric",
+      minute: "2-digit",
     });
   }
 
-  if (accentSelect) {
-    accentSelect.value = appData.settings.accent || "blue-gold";
+  function getNoteTitle(content) {
+    const firstLine = content.trim().split("\n")[0];
 
-    accentSelect.addEventListener("change", () => {
-      appData.settings.accent = accentSelect.value;
-      saveAppData();
-      applyAccent();
+    if (!firstLine) {
+      return "Untitled Note";
+    }
 
-      addActivity("Accent updated", `Accent changed to ${accentSelect.value}.`);
+    return firstLine.length > 35 ? `${firstLine.slice(0, 35)}...` : firstLine;
+  }
 
-      showToast("Accent updated.");
+  function getActiveNote() {
+    return appData.notebookNotes.find(
+      (note) => note.id === appData.activeNoteId,
+    );
+  }
+
+  function renderSavedNotes() {
+    savedNotesList.innerHTML = "";
+
+    if (!appData.notebookNotes.length) {
+      savedNotesList.innerHTML = `
+        <p class="empty-notes-message">No saved notes yet.</p>
+      `;
+      return;
+    }
+
+    const sortedNotes = [...appData.notebookNotes].sort(
+      (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt),
+    );
+
+    sortedNotes.forEach((note) => {
+      const button = document.createElement("button");
+
+      button.type = "button";
+      button.className = "saved-note-item";
+
+      if (note.id === appData.activeNoteId) {
+        button.classList.add("active");
+      }
+
+      button.innerHTML = `
+        <strong>${escapeHTML(getNoteTitle(note.content))}</strong>
+        <span>${escapeHTML(formatNoteDate(note.updatedAt))}</span>
+      `;
+
+      button.addEventListener("click", () => {
+        appData.activeNoteId = note.id;
+        saveAppData();
+        loadActiveNote();
+        renderSavedNotes();
+      });
+
+      savedNotesList.appendChild(button);
     });
   }
-}
 
-function applyTheme() {
-  const theme = appData.settings.theme || "dark";
+  function loadActiveNote() {
+    const note = getActiveNote();
 
-  document.body.classList.toggle("light-theme", theme === "light");
+    if (!note) {
+      mainNote.value = "";
+      currentNoteTitle.textContent = "New Note";
+      noteTimestamp.textContent = "Start typing to save this note.";
+      noteSaveStatus.textContent = "Your note will save automatically.";
+      deleteNoteBtn.disabled = true;
+      return;
+    }
 
-  const themeSelect = byId("themeSelect");
-
-  if (themeSelect) {
-    themeSelect.value = theme;
+    mainNote.value = note.content;
+    currentNoteTitle.textContent = getNoteTitle(note.content);
+    noteTimestamp.textContent = `Last saved ${formatNoteDate(note.updatedAt)}`;
+    noteSaveStatus.textContent = "Saved automatically.";
+    deleteNoteBtn.disabled = false;
   }
 
-  applyAccent();
-}
-
-function applyAccent() {
-  const accent = appData.settings.accent || "blue-gold";
-
-  document.body.classList.remove("accent-blue-gold", "accent-black-gold");
-  document.body.classList.add(`accent-${accent}`);
-
-  const accentSelect = byId("accentSelect");
-
-  if (accentSelect) {
-    accentSelect.value = accent;
+  function createNewNote() {
+    appData.activeNoteId = null;
+    saveAppData();
+    loadActiveNote();
+    renderSavedNotes();
+    mainNote.focus();
   }
+
+  mainNote.addEventListener("input", () => {
+    const content = mainNote.value;
+    let note = getActiveNote();
+
+    if (!note && content.trim()) {
+      note = {
+        id: `note-${Date.now()}`,
+        content: "",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+
+      appData.notebookNotes.unshift(note);
+      appData.activeNoteId = note.id;
+    }
+
+    if (!note) {
+      return;
+    }
+
+    note.content = content;
+    note.updatedAt = new Date().toISOString();
+
+    saveAppData();
+
+    currentNoteTitle.textContent = getNoteTitle(note.content);
+    noteTimestamp.textContent = `Last saved ${formatNoteDate(note.updatedAt)}`;
+    noteSaveStatus.textContent = "Saved automatically.";
+    deleteNoteBtn.disabled = false;
+
+    renderSavedNotes();
+  });
+
+  newNoteBtn.addEventListener("click", createNewNote);
+
+  deleteNoteBtn.addEventListener("click", () => {
+    const note = getActiveNote();
+
+    if (!note) {
+      return;
+    }
+
+    const confirmDelete = window.confirm(
+      "Delete this note? This cannot be undone.",
+    );
+
+    if (!confirmDelete) {
+      return;
+    }
+
+    appData.notebookNotes = appData.notebookNotes.filter(
+      (savedNote) => savedNote.id !== note.id,
+    );
+
+    appData.activeNoteId = null;
+    saveAppData();
+
+    loadActiveNote();
+    renderSavedNotes();
+    showToast("Note deleted.");
+  });
+
+  loadActiveNote();
+  renderSavedNotes();
 }
 
 /* ==========================
@@ -3027,77 +3071,16 @@ function applyAccent() {
    ========================== */
 
 function setupDataTools() {
-  const exportDataBtn = byId("exportDataBtn");
-  const importDataBtn = byId("importDataBtn");
-  const importDataFile = byId("importDataFile");
   const resetDataBtn = byId("resetDataBtn");
-
-  if (exportDataBtn) {
-    exportDataBtn.addEventListener("click", exportBackupData);
-  }
-
-  if (importDataBtn && importDataFile) {
-    importDataBtn.addEventListener("click", () => {
-      importDataFile.click();
-    });
-
-    importDataFile.addEventListener("change", importBackupData);
-  }
 
   if (resetDataBtn) {
     resetDataBtn.addEventListener("click", handleResetData);
   }
 }
-function exportBackupData() {
-  const backup = {
-    app: "Prompt Generator Companion",
-    version: APP_CONFIG.version,
-    exportedAt: new Date().toISOString(),
-    data: appData,
-  };
-
-  downloadTextFile(
-    "prompt-generator-companion-backup.json",
-    JSON.stringify(backup, null, 2),
-  );
-
-  addActivity("Backup exported", "Workshop data backup was downloaded.");
-  showToast("Backup exported.");
-}
-
-function importBackupData(event) {
-  const file = event.target.files[0];
-
-  if (!file) return;
-
-  const reader = new FileReader();
-
-  reader.onload = () => {
-    try {
-      const parsed = JSON.parse(reader.result);
-      const importedData = parsed.data || parsed;
-
-      appData = deepMerge(DEFAULT_APP_DATA, importedData);
-      saveAppData();
-
-      addActivity("Backup imported", "Workshop data was restored from backup.");
-      showToast("Backup imported.");
-
-      setTimeout(() => {
-        window.location.reload();
-      }, 800);
-    } catch (error) {
-      console.error(error);
-      showToast("Import failed.");
-    }
-  };
-
-  reader.readAsText(file);
-}
 
 function handleResetData() {
   const confirmReset = window.confirm(
-    "This will erase profile, notes, progress, achievements, and settings. Reset everything?",
+    "This will erase your saved notes, progress, checklists, and achievements. Reset everything?",
   );
 
   if (!confirmReset) return;
@@ -3133,34 +3116,14 @@ function downloadTextFile(filename, content) {
 }
 
 /* ==========================
-   CERTIFICATE PRINT
-   ========================== */
-
-function setupCertificatePrint() {
-  const printCertificateBtn = byId("printCertificateBtn");
-
-  if (!printCertificateBtn) return;
-
-  printCertificateBtn.addEventListener("click", () => {
-    updateCertificateName();
-    window.print();
-  });
-}
-
-/* ==========================
    SECTION 3 INIT
    ========================== */
 
 function initializeProfileNotebookSettings() {
   setupNotebook();
-
-  setupProfile();
-  setupThemeSettings();
   setupDataTools();
-  setupCertificatePrint();
-  updateCertificateName();
 
-  console.log("Section 3 loaded: Notebook + Profile + Settings");
+  console.log("Section 3 loaded: Notebook + Bonus Resources");
 }
 
 /* =========================================================
@@ -3423,14 +3386,14 @@ const REPLAY_DATA = {
     title: "Day 1 Replay",
     message:
       "Day 1 replay is where students review project setup, HTML, CSS, JavaScript, generator buttons, and testing.",
-    page: "day-one",
+    url: "",
   },
 
   day2: {
     title: "Day 2 Replay",
     message:
       "Day 2 replay is where students review premium modules, GitHub, Netlify, product packaging, and launch strategy.",
-    page: "day-two",
+    url: "",
   },
 };
 
@@ -3449,7 +3412,12 @@ function setupReplayButtons() {
 
       showToast(`${replay.title} opened.`);
 
-      openPage(replay.page);
+      if (!replay.url) {
+        showToast("Replay video coming soon.");
+        return;
+      }
+
+      window.open(replay.url, "_blank", "noopener,noreferrer");
     });
   });
 }
@@ -3624,34 +3592,6 @@ function initializeDownloadsReplaysSearch() {
    CERTIFICATE SYSTEM
    ========================== */
 
-function setupCertificateSystem() {
-  renderCertificateState();
-  updateCertificateName();
-}
-
-function renderCertificateState() {
-  const locked = byId("certificateLocked");
-  const unlocked = byId("certificateUnlocked");
-
-  if (!locked || !unlocked) return;
-
-  if (isWorkshopComplete()) {
-    locked.classList.add("hidden");
-    unlocked.classList.remove("hidden");
-
-    updateCertificateName();
-
-    unlockAchievement(
-      "certificate-unlocked",
-      "Certificate Unlocked",
-      "Your workshop certificate is ready.",
-    );
-  } else {
-    locked.classList.remove("hidden");
-    unlocked.classList.add("hidden");
-  }
-}
-
 /* ==========================
    CHECKLIST AUTOSAVE SYSTEM
    ========================== */
@@ -3823,10 +3763,9 @@ function setupFirstVisit() {
 
   addActivity("Workshop started", "Prompt Generator Companion v7.0 is ready.");
 
-  unlockAchievement(
-    "first-open",
-    "Welcome",
-    "You opened Prompt Generator Companion. Let's build something amazing together.",
+  showAchievementPopup(
+    "💙 Welcome to the Workshop!",
+    `First things first... relax. You don't have to figure everything out today. I'll guide you every step of the way, and before you know it, you'll be saying, "I really built this!"`,
   );
 
   saveAppData();
@@ -3845,11 +3784,11 @@ function runAppHealthCheck() {
 
     "publish",
     "sell",
-    "downloads",
+
     "notebook",
     "replays",
-    "certificate",
-    "settings",
+
+    "bonuses",
     "toast",
   ];
 
@@ -3877,7 +3816,7 @@ function refreshFullUI() {
 
 function initializeFinalPolish() {
   runAppHealthCheck();
-  setupCertificateSystem();
+
   setupChecklistAutosave();
   setupKeyboardShortcuts();
   setupButtonSafety();
@@ -3934,6 +3873,7 @@ function setupLaunchChecklistCard() {
 }
 document.addEventListener("DOMContentLoaded", () => {
   initializeCoreEngine();
+  setupWorkshopLockPopup();
   initializeDashboardEngine();
   initializeProfileNotebookSettings();
   initializeDownloadsReplaysSearch();

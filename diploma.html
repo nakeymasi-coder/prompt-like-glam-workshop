@@ -1,0 +1,1211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Luxury interactive Workshop Companion diploma with print, PDF, and PNG"
+    />
+    <title>Workshop Companion Diploma</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <style>
+      :root {
+        --black: #03050a;
+        --navy-950: #050914;
+        --navy-900: #081227;
+        --navy-800: #0e214a;
+        --royal-blue: #123f91;
+        --royal-blue-light: #2c63c4;
+        --gold-dark: #7c5910;
+        --gold: #cda434;
+        --gold-light: #f0da88;
+        --gold-pale: #fff4bd;
+        --paper: #fffdf6;
+        --paper-shadow: #e7dcc0;
+        --ink: #17213f;
+        --muted: #6f6a5f;
+        --white: #ffffff;
+        --shadow: 0 30px 90px rgba(0, 0, 0, 0.42);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--white);
+        font-family: Inter, Arial, sans-serif;
+        background:
+          radial-gradient(
+            circle at 50% 0%,
+            rgba(44, 99, 196, 0.18),
+            transparent 34rem
+          ),
+          linear-gradient(145deg, var(--black), var(--navy-950) 46%, #02040a);
+        overflow-x: hidden;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      .celebration-layer {
+        position: fixed;
+        inset: 0;
+        z-index: 300;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .confetti {
+        position: absolute;
+        width: 8px;
+        height: 18px;
+        opacity: 0;
+        animation: confettiFall var(--duration) ease-in forwards;
+        animation-delay: var(--delay);
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
+      }
+
+      @keyframes confettiFall {
+        0% {
+          opacity: 1;
+          transform: translate3d(0, -12vh, 0) rotate(0deg);
+        }
+        100% {
+          opacity: 0;
+          transform: translate3d(var(--drift), 112vh, 0) rotate(900deg);
+        }
+      }
+
+      .intro {
+        position: fixed;
+        inset: 0;
+        z-index: 250;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background:
+          radial-gradient(
+            circle at 50% 45%,
+            rgba(240, 218, 136, 0.2),
+            transparent 27rem
+          ),
+          rgba(2, 4, 10, 0.97);
+        transition:
+          opacity 0.85s ease,
+          visibility 0.85s ease;
+      }
+
+      .intro.is-hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .intro-card {
+        width: min(620px, 94vw);
+        padding: 50px 30px 44px;
+        text-align: center;
+        border: 1px solid rgba(240, 218, 136, 0.45);
+        border-radius: 30px;
+        background: linear-gradient(
+          145deg,
+          rgba(20, 44, 92, 0.98),
+          rgba(4, 8, 19, 0.98)
+        );
+        box-shadow:
+          0 0 90px rgba(205, 164, 52, 0.18),
+          inset 0 0 0 7px rgba(255, 255, 255, 0.018);
+        animation: introRise 0.9s ease both;
+      }
+
+      @keyframes introRise {
+        from {
+          opacity: 0;
+          transform: translateY(24px) scale(0.97);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .intro-kicker {
+        margin: 0 0 12px;
+        color: var(--gold-light);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+      }
+
+      .intro h1 {
+        max-width: 100%;
+        margin: 0;
+        color: var(--gold-pale);
+        font-family: Cinzel, Georgia, serif;
+        font-size: clamp(1.65rem, 7vw, 2.85rem);
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+        white-space: nowrap;
+      }
+
+      .intro p {
+        max-width: 40rem;
+        margin: 18px auto 0;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.75;
+      }
+
+      .intro-emblem {
+        width: 100px;
+        height: 100px;
+        display: grid;
+        place-items: center;
+        margin: 30px auto 0;
+        border-radius: 50%;
+        color: var(--navy-900);
+        background: radial-gradient(
+          circle at 34% 28%,
+          var(--gold-pale),
+          var(--gold) 48%,
+          var(--gold-dark) 82%
+        );
+        box-shadow:
+          0 0 0 7px rgba(205, 164, 52, 0.16),
+          0 0 45px rgba(240, 218, 136, 0.34);
+      }
+
+      .intro-emblem svg {
+        width: 48px;
+        height: 48px;
+      }
+
+      .app {
+        width: min(1320px, 100%);
+        margin: 0 auto;
+        padding: 36px 20px 72px;
+      }
+
+      .hero {
+        text-align: center;
+        margin-bottom: 32px;
+        animation: fadeUp 0.9s 0.25s both;
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-kicker {
+        margin: 0 0 10px;
+        color: var(--gold-light);
+        font-weight: 700;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+      }
+
+      .hero h1 {
+        margin: 0;
+        color: var(--gold-pale);
+        font-family: Cinzel, Georgia, serif;
+        font-size: clamp(2rem, 6vw, 4.2rem);
+        line-height: 1.05;
+      }
+
+      .hero p {
+        max-width: 720px;
+        margin: 14px auto 0;
+        color: rgba(255, 255, 255, 0.74);
+        line-height: 1.7;
+      }
+
+      .workspace {
+        display: grid;
+        grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
+        gap: 26px;
+        align-items: start;
+      }
+
+      .controls {
+        position: sticky;
+        top: 22px;
+        padding: 24px;
+        border: 1px solid rgba(240, 218, 136, 0.24);
+        border-radius: 24px;
+        background: rgba(9, 20, 45, 0.84);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+        backdrop-filter: blur(16px);
+      }
+
+      .controls h2 {
+        margin: 0;
+        color: var(--gold-light);
+        font-family: Cinzel, Georgia, serif;
+        font-size: 1.18rem;
+      }
+
+      .controls p {
+        margin: 10px 0 22px;
+        color: rgba(255, 255, 255, 0.68);
+        font-size: 0.93rem;
+        line-height: 1.6;
+      }
+
+      .field {
+        display: grid;
+        gap: 8px;
+        margin-bottom: 18px;
+      }
+
+      .field label {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.84rem;
+        font-weight: 700;
+      }
+
+      .field input {
+        width: 100%;
+        padding: 13px 14px;
+        border: 1px solid rgba(240, 218, 136, 0.34);
+        border-radius: 12px;
+        outline: none;
+        color: var(--white);
+        background: rgba(255, 255, 255, 0.06);
+        transition:
+          border-color 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .field input:focus {
+        border-color: var(--gold-light);
+        box-shadow: 0 0 0 4px rgba(205, 164, 52, 0.14);
+      }
+
+      .actions {
+        display: grid;
+        gap: 10px;
+      }
+
+      .btn {
+        min-height: 46px;
+        padding: 12px 16px;
+        border: 1px solid transparent;
+        border-radius: 12px;
+        font-weight: 800;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          background 0.2s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .btn-primary {
+        color: #111827;
+        background: linear-gradient(135deg, var(--gold-light), var(--gold));
+        box-shadow: 0 10px 28px rgba(205, 164, 52, 0.22);
+      }
+
+      .btn-secondary {
+        color: var(--white);
+        border-color: rgba(240, 218, 136, 0.42);
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .status {
+        min-height: 22px;
+        margin-top: 14px;
+        color: var(--gold-light);
+        font-size: 0.85rem;
+        line-height: 1.45;
+      }
+
+      .diploma-wrap {
+        min-width: 0;
+      }
+
+      .diploma-stage {
+        padding: clamp(10px, 2.5vw, 22px);
+        border-radius: 28px;
+        background: linear-gradient(
+          145deg,
+          rgba(240, 218, 136, 0.12),
+          rgba(255, 255, 255, 0.018)
+        );
+        box-shadow: var(--shadow);
+        overflow: visible;
+      }
+
+      .diploma {
+        position: relative;
+        width: 1120px;
+        zoom: 0.78;
+        aspect-ratio: 1.414 / 1;
+        margin: 0 auto;
+        color: var(--ink);
+        overflow: hidden;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.76), rgba(255, 255, 255, 0.76)),
+          repeating-linear-gradient(
+            0deg,
+            rgba(117, 91, 32, 0.028) 0,
+            rgba(117, 91, 32, 0.028) 1px,
+            transparent 1px,
+            transparent 5px
+          ),
+          radial-gradient(circle at center, #fffef9 0%, #f8f0db 100%);
+        box-shadow:
+          0 20px 55px rgba(0, 0, 0, 0.28),
+          inset 0 0 100px rgba(117, 91, 32, 0.09);
+      }
+
+      .diploma::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            circle at 10% 12%,
+            rgba(205, 164, 52, 0.05),
+            transparent 18%
+          ),
+          radial-gradient(
+            circle at 90% 88%,
+            rgba(18, 63, 145, 0.04),
+            transparent 18%
+          );
+        pointer-events: none;
+      }
+
+      .diploma-border-1,
+      .diploma-border-2,
+      .diploma-border-3,
+      .diploma-border-4 {
+        position: absolute;
+        pointer-events: none;
+      }
+
+      .diploma-border-1 {
+        inset: 16px;
+        border: 8px double var(--gold-dark);
+      }
+
+      .diploma-border-2 {
+        inset: 30px;
+        border: 2px solid var(--royal-blue);
+      }
+
+      .diploma-border-3 {
+        inset: 38px;
+        border: 1px solid rgba(143, 104, 22, 0.68);
+      }
+
+      .diploma-border-4 {
+        inset: 47px;
+        border: 1px solid rgba(18, 63, 145, 0.46);
+      }
+
+      .ornament {
+        position: absolute;
+        width: 136px;
+        height: 136px;
+        color: var(--gold-dark);
+        opacity: 0.8;
+      }
+
+      .ornament svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      .ornament-tl {
+        top: 42px;
+        left: 42px;
+      }
+
+      .ornament-tr {
+        top: 42px;
+        right: 42px;
+        transform: rotate(90deg);
+      }
+
+      .ornament-br {
+        right: 42px;
+        bottom: 42px;
+        transform: rotate(180deg);
+      }
+
+      .ornament-bl {
+        bottom: 42px;
+        left: 42px;
+        transform: rotate(270deg);
+      }
+
+      .watermark {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        pointer-events: none;
+        opacity: 0.04;
+        color: var(--royal-blue);
+      }
+
+      .watermark svg {
+        width: 320px;
+        height: 320px;
+      }
+
+      .diploma-content {
+        position: relative;
+        z-index: 2;
+        height: 100%;
+        display: grid;
+        grid-template-rows: auto auto auto auto 1fr auto;
+        justify-items: center;
+        padding: 70px 90px 58px;
+        text-align: center;
+      }
+
+      .institution {
+        margin: 0;
+        color: var(--royal-blue);
+        font-family: Cinzel, Georgia, serif;
+        font-size: 23px;
+        font-weight: 700;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+      }
+
+      .official-line {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-top: 15px;
+        color: var(--gold-dark);
+        font-family:
+          Cormorant Garamond,
+          Georgia,
+          serif;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0.34em;
+        text-transform: uppercase;
+      }
+
+      .official-line::before,
+      .official-line::after {
+        content: "";
+        width: 118px;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--gold-dark),
+          transparent
+        );
+      }
+
+      .diploma-title {
+        margin: 21px 0 4px;
+        color: var(--ink);
+        font-family: Cinzel, Georgia, serif;
+        font-size: 50px;
+        line-height: 1.1;
+        letter-spacing: 0.052em;
+        text-transform: uppercase;
+      }
+
+      .presented {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-family:
+          Cormorant Garamond,
+          Georgia,
+          serif;
+        font-size: 21px;
+        letter-spacing: 0.12em;
+      }
+
+      .student-name {
+        min-width: 650px;
+        margin: 17px 0 10px;
+        padding: 0 30px 10px;
+        border-bottom: 2px solid var(--gold-dark);
+        color: var(--royal-blue);
+        font-family:
+          Cormorant Garamond,
+          Georgia,
+          serif;
+        font-size: 60px;
+        font-style: italic;
+        font-weight: 600;
+        line-height: 1;
+      }
+
+      .completion-copy {
+        max-width: 770px;
+        margin: 11px 0 0;
+        color: #4c4a45;
+        font-family:
+          Cormorant Garamond,
+          Georgia,
+          serif;
+        font-size: 21px;
+        line-height: 1.5;
+      }
+
+      .workshop-name {
+        margin: 10px 0 0;
+        color: var(--royal-blue);
+        font-family: Cinzel, Georgia, serif;
+        font-size: 31px;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+      }
+
+      .footer-row {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 150px 1fr;
+        gap: 32px;
+        align-items: end;
+        margin-top: 24px;
+      }
+
+      .signature-block {
+        min-width: 0;
+        text-align: center;
+      }
+
+      .signature {
+        min-height: 34px;
+        color: var(--ink);
+        font-family:
+          Cormorant Garamond,
+          Georgia,
+          serif;
+        font-size: 27px;
+        font-style: italic;
+        font-weight: 600;
+      }
+
+      .signature-line {
+        width: 100%;
+        height: 1px;
+        margin: 4px 0 8px;
+        background: #4f4b42;
+      }
+
+      .signature-label {
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .seal {
+        position: relative;
+        width: 138px;
+        height: 138px;
+        display: grid;
+        place-items: center;
+        margin: 0 auto;
+        border-radius: 50%;
+        color: var(--navy-900);
+        text-align: center;
+        background: radial-gradient(
+          circle at 32% 26%,
+          var(--gold-pale),
+          var(--gold-light) 28%,
+          var(--gold) 58%,
+          var(--gold-dark) 84%
+        );
+        box-shadow:
+          0 12px 26px rgba(85, 57, 5, 0.32),
+          inset 0 3px 5px rgba(255, 255, 255, 0.7),
+          inset 0 -4px 8px rgba(61, 40, 3, 0.24);
+      }
+
+      .seal::before {
+        content: "";
+        position: absolute;
+        inset: 9px;
+        border: 2px dashed rgba(7, 18, 39, 0.58);
+        border-radius: 50%;
+      }
+
+      .seal::after {
+        content: "";
+        position: absolute;
+        inset: 18px;
+        border: 1px solid rgba(7, 18, 39, 0.4);
+        border-radius: 50%;
+      }
+
+      .seal-text {
+        position: relative;
+        z-index: 1;
+        font-family: Cinzel, Georgia, serif;
+        font-size: 12px;
+        font-weight: 800;
+        line-height: 1.38;
+        letter-spacing: 0.06em;
+      }
+
+      .document-details {
+        position: absolute;
+        right: 76px;
+        bottom: 48px;
+        color: rgba(23, 33, 63, 0.64);
+        font-size: 10px;
+        letter-spacing: 0.09em;
+        text-align: right;
+        text-transform: uppercase;
+      }
+
+      @media (max-width: 920px) {
+        .workspace {
+          grid-template-columns: 1fr;
+        }
+
+        .controls {
+          position: static;
+        }
+      }
+
+      @media print {
+        @page {
+          size: landscape;
+          margin: 0;
+        }
+
+        body {
+          background: #fff;
+        }
+
+        .intro,
+        .hero,
+        .controls,
+        .celebration-layer,
+        .app,
+        .workspace,
+        .diploma-wrap,
+        .diploma-stage {
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          display: block;
+          background: #fff;
+          box-shadow: none;
+          overflow: visible;
+        }
+
+        .diploma {
+          width: 100vw;
+          height: 70.7vw;
+          max-height: 100vh;
+          box-shadow: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div
+      class="celebration-layer"
+      id="celebrationLayer"
+      aria-hidden="true"
+    ></div>
+
+    <section class="intro" id="intro" aria-label="Diploma celebration">
+      <div class="intro-card">
+        <p class="intro-kicker">Achievement Unlocked</p>
+        <h1>Congratulations!</h1>
+        <p>
+          You completed the Workshop Companion. Your official graduation diploma
+          is ready to personalize, print, and share.
+        </p>
+
+        <div class="intro-emblem" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none">
+            <path
+              d="M31.5 31.5C22 19 11 16 6 20c-5 4 0 16 11 18-9 4-12 14-7 18 5 4 16-2 22-14"
+              fill="currentColor"
+              opacity=".85"
+            />
+            <path
+              d="M32.5 31.5C42 19 53 16 58 20c5 4 0 16-11 18 9 4 12 14 7 18-5 4-16-2-22-14"
+              fill="currentColor"
+              opacity=".85"
+            />
+            <path
+              d="M32 23c-4 5-4 18 0 26 4-8 4-21 0-26Z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <main class="app">
+      <header class="hero">
+        <p class="hero-kicker">Official Workshop Achievement</p>
+        <h1>Your Graduation Diploma</h1>
+        <p>
+          Enter your details below. Your diploma updates instantly and can be
+          printed, downloaded, or shared.
+        </p>
+      </header>
+
+      <div class="workspace">
+        <aside class="controls" aria-label="Diploma controls">
+          <h2>Personalize Your Diploma</h2>
+          <p>Your changes appear instantly on the diploma.</p>
+
+          <div class="field">
+            <label for="nameInput">Your full name</label>
+            <input
+              id="nameInput"
+              type="text"
+              maxlength="60"
+              placeholder="Type your full name"
+            />
+          </div>
+
+          <div class="field">
+            <label for="workshopInput">Workshop name</label>
+            <input
+              id="workshopInput"
+              type="text"
+              maxlength="80"
+              value="Workshop Companion"
+            />
+          </div>
+
+          <div class="field">
+            <label for="instructorInput">Instructor or brand name</label>
+            <input
+              id="instructorInput"
+              type="text"
+              maxlength="60"
+              value="GlamorousGrammyGlowUp"
+            />
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primary" id="downloadPngBtn" type="button">
+              Download Diploma PNG
+            </button>
+            <button class="btn btn-primary" id="downloadPdfBtn" type="button">
+              Download Diploma PDF
+            </button>
+            <button class="btn btn-secondary" id="shareBtn" type="button">
+              Share Diploma
+            </button>
+
+            <button class="btn btn-secondary" id="printBtn" type="button">
+              Print Diploma
+            </button>
+            <button class="btn btn-secondary" id="celebrateBtn" type="button">
+              Celebrate Again
+            </button>
+          </div>
+
+          <div
+            class="status"
+            id="status"
+            role="status"
+            aria-live="polite"
+          ></div>
+        </aside>
+
+        <section class="diploma-wrap" aria-label="Diploma preview">
+          <div class="diploma-stage">
+            <article class="diploma" id="diploma">
+              <div class="diploma-border-1"></div>
+              <div class="diploma-border-2"></div>
+              <div class="diploma-border-3"></div>
+              <div class="diploma-border-4"></div>
+
+              <div class="ornament ornament-tl" aria-hidden="true">
+                <svg viewBox="0 0 120 120" fill="none">
+                  <path
+                    d="M10 82c30-1 55-26 56-56M10 92c38-1 68-31 69-69"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                  <path
+                    d="M36 34c8 4 14 10 18 18M27 48c9 2 17 7 23 14M49 25c6 5 11 12 14 20"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                  <circle cx="67" cy="25" r="4" fill="currentColor" />
+                  <circle cx="11" cy="92" r="4" fill="currentColor" />
+                </svg>
+              </div>
+
+              <div class="ornament ornament-tr" aria-hidden="true">
+                <svg viewBox="0 0 120 120" fill="none">
+                  <path
+                    d="M10 82c30-1 55-26 56-56M10 92c38-1 68-31 69-69"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                  <path
+                    d="M36 34c8 4 14 10 18 18M27 48c9 2 17 7 23 14M49 25c6 5 11 12 14 20"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                  <circle cx="67" cy="25" r="4" fill="currentColor" />
+                  <circle cx="11" cy="92" r="4" fill="currentColor" />
+                </svg>
+              </div>
+
+              <div class="ornament ornament-br" aria-hidden="true">
+                <svg viewBox="0 0 120 120" fill="none">
+                  <path
+                    d="M10 82c30-1 55-26 56-56M10 92c38-1 68-31 69-69"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                  <path
+                    d="M36 34c8 4 14 10 18 18M27 48c9 2 17 7 23 14M49 25c6 5 11 12 14 20"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                  <circle cx="67" cy="25" r="4" fill="currentColor" />
+                  <circle cx="11" cy="92" r="4" fill="currentColor" />
+                </svg>
+              </div>
+
+              <div class="ornament ornament-bl" aria-hidden="true">
+                <svg viewBox="0 0 120 120" fill="none">
+                  <path
+                    d="M10 82c30-1 55-26 56-56M10 92c38-1 68-31 69-69"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                  <path
+                    d="M36 34c8 4 14 10 18 18M27 48c9 2 17 7 23 14M49 25c6 5 11 12 14 20"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                  <circle cx="67" cy="25" r="4" fill="currentColor" />
+                  <circle cx="11" cy="92" r="4" fill="currentColor" />
+                </svg>
+              </div>
+
+              <div class="watermark" aria-hidden="true">
+                <svg viewBox="0 0 64 64" fill="none">
+                  <path
+                    d="M31.5 31.5C22 19 11 16 6 20c-5 4 0 16 11 18-9 4-12 14-7 18 5 4 16-2 22-14"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M32.5 31.5C42 19 53 16 58 20c5 4 0 16-11 18 9 4 12 14 7 18-5 4-16-2-22-14"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M32 23c-4 5-4 18 0 26 4-8 4-21 0-26Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+
+              <div class="diploma-content">
+                <p class="institution">Workshop Companion Institute</p>
+
+                <div class="official-line">Official Graduation Diploma</div>
+
+                <h2 class="diploma-title">Certificate of Achievement</h2>
+
+                <p class="presented">This diploma is proudly presented to</p>
+
+                <div class="student-name" id="studentName">Your Name Here</div>
+
+                <div>
+                  <p class="completion-copy">
+                    In recognition of the successful completion of all required
+                    lessons, projects, and workshop activities for
+                  </p>
+
+                  <h3 class="workshop-name" id="workshopName">
+                    Workshop Companion
+                  </h3>
+                </div>
+
+                <div class="footer-row">
+                  <div class="signature-block">
+                    <div class="signature" id="instructorName">
+                      GlamorousGrammyGlowUp
+                    </div>
+                    <div class="signature-line"></div>
+                    <div class="signature-label">
+                      Instructor / Authorized Signature
+                    </div>
+                  </div>
+
+                  <div class="seal" aria-label="Official certified seal">
+                    <span class="seal-text">
+                      CERTIFIED<br />
+                      WORKSHOP<br />
+                      GRADUATE
+                    </span>
+                  </div>
+
+                  <div class="signature-block">
+                    <div class="signature" id="dateText"></div>
+                    <div class="signature-line"></div>
+                    <div class="signature-label">Date Awarded</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="document-details">
+                Certificate ID: <span id="certificateId"></span><br />
+                Official Workshop Record
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      const intro = document.getElementById("intro");
+      const celebrationLayer = document.getElementById("celebrationLayer");
+      const diploma = document.getElementById("diploma");
+
+      const nameInput = document.getElementById("nameInput");
+      const workshopInput = document.getElementById("workshopInput");
+      const instructorInput = document.getElementById("instructorInput");
+
+      const studentName = document.getElementById("studentName");
+      const workshopName = document.getElementById("workshopName");
+      const instructorName = document.getElementById("instructorName");
+
+      const dateText = document.getElementById("dateText");
+      const certificateId = document.getElementById("certificateId");
+      const status = document.getElementById("status");
+
+      const today = new Date();
+
+      dateText.textContent = today.toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      });
+
+      certificateId.textContent =
+        "WC-" +
+        today.getFullYear() +
+        "-" +
+        Math.random().toString(36).slice(2, 8).toUpperCase();
+
+      function syncContent() {
+        const name = nameInput.value.trim() || "Your Name Here";
+        const workshop = workshopInput.value.trim() || "Workshop Companion";
+        const instructor = instructorInput.value.trim() || "Instructor";
+
+        studentName.textContent = name;
+        workshopName.textContent = workshop;
+        instructorName.textContent = instructor;
+      }
+
+      nameInput.addEventListener("input", syncContent);
+      workshopInput.addEventListener("input", syncContent);
+      instructorInput.addEventListener("input", syncContent);
+
+      function setStatus(message) {
+        status.textContent = message;
+      }
+
+      function celebrate() {
+        const colors = ["#f0da88", "#cda434", "#7c5910", "#ffffff", "#123f91"];
+
+        for (let i = 0; i < 110; i += 1) {
+          const piece = document.createElement("span");
+          piece.className = "confetti";
+          piece.style.left = Math.random() * 100 + "vw";
+          piece.style.top = "-30px";
+          piece.style.background =
+            colors[Math.floor(Math.random() * colors.length)];
+          piece.style.setProperty(
+            "--duration",
+            2.8 + Math.random() * 2.8 + "s",
+          );
+          piece.style.setProperty("--delay", Math.random() * 0.7 + "s");
+          piece.style.setProperty("--drift", -130 + Math.random() * 260 + "px");
+          piece.style.borderRadius = Math.random() > 0.55 ? "50%" : "2px";
+          celebrationLayer.appendChild(piece);
+
+          setTimeout(() => piece.remove(), 6800);
+        }
+      }
+
+      async function renderElement(element, backgroundColor) {
+        setStatus("Preparing your file...");
+
+        return html2canvas(element, {
+          scale: 2,
+          backgroundColor,
+          useCORS: true,
+          logging: false,
+        });
+      }
+
+      function safeFileName() {
+        const name = nameInput.value.trim() || "Workshop-Graduate";
+
+        return name.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "");
+      }
+
+      async function downloadPNG() {
+        try {
+          const canvas = await renderElement(diploma, "#fffdf6");
+          const link = document.createElement("a");
+          link.download = safeFileName() + "-Diploma.png";
+          link.href = canvas.toDataURL("image/png", 1);
+          link.click();
+          setStatus("Your diploma PNG was downloaded.");
+        } catch (error) {
+          console.error(error);
+          setStatus("The PNG could not be created. Try Print Diploma instead.");
+        }
+      }
+
+      async function downloadPDF() {
+        try {
+          const canvas = await renderElement(diploma, "#fffdf6");
+          const image = canvas.toDataURL("image/png", 1);
+          const { jsPDF } = window.jspdf;
+
+          const pdf = new jsPDF({
+            orientation: "landscape",
+            unit: "px",
+            format: [canvas.width, canvas.height],
+          });
+
+          pdf.addImage(image, "PNG", 0, 0, canvas.width, canvas.height);
+          pdf.save(safeFileName() + "-Diploma.pdf");
+          setStatus("Your diploma PDF was downloaded.");
+        } catch (error) {
+          console.error(error);
+          setStatus("The PDF could not be created. Try Print Diploma instead.");
+        }
+      }
+
+      async function shareDiploma() {
+        try {
+          const canvas = await renderElement(diploma, "#fffdf6");
+
+          const blob = await new Promise((resolve) =>
+            canvas.toBlob(resolve, "image/png", 1),
+          );
+
+          const file = new File([blob], safeFileName() + "-Diploma.png", {
+            type: "image/png",
+          });
+
+          if (
+            navigator.share &&
+            navigator.canShare &&
+            navigator.canShare({ files: [file] })
+          ) {
+            await navigator.share({
+              title: "My Workshop Companion Diploma",
+              text: "I completed the Workshop Companion!",
+              files: [file],
+            });
+
+            setStatus("Your share menu opened.");
+            return;
+          }
+
+          const link = document.createElement("a");
+          const objectUrl = URL.createObjectURL(blob);
+
+          link.download = file.name;
+          link.href = objectUrl;
+          link.click();
+
+          URL.revokeObjectURL(objectUrl);
+
+          setStatus(
+            "Direct sharing is not supported here, so the diploma image was downloaded for you to post.",
+          );
+        } catch (error) {
+          if (error.name !== "AbortError") {
+            console.error(error);
+            setStatus(
+              "Sharing did not work. Download the PNG and post it manually.",
+            );
+          }
+        }
+      }
+
+      document
+        .getElementById("downloadPngBtn")
+        .addEventListener("click", downloadPNG);
+
+      document
+        .getElementById("downloadPdfBtn")
+        .addEventListener("click", downloadPDF);
+
+      document
+        .getElementById("shareBtn")
+        .addEventListener("click", shareDiploma);
+
+      document
+        .getElementById("printBtn")
+        .addEventListener("click", () => window.print());
+
+      document
+        .getElementById("celebrateBtn")
+        .addEventListener("click", celebrate);
+
+      window.addEventListener("load", () => {
+        syncContent();
+        celebrate();
+
+        setTimeout(() => {
+          intro.classList.add("is-hidden");
+        }, 2800);
+      });
+    </script>
+  </body>
+</html>
