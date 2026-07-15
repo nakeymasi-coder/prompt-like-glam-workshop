@@ -182,36 +182,36 @@
                 Watch each video, complete the setup, then come back here when
                 you're finished.
               </p>
-<div class="lesson-complete-area setup-video-buttons"></div>
-<a
-  class="gold-btn"
-  id="githubSetupLink"
-  href="PASTE-YOUR-GITHUB-TUTORIAL-LINK-HERE"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  🎥 GitHub Setup Tutorial
-</a>
+              <div class="lesson-complete-area setup-video-buttons">
+                <a
+                  class="gold-btn"
+                  id="githubSetupLink"
+                  href="PASTE-YOUR-GITHUB-TUTORIAL-LINK-HERE"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  🎥 GitHub Setup Tutorial
+                </a>
 
                 <a
-  class="gold-btn"
-  id="netlifySetupLink"
- href="PASTE-YOUR-NETLIFY-TUTORIAL-LINK-HERE"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  🎥 Watch Netlify Setup
-</a>
+                  class="gold-btn"
+                  id="netlifySetupLink"
+                  href="PASTE-YOUR-NETLIFY-TUTORIAL-LINK-HERE"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  🎥 Watch Netlify Setup
+                </a>
 
                 <a
-  class="gold-btn"
-  id="vsCodeSetupLink"
- href="PASTE-YOUR-VSCODE-TUTORIAL-LINK-HERE"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  🎥 Watch VS Code Setup
-</a>
+                  class="gold-btn"
+                  id="vsCodeSetupLink"
+                  href="PASTE-YOUR-VSCODE-TUTORIAL-LINK-HERE"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  🎥 Watch VS Code Setup
+                </a>
               </div>
 
               <p style="margin-top: 20px">
@@ -398,73 +398,174 @@
         <!-- ============================= -->
         <!-- PAGE: JOURNEY -->
         <!-- ============================= -->
-        <section class="page" id="journey">
-          <div class="page-header">
-            <h1>One clean path from idea to sellable generator</h1>
-          </div>
-          <div class="timeline">
-            <article class="timeline-item">
-              <span class="timeline-number">01</span>
-              <div class="timeline-content">
-                <h2>Plan the Generator</h2>
+        <section class="page workshop-journey-page" id="journey">
+          <div class="journey-stage">
+            <!-- WELCOME CARD -->
+            <article class="journey-card journey-welcome-card">
+              <div class="journey-butterfly journey-butterfly-left"></div>
+              <div class="journey-butterfly journey-butterfly-right"></div>
+
+              <div class="journey-card-content">
+                <span class="eyebrow">Welcome</span>
+
+                <h1>Welcome to Your Workshop Journey</h1>
+
+                <div class="journey-divider"></div>
+
+                <p>I’m so excited you’re here!</p>
+
                 <p>
-                  Define the audience, problem, outputs, categories, product
-                  name, and the transformation the generator creates.
+                  Over the next two days, we’ll work together step by step to
+                  build something incredible.
                 </p>
-                <button class="secondary-btn" data-open-page="blueprint">
-                  Open Blueprint
+
+                <p>
+                  Whether you’re brand new or have a little experience, I’ll
+                  guide you through the entire process from beginning to end.
+                </p>
+
+                <p>
+                  This workshop is hands-on, beginner-friendly, and designed to
+                  help you leave with a finished project you can be proud of.
+                </p>
+              </div>
+            </article>
+
+            <!-- BEFORE WE BEGIN CARD -->
+            <article class="journey-card journey-requirements-card">
+              <div class="journey-butterfly journey-butterfly-left"></div>
+              <div class="journey-butterfly journey-butterfly-right"></div>
+
+              <div class="journey-card-content">
+                <span class="eyebrow">Important</span>
+
+                <h2>Before We Begin</h2>
+
+                <div class="journey-divider"></div>
+
+                <p>
+                  Before the workshop starts, please make sure you’ve completed
+                  the following:
+                </p>
+
+                <ul class="journey-checklist">
+                  <li>Create a GitHub account</li>
+                  <li>Create a Netlify account</li>
+                  <li>Install Visual Studio Code</li>
+                  <li>Sign in to all three platforms</li>
+                  <li>Verify your email addresses</li>
+                  <li>
+                    Make sure everything is installed and working correctly
+                  </li>
+                </ul>
+
+                <div class="journey-important-box">
+                  <h3>Important</h3>
+
+                  <p>Our workshop time is reserved for building together.</p>
+
+                  <p>
+                    We will <strong>not</strong> be creating accounts,
+                    installing software, or troubleshooting setup during class.
+                  </p>
+
+                  <p>
+                    Completing these steps beforehand will help you stay on
+                    track and get the most out of the workshop.
+                  </p>
+                </div>
+
+                <button
+                  class="gold-btn journey-link-btn"
+                  data-open-page="requirements"
+                  type="button"
+                >
+                  Open Workshop Requirements
                 </button>
               </div>
             </article>
-            <article class="timeline-item">
-              <span class="timeline-number">02</span>
-              <div class="timeline-content">
-                <h2>Build the Foundation</h2>
-                <p>
-                  Create the project folder, add HTML, CSS, and JavaScript
-                  files, then build the core generator interface.
-                </p>
-                <button class="secondary-btn" data-open-page="day-one">
-                  Open Day 1
-                </button>
+
+            <!-- WHAT WE WILL COVER CARD -->
+            <article class="journey-card journey-cover-card">
+              <div class="journey-butterfly journey-butterfly-left"></div>
+              <div class="journey-butterfly journey-butterfly-right"></div>
+
+              <div class="journey-card-content">
+                <span class="eyebrow">Two-Day Experience</span>
+
+                <h2>What We’ll Cover</h2>
+
+                <div class="journey-divider"></div>
+
+                <div class="journey-days-grid">
+                  <div class="journey-day-card">
+                    <span class="journey-day-label">Day 1</span>
+
+                    <h3>Build</h3>
+
+                    <p>
+                      We’ll build the foundation, connect everything together,
+                      and make sure your project is working exactly as it
+                      should.
+                    </p>
+
+                    <button
+                      class="secondary-btn journey-link-btn"
+                      data-open-page="day-one"
+                      type="button"
+                    >
+                      Open Day 1
+                    </button>
+                  </div>
+
+                  <div class="journey-day-card">
+                    <span class="journey-day-label">Day 2</span>
+
+                    <h3>Customize, Publish & Sell</h3>
+
+                    <p>
+                      We’ll personalize your project, publish it online, and
+                      prepare it to confidently share or sell.
+                    </p>
+
+                    <button
+                      class="secondary-btn journey-link-btn"
+                      data-open-page="day-two"
+                      type="button"
+                    >
+                      Open Day 2
+                    </button>
+                  </div>
+                </div>
               </div>
             </article>
-            <article class="timeline-item">
-              <span class="timeline-number">03</span>
-              <div class="timeline-content">
-                <h2>Add AI Modules</h2>
+
+            <!-- CLOSING CARD -->
+            <article class="journey-card journey-closing-card">
+              <div class="journey-butterfly journey-butterfly-left"></div>
+              <div class="journey-butterfly journey-butterfly-right"></div>
+
+              <div class="journey-card-content">
+                <span class="eyebrow">Let’s Begin</span>
+
+                <h2>Let’s Get Started</h2>
+
+                <div class="journey-divider"></div>
+
+                <p>Take your time, ask questions, and enjoy the process.</p>
+
                 <p>
-                  Add sections for images, video scripts, Suno music, marketing,
-                  Custom GPT instructions, lead magnets, and launch copy.
+                  Every expert was once a beginner, and by the end of these two
+                  days, you’ll have accomplished something you may have never
+                  imagined possible.
                 </p>
-                <button class="secondary-btn" data-open-page="day-two">
-                  Open Modules
-                </button>
-              </div>
-            </article>
-            <article class="timeline-item">
-              <span class="timeline-number">04</span>
-              <div class="timeline-content">
-                <h2>Publish the Product</h2>
-                <p>
-                  Save the project with GitHub, connect the repo to Netlify, and
-                  publish a live link students can share.
-                </p>
-                <button class="secondary-btn" data-open-page="publish">
-                  Open Publish Steps
-                </button>
-              </div>
-            </article>
-            <article class="timeline-item">
-              <span class="timeline-number">05</span>
-              <div class="timeline-content">
-                <h2>Package and Sell</h2>
-                <p>
-                  Create a product mockup, sales description, pricing, FAQ,
-                  launch checklist, and simple buyer instructions.
-                </p>
-                <button class="secondary-btn" data-open-page="sell">
-                  Open Selling Kit
+
+                <button
+                  class="gold-btn journey-start-btn"
+                  data-open-page="day-one"
+                  type="button"
+                >
+                  Start Day 1
                 </button>
               </div>
             </article>
@@ -476,7 +577,7 @@
         <!-- ============================= -->
         <section class="page" id="day-one">
           <div class="page-header">
-            <h1>Premium outputs that make the generator worth selling</h1>
+            <h1>Build Your AI Prompt Generator</h1>
           </div>
 
           <div class="module-card-grid">
@@ -517,24 +618,30 @@
                   <h4>Why this matters</h4>
 
                   <p>
-                    A strong foundation keeps every HTML, CSS, and JavaScript
-                    file focused on the same goal, making the finished generator
-                    more organized, easier to build, easier to customize, and
-                    ready to sell.
+                    A strong planning process prevents unnecessary revisions
+                    later by helping you define the right categories before
+                    building the generator. The approved categories become the
+                    foundation for every blueprint that follows.
                   </p>
 
                   <h4>What to do with the output</h4>
-
                   <ul>
-                    <li>Review the generated foundation.</li>
+                    <li>Review the recommended generator names.</li>
 
-                    <li>Confirm it matches your generator idea.</li>
+                    <li>Choose one or enter your own.</li>
 
-                    <li>Adjust any details before continuing.</li>
+                    <li>Review the AI-recommended categories.</li>
+
+                    <li>Keep, remove, rename, or add categories as needed.</li>
+
+                    <li>
+                      Approve the final category structure before moving to the
+                      Category Blueprint.
+                    </li>
 
                     <li>
                       Stay in the same ChatGPT conversation for the remaining
-                      cards.
+                      workshop steps.
                     </li>
                   </ul>
                 </div>
@@ -549,8 +656,9 @@
                   <h2>Generator Planner</h2>
 
                   <p>
-                    Define exactly what your prompt generator will create before
-                    building the application.
+                    Plan your generator idea, review reference images, choose a
+                    name, and approve the categories before building the
+                    blueprints
                   </p>
 
                   <button
@@ -569,9 +677,10 @@
                   <h4>Purpose</h4>
 
                   <p>
-                    Define your generator's purpose, target audience, required
-                    inputs, expected outputs, and core features. This becomes
-                    the blueprint for everything you'll build next.
+                    Guide the planning conversation by reviewing the generator
+                    idea and reference images, recommending five names, asking
+                    focused category questions, and helping the user approve the
+                    final category structure
                   </p>
 
                   <h4>Why this matters</h4>
@@ -607,8 +716,9 @@
                   <h2>Reference Image</h2>
 
                   <p>
-                    Download the reference image, upload it into ChatGPT, then
-                    continue building your generator.
+                    Upload one or more reference images to help ChatGPT
+                    understand the style, structure, and visual elements your
+                    generator should support during the planning process.
                   </p>
 
                   <a
@@ -628,8 +738,11 @@
                   <h4>Purpose</h4>
 
                   <p>
-                    Give ChatGPT a visual example before building the layout,
-                    styling, and user experience.
+                    Reference images give ChatGPT real visual context instead of
+                    forcing it to guess. This helps the Generator Planner
+                    recommend stronger, more specific categories while
+                    preserving the important details that define the generator
+                    concept.
                   </p>
 
                   <h4>Why this matters</h4>
@@ -643,18 +756,29 @@
                   <h4>What to do</h4>
 
                   <ul>
-                    <li>Download the reference image.</li>
-
-                    <li>Upload it into the same ChatGPT conversation.</li>
-
                     <li>
-                      Tell ChatGPT to use it as visual inspiration, not to copy
-                      it exactly.
+                      Upload one or more reference images into the same ChatGPT
+                      conversation.
                     </li>
 
                     <li>
-                      Keep the same conversation open and continue to Layout
-                      Builder.
+                      Use images that represent the style or type of generator
+                      you want to build.
+                    </li>
+
+                    <li>
+                      Allow the Generator Planner to analyze the images before
+                      recommending categories.
+                    </li>
+
+                    <li>
+                      Review the recommended categories and approve them before
+                      continuing.
+                    </li>
+
+                    <li>
+                      Keep the same ChatGPT conversation open for the remaining
+                      blueprint stages.
                     </li>
                   </ul>
 
@@ -673,73 +797,13 @@
             <article class="module-card flip-card">
               <div class="module-card-inner">
                 <div class="module-card-front">
-                  <i data-lucide="layout-panel-top"></i>
-
-                  <h2>Layout Builder</h2>
-
-                  <p>
-                    Design the complete user interface before writing any HTML,
-                    CSS, or JavaScript.
-                  </p>
-
-                  <button
-                    class="secondary-btn copy-snippet-btn"
-                    data-snippet="layout"
-                  >
-                    Copy Layout Prompt
-                  </button>
-
-                  <span class="flip-hint">Click card for teaching notes</span>
-                </div>
-
-                <div class="module-card-back">
-                  <h3>Layout Builder</h3>
-
-                  <h4>Purpose</h4>
-
-                  <p>
-                    Design the complete layout of your Prompt Generator before
-                    writing code.
-                  </p>
-
-                  <h4>Why this matters</h4>
-
-                  <p>
-                    A well-planned layout makes the generator easier to build,
-                    easier to maintain, and easier for your customers to use.
-                  </p>
-
-                  <h4>What to do with the output</h4>
-
-                  <ul>
-                    <li>Review the suggested layout.</li>
-
-                    <li>Rearrange sections if needed.</li>
-
-                    <li>Remove anything you don't want.</li>
-
-                    <li>Add any missing sections.</li>
-
-                    <li>
-                      Approve the layout before moving to the Category Builder.
-                    </li>
-                  </ul>
-
-                  <span class="flip-hint">Click again to flip back</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="module-card flip-card">
-              <div class="module-card-inner">
-                <div class="module-card-front">
                   <i data-lucide="folders"></i>
 
-                  <h2>Category Builder</h2>
+                  <h2>Category Blueprint</h2>
 
                   <p>
-                    Design every category your Prompt Generator will use before
-                    writing code.
+                    Build the complete category blueprint that defines exactly
+                    what information your generator will collect from users.
                   </p>
 
                   <button
@@ -753,8 +817,7 @@
                 </div>
 
                 <div class="module-card-back">
-                  <h3>Category Builder</h3>
-
+                  <h3>Category Blueprint</h3>
                   <h4>Purpose</h4>
 
                   <p>
@@ -765,25 +828,45 @@
                   <h4>Why this matters</h4>
 
                   <p>
-                    Your categories determine the information users provide.
-                    Better categories lead to better prompts and better
-                    AI-generated results.
+                    Well-designed categories collect the right information from
+                    users without making the generator confusing or repetitive.
+                    A strong Category Blueprint leads to better inputs, better
+                    prompts, and better AI-generated results.
                   </p>
 
                   <h4>What to do with the output</h4>
 
+                  <p>
+                    Define every category your generator needs based on the
+                    approved Generator Planner. These categories become the
+                    foundation for every input, option, preset, and prompt built
+                    later.
+                  </p>
+
                   <ul>
-                    <li>Review every category.</li>
-
-                    <li>Delete categories you don't need.</li>
-
-                    <li>Rename categories to match your project.</li>
-
-                    <li>Add any categories you forgot.</li>
+                    <li>Review every recommended category.</li>
 
                     <li>
-                      Make sure the categories are in the best order for the
-                      user.
+                      Confirm each category is necessary for this generator.
+                    </li>
+
+                    <li>
+                      Remove duplicate, generic, or unnecessary categories.
+                    </li>
+
+                    <li>
+                      Check that the categories appear in the best order for
+                      users.
+                    </li>
+
+                    <li>
+                      Approve the final category list before moving to the Input
+                      Builder Blueprint.
+                    </li>
+
+                    <li>
+                      Stay in the same ChatGPT conversation for the remaining
+                      blueprint stages.
                     </li>
                   </ul>
 
@@ -797,11 +880,10 @@
                 <div class="module-card-front">
                   <i data-lucide="text-cursor-input"></i>
 
-                  <h2>Input Builder</h2>
-
+                  <h2>Input Builder Blueprint</h2>
                   <p>
-                    Design every input your users will interact with before
-                    building the HTML form.
+                    Define the exact input type, ID, label, default value,
+                    validation, and selection rules for every approved category.
                   </p>
 
                   <button
@@ -815,8 +897,7 @@
                 </div>
 
                 <div class="module-card-back">
-                  <h3>Input Builder</h3>
-
+                  <h3>Input Builder Blueprint</h3>
                   <h4>Purpose</h4>
 
                   <p>
@@ -827,25 +908,199 @@
                   <h4>Why this matters</h4>
 
                   <p>
-                    This becomes the blueprint for your entire user interface.
-                    Planning your inputs now makes building the HTML much faster
-                    and helps prevent missing fields later.
+                    Every input affects the quality of the final prompt.
+                    Defining the correct input type, validation, and selection
+                    rules now creates a consistent user experience and makes the
+                    HTML and JavaScript builders much easier to implement.
                   </p>
 
                   <h4>What to do with the output</h4>
 
                   <ul>
-                    <li>Review every input field.</li>
-
-                    <li>Verify each dropdown and its options.</li>
-
-                    <li>Edit placeholder text if needed.</li>
-
-                    <li>Remove unnecessary inputs.</li>
+                    <li>Review every input ID, label, and control type.</li>
 
                     <li>
-                      Save this output because you'll use it as your HTML form
-                      checklist.
+                      Confirm each input matches the approved category it
+                      belongs to.
+                    </li>
+
+                    <li>
+                      Check default values, validation rules, and selection
+                      limits.
+                    </li>
+
+                    <li>
+                      Verify lock, randomize, preset, and Clear All support
+                      where approved.
+                    </li>
+
+                    <li>
+                      Approve the completed input structure before moving to the
+                      Option Data Blueprint.
+                    </li>
+
+                    <li>
+                      Stay in the same ChatGPT conversation for the remaining
+                      blueprint stages.
+                    </li>
+                  </ul>
+
+                  <span class="flip-hint">Click again to flip back</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="module-card flip-card">
+              <div class="module-card-inner">
+                <div class="module-card-front">
+                  <i data-lucide="list-checks"></i>
+
+                  <h2>Option Data Blueprint</h2>
+
+                  <p>
+                    Create the complete source of truth for every approved
+                    selectable value used by the generator. This includes
+                    dropdown options, single-select chips, multi-select chips,
+                    and any other predefined choices that users can select.
+                  </p>
+
+                  <button
+                    class="secondary-btn copy-snippet-btn"
+                    data-snippet="optionData"
+                  >
+                    Copy Option Data Prompt
+                  </button>
+
+                  <span class="flip-hint">Click card for teaching notes</span>
+                </div>
+
+                <div class="module-card-back">
+                  <h3>Option Data Blueprint</h3>
+
+                  <h4>Purpose</h4>
+
+                  <p>
+                    Create the complete source of truth for every approved
+                    selectable value used by the generator. This includes
+                    dropdown options, single-select chips, multi-select chips,
+                    and any other predefined choices that users can select.
+                  </p>
+
+                  <h4>Why this matters</h4>
+
+                  <p>
+                    Complete option data prevents empty controls, broken
+                    presets, invalid randomization, and inconsistent values
+                    later. Finalizing every selectable value here gives the HTML
+                    and JavaScript builders one reliable source of truth.
+                  </p>
+
+                  <h4>What to do with the output</h4>
+
+                  <ul>
+                    <li>Review every approved option value.</li>
+
+                    <li>
+                      Confirm every option belongs to the correct category and
+                      input.
+                    </li>
+
+                    <li>
+                      Remove duplicate, inconsistent, or unnecessary values.
+                    </li>
+
+                    <li>
+                      Verify spelling, capitalization, and formatting are
+                      consistent.
+                    </li>
+
+                    <li>
+                      Approve the completed option data before moving to the
+                      Preset Blueprint.
+                    </li>
+
+                    <li>
+                      Stay in the same ChatGPT conversation for the remaining
+                      blueprint stages.
+                    </li>
+                  </ul>
+
+                  <span class="flip-hint">Click again to flip back</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="module-card flip-card">
+              <div class="module-card-inner">
+                <div class="module-card-front">
+                  <i data-lucide="bookmark-check"></i>
+
+                  <h2>Preset Blueprint</h2>
+                  <p>
+                    Create professionally designed presets that automatically
+                    populate your generator using approved categories, inputs,
+                    and option data.
+                  </p>
+
+                  <button
+                    class="secondary-btn copy-snippet-btn"
+                    data-snippet="presets"
+                  >
+                    Copy Preset Blueprint Prompt
+                  </button>
+
+                  <span class="flip-hint">Click card for teaching notes</span>
+                </div>
+
+                <div class="module-card-back">
+                  <h3>Preset Blueprint</h3>
+
+                  <h4>Purpose</h4>
+
+                  <p>
+                    Design complete, ready-to-use presets that automatically
+                    populate the generator using the approved categories, input
+                    structure, and option data. Each preset should produce a
+                    unique, high-quality result with a single click.
+                  </p>
+
+                  <h4>Why this matters</h4>
+
+                  <p>
+                    Presets help beginners get strong results quickly while
+                    showing them how the generator can be used. Defining every
+                    preset before coding also prevents missing values, invalid
+                    combinations, and broken preset buttons later.
+                  </p>
+
+                  <h4>What to do with the output</h4>
+
+                  <ul>
+                    <li>Review every preset name and preset ID.</li>
+
+                    <li>
+                      Confirm every preset uses only approved input IDs and
+                      option values.
+                    </li>
+
+                    <li>
+                      Check that each preset creates a meaningfully different
+                      result.
+                    </li>
+
+                    <li>
+                      Verify all single-select and multi-select values follow
+                      the approved rules.
+                    </li>
+
+                    <li>
+                      Approve the completed presets before moving to the Logic
+                      Blueprint.
+                    </li>
+
+                    <li>
+                      Stay in the same ChatGPT conversation for the remaining
+                      blueprint stages.
                     </li>
                   </ul>
 
@@ -859,11 +1114,10 @@
                 <div class="module-card-front">
                   <i data-lucide="cpu"></i>
 
-                  <h2>Logic Builder</h2>
-
+                  <h2>Logic Blueprint</h2>
                   <p>
-                    Design how every feature in your generator will work before
-                    writing JavaScript.
+                    Design exactly how every feature, interaction, and generator
+                    workflow will function before writing any JavaScript.
                   </p>
 
                   <button
@@ -877,40 +1131,54 @@
                 </div>
 
                 <div class="module-card-back">
-                  <h3>Logic Builder</h3>
-
+                  <h3>Logic Blueprint</h3>
                   <h4>Purpose</h4>
 
                   <p>
-                    Plan exactly how your Prompt Generator will function before
-                    writing JavaScript.
+                    Define how every approved feature should behave before
+                    writing JavaScript. Plan the complete application logic,
+                    including user interactions, prompt generation, presets,
+                    randomization, validation, locking, history, and every
+                    workflow the generator will support.
                   </p>
 
                   <h4>Why this matters</h4>
 
                   <p>
-                    The logic is the brain of your generator. Planning it first
-                    helps prevent broken features, duplicate code, and confusing
-                    workflows.
+                    Clear logic prevents broken buttons, disconnected features,
+                    conflicting behavior, and duplicate code. Planning the full
+                    application behavior first gives the JavaScript Builder one
+                    reliable blueprint to follow.
                   </p>
 
                   <h4>What to do with the output</h4>
 
                   <ul>
-                    <li>Review the application workflow.</li>
-
-                    <li>Verify how Generate Prompt should work.</li>
-
-                    <li>Review Randomize, Lock, Presets, and Clear All.</li>
+                    <li>Review the complete application workflow.</li>
 
                     <li>
-                      Confirm how Prompt History and Prompt Variations should
-                      function.
+                      Confirm how Generate Prompt, Randomize, Lock, Presets, and
+                      Clear All should behave.
                     </li>
 
                     <li>
-                      Save this output because it becomes your JavaScript
-                      blueprint.
+                      Check validation, error handling, Local Storage, history,
+                      and variation rules.
+                    </li>
+
+                    <li>
+                      Make sure every approved feature has clear behavior and no
+                      conflicting instructions.
+                    </li>
+
+                    <li>
+                      Approve the completed logic before moving to the Prompt
+                      Assembly Blueprint.
+                    </li>
+
+                    <li>
+                      Stay in the same ChatGPT conversation for the remaining
+                      blueprint stages.
                     </li>
                   </ul>
 
@@ -924,11 +1192,10 @@
                 <div class="module-card-front">
                   <i data-lucide="wand-sparkles"></i>
 
-                  <h2>Prompt Assembly Builder</h2>
-
+                  <h2>Prompt Assembly Blueprint</h2>
                   <p>
-                    Design how every user selection becomes one polished,
-                    professional AI prompt.
+                    Define how every approved user selection will be combined
+                    into one polished, natural, and copy-ready final prompt.
                   </p>
 
                   <button
@@ -942,38 +1209,228 @@
                 </div>
 
                 <div class="module-card-back">
-                  <h3>Prompt Assembly Builder</h3>
-
+                  <h3>Prompt Assembly Blueprint</h3>
                   <h4>Purpose</h4>
 
                   <p>
-                    Design how your Prompt Generator combines every user input
-                    into one polished, high-quality prompt.
+                    Define exactly how every approved category, input, custom
+                    field, and preset will be assembled into one complete,
+                    natural-language prompt that is ready to use with AI.
                   </p>
 
                   <h4>Why this matters</h4>
 
                   <p>
-                    Even with great categories and inputs, your generator is
-                    only as good as the final prompt it creates. This step
-                    ensures everything flows together naturally and produces
-                    professional results.
+                    Even the best categories and options won't produce great
+                    results if they're assembled poorly. A well-planned prompt
+                    structure creates clear, natural, and high-quality prompts
+                    that AI can interpret consistently.
                   </p>
 
                   <h4>What to do with the output</h4>
 
                   <ul>
-                    <li>Review the overall prompt structure.</li>
-
-                    <li>Check that the information flows logically.</li>
-
-                    <li>Remove duplicate or conflicting instructions.</li>
-
-                    <li>Verify where custom text should appear.</li>
+                    <li>
+                      Review the complete prompt structure from beginning to
+                      end.
+                    </li>
 
                     <li>
-                      Save this output because it becomes the blueprint for your
-                      Generate Prompt function.
+                      Confirm every approved category and custom input is
+                      included in the correct order.
+                    </li>
+
+                    <li>
+                      Remove repetitive wording and improve the natural flow of
+                      the prompt.
+                    </li>
+
+                    <li>
+                      Verify the final prompt reads naturally and produces
+                      consistent AI results.
+                    </li>
+
+                    <li>
+                      Approve the completed prompt structure before moving to
+                      the Visual &amp; Layout Planner.
+                    </li>
+
+                    <li>
+                      Stay in the same ChatGPT conversation for the remaining
+                      workshop stages.
+                    </li>
+                  </ul>
+
+                  <span class="flip-hint">Click again to flip back</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="module-card flip-card">
+              <div class="module-card-inner">
+                <div class="module-card-front">
+                  <i data-lucide="palette"></i>
+
+                  <h2>Visual &amp; Layout Planner</h2>
+
+                  <p>
+                    Plan your generator's branding, colors, typography, imagery,
+                    and visual direction before creating the final interface
+                    blueprint.
+                  </p>
+
+                  <button
+                    class="secondary-btn copy-snippet-btn"
+                    data-snippet="visualLayoutPlanner"
+                  >
+                    Copy Visual &amp; Layout Planner Prompt
+                  </button>
+
+                  <span class="flip-hint">Click card for teaching notes</span>
+                </div>
+
+                <div class="module-card-back">
+                  <h3>Visual &amp; Layout Planner</h3>
+
+                  <h4>Purpose</h4>
+
+                  <p>
+                    Define the visual identity and presentation style of your
+                    generator before planning the final interface structure.
+                    This includes the brand colors, typography, imagery, header
+                    style, marquee, footer, background, buttons, and overall
+                    design mood.
+                  </p>
+
+                  <h4>Why this matters</h4>
+
+                  <p>
+                    Making visual decisions before creating the Layout Blueprint
+                    prevents unnecessary redesigns and conflicting styles. It
+                    gives the next stage a clear, approved direction for
+                    branding, hierarchy, spacing, imagery, and the overall user
+                    experience.
+                  </p>
+
+                  <h4>What to do with the output</h4>
+
+                  <ul>
+                    <li>Review the complete visual direction.</li>
+
+                    <li>
+                      Confirm the approved brand colors, typography, and overall
+                      design mood.
+                    </li>
+
+                    <li>
+                      Confirm the background style, button style, and visual
+                      details.
+                    </li>
+
+                    <li>
+                      Decide whether the generator will include a header image
+                      or other branded imagery.
+                    </li>
+
+                    <li>
+                      Decide whether the generator will include a marquee and
+                      footer.
+                    </li>
+
+                    <li>
+                      Remove or revise anything that does not match the
+                      generator's brand or purpose.
+                    </li>
+
+                    <li>
+                      Approve the final visual plan before moving to the Layout
+                      Blueprint.
+                    </li>
+
+                    <li>
+                      Keep the approved output in the same ChatGPT conversation
+                      for the remaining workshop stages.
+                    </li>
+                  </ul>
+
+                  <span class="flip-hint">Click again to flip back</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="module-card flip-card">
+              <div class="module-card-inner">
+                <div class="module-card-front">
+                  <i data-lucide="layout-panel-top"></i>
+
+                  <h2>Layout Blueprint</h2>
+
+                  <p>
+                    Design the complete structure of your generator by
+                    organizing every section, component, and user interaction
+                    before writing HTML, CSS, or JavaScript.
+                  </p>
+
+                  <button
+                    class="secondary-btn copy-snippet-btn"
+                    data-snippet="layout"
+                  >
+                    Copy Layout Blueprint Prompt
+                  </button>
+
+                  <span class="flip-hint">Click card for teaching notes</span>
+                </div>
+
+                <div class="module-card-back">
+                  <h3>Layout Blueprint</h3>
+
+                  <h4>Purpose</h4>
+
+                  <p>
+                    Transform your approved planning documents into a complete
+                    interface blueprint. Organize every section, control, panel,
+                    button, navigation area, and user interaction so you know
+                    exactly what the finished generator should look like before
+                    writing any code.
+                  </p>
+
+                  <h4>Why this matters</h4>
+
+                  <p>
+                    A complete Layout Blueprint eliminates guesswork during
+                    development. Because the structure has already been
+                    approved, building the HTML, CSS, and JavaScript becomes
+                    faster, more organized, and much less likely to require
+                    major redesigns later.
+                  </p>
+
+                  <h4>What to do with the output</h4>
+
+                  <ul>
+                    <li>Review the complete interface layout.</li>
+
+                    <li>
+                      Confirm the placement of every section, panel, category,
+                      and control.
+                    </li>
+
+                    <li>
+                      Verify that the layout follows the approved Visual &amp;
+                      Layout Planner.
+                    </li>
+
+                    <li>
+                      Make any final adjustments before development begins.
+                    </li>
+
+                    <li>
+                      Approve the finished Layout Blueprint as the master guide
+                      for the HTML, CSS, and JavaScript stages.
+                    </li>
+
+                    <li>
+                      Keep the approved output in the same ChatGPT conversation
+                      for the remaining workshop stages.
                     </li>
                   </ul>
 
@@ -2018,8 +2475,7 @@ Before writing the listing, ask me for:
             </div>
           </article>
 
-            <a class="gold-btn" href="./diploma.html"> View My Diploma </a>
-          </div>
+          <a class="gold-btn" href="./diploma.html"> View My Diploma </a>
         </section>
         <!-- ============================= -->
         <!-- PAGE: NOTEBOOK -->

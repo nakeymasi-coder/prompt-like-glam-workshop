@@ -319,10 +319,20 @@ svg {
    ============================= */
 
 .main-content {
-  width: calc(100% - var(--sidebar-width));
+  flex: 1;
+  width: auto;
+  max-width: calc(100vw - var(--sidebar-width));
+  min-width: 0;
   margin-left: var(--sidebar-width);
   min-height: 100vh;
   padding: 0 34px 56px;
+  overflow-x: hidden;
+}
+
+.page {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .topbar {
@@ -469,12 +479,14 @@ svg {
 
 .page-header h1,
 .workspace-header h1 {
-  max-width: 950px;
+  max-width: 100%;
   margin: 8px 0 10px;
   font-family: var(--font-display);
-  font-size: clamp(34px, 5vw, 64px);
-  line-height: 0.98;
-  letter-spacing: -0.045em;
+  font-size: clamp(2rem, 3vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 .page-header p,
@@ -789,7 +801,10 @@ svg {
   gap: 18px;
 }
 
-.lesson-section-grid,
+.lesson-section-grid {
+  grid-template-columns: 1fr;
+}
+
 .replay-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -2223,4 +2238,322 @@ body.light-theme .help-card p {
 
 .workshop-help-text strong {
   color: var(--gold-pale);
+}
+/* ========================================
+   DESKTOP SIDEBAR LAYOUT FIX
+======================================== */
+
+@media (min-width: 901px) {
+  .main-content {
+    width: calc(100% - var(--sidebar-width)) !important;
+    margin-left: var(--sidebar-width) !important;
+    min-width: 0;
+  }
+}
+/* ========================================
+   WORKSHOP JOURNEY — LUXURY EXPERIENCE
+======================================== */
+
+.workshop-journey-page {
+  position: relative;
+  min-height: calc(100vh - 80px);
+  padding: 48px 28px 80px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 50% 10%,
+      rgba(33, 82, 190, 0.22),
+      transparent 38%
+    ),
+    linear-gradient(180deg, #020713 0%, #06163d 48%, #01040c 100%);
+}
+
+.workshop-journey-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 15% 30%,
+      rgba(212, 175, 55, 0.08),
+      transparent 25%
+    ),
+    radial-gradient(circle at 85% 65%, rgba(39, 94, 220, 0.12), transparent 30%);
+}
+
+.journey-stage {
+  position: relative;
+  z-index: 1;
+  width: min(960px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 44px;
+}
+
+.journey-card {
+  position: relative;
+  width: 100%;
+  padding: 3px;
+  border-radius: 30px;
+  background: linear-gradient(
+    135deg,
+    #fff3a6 0%,
+    #d4af37 22%,
+    #7d570f 48%,
+    #f4d978 74%,
+    #b67b13 100%
+  );
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.55),
+    0 0 34px rgba(212, 175, 55, 0.18);
+}
+
+.journey-card::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  z-index: 1;
+  pointer-events: none;
+  border: 1px solid rgba(244, 217, 120, 0.42);
+  border-radius: 21px;
+}
+
+.journey-card-content {
+  position: relative;
+  z-index: 2;
+  padding: 52px 64px;
+  text-align: center;
+  border-radius: 27px;
+  background:
+    radial-gradient(
+      circle at top center,
+      rgba(36, 82, 181, 0.24),
+      transparent 42%
+    ),
+    linear-gradient(145deg, rgba(7, 30, 85, 0.99), rgba(1, 7, 22, 0.99));
+  box-shadow:
+    inset 0 0 45px rgba(16, 69, 174, 0.16),
+    inset 0 0 0 6px rgba(255, 255, 255, 0.018);
+}
+
+.journey-card .eyebrow {
+  display: inline-block;
+  margin-bottom: 13px;
+  color: #f2d477;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.journey-card h1,
+.journey-card h2 {
+  margin: 0;
+  color: #f4d978;
+  font-family: Cinzel, Georgia, serif;
+  line-height: 1.12;
+  text-shadow:
+    0 2px 14px rgba(0, 0, 0, 0.6),
+    0 0 18px rgba(212, 175, 55, 0.13);
+}
+
+.journey-card h1 {
+  font-size: clamp(2rem, 5vw, 3.8rem);
+}
+
+.journey-card h2 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+}
+
+.journey-card h3 {
+  color: #f0cf68;
+  font-family: Cinzel, Georgia, serif;
+}
+
+.journey-card p,
+.journey-card li {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.journey-card p {
+  max-width: 730px;
+  margin: 18px auto 0;
+}
+
+.journey-divider {
+  width: min(340px, 72%);
+  height: 1px;
+  margin: 24px auto 30px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(244, 217, 120, 0.95),
+    transparent
+  );
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
+}
+
+.journey-checklist {
+  width: min(700px, 100%);
+  margin: 28px auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 24px;
+  text-align: left;
+  list-style: none;
+}
+
+.journey-checklist li {
+  position: relative;
+  padding: 14px 16px 14px 48px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.journey-checklist li::before {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  color: #06163d;
+  font-weight: 900;
+  background: linear-gradient(145deg, #fff0a0, #c78e1d);
+  box-shadow: 0 0 13px rgba(212, 175, 55, 0.25);
+}
+
+.journey-important-box {
+  width: min(720px, 100%);
+  margin: 30px auto;
+  padding: 24px 28px;
+  border: 1px solid rgba(212, 175, 55, 0.48);
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.22);
+  box-shadow: inset 0 0 24px rgba(212, 175, 55, 0.035);
+}
+
+.journey-important-box h3 {
+  margin: 0 0 10px;
+  color: #f3d572;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.journey-important-box p {
+  margin-top: 8px;
+}
+
+.journey-days-grid {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.journey-day-card {
+  padding: 32px 26px;
+  border: 1px solid rgba(212, 175, 55, 0.38);
+  border-radius: 22px;
+  background: linear-gradient(
+    145deg,
+    rgba(11, 45, 113, 0.72),
+    rgba(2, 10, 30, 0.94)
+  );
+  box-shadow:
+    inset 0 0 28px rgba(29, 83, 192, 0.12),
+    0 16px 30px rgba(0, 0, 0, 0.25);
+}
+
+.journey-day-label {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: #f4d978;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.journey-day-card h3 {
+  margin: 8px 0 12px;
+  font-size: 1.5rem;
+}
+
+.journey-day-card p {
+  min-height: 116px;
+  margin-top: 0;
+}
+
+.journey-link-btn,
+.journey-start-btn {
+  margin-top: 20px;
+}
+
+.journey-closing-card .journey-card-content {
+  padding-top: 58px;
+  padding-bottom: 58px;
+}
+
+.journey-start-btn {
+  min-width: 230px;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+@media (max-width: 760px) {
+  .workshop-journey-page {
+    padding: 32px 14px 60px;
+  }
+
+  .journey-stage {
+    gap: 28px;
+  }
+
+  .journey-card-content {
+    padding: 42px 24px;
+  }
+
+  .journey-checklist,
+  .journey-days-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .journey-day-card p {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 460px) {
+  .journey-card {
+    border-radius: 23px;
+  }
+
+  .journey-card::before {
+    inset: 9px;
+    border-radius: 16px;
+  }
+
+  .journey-card-content {
+    padding: 36px 19px;
+    border-radius: 20px;
+  }
+
+  .journey-card p,
+  .journey-card li {
+    font-size: 0.94rem;
+  }
+
+  .journey-checklist li {
+    padding-left: 46px;
+  }
 }
