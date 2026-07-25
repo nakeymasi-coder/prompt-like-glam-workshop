@@ -713,19 +713,29 @@
           margin: 0;
         }
 
+        html,
         body {
+          width: 100%;
+          height: 100%;
+          margin: 0;
+          padding: 0;
           background: #fff;
+          overflow: visible;
         }
 
         .intro,
         .hero,
         .controls,
-        .celebration-layer,
+        .celebration-layer {
+          display: none !important;
+        }
+
         .app,
         .workspace,
         .diploma-wrap,
         .diploma-stage {
           width: 100%;
+          max-width: none;
           margin: 0;
           padding: 0;
           display: block;
@@ -735,10 +745,15 @@
         }
 
         .diploma {
-          width: 100vw;
-          height: 70.7vw;
-          max-height: 100vh;
+          width: 100%;
+          height: auto;
+          aspect-ratio: 1.414 / 1;
+          margin: 0;
+          zoom: 1;
+          transform: none;
           box-shadow: none;
+          break-inside: avoid;
+          page-break-inside: avoid;
         }
       }
     </style>
@@ -1080,12 +1095,63 @@
       async function renderElement(element, backgroundColor) {
         setStatus("Preparing your file...");
 
-        return html2canvas(element, {
-          scale: 2,
-          backgroundColor,
-          useCORS: true,
-          logging: false,
+        if (document.fonts && document.fonts.ready) {
+          await document.fonts.ready;
+        }
+
+        const clone = element.cloneNode(true);
+        const renderHost = document.createElement("div");
+
+        renderHost.setAttribute("aria-hidden", "true");
+        renderHost.style.position = "fixed";
+        renderHost.style.left = "-10000px";
+        renderHost.style.top = "0";
+        renderHost.style.width = "1120px";
+        renderHost.style.height = "792px";
+        renderHost.style.overflow = "hidden";
+        renderHost.style.pointerEvents = "none";
+        renderHost.style.background = backgroundColor;
+
+        clone.style.width = "1120px";
+        clone.style.height = "792px";
+        clone.style.margin = "0";
+        clone.style.zoom = "1";
+        clone.style.transform = "none";
+        clone.style.maxWidth = "none";
+        clone.style.maxHeight = "none";
+
+        renderHost.appendChild(clone);
+        document.body.appendChild(renderHost);
+
+        await new Promise((resolve) => {
+          requestAnimationFrame(() => {
+            requestAnimationFrame(resolve);
+          });
         });
+
+        const bounds = clone.getBoundingClientRect();
+
+        if (bounds.width <= 0 || bounds.height <= 0) {
+          renderHost.remove();
+          throw new Error("The diploma could not be rendered at a valid size.");
+        }
+
+        try {
+          return await html2canvas(clone, {
+            scale: 2,
+            width: 1120,
+            height: 792,
+            windowWidth: 1120,
+            windowHeight: 792,
+            backgroundColor,
+            useCORS: true,
+            allowTaint: false,
+            logging: false,
+            removeContainer: true,
+          });
+        } finally {
+          renderHost.remove();
+        }
       }
 
       function safeFileName() {
@@ -1136,6 +1202,10 @@
           const blob = await new Promise((resolve) =>
             canvas.toBlob(resolve, "image/png", 1),
           );
+
+          if (!blob) {
+            throw new Error("The diploma image could not be created.");
+          }
 
           const file = new File([blob], safeFileName() + "-Diploma.png", {
             type: "image/png",
@@ -1192,7 +1262,16 @@
 
       document
         .getElementById("printBtn")
-        .addEventListener("click", () => window.print());
+        .addEventListener("click", () => {
+          intro.classList.add("is-hidden");
+          setStatus("Opening the print window...");
+
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              window.print();
+            });
+          });
+        });
 
       document
         .getElementById("celebrateBtn")
