@@ -1,806 +1,615 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta
-      content="Prompt Generator Companion: build a reusable prompt generator with HTML, CSS, and JavaScript."
-      name="description"
-    />
-    <title>Prompt Generator Companion</title>
-    <link href="css/style.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&amp;family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <meta content="Prompt Generator Companion v7.0" name="generator" />
-  </head>
-  <body>
-    <a class="skip-link" href="#dashboard">Skip to content</a>
-    <div class="app-shell">
-      <!-- ============================= -->
-      <!-- SIDEBAR -->
-      <!-- ============================= -->
-      <aside aria-label="Main navigation" class="sidebar">
-        <div class="brand-block">
-          <div>
-            <h1>Prompt Generator Companion™</h1>
-            <p>Workshop Experience</p>
-          </div>
-        </div>
-        <nav class="sidebar-nav">
-          <a
-            class="nav-link requirements-nav-link"
-            data-page="requirements"
-            href="#"
-          >
-            <i data-lucide="clipboard-check"></i>
-            <span>🚨 Workshop Requirements (Read First)</span>
-          </a>
-          <a class="nav-link active" data-page="dashboard" href="#">
-            <i data-lucide="layout-dashboard"></i>
-            <span>Generator Studio</span>
-          </a>
-          <a class="nav-link" data-page="journey" href="#">
-            <i data-lucide="route"></i>
-            <span>Workshop Journey</span>
-          </a>
-          <a class="nav-link" data-page="day-one" href="#">
-            <i data-lucide="hammer"></i>
-            <span>Day 1: Build</span>
-          </a>
-          <a class="nav-link" data-page="day-two" href="#">
-            <i data-lucide="rocket"></i>
-            <span>Day 2: Publish + Sell</span>
-          </a>
-
-          <a class="nav-link" data-page="references" href="#">
-            <i data-lucide="images"></i>
-            <span>Reference Image Library</span>
-          </a>
-
-          <a class="nav-link" data-page="sell" href="#">
-            <i data-lucide="badge-dollar-sign"></i>
-            <span>Sell Your Generator</span>
-          </a>
-
-          <a class="nav-link" data-page="publish" href="#">
-            <i data-lucide="cloud-upload"></i>
-            <span>Tools & Resources</span>
-          </a>
-
-          <a class="nav-link" data-page="notebook" href="#">
-            <i data-lucide="notebook-pen"></i>
-            <span>Notebook</span>
-          </a>
-          <a class="nav-link" data-page="replays" href="#">
-            <i data-lucide="monitor-play"></i>
-            <span>Replay Library</span>
-          </a>
-
-          <a class="nav-link" data-page="bonuses" href="#">
-            <i data-lucide="gift"></i>
-            <span>Bonus Resources</span>
-          </a>
-        </nav>
-      </aside>
-      <!-- ============================= -->
-      <!-- MAIN CONTENT -->
-      <!-- ============================= -->
-      <main class="main-content">
-        <header class="topbar">
-          <button
-            aria-label="Open menu"
-            class="mobile-menu-btn"
-            id="mobileMenuBtn"
-          >
-            <i data-lucide="menu"></i>
-          </button>
-          <div class="topbar-search">
-            <i data-lucide="search"></i>
-            <input
-              id="globalSearch"
-              placeholder="Search workshop steps, code, modules, downloads..."
-              type="search"
-            />
-          </div>
-        </header>
-
-        <!-- ============================= -->
-        <!-- PAGE: WORKSHOP REQUIREMENTS -->
-        <!-- ============================= -->
-        <section class="page" id="requirements">
-          <div class="page-header">
-            <span class="eyebrow">Before Class</span>
-            <h1>Workshop Requirements</h1>
-            <p>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Prompt Generator Companion: build a reusable prompt generator with HTML, CSS, and JavaScript." name="description"/>
+<title>Prompt Generator Companion</title>
+<link href="css/style.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&amp;family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/lucide@latest"></script>
+<meta content="Prompt Generator Companion v7.0" name="generator"/>
+</head>
+<body>
+<a class="skip-link" href="#dashboard">Skip to content</a>
+<div class="app-shell">
+<!-- ============================= -->
+<!-- SIDEBAR -->
+<!-- ============================= -->
+<aside aria-label="Main navigation" class="sidebar">
+<div class="brand-block">
+<div>
+<h1>Prompt Generator Companion™</h1>
+<p>Workshop Experience</p>
+</div>
+</div>
+<nav class="sidebar-nav">
+<a class="nav-link requirements-nav-link" data-page="requirements" href="#">
+<i data-lucide="clipboard-check"></i>
+<span>🚨 Workshop Requirements (Read First)</span>
+</a>
+<a class="nav-link active" data-page="dashboard" href="#">
+<i data-lucide="layout-dashboard"></i>
+<span>Generator Studio</span>
+</a>
+<a class="nav-link" data-page="journey" href="#">
+<i data-lucide="route"></i>
+<span>Workshop Journey</span>
+</a>
+<a class="nav-link" data-page="day-one" href="#">
+<i data-lucide="hammer"></i>
+<span>Day 1: Build</span>
+</a>
+<a class="nav-link" data-page="day-two" href="#">
+<i data-lucide="rocket"></i>
+<span>Day 2: Publish + Sell</span>
+</a>
+<a class="nav-link" data-page="references" href="#">
+<i data-lucide="images"></i>
+<span>Reference Image Library</span>
+</a>
+<a class="nav-link" data-page="sell" href="#">
+<i data-lucide="badge-dollar-sign"></i>
+<span>Sell Your Generator</span>
+</a>
+<a class="nav-link" data-page="publish" href="#">
+<i data-lucide="cloud-upload"></i>
+<span>Tools &amp; Resources</span>
+</a>
+<a class="nav-link" data-page="notebook" href="#">
+<i data-lucide="notebook-pen"></i>
+<span>Notebook</span>
+</a>
+<a class="nav-link" data-page="replays" href="#">
+<i data-lucide="monitor-play"></i>
+<span>Replay Library</span>
+</a>
+<a class="nav-link" data-page="bonuses" href="#">
+<i data-lucide="gift"></i>
+<span>Bonus Resources</span>
+</a>
+</nav>
+</aside>
+<!-- ============================= -->
+<!-- MAIN CONTENT -->
+<!-- ============================= -->
+<main class="main-content">
+<header class="topbar">
+<button aria-label="Open menu" class="mobile-menu-btn" id="mobileMenuBtn">
+<i data-lucide="menu"></i>
+</button>
+<div class="topbar-search">
+<i data-lucide="search"></i>
+<input id="globalSearch" placeholder="Search workshop steps, code, modules, downloads..." type="search"/>
+</div>
+</header>
+<!-- ============================= -->
+<!-- PAGE: WORKSHOP REQUIREMENTS -->
+<!-- ============================= -->
+<section class="page" id="requirements">
+<div class="page-header">
+<span class="eyebrow">Before Class</span>
+<h1>Workshop Requirements</h1>
+<p>
               Before the workshop begins, please complete the items below.
               Having everything ready before class allows us to spend our time
               building your Prompt Generator instead of setting up software and
               accounts.
             </p>
-          </div>
-
-          <div class="lesson-section-grid">
-            <article class="lesson-block">
-              <span class="lesson-tag">Required</span>
-              <h2>Complete Before Class</h2>
-
-              <ul>
-                <li><input type="checkbox" /> Create a GitHub account</li>
-                <li><input type="checkbox" /> Create a Netlify account</li>
-                <li><input type="checkbox" /> Install Visual Studio Code</li>
-                <li><input type="checkbox" /> Sign in to all three</li>
-                <li><input type="checkbox" /> Verify your email addresses</li>
-                <li>
-                  <input type="checkbox" /> Make sure everything opens correctly
+</div>
+<div class="lesson-section-grid">
+<article class="lesson-block">
+<span class="lesson-tag">Required</span>
+<h2>Complete Before Class</h2>
+<ul>
+<li><input type="checkbox"/> Create a GitHub account</li>
+<li><input type="checkbox"/> Create a Netlify account</li>
+<li><input type="checkbox"/> Install Visual Studio Code</li>
+<li><input type="checkbox"/> Sign in to all three</li>
+<li><input type="checkbox"/> Verify your email addresses</li>
+<li>
+<input type="checkbox"/> Make sure everything opens correctly
                 </li>
-              </ul>
-            </article>
-
-            <article class="lesson-block">
-              <span class="lesson-tag">Need Help?</span>
-
-              <h2>Setup Video Tutorials</h2>
-
-              <p>
+</ul>
+</article>
+<article class="lesson-block">
+<span class="lesson-tag">Need Help?</span>
+<h2>Setup Video Tutorials</h2>
+<p>
                 If you don't already know how to set up GitHub, Netlify, or
                 Visual Studio Code, don't worry.
               </p>
-
-              <p>
+<p>
                 A step-by-step video tutorial is included for each one. Simply
                 watch the videos, complete the setup, and come to the workshop
                 ready to build.
               </p>
-
-              <div class="important-alert">
-                <h3>⚠️ IMPORTANT</h3>
-
-                <p>
+<div class="important-alert">
+<h3>⚠️ IMPORTANT</h3>
+<p>
                   GitHub, Netlify, and Visual Studio Code setup will
                   <strong>NOT</strong> be covered during the live workshop.
                 </p>
-
-                <p>
+<p>
                   These must already be installed, set up, and ready to use
                   before class begins.
                 </p>
-              </div>
-            </article>
-
-            <article class="lesson-block">
-              <span class="lesson-tag">Video Tutorials</span>
-
-              <h2>Need Help Setting Everything Up?</h2>
-
-              <p>
+</div>
+</article>
+<article class="lesson-block">
+<span class="lesson-tag">Video Tutorials</span>
+<h2>Need Help Setting Everything Up?</h2>
+<p>
                 I've included step-by-step video tutorials to help you set up
                 GitHub, Netlify, and Visual Studio Code before the workshop.
               </p>
-
-              <p>
+<p>
                 Watch each video, complete the setup, then come back here when
                 you're finished.
               </p>
-              <div class="lesson-complete-area setup-video-buttons">
-                <a
-                  class="gold-btn"
-                  id="githubSetupLink"
-                  href="PASTE-YOUR-GITHUB-TUTORIAL-LINK-HERE"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+<div class="lesson-complete-area setup-video-buttons">
+<a class="gold-btn" href="https://drive.google.com/file/d/1-p_ZhEkv-ckb2821290MXmFIVccRfGC3/view?usp=sharing" id="githubSetupLink" rel="noopener noreferrer" target="_blank">
                   🎥 GitHub Setup Tutorial
                 </a>
-
-                <a
-                  class="gold-btn"
-                  id="netlifySetupLink"
-                  href="PASTE-YOUR-NETLIFY-TUTORIAL-LINK-HERE"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+<a class="gold-btn" href="https://drive.google.com/file/d/1KKLF5JFjt7avnuthXSyosbEe-5eFNjca/view?usp=sharing" id="netlifySetupLink" rel="noopener noreferrer" target="_blank">
                   🎥 Watch Netlify Setup
                 </a>
-
-                <a
-                  class="gold-btn"
-                  id="vsCodeSetupLink"
-                  href="PASTE-YOUR-VSCODE-TUTORIAL-LINK-HERE"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+<a class="gold-btn" href="https://drive.google.com/file/d/1k4pb-S3MF683Ypfb4CCY3ShRJADzXuga/view?usp=sharing" id="vsCodeSetupLink" rel="noopener noreferrer" target="_blank">
                   🎥 Watch VS Code Setup
                 </a>
-              </div>
-
-              <p style="margin-top: 20px">
-                <strong>Tip:</strong> You can also open the official GitHub,
+</div>
+<p style="margin-top: 20px">
+<strong>Tip:</strong> You can also open the official GitHub,
                 Netlify, and Visual Studio Code websites anytime from the
-                <strong>Tools & Resources</strong>
+                <strong>Tools &amp; Resources</strong>
                 page inside this Workshop Companion.
               </p>
-            </article>
-          </div>
-        </section>
-
-        <!-- ============================= -->
-        <!-- PAGE: DASHBOARD -->
-        <!-- ============================= -->
-        <section class="page active-page" id="dashboard">
-          <div class="page-header split-header">
-            <div>
-              <h1>Build Your First Prompt Generator</h1>
-              <p>
+</article>
+</div>
+</section>
+<!-- ============================= -->
+<!-- PAGE: DASHBOARD -->
+<!-- ============================= -->
+<section class="page active-page" id="dashboard">
+<div class="page-header split-header">
+<div>
+<h1>Build Your First Prompt Generator</h1>
+<p>
                 Use this companion during the live workshop and later when
                 rebuilding your generator.
               </p>
-            </div>
-          </div>
-          <div class="lesson-section-grid">
-            <article class="lesson-block">
-              <span class="lesson-tag">ROADMAP</span>
-              <h2>Today's Build</h2>
-              <ul class="mission-list">
-                <li><input type="checkbox" /> Create project folder</li>
-                <li><input type="checkbox" /> Create index.html</li>
-                <li><input type="checkbox" /> Create style.css</li>
-                <li><input type="checkbox" /> Create script.js</li>
-                <li><input type="checkbox" /> Connect all files</li>
-                <li><input type="checkbox" /> Build layout</li>
-                <li><input type="checkbox" /> Make Generate work</li>
-                <li><input type="checkbox" /> Make Copy work</li>
-                <li><input type="checkbox" /> Test everything</li>
-              </ul>
-            </article>
-            <article class="lesson-block">
-              <span class="lesson-tag">HELP</span>
-              <h2>Quick Help</h2>
-
-              <details>
-                <summary>What is HTML?</summary>
-                <p>
+</div>
+</div>
+<div class="lesson-section-grid">
+<article class="lesson-block">
+<span class="lesson-tag">ROADMAP</span>
+<h2>Today's Build</h2>
+<ul class="mission-list">
+<li><input type="checkbox"/> Create project folder</li>
+<li><input type="checkbox"/> Create index.html</li>
+<li><input type="checkbox"/> Create style.css</li>
+<li><input type="checkbox"/> Create script.js</li>
+<li><input type="checkbox"/> Connect all files</li>
+<li><input type="checkbox"/> Build layout</li>
+<li><input type="checkbox"/> Make Generate work</li>
+<li><input type="checkbox"/> Make Copy work</li>
+<li><input type="checkbox"/> Test everything</li>
+</ul>
+</article>
+<article class="lesson-block">
+<span class="lesson-tag">HELP</span>
+<h2>Quick Help</h2>
+<details>
+<summary>What is HTML?</summary>
+<p>
                   HTML creates the structure of your prompt generator. It builds
                   the headings, buttons, text boxes, cards, and everything users
                   can see.
                 </p>
-              </details>
-
-              <details>
-                <summary>What is CSS?</summary>
-                <p>
+</details>
+<details>
+<summary>What is CSS?</summary>
+<p>
                   CSS controls the appearance of your generator, including
                   colors, fonts, spacing, layouts, borders, and animations.
                 </p>
-              </details>
-
-              <details>
-                <summary>What is JavaScript?</summary>
-                <p>
+</details>
+<details>
+<summary>What is JavaScript?</summary>
+<p>
                   JavaScript powers the interactive features like Generate
                   Prompt, Randomize, Copy, Presets, and other buttons.
                 </p>
-              </details>
-
-              <details>
-                <summary>
+</details>
+<details>
+<summary>
                   What's the difference between HTML, CSS, and JavaScript?
                 </summary>
-                <p>
+<p>
                   Think of it like a house: HTML builds it, CSS decorates it,
                   and JavaScript makes everything work.
                 </p>
-              </details>
-
-              <details>
-                <summary>Where do I paste the ChatGPT prompts?</summary>
-                <p>
+</details>
+<details>
+<summary>Where do I paste the ChatGPT prompts?</summary>
+<p>
                   Copy the lesson prompt from this companion and paste it into a
                   new ChatGPT conversation. Then copy the generated code into
                   the correct file.
                 </p>
-              </details>
-
-              <details>
-                <summary>How do I know which file to edit?</summary>
-                <p>
+</details>
+<details>
+<summary>How do I know which file to edit?</summary>
+<p>
                   Each lesson tells you whether you're working in
                   <strong>index.html</strong>, <strong>style.css</strong>, or
                   <strong>script.js</strong>. Always paste the code into the
                   matching file.
                 </p>
-              </details>
-
-              <details>
-                <summary>How do I change my generator's colors?</summary>
-                <p>
+</details>
+<details>
+<summary>How do I change my generator's colors?</summary>
+<p>
                   Open <strong>style.css</strong>, find the color variables near
                   the top, and replace them with your own brand colors.
                 </p>
-              </details>
-
-              <details>
-                <summary>How do I add my own header image?</summary>
-                <p>
+</details>
+<details>
+<summary>How do I add my own header image?</summary>
+<p>
                   Add your image to the project folder, then update the image
                   path in <strong>index.html</strong> to point to your file.
                 </p>
-              </details>
-
-              <details>
-                <summary>How do I publish my generator?</summary>
-                <p>
+</details>
+<details>
+<summary>How do I publish my generator?</summary>
+<p>
                   Save your project, commit and push it to GitHub, then deploy
                   it with Netlify to create your live website.
                 </p>
-              </details>
-
-              <details>
-                <summary>My generator isn't working. What should I do?</summary>
-                <p>
+</details>
+<details>
+<summary>My generator isn't working. What should I do?</summary>
+<p>
                   Make sure your files are saved, the code was pasted into the
                   correct file, and check your browser's Console for any errors.
                 </p>
-              </details>
-            </article>
-
-            <article class="lesson-block">
-              <span class="lesson-tag">REMEMBER</span>
-              <h2>Common Mistakes</h2>
-
-              <ul>
-                <li>Always save your file before refreshing your browser.</li>
-                <li>
+</details>
+</article>
+<article class="lesson-block">
+<span class="lesson-tag">REMEMBER</span>
+<h2>Common Mistakes</h2>
+<ul>
+<li>Always save your file before refreshing your browser.</li>
+<li>
                   Paste the generated code into the correct file (index.html,
                   style.css, or script.js).
                 </li>
-                <li>
+<li>
                   Never overwrite your entire file unless the lesson tells you
                   to.
                 </li>
-                <li>
+<li>
                   Copy the entire response—don't stop halfway through the code.
                 </li>
-                <li>Only ask ChatGPT to generate one file at a time.</li>
-                <li>Read the lesson instructions before pasting any code.</li>
-                <li>
+<li>Only ask ChatGPT to generate one file at a time.</li>
+<li>Read the lesson instructions before pasting any code.</li>
+<li>
                   If something breaks, undo your last change before trying
                   something else.
                 </li>
-                <li>
+<li>
                   One missing quotation mark, bracket, or semicolon can break
                   your generator.
                 </li>
-                <li>
+<li>
                   Check the browser Console for errors before asking for help.
                 </li>
-                <li>
+<li>
                   Test your generator after every major change instead of
                   waiting until the end.
                 </li>
-              </ul>
-            </article>
-
-            <article class="lesson-block">
-              <span class="lesson-tag">CHECKPOINT</span>
-              <h2>Before You Leave Today</h2>
-              <ul>
-                <li><input type="checkbox" /> HTML linked</li>
-                <li><input type="checkbox" /> CSS linked</li>
-                <li><input type="checkbox" /> JavaScript linked</li>
-                <li><input type="checkbox" /> Generator works</li>
-                <li><input type="checkbox" /> Copy button works</li>
-                <li><input type="checkbox" /> Ready for Day 2</li>
-              </ul>
-            </article>
-          </div>
-        </section>
-        <!-- ============================= -->
-        <!-- PAGE: JOURNEY -->
-        <!-- ============================= -->
-        <section class="page workshop-journey-page" id="journey">
-          <div class="journey-stage">
-            <!-- WELCOME CARD -->
-            <article class="journey-card journey-welcome-card">
-              <div class="journey-butterfly journey-butterfly-left"></div>
-              <div class="journey-butterfly journey-butterfly-right"></div>
-
-              <div class="journey-card-content">
-                <span class="eyebrow">Welcome</span>
-
-                <h1>Welcome to Your Workshop Journey</h1>
-
-                <div class="journey-divider"></div>
-
-                <p>I’m so excited you’re here!</p>
-
-                <p>
+</ul>
+</article>
+<article class="lesson-block">
+<span class="lesson-tag">CHECKPOINT</span>
+<h2>Before You Leave Today</h2>
+<ul>
+<li><input type="checkbox"/> HTML linked</li>
+<li><input type="checkbox"/> CSS linked</li>
+<li><input type="checkbox"/> JavaScript linked</li>
+<li><input type="checkbox"/> Generator works</li>
+<li><input type="checkbox"/> Copy button works</li>
+<li><input type="checkbox"/> Ready for Day 2</li>
+</ul>
+</article>
+</div>
+</section>
+<!-- ============================= -->
+<!-- PAGE: JOURNEY -->
+<!-- ============================= -->
+<section class="page workshop-journey-page" id="journey">
+<div class="journey-stage">
+<!-- WELCOME CARD -->
+<article class="journey-card journey-welcome-card">
+<div class="journey-butterfly journey-butterfly-left"></div>
+<div class="journey-butterfly journey-butterfly-right"></div>
+<div class="journey-card-content">
+<span class="eyebrow">Welcome</span>
+<h1>Welcome to Your Workshop Journey</h1>
+<div class="journey-divider"></div>
+<p>I’m so excited you’re here!</p>
+<p>
                   Over the next two days, we’ll work together step by step to
                   build something incredible.
                 </p>
-
-                <p>
+<p>
                   Whether you’re brand new or have a little experience, I’ll
                   guide you through the entire process from beginning to end.
                 </p>
-
-                <p>
+<p>
                   This workshop is hands-on, beginner-friendly, and designed to
                   help you leave with a finished project you can be proud of.
                 </p>
-              </div>
-            </article>
-
-            <!-- BEFORE WE BEGIN CARD -->
-            <article class="journey-card journey-requirements-card">
-              <div class="journey-butterfly journey-butterfly-left"></div>
-              <div class="journey-butterfly journey-butterfly-right"></div>
-
-              <div class="journey-card-content">
-                <span class="eyebrow">Important</span>
-
-                <h2>Before We Begin</h2>
-
-                <div class="journey-divider"></div>
-
-                <p>
+</div>
+</article>
+<!-- BEFORE WE BEGIN CARD -->
+<article class="journey-card journey-requirements-card">
+<div class="journey-butterfly journey-butterfly-left"></div>
+<div class="journey-butterfly journey-butterfly-right"></div>
+<div class="journey-card-content">
+<span class="eyebrow">Important</span>
+<h2>Before We Begin</h2>
+<div class="journey-divider"></div>
+<p>
                   Before the workshop starts, please make sure you’ve completed
                   the following:
                 </p>
-
-                <ul class="journey-checklist">
-                  <li>Create a GitHub account</li>
-                  <li>Create a Netlify account</li>
-                  <li>Install Visual Studio Code</li>
-                  <li>Sign in to all three platforms</li>
-                  <li>Verify your email addresses</li>
-                  <li>
+<ul class="journey-checklist">
+<li>Create a GitHub account</li>
+<li>Create a Netlify account</li>
+<li>Install Visual Studio Code</li>
+<li>Sign in to all three platforms</li>
+<li>Verify your email addresses</li>
+<li>
                     Make sure everything is installed and working correctly
                   </li>
-                </ul>
-
-                <div class="journey-important-box">
-                  <h3>Important</h3>
-
-                  <p>Our workshop time is reserved for building together.</p>
-
-                  <p>
+</ul>
+<div class="journey-important-box">
+<h3>Important</h3>
+<p>Our workshop time is reserved for building together.</p>
+<p>
                     We will <strong>not</strong> be creating accounts,
                     installing software, or troubleshooting setup during class.
                   </p>
-
-                  <p>
+<p>
                     Completing these steps beforehand will help you stay on
                     track and get the most out of the workshop.
                   </p>
-                </div>
-
-                <button
-                  class="gold-btn journey-link-btn"
-                  data-open-page="requirements"
-                  type="button"
-                >
+</div>
+<button class="gold-btn journey-link-btn" data-open-page="requirements" type="button">
                   Open Workshop Requirements
                 </button>
-              </div>
-            </article>
-
-            <!-- WHAT WE WILL COVER CARD -->
-            <article class="journey-card journey-cover-card">
-              <div class="journey-butterfly journey-butterfly-left"></div>
-              <div class="journey-butterfly journey-butterfly-right"></div>
-
-              <div class="journey-card-content">
-                <span class="eyebrow">Two-Day Experience</span>
-
-                <h2>What We’ll Cover</h2>
-
-                <div class="journey-divider"></div>
-
-                <div class="journey-days-grid">
-                  <div class="journey-day-card">
-                    <span class="journey-day-label">Day 1</span>
-
-                    <h3>Build</h3>
-
-                    <p>
+</div>
+</article>
+<!-- WHAT WE WILL COVER CARD -->
+<article class="journey-card journey-cover-card">
+<div class="journey-butterfly journey-butterfly-left"></div>
+<div class="journey-butterfly journey-butterfly-right"></div>
+<div class="journey-card-content">
+<span class="eyebrow">Two-Day Experience</span>
+<h2>What We’ll Cover</h2>
+<div class="journey-divider"></div>
+<div class="journey-days-grid">
+<div class="journey-day-card">
+<span class="journey-day-label">Day 1</span>
+<h3>Build</h3>
+<p>
                       We’ll build the foundation, connect everything together,
                       and make sure your project is working exactly as it
                       should.
                     </p>
-
-                    <button
-                      class="secondary-btn journey-link-btn"
-                      data-open-page="day-one"
-                      type="button"
-                    >
+<button class="secondary-btn journey-link-btn" data-open-page="day-one" type="button">
                       Open Day 1
                     </button>
-                  </div>
-
-                  <div class="journey-day-card">
-                    <span class="journey-day-label">Day 2</span>
-
-                    <h3>Customize, Publish & Sell</h3>
-
-                    <p>
+</div>
+<div class="journey-day-card">
+<span class="journey-day-label">Day 2</span>
+<h3>Customize, Publish &amp; Sell</h3>
+<p>
                       We’ll personalize your project, publish it online, and
                       prepare it to confidently share or sell.
                     </p>
-
-                    <button
-                      class="secondary-btn journey-link-btn"
-                      data-open-page="day-two"
-                      type="button"
-                    >
+<button class="secondary-btn journey-link-btn" data-open-page="day-two" type="button">
                       Open Day 2
                     </button>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <!-- CLOSING CARD -->
-            <article class="journey-card journey-closing-card">
-              <div class="journey-butterfly journey-butterfly-left"></div>
-              <div class="journey-butterfly journey-butterfly-right"></div>
-
-              <div class="journey-card-content">
-                <span class="eyebrow">Let’s Begin</span>
-
-                <h2>Let’s Get Started</h2>
-
-                <div class="journey-divider"></div>
-
-                <p>Take your time, ask questions, and enjoy the process.</p>
-
-                <p>
+</div>
+</div>
+</div>
+</article>
+<!-- CLOSING CARD -->
+<article class="journey-card journey-closing-card">
+<div class="journey-butterfly journey-butterfly-left"></div>
+<div class="journey-butterfly journey-butterfly-right"></div>
+<div class="journey-card-content">
+<span class="eyebrow">Let’s Begin</span>
+<h2>Let’s Get Started</h2>
+<div class="journey-divider"></div>
+<p>Take your time, ask questions, and enjoy the process.</p>
+<p>
                   Every expert was once a beginner, and by the end of these two
                   days, you’ll have accomplished something you may have never
                   imagined possible.
                 </p>
-
-                <button
-                  class="gold-btn journey-start-btn"
-                  data-open-page="day-one"
-                  type="button"
-                >
+<button class="gold-btn journey-start-btn" data-open-page="day-one" type="button">
                   Start Day 1
                 </button>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <!-- ============================= -->
-        <!-- PAGE: DAY ONE -->
-        <!-- ============================= -->
-        <section class="page" id="day-one">
-          <div class="page-header">
-            <h1>Build Your AI Prompt Generator</h1>
-          </div>
-
-          <div class="module-card-grid">
-            <article class="module-card flip-card">
-              <div class="module-card-inner">
-                <div class="module-card-front">
-                  <i data-lucide="clipboard-list"></i>
-
-                  <h2>Generator Foundation</h2>
-
-                  <p>
+</div>
+</article>
+</div>
+</section>
+<!-- ============================= -->
+<!-- PAGE: DAY ONE -->
+<!-- ============================= -->
+<section class="page" id="day-one">
+<div class="page-header">
+<h1>Build Your AI Prompt Generator</h1>
+</div>
+<div class="module-card-grid">
+<article class="module-card flip-card">
+<div class="module-card-inner">
+<div class="module-card-front">
+<i data-lucide="clipboard-list"></i>
+<h2>Generator Foundation</h2>
+<p>
                     Create the foundation for your AI prompt generator before
                     building the application.
                   </p>
-
-                  <button
-                    class="secondary-btn copy-snippet-btn"
-                    data-snippet="foundation"
-                  >
+<button class="secondary-btn copy-snippet-btn" data-snippet="foundation">
                     Copy Foundation Prompt
                   </button>
-
-                  <span class="flip-hint">Click card for teaching notes</span>
-                </div>
-
-                <div class="module-card-back">
-                  <h3>Generator Foundation</h3>
-
-                  <h4>Purpose</h4>
-
-                  <p>
+<span class="flip-hint">Click card for teaching notes</span>
+</div>
+<div class="module-card-back">
+<h3>Generator Foundation</h3>
+<h4>Purpose</h4>
+<p>
                     Build the project's foundation by defining the generator's
                     purpose, target users, main objective, and overall
                     structure. This foundation guides every file created
                     throughout the rest of the project.
                   </p>
-
-                  <h4>Why this matters</h4>
-
-                  <p>
+<h4>Why this matters</h4>
+<p>
                     A strong planning process prevents unnecessary revisions
                     later by helping you define the right categories before
                     building the generator. The approved categories become the
                     foundation for every blueprint that follows.
                   </p>
-
-                  <h4>What to do with the output</h4>
-                  <ul>
-                    <li>Review the recommended generator names.</li>
-
-                    <li>Choose one or enter your own.</li>
-
-                    <li>Review the AI-recommended categories.</li>
-
-                    <li>Keep, remove, rename, or add categories as needed.</li>
-
-                    <li>
+<h4>What to do with the output</h4>
+<ul>
+<li>Review the recommended generator names.</li>
+<li>Choose one or enter your own.</li>
+<li>Review the AI-recommended categories.</li>
+<li>Keep, remove, rename, or add categories as needed.</li>
+<li>
                       Approve the final category structure before moving to the
                       Category Blueprint.
                     </li>
-
-                    <li>
+<li>
                       Stay in the same ChatGPT conversation for the remaining
                       workshop steps.
                     </li>
-                  </ul>
-                </div>
-              </div>
-            </article>
-
-            <article class="module-card flip-card">
-              <div class="module-card-inner">
-                <div class="module-card-front">
-                  <i data-lucide="folder-open"></i>
-
-                  <h2>Project Setup</h2>
-
-                  <p>
+</ul>
+</div>
+</div>
+</article>
+<article class="module-card flip-card">
+<div class="module-card-inner">
+<div class="module-card-front">
+<i data-lucide="folder-open"></i>
+<h2>Project Setup</h2>
+<p>
                     Create your project folder and organize the files before
                     building your prompt generator.
                   </p>
-
-                  <button
-                    class="secondary-btn copy-snippet-btn"
-                    data-snippet="projectSetup"
-                  >
+<button class="secondary-btn copy-snippet-btn" data-snippet="projectSetup">
                     Copy Project Setup Prompt
                   </button>
-
-                  <span class="flip-hint">Click card for teaching notes</span>
-                </div>
-
-                <div class="module-card-back">
-                  <h3>Project Setup</h3>
-
-                  <h4>Purpose</h4>
-
-                  <p>
+<span class="flip-hint">Click card for teaching notes</span>
+</div>
+<div class="module-card-back">
+<h3>Project Setup</h3>
+<h4>Purpose</h4>
+<p>
                     Set up a clean project structure in Visual Studio Code
                     before writing any HTML, CSS, or JavaScript. This ensures
                     every generator starts organized and is easy to build, test,
                     and maintain.
                   </p>
-
-                  <h4>Why this matters</h4>
-
-                  <p>
+<h4>Why this matters</h4>
+<p>
                     A consistent folder structure prevents missing files, broken
                     links, and confusion later in the workshop. Every generator
                     begins with the same professional setup.
                   </p>
-
-                  <h4>What to do with the output</h4>
-
-                  <ul>
-                    <li>Create the main project folder.</li>
-                    <li>Create the required folders and files.</li>
-                    <li>Verify everything is in the correct location.</li>
-                    <li>
+<h4>What to do with the output</h4>
+<ul>
+<li>Create the main project folder.</li>
+<li>Create the required folders and files.</li>
+<li>Verify everything is in the correct location.</li>
+<li>
                       Return to the Workshop Companion and continue with the
                       Master Generator Planner.
                     </li>
-                  </ul>
-
-                  <span class="flip-hint">Click again to flip back</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="module-card flip-card">
-              <div class="module-card-inner">
-                <div class="module-card-front">
-                  <i data-lucide="file-pen-line"></i>
-
-                  <h2>Master Generator Planner</h2>
-
-                  <p>
+</ul>
+<span class="flip-hint">Click again to flip back</span>
+</div>
+</div>
+</article>
+<article class="module-card flip-card">
+<div class="module-card-inner">
+<div class="module-card-front">
+<i data-lucide="file-pen-line"></i>
+<h2>Master Generator Planner</h2>
+<p>
                     Plan your generator idea, review reference images, choose a
                     name, and approve the categories before building the
                     blueprints
                   </p>
-
-                  <button
-                    class="secondary-btn copy-snippet-btn"
-                    data-snippet="masterGeneratorPlanner"
-                  >
+<button class="secondary-btn copy-snippet-btn" data-snippet="masterGeneratorPlanner">
                     Copy Generator Planner Prompt
                   </button>
-
-                  <span class="flip-hint">Click card for teaching notes</span>
-                </div>
-
-                <div class="module-card-back">
-                  <h3>Generator Planner</h3>
-
-                  <h4>Purpose</h4>
-
-                  <p>
+<span class="flip-hint">Click card for teaching notes</span>
+</div>
+<div class="module-card-back">
+<h3>Generator Planner</h3>
+<h4>Purpose</h4>
+<p>
                     Guide the planning conversation by reviewing the generator
                     idea and reference images, recommending five names, asking
                     focused category questions, and helping the user approve the
                     final category structure
                   </p>
-
-                  <h4>Why this matters</h4>
-
-                  <p>
+<h4>Why this matters</h4>
+<p>
                     A clear blueprint helps you build a focused generator,
                     reduces unnecessary changes, and keeps every HTML, CSS, and
                     JavaScript file working toward the same goal.
                   </p>
-
-                  <h4>What to do with the output</h4>
-
-                  <ul>
-                    <li>Review the complete blueprint.</li>
-
-                    <li>Remove anything you don't want.</li>
-
-                    <li>Add anything that's missing.</li>
-
-                    <li>Use it as the guide for the remaining cards.</li>
-                  </ul>
-
-                  <span class="flip-hint">Click again to flip back</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="module-card flip-card">
-              <div class="module-card-inner">
-                <div class="module-card-front">
-                  <i data-lucide="palette"></i>
-
-                  <h2>Content &amp; Design Builder</h2>
-
-                  <p>
+<h4>What to do with the output</h4>
+<ul>
+<li>Review the complete blueprint.</li>
+<li>Remove anything you don't want.</li>
+<li>Add anything that's missing.</li>
+<li>Use it as the guide for the remaining cards.</li>
+</ul>
+<span class="flip-hint">Click again to flip back</span>
+</div>
+</div>
+</article>
+<article class="module-card flip-card">
+<div class="module-card-inner">
+<div class="module-card-front">
+<i data-lucide="palette"></i>
+<h2>Content &amp; Design Builder</h2>
+<p>
                     Create the complete visual direction, branding, content
                     structure, interface layout, and design plan for your prompt
                     generator before generating any code.
                   </p>
-
-                  <button
-                    class="secondary-btn copy-snippet-btn"
-                    data-snippet="contentDesignBuilder"
-                  >
+<button class="secondary-btn copy-snippet-btn" data-snippet="contentDesignBuilder">
                     Copy Content Design Builder Prompt
                   </button>
-
-                  <span class="flip-hint">Click card for teaching notes</span>
-                </div>
-
-                <div class="module-card-back">
-                  <h3>Content &amp; Design Builder</h3>
-
-                  <h4>Purpose</h4>
-
-                  <p>
+<span class="flip-hint">Click card for teaching notes</span>
+</div>
+<div class="module-card-back">
+<h3>Content &amp; Design Builder</h3>
+<h4>Purpose</h4>
+<p>
                     Build the complete visual and content blueprint for your
                     generator. This combines branding, colors, typography,
                     imagery, layout planning, page structure, user interface
@@ -808,1007 +617,1009 @@
                     streamlined planning step before any HTML, CSS, or
                     JavaScript is generated.
                   </p>
-
-                  <h4>Why this matters</h4>
-
-                  <p>
+<h4>Why this matters</h4>
+<p>
                     Completing the entire content and design plan first
                     eliminates multiple planning steps, prevents redesigns
                     later, and gives the Generator Code Builder one complete
                     approved specification to build from.
                   </p>
-
-                  <h4>What to do with the output</h4>
-
-                  <ul>
-                    <li>Review the complete branding and visual direction.</li>
-
-                    <li>
+<h4>What to do with the output</h4>
+<ul>
+<li>Review the complete branding and visual direction.</li>
+<li>
                       Approve the color palette, typography, icons, and imagery.
                     </li>
-
-                    <li>Review every page section and interface component.</li>
-
-                    <li>
+<li>Review every page section and interface component.</li>
+<li>
                       Confirm the organization of categories, inputs, buttons,
                       and output areas.
                     </li>
-
-                    <li>
+<li>
                       Review spacing, layout, cards, headers, navigation,
                       footer, and responsive behavior.
                     </li>
-
-                    <li>
+<li>
                       Approve the complete user experience before generating
                       code.
                     </li>
-
-                    <li>
+<li>
                       Keep the approved Content &amp; Design Builder output in
                       the same ChatGPT conversation.
                     </li>
-
-                    <li>Continue directly to the Generator Code Builder.</li>
-                  </ul>
-
-                  <span class="flip-hint">Click again to flip back</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="module-card flip-card">
-              <div class="module-card-inner">
-                <div class="module-card-front">
-                  <i data-lucide="code-2"></i>
-
-                  <h2>Generator Code Builder</h2>
-
-                  <p>
+<li>Continue directly to the Generator Code Builder.</li>
+</ul>
+<span class="flip-hint">Click again to flip back</span>
+</div>
+</div>
+</article>
+<article class="module-card flip-card">
+<div class="module-card-inner">
+<div class="module-card-front">
+<i data-lucide="code-2"></i>
+<h2>Generator Code Builder</h2>
+<p>
                     Build the complete HTML, CSS, and JavaScript for your prompt
                     generator using one connected code-building process.
                   </p>
-
-                  <button
-                    class="secondary-btn copy-snippet-btn"
-                    data-snippet="generatorCodeBuilder"
-                  >
+<button class="secondary-btn copy-snippet-btn" data-snippet="generatorCodeBuilder">
                     Copy Generator Code Builder Prompt
                   </button>
-
-                  <span class="flip-hint">Click card for teaching notes</span>
-                </div>
-
-                <div class="module-card-back">
-                  <h3>Generator Code Builder</h3>
-
-                  <h4>Purpose</h4>
-
-                  <p>
+<span class="flip-hint">Click card for teaching notes</span>
+</div>
+<div class="module-card-back">
+<h3>Generator Code Builder</h3>
+<h4>Purpose</h4>
+<p>
                     Turn all approved planning documents into the three complete
                     project files: index.html, style.css, and script.js.
                   </p>
-
-                  <h4>Why this matters</h4>
-
-                  <p>
+<h4>Why this matters</h4>
+<p>
                     Building the three connected files through one guided
                     process reduces repeated instructions, prevents mismatched
                     code, and keeps the HTML, CSS, and JavaScript working
                     together.
                   </p>
-
-                  <h4>What to do with the output</h4>
-
-                  <ul>
-                    <li>Generate the complete index.html file.</li>
-                    <li>Paste it into index.html and save it.</li>
-                    <li>Generate the complete style.css file.</li>
-                    <li>Paste it into the css/style.css file and save it.</li>
-                    <li>Generate the complete script.js file.</li>
-                    <li>Paste it into the js/script.js file and save it.</li>
-                    <li>Keep all three files connected and consistent.</li>
-                    <li>Continue to Test, Debug &amp; Customize.</li>
-                  </ul>
-
-                  <span class="flip-hint">Click again to flip back</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="module-card flip-card">
-              <div class="module-card-inner">
-                <div class="module-card-front">
-                  <i data-lucide="palette"></i>
-
-                  <h2>CSS Builder</h2>
-
-                  <p>
+<h4>What to do with the output</h4>
+<ul>
+<li>Generate the complete index.html file.</li>
+<li>Paste it into index.html and save it.</li>
+<li>Generate the complete style.css file.</li>
+<li>Paste it into the css/style.css file and save it.</li>
+<li>Generate the complete script.js file.</li>
+<li>Paste it into the js/script.js file and save it.</li>
+<li>Keep all three files connected and consistent.</li>
+<li>Continue to Test, Debug &amp; Customize.</li>
+</ul>
+<span class="flip-hint">Click again to flip back</span>
+</div>
+</div>
+</article>
+<article class="module-card flip-card">
+<div class="module-card-inner">
+<div class="module-card-front">
+<i data-lucide="palette"></i>
+<h2>CSS Builder</h2>
+<p>
                     Generate one complete, polished, responsive style.css file
                     from your approved design plan and completed HTML.
                   </p>
-
-                  <button
-                    class="secondary-btn copy-snippet-btn"
-                    data-snippet="cssBuilder"
-                  >
+<button class="secondary-btn copy-snippet-btn" data-snippet="cssBuilder">
                     Copy CSS Builder Prompt
                   </button>
-
-                  <span class="flip-hint">Click card for teaching notes</span>
-                </div>
-
-                <div class="module-card-back">
-                  <h3>CSS Builder</h3>
-
-                  <h4>Purpose</h4>
-
-                  <p>
+<span class="flip-hint">Click card for teaching notes</span>
+</div>
+<div class="module-card-back">
+<h3>CSS Builder</h3>
+<h4>Purpose</h4>
+<p>
                     Turn the approved Content &amp; Design Builder plan and the
                     completed index.html into one complete external style.css
                     file.
                   </p>
-
-                  <h4>Why this matters</h4>
-
-                  <p>
+<h4>Why this matters</h4>
+<p>
                     One complete CSS build prevents missing sections, duplicated
                     styles, conflicting rules, and mismatched responsive
                     behavior caused by splitting the stylesheet into several
                     separate prompts.
                   </p>
-
-                  <h4>What to do with the output</h4>
-
-                  <ul>
-                    <li>
+<h4>What to do with the output</h4>
+<ul>
+<li>
                       Copy the CSS Builder prompt into the same ChatGPT
                       conversation.
                     </li>
-                    <li>
+<li>
                       Upload or paste the completed index.html when requested.
                     </li>
-                    <li>
+<li>
                       Generate the full style.css file in one complete response.
                     </li>
-                    <li>
+<li>
                       Replace the contents of css/style.css with the complete
                       code.
                     </li>
-                    <li>Save the file and refresh the browser.</li>
-                    <li>Check desktop, tablet, and mobile layouts.</li>
-                    <li>Continue to the JavaScript Builder.</li>
-                  </ul>
-
-                  <span class="flip-hint">Click again to flip back</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="module-card flip-card">
-              <div class="module-card-inner">
-                <div class="module-card-front">
-                  <i data-lucide="file-code"></i>
-
-                  <h2>JavaScript Builder</h2>
-
-                  <p>
+<li>Save the file and refresh the browser.</li>
+<li>Check desktop, tablet, and mobile layouts.</li>
+<li>Continue to the JavaScript Builder.</li>
+</ul>
+<span class="flip-hint">Click again to flip back</span>
+</div>
+</div>
+</article>
+<article class="module-card flip-card">
+<div class="module-card-inner">
+<div class="module-card-front">
+<i data-lucide="file-code"></i>
+<h2>JavaScript Builder</h2>
+<p>
                     Generate one complete script.js file that connects every
                     approved control, workflow, and generator feature.
                   </p>
-
-                  <button
-                    class="secondary-btn copy-snippet-btn"
-                    data-snippet="javascriptBuilder"
-                  >
+<button class="secondary-btn copy-snippet-btn" data-snippet="javascriptBuilder">
                     Copy JavaScript Builder Prompt
                   </button>
-
-                  <span class="flip-hint">Click card for teaching notes</span>
-                </div>
-
-                <div class="module-card-back">
-                  <h3>JavaScript Builder</h3>
-
-                  <h4>Purpose</h4>
-
-                  <p>
+<span class="flip-hint">Click card for teaching notes</span>
+</div>
+<div class="module-card-back">
+<h3>JavaScript Builder</h3>
+<h4>Purpose</h4>
+<p>
                     Turn the approved planning documents, completed index.html,
                     and completed style.css into one complete external script.js
                     file.
                   </p>
-
-                  <h4>Why this matters</h4>
-
-                  <p>
+<h4>Why this matters</h4>
+<p>
                     One connected JavaScript build reduces missing event
                     listeners, broken selectors, duplicate functions, and
                     features that stop working because the code was generated in
                     disconnected parts.
                   </p>
-
-                  <h4>What to do with the output</h4>
-
-                  <ul>
-                    <li>
+<h4>What to do with the output</h4>
+<ul>
+<li>
                       Copy the JavaScript Builder prompt into the same ChatGPT
                       conversation.
                     </li>
-                    <li>
+<li>
                       Upload or paste the completed index.html and style.css
                       when requested.
                     </li>
-                    <li>
+<li>
                       Generate the full script.js file in one complete response.
                     </li>
-                    <li>
+<li>
                       Replace the contents of js/script.js with the complete
                       code.
                     </li>
-                    <li>Save the file and refresh the browser.</li>
-                    <li>
+<li>Save the file and refresh the browser.</li>
+<li>
                       Test every button, input, preset, and generator feature.
                     </li>
-                    <li>Continue to Test, Debug &amp; Customize.</li>
-                  </ul>
-
-                  <span class="flip-hint">Click again to flip back</span>
-                </div>
-              </div>
-            </article>
-          </div>
-          <div class="lesson-complete-area">
-            <button class="gold-btn" id="markDayOneCompleteBtn">
+<li>Continue to Test, Debug &amp; Customize.</li>
+</ul>
+<span class="flip-hint">Click again to flip back</span>
+</div>
+</div>
+</article>
+</div>
+<div class="lesson-complete-area">
+<button class="gold-btn" id="markDayOneCompleteBtn">
               Mark Day 1 Complete
             </button>
-          </div>
-        </section>
-        <!-- ============================= -->
-        <!-- PAGE: DAY TWO -->
-        <!-- ============================= -->
-        <section class="page" id="day-two">
-          <div class="page-header split-header">
-            <div>
-              <h1>Customize Your Generator</h1>
-            </div>
-          </div>
-
-          <div class="lesson-section-grid">
-            <article class="lesson-block">
-              <span class="lesson-tag">Step 1</span>
-
-              <h2>Review Your Working Generator</h2>
-
-              <p>
+</div>
+</section>
+<!-- ============================= -->
+<!-- PAGE: DAY TWO -->
+<!-- ============================= -->
+<section class="page" id="day-two">
+<div class="page-header split-header">
+<div>
+<h1>Customize Your Generator</h1>
+</div>
+</div>
+<div class="lesson-section-grid">
+<article class="lesson-block">
+<span class="lesson-tag">Step 1</span>
+<h2>Review Your Working Generator</h2>
+<p>
                 Open the generator you completed during Day 1 and review what is
                 already working before making changes.
               </p>
-
-              <ul>
-                <li>Open the generator in your browser.</li>
-                <li>Test Generate Prompt.</li>
-                <li>Test Randomize and locks.</li>
-                <li>Review the existing categories and options.</li>
-                <li>Identify anything you want to expand or customize.</li>
-              </ul>
-            </article>
-            <article class="lesson-block">
-              <span class="lesson-tag">Step 2</span>
-
-              <h2>Expand Your Category Options</h2>
-
-              <p>
+<ul>
+<li>Open the generator in your browser.</li>
+<li>Test Generate Prompt.</li>
+<li>Test Randomize and locks.</li>
+<li>Review the existing categories and options.</li>
+<li>Identify anything you want to expand or customize.</li>
+</ul>
+</article>
+<article class="lesson-block">
+<span class="lesson-tag">Step 2</span>
+<h2>Expand Your Category Options</h2>
+<p>
                 Improve the generator’s existing categories by adding stronger,
                 more useful options before rebuilding the final presets.
               </p>
-
-              <ul>
-                <li>Choose which categories need more options.</li>
-                <li>Remove duplicates or weak choices.</li>
-                <li>Add useful options that match the generator.</li>
-                <li>Keep the current controls and structure.</li>
-                <li>Test Randomize after adding the new options.</li>
-              </ul>
-
-              <button
-                class="secondary-btn copy-snippet-btn"
-                data-snippet="expandCategoryOptions"
-              >
+<ul>
+<li>Choose which categories need more options.</li>
+<li>Remove duplicates or weak choices.</li>
+<li>Add useful options that match the generator.</li>
+<li>Keep the current controls and structure.</li>
+<li>Test Randomize after adding the new options.</li>
+</ul>
+<button class="secondary-btn copy-snippet-btn" data-snippet="expandCategoryOptions">
                 Copy Expand Category Options Prompt
               </button>
-            </article>
-
-            <article class="lesson-block">
-              <span class="lesson-tag">HTML</span>
-
-              <h2>Add a Header Image</h2>
-
-              <p>
+</article>
+<article class="lesson-block">
+<span class="lesson-tag">HTML</span>
+<h2>Add a Header Image</h2>
+<p>
                 Add a branded image directly under your generator title. Use the
                 prompt below so ChatGPT can walk you through the exact steps.
               </p>
-
-              <ul>
-                <li>Open your generator project folder.</li>
-                <li>Add your image to the images folder.</li>
-                <li>Open index.html.</li>
-                <li>Find your main generator title.</li>
-                <li>Add the image code directly under the title.</li>
-                <li>Open style.css and style the image.</li>
-                <li>Save and refresh your browser.</li>
-              </ul>
-
-              <button
-                class="secondary-btn copy-snippet-btn"
-                data-snippet="addHeaderImage"
-              >
+<ul>
+<li>Open your generator project folder.</li>
+<li>Add your image to the images folder.</li>
+<li>Open index.html.</li>
+<li>Find your main generator title.</li>
+<li>Add the image code directly under the title.</li>
+<li>Open style.css and style the image.</li>
+<li>Save and refresh your browser.</li>
+</ul>
+<button class="secondary-btn copy-snippet-btn" data-snippet="addHeaderImage">
                 Copy Prompt
               </button>
-            </article>
-
-            <article class="lesson-block">
-              <span class="lesson-tag">HTML</span>
-
-              <h2>Add a Marquee</h2>
-
-              <p>
+</article>
+<article class="lesson-block">
+<span class="lesson-tag">HTML</span>
+<h2>Add a Marquee</h2>
+<p>
                 Add a scrolling marquee to your generator that matches your
                 brand and style. Use the prompt below so ChatGPT can guide you
                 through every step.
               </p>
-
-              <ul>
-                <li>Choose what your marquee should say.</li>
-                <li>Open your generator's index.html file.</li>
-                <li>Find the correct location for the marquee.</li>
-                <li>Add the HTML.</li>
-                <li>Open style.css.</li>
-                <li>Style the marquee.</li>
-                <li>Test the scrolling animation.</li>
-              </ul>
-
-              <button
-                class="secondary-btn copy-snippet-btn"
-                data-snippet="addMarquee"
-              >
+<ul>
+<li>Choose what your marquee should say.</li>
+<li>Open your generator's index.html file.</li>
+<li>Find the correct location for the marquee.</li>
+<li>Add the HTML.</li>
+<li>Open style.css.</li>
+<li>Style the marquee.</li>
+<li>Test the scrolling animation.</li>
+</ul>
+<button class="secondary-btn copy-snippet-btn" data-snippet="addMarquee">
                 Copy Prompt
               </button>
-            </article>
-
-            <article class="lesson-block">
-              <span class="lesson-tag">Footer</span>
-
-              <h2>Update the Copyright</h2>
-
-              <p>
+</article>
+<article class="lesson-block">
+<span class="lesson-tag">Footer</span>
+<h2>Update the Copyright</h2>
+<p>
                 Add a simple copyright footer to your generator. The prompt
                 below will walk you through every step and show you exactly
                 where to update the footer in your project.
               </p>
-
-              <ul>
-                <li>Open the correct HTML file.</li>
-                <li>Find the existing footer.</li>
-                <li>Replace or update the footer.</li>
-                <li>Customize your brand name.</li>
-                <li>Automatically display the current year.</li>
-                <li>Style the footer to match your generator.</li>
-              </ul>
-
-              <button
-                class="secondary-btn copy-snippet-btn"
-                data-snippet="updateCopyright"
-              >
+<ul>
+<li>Open the correct HTML file.</li>
+<li>Find the existing footer.</li>
+<li>Replace or update the footer.</li>
+<li>Customize your brand name.</li>
+<li>Automatically display the current year.</li>
+<li>Style the footer to match your generator.</li>
+</ul>
+<button class="secondary-btn copy-snippet-btn" data-snippet="updateCopyright">
                 Copy Prompt
               </button>
-            </article>
-
-            <article class="module-card flip-card">
-              <div class="module-card-inner">
-                <!-- FRONT -->
-                <div class="module-card-front">
-                  <i data-lucide="stars"></i>
-
-                  <h2>Premium Output Modules</h2>
-
-                  <p>
+</article>
+<article class="module-card flip-card">
+<div class="module-card-inner">
+<!-- FRONT -->
+<div class="module-card-front">
+<i data-lucide="stars"></i>
+<h2>Premium Output Modules</h2>
+<p>
                     Expand your generator with premium outputs like Suno AI
                     Music, Video Scripts, Marketing builders, and Custom GPT
                     Builder.
                   </p>
-
-                  <button
-                    class="secondary-btn copy-snippet-btn"
-                    data-snippet="premiumOutputModules"
-                  >
+<button class="secondary-btn copy-snippet-btn" data-snippet="premiumOutputModules">
                     Copy Premium Output Prompt
                   </button>
-
-                  <span class="flip-hint"> Click card for teaching notes </span>
-                </div>
-
-                <!-- BACK -->
-                <div class="module-card-back">
-                  <h3>Premium Output Modules</h3>
-
-                  <h4>Purpose</h4>
-
-                  <p>
+<span class="flip-hint"> Click card for teaching notes </span>
+</div>
+<!-- BACK -->
+<div class="module-card-back">
+<h3>Premium Output Modules</h3>
+<h4>Purpose</h4>
+<p>
                     Expand your completed AI prompt generator by adding premium
                     output modules that generate additional content from the
                     same user inputs. These modules increase the value of your
                     generator without changing its existing structure.
                   </p>
-
-                  <h4>Why this matters</h4>
-
-                  <p>
+<h4>Why this matters</h4>
+<p>
                     Premium output modules transform a single prompt generator
                     into a complete content creation system. Instead of
                     producing only one final prompt, your generator can also
                     create supporting assets that make it more valuable for
                     customers.
                   </p>
-
-                  <h4>Premium Modules</h4>
-
-                  <ul>
-                    <li>Suno AI Music Builder</li>
-                    <li>Video Script Builder</li>
-                    <li>Marketing Builder</li>
-                    <li>Custom GPT Builder</li>
-                  </ul>
-
-                  <h4>What to do with the output</h4>
-
-                  <ul>
-                    <li>Copy the generated prompt into ChatGPT.</li>
-                    <li>Choose only the premium modules you want to add.</li>
-                    <li>
+<h4>Premium Modules</h4>
+<ul>
+<li>Suno AI Music Builder</li>
+<li>Video Script Builder</li>
+<li>Marketing Builder</li>
+<li>Custom GPT Builder</li>
+</ul>
+<h4>What to do with the output</h4>
+<ul>
+<li>Copy the generated prompt into ChatGPT.</li>
+<li>Choose only the premium modules you want to add.</li>
+<li>
                       Update your existing HTML, CSS, and JavaScript files.
                     </li>
-                    <li>Reuse your generator's existing inputs.</li>
-                    <li>
-                      Test every premium module before moving to Testing &
+<li>Reuse your generator's existing inputs.</li>
+<li>
+                      Test every premium module before moving to Testing &amp;
                       Debugging.
                     </li>
-                  </ul>
-
-                  <span class="flip-hint"> Click again to flip back </span>
-                </div>
-              </div>
-            </article>
-
-            <article class="lesson-block">
-              <span class="lesson-tag">Step 3</span>
-
-              <h2>Rebuild Your Final Presets</h2>
-
-              <p>
+</ul>
+<span class="flip-hint"> Click again to flip back </span>
+</div>
+</div>
+</article>
+<article class="lesson-block">
+<span class="lesson-tag">Step 3</span>
+<h2>Rebuild Your Final Presets</h2>
+<p>
                 Replace the temporary starter presets with final presets that
                 use the generator’s expanded option lists.
               </p>
-
-              <ul>
-                <li>Use only current categories and option values.</li>
-                <li>Create unique, useful preset combinations.</li>
-                <li>Preserve locks and custom text when required.</li>
-                <li>Do not force a preset count that was not approved.</li>
-                <li>Test every preset before continuing.</li>
-              </ul>
-
-              <button
-                class="secondary-btn copy-snippet-btn"
-                data-snippet="customizePresets"
-              >
+<ul>
+<li>Use only current categories and option values.</li>
+<li>Create unique, useful preset combinations.</li>
+<li>Preserve locks and custom text when required.</li>
+<li>Do not force a preset count that was not approved.</li>
+<li>Test every preset before continuing.</li>
+</ul>
+<button class="secondary-btn copy-snippet-btn" data-snippet="customizePresets">
                 Copy Final Presets Prompt
               </button>
-            </article>
-
-            <article class="module-card flip-card">
-              <div class="module-card-inner">
-                <div class="module-card-front">
-                  <i data-lucide="bug"></i>
-
-                  <h2>Test, Debug &amp; Customize</h2>
-
-                  <p>
+</article>
+<article class="module-card flip-card">
+<div class="module-card-inner">
+<div class="module-card-front">
+<i data-lucide="bug"></i>
+<h2>Test, Debug &amp; Customize</h2>
+<p>
                     Test every feature, find bugs, and fix issues before
                     publishing your generator.
                   </p>
-
-                  <button
-                    class="secondary-btn copy-snippet-btn"
-                    data-snippet="testDebugCustomize"
-                  >
+<button class="secondary-btn copy-snippet-btn" data-snippet="testDebugCustomize">
                     Copy Test, Debug &amp; Customize Prompt
                   </button>
-
-                  <span class="flip-hint">Click card for teaching notes</span>
-                </div>
-
-                <div class="module-card-back">
-                  <h3>Testing & Debugging</h3>
-
-                  <h4>Purpose</h4>
-
-                  <p>
+<span class="flip-hint">Click card for teaching notes</span>
+</div>
+<div class="module-card-back">
+<h3>Testing &amp; Debugging</h3>
+<h4>Purpose</h4>
+<p>
                     Find and fix problems before releasing your Prompt
                     Generator.
                   </p>
-
-                  <h4>Why this matters</h4>
-
-                  <p>
+<h4>Why this matters</h4>
+<p>
                     Even small bugs can break the user experience. Testing every
                     feature ensures your generator is reliable, professional,
                     and ready for customers.
                   </p>
-
-                  <h4>What to do with the output</h4>
-
-                  <ul>
-                    <li>Test every button one at a time.</li>
-
-                    <li>Verify every dropdown and input field.</li>
-
-                    <li>
+<h4>What to do with the output</h4>
+<ul>
+<li>Test every button one at a time.</li>
+<li>Verify every dropdown and input field.</li>
+<li>
                       Check the browser console (F12) for JavaScript errors.
                     </li>
+<li>Test desktop, tablet, and mobile layouts.</li>
+<li>Fix every issue before moving to the final polish.</li>
+</ul>
+<span class="flip-hint">Click again to flip back</span>
+</div>
+</div>
+</article>
+<article class="lesson-block reusable-master-prompt-resource">
+<div class="reusable-master-prompt-heading">
+<div>
+<span class="lesson-tag">Day 2 Resource</span>
+<h2>Reusable App Welcome Page HTML Template</h2>
+<p class="reusable-master-prompt-subtitle">Create branded app access pages by replacing only the name, text, and links.</p>
+</div>
+</div>
+<p class="reusable-master-prompt-description">Use this ready-made welcome page for any app, prompt generator, resource, or digital product. Duplicate the file, replace the bracketed text and links, then open it in VS Code and publish it through GitHub and Netlify.</p>
+<div class="reusable-master-prompt-actions">
+<button class="gold-btn" id="copyReusableWelcomePromptBtn" type="button">COPY HTML TEMPLATE</button>
+<button class="secondary-btn" id="downloadReusableWelcomePromptBtn" type="button">DOWNLOAD HTML TEMPLATE</button>
+</div>
+<div class="reusable-master-prompt-layout">
+<div class="reusable-master-prompt-box-wrap">
+<label for="reusableWelcomeMasterPrompt">Reusable HTML Template</label>
+<textarea class="reusable-master-prompt-box" id="reusableWelcomeMasterPrompt" readonly="" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;title&gt;[INSERT APP NAME]&lt;/title&gt;
 
-                    <li>Test desktop, tablet, and mobile layouts.</li>
+  &lt;style&gt;
+    * {
+      box-sizing: border-box;
+    }
 
-                    <li>Fix every issue before moving to the final polish.</li>
-                  </ul>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 40px 20px;
+      overflow-x: hidden;
+      color: white;
+      background: linear-gradient(135deg, #00145c, #0b2cff, #020024);
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
 
-                  <span class="flip-hint">Click again to flip back</span>
-                </div>
-              </div>
-            </article>
+    .floating-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
 
-            <div class="lesson-complete-area">
-              <button class="gold-btn" id="markDayTwoCompleteBtn" type="button">
-                Mark Day 2 Complete & Continue to Sell Your Generator
+    .float {
+      position: absolute;
+      bottom: -80px;
+      color: gold;
+      font-size: 34px;
+      opacity: 0.75;
+      animation: floatUp 12s linear infinite;
+      text-shadow: 0 0 15px gold, 0 0 30px white;
+    }
+
+    .float:nth-child(1) {
+      left: 8%;
+      animation-delay: 0s;
+    }
+
+    .float:nth-child(2) {
+      left: 22%;
+      animation-delay: 3s;
+      font-size: 26px;
+    }
+
+    .float:nth-child(3) {
+      left: 40%;
+      animation-delay: 6s;
+    }
+
+    .float:nth-child(4) {
+      left: 58%;
+      animation-delay: 2s;
+      font-size: 28px;
+    }
+
+    .float:nth-child(5) {
+      left: 73%;
+      animation-delay: 5s;
+    }
+
+    .float:nth-child(6) {
+      left: 88%;
+      animation-delay: 8s;
+      font-size: 30px;
+    }
+
+    @keyframes floatUp {
+      0% {
+        bottom: -80px;
+        transform: translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+
+      15% {
+        opacity: 0.85;
+      }
+
+      100% {
+        bottom: 110%;
+        transform: translateX(40px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .vault-box {
+      position: relative;
+      z-index: 2;
+      width: min(720px, 100%);
+      margin: 50px auto;
+      padding: 45px;
+      border: 2px solid gold;
+      border-radius: 28px;
+      background: rgba(0, 0, 0, 0.78);
+      box-shadow:
+        0 0 25px gold,
+        0 0 55px #ffffff,
+        0 0 80px #0b2cff;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      color: gold;
+      font-size: clamp(2.8rem, 8vw, 58px);
+      text-shadow: 0 0 15px gold, 0 0 35px white;
+    }
+
+    h2 {
+      color: gold;
+      font-size: clamp(1.7rem, 5vw, 34px);
+      text-shadow: 0 0 12px gold;
+    }
+
+    p {
+      color: #f5f5f5;
+      font-size: clamp(1rem, 2.5vw, 21px);
+      line-height: 1.6;
+    }
+
+    .button {
+      display: block;
+      width: min(320px, 100%);
+      margin: 22px auto;
+      padding: 20px;
+      border: 2px solid gold;
+      border-radius: 18px;
+      color: white;
+      background: linear-gradient(135deg, #0b2cff, #001f8f);
+      box-shadow: 0 0 15px #0b2cff, 0 0 25px gold;
+      font-size: 20px;
+      font-weight: bold;
+      text-decoration: none;
+      transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        color 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      color: black;
+      background: linear-gradient(135deg, gold, #c99700);
+      box-shadow: 0 0 30px gold, 0 0 55px white;
+      transform: scale(1.06);
+      outline: none;
+    }
+
+    .gold-button {
+      color: black;
+      background: linear-gradient(135deg, gold, #b8860b);
+    }
+
+    .outline-button {
+      color: white;
+      background: black;
+    }
+
+    .sparkle {
+      color: gold;
+      font-size: 28px;
+      text-shadow: 0 0 12px gold;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 20px 14px;
+      }
+
+      .vault-box {
+        margin: 24px auto;
+        padding: 28px 18px;
+      }
+
+      .button {
+        padding: 17px;
+        font-size: 17px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .float {
+        animation: none;
+      }
+
+      .button {
+        transition: none;
+      }
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;div class="floating-bg" aria-hidden="true"&gt;
+    &lt;div class="float"&gt;🦋&lt;/div&gt;
+    &lt;div class="float"&gt;✨&lt;/div&gt;
+    &lt;div class="float"&gt;💫&lt;/div&gt;
+    &lt;div class="float"&gt;🦋&lt;/div&gt;
+    &lt;div class="float"&gt;✦&lt;/div&gt;
+    &lt;div class="float"&gt;✨&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;main class="vault-box"&gt;
+    &lt;div class="sparkle"&gt;✨ 🦋 ✨&lt;/div&gt;
+
+    &lt;h1&gt;[INSERT APP NAME]&lt;/h1&gt;
+
+    &lt;h2&gt;[INSERT WELCOME HEADLINE]&lt;/h2&gt;
+
+    &lt;p&gt;[INSERT SHORT WELCOME MESSAGE]&lt;/p&gt;
+
+    &lt;a
+      class="button"
+      href="[PASTE MAIN APP OR GENERATOR LINK HERE]"
+      target="_blank"
+      rel="noopener noreferrer"
+    &gt;
+      [INSERT MAIN APP BUTTON NAME]
+    &lt;/a&gt;
+
+    &lt;a
+      class="button gold-button"
+      href="[PASTE HOW-TO-USE GUIDE LINK HERE]"
+      target="_blank"
+      rel="noopener noreferrer"
+    &gt;
+      [INSERT HOW-TO GUIDE BUTTON NAME]
+    &lt;/a&gt;
+
+    &lt;a
+      class="button"
+      href="[PASTE BONUS RESOURCE LINK HERE]"
+      target="_blank"
+      rel="noopener noreferrer"
+    &gt;
+      [INSERT BONUS RESOURCE BUTTON NAME]
+    &lt;/a&gt;
+
+    &lt;a
+      class="button gold-button"
+      href="[PASTE SELLING GUIDE LINK HERE]"
+      target="_blank"
+      rel="noopener noreferrer"
+    &gt;
+      [INSERT SELLING GUIDE BUTTON NAME]
+    &lt;/a&gt;
+
+    &lt;a
+      class="button outline-button"
+      href="[PASTE COMMUNITY LINK HERE]"
+      target="_blank"
+      rel="noopener noreferrer"
+    &gt;
+      [INSERT COMMUNITY BUTTON NAME]
+    &lt;/a&gt;
+
+    &lt;p&gt;[INSERT FINAL MESSAGE]&lt;/p&gt;
+  &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+</div>
+<aside class="reusable-master-prompt-note">
+<span class="eyebrow">Quick Lesson</span>
+<h3>How to use this HTML template</h3>
+<p>Save one untouched copy as your master. Each time you need a new welcome page, duplicate the file and replace the information inside the brackets.</p>
+<p><strong>Only change:</strong></p>
+<ul><li>The app name</li><li>The welcome headline</li><li>The welcome message</li><li>The button names</li><li>The main app link</li><li>The guide link</li><li>The bonus resource link</li><li>The selling guide link</li><li>The community link</li><li>The final message</li></ul>
+<p class="reusable-master-prompt-reminder">Do not rebuild the whole page every time.</p>
+</aside>
+</div>
+</article>
+<div class="lesson-complete-area">
+<button class="gold-btn" id="markDayTwoCompleteBtn" type="button">
+                Mark Day 2 Complete &amp; Continue to Sell Your Generator
               </button>
-            </div>
-          </div>
-        </section>
-
-        <!-- ============================= -->
-        <!-- PAGE: REFERENCE IMAGE LIBRARY -->
-        <!-- ============================= -->
-        <section class="page reference-library-page" id="references">
-          <div class="page-header split-header">
-            <div>
-              <span class="eyebrow">Creative Inspiration</span>
-              <h1>Reference Image Library</h1>
-              <p>
+</div>
+</div>
+</section>
+<!-- ============================= -->
+<!-- PAGE: REFERENCE IMAGE LIBRARY -->
+<!-- ============================= -->
+<section class="page reference-library-page" id="references">
+<div class="page-header split-header">
+<div>
+<span class="eyebrow">Creative Inspiration</span>
+<h1>Reference Image Library</h1>
+<p>
                 View workshop examples, download images for practice, and add
                 your own inspiration images to use while planning a prompt
                 generator.
               </p>
-            </div>
-          </div>
-
-          <div class="reference-library-intro card">
-            <div>
-              <span class="lesson-tag">How to Use This Page</span>
-              <h2>Choose an Image That Inspires Your Generator</h2>
-              <p>
+</div>
+</div>
+<div class="reference-library-intro card">
+<div>
+<span class="lesson-tag">How to Use This Page</span>
+<h2>Choose an Image That Inspires Your Generator</h2>
+<p>
                 Study the image for its subject, style, colors, layout,
                 atmosphere, and creative details. Then use those ideas to plan a
                 generator of your own. The goal is inspiration—not copying the
                 image exactly.
               </p>
-            </div>
-
-            <ul class="reference-library-tips">
-              <li>Notice the strongest visual details.</li>
-              <li>
+</div>
+<ul class="reference-library-tips">
+<li>Notice the strongest visual details.</li>
+<li>
                 Think about which generator categories the image suggests.
               </li>
-              <li>Download an example to use during the workshop.</li>
-              <li>Upload your own images when you find new inspiration.</li>
-            </ul>
-          </div>
-
-          <div class="reference-library-section">
-            <div class="reference-section-heading">
-              <div>
-                <span class="eyebrow">Workshop Example</span>
-                <h2>Included Reference Image</h2>
-                <p>
+<li>Download an example to use during the workshop.</li>
+<li>Upload your own images when you find new inspiration.</li>
+</ul>
+</div>
+<div class="reference-library-section">
+<div class="reference-section-heading">
+<div>
+<span class="eyebrow">Workshop Example</span>
+<h2>Included Reference Image</h2>
+<p>
                   This example is stored inside the Workshop Companion project.
                 </p>
-              </div>
-            </div>
-
-            <div class="reference-image-grid">
-              <article class="reference-image-card">
-                <div class="reference-image-frame">
-                  <img
-                    src="./assets/images/workshop-reference.png"
-                    alt="Workshop reference image example"
-                  />
-                </div>
-
-                <div class="reference-image-card-body">
-                  <div>
-                    <h3>Workshop Reference Image</h3>
-                    <p>
+</div>
+</div>
+<div class="reference-image-grid">
+<article class="reference-image-card">
+<div class="reference-image-frame">
+<img alt="Workshop reference image example" src="./assets/images/workshop-reference.png"/>
+</div>
+<div class="reference-image-card-body">
+<div>
+<h3>Workshop Reference Image</h3>
+<p>
                       Download this image and upload it into ChatGPT when you
                       want to practice building a generator from visual
                       inspiration.
                     </p>
-                  </div>
-
-                  <a
-                    class="gold-btn reference-download-btn"
-                    href="./assets/images/workshop-reference.png"
-                    download="workshop-reference.png"
-                  >
-                    <i data-lucide="download"></i>
+</div>
+<a class="gold-btn reference-download-btn" download="workshop-reference.png" href="./assets/images/workshop-reference.png">
+<i data-lucide="download"></i>
                     Download Image
                   </a>
-                </div>
-              </article>
-            </div>
-          </div>
-
-          <div class="reference-library-section">
-            <div class="reference-upload-card card">
-              <div class="reference-upload-copy">
-                <span class="eyebrow">Your Inspiration</span>
-                <h2>Upload Your Own Reference Images</h2>
-                <p>
+</div>
+</article>
+</div>
+</div>
+<div class="reference-library-section">
+<div class="reference-upload-card card">
+<div class="reference-upload-copy">
+<span class="eyebrow">Your Inspiration</span>
+<h2>Upload Your Own Reference Images</h2>
+<p>
                   Choose one or several JPG, PNG, WEBP, or GIF images from your
                   computer. Your uploaded images are saved in this browser so
                   they remain available after you refresh the page.
                 </p>
-                <p class="reference-storage-note">
+<p class="reference-storage-note">
                   These images stay on this device and are not uploaded to a
                   website or shared with anyone.
                 </p>
-              </div>
-
-              <div class="reference-upload-actions">
-                <label
-                  class="gold-btn reference-upload-label"
-                  for="referenceImageUpload"
-                >
-                  <i data-lucide="image-plus"></i>
+</div>
+<div class="reference-upload-actions">
+<label class="gold-btn reference-upload-label" for="referenceImageUpload">
+<i data-lucide="image-plus"></i>
                   Choose Images
                 </label>
-
-                <input
-                  id="referenceImageUpload"
-                  class="reference-file-input"
-                  type="file"
-                  accept="image/png,image/jpeg,image/webp,image/gif"
-                  multiple
-                />
-
-                <button
-                  class="danger-btn"
-                  id="clearReferenceImagesBtn"
-                  type="button"
-                  disabled
-                >
-                  <i data-lucide="trash-2"></i>
+<input accept="image/png,image/jpeg,image/webp,image/gif" class="reference-file-input" id="referenceImageUpload" multiple="" type="file"/>
+<button class="danger-btn" disabled="" id="clearReferenceImagesBtn" type="button">
+<i data-lucide="trash-2"></i>
                   Remove All Uploaded Images
                 </button>
-              </div>
-            </div>
-
-            <div class="reference-section-heading reference-uploaded-heading">
-              <div>
-                <span class="eyebrow">Saved in This Browser</span>
-                <h2>My Uploaded Reference Images</h2>
-              </div>
-              <p id="referenceImageCount">0 images</p>
-            </div>
-
-            <div
-              class="reference-image-grid"
-              id="uploadedReferenceGrid"
-              aria-live="polite"
-            >
-              <div class="reference-empty-state" id="referenceEmptyState">
-                <i data-lucide="images"></i>
-                <h3>No uploaded images yet</h3>
-                <p>
+</div>
+</div>
+<div class="reference-section-heading reference-uploaded-heading">
+<div>
+<span class="eyebrow">Saved in This Browser</span>
+<h2>My Uploaded Reference Images</h2>
+</div>
+<p id="referenceImageCount">0 images</p>
+</div>
+<div aria-live="polite" class="reference-image-grid" id="uploadedReferenceGrid">
+<div class="reference-empty-state" id="referenceEmptyState">
+<i data-lucide="images"></i>
+<h3>No uploaded images yet</h3>
+<p>
                   Click <strong>Choose Images</strong> to add your first
                   reference image.
                 </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ============================= -->
-        <!-- PAGE: PUBLISH -->
-        <!-- ============================= -->
-        <section class="page" id="publish">
-          <div class="page-header">
-            <h1>Open the tools used to build, publish, and create</h1>
-          </div>
-
-          <div class="publish-grid">
-            <article class="download-card">
-              <i data-lucide="cloud-upload"></i>
-
-              <h2>Publish Checklist</h2>
-
-              <p>GitHub and Netlify steps for students.</p>
-
-              <button
-                type="button"
-                class="primary-btn download-btn"
-                data-download="publish"
-              >
+</div>
+</div>
+</div>
+</section>
+<!-- ============================= -->
+<!-- PAGE: PUBLISH -->
+<!-- ============================= -->
+<section class="page" id="publish">
+<div class="page-header">
+<h1>Open the tools used to build, publish, and create</h1>
+</div>
+<div class="publish-grid">
+<article class="download-card">
+<i data-lucide="cloud-upload"></i>
+<h2>Publish Checklist</h2>
+<p>GitHub and Netlify steps for students.</p>
+<button class="primary-btn download-btn" data-download="publish" type="button">
                 Download
               </button>
-            </article>
-
-            <article class="download-card">
-              <i data-lucide="badge-dollar-sign"></i>
-
-              <h2>Selling Guide</h2>
-
-              <p>Mockups, pricing, sales copy, and launch checklist.</p>
-
-              <button class="primary-btn download-btn" data-download="selling">
+</article>
+<article class="download-card">
+<i data-lucide="badge-dollar-sign"></i>
+<h2>Selling Guide</h2>
+<p>Mockups, pricing, sales copy, and launch checklist.</p>
+<button class="primary-btn download-btn" data-download="selling">
                 Download
               </button>
-            </article>
-
-            <article class="card publish-card">
-              <span class="lesson-tag">Design</span>
-              <h2>Canva</h2>
-              <p>
+</article>
+<article class="card publish-card">
+<span class="lesson-tag">Design</span>
+<h2>Canva</h2>
+<p>
                 Design graphics, presentations, ebooks, and marketing assets.
               </p>
-              <a
-                href="https://www.canva.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="gold-btn"
-                >Open Canva →</a
-              >
-            </article>
-
-            <article class="card publish-card">
-              <span class="lesson-tag">AI Assistant</span>
-              <h2>ChatGPT</h2>
-              <p>Generate code, content, prompts, and troubleshooting help.</p>
-              <a
-                href="https://chatgpt.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="gold-btn"
-                >Open ChatGPT →</a
-              >
-            </article>
-
-            <article class="card publish-card">
-              <span class="lesson-tag">AI Video</span>
-              <h2>Flow</h2>
-              <p>Create cinematic AI videos from prompts and scenes.</p>
-              <a
-                href="https://labs.google/fx/tools/flow"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="gold-btn"
-                >Open Flow →</a
-              >
-            </article>
-
-            <article class="card publish-card">
-              <span class="lesson-tag">AI Assistant</span>
-              <h2>Gemini</h2>
-              <p>Brainstorm ideas, research topics, and generate content.</p>
-              <a
-                href="https://gemini.google.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="gold-btn"
-                >Open Gemini →</a
-              >
-            </article>
-
-            <article class="card publish-card">
-              <span class="lesson-tag">Development</span>
-              <h2>GitHub</h2>
-              <p>Save your project, track changes, and manage versions.</p>
-              <a
-                href="https://github.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="gold-btn"
-                >Open GitHub →</a
-              >
-            </article>
-
-            <article class="card publish-card">
-              <span class="lesson-tag">Image Upscaling</span>
-              <h2>I❤️IMG</h2>
-              <p>Increase image resolution and improve image quality.</p>
-              <a
-                href="https://www.iloveimg.com/upscale-image"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="gold-btn"
-                >Open I❤️IMG →</a
-              >
-            </article>
-
-            <article class="card publish-card">
-              <span class="lesson-tag">AI Images</span>
-              <h2>ImageFX</h2>
-              <p>Generate high-quality AI images from text prompts.</p>
-              <a
-                href="https://labs.google/fx/tools/image-fx"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="gold-btn"
-                >Open ImageFX →</a
-              >
-            </article>
-
-            <article class="card publish-card">
-              <span class="lesson-tag">Publishing</span>
-              <h2>Netlify</h2>
-              <p>Publish your project and get a live website link.</p>
-              <a
-                href="https://app.netlify.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="gold-btn"
-                >Open Netlify →</a
-              >
-            </article>
-
-            <article class="card publish-card">
-              <span class="lesson-tag">Research</span>
-              <h2>Perplexity</h2>
-              <p>Research ideas, verify information, and gather sources.</p>
-              <a
-                href="https://www.perplexity.ai/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="gold-btn"
-                >Open Perplexity →</a
-              >
-            </article>
-
-            <article class="card publish-card">
-              <span class="lesson-tag">AI Music</span>
-              <h2>Suno</h2>
-              <p>Generate AI songs, music, and background audio.</p>
-              <a
-                href="https://suno.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="gold-btn"
-                >Open Suno →</a
-              >
-            </article>
-
-            <article class="card publish-card">
-              <span class="lesson-tag">Development</span>
-              <h2>VS Code</h2>
-              <p>Write and edit HTML, CSS, and JavaScript files.</p>
-              <a
-                href="https://code.visualstudio.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="gold-btn"
-                >Open VS Code →</a
-              >
-            </article>
-          </div>
-        </section>
-        <!-- ============================= -->
-        <!-- PAGE: SELL -->
-        <!-- ============================= -->
-        <section class="page" id="sell">
-          <div class="page-header">
-            <h1>Launch Your Generator</h1>
-            <p>
+<a class="gold-btn" href="https://www.canva.com/" rel="noopener noreferrer" target="_blank">Open Canva →</a>
+</article>
+<article class="card publish-card">
+<span class="lesson-tag">AI Assistant</span>
+<h2>ChatGPT</h2>
+<p>Generate code, content, prompts, and troubleshooting help.</p>
+<a class="gold-btn" href="https://chatgpt.com/" rel="noopener noreferrer" target="_blank">Open ChatGPT →</a>
+</article>
+<article class="card publish-card">
+<span class="lesson-tag">AI Video</span>
+<h2>Flow</h2>
+<p>Create cinematic AI videos from prompts and scenes.</p>
+<a class="gold-btn" href="https://labs.google/fx/tools/flow" rel="noopener noreferrer" target="_blank">Open Flow →</a>
+</article>
+<article class="card publish-card">
+<span class="lesson-tag">AI Assistant</span>
+<h2>Gemini</h2>
+<p>Brainstorm ideas, research topics, and generate content.</p>
+<a class="gold-btn" href="https://gemini.google.com/" rel="noopener noreferrer" target="_blank">Open Gemini →</a>
+</article>
+<article class="card publish-card">
+<span class="lesson-tag">Development</span>
+<h2>GitHub</h2>
+<p>Save your project, track changes, and manage versions.</p>
+<a class="gold-btn" href="https://github.com/" rel="noopener noreferrer" target="_blank">Open GitHub →</a>
+</article>
+<article class="card publish-card">
+<span class="lesson-tag">Image Upscaling</span>
+<h2>I❤️IMG</h2>
+<p>Increase image resolution and improve image quality.</p>
+<a class="gold-btn" href="https://www.iloveimg.com/upscale-image" rel="noopener noreferrer" target="_blank">Open I❤️IMG →</a>
+</article>
+<article class="card publish-card">
+<span class="lesson-tag">AI Images</span>
+<h2>ImageFX</h2>
+<p>Generate high-quality AI images from text prompts.</p>
+<a class="gold-btn" href="https://labs.google/fx/tools/image-fx" rel="noopener noreferrer" target="_blank">Open ImageFX →</a>
+</article>
+<article class="card publish-card">
+<span class="lesson-tag">Publishing</span>
+<h2>Netlify</h2>
+<p>Publish your project and get a live website link.</p>
+<a class="gold-btn" href="https://app.netlify.com/" rel="noopener noreferrer" target="_blank">Open Netlify →</a>
+</article>
+<article class="card publish-card">
+<span class="lesson-tag">Research</span>
+<h2>Perplexity</h2>
+<p>Research ideas, verify information, and gather sources.</p>
+<a class="gold-btn" href="https://www.perplexity.ai/" rel="noopener noreferrer" target="_blank">Open Perplexity →</a>
+</article>
+<article class="card publish-card">
+<span class="lesson-tag">AI Music</span>
+<h2>Suno</h2>
+<p>Generate AI songs, music, and background audio.</p>
+<a class="gold-btn" href="https://suno.com/" rel="noopener noreferrer" target="_blank">Open Suno →</a>
+</article>
+<article class="card publish-card">
+<span class="lesson-tag">Development</span>
+<h2>VS Code</h2>
+<p>Write and edit HTML, CSS, and JavaScript files.</p>
+<a class="gold-btn" href="https://code.visualstudio.com/" rel="noopener noreferrer" target="_blank">Open VS Code →</a>
+</article>
+</div>
+</section>
+<!-- ============================= -->
+<!-- PAGE: SELL -->
+<!-- ============================= -->
+<section class="page" id="sell">
+<div class="page-header">
+<h1>Launch Your Generator</h1>
+<p>
               Your generator is built. Now it’s time to package it, create your
               product listing, and prepare it for real-world customers.
             </p>
-          </div>
-
-          <div class="sell-grid">
-            <article class="card sell-card">
-              <h2>Product Checklist</h2>
-              <ul>
-                <li>Live generator link</li>
-                <li>PDF buyer instructions</li>
-                <li>Preview screenshots</li>
-                <li>Product mockup</li>
-                <li>Simple terms of use</li>
-              </ul>
-            </article>
-
-            <article class="card sell-card">
-              <h2>Product Listing</h2>
-              <ul>
-                <li>Clear product title</li>
-                <li>Who the product helps</li>
-                <li>What the generator creates</li>
-                <li>Key features and benefits</li>
-                <li>What the buyer receives</li>
-              </ul>
-            </article>
-
-            <article class="card sell-card">
-              <h2>Launch Plan</h2>
-              <ul>
-                <li>Create 3–5 short videos</li>
-                <li>Show the generator working</li>
-                <li>Share before-and-after examples</li>
-                <li>Add your product link</li>
-                <li>Invite buyers to customize it</li>
-              </ul>
-            </article>
-          </div>
-
-          <!-- QUICK LINKS -->
-          <div class="card selling-links-card">
-            <div class="card-header">
-              <div>
-                <span class="eyebrow">Quick Links</span>
-                <h2>Publish Your Product</h2>
-              </div>
-            </div>
-
-            <div class="selling-links-grid">
-              <a
-                class="selling-platform-link"
-                href="https://payhip.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div>
-                  <h3>Payhip</h3>
-                  <p>Upload, price, and sell your generator.</p>
-                </div>
-                <span>Open Payhip</span>
-              </a>
-
-              <a
-                class="selling-platform-link"
-                href="https://beacons.ai/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div>
-                  <h3>Beacons</h3>
-                  <p>Add your generator to your store or link-in-bio page.</p>
-                </div>
-                <span>Open Beacons</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- PRODUCT DESCRIPTION PROMPT -->
-          <div class="card prompt-card sell-prompt-card">
-            <div class="card-header">
-              <div>
-                <h2>Product Description Prompt</h2>
-              </div>
-
-              <button
-                class="primary-btn copy-btn"
-                data-copy-target="productPrompt"
-              >
+</div>
+<div class="sell-grid">
+<article class="card sell-card">
+<h2>Product Checklist</h2>
+<ul>
+<li>Live generator link</li>
+<li>PDF buyer instructions</li>
+<li>Preview screenshots</li>
+<li>Product mockup</li>
+<li>Simple terms of use</li>
+</ul>
+</article>
+<article class="card sell-card">
+<h2>Product Listing</h2>
+<ul>
+<li>Clear product title</li>
+<li>Who the product helps</li>
+<li>What the generator creates</li>
+<li>Key features and benefits</li>
+<li>What the buyer receives</li>
+</ul>
+</article>
+<article class="card sell-card">
+<h2>Launch Plan</h2>
+<ul>
+<li>Create 3–5 short videos</li>
+<li>Show the generator working</li>
+<li>Share before-and-after examples</li>
+<li>Add your product link</li>
+<li>Invite buyers to customize it</li>
+</ul>
+</article>
+</div>
+<!-- QUICK LINKS -->
+<div class="card selling-links-card">
+<div class="card-header">
+<div>
+<span class="eyebrow">Quick Links</span>
+<h2>Publish Your Product</h2>
+</div>
+</div>
+<div class="selling-links-grid">
+<a class="selling-platform-link" href="https://payhip.com/" rel="noopener noreferrer" target="_blank">
+<div>
+<h3>Payhip</h3>
+<p>Upload, price, and sell your generator.</p>
+</div>
+<span>Open Payhip</span>
+</a>
+<a class="selling-platform-link" href="https://beacons.ai/" rel="noopener noreferrer" target="_blank">
+<div>
+<h3>Beacons</h3>
+<p>Add your generator to your store or link-in-bio page.</p>
+</div>
+<span>Open Beacons</span>
+</a>
+</div>
+</div>
+<!-- PRODUCT DESCRIPTION PROMPT -->
+<div class="card prompt-card sell-prompt-card">
+<div class="card-header">
+<div>
+<h2>Product Description Prompt</h2>
+</div>
+<button class="primary-btn copy-btn" data-copy-target="productPrompt">
                 Copy Prompt
               </button>
-            </div>
-
-            <textarea class="copy-area" id="productPrompt" readonly>
+</div>
+<textarea class="copy-area" id="productPrompt" readonly="">
 Write a clear, polished, and persuasive product listing for my AI prompt generator.
 
 Use the information I provide to create:
@@ -1840,599 +1651,454 @@ Before writing the listing, ask me for:
 6. What the buyer receives
 7. Product price
 8. Where the product will be sold
-</textarea
-            >
-          </div>
-
-          <!-- Launch Checklist -->
-          <article class="card launch-checklist-card">
-            <div class="launch-checklist-inner">
-              <div class="launch-checklist-front">
-                <span class="eyebrow">Final Step</span>
-
-                <h2>Launch Checklist</h2>
-
-                <p>
+</textarea>
+</div>
+<!-- Launch Checklist -->
+<article class="card launch-checklist-card">
+<div class="launch-checklist-inner">
+<div class="launch-checklist-front">
+<span class="eyebrow">Final Step</span>
+<h2>Launch Checklist</h2>
+<p>
                   Before you publish your generator, make sure you've completed
                   the final steps.
                 </p>
-
-                <button class="primary-btn">View Checklist</button>
-              </div>
-
-              <div class="launch-checklist-back">
-                <span class="eyebrow">Ready to Launch?</span>
-
-                <h2>Final Checklist</h2>
-
-                <ul class="launch-checklist-list">
-                  <li>✅ Test every feature</li>
-                  <li>✅ Remove placeholder text</li>
-                  <li>✅ Add your branding</li>
-                  <li>✅ Take screenshots</li>
-                  <li>✅ Write your product description</li>
-                  <li>✅ Upload your generator</li>
-                  <li>✅ Test your purchase link</li>
-                  <li>✅ Announce your launch</li>
-                </ul>
-
-                <button class="secondary-btn">Back</button>
-              </div>
-            </div>
-          </article>
-
-          <a class="gold-btn" href="./diploma.html"> View My Diploma </a>
-        </section>
-        <!-- ============================= -->
-        <!-- PAGE: NOTEBOOK -->
-        <!-- ============================= -->
-        <section class="page" id="notebook">
-          <div class="page-header">
-            <span class="eyebrow">Notebook</span>
-            <h1>My Workshop Notes</h1>
-            <p>
+<button class="primary-btn">View Checklist</button>
+</div>
+<div class="launch-checklist-back">
+<span class="eyebrow">Ready to Launch?</span>
+<h2>Final Checklist</h2>
+<ul class="launch-checklist-list">
+<li>✅ Test every feature</li>
+<li>✅ Remove placeholder text</li>
+<li>✅ Add your branding</li>
+<li>✅ Take screenshots</li>
+<li>✅ Write your product description</li>
+<li>✅ Upload your generator</li>
+<li>✅ Test your purchase link</li>
+<li>✅ Announce your launch</li>
+</ul>
+<button class="secondary-btn">Back</button>
+</div>
+</div>
+</article>
+<a class="gold-btn" href="./diploma.html"> View My Diploma </a>
+</section>
+<!-- ============================= -->
+<!-- PAGE: NOTEBOOK -->
+<!-- ============================= -->
+<section class="page" id="notebook">
+<div class="page-header">
+<span class="eyebrow">Notebook</span>
+<h1>My Workshop Notes</h1>
+<p>
               Write, save, edit, and delete your workshop notes in one place.
               Your notes save automatically.
             </p>
-          </div>
-
-          <div class="notebook-layout">
-            <aside class="card note-sidebar">
-              <button class="primary-btn full-width" id="newNoteBtn">
+</div>
+<div class="notebook-layout">
+<aside class="card note-sidebar">
+<button class="primary-btn full-width" id="newNoteBtn">
                 New Note
               </button>
-
-              <div class="saved-notes-header">
-                <h2>Saved Notes</h2>
-              </div>
-
-              <div class="saved-notes-list" id="savedNotesList">
-                <p class="empty-notes-message">No saved notes yet.</p>
-              </div>
-            </aside>
-
-            <div class="card note-editor-card">
-              <div class="note-editor-header">
-                <div>
-                  <h2 id="currentNoteTitle">New Note</h2>
-                  <p id="noteTimestamp">Start typing to save this note.</p>
-                </div>
-
-                <button
-                  class="secondary-btn"
-                  id="deleteNoteBtn"
-                  type="button"
-                  disabled
-                >
+<div class="saved-notes-header">
+<h2>Saved Notes</h2>
+</div>
+<div class="saved-notes-list" id="savedNotesList">
+<p class="empty-notes-message">No saved notes yet.</p>
+</div>
+</aside>
+<div class="card note-editor-card">
+<div class="note-editor-header">
+<div>
+<h2 id="currentNoteTitle">New Note</h2>
+<p id="noteTimestamp">Start typing to save this note.</p>
+</div>
+<button class="secondary-btn" disabled="" id="deleteNoteBtn" type="button">
                   Delete Note
                 </button>
-              </div>
-
-              <textarea
-                class="note-editor"
-                id="mainNote"
-                placeholder="Type your note here..."
-              ></textarea>
-
-              <p class="note-save-status" id="noteSaveStatus">
+</div>
+<textarea class="note-editor" id="mainNote" placeholder="Type your note here..."></textarea>
+<p class="note-save-status" id="noteSaveStatus">
                 Your note will save automatically.
               </p>
-            </div>
-          </div>
-        </section>
-
-        <!-- ============================= -->
-        <!-- PAGE: REPLAYS -->
-        <!-- ============================= -->
-        <section class="page" id="replays">
-          <div class="page-header">
-            <span class="eyebrow">Replay Library</span>
-            <h1>Two clean replays. No clutter.</h1>
-            <p>
+</div>
+</div>
+</section>
+<!-- ============================= -->
+<!-- PAGE: REPLAYS -->
+<!-- ============================= -->
+<section class="page" id="replays">
+<div class="page-header">
+<span class="eyebrow">Replay Library</span>
+<h1>Two clean replays. No clutter.</h1>
+<p>
               Only Day 1 and Day 2 live here so students know exactly what to
               watch.
             </p>
-          </div>
-          <div class="replay-grid">
-            <article class="card replay-card">
-              <span class="status-pill">Day 1</span>
-              <h2>Build the Prompt Generator Companion</h2>
-              <p>
+</div>
+<div class="replay-grid">
+<article class="card replay-card">
+<span class="status-pill">Day 1</span>
+<h2>Build the Prompt Generator Companion</h2>
+<p>
                 Project setup, HTML, CSS, JavaScript, generator buttons, and
                 testing.
               </p>
-              <ul>
-                <li>Project folder setup</li>
-                <li>Generator layout</li>
-                <li>Category dropdowns</li>
-                <li>Generate, Randomize, Copy, Clear</li>
-              </ul>
-              <button class="primary-btn replay-btn" data-replay="day1">
+<ul>
+<li>Project folder setup</li>
+<li>Generator layout</li>
+<li>Category dropdowns</li>
+<li>Generate, Randomize, Copy, Clear</li>
+</ul>
+<button class="primary-btn replay-btn" data-replay="day1">
                 Watch Day 1 Replay
               </button>
-            </article>
-            <article class="card replay-card">
-              <span class="status-pill">Day 2</span>
-              <h2>Publish and Sell the Generator</h2>
-              <p>
+</article>
+<article class="card replay-card">
+<span class="status-pill">Day 2</span>
+<h2>Publish and Sell the Generator</h2>
+<p>
                 AI modules, GitHub, Netlify, product packaging, and selling
                 strategy.
               </p>
-              <ul>
-                <li>Premium AI modules</li>
-                <li>GitHub workflow</li>
-                <li>Netlify deployment</li>
-                <li>Sales page and launch plan</li>
-              </ul>
-              <button class="primary-btn replay-btn" data-replay="day2">
+<ul>
+<li>Premium AI modules</li>
+<li>GitHub workflow</li>
+<li>Netlify deployment</li>
+<li>Sales page and launch plan</li>
+</ul>
+<button class="primary-btn replay-btn" data-replay="day2">
                 Watch Day 2 Replay
               </button>
-            </article>
-          </div>
-        </section>
-
-        <!-- ============================= -->
-        <!-- PAGE: BONUS RESOURCES -->
-        <!-- ============================= -->
-        <section class="page" id="bonuses">
-          <div class="page-header">
-            <span class="eyebrow">Bonus Resources</span>
-
-            <h1>Your workshop extras</h1>
-
-            <p>
+</article>
+</div>
+</section>
+<!-- ============================= -->
+<!-- PAGE: BONUS RESOURCES -->
+<!-- ============================= -->
+<section class="page" id="bonuses">
+<div class="page-header">
+<span class="eyebrow">Bonus Resources</span>
+<h1>Your workshop extras</h1>
+<p>
               Customize, expand, and reuse your Workshop Companion with these
               bonus resources
             </p>
-          </div>
-
-          <div class="settings-grid">
-            <article class="card settings-card">
-              <h2>Workshop Companion Code</h2>
-
-              <p>
+</div>
+<div class="settings-grid">
+<article class="card settings-card">
+<h2>Workshop Companion Code</h2>
+<p>
                 As a bonus, you receive the complete source code for the
                 Workshop Companion. Make it your own by updating the branding,
                 colors, lessons, pages, downloads, and resources. Customize it
                 "Use it for your own Prompt Generator Workshop.
               </p>
-
-              <ul class="bonus-list">
-                <li>✔ Rebrand the Workshop Companion</li>
-                <li>✔ Edit every lesson and resource</li>
-                <li>✔ Add or remove workshop pages</li>
-                <li>✔ Customize the design and colors</li>
-                <li>✔ Use it for your own prompt generator workshop</li>
-              </ul>
-              <a
-                class="primary-btn"
-                href="downloads/Workshop-Companion.zip"
-                download
-              >
+<ul class="bonus-list">
+<li>✔ Rebrand the Workshop Companion</li>
+<li>✔ Edit every lesson and resource</li>
+<li>✔ Add or remove workshop pages</li>
+<li>✔ Customize the design and colors</li>
+<li>✔ Use it for your own prompt generator workshop</li>
+</ul>
+<a class="primary-btn" download="" href="downloads/Workshop-Companion.zip">
                 Download Workshop Companion Code
               </a>
-
-              <button class="secondary-btn" data-open-page="gettingStartedPage">
+<button class="secondary-btn" data-open-page="gettingStartedPage">
                 Open Setup Guide
               </button>
-            </article>
-
-            <article class="card settings-card">
-              <h2>Workshop Data</h2>
-
-              <p>
+</article>
+<article class="card settings-card">
+<h2>Workshop Data</h2>
+<p>
                 Reset your saved notes, checklists, and workshop progress at any
                 time.
               </p>
-
-              <button class="danger-btn full-width" id="resetDataBtn">
+<button class="danger-btn full-width" id="resetDataBtn">
                 Reset Everything
               </button>
-            </article>
-          </div>
-        </section>
-        <!-- ========================================
+</article>
+</div>
+</section>
+<!-- ========================================
      GETTING STARTED GUIDE PAGE
 ======================================== -->
-        <section class="page getting-started-page" id="gettingStartedPage">
-          <div class="page-heading">
-            <div>
-              <span class="eyebrow">Beginner Guide</span>
-              <h1>Getting Started Guide</h1>
-              <p>
+<section class="page getting-started-page" id="gettingStartedPage">
+<div class="page-heading">
+<div>
+<span class="eyebrow">Beginner Guide</span>
+<h1>Getting Started Guide</h1>
+<p>
                 Follow these simple steps to download, open, and customize your
                 Workshop Companion.
               </p>
-            </div>
-
-            <button
-              class="secondary-btn"
-              data-open-page="bonuses"
-              type="button"
-            >
+</div>
+<button class="secondary-btn" data-open-page="bonuses" type="button">
               Back to Bonus Resources
             </button>
-          </div>
-          <div class="getting-started-content">
-            <!-- Step 1: Download the ZIP -->
-            <article class="card guide-step-card">
-              <div class="guide-step-number">1</div>
-
-              <div class="guide-step-content">
-                <span class="eyebrow">First Step</span>
-
-                <h2>Download the Workshop Companion ZIP</h2>
-
-                <p>
+</div>
+<div class="getting-started-content">
+<!-- Step 1: Download the ZIP -->
+<article class="card guide-step-card">
+<div class="guide-step-number">1</div>
+<div class="guide-step-content">
+<span class="eyebrow">First Step</span>
+<h2>Download the Workshop Companion ZIP</h2>
+<p>
                   Start by downloading the Workshop Companion ZIP file to your
                   computer. A ZIP file is a folder that has been compressed so
                   it is easier to download and share.
                 </p>
-
-                <h3>Follow Along with the Screenshot</h3>
-
-                <figure class="guide-screenshot">
-                  <img
-                    src="assets/images/getting-started/download-zip.png"
-                    alt="Download the Workshop Companion ZIP file"
-                  />
-
-                  <figcaption>
+<h3>Follow Along with the Screenshot</h3>
+<figure class="guide-screenshot">
+<img alt="Download the Workshop Companion ZIP file" src="assets/images/getting-started/download-zip.png"/>
+<figcaption>
                     Download the Workshop Companion ZIP file and find it in your
                     Downloads folder.
                   </figcaption>
-                </figure>
-
-                <ol class="guide-instructions">
-                  <li>
+</figure>
+<ol class="guide-instructions">
+<li>
                     Click the download button provided with your Workshop
                     Companion.
                   </li>
-
-                  <li>Wait for the ZIP file to finish downloading.</li>
-
-                  <li>Open your computer’s Downloads folder.</li>
-
-                  <li>Look for the Workshop Companion ZIP file.</li>
-                </ol>
-
-                <div class="guide-tip">
-                  <strong>Beginner Tip:</strong>
+<li>Wait for the ZIP file to finish downloading.</li>
+<li>Open your computer’s Downloads folder.</li>
+<li>Look for the Workshop Companion ZIP file.</li>
+</ol>
+<div class="guide-tip">
+<strong>Beginner Tip:</strong>
                   Do not try to open or edit the project while it is still
                   inside the ZIP file. You must extract it first.
                 </div>
-              </div>
-            </article>
-            <!-- Step 2: Extract the ZIP -->
-            <article class="card guide-step-card">
-              <div class="guide-step-number">2</div>
-
-              <div class="guide-step-content">
-                <span class="eyebrow">Second Step</span>
-
-                <h2>Extract the ZIP File</h2>
-
-                <p>
+</div>
+</article>
+<!-- Step 2: Extract the ZIP -->
+<article class="card guide-step-card">
+<div class="guide-step-number">2</div>
+<div class="guide-step-content">
+<span class="eyebrow">Second Step</span>
+<h2>Extract the ZIP File</h2>
+<p>
                   Extracting the ZIP turns it back into a normal folder that you
                   can open and edit.
                 </p>
-
-                <h3>Follow Along with the Screenshots</h3>
-
-                <div class="guide-screenshot-stack">
-                  <figure class="guide-screenshot">
-                    <img
-                      src="assets/images/getting-started/extract-zip.png"
-                      alt="Right-click the ZIP file"
-                    />
-                    <figcaption>
+<h3>Follow Along with the Screenshots</h3>
+<div class="guide-screenshot-stack">
+<figure class="guide-screenshot">
+<img alt="Right-click the ZIP file" src="assets/images/getting-started/extract-zip.png"/>
+<figcaption>
                       Right-click the Workshop Companion ZIP file.
                     </figcaption>
-                  </figure>
-
-                  <figure class="guide-screenshot">
-                    <img
-                      src="assets/images/getting-started/extract-zip-1.png"
-                      alt="Click Extract All"
-                    />
-                    <figcaption>Click <strong>Extract All</strong>.</figcaption>
-                  </figure>
-
-                  <figure class="guide-screenshot">
-                    <img
-                      src="assets/images/getting-started/extract-zip-2.png"
-                      alt="Verify the folder location"
-                    />
-                    <figcaption>
+</figure>
+<figure class="guide-screenshot">
+<img alt="Click Extract All" src="assets/images/getting-started/extract-zip-1.png"/>
+<figcaption>Click <strong>Extract All</strong>.</figcaption>
+</figure>
+<figure class="guide-screenshot">
+<img alt="Verify the folder location" src="assets/images/getting-started/extract-zip-2.png"/>
+<figcaption>
                       Don't skip this step. Make sure the folder location is
                       correct.
                     </figcaption>
-                  </figure>
-
-                  <figure class="guide-screenshot">
-                    <img
-                      src="assets/images/getting-started/extract-zip-3.png"
-                      alt="Create a new folder"
-                    />
-                    <figcaption>
+</figure>
+<figure class="guide-screenshot">
+<img alt="Create a new folder" src="assets/images/getting-started/extract-zip-3.png"/>
+<figcaption>
                       Click <strong>New Folder</strong>, give it a name you'll
                       remember, then click <strong>Select Folder</strong>.
                     </figcaption>
-                  </figure>
-
-                  <figure class="guide-screenshot">
-                    <img
-                      src="assets/images/getting-started/extract-zip-4.png"
-                      alt="This Should Open Into The New Folder"
-                    />
-                    <figcaption>
+</figure>
+<figure class="guide-screenshot">
+<img alt="This Should Open Into The New Folder" src="assets/images/getting-started/extract-zip-4.png"/>
+<figcaption>
                       This Should Open Into The New Folder
                     </figcaption>
-                  </figure>
-
-                  <figure class="guide-screenshot">
-                    <img
-                      src="assets/images/getting-started/extract-zip-5.png"
-                      alt="The Folder You Extracted Will Be The One You Upload To VS Code"
-                    />
-                    <figcaption>
+</figure>
+<figure class="guide-screenshot">
+<img alt="The Folder You Extracted Will Be The One You Upload To VS Code" src="assets/images/getting-started/extract-zip-5.png"/>
+<figcaption>
                       The Folder You Extracted Will Be The One You Upload To VS
                       Code
                     </figcaption>
-                  </figure>
-                </div>
-
-                <ol class="guide-instructions">
-                  <li>Right-click the Workshop Companion ZIP file.</li>
-                  <li>Click <strong>Extract All</strong>.</li>
-                  <li>Choose where you want the new folder to be saved.</li>
-                  <li>Click <strong>Extract</strong>.</li>
-                  <li>Wait for the new folder to open.</li>
-                </ol>
-
-                <div class="guide-tip">
-                  <strong>Beginner Tip:</strong>
+</figure>
+</div>
+<ol class="guide-instructions">
+<li>Right-click the Workshop Companion ZIP file.</li>
+<li>Click <strong>Extract All</strong>.</li>
+<li>Choose where you want the new folder to be saved.</li>
+<li>Click <strong>Extract</strong>.</li>
+<li>Wait for the new folder to open.</li>
+</ol>
+<div class="guide-tip">
+<strong>Beginner Tip:</strong>
                   Use the new extracted folder from now on. Do not keep working
                   inside the original ZIP file.
                 </div>
-              </div>
-            </article>
-
-            <!-- Step 3: Open the Project -->
-            <article class="card guide-step-card">
-              <div class="guide-step-number">3</div>
-
-              <div class="guide-step-content">
-                <span class="eyebrow">Third Step</span>
-
-                <h2>Open the Project in Visual Studio Code</h2>
-
-                <p>
+</div>
+</article>
+<!-- Step 3: Open the Project -->
+<article class="card guide-step-card">
+<div class="guide-step-number">3</div>
+<div class="guide-step-content">
+<span class="eyebrow">Third Step</span>
+<h2>Open the Project in Visual Studio Code</h2>
+<p>
                   Now you'll open the Workshop Companion in Visual Studio Code
                   so you can begin customizing it.
                 </p>
-
-                <ol class="guide-instructions">
-                  <li>Open Visual Studio Code.</li>
-
-                  <li>
+<ol class="guide-instructions">
+<li>Open Visual Studio Code.</li>
+<li>
                     Click <strong>File</strong>, then click
                     <strong>New Window</strong>.
                   </li>
-
-                  <li>
+<li>
                     In the new window, click <strong>File</strong> again, then
                     click <strong>Open Folder...</strong>.
                   </li>
-
-                  <li>
+<li>
                     Find the Workshop Companion folder you extracted in Step 2.
                   </li>
-
-                  <li>Select the Workshop Companion folder.</li>
-
-                  <li>
+<li>Select the Workshop Companion folder.</li>
+<li>
                     Click <strong>Select Folder</strong>, or
                     <strong>Open</strong> if that is what your computer shows.
                   </li>
-
-                  <li>
+<li>
                     Wait for the project files to appear in the Explorer panel
                     on the left side of VS Code.
                   </li>
-                </ol>
-
-                <div class="guide-tip">
-                  <strong>Beginner Tip:</strong>
+</ol>
+<div class="guide-tip">
+<strong>Beginner Tip:</strong>
                   Open the main Workshop Companion folder, not one of the
                   folders inside it. You should see files like
                   <code>index.html</code>, <code>style.css</code>, and
                   <code>script.js</code>.
                 </div>
-
-                <h3>Follow Along with the Screenshots</h3>
-
-                <div class="guide-screenshot-stack">
-                  <figure class="guide-screenshot">
-                    <img
-                      src="assets/images/getting-started/open-project.png"
-                      alt="Click File, select New Window, and then select Open Folder in Visual Studio Code"
-                    />
-                    <figcaption>
+<h3>Follow Along with the Screenshots</h3>
+<div class="guide-screenshot-stack">
+<figure class="guide-screenshot">
+<img alt="Click File, select New Window, and then select Open Folder in Visual Studio Code" src="assets/images/getting-started/open-project.png"/>
+<figcaption>
                       Click <strong>File</strong>, then
                       <strong>New Window</strong>. In the new window, click
                       <strong>File</strong> again and choose
                       <strong>Open Folder...</strong>.
                     </figcaption>
-                  </figure>
-
-                  <figure class="guide-screenshot">
-                    <img
-                      src="assets/images/getting-started/open-project-1.png"
-                      alt="Browse to the extracted Workshop Companion folder"
-                    />
-                    <figcaption>
+</figure>
+<figure class="guide-screenshot">
+<img alt="Browse to the extracted Workshop Companion folder" src="assets/images/getting-started/open-project-1.png"/>
+<figcaption>
                       Browse to the location where you saved the extracted
                       Workshop Companion folder.
                     </figcaption>
-                  </figure>
-
-                  <figure class="guide-screenshot">
-                    <img
-                      src="assets/images/getting-started/open-project-2.png"
-                      alt="Select the main Workshop Companion folder"
-                    />
-                    <figcaption>
+</figure>
+<figure class="guide-screenshot">
+<img alt="Select the main Workshop Companion folder" src="assets/images/getting-started/open-project-2.png"/>
+<figcaption>
                       Click the main Workshop Companion folder to select it.
                     </figcaption>
-                  </figure>
-
-                  <figure class="guide-screenshot">
-                    <img
-                      src="assets/images/getting-started/open-project-3.png"
-                      alt="Workshop Companion files open in the Visual Studio Code Explorer panel"
-                    />
-                    <figcaption>
+</figure>
+<figure class="guide-screenshot">
+<img alt="Workshop Companion files open in the Visual Studio Code Explorer panel" src="assets/images/getting-started/open-project-3.png"/>
+<figcaption>
                       The project files will appear in the Explorer panel on the
                       left side of VS Code.
                     </figcaption>
-                  </figure>
-                </div>
-              </div>
-            </article>
-
-            <!-- Step 4: Understand the Project Structure -->
-            <article class="card guide-step-card">
-              <div class="guide-step-number">4</div>
-
-              <div class="guide-step-content">
-                <span class="eyebrow">Fourth Step</span>
-                <h2>Understand the Project Structure</h2>
-
-                <p>
+</figure>
+</div>
+</div>
+</article>
+<!-- Step 4: Understand the Project Structure -->
+<article class="card guide-step-card">
+<div class="guide-step-number">4</div>
+<div class="guide-step-content">
+<span class="eyebrow">Fourth Step</span>
+<h2>Understand the Project Structure</h2>
+<p>
                   Before you start editing, it's helpful to know what each file
                   does. You do not need to memorize this. Just use it as a quick
                   reference.
                 </p>
-
-                <figure class="guide-screenshot">
-                  <img
-                    src="assets/images/getting-started/project-structure.png"
-                    alt="Example showing the Workshop Companion project structure in Visual Studio Code"
-                  />
-
-                  <figcaption>
+<figure class="guide-screenshot">
+<img alt="Example showing the Workshop Companion project structure in Visual Studio Code" src="assets/images/getting-started/project-structure.png"/>
+<figcaption>
                     Example: You should see files like
                     <strong>index.html</strong>, <strong>style.css</strong>,
                     <strong>script.js</strong>, and your project folders in the
                     Explorer panel.
                   </figcaption>
-                </figure>
-
-                <div class="guide-file-list">
-                  <div class="guide-file-item">
-                    <h3>index.html</h3>
-                    <p>
+</figure>
+<div class="guide-file-list">
+<div class="guide-file-item">
+<h3>index.html</h3>
+<p>
                       This file contains the content and structure of your
                       Workshop Companion. Most text, buttons, and sections are
                       found here.
                     </p>
-                  </div>
-
-                  <div class="guide-file-item">
-                    <h3>style.css</h3>
-                    <p>
+</div>
+<div class="guide-file-item">
+<h3>style.css</h3>
+<p>
                       This file controls how your Workshop Companion looks,
                       including colors, fonts, spacing, borders, and layouts.
                     </p>
-                  </div>
-
-                  <div class="guide-file-item">
-                    <h3>script.js</h3>
-                    <p>
+</div>
+<div class="guide-file-item">
+<h3>script.js</h3>
+<p>
                       This file controls how the Workshop Companion works. It
                       handles buttons, menus, pop-ups, copying text, and other
                       interactive features.
                     </p>
-                  </div>
-
-                  <div class="guide-file-item">
-                    <h3>Assets & Downloads</h3>
-                    <p>
+</div>
+<div class="guide-file-item">
+<h3>Assets &amp; Downloads</h3>
+<p>
                       These folders hold images, icons, downloadable files, and
                       other resources used by the Workshop Companion.
                     </p>
-                  </div>
-                </div>
-
-                <div class="guide-tip">
-                  <strong>Beginner Tip:</strong>
+</div>
+</div>
+<div class="guide-tip">
+<strong>Beginner Tip:</strong>
                   If you're only changing wording, you'll usually work in
                   <code>index.html</code>. If you're changing colors or fonts,
                   you'll usually work in <code>style.css</code>.
                 </div>
-              </div>
-            </article>
-
-            <!-- Step 5: Customize with ChatGPT -->
-            <article class="card guide-step-card">
-              <div class="guide-step-number">5</div>
-
-              <div class="guide-step-content">
-                <span class="eyebrow">Fifth Step</span>
-                <h2>Use ChatGPT to Customize Your Workshop Companion</h2>
-
-                <p>
+</div>
+</article>
+<!-- Step 5: Customize with ChatGPT -->
+<article class="card guide-step-card">
+<div class="guide-step-number">5</div>
+<div class="guide-step-content">
+<span class="eyebrow">Fifth Step</span>
+<h2>Use ChatGPT to Customize Your Workshop Companion</h2>
+<p>
                   You can use ChatGPT to help you change the wording, colors,
                   images, buttons, downloads, and branding without trying to
                   figure everything out by yourself.
                 </p>
-
-                <div class="card prompt-card">
-                  <div class="card-header">
-                    <div>
-                      <span class="eyebrow">Workshop Prompt</span>
-                      <h3>Workshop Companion Master Customization Prompt</h3>
-                      <p>
+<div class="card prompt-card">
+<div class="card-header">
+<div>
+<span class="eyebrow">Workshop Prompt</span>
+<h3>Workshop Companion Master Customization Prompt</h3>
+<p>
                         Click <strong>Copy Prompt</strong>, then paste it into a
                         new ChatGPT conversation to begin customizing your
                         Workshop Companion.
                       </p>
-                    </div>
-
-                    <button
-                      class="primary-btn copy-btn"
-                      data-copy-target="workshopCompanionPrompt"
-                    >
+</div>
+<button class="primary-btn copy-btn" data-copy-target="workshopCompanionPrompt">
                       Copy Prompt
                     </button>
-                  </div>
-
-                  <textarea
-                    class="copy-area"
-                    id="workshopCompanionPrompt"
-                    readonly
-                  >
+</div>
+<textarea class="copy-area" id="workshopCompanionPrompt" readonly="">
 You are an expert HTML, CSS, JavaScript, UI/UX, Visual Studio Code, and front-end development instructor helping a complete beginner customize an existing Workshop Companion.
 
 The Workshop Companion has already been built.
@@ -2932,173 +2598,133 @@ Wait for me to say "done" before every new step.
 Start by asking me the customization questions.
 
 Do not generate code yet.
-  </textarea
-                  >
-                </div>
-
-                <div class="guide-tip">
-                  <strong>Beginner Tip:</strong>
+  </textarea>
+</div>
+<div class="guide-tip">
+<strong>Beginner Tip:</strong>
                   Keep Visual Studio Code and ChatGPT open at the same time.
                   This makes it easier to copy code, paste changes, save your
                   work, and test each step.
                 </div>
-
-                <div class="guide-warning">
-                  <strong>Important:</strong>
+<div class="guide-warning">
+<strong>Important:</strong>
                   Never replace an entire file unless ChatGPT clearly tells you
                   to. Small, careful changes are safer and easier to fix.
                 </div>
-              </div>
-            </article>
-
-            <!-- Quick Reference -->
-            <article class="card guide-reference-card">
-              <div class="guide-step-content">
-                <span class="eyebrow">Quick Reference</span>
-                <h2>Common VS Code Keyboard Shortcuts</h2>
-
-                <table class="guide-shortcuts-table">
-                  <thead>
-                    <tr>
-                      <th>Shortcut</th>
-                      <th>What It Does</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    <tr>
-                      <td><code>Ctrl + A</code></td>
-                      <td>Select everything in the current file.</td>
-                    </tr>
-
-                    <tr>
-                      <td><code>Ctrl + C</code></td>
-                      <td>Copy the selected text.</td>
-                    </tr>
-
-                    <tr>
-                      <td><code>Ctrl + V</code></td>
-                      <td>Paste copied text.</td>
-                    </tr>
-
-                    <tr>
-                      <td><code>Ctrl + F</code></td>
-                      <td>Find text in the current file.</td>
-                    </tr>
-
-                    <tr>
-                      <td><code>Ctrl + H</code></td>
-                      <td>Find and replace text.</td>
-                    </tr>
-
-                    <tr>
-                      <td><code>Ctrl + S</code></td>
-                      <td>Save your changes.</td>
-                    </tr>
-
-                    <tr>
-                      <td><code>Ctrl + Z</code></td>
-                      <td>Undo your last change.</td>
-                    </tr>
-
-                    <tr>
-                      <td><code>Ctrl + Y</code></td>
-                      <td>Redo a change you undid.</td>
-                    </tr>
-
-                    <tr>
-                      <td><code>Ctrl + Shift + F</code></td>
-                      <td>Search across every file in the project.</td>
-                    </tr>
-
-                    <tr>
-                      <td><code>Ctrl + G</code></td>
-                      <td>Jump directly to a specific line number.</td>
-                    </tr>
-
-                    <tr>
-                      <td><code>Ctrl + Shift + P</code></td>
-                      <td>
+</div>
+</article>
+<!-- Quick Reference -->
+<article class="card guide-reference-card">
+<div class="guide-step-content">
+<span class="eyebrow">Quick Reference</span>
+<h2>Common VS Code Keyboard Shortcuts</h2>
+<table class="guide-shortcuts-table">
+<thead>
+<tr>
+<th>Shortcut</th>
+<th>What It Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Ctrl + A</code></td>
+<td>Select everything in the current file.</td>
+</tr>
+<tr>
+<td><code>Ctrl + C</code></td>
+<td>Copy the selected text.</td>
+</tr>
+<tr>
+<td><code>Ctrl + V</code></td>
+<td>Paste copied text.</td>
+</tr>
+<tr>
+<td><code>Ctrl + F</code></td>
+<td>Find text in the current file.</td>
+</tr>
+<tr>
+<td><code>Ctrl + H</code></td>
+<td>Find and replace text.</td>
+</tr>
+<tr>
+<td><code>Ctrl + S</code></td>
+<td>Save your changes.</td>
+</tr>
+<tr>
+<td><code>Ctrl + Z</code></td>
+<td>Undo your last change.</td>
+</tr>
+<tr>
+<td><code>Ctrl + Y</code></td>
+<td>Redo a change you undid.</td>
+</tr>
+<tr>
+<td><code>Ctrl + Shift + F</code></td>
+<td>Search across every file in the project.</td>
+</tr>
+<tr>
+<td><code>Ctrl + G</code></td>
+<td>Jump directly to a specific line number.</td>
+</tr>
+<tr>
+<td><code>Ctrl + Shift + P</code></td>
+<td>
                         Open the Command Palette to access VS Code commands.
                       </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </article>
-          </div>
-        </section>
-      </main>
-    </div>
-
-    <!-- ============================= -->
-    <!-- TOAST + POPUPS -->
-    <!-- ============================= -->
-    <div class="completion-popup hidden" id="workshopLockPopup">
-      <div class="completion-card">
-        <button
-          aria-label="Close workshop code popup"
-          class="close-popup"
-          id="closeWorkshopLockPopup"
-          type="button"
-        >
+</tr>
+</tbody>
+</table>
+</div>
+</article>
+</div>
+</section>
+</main>
+</div>
+<!-- ============================= -->
+<!-- TOAST + POPUPS -->
+<!-- ============================= -->
+<div class="completion-popup hidden" id="workshopLockPopup">
+<div class="completion-card">
+<button aria-label="Close workshop code popup" class="close-popup" id="closeWorkshopLockPopup" type="button">
           ×
         </button>
-
-        <span class="eyebrow">Workshop Locked</span>
-
-        <h2>🔒 This Lesson Is Locked Until Workshop Day</h2>
-
-        <p>
+<span class="eyebrow">Workshop Locked</span>
+<h2>🔒 This Lesson Is Locked Until Workshop Day</h2>
+<p>
           This lesson will unlock when the live workshop begins. Enter the
           workshop code I'll provide during class to unlock your Workshop
           Companion.
         </p>
-
-        <input
-          id="workshopCodeInput"
-          type="text"
-          placeholder="Enter workshop code"
-          autocomplete="off"
-        />
-
-        <button class="gold-btn" id="unlockWorkshopBtn" type="button">
+<input autocomplete="off" id="workshopCodeInput" placeholder="Enter workshop code" type="text"/>
+<button class="gold-btn" id="unlockWorkshopBtn" type="button">
           🔓 Unlock My Workshop
         </button>
-
-        <p class="workshop-help-text">
+<p class="workshop-help-text">
           Need help getting ready? Visit <strong>Start Here</strong> and
-          <strong>Tools & Resources</strong> before class.
+          <strong>Tools &amp; Resources</strong> before class.
         </p>
-
-        <p id="workshopCodeMessage"></p>
-      </div>
-    </div>
-    <div aria-live="polite" class="toast" id="toast" role="status">Copied!</div>
-    <div class="completion-popup hidden" id="completionPopup">
-      <div class="completion-card">
-        <button
-          aria-label="Close popup"
-          class="close-popup"
-          id="closeCompletionPopup"
-          type="button"
-          onclick="closeAchievementPopup()"
-        >
+<p id="workshopCodeMessage"></p>
+</div>
+</div>
+<div aria-live="polite" class="toast" id="toast" role="status">Copied!</div>
+<div class="completion-popup hidden" id="completionPopup">
+<div class="completion-card">
+<button aria-label="Close popup" class="close-popup" id="closeCompletionPopup" onclick="closeAchievementPopup()" type="button">
           ×
         </button>
-        <span class="eyebrow">Let's Get Started</span>
-        <h2 id="completionTitle">Workshop Step Complete</h2>
-        <p id="completionText">Your progress has been saved.</p>
-        <a class="gold-btn" href="./diploma.html" id="completionDiplomaButton">
+<span class="eyebrow">Let's Get Started</span>
+<h2 id="completionTitle">Workshop Step Complete</h2>
+<p id="completionText">Your progress has been saved.</p>
+<a class="gold-btn" href="./diploma.html" id="completionDiplomaButton">
           View Diploma
         </a>
-      </div>
-    </div>
-    <script src="js/script.js"></script>
-    <script>
+</div>
+</div>
+<script src="js/script.js"></script>
+<script>
       if (window.lucide) {
         lucide.createIcons();
       }
     </script>
-  </body>
+</body>
 </html>

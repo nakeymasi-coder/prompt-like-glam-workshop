@@ -3163,7 +3163,7 @@ async function handleResetData() {
 
 function downloadTextFile(filename, content) {
   const blob = new Blob([content], {
-    type: "text/plain;charset=utf-8",
+    type: "text/html;charset=utf-8",
   });
 
   const url = URL.createObjectURL(blob);
@@ -4296,6 +4296,64 @@ function setupLaunchChecklistCard() {
     card.classList.remove("is-flipped");
   });
 }
+
+
+/* =========================================================
+   DAY 2 — REUSABLE APP WELCOME PAGE MASTER PROMPT
+   ========================================================= */
+
+function setupReusableWelcomeMasterPrompt() {
+  const promptBox = byId("reusableWelcomeMasterPrompt");
+  const copyButton = byId("copyReusableWelcomePromptBtn");
+  const downloadButton = byId("downloadReusableWelcomePromptBtn");
+
+  if (!promptBox || !copyButton || !downloadButton) return;
+
+  const defaultCopyText = "COPY HTML TEMPLATE";
+  let copyResetTimer;
+
+  copyButton.addEventListener("click", async () => {
+    const copied = await copyText(
+      promptBox.value,
+      "HTML template copied!",
+    );
+
+    if (!copied) return;
+
+    window.clearTimeout(copyResetTimer);
+    copyButton.textContent = "HTML COPIED";
+    copyButton.classList.add("is-success");
+
+    copyResetTimer = window.setTimeout(() => {
+      copyButton.textContent = defaultCopyText;
+      copyButton.classList.remove("is-success");
+    }, 2000);
+  });
+
+  downloadButton.addEventListener("click", () => {
+    const promptFile = new Blob([promptBox.value], {
+      type: "text/html;charset=utf-8",
+    });
+
+    const downloadUrl = URL.createObjectURL(promptFile);
+    const temporaryLink = document.createElement("a");
+
+    temporaryLink.href = downloadUrl;
+    temporaryLink.download =
+      "reusable-app-welcome-page-template.html";
+
+    document.body.appendChild(temporaryLink);
+    temporaryLink.click();
+    temporaryLink.remove();
+
+    window.setTimeout(() => {
+      URL.revokeObjectURL(downloadUrl);
+    }, 1000);
+
+    showToast("HTML template downloaded!");
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initializeCoreEngine();
   setupWorkshopLockPopup();
@@ -4305,6 +4363,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupReferenceImageLibrary();
   initializeFlipCards();
   setupLaunchChecklistCard();
+  setupReusableWelcomeMasterPrompt();
   initializeFinalPolish();
 
   console.log("Prompt Generator Companion fully initialized.");
