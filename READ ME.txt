@@ -1,0 +1,8 @@
+WORKSHOP REFERENCE IMAGE UPDATE
+
+1. Replace your current index.html with the index.html in this folder.
+2. Open assets > images.
+3. Copy all six new image files into your project's assets/images folder.
+4. Keep your existing workshop-reference.png file.
+5. Save, test in the browser, then commit and push to GitHub.
+6. Netlify will redeploy the updated class page.
