@@ -5,13 +5,3326 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="Prompt Generator Companion: build a reusable prompt generator with HTML, CSS, and JavaScript." name="description"/>
-<title>Prompt Generator Companion</title>
-<link href="css/style.css" rel="stylesheet"/>
+<title>Glamshop Workshop Companion</title>
+<style>
+/* ==========================================================
+   AI BUSINESS BUILDER™ — CLEANED STYLE.CSS v7.1
+   Premium Luxury Workshop UI
+   Cleaned: duplicate flip-card rules removed, sections organized
+   ========================================================== */
+
+/* =============================
+   RESET + ROOT TOKENS
+   ============================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --royal-blue: #3b145f;
+  --royal-blue-2: #6d2da8;
+  --deep-blue: #16081f;
+  --midnight: #120719;
+  --black: #09070d;
+  --black-soft: #140d19;
+  --gold: #c7c9d1;
+  --gold-light: #f4f5f7;
+  --gold-dark: #8f93a1;
+  --white: #ffffff;
+  --soft-white: rgba(255, 255, 255, 0.86);
+  --muted-white: rgba(255, 255, 255, 0.68);
+  --faint-white: rgba(255, 255, 255, 0.42);
+  --glass: rgba(255, 255, 255, 0.07);
+  --glass-strong: rgba(255, 255, 255, 0.11);
+  --border: rgba(255, 255, 255, 0.12);
+  --gold-border: rgba(199, 201, 209, 0.42);
+  --gold-glow: rgba(199, 201, 209, 0.24);
+  --blue-glow: rgba(109, 45, 168, 0.36);
+  --danger: #ff5c7a;
+  --success: #65f0b5;
+  --sidebar-width: 310px;
+  --topbar-height: 86px;
+  --radius-xl: 32px;
+  --radius-lg: 24px;
+  --radius-md: 18px;
+  --radius-sm: 14px;
+  --shadow-lg: 0 28px 80px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 18px 45px rgba(0, 0, 0, 0.34);
+  --shadow-sm: 0 10px 24px rgba(0, 0, 0, 0.24);
+  --font-display: "Cinzel", Georgia, serif;
+  --font-body: "Inter", Arial, sans-serif;
+  --transition: 220ms ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--white);
+  background:
+    radial-gradient(
+      circle at 14% 8%,
+      rgba(199, 201, 209, 0.14),
+      transparent 32%
+    ),
+    radial-gradient(circle at 82% 0%, rgba(59, 20, 95, 0.78), transparent 42%),
+    radial-gradient(
+      circle at 62% 80%,
+      rgba(199, 201, 209, 0.08),
+      transparent 34%
+    ),
+    linear-gradient(135deg, #02030a 0%, #05050a 38%, #3b145f 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(circle at center, black, transparent 78%);
+}
+
+::selection {
+  background: rgba(199, 201, 209, 0.38);
+  color: var(--white);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  border: 0;
+}
+
+button,
+.nav-link {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.skip-link {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 9999;
+  transform: translateY(-150%);
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--black);
+  font-weight: 900;
+  transition: var(--transition);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* =============================
+   APP SHELL
+   ============================= */
+
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* =============================
+   SIDEBAR
+   ============================= */
+
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--sidebar-width);
+  min-height: 100vh;
+  padding: 26px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  background:
+    linear-gradient(180deg, rgba(59, 20, 95, 0.96), rgba(1, 3, 12, 0.97)),
+    radial-gradient(
+      circle at top left,
+      rgba(199, 201, 209, 0.16),
+      transparent 40%
+    );
+  border-right: 1px solid rgba(199, 201, 209, 0.26);
+  box-shadow: 18px 0 55px rgba(0, 0, 0, 0.42);
+  z-index: 40;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(199, 201, 209, 0.45) transparent;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(199, 201, 209, 0.45);
+  border-radius: 999px;
+}
+
+.brand-block {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 12px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.11);
+}
+
+.brand-mark {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 18px;
+  background: linear-gradient(
+    145deg,
+    var(--gold-light),
+    var(--gold) 45%,
+    var(--gold-dark)
+  );
+  color: var(--black);
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  box-shadow: 0 14px 34px rgba(199, 201, 209, 0.28);
+}
+
+.brand-block h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 17px;
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+}
+
+.brand-block p {
+  margin: 6px 0 0;
+  color: var(--muted-white);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sidebar-nav {
+  display: grid;
+  gap: 8px;
+}
+
+.nav-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 46px;
+  padding: 12px 14px;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 14px;
+  font-weight: 750;
+  transition:
+    transform var(--transition),
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition);
+}
+
+.nav-link i,
+.nav-link svg {
+  width: 18px;
+  height: 18px;
+  color: rgba(199, 201, 209, 0.78);
+  flex: 0 0 auto;
+}
+
+.nav-link:hover {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(199, 201, 209, 0.22);
+  transform: translateX(3px);
+}
+
+.nav-link.active {
+  color: var(--white);
+  background: linear-gradient(
+    135deg,
+    rgba(199, 201, 209, 0.2),
+    rgba(255, 255, 255, 0.075)
+  );
+  border-color: rgba(199, 201, 209, 0.42);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 12px 28px rgba(0, 0, 0, 0.2);
+}
+
+.nav-link.active::before {
+  content: "";
+  position: absolute;
+  left: -21px;
+  top: 50%;
+  width: 5px;
+  height: 28px;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: linear-gradient(var(--gold-light), var(--gold));
+  box-shadow: 0 0 18px var(--gold-glow);
+}
+
+.sidebar-footer {
+  padding: 6px 6px 0;
+  color: var(--faint-white);
+}
+
+.sidebar-footer p {
+  margin: 0 0 4px;
+  color: var(--gold);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sidebar-footer small {
+  line-height: 1.45;
+}
+
+/* =============================
+   MAIN + TOPBAR
+   ============================= */
+
+.main-content {
+  flex: 1;
+  width: auto;
+  max-width: calc(100vw - var(--sidebar-width));
+  min-width: 0;
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+  padding: 0 34px 56px;
+  overflow-x: hidden;
+}
+
+.page {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  min-height: var(--topbar-height);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 0;
+  background: linear-gradient(
+    180deg,
+    rgba(3, 5, 16, 0.94),
+    rgba(3, 5, 16, 0.72) 70%,
+    transparent
+  );
+  backdrop-filter: blur(18px);
+}
+
+.mobile-menu-btn {
+  display: none;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--white);
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.topbar-search {
+  flex: 1;
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 18px;
+  border: 1px solid rgba(199, 201, 209, 0.23);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.topbar-search svg {
+  width: 19px;
+  height: 19px;
+  color: var(--gold);
+}
+
+.topbar-search input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--white);
+  font-size: 14px;
+}
+
+.topbar-search input::placeholder {
+  color: rgba(255, 255, 255, 0.48);
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* =============================
+   PAGES
+   ============================= */
+
+.page {
+  display: none;
+}
+
+.page.active-page {
+  display: block;
+  animation: pageIn 320ms ease both;
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-header,
+.workspace-header {
+  position: relative;
+  margin: 8px 0 26px;
+  padding: 34px;
+  border: 1px solid rgba(199, 201, 209, 0.24);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(199, 201, 209, 0.18),
+      transparent 38%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.09),
+      rgba(255, 255, 255, 0.035)
+    );
+  box-shadow: var(--shadow-lg);
+}
+
+.page-header::before,
+.workspace-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.06),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: shine 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes shine {
+  0%,
+  62% {
+    transform: translateX(-110%);
+  }
+
+  78%,
+  100% {
+    transform: translateX(110%);
+  }
+}
+
+.page-header h1,
+.workspace-header h1 {
+  max-width: 100%;
+  margin: 8px 0 10px;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.page-header p,
+.workspace-header p {
+  max-width: 760px;
+  margin: 0;
+  color: var(--muted-white);
+  font-size: 16px;
+  line-height: 1.72;
+}
+
+.split-header,
+.workspace-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 26px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gold-light);
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+
+/* =============================
+   BUTTONS
+   ============================= */
+
+.gold-btn,
+.primary-btn,
+.secondary-btn,
+.ghost-btn,
+.danger-btn {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 950;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    border-color var(--transition),
+    background var(--transition),
+    color var(--transition);
+  white-space: nowrap;
+}
+
+.gold-btn,
+.primary-btn {
+  color: var(--black);
+  background: linear-gradient(
+    135deg,
+    var(--gold-light),
+    var(--gold) 46%,
+    var(--gold-dark)
+  );
+  box-shadow: 0 15px 32px rgba(199, 201, 209, 0.22);
+}
+
+.gold-btn:hover,
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 44px rgba(199, 201, 209, 0.3);
+}
+
+.secondary-btn,
+.ghost-btn {
+  color: var(--white);
+  border: 1px solid rgba(199, 201, 209, 0.28);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.secondary-btn:hover,
+.ghost-btn:hover {
+  border-color: rgba(199, 201, 209, 0.55);
+  background: rgba(199, 201, 209, 0.12);
+  transform: translateY(-2px);
+}
+
+.danger-btn {
+  color: var(--white);
+  border: 1px solid rgba(255, 92, 122, 0.5);
+  background: rgba(255, 92, 122, 0.14);
+}
+
+.danger-btn:hover {
+  background: rgba(255, 92, 122, 0.22);
+  transform: translateY(-2px);
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* =============================
+   CARD BASE
+   ============================= */
+
+.card,
+.lesson-block,
+.module-card,
+.download-card,
+.timeline-content,
+.publish-card,
+.sell-card,
+.settings-card,
+.replay-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.095),
+    rgba(255, 255, 255, 0.042)
+  );
+  box-shadow: var(--shadow-md);
+  transition:
+    transform var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition),
+    background var(--transition);
+}
+
+.card::after,
+.lesson-block::after,
+.module-card::after,
+.download-card::after,
+.help-card::after,
+.timeline-content::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at top right,
+    rgba(199, 201, 209, 0.13),
+    transparent 38%
+  );
+  opacity: 0.85;
+}
+
+.card:hover,
+.lesson-block:hover,
+.module-card:hover,
+.download-card:hover,
+.help-card:hover,
+.timeline-content:hover,
+.publish-card:hover,
+.sell-card:hover,
+.settings-card:hover,
+.replay-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(199, 201, 209, 0.34);
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.42);
+}
+
+.card,
+.lesson-block,
+.module-card,
+.download-card,
+.timeline-content,
+.publish-card,
+.sell-card,
+.settings-card,
+.replay-card {
+  padding: 26px;
+}
+
+.card h2,
+.lesson-block h2,
+.module-card h2,
+.download-card h2,
+.help-card h2,
+.publish-card h2,
+.sell-card h2,
+.settings-card h2,
+.replay-card h2 {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-size: clamp(21px, 2vw, 30px);
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+}
+
+.card p,
+.lesson-block p,
+.module-card p,
+.download-card p,
+.help-card p,
+.publish-card p,
+.sell-card p,
+.replay-card p {
+  position: relative;
+  z-index: 1;
+  color: var(--muted-white);
+  line-height: 1.68;
+}
+
+.card ul,
+.lesson-block ul,
+.publish-card ol,
+.sell-card ul,
+.replay-card ul {
+  position: relative;
+  z-index: 1;
+  margin: 16px 0 0;
+  padding-left: 20px;
+  color: var(--soft-white);
+  line-height: 1.8;
+}
+
+.card-header {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+/* =============================
+   DASHBOARD
+   ============================= */
+
+.workspace-header {
+  align-items: stretch;
+}
+
+.mission-list {
+  list-style: none;
+  padding: 0 !important;
+}
+
+.mission-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.055);
+}
+
+/* =============================
+   TIMELINE
+   ============================= */
+
+.timeline {
+  display: grid;
+  gap: 18px;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 86px 1fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.timeline-number {
+  display: grid;
+  place-items: center;
+  border-radius: 24px;
+  color: var(--black);
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 950;
+  background: linear-gradient(145deg, var(--gold-light), var(--gold));
+  box-shadow: 0 18px 40px rgba(199, 201, 209, 0.2);
+}
+
+.timeline-content {
+  padding: 28px;
+}
+
+/* =============================
+   GRIDS
+   ============================= */
+
+.lesson-section-grid,
+.module-card-grid,
+.publish-grid,
+.sell-grid,
+.download-grid,
+.help-grid,
+.replay-grid,
+.settings-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.lesson-section-grid {
+  grid-template-columns: 1fr;
+}
+
+.replay-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.module-card-grid,
+.download-grid,
+.help-grid,
+.settings-grid,
+.publish-grid,
+.sell-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.lesson-tag,
+.status-pill {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  width: fit-content;
+  margin-bottom: 14px;
+  padding: 7px 11px;
+  border: 1px solid rgba(199, 201, 209, 0.34);
+  border-radius: 999px;
+  color: var(--gold-light);
+  background: rgba(199, 201, 209, 0.09);
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.lesson-block pre {
+  position: relative;
+  z-index: 1;
+  overflow-x: auto;
+  margin: 16px 0 0;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(199, 201, 209, 0.2);
+  color: var(--gold-light);
+  background: rgba(0, 0, 0, 0.34);
+  line-height: 1.65;
+}
+
+details {
+  position: relative;
+  z-index: 1;
+  margin: 10px 0;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+summary {
+  cursor: pointer;
+  color: var(--gold-light);
+  font-weight: 900;
+}
+
+details p {
+  margin-bottom: 0;
+}
+
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--gold);
+}
+
+/* =============================
+   MODULES + DOWNLOADS
+   ============================= */
+
+.module-card,
+.download-card {
+  min-height: 260px;
+}
+
+.module-card svg,
+.download-card svg {
+  position: relative;
+  z-index: 1;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 18px;
+  color: var(--gold);
+}
+
+.download-card .primary-btn,
+.module-card .secondary-btn,
+.replay-card .primary-btn {
+  position: relative;
+  z-index: 2;
+  margin-top: 14px;
+}
+
+/* =============================
+   FORMS + CODE AREAS
+   ============================= */
+
+label {
+  display: block;
+  margin: 14px 0 8px;
+  color: var(--gold-light);
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid rgba(199, 201, 209, 0.2);
+  border-radius: 16px;
+  outline: none;
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.075);
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition),
+    background var(--transition);
+}
+
+input,
+select {
+  min-height: 48px;
+  padding: 0 14px;
+}
+
+textarea {
+  min-height: 210px;
+  padding: 16px;
+  resize: vertical;
+  line-height: 1.65;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: rgba(199, 201, 209, 0.58);
+  box-shadow: 0 0 0 4px rgba(199, 201, 209, 0.11);
+  background: rgba(255, 255, 255, 0.095);
+}
+
+select option {
+  color: var(--black);
+}
+
+.code-area,
+.copy-area {
+  position: relative;
+  z-index: 1;
+  min-height: 420px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 13px;
+  color: #f8e7ac;
+  background: rgba(0, 0, 0, 0.44);
+  border-color: rgba(199, 201, 209, 0.28);
+}
+
+.copy-area {
+  min-height: 180px;
+}
+
+.note-editor {
+  min-height: 320px;
+}
+
+.notebook-layout {
+  display: grid;
+  grid-template-columns: 310px 1fr;
+  gap: 18px;
+}
+
+.note-sidebar,
+.note-editor-card {
+  padding: 24px;
+}
+
+/* =============================
+   CERTIFICATE
+   ============================= */
+
+.certificate-locked {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 46px;
+}
+
+.certificate-wrap {
+  display: grid;
+  place-items: center;
+  gap: 22px;
+}
+
+.certificate-card {
+  width: min(880px, 100%);
+  padding: 58px;
+  text-align: center;
+  border: 2px solid rgba(199, 201, 209, 0.52);
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at top, rgba(199, 201, 209, 0.16), transparent 42%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
+  box-shadow: var(--shadow-lg);
+}
+
+.certificate-small {
+  color: var(--gold-light);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 950;
+}
+
+.certificate-card h1,
+.certificate-card h2 {
+  font-family: var(--font-display);
+}
+
+.certificate-card h1 {
+  color: var(--gold-light);
+  font-size: clamp(38px, 5vw, 72px);
+  margin: 18px 0;
+}
+
+.certificate-card h2 {
+  font-size: clamp(28px, 4vw, 56px);
+}
+
+/* =============================
+   TOAST + POPUP
+   ============================= */
+
+.toast {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 90;
+  padding: 14px 18px;
+  border: 1px solid rgba(199, 201, 209, 0.42);
+  border-radius: 999px;
+  color: var(--black);
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  font-weight: 950;
+  box-shadow: var(--shadow-md);
+  transform: translateY(18px);
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition);
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.completion-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgba(0, 0, 0, 0.66);
+  backdrop-filter: blur(12px);
+}
+
+.completion-card {
+  position: relative;
+  width: min(560px, 100%);
+  padding: 38px;
+  border: 1px solid rgba(199, 201, 209, 0.46);
+  border-radius: 30px;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(199, 201, 209, 0.2),
+      transparent 40%
+    ),
+    linear-gradient(135deg, #071232, #05050a);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+}
+
+.close-popup {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+}
+
+.completion-card h2 {
+  margin: 14px 0 10px;
+  font-family: var(--font-display);
+  font-size: 28px;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+}
+
+.completion-card p {
+  color: var(--muted-white);
+  line-height: 1.65;
+}
+
+/* =============================
+   LIGHT THEME SUPPORT
+   ============================= */
+
+body.light-theme {
+  color: #11131f;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(199, 201, 209, 0.25),
+      transparent 30%
+    ),
+    linear-gradient(135deg, #f8f4ea, #ffffff 48%, #dfe8ff);
+}
+
+body.light-theme .main-content,
+body.light-theme .page-header,
+body.light-theme .workspace-header,
+body.light-theme .card,
+body.light-theme .lesson-block,
+body.light-theme .module-card,
+body.light-theme .download-card,
+body.light-theme .timeline-content,
+body.light-theme .publish-card,
+body.light-theme .sell-card,
+body.light-theme .settings-card,
+body.light-theme .replay-card {
+  color: #11131f;
+}
+
+body.light-theme .page-header p,
+body.light-theme .workspace-header p,
+body.light-theme .card p,
+body.light-theme .lesson-block p,
+body.light-theme .module-card p,
+body.light-theme .download-card p,
+body.light-theme .help-card p {
+  color: rgba(17, 19, 31, 0.7);
+}
+
+/* =============================
+   FLIP CARDS + BUILDER BUTTONS
+   ============================= */
+
+.flip-card {
+  perspective: 1200px;
+  cursor: pointer;
+  min-height: 520px;
+}
+
+.module-card-inner {
+  position: relative;
+  width: 100%;
+  min-height: 520px;
+  transition: transform 0.7s ease;
+  transform-style: preserve-3d;
+}
+
+.flip-card.is-flipped .module-card-inner,
+.module-card.is-flipped .module-card-inner {
+  transform: rotateY(180deg);
+}
+
+.module-card-front,
+.module-card-back {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  backface-visibility: hidden;
+  overflow-y: auto;
+}
+
+.module-card-front {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.module-card-back {
+  transform: rotateY(180deg);
+  padding: 22px;
+  border: 1px solid rgba(199, 201, 209, 0.42);
+  background: linear-gradient(
+    145deg,
+    rgba(6, 22, 70, 0.96),
+    rgba(5, 5, 10, 0.98)
+  );
+}
+
+.module-card-back h3 {
+  margin: 0 0 14px;
+  color: var(--gold);
+}
+
+.module-card-back h4 {
+  margin: 16px 0 6px;
+  color: var(--white);
+}
+
+.module-card-back p,
+.module-card-back li {
+  color: var(--soft-white);
+  line-height: 1.55;
+}
+
+.module-card-back ul {
+  padding-left: 20px;
+}
+
+.flip-hint {
+  display: block;
+  margin-top: auto;
+  color: rgba(199, 201, 209, 0.85);
+  font-size: 0.78rem;
+}
+
+.builder-buttons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.builder-buttons .secondary-btn {
+  width: 100%;
+}
+
+/* =============================
+   RESPONSIVE
+   ============================= */
+
+@media (max-width: 1180px) {
+  :root {
+    --sidebar-width: 286px;
+  }
+
+  .module-card-grid,
+  .download-grid,
+  .help-grid,
+  .settings-grid,
+  .publish-grid,
+  .sell-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .workspace-header {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --sidebar-width: 0px;
+  }
+
+  .sidebar {
+    transform: translateX(-105%);
+    transition: transform 260ms ease;
+  }
+
+  body.sidebar-open .sidebar {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    width: 100%;
+    margin-left: 0;
+    padding: 0 18px 42px;
+  }
+
+  .mobile-menu-btn {
+    display: grid;
+  }
+
+  .topbar {
+    gap: 10px;
+  }
+
+  .topbar-actions {
+    display: none;
+  }
+
+  .split-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .lesson-section-grid,
+  .replay-grid,
+  .module-card-grid,
+  .download-grid,
+  .help-grid,
+  .settings-grid,
+  .publish-grid,
+  .sell-grid,
+  .notebook-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-item {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-number {
+    min-height: 74px;
+  }
+}
+
+@media (max-width: 620px) {
+  .page-header,
+  .workspace-header,
+  .card,
+  .lesson-block,
+  .module-card,
+  .download-card,
+  .timeline-content,
+  .publish-card,
+  .sell-card,
+  .settings-card,
+  .replay-card {
+    padding: 20px;
+    border-radius: 22px;
+  }
+
+  .page-header h1,
+  .workspace-header h1 {
+    font-size: 34px;
+  }
+
+  .topbar-search {
+    min-height: 48px;
+    padding: 0 14px;
+  }
+
+  .certificate-card {
+    padding: 30px 20px;
+  }
+}
+
+/* =============================
+   PRINT
+   ============================= */
+
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  .sidebar,
+  .topbar,
+  .page-header,
+  .gold-btn,
+  .primary-btn,
+  .secondary-btn,
+  .ghost-btn,
+  .danger-btn,
+  .toast,
+  .completion-popup {
+    display: none !important;
+  }
+
+  .main-content {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .certificate-card {
+    color: black;
+    box-shadow: none;
+    border: 2px solid #000;
+  }
+}
+
+/* =========================================================
+   SELL PAGE — LAUNCH KIT + QUICK LINKS
+   ========================================================= */
+
+/* Add breathing room between the top cards and prompt area */
+.sell-prompt-card {
+  margin-top: 32px;
+}
+
+/* Launch Kit featured card */
+.launch-kit-card {
+  margin-top: 32px;
+  padding: 32px;
+  border: 1px solid rgba(199, 201, 209, 0.35);
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(199, 201, 209, 0.12),
+      transparent 38%
+    ),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(19, 43, 92, 0.32));
+  overflow: hidden;
+}
+
+.launch-kit-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.launch-kit-content > div {
+  flex: 1;
+}
+
+.launch-kit-card h2 {
+  margin: 8px 0 12px;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+}
+
+.launch-kit-card p {
+  max-width: 720px;
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.launch-kit-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 24px;
+  margin: 24px 0 0;
+  padding-left: 20px;
+}
+
+.launch-kit-list li {
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+.launch-kit-download {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 210px;
+  min-height: 52px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Quick links card */
+.selling-links-card {
+  margin-top: 32px;
+  padding: 32px;
+}
+
+.selling-links-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.selling-platform-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 150px;
+  padding: 24px;
+  border: 1px solid rgba(199, 201, 209, 0.28);
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(20, 43, 88, 0.3)
+  );
+  color: var(--text-color);
+  text-decoration: none;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.selling-platform-link:hover {
+  transform: translateY(-4px);
+  border-color: rgba(199, 201, 209, 0.65);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+}
+
+.selling-platform-link h3 {
+  margin: 0 0 8px;
+  font-size: 1.45rem;
+}
+
+.selling-platform-link p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.selling-platform-link span {
+  flex-shrink: 0;
+  padding: 10px 16px;
+  border: 1px solid rgba(199, 201, 209, 0.42);
+  border-radius: 999px;
+  color: var(--gold, #c7c9d1);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Keep the three sell cards even and polished */
+.sell-grid {
+  align-items: stretch;
+}
+
+.sell-card {
+  height: 100%;
+}
+
+.sell-card ul {
+  margin-bottom: 0;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .launch-kit-content {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .launch-kit-download {
+    width: 100%;
+  }
+
+  .selling-links-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .launch-kit-card,
+  .selling-links-card {
+    padding: 22px;
+  }
+
+  .launch-kit-list {
+    grid-template-columns: 1fr;
+  }
+
+  .selling-platform-link {
+    align-items: flex-start;
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .selling-platform-link span {
+    width: 100%;
+    text-align: center;
+  }
+
+  .sell-prompt-card,
+  .launch-kit-card,
+  .selling-links-card {
+    margin-top: 24px;
+  }
+}
+
+/* =========================================================
+   LAUNCH CHECKLIST FLIP CARD
+   ========================================================= */
+
+.launch-checklist-card {
+  margin-top: 32px;
+  padding: 0;
+  min-height: 520px;
+  overflow: hidden;
+  perspective: 1200px;
+}
+
+.launch-checklist-inner {
+  position: relative;
+  width: 100%;
+  min-height: 520px;
+  transform-style: preserve-3d;
+  transition: transform 0.7s ease;
+}
+
+.launch-checklist-card.is-flipped .launch-checklist-inner {
+  transform: rotateY(180deg);
+}
+
+.launch-checklist-front,
+.launch-checklist-back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 36px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.launch-checklist-front {
+  justify-content: center;
+  align-items: flex-start;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(199, 201, 209, 0.16),
+      transparent 40%
+    ),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(15, 39, 88, 0.36));
+}
+
+.launch-checklist-back {
+  justify-content: flex-start;
+  transform: rotateY(180deg);
+  background:
+    radial-gradient(
+      circle at bottom left,
+      rgba(199, 201, 209, 0.12),
+      transparent 42%
+    ),
+    linear-gradient(135deg, rgba(15, 39, 88, 0.4), rgba(255, 255, 255, 0.05));
+}
+
+.launch-checklist-back .secondary-btn {
+  margin-top: auto;
+}
+
+.launch-checklist-front {
+  align-items: flex-start;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(199, 201, 209, 0.16),
+      transparent 40%
+    ),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(15, 39, 88, 0.36));
+}
+
+.launch-checklist-back {
+  transform: rotateY(180deg);
+  background:
+    radial-gradient(
+      circle at bottom left,
+      rgba(199, 201, 209, 0.12),
+      transparent 42%
+    ),
+    linear-gradient(135deg, rgba(15, 39, 88, 0.4), rgba(255, 255, 255, 0.05));
+}
+
+.launch-checklist-front h2,
+.launch-checklist-back h2 {
+  margin: 8px 0 14px;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+}
+
+.launch-checklist-front p {
+  max-width: 620px;
+  margin: 0 0 24px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.launch-checklist-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 24px;
+  width: 100%;
+  margin: 22px 0 30px;
+  padding: 0;
+  list-style: none;
+}
+
+.launch-checklist-list li {
+  padding: 17px 18px;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(199, 201, 209, 0.24);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  line-height: 1.45;
+}
+
+.launch-checklist-front .primary-btn,
+.launch-checklist-back .secondary-btn {
+  min-width: 170px;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .launch-checklist-card,
+  .launch-checklist-inner {
+    min-height: 470px;
+  }
+
+  .launch-checklist-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .launch-checklist-card,
+  .launch-checklist-inner {
+    min-height: 560px;
+  }
+
+  .launch-checklist-front,
+  .launch-checklist-back {
+    padding: 24px;
+  }
+
+  .launch-checklist-front .primary-btn,
+  .launch-checklist-back .secondary-btn {
+    width: 100%;
+  }
+}
+/* ========================================
+   GETTING STARTED GUIDE
+======================================== */
+
+.getting-started-page {
+  min-height: 100vh;
+  padding: 32px;
+  background: var(--bg);
+}
+
+.getting-started-page[hidden] {
+  display: none;
+}
+
+.getting-started-page .page-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.getting-started-page .page-heading h1 {
+  margin: 6px 0 10px;
+}
+
+.getting-started-page .page-heading p {
+  max-width: 720px;
+  margin: 0;
+}
+
+.getting-started-content {
+  display: grid;
+  gap: 24px;
+  max-width: 1100px;
+}
+
+.guide-step-card,
+.guide-reference-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 22px;
+  padding: 26px;
+}
+
+.guide-step-number {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 1px solid rgba(199, 201, 209, 0.5);
+  border-radius: 16px;
+  background: rgba(199, 201, 209, 0.12);
+  color: var(--gold);
+  font-family: "Cinzel", serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.guide-step-content h2 {
+  margin: 6px 0 12px;
+}
+
+.guide-step-content p {
+  margin: 0 0 16px;
+}
+
+.guide-instructions {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 18px;
+  padding-left: 22px;
+}
+
+.guide-tip,
+.guide-warning {
+  padding: 16px 18px;
+  border-radius: 14px;
+  line-height: 1.6;
+}
+
+.guide-tip {
+  border: 1px solid rgba(199, 201, 209, 0.3);
+  background: rgba(199, 201, 209, 0.08);
+}
+
+.guide-warning {
+  margin-top: 14px;
+  border: 1px solid rgba(255, 193, 7, 0.35);
+  background: rgba(255, 193, 7, 0.08);
+}
+
+.guide-file-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 18px 0;
+}
+
+.guide-file-item {
+  padding: 18px;
+  border: 1px solid rgba(199, 201, 209, 0.2);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.guide-file-item h3 {
+  margin: 0 0 8px;
+}
+
+.guide-file-item p {
+  margin: 0;
+}
+
+.guide-reference-card {
+  grid-template-columns: 1fr;
+  overflow-x: auto;
+}
+
+.guide-shortcuts-table {
+  width: 100%;
+  margin-top: 18px;
+  border-collapse: collapse;
+}
+
+.guide-shortcuts-table th,
+.guide-shortcuts-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(199, 201, 209, 0.18);
+  text-align: left;
+  vertical-align: top;
+}
+
+.guide-shortcuts-table th {
+  color: var(--gold);
+  font-family: "Cinzel", serif;
+}
+
+.guide-shortcuts-table code {
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .getting-started-page {
+    padding: 20px;
+  }
+
+  .getting-started-page .page-heading {
+    flex-direction: column;
+  }
+
+  .guide-step-card,
+  .guide-reference-card {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .guide-file-list {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-shortcuts-table {
+    min-width: 620px;
+  }
+}
+
+/* ========================================
+   BONUS RESOURCES BUTTON FIX
+======================================== */
+
+#bonuses .settings-card > .primary-btn,
+#bonuses .settings-card > .secondary-btn {
+  width: 100%;
+  min-height: 50px;
+  padding: 13px 18px;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.35;
+}
+
+#bonuses .settings-card > .secondary-btn {
+  margin-top: 12px;
+}
+/* ========================================
+   GETTING STARTED SCREENSHOTS
+======================================== */
+
+.guide-screenshot-stack {
+  display: grid;
+  gap: 28px;
+  margin: 24px 0;
+}
+
+.guide-screenshot {
+  margin: 0;
+}
+
+.guide-screenshot img {
+  display: block;
+  width: 100%;
+  border: 2px solid rgba(199, 201, 209, 0.35);
+  border-radius: 18px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+}
+
+.guide-screenshot figcaption {
+  margin-top: 12px;
+  color: var(--gold-light);
+  font-weight: 700;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.guide-video-card {
+  margin-top: 30px;
+}
+
+.guide-video {
+  width: 100%;
+  border-radius: 18px;
+  border: 2px solid rgba(199, 201, 209, 0.35);
+  margin-top: 18px;
+}
+.lesson-complete-area {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-start;
+}
+.saved-note-item {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid rgba(199, 201, 209, 0.28);
+  border-radius: 16px;
+  background: linear-gradient(
+    145deg,
+    rgba(20, 44, 92, 0.92),
+    rgba(5, 10, 24, 0.96)
+  );
+  color: white;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.saved-note-item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(199, 201, 209, 0.75);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+.saved-note-item.active {
+  border-color: var(--gold, #c7c9d1);
+  box-shadow:
+    0 0 0 1px rgba(199, 201, 209, 0.35),
+    0 12px 30px rgba(199, 201, 209, 0.18);
+}
+.saved-notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.saved-note-item strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--gold-pale);
+  font-size: 0.98rem;
+  line-height: 1.3;
+}
+
+.saved-note-item span {
+  display: block;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.82rem;
+}
+.note-sidebar {
+  align-self: start;
+  padding: 20px;
+  border: 1px solid rgba(199, 201, 209, 0.24);
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(199, 201, 209, 0.12),
+      transparent 38%
+    ),
+    linear-gradient(160deg, rgba(11, 30, 68, 0.96), rgba(4, 9, 20, 0.98));
+}
+
+.saved-notes-header {
+  margin-top: 22px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(199, 201, 209, 0.18);
+}
+
+.saved-notes-header h2 {
+  margin: 0;
+  color: var(--gold-pale);
+  font-size: 1rem;
+}
+.note-editor-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(199, 201, 209, 0.18);
+}
+
+.note-editor-header h2 {
+  margin: 0 0 6px;
+  color: var(--gold-pale);
+  font-size: 1.25rem;
+}
+
+.note-editor-header p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.85rem;
+}
+.note-editor-card {
+  min-height: 520px;
+  padding: 24px;
+}
+
+.note-editor {
+  min-height: 380px;
+  resize: vertical;
+  border: 1px solid rgba(199, 201, 209, 0.2);
+  border-radius: 18px;
+  background: rgba(3, 8, 18, 0.72);
+  color: white;
+  line-height: 1.65;
+}
+
+.note-editor:focus {
+  border-color: rgba(199, 201, 209, 0.75);
+  box-shadow: 0 0 0 3px rgba(199, 201, 209, 0.12);
+}
+.note-save-status {
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.82rem;
+  text-align: right;
+}
+.note-editor-header h2 {
+  font-size: 1.05rem;
+}
+#deleteNoteBtn {
+  padding: 10px 18px;
+  font-size: 0.88rem;
+  min-width: auto;
+  border-radius: 999px;
+  align-self: flex-start;
+}
+
+#deleteNoteBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.saved-note-item {
+  padding: 12px 14px;
+}
+
+.saved-note-item strong {
+  margin-bottom: 4px;
+}
+
+.saved-notes-list {
+  gap: 10px;
+}
+
+/* ============================= */
+/* WORKSHOP REQUIREMENTS ALERT */
+/* ============================= */
+
+.important-alert {
+  margin-top: 24px;
+  padding: 22px;
+  border-radius: 18px;
+  border: 2px solid rgba(255, 59, 59, 0.75);
+  background: rgba(95, 0, 0, 0.22);
+  box-shadow:
+    0 0 18px rgba(255, 59, 59, 0.35),
+    inset 0 0 12px rgba(255, 59, 59, 0.12);
+}
+
+.important-alert h3 {
+  margin: 0 0 12px;
+  color: #ff6b6b;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.important-alert p {
+  margin: 0 0 10px;
+}
+
+.important-alert p:last-child {
+  margin-bottom: 0;
+}
+/* ============================= */
+/* SETUP VIDEO BUTTONS */
+/* ============================= */
+
+.lesson-complete-area {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+/* ============================= */
+/* WORKSHOP REQUIREMENTS SIDEBAR */
+/* ============================= */
+
+.requirements-nav-link {
+  border: 1px solid rgba(255, 70, 70, 0.55);
+  background: linear-gradient(
+    135deg,
+    rgba(120, 0, 0, 0.35),
+    rgba(70, 0, 0, 0.18)
+  );
+  color: #ff8a8a;
+  box-shadow: 0 0 18px rgba(255, 70, 70, 0.28);
+  animation: requirementsGlow 2s ease-in-out infinite;
+}
+
+.requirements-nav-link:hover {
+  box-shadow: 0 0 28px rgba(255, 70, 70, 0.55);
+}
+
+@keyframes requirementsGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 12px rgba(255, 70, 70, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 24px rgba(255, 70, 70, 0.55);
+  }
+}
+
+/* ============================= */
+/* WORKSHOP CODE POPUP */
+/* ============================= */
+
+#workshopCodeInput {
+  width: 100%;
+  margin: 20px 0;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(199, 201, 209, 0.35);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 1rem;
+}
+
+#workshopCodeInput:focus {
+  outline: none;
+  border-color: #c7c9d1;
+  box-shadow: 0 0 12px rgba(199, 201, 209, 0.35);
+}
+
+#workshopCodeMessage {
+  margin-top: 16px;
+  color: #ff7b7b;
+  font-weight: 600;
+  text-align: center;
+}
+#workshopLockPopup .completion-card h2 {
+  max-width: 440px;
+  white-space: normal;
+  overflow-wrap: break-word;
+  line-height: 1.15;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* ============================= */
+/* WORKSHOP POPUP HELP TEXT */
+/* ============================= */
+
+.workshop-help-text {
+  margin: 18px 0 12px;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.workshop-help-text strong {
+  color: var(--gold-pale);
+}
+/* ========================================
+   DESKTOP SIDEBAR LAYOUT FIX
+======================================== */
+
+@media (min-width: 901px) {
+  .main-content {
+    width: calc(100% - var(--sidebar-width)) !important;
+    margin-left: var(--sidebar-width) !important;
+    min-width: 0;
+  }
+}
+/* ========================================
+   WORKSHOP JOURNEY — LUXURY EXPERIENCE
+======================================== */
+
+.workshop-journey-page {
+  position: relative;
+  min-height: calc(100vh - 80px);
+  padding: 48px 28px 80px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 50% 10%,
+      rgba(33, 82, 190, 0.22),
+      transparent 38%
+    ),
+    linear-gradient(180deg, #020713 0%, #06163d 48%, #01040c 100%);
+}
+
+.workshop-journey-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 15% 30%,
+      rgba(199, 201, 209, 0.08),
+      transparent 25%
+    ),
+    radial-gradient(circle at 85% 65%, rgba(39, 94, 220, 0.12), transparent 30%);
+}
+
+.journey-stage {
+  position: relative;
+  z-index: 1;
+  width: min(960px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 44px;
+}
+
+.journey-card {
+  position: relative;
+  width: 100%;
+  padding: 3px;
+  border-radius: 30px;
+  background: linear-gradient(
+    135deg,
+    #fff3a6 0%,
+    #c7c9d1 22%,
+    #7d570f 48%,
+    #f4d978 74%,
+    #b67b13 100%
+  );
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.55),
+    0 0 34px rgba(199, 201, 209, 0.18);
+}
+
+.journey-card::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  z-index: 1;
+  pointer-events: none;
+  border: 1px solid rgba(244, 217, 120, 0.42);
+  border-radius: 21px;
+}
+
+.journey-card-content {
+  position: relative;
+  z-index: 2;
+  padding: 52px 64px;
+  text-align: center;
+  border-radius: 27px;
+  background:
+    radial-gradient(
+      circle at top center,
+      rgba(36, 82, 181, 0.24),
+      transparent 42%
+    ),
+    linear-gradient(145deg, rgba(7, 30, 85, 0.99), rgba(1, 7, 22, 0.99));
+  box-shadow:
+    inset 0 0 45px rgba(16, 69, 174, 0.16),
+    inset 0 0 0 6px rgba(255, 255, 255, 0.018);
+}
+
+.journey-card .eyebrow {
+  display: inline-block;
+  margin-bottom: 13px;
+  color: #f2d477;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.journey-card h1,
+.journey-card h2 {
+  margin: 0;
+  color: #f4d978;
+  font-family: Cinzel, Georgia, serif;
+  line-height: 1.12;
+  text-shadow:
+    0 2px 14px rgba(0, 0, 0, 0.6),
+    0 0 18px rgba(199, 201, 209, 0.13);
+}
+
+.journey-card h1 {
+  font-size: clamp(2rem, 5vw, 3.8rem);
+}
+
+.journey-card h2 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+}
+
+.journey-card h3 {
+  color: #f0cf68;
+  font-family: Cinzel, Georgia, serif;
+}
+
+.journey-card p,
+.journey-card li {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.journey-card p {
+  max-width: 730px;
+  margin: 18px auto 0;
+}
+
+.journey-divider {
+  width: min(340px, 72%);
+  height: 1px;
+  margin: 24px auto 30px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(244, 217, 120, 0.95),
+    transparent
+  );
+  box-shadow: 0 0 12px rgba(199, 201, 209, 0.3);
+}
+
+.journey-checklist {
+  width: min(700px, 100%);
+  margin: 28px auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 24px;
+  text-align: left;
+  list-style: none;
+}
+
+.journey-checklist li {
+  position: relative;
+  padding: 14px 16px 14px 48px;
+  border: 1px solid rgba(199, 201, 209, 0.2);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.journey-checklist li::before {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  color: #06163d;
+  font-weight: 900;
+  background: linear-gradient(145deg, #fff0a0, #c78e1d);
+  box-shadow: 0 0 13px rgba(199, 201, 209, 0.25);
+}
+
+.journey-important-box {
+  width: min(720px, 100%);
+  margin: 30px auto;
+  padding: 24px 28px;
+  border: 1px solid rgba(199, 201, 209, 0.48);
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.22);
+  box-shadow: inset 0 0 24px rgba(199, 201, 209, 0.035);
+}
+
+.journey-important-box h3 {
+  margin: 0 0 10px;
+  color: #f3d572;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.journey-important-box p {
+  margin-top: 8px;
+}
+
+.journey-days-grid {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.journey-day-card {
+  padding: 32px 26px;
+  border: 1px solid rgba(199, 201, 209, 0.38);
+  border-radius: 22px;
+  background: linear-gradient(
+    145deg,
+    rgba(11, 45, 113, 0.72),
+    rgba(2, 10, 30, 0.94)
+  );
+  box-shadow:
+    inset 0 0 28px rgba(29, 83, 192, 0.12),
+    0 16px 30px rgba(0, 0, 0, 0.25);
+}
+
+.journey-day-label {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: #f4d978;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.journey-day-card h3 {
+  margin: 8px 0 12px;
+  font-size: 1.5rem;
+}
+
+.journey-day-card p {
+  min-height: 116px;
+  margin-top: 0;
+}
+
+.journey-link-btn,
+.journey-start-btn {
+  margin-top: 20px;
+}
+
+.journey-closing-card .journey-card-content {
+  padding-top: 58px;
+  padding-bottom: 58px;
+}
+
+.journey-start-btn {
+  min-width: 230px;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+@media (max-width: 760px) {
+  .workshop-journey-page {
+    padding: 32px 14px 60px;
+  }
+
+  .journey-stage {
+    gap: 28px;
+  }
+
+  .journey-card-content {
+    padding: 42px 24px;
+  }
+
+  .journey-checklist,
+  .journey-days-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .journey-day-card p {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 460px) {
+  .journey-card {
+    border-radius: 23px;
+  }
+
+  .journey-card::before {
+    inset: 9px;
+    border-radius: 16px;
+  }
+
+  .journey-card-content {
+    padding: 36px 19px;
+    border-radius: 20px;
+  }
+
+  .journey-card p,
+  .journey-card li {
+    font-size: 0.94rem;
+  }
+
+  .journey-checklist li {
+    padding-left: 46px;
+  }
+}
+
+/* =========================================================
+   REFERENCE IMAGE LIBRARY
+   ========================================================= */
+
+.reference-library-page {
+  padding-bottom: 40px;
+}
+
+.reference-library-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 28px;
+  align-items: start;
+  margin-bottom: 30px;
+}
+
+.reference-library-intro h2,
+.reference-section-heading h2,
+.reference-upload-card h2 {
+  margin: 8px 0 12px;
+  font-family: var(--font-display);
+}
+
+.reference-library-tips {
+  margin: 0;
+  padding: 20px 20px 20px 42px;
+  border: 1px solid rgba(199, 201, 209, 0.24);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.045);
+  color: var(--soft-white);
+  line-height: 1.75;
+}
+
+.reference-library-section {
+  margin-top: 34px;
+}
+
+.reference-section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 18px;
+}
+
+.reference-section-heading h2 {
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+}
+
+.reference-section-heading p {
+  margin: 0;
+  color: var(--muted-white);
+}
+
+.reference-image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.reference-image-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(199, 201, 209, 0.3);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.09),
+    rgba(255, 255, 255, 0.035)
+  );
+  box-shadow: var(--shadow-md);
+  transition:
+    transform var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.reference-image-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(199, 201, 209, 0.62);
+  box-shadow: 0 26px 65px rgba(0, 0, 0, 0.42);
+}
+
+.reference-image-frame {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(59, 20, 95, 0.9), rgba(5, 5, 10, 0.95));
+}
+
+.reference-image-frame img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 300ms ease;
+}
+
+.reference-image-card:hover .reference-image-frame img {
+  transform: scale(1.025);
+}
+
+.reference-image-card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 18px;
+  padding: 20px;
+}
+
+.reference-image-card-body h3 {
+  margin: 0 0 8px;
+  color: var(--gold-light);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  overflow-wrap: anywhere;
+}
+
+.reference-image-card-body p {
+  margin: 0;
+  color: var(--muted-white);
+  line-height: 1.6;
+}
+
+.reference-download-btn {
+  width: 100%;
+  margin-top: auto;
+}
+
+.reference-card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.reference-card-actions .secondary-btn,
+.reference-card-actions .danger-btn {
+  width: 100%;
+  min-width: 0;
+  white-space: normal;
+}
+
+.reference-upload-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 28px;
+  align-items: center;
+}
+
+.reference-upload-copy p {
+  max-width: 760px;
+}
+
+.reference-storage-note {
+  margin-top: 12px !important;
+  color: var(--gold-light) !important;
+  font-size: 0.9rem;
+}
+
+.reference-upload-actions {
+  display: grid;
+  gap: 12px;
+  min-width: 260px;
+}
+
+.reference-upload-label {
+  width: 100%;
+}
+
+.reference-file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.reference-uploaded-heading {
+  margin-top: 34px;
+}
+
+.reference-empty-state {
+  grid-column: 1 / -1;
+  min-height: 260px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 12px;
+  padding: 34px;
+  text-align: center;
+  border: 1px dashed rgba(199, 201, 209, 0.42);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.reference-empty-state svg {
+  width: 46px;
+  height: 46px;
+  color: var(--gold);
+}
+
+.reference-empty-state h3 {
+  margin: 0;
+  font-family: var(--font-display);
+}
+
+.reference-empty-state p {
+  max-width: 500px;
+  margin: 0;
+  color: var(--muted-white);
+  line-height: 1.6;
+}
+
+#clearReferenceImagesBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (max-width: 1100px) {
+  .reference-image-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .reference-library-intro,
+  .reference-upload-card {
+    grid-template-columns: 1fr;
+  }
+
+  .reference-upload-actions {
+    min-width: 0;
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 640px) {
+  .reference-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .reference-image-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reference-card-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .reference-library-intro,
+  .reference-upload-card {
+    padding: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reference-image-card,
+  .reference-image-frame img {
+    transition: none;
+  }
+
+  .reference-image-card:hover,
+  .reference-image-card:hover .reference-image-frame img {
+    transform: none;
+  }
+}
+
+/* =========================================================
+   DAY 2 — REUSABLE APP WELCOME PAGE MASTER PROMPT
+   ========================================================= */
+
+.reusable-master-prompt-resource {
+  grid-column: 1 / -1;
+  padding: clamp(24px, 3vw, 38px);
+  border-color: rgba(199, 201, 209, 0.38);
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(199, 201, 209, 0.16),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgba(109, 45, 168, 0.34),
+      transparent 40%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.045)
+    );
+}
+
+.reusable-master-prompt-heading {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.reusable-master-prompt-resource h2 {
+  max-width: 850px;
+  margin-bottom: 8px;
+  color: var(--white);
+}
+
+.reusable-master-prompt-subtitle {
+  margin: 0 !important;
+  color: var(--gold-light) !important;
+  font-size: clamp(1rem, 1.6vw, 1.18rem);
+  font-weight: 800;
+}
+
+.reusable-master-prompt-description {
+  max-width: 920px;
+  margin: 18px 0 0;
+}
+
+.reusable-master-prompt-actions {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.reusable-master-prompt-actions .gold-btn,
+.reusable-master-prompt-actions .secondary-btn {
+  min-width: 220px;
+}
+
+.reusable-master-prompt-layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.75fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.reusable-master-prompt-box-wrap,
+.reusable-master-prompt-note {
+  min-width: 0;
+}
+
+.reusable-master-prompt-box-wrap label {
+  margin-top: 0;
+}
+
+.reusable-master-prompt-box {
+  min-height: 430px;
+  max-height: 540px;
+  resize: vertical;
+  overflow: auto;
+  padding: 20px;
+  border: 1px solid rgba(199, 201, 209, 0.34);
+  border-radius: var(--radius-md);
+  color: #f8e7ac;
+  background:
+    linear-gradient(rgba(2, 8, 23, 0.92), rgba(4, 7, 18, 0.96));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    inset 0 0 34px rgba(59, 20, 95, 0.22);
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 0.9rem;
+  line-height: 1.68;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(199, 201, 209, 0.55) rgba(255, 255, 255, 0.04);
+}
+
+.reusable-master-prompt-box::-webkit-scrollbar {
+  width: 10px;
+}
+
+.reusable-master-prompt-box::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.035);
+  border-radius: 999px;
+}
+
+.reusable-master-prompt-box::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--gold-light), var(--gold-dark));
+  border-radius: 999px;
+}
+
+.reusable-master-prompt-note {
+  padding: 24px;
+  border: 1px solid rgba(199, 201, 209, 0.3);
+  border-radius: var(--radius-md);
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(199, 201, 209, 0.13),
+      transparent 42%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(59, 20, 95, 0.7),
+      rgba(2, 8, 23, 0.86)
+    );
+  box-shadow: var(--shadow-sm);
+}
+
+.reusable-master-prompt-note h3 {
+  margin: 10px 0 12px;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  line-height: 1.2;
+}
+
+.reusable-master-prompt-note p {
+  margin: 0 0 14px;
+}
+
+.reusable-master-prompt-note ul {
+  display: grid;
+  gap: 7px;
+  margin: 12px 0 18px;
+  padding-left: 20px;
+}
+
+.reusable-master-prompt-reminder {
+  margin-bottom: 0 !important;
+  padding: 14px 16px;
+  border-left: 3px solid var(--gold);
+  border-radius: 10px;
+  color: var(--gold-light) !important;
+  background: rgba(199, 201, 209, 0.09);
+  font-weight: 850;
+}
+
+.reusable-master-prompt-actions button.is-success {
+  color: #02150d;
+  background: linear-gradient(135deg, #b8f8d8, var(--success));
+  box-shadow: 0 15px 34px rgba(101, 240, 181, 0.22);
+}
+
+@media (max-width: 980px) {
+  .reusable-master-prompt-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .reusable-master-prompt-note {
+    max-width: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .reusable-master-prompt-actions {
+    flex-direction: column;
+  }
+
+  .reusable-master-prompt-actions .gold-btn,
+  .reusable-master-prompt-actions .secondary-btn {
+    width: 100%;
+    min-width: 0;
+    white-space: normal;
+  }
+
+  .reusable-master-prompt-box {
+    min-height: 340px;
+    max-height: 460px;
+    padding: 16px;
+    font-size: 0.82rem;
+  }
+
+  .reusable-master-prompt-note {
+    padding: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reusable-master-prompt-actions button {
+    transition: none;
+  }
+}
+
+
+
+/* =========================================================
+   GLAMSHOP PROMPT LIBRARY
+   ========================================================= */
+
+.prompts-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.prompt-form-card,
+.saved-prompts-card {
+  min-width: 0;
+}
+
+.prompt-form-card {
+  position: sticky;
+  top: calc(var(--topbar-height) + 18px);
+}
+
+.prompt-form-header {
+  margin-bottom: 12px;
+}
+
+.prompt-form-card textarea {
+  min-height: 260px;
+}
+
+.prompt-save-status {
+  min-height: 22px;
+  margin: 12px 0 0;
+  color: var(--soft-white);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.saved-prompts-toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 16px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(199, 201, 209, 0.18);
+}
+
+.saved-prompts-toolbar h2 {
+  margin: 6px 0 0;
+}
+
+.saved-prompts-search {
+  width: min(320px, 100%);
+}
+
+.saved-prompts-search label {
+  margin: 0;
+}
+
+.saved-prompts-count {
+  margin-bottom: 16px;
+  color: var(--gold-light);
+  font-size: 0.86rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.saved-prompts-list {
+  display: grid;
+  gap: 16px;
+}
+
+.saved-prompt-item {
+  position: relative;
+  padding: 20px;
+  border: 1px solid rgba(199, 201, 209, 0.24);
+  border-radius: 20px;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(109, 45, 168, 0.16),
+      transparent 40%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.07),
+      rgba(255, 255, 255, 0.03)
+    );
+}
+
+.saved-prompt-item h3 {
+  margin: 0 0 8px;
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: 1.16rem;
+}
+
+.saved-prompt-category {
+  display: inline-flex;
+  margin-bottom: 12px;
+  padding: 6px 10px;
+  border: 1px solid rgba(199, 201, 209, 0.3);
+  border-radius: 999px;
+  color: var(--gold-light);
+  background: rgba(199, 201, 209, 0.08);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.saved-prompt-text {
+  margin: 0;
+  color: var(--soft-white);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.7;
+}
+
+.saved-prompt-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.saved-prompt-actions .secondary-btn,
+.saved-prompt-actions .danger-btn {
+  min-width: 110px;
+}
+
+.prompts-empty-state {
+  padding: 48px 24px;
+  border: 1px dashed rgba(199, 201, 209, 0.32);
+  border-radius: 20px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.prompts-empty-state svg {
+  width: 38px;
+  height: 38px;
+  margin-bottom: 12px;
+  color: var(--gold-light);
+}
+
+.prompts-empty-state h3 {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+}
+
+.prompts-empty-state p {
+  margin: 0;
+  color: var(--muted-white);
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+@media (max-width: 980px) {
+  .prompts-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .prompt-form-card {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .saved-prompts-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .saved-prompts-search {
+    width: 100%;
+  }
+
+  .saved-prompt-actions {
+    flex-direction: column;
+  }
+
+  .saved-prompt-actions .secondary-btn,
+  .saved-prompt-actions .danger-btn {
+    width: 100%;
+  }
+}
+
+
+/* =========================================================
+   GLAMSHOP CHALLENGES PAGE
+   ========================================================= */
+
+.challenges-page {
+  padding-bottom: 30px;
+}
+
+.challenges-coming-soon-card {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 54px 34px;
+  text-align: center;
+  border: 1px solid rgba(199, 201, 209, 0.34);
+  background:
+    radial-gradient(
+      circle at top center,
+      rgba(109, 45, 168, 0.22),
+      transparent 42%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.03)
+    );
+}
+
+.challenges-coming-soon-icon {
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 20px;
+  border: 1px solid rgba(199, 201, 209, 0.42);
+  border-radius: 24px;
+  background: linear-gradient(
+    145deg,
+    rgba(109, 45, 168, 0.38),
+    rgba(255, 255, 255, 0.08)
+  );
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+}
+
+.challenges-coming-soon-icon svg {
+  width: 34px;
+  height: 34px;
+  color: var(--gold-light);
+}
+
+.challenges-coming-soon-card h2 {
+  margin-top: 8px;
+}
+
+.challenges-coming-soon-card p {
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+  .challenges-coming-soon-card {
+    padding: 38px 22px;
+  }
+}
+
+</style>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&amp;family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
 <script src="https://unpkg.com/lucide@latest"></script>
-<meta content="Prompt Generator Companion v7.0" name="generator"/>
+<meta content="Glamshop Workshop Companion — Self-Contained v7.0" name="generator"/>
 </head>
 <body>
 <a class="skip-link" href="#dashboard">Skip to content</a>
@@ -22,7 +3335,7 @@
 <aside aria-label="Main navigation" class="sidebar">
 <div class="brand-block">
 <div>
-<h1>Prompt Generator Companion™</h1>
+<h1>Glamshop Workshop Companion™</h1>
 <p>Workshop Experience</p>
 </div>
 </div>
@@ -58,6 +3371,14 @@
 <a class="nav-link" data-page="publish" href="#">
 <i data-lucide="cloud-upload"></i>
 <span>Tools &amp; Resources</span>
+</a>
+<a class="nav-link" data-page="challenges" href="#">
+<i data-lucide="trophy"></i>
+<span>Challenges</span>
+</a>
+<a class="nav-link" data-page="prompts" href="#">
+<i data-lucide="library"></i>
+<span>Prompts</span>
 </a>
 <a class="nav-link" data-page="notebook" href="#">
 <i data-lucide="notebook-pen"></i>
@@ -1774,6 +5095,93 @@ Before writing the listing, ask me for:
 <a class="gold-btn" href="./diploma.html"> View My Diploma </a>
 </section>
 <!-- ============================= -->
+<!-- PAGE: CHALLENGES -->
+<!-- ============================= -->
+<section class="page challenges-page" id="challenges">
+<div class="page-header">
+<span class="eyebrow">Glamshop Challenges</span>
+<h1>Challenges Coming Soon</h1>
+<p>
+              New creative and business challenges are being prepared for this space.
+              Check back soon for guided activities, prompts, and opportunities to
+              put what you learn into action.
+            </p>
+</div>
+
+<div class="card challenges-coming-soon-card">
+<div class="challenges-coming-soon-icon">
+<i data-lucide="trophy"></i>
+</div>
+<span class="lesson-tag">Coming Soon</span>
+<h2>Your Next Challenge Starts Here</h2>
+<p>
+              This page will hold future Glamshop challenges. Each challenge will be
+              added here when it is ready.
+            </p>
+</div>
+</section>
+
+<!-- ============================= -->
+<!-- PAGE: PROMPTS -->
+<!-- ============================= -->
+<section class="page" id="prompts">
+<div class="page-header">
+<span class="eyebrow">Prompt Library</span>
+<h1>My Saved Prompts</h1>
+<p>
+              Save, organize, copy, search, and remove your prompts in one place.
+              Your prompts are stored in this browser using local storage.
+            </p>
+</div>
+
+<div class="prompts-layout">
+<aside class="card prompt-form-card">
+<div class="prompt-form-header">
+<span class="lesson-tag">Add Prompt</span>
+<h2>Save a New Prompt</h2>
+</div>
+
+<label for="savedPromptTitle">Prompt Title</label>
+<input id="savedPromptTitle" type="text" placeholder="Example: Luxury Product Photo Prompt"/>
+
+<label for="savedPromptCategory">Category</label>
+<input id="savedPromptCategory" type="text" placeholder="Example: Branding, Social Media, Images"/>
+
+<label for="savedPromptText">Prompt</label>
+<textarea id="savedPromptText" rows="12" placeholder="Paste or type your prompt here..."></textarea>
+
+<button class="primary-btn full-width" id="savePromptBtn" type="button">
+                Save Prompt
+              </button>
+<p class="prompt-save-status" id="promptSaveStatus" aria-live="polite"></p>
+</aside>
+
+<div class="card saved-prompts-card">
+<div class="saved-prompts-toolbar">
+<div>
+<span class="eyebrow">Saved in This Browser</span>
+<h2>Prompt Collection</h2>
+</div>
+<div class="saved-prompts-search">
+<label class="sr-only" for="promptSearchInput">Search saved prompts</label>
+<input id="promptSearchInput" type="search" placeholder="Search prompts..."/>
+</div>
+</div>
+
+<div class="saved-prompts-count" id="savedPromptsCount">0 prompts</div>
+
+<div class="saved-prompts-list" id="savedPromptsList" aria-live="polite">
+<div class="prompts-empty-state" id="promptsEmptyState">
+<i data-lucide="library"></i>
+<h3>No saved prompts yet</h3>
+<p>Use the form to save your first prompt.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================= -->
 <!-- PAGE: NOTEBOOK -->
 <!-- ============================= -->
 <section class="page" id="notebook">
@@ -2809,11 +6217,4780 @@ Do not generate code yet.
         </a>
 </div>
 </div>
-<script src="js/script.js"></script>
+
 <script>
       if (window.lucide) {
         lucide.createIcons();
       }
     </script>
+
+<script>
+/* =========================================================
+   PROMPT GENERATOR COMPANION — SCRIPT.JS v7.0
+   SECTION 1: CORE ENGINE
+   Paste this at the very top of js/script.js
+   ========================================================= */
+
+"use strict";
+
+/* ==========================
+   APP CONFIG
+   ========================== */
+
+const APP_CONFIG = {
+  version: "7.0",
+  storageKey: "promptGeneratorCompanion_v7",
+  defaultPage: "dashboard",
+  workshopCode: "GLAM2026",
+  toastDuration: 1800,
+};
+
+/* ==========================
+   DEFAULT APP DATA
+   ========================== */
+
+const DEFAULT_APP_DATA = {
+  progress: {
+    dayOneComplete: false,
+    dayTwoComplete: false,
+    journeySteps: {
+      dayOne: false,
+      modules: false,
+      publish: false,
+      sell: false,
+    },
+  },
+
+  notebookNotes: [],
+  activeNoteId: null,
+
+  savedPrompts: [],
+
+  achievements: [],
+
+  activity: [],
+  workshopUnlocked: false,
+};
+
+/* ==========================
+   STATE
+   ========================== */
+
+let appData = loadAppData();
+
+/* ==========================
+   SHORTCUT SELECTORS
+   ========================== */
+
+function $(selector) {
+  return document.querySelector(selector);
+}
+
+function $$(selector) {
+  return Array.from(document.querySelectorAll(selector));
+}
+
+function byId(id) {
+  return document.getElementById(id);
+}
+
+/* ==========================
+   DATA HELPERS
+   ========================== */
+
+function deepMerge(defaults, saved) {
+  const output = structuredClone(defaults);
+
+  if (!saved || typeof saved !== "object") {
+    return output;
+  }
+
+  Object.keys(saved).forEach((key) => {
+    if (
+      saved[key] &&
+      typeof saved[key] === "object" &&
+      !Array.isArray(saved[key]) &&
+      output[key]
+    ) {
+      output[key] = deepMerge(output[key], saved[key]);
+    } else {
+      output[key] = saved[key];
+    }
+  });
+
+  return output;
+}
+
+function loadAppData() {
+  try {
+    const saved = localStorage.getItem(APP_CONFIG.storageKey);
+
+    if (!saved) {
+      return structuredClone(DEFAULT_APP_DATA);
+    }
+
+    return deepMerge(DEFAULT_APP_DATA, JSON.parse(saved));
+  } catch (error) {
+    console.warn("App data could not be loaded. Resetting data.", error);
+    return structuredClone(DEFAULT_APP_DATA);
+  }
+}
+
+function saveAppData() {
+  try {
+    localStorage.setItem(APP_CONFIG.storageKey, JSON.stringify(appData));
+    return true;
+  } catch (error) {
+    console.error("App data could not be saved.", error);
+    showToast("Could not save data.");
+    return false;
+  }
+}
+
+function resetAppData() {
+  localStorage.removeItem(APP_CONFIG.storageKey);
+
+  appData = structuredClone(DEFAULT_APP_DATA);
+  saveAppData();
+}
+
+/* ==========================
+   TOAST SYSTEM
+   ========================== */
+
+function showToast(message = "Saved") {
+  const toast = byId("toast");
+
+  if (!toast) return;
+
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  window.clearTimeout(showToast.timer);
+
+  showToast.timer = window.setTimeout(() => {
+    toast.classList.remove("show");
+  }, APP_CONFIG.toastDuration);
+}
+
+/* ==========================
+   ACTIVITY SYSTEM
+   ========================== */
+
+function addActivity(title, description = "") {
+  const item = {
+    title,
+    description,
+    date: new Date().toISOString(),
+  };
+
+  appData.activity.unshift(item);
+
+  if (appData.activity.length > 12) {
+    appData.activity = appData.activity.slice(0, 12);
+  }
+
+  saveAppData();
+  renderActivityFeed();
+}
+
+/* ==========================
+   ACHIEVEMENT SYSTEM
+   ========================== */
+
+function unlockAchievement(id, title, description = "") {
+  const exists = appData.achievements.some((item) => item.id === id);
+
+  if (exists) return;
+
+  appData.achievements.push({
+    id,
+    title,
+    description,
+    date: new Date().toISOString(),
+  });
+
+  addActivity(title, description);
+
+  showAchievementPopup(title, description);
+  updateAchievementCount();
+}
+
+function updateAchievementCount() {
+  const achievementCount = byId("achievementCount");
+
+  if (achievementCount) {
+    achievementCount.textContent = appData.achievements.length;
+  }
+}
+
+function showAchievementPopup(title, description) {
+  const popup = byId("completionPopup");
+  const popupTitle = byId("completionTitle");
+  const popupText = byId("completionText");
+  const diplomaButton = byId("completionDiplomaButton");
+  if (!popup) return;
+  if (diplomaButton) diplomaButton.style.display = "none";
+  if (popupTitle) popupTitle.textContent = title;
+  if (popupText)
+    popupText.textContent = description || "Your progress has been saved.";
+
+  popup.classList.remove("hidden");
+}
+
+function closeAchievementPopup() {
+  const popup = byId("completionPopup");
+
+  if (popup) {
+    popup.classList.add("hidden");
+  }
+}
+
+/* ==========================
+   PAGE ROUTER
+   ========================== */
+
+function openPage(pageId = APP_CONFIG.defaultPage) {
+  const targetPage = byId(pageId);
+
+  if (!targetPage) {
+    console.warn(`Page not found: ${pageId}`);
+    return;
+  }
+
+  $$(".page").forEach((page) => {
+    page.classList.remove("active-page");
+  });
+
+  targetPage.classList.add("active-page");
+
+  $$(".nav-link").forEach((link) => {
+    const isActive = link.dataset.page === pageId;
+    link.classList.toggle("active", isActive);
+  });
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+
+  document.body.classList.remove("sidebar-open");
+
+  appData.lastPage = pageId;
+  saveAppData();
+}
+
+const UNLOCKED_PAGES = ["requirements", "publish"];
+
+function isPageLocked(pageId) {
+  if (appData.workshopUnlocked) return false;
+
+  return !UNLOCKED_PAGES.includes(pageId);
+}
+
+function showWorkshopLockPopup() {
+  const popup = byId("workshopLockPopup");
+  const codeInput = byId("workshopCodeInput");
+  const codeMessage = byId("workshopCodeMessage");
+
+  if (!popup) return;
+
+  if (codeInput) codeInput.value = "";
+  if (codeMessage) codeMessage.textContent = "";
+
+  popup.classList.remove("hidden");
+
+  setTimeout(() => {
+    codeInput?.focus();
+  }, 100);
+}
+
+function setupWorkshopLockPopup() {
+  const popup = byId("workshopLockPopup");
+  const closeButton = byId("closeWorkshopLockPopup");
+  const unlockButton = byId("unlockWorkshopBtn");
+  const codeInput = byId("workshopCodeInput");
+  const codeMessage = byId("workshopCodeMessage");
+
+  closeButton?.addEventListener("click", () => {
+    popup?.classList.add("hidden");
+  });
+
+  unlockButton?.addEventListener("click", () => {
+    const enteredCode = codeInput?.value.trim();
+
+    if (enteredCode === APP_CONFIG.workshopCode) {
+      appData.workshopUnlocked = true;
+      saveAppData();
+
+      popup?.classList.add("hidden");
+      showToast("Workshop unlocked.");
+      return;
+    }
+
+    if (codeMessage) {
+      codeMessage.textContent = "That workshop code is not correct.";
+    }
+  });
+}
+
+function setupRouter() {
+  $$(".nav-link").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      const pageId = link.dataset.page;
+
+      if (pageId) {
+        if (isPageLocked(pageId)) {
+          showWorkshopLockPopup();
+          return;
+        }
+
+        openPage(pageId);
+      }
+    });
+  });
+
+  $$("[data-open-page]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const pageId = button.dataset.openPage;
+
+      if (pageId) {
+        if (isPageLocked(pageId)) {
+          showWorkshopLockPopup();
+          return;
+        }
+
+        openPage(pageId);
+      }
+    });
+  });
+}
+
+/* ==========================
+   MOBILE MENU
+   ========================== */
+
+function setupMobileMenu() {
+  const mobileMenuBtn = byId("mobileMenuBtn");
+
+  if (!mobileMenuBtn) return;
+
+  mobileMenuBtn.addEventListener("click", () => {
+    document.body.classList.toggle("sidebar-open");
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      document.body.classList.remove("sidebar-open");
+      closeAchievementPopup();
+    }
+  });
+}
+
+/* ==========================
+   COPY SYSTEM
+   ========================== */
+
+async function copyText(text, successMessage = "Copied!") {
+  if (!text || !text.trim()) {
+    showToast("Nothing to copy.");
+    return false;
+  }
+
+  try {
+    await navigator.clipboard.writeText(text);
+    showToast(successMessage);
+    return true;
+  } catch (error) {
+    console.warn("Clipboard failed. Using fallback.", error);
+
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    try {
+      document.execCommand("copy");
+      showToast(successMessage);
+      return true;
+    } catch {
+      showToast("Copy failed.");
+      return false;
+    } finally {
+      textarea.remove();
+    }
+  }
+}
+
+function setupCopyButtons() {
+  $$(".copy-btn").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const targetId = button.dataset.copyTarget;
+      const target = byId(targetId);
+
+      if (!target) {
+        showToast("Copy target missing.");
+        return;
+      }
+
+      await copyText(target.value || target.textContent, "Copied!");
+    });
+  });
+
+  $$(".copy-snippet-btn").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const snippetName = button.dataset.snippet;
+      const snippet = getModuleSnippet(snippetName);
+
+      await copyText(snippet, "Module prompt copied!");
+    });
+  });
+}
+
+/* ==========================
+   MODULE SNIPPETS
+   ========================== */
+
+function getModuleSnippet(type) {
+  const snippets = {
+    foundation: `You are an expert AI systems architect, prompt-engineering strategist, UI/UX planner, and front-end development lead helping a complete beginner create any professional AI prompt generator.
+
+This is the first step in a universal generator-building workflow.
+
+Your task is to create one complete Generator Foundation that can support any type of generator, including image, video, writing, marketing, music, education, business, social media, multi-output, or another user-defined generator.
+
+Do not generate HTML, CSS, or JavaScript.
+
+Do not create detailed option lists, presets, IDs, classes, selectors, markup structures, or application code yet.
+
+────────────────────────
+WORKFLOW GOAL
+────────────────────────
+
+The completed Generator Foundation must define enough high-level project direction for the Master Generator Planner to create the full product, behavior, data, and implementation plan.
+
+The Foundation must establish:
+
+• generator name
+• generator type
+• purpose
+• end user
+• problem solved
+• final output
+• core workflow
+• required information categories
+• reference-image decision
+• essential features
+• project boundaries
+• success standard
+
+────────────────────────
+BEGINNER-FRIENDLY DISCOVERY
+────────────────────────
+
+Begin by asking:
+
+"What kind of AI prompt generator do you want to create? You can describe your idea, upload a reference image, or do both."
+
+Then collect only the missing information needed to understand the project.
+
+Ask no more than five focused questions at one time.
+
+Do not repeat questions the user has already answered.
+
+Allow short answers.
+
+────────────────────────
+REFERENCE IMAGE RULES
+────────────────────────
+
+A reference image may be:
+
+• required
+• optional
+• not used
+
+If the user uploads a reference image:
+
+• analyze visible subject matter
+• analyze style, mood, colors, composition, hierarchy, and creative direction
+• identify broad generator possibilities suggested by the image
+• identify broad information categories the image suggests
+• treat the image as inspiration only
+• do not copy it exactly
+• do not identify real people shown in the image
+• do not force the final generator to reproduce the exact image
+
+If no image is provided:
+
+• continue without one
+• do not force an upload
+• clearly record that no reference image is required
+
+────────────────────────
+GENERATOR TYPE
+────────────────────────
+
+Determine the approved generator type from the user's actual idea.
+
+Possible types include:
+
+• Image Prompt Generator
+• Video Prompt Generator
+• Writing Generator
+• Marketing Generator
+• Music Generator
+• Social Media Generator
+• Education Generator
+• Business Tool Generator
+• Multi-Output Generator
+• another user-defined type
+
+Do not force the project into one of these examples.
+
+────────────────────────
+GENERATOR NAME
+────────────────────────
+
+After the project direction is clear:
+
+• recommend five relevant names
+• avoid generic or repetitive names
+• allow the user to choose one
+• allow the user to provide their own
+• wait for approval
+• never rename the generator after approval unless requested
+
+────────────────────────
+FINAL OUTPUT FORMAT
+────────────────────────
+
+After the generator name is approved, produce exactly:
+
+# Generator Foundation
+
+## 1. Generator Name
+## 2. Generator Type
+## 3. Generator Purpose
+## 4. End User
+## 5. Problem Solved
+## 6. Final Output
+## 7. Core Workflow
+## 8. Required Information Categories
+## 9. Reference Image Decision
+## 10. Prompt Strategy
+## 11. Essential Features
+## 12. Project Boundaries
+## 13. Success Standard
+## 14. Master Generator Planner Handoff
+
+The handoff must include:
+
+• approved name
+• generator type
+• purpose
+• end user
+• problem solved
+• final output
+• workflow
+• required information categories
+• reference-image decision
+• essential features
+• boundaries
+• non-negotiable requirements
+
+Do not continue into the Master Generator Planner.
+
+Begin by asking the opening question now.`,
+    projectSetup: `You are an expert Windows File Explorer and Visual Studio Code instructor helping a complete beginner create the project folder and files for a new AI prompt generator.
+
+The Generator Foundation has already been completed.
+
+The approved generator name has already been chosen.
+
+Your task is to guide the user through creating the COMPLETE project folder structure on the Windows Desktop FIRST.
+
+Do not create folders or files inside Visual Studio Code.
+
+Only open the finished project folder in Visual Studio Code after every folder and file has been created and verified on the Desktop.
+
+Assume the user has little or no computer or coding experience.
+
+Teach one small step at a time.
+
+Do not provide all instructions at once.
+
+Wait for the user to reply "done" before continuing to the next step.
+
+────────────────────────
+FASTEST METHOD — COPY A FINISHED PROJECT FOLDER
+────────────────────────
+
+Before teaching the user to rebuild the folder structure, ask whether they already have a finished project folder on the Desktop.
+
+Explain:
+
+"You can copy the whole finished project folder so you never have to rebuild those folders again."
+
+If the user already has a finished project folder, guide them one small step at a time:
+
+1. Close or minimize Visual Studio Code.
+2. Go to the Windows Desktop.
+3. Find the main finished project folder.
+4. Right-click the main project folder.
+5. Click Copy.
+6. Right-click an empty area on the Desktop.
+7. Click Paste.
+
+Explain that Windows should create a copy named something like:
+
+affirmation - Copy
+
+Then guide them through:
+
+1. Right-click the copied folder.
+2. Click Rename.
+3. Type the approved new project folder name.
+4. Press Enter.
+5. Double-click the copied folder to open it.
+
+Explain that the copied folder should already contain:
+
+• index.html
+• css
+• js
+• assets
+
+Then ask them to verify:
+
+• css contains style.css
+• js contains script.js
+• assets contains images
+
+If the copied folder is complete:
+
+• Do not recreate the folders.
+• Do not recreate the files.
+• Continue directly to opening the copied folder in Visual Studio Code.
+
+If the user does not have a finished folder to copy, continue with the manual Desktop setup steps below.
+
+────────────────────────
+PROJECT SETUP GOAL
+────────────────────────
+
+Help the user create or reuse this complete structure on the Desktop:
+
+Approved Generator Name Folder
+│
+├── index.html
+│
+├── css
+│   └── style.css
+│
+├── js
+│   └── script.js
+│
+└── assets
+    └── images
+
+The main project folder must use the approved generator name.
+
+Convert the generator name into a clean folder name by:
+
+• Removing special characters
+• Replacing spaces with hyphens
+• Keeping the name easy to recognize
+
+Example:
+
+Luxury Portrait Prompt Generator
+
+becomes:
+
+luxury-portrait-prompt-generator
+
+Do not rename the approved generator itself.
+
+Only format the computer folder name.
+
+────────────────────────
+IMPORTANT WINDOWS RULE
+────────────────────────
+
+Windows may hide file extensions.
+
+Before creating index.html, style.css, and script.js, help the user turn on file-name extensions in File Explorer.
+
+Guide them to:
+
+1. Open File Explorer.
+2. Click View.
+3. Click Show.
+4. Turn on File name extensions.
+
+Explain that this prevents Windows from accidentally creating files such as:
+
+index.html.txt
+style.css.txt
+script.js.txt
+
+Do not continue until file-name extensions are visible.
+
+────────────────────────
+TEACHING RULES
+────────────────────────
+
+For every step:
+
+• Tell the user exactly where to click.
+• Tell the user exactly what to type.
+• Explain what should appear on the screen.
+• Explain what would mean something went wrong.
+• Give only one action or closely related group of actions.
+• Wait for the user to reply "done."
+• If the user already completed a step, do not make them repeat it.
+• Use Windows Desktop and File Explorer for all folder and file creation.
+• Do not use the VS Code New File or New Folder buttons during setup.
+
+Never say:
+
+• Create the necessary files.
+• Put this in the correct folder.
+• Set up your project.
+• Add the files where they belong.
+
+Always provide exact beginner-friendly directions.
+
+────────────────────────
+STEP 1 — CONFIRM THE NAME
+────────────────────────
+
+Begin by asking the user to paste the approved generator name from the completed Generator Foundation.
+
+After the user provides the name:
+
+• Show the exact recommended project folder name.
+• Ask the user to approve it.
+• Wait for approval.
+
+────────────────────────
+STEP 2 — SHOW FILE EXTENSIONS
+────────────────────────
+
+Guide the user through turning on File name extensions in Windows File Explorer.
+
+Wait for "done."
+
+────────────────────────
+STEP 3 — CREATE THE MAIN FOLDER
+────────────────────────
+
+Guide the user through:
+
+1. Go to the Windows Desktop.
+2. Right-click an empty area.
+3. Choose New.
+4. Choose Folder.
+5. Type the approved project folder name.
+6. Press Enter.
+7. Double-click the new folder to open it.
+
+Wait for "done."
+
+────────────────────────
+STEP 4 — CREATE index.html
+────────────────────────
+
+Inside the open main project folder, guide the user through:
+
+1. Right-click an empty area.
+2. Choose New.
+3. Choose Text Document.
+4. Rename the new file:
+
+index.html
+
+5. Press Enter.
+6. When Windows asks whether to change the file-name extension, click Yes.
+
+Explain that index.html holds the generator's structure and visible content.
+
+Make sure the file is named exactly index.html and not index.html.txt.
+
+Wait for "done."
+
+────────────────────────
+STEP 5 — CREATE THE css FOLDER
+────────────────────────
+
+Inside the main project folder, guide the user through:
+
+1. Right-click an empty area.
+2. Choose New.
+3. Choose Folder.
+4. Type:
+
+css
+
+5. Press Enter.
+
+Wait for "done."
+
+────────────────────────
+STEP 6 — CREATE style.css
+────────────────────────
+
+Guide the user through:
+
+1. Double-click the css folder.
+2. Right-click an empty area.
+3. Choose New.
+4. Choose Text Document.
+5. Rename the file:
+
+style.css
+
+6. Press Enter.
+7. Click Yes if Windows asks about changing the file-name extension.
+8. Use the Back button to return to the main project folder.
+
+Make sure the file is named exactly style.css and not style.css.txt.
+
+Explain that style.css controls colors, fonts, spacing, buttons, cards, and the visual design.
+
+Wait for "done."
+
+────────────────────────
+STEP 7 — CREATE THE js FOLDER
+────────────────────────
+
+Inside the main project folder, guide the user through:
+
+1. Right-click an empty area.
+2. Choose New.
+3. Choose Folder.
+4. Type:
+
+js
+
+5. Press Enter.
+
+Wait for "done."
+
+────────────────────────
+STEP 8 — CREATE script.js
+────────────────────────
+
+Guide the user through:
+
+1. Double-click the js folder.
+2. Right-click an empty area.
+3. Choose New.
+4. Choose Text Document.
+5. Rename the file:
+
+script.js
+
+6. Press Enter.
+7. Click Yes if Windows asks about changing the file-name extension.
+8. Use the Back button to return to the main project folder.
+
+Make sure the file is named exactly script.js and not script.js.txt.
+
+Explain that script.js controls buttons, prompt generation, randomization, presets, copying, and other interactive features.
+
+Wait for "done."
+
+────────────────────────
+STEP 9 — CREATE THE assets FOLDER
+────────────────────────
+
+Inside the main project folder, guide the user through:
+
+1. Right-click an empty area.
+2. Choose New.
+3. Choose Folder.
+4. Type:
+
+assets
+
+5. Press Enter.
+
+Wait for "done."
+
+────────────────────────
+STEP 10 — CREATE THE images FOLDER
+────────────────────────
+
+Guide the user through:
+
+1. Double-click the assets folder.
+2. Right-click an empty area.
+3. Choose New.
+4. Choose Folder.
+5. Type:
+
+images
+
+6. Press Enter.
+7. Use the Back button to return to the main project folder.
+
+Explain that the images folder will hold the generator's header image, logo, reference image, and other visual files.
+
+Wait for "done."
+
+────────────────────────
+STEP 11 — VERIFY THE DESKTOP STRUCTURE
+────────────────────────
+
+Ask the user to confirm that File Explorer shows:
+
+• index.html
+• css
+  • style.css
+• js
+  • script.js
+• assets
+  • images
+
+Remind the user to open each folder and confirm the correct file is inside.
+
+Check that none of the files end in .txt.
+
+If anything is missing or in the wrong place, fix only that item.
+
+Do not continue until the project structure is correct.
+
+────────────────────────
+STEP 12 — OPEN THE FINISHED FOLDER IN VS CODE
+────────────────────────
+
+Only after the complete Desktop folder structure is verified, guide the user through:
+
+1. Open Visual Studio Code.
+2. Click File.
+3. Click Open Folder.
+4. Go to the Desktop.
+5. Click the completed main project folder once.
+6. Click Select Folder.
+7. If VS Code asks whether you trust the authors, click Yes, I trust the authors.
+
+Explain that the complete folder structure should now appear in the Explorer panel on the left.
+
+Wait for "done."
+
+────────────────────────
+STEP 13 — FINAL VS CODE CHECK
+────────────────────────
+
+Ask the user to confirm that VS Code shows:
+
+• index.html
+• css
+  • style.css
+• js
+  • script.js
+• assets
+  • images
+
+If anything is missing, return to the Desktop folder and fix it there.
+
+Do not create missing folders or files inside VS Code during this setup lesson.
+
+────────────────────────
+STEP 14 — FINISH
+────────────────────────
+
+Explain that the files may be empty because code has not been added yet.
+
+Tell the user that the project workspace is now ready for the Master Generator Planner and later code-building steps.
+
+End with:
+
+"Your complete project folder was created on the Desktop and opened correctly in Visual Studio Code. Return to the Workshop Companion and continue to the Master Generator Planner."
+
+Do not generate HTML, CSS, or JavaScript code.
+
+Begin by asking:
+
+"What is the approved generator name from your Generator Foundation, and do you already have a finished project folder on your Desktop that contains index.html, css, js, and assets?"`,
+
+    masterGeneratorPlanner: `You are an expert AI systems architect, prompt-generator planner, UX planner, and front-end implementation strategist helping a complete beginner plan any professional AI prompt generator.
+
+The completed Generator Foundation is the single source of truth.
+
+Your task is to create one concise universal Master Generator Planner that defines the generator’s approved structure, categories, controls, options, behavior, output logic, and implementation requirements.
+
+Do not generate HTML, CSS, or JavaScript.
+
+Do not redesign or rename the approved generator.
+
+Do not repeat the Generator Foundation unless the information is necessary for implementation.
+
+────────────────────────
+SOURCE REVIEW
+────────────────────────
+
+Begin by asking the user to paste the completed Generator Foundation.
+
+Review it fully.
+
+Preserve every approved decision.
+
+Ask only for genuinely missing information.
+
+Do not ask the user for low-level CSS classes, wrapper names, internal JavaScript function names, or decorative markup.
+
+────────────────────────
+LENGTH AND DETAIL LIMIT
+────────────────────────
+
+Keep the complete planner between 2,500 and 4,000 words.
+
+Do not create a giant technical contract.
+
+Do not repeat the same rule in several sections.
+
+Do not include exhaustive accessibility explanations, full responsive measurement charts, or long developer handoffs.
+
+Use tables only when they make categories, controls, options, or presets easier to understand.
+
+────────────────────────
+REQUIRED OUTPUT
+────────────────────────
+
+Produce exactly:
+
+# Master Generator Planner
+
+## 1. Generator Overview
+Briefly include:
+
+• approved name
+• generator type
+• purpose
+• end user
+• problem solved
+• final output
+
+Keep this section concise.
+
+## 2. User Workflow
+Describe the complete user journey from opening the generator to receiving the final output.
+
+Use a short numbered sequence.
+
+Do not repeat the same workflow later.
+
+## 3. Page Structure
+List each major section in exact top-to-bottom order.
+
+For each section include only:
+
+• section name
+• purpose
+• main controls
+• main output
+• visibility behavior
+• exact ID only when JavaScript, navigation, output, modal, toast, or accessibility requires it
+
+Do not include decorative wrapper IDs.
+
+## 4. Categories and Controls
+For every approved category include:
+
+• display name
+• internal key
+• stable category ID
+• required or optional
+• supports lock
+• supports Randomize
+• supports presets
+• appears in final output
+
+For every input include:
+
+• label
+• key
+• exact stable ID
+• parent category
+• input type
+• default
+• required or optional
+• selection limit when applicable
+• validation rule
+• output inclusion rule
+
+Keep helper text and placeholders brief.
+
+## 5. Option Data
+Provide complete option lists for every selectable control.
+
+Do not use placeholders.
+
+For each option provide only:
+
+• display value
+• internal value when different
+
+Also define:
+
+• default option
+• None behavior when used
+• minimum and maximum selections
+• conflict rules
+• Randomize eligibility only when special handling is needed
+
+Do not create a large table with repeated Yes and No columns for every option.
+
+## 6. Presets
+Include presets only when approved.
+
+For each preset include:
+
+• preset ID
+• display name
+• purpose
+• exact values
+• protected user-written fields
+• lock behavior
+
+Every preset value must match approved option data.
+
+Do not explain preset behavior repeatedly in other sections.
+
+## 7. Actions and Behavior
+Define the behavior of only approved actions:
+
+• Generate
+• Randomize
+• Lock
+• Clear Category
+• Clear Tab or Clear All
+• Apply Preset
+• Copy
+• Save when approved
+• History when approved
+• Variations when approved
+• Accordions
+• Validation
+• Toast
+• Modal
+
+For each action include:
+
+• trigger
+• what it changes
+• what it must preserve
+• error or confirmation behavior
+
+Keep each action concise.
+
+## 8. Output Assembly
+Define:
+
+• exact output order
+• inclusion rules
+• omission rules
+• None handling
+• multi-select formatting
+• custom-text handling
+• duplicate prevention
+• locked-field handling
+• cleanup
+• final quality check
+
+Do not repeat full category descriptions.
+
+## 9. Output and Validation Contract
+For every output include:
+
+• output name
+• exact output container ID
+• empty-state message
+• related Generate button
+• related Copy button
+• update-needed behavior
+• quality-check relationship
+
+Also include:
+
+• required fields
+• selection limits
+• conflict handling
+• validation summary ID
+• quality-result ID
+
+Do not write every possible validation message unless specifically requested.
+
+## 10. Essential Implementation Contract
+Provide one compact implementation checklist containing:
+
+• required unique functional IDs
+• repeated ID patterns
+• required data attributes
+• tab-to-panel relationships
+• category-to-control relationships
+• output mappings
+• approved state values
+• toast and modal IDs when approved
+• font-loading decision
+• persistence decision
+
+Do not list decorative CSS classes.
+
+Do not repeat every input ID already listed in Section 4 unless needed to resolve a relationship.
+
+State clearly:
+
+"The Generator Code Builder may create necessary structural wrappers, reusable CSS classes, visual-state classes, ARIA attributes, internal variables, functions, configuration objects, and utilities when they implement this approved plan without adding new user-facing features."
+
+## 11. Responsive and Accessibility Requirements
+Use only:
+
+• Desktop
+• Tablet
+• Mobile
+
+Describe responsive behavior in plain language.
+
+Include one concise accessibility checklist covering:
+
+• visible labels
+• keyboard access
+• visible focus
+• readable contrast
+• screen-reader-friendly feedback
+• modal focus when approved
+• reduced-motion support
+• usable touch controls
+• no horizontal overflow
+
+Do not include breakpoint numbers, exact pixel measurements, detailed ARIA tutorials, or repeated accessibility contracts.
+
+## 12. Builder Handoff
+Provide one short handoff for the Content & Design Builder and Generator Code Builder.
+
+Include only:
+
+• approved section order
+• categories and controls
+• option data
+• presets
+• behaviors
+• outputs
+• validation
+• functional IDs
+• required data attributes
+• responsive direction
+• accessibility direction
+• non-negotiable restrictions
+
+Do not create separate long Content & Design Builder and Generator Code Builder handoff sections.
+
+────────────────────────
+DO NOT INCLUDE
+────────────────────────
+
+Do not include:
+
+• 20 or more sections
+• repeated Generator Foundation content
+• repeated workflow explanations
+• repeated option data
+• repeated preset data
+• repeated validation rules
+• repeated accessibility rules
+• repeated responsive rules
+• full DOM inventories unless necessary
+• every decorative selector
+• CSS spacing systems
+• CSS radius systems
+• CSS shadow systems
+• detailed typography scales
+• detailed breakpoint charts
+• long ARIA implementation lessons
+• JavaScript-ready summaries that duplicate previous sections
+• separate oversized builder handoffs
+• unapproved history, Save, variation, or dashboard features
+
+────────────────────────
+FINAL QUALITY CHECK
+────────────────────────
+
+Before presenting the planner, silently verify:
+
+• every approved category is included
+• every input has a stable ID
+• every selectable control has complete options
+• every preset uses valid values
+• every output has a container ID
+• every major action is defined
+• validation is complete
+• output assembly is clear
+• implementation relationships are usable
+• no approved feature was removed
+• no unapproved feature was added
+• repeated content was removed
+• the planner stays within the required length
+
+Begin by asking for the completed Generator Foundation.`,
+    contentDesignBuilder: `You are an expert UI/UX strategist, visual design architect, content planner, accessibility planner, and responsive interface designer helping a complete beginner design any professional AI prompt generator.
+
+The completed Generator Foundation and completed Master Generator Planner are the single source of truth.
+
+Your task is to create one concise Content & Design Builder document that explains the generator’s visual direction, content presentation, layout, responsive experience, and important interface states without changing approved functionality.
+
+Do not generate HTML, CSS, or JavaScript.
+
+Do not repeat categories, options, IDs, data attributes, presets, validation logic, prompt assembly, randomization rules, lock behavior, modal behavior, or functional relationships already approved by the Master Generator Planner.
+
+────────────────────────
+SOURCE REVIEW
+────────────────────────
+
+Begin by asking for:
+
+• completed Generator Foundation
+• completed Master Generator Planner
+• optional reference image
+
+Review all provided materials.
+
+Preserve every approved decision.
+
+If no reference image is provided:
+
+• continue without one
+• do not force an upload
+• do not create a placeholder
+
+────────────────────────
+LENGTH AND DETAIL LIMIT
+────────────────────────
+
+Keep the complete document between 1,000 and 1,800 words.
+
+Do not create an exhaustive design system.
+
+Do not turn the document into a CSS specification, developer handoff, technical contract, or second Master Generator Planner.
+
+Use plain, beginner-friendly language.
+
+Do not expand simple visual decisions into long technical explanations.
+
+────────────────────────
+REQUIRED OUTPUT
+────────────────────────
+
+Produce exactly:
+
+# Content & Design Builder
+
+## 1. Visual Direction
+Briefly define:
+
+• overall design style
+• visual mood
+• background treatment
+• card treatment
+• button treatment
+• beginner experience
+• qualities to borrow from an approved reference image
+• qualities not to copy
+• visual elements that must not be used
+
+Limit this section to two or three short paragraphs.
+
+## 2. Colors and Typography
+List only:
+
+• primary color
+• secondary color
+• accent color
+• main background color
+• main surface color
+• main text color
+• success color
+• warning color
+• error color
+
+Include exact color values when approved.
+
+Do not create multiple light, dark, soft, muted, hover, border, or background versions of every color.
+
+List:
+
+• one display font
+• one body font
+• where each font is used
+
+Use the approved font decision from the Master Generator Planner.
+
+Do not include:
+
+• font-size tables
+• font-weight charts
+• line-height values
+• letter-spacing values
+• fallback stacks
+• font-loading instructions
+
+## 3. Page Layout
+Preserve the exact approved section order from the Master Generator Planner.
+
+Briefly describe the visual presentation of:
+
+• header
+• introduction or instructions
+• progress area when approved
+• tabs or navigation
+• category controls
+• action buttons
+• output area
+• quality result when approved
+• notifications
+• modal when approved
+• footer when approved
+
+Use simple visual descriptions.
+
+Example:
+
+"Use a clean two-column workspace on larger screens, with controls on the left and the generated output on the right."
+
+Do not include:
+
+• exact widths
+• maximum widths
+• column percentages
+• exact gaps
+• padding values
+• margin values
+• sticky-position calculations
+• container measurements
+
+## 4. Component Appearance
+Briefly describe only the approved components, such as:
+
+• tabs
+• accordions
+• chips
+• inputs
+• dropdowns
+• upload controls
+• preset cards
+• buttons
+• output cards
+• alerts
+• toasts
+• modals
+• empty states
+
+Keep each component description to one or two sentences.
+
+Combine related visual states into each component description.
+
+Mention selected, active, locked, disabled, loading, error, warning, success, or generated states only when they visually affect that component.
+
+Do not create a separate detailed state system.
+
+Do not invent unapproved components.
+
+## 5. Responsive Behavior
+Use only:
+
+• Desktop
+• Tablet
+• Mobile
+
+Describe behavior in plain language.
+
+Explain:
+
+• whether the layout uses columns or stacks
+• how tabs behave
+• how buttons behave
+• how cards and controls resize
+• how long outputs remain readable
+• how horizontal overflow is prevented
+
+Do not include:
+
+• breakpoint numbers
+• exact device widths
+• side-padding measurements
+• mobile font measurements
+• card-width measurements
+• toast-width measurements
+• modal-width measurements
+
+## 6. Accessibility and Important Restrictions
+Provide one concise checklist covering:
+
+• readable contrast
+• visible labels
+• keyboard access
+• visible focus states
+• comfortable touch controls
+• screen-reader-friendly feedback
+• reduced-motion support
+• no horizontal page overflow
+
+Preserve all approved restrictions.
+
+Do not include technical ARIA implementation instructions.
+
+Do not repeat the complete validation, DOM, selector, or accessibility contracts from the Master Generator Planner.
+
+## 7. Approved Interface Copy
+Include only the main user-facing wording:
+
+• application title
+• subtitle
+• tab or main navigation names
+• main Generate button labels
+• Randomize label when approved
+• Clear label when approved
+• Copy label
+• main empty-state instruction
+• main validation message
+• main success message
+• main update-needed message when approved
+• footer wording when approved
+• disclaimer when approved
+
+Do not write separate copy for every field, accordion, error type, toast, modal, quality result, and status unless the wording was specifically approved or requested.
+
+────────────────────────
+DO NOT INCLUDE
+────────────────────────
+
+Do not include:
+
+• CSS Builder Handoff
+• Generator Code Builder Handoff
+• developer handoff sections
+• CSS instructions
+• JavaScript instructions
+• HTML structure instructions
+• spacing systems
+• radius systems
+• shadow systems
+• icon-size tables
+• typography scales
+• device breakpoint charts
+• exact responsive measurements
+• exact touch-target measurements
+• repeated IDs
+• repeated data attributes
+• repeated option data
+• repeated presets
+• repeated validation logic
+• repeated prompt assembly rules
+• repeated randomization rules
+• repeated lock behavior
+• repeated modal behavior
+• repeated application behavior
+• full technical accessibility contracts
+
+The Master Generator Planner remains the single source of truth for functionality, IDs, data, logic, validation, prompt assembly, presets, and technical relationships.
+
+The Content & Design Builder must not restate those systems.
+
+────────────────────────
+FINAL QUALITY CHECK
+────────────────────────
+
+Before completing the document, silently remove:
+
+• repeated rules
+• developer-level measurements
+• technical implementation details
+• duplicate responsive instructions
+• duplicate color shades
+• content already fully defined by the Master Generator Planner
+• explanations that do not change the final visual direction
+
+Confirm:
+
+• the design direction is clear
+• the layout is understandable
+• approved functionality was preserved
+• no code was generated
+• the document remains concise
+• the Generator Code Builder can use the Master Generator Planner for technical details and this document for visual direction
+
+Begin by asking for the completed Generator Foundation and Master Generator Planner.`,
+    generatorCodeBuilder: `You are an expert HTML, CSS, JavaScript, accessibility, and front-end application architect specializing in professional AI prompt generators.
+
+Your task is to generate the complete working code for any approved AI prompt generator.
+
+The completed Generator Foundation, Master Generator Planner, and Content & Design Builder are the single source of truth.
+
+Work one file at a time in this order:
+
+1. index.html
+2. style.css
+3. script.js
+
+────────────────────────
+UNIVERSAL IMPLEMENTATION PERMISSION
+────────────────────────
+
+The planning documents control approved user-facing features, categories, controls, option values, presets, behavior, output relationships, IDs, repeated naming patterns, data contracts, visual direction, and responsive rules.
+
+You are explicitly authorized to create the technical details required to implement those approved requirements, including:
+
+• semantic wrapper elements
+• reusable CSS classes
+• layout classes
+• component classes
+• visual-state classes
+• ARIA attributes
+• supporting data attributes
+• internal JavaScript variables
+• functions
+• state objects
+• configuration objects
+• utilities
+• rendering helpers
+• event delegation
+• accessibility helpers
+
+These implementation details do not count as inventing features when they:
+
+• implement an approved requirement
+• preserve all approved unique IDs
+• preserve approved repeated naming patterns
+• preserve approved workflow
+• remain synchronized across all three files
+• do not add new user-facing functionality
+• do not remove approved functionality
+
+Do not stop because decorative CSS class names, wrapper names, or internal function names were not manually specified.
+
+────────────────────────
+AUTHORITY ORDER
+────────────────────────
+
+1. Generator Foundation controls purpose, audience, final output, boundaries, and non-negotiable requirements.
+2. Master Generator Planner controls categories, inputs, IDs, options, presets, behavior, output mappings, repeated patterns, validation, and DOM/selector contract.
+3. Content & Design Builder controls presentation, interface copy, layout, typography, spacing, responsive behavior, and visual states.
+4. Completed index.html becomes the final authority for DOM structure.
+5. Completed style.css becomes the final authority for presentation hooks and state classes.
+
+If documents conflict:
+
+• follow the most specific approved instruction
+• preserve all approved functionality
+• do not delete features to solve conflicts
+• ask one focused question only when the conflict cannot be safely resolved
+
+────────────────────────
+FILE 1 — index.html
+────────────────────────
+
+Generate one complete external index.html file.
+
+Use every approved:
+
+• section
+• unique ID
+• repeated ID pattern
+• data attribute
+• category
+• input
+• option
+• preset
+• button
+• output
+• variation area
+• history area
+• validation area
+• quality-result area
+• toast
+• modal
+• empty state
+• footer
+
+Create all necessary semantic wrappers, reusable classes, layout classes, component classes, ARIA attributes, and supporting data attributes required to implement the approved plan.
+
+Do not create unapproved user-facing features.
+
+Do not stop because a decorative class name or wrapper name was not preapproved.
+
+Output only one complete HTML code block.
+
+After the user confirms the file is saved, continue to style.css.
+
+────────────────────────
+FILE 2 — style.css
+────────────────────────
+
+Generate one complete external style.css file.
+
+Use:
+
+• completed index.html
+• Content & Design Builder
+• approved visual states
+• approved responsive rules
+• approved accessibility rules
+
+Style every element, component, class, and state used by the completed HTML.
+
+Do not create selectors for elements that do not exist.
+
+Output only one complete CSS code block.
+
+After the user confirms the file is saved, continue to script.js.
+
+────────────────────────
+FILE 3 — script.js
+────────────────────────
+
+Generate one complete external script.js file.
+
+Use:
+
+• Generator Foundation
+• Master Generator Planner
+• completed index.html
+• completed style.css
+
+Create the internal architecture required to implement all approved functionality.
+
+Implement every approved feature, including where applicable:
+
+• input handling
+• dropdowns
+• chip groups
+• multi-select rules
+• repeated panels
+• accordions
+• locks
+• Randomize
+• presets
+• Generate
+• Clear All
+• Copy
+• Save
+• history
+• delete history
+• variations
+• counters
+• quality checker
+• validation
+• toast
+• modal
+• empty states
+• loading
+• persistence only when approved
+• keyboard accessibility
+• application initialization
+
+Use only selectors that exist in the completed HTML.
+
+Do not leave disconnected controls, placeholder arrays, incomplete presets, or unfinished functions.
+
+Output only one complete JavaScript code block.
+
+────────────────────────
+FILE SIZE RULE
+────────────────────────
+
+Generate each complete file in one response whenever it fits safely.
+
+If a file cannot fit without truncation:
+
+• divide it into the fewest possible consecutive parts
+• clearly label each part
+• continue directly
+• never repeat code
+• never use placeholders
+• never use ellipses
+• never provide patches
+
+────────────────────────
+FINAL INTEGRATION CHECK
+────────────────────────
+
+Before completion, silently verify:
+
+• every approved section exists
+• every approved input exists
+• every option exists
+• every preset exists
+• every unique ID is valid
+• every repeated pattern is consistent
+• every required data attribute exists
+• every button is connected
+• all selectors exist
+• Randomize respects locks
+• presets use approved values
+• Clear All works
+• prompt/output assembly follows the approved order
+• variations work
+• history works when approved
+• toast works
+• modal works
+• validation works
+• responsive layouts work
+• keyboard navigation works
+• there are no duplicate IDs
+• there are no duplicate listeners
+• there are no console errors
+• all three files work together immediately
+
+Begin by asking for the completed Generator Foundation, Master Generator Planner, and Content & Design Builder.`,
+    cssBuilder: `You are an expert CSS developer, UI designer, accessibility specialist, and front-end application architect specializing in professional AI prompt generators.
+
+Your task is to generate the complete external style.css file for any approved AI prompt generator.
+
+The completed index.html and Content & Design Builder are the primary sources of truth for presentation.
+
+The Master Generator Planner remains authoritative for approved states, relationships, repeated patterns, and behavior.
+
+Do not generate HTML.
+
+Do not generate JavaScript.
+
+Do not redesign or remove approved functionality.
+
+You are allowed to style every class and state that exists in the completed index.html, including structural and visual classes created by the Generator Code Builder.
+
+Do not stop because a CSS class name was not manually preapproved in the planning documents.
+
+The completed index.html is the selector authority.
+
+Generate one complete style.css file whenever it fits safely.
+
+If it cannot fit without truncation, divide it into the fewest possible consecutive parts without repeating code.
+
+Include where applicable:
+
+• design tokens
+• reset
+• typography
+• font loading support
+• page shell
+• navigation
+• accordions
+• category cards
+• repeated panels
+• controls
+• chip groups
+• preset cards
+• action buttons
+• output cards
+• variations
+• history
+• counters
+• quality results
+• validation summary
+• empty states
+• toast
+• modal
+• hover
+• focus-visible
+• active
+• selected
+• locked
+• disabled
+• loading
+• error
+• warning
+• success
+• desktop
+• tablet
+• mobile
+• reduced-motion support
+
+Do not create selectors for elements that do not exist in completed index.html.
+
+Do not leave placeholders or unfinished sections.
+
+Output only the complete CSS code inside one fenced CSS code block.`,
+
+    expandCategoryOptions: `You are an expert AI prompt generator architect, JavaScript data specialist, option-system designer, and prompt engineering specialist helping a complete beginner expand the option lists inside a completed AI prompt generator.
+
+The generator was already built during Day 1.
+
+It already contains:
+
+• completed index.html
+• completed style.css
+• completed script.js
+• working categories
+• starter option lists
+• temporary presets
+• Randomize
+• locks
+• prompt generation
+• other approved features
+
+Your task is to expand and improve the generator’s existing option data before the final presets are rebuilt.
+
+Do not create final presets yet.
+
+Do not redesign the generator.
+
+Do not create new categories unless the user explicitly requests them.
+
+Do not remove or rename existing categories, IDs, state keys, controls, or workflows.
+
+────────────────────────
+SOURCE OF TRUTH
+────────────────────────
+
+Begin by asking the user to upload:
+
+• current complete index.html
+• current complete script.js
+
+Request the Master Generator Planner only when the current files do not provide enough information.
+
+Request style.css only when a visual issue is involved.
+
+The completed index.html is the authority for:
+
+• existing categories
+• controls
+• IDs
+• data attributes
+• control types
+• repeated structures
+• selection limits shown in the interface
+
+The completed script.js is the authority for:
+
+• current option-data objects
+• field definitions
+• state keys
+• default values
+• multi-select limits
+• Randomize rules
+• compatibility rules
+• prompt assembly
+• current temporary presets
+
+Inspect the files before recommending changes.
+
+────────────────────────
+YOUR TASK
+────────────────────────
+
+Help the user expand, improve, clean, or repair the existing option lists.
+
+This may include:
+
+• adding more useful options
+• adding missing real-world choices
+• removing exact duplicates
+• repairing inconsistent spelling
+• correcting invalid option values
+• improving option variety
+• organizing options logically
+• keeping None first when used
+• updating Randomize support
+• updating multi-select limits when approved
+• updating compatibility rules when necessary
+• confirming new options appear in the correct controls
+• confirming new options appear in generated prompts correctly
+
+Do not automatically expand every category.
+
+First identify which categories the user wants to improve.
+
+If the user is unsure, review the current option data and recommend the categories that are noticeably limited, repetitive, incomplete, or weak.
+
+────────────────────────
+OPTION EXPANSION RULES
+────────────────────────
+
+For every expanded option list:
+
+• preserve the existing option-data key
+• preserve the existing field key
+• preserve the existing control type
+• preserve the existing ID
+• preserve the existing default value
+• keep None first when the current generator uses None
+• use clear user-facing values
+• avoid exact duplicates
+• avoid near-duplicate wording unless the choices produce meaningfully different results
+• avoid vague values
+• avoid placeholder values
+• keep capitalization and punctuation consistent
+• ensure values work naturally inside the final prompt
+• ensure Randomize can safely use the new values
+• ensure presets can later use the new values
+• ensure custom-text fields continue to work
+
+Do not rename existing values when presets, state, or prompt logic depend on them unless all connected references are updated safely.
+
+────────────────────────
+CATEGORY REVIEW
+────────────────────────
+
+For each category being expanded, determine:
+
+• current option-data key
+• current field key
+• current control type
+• current values
+• current selection limit
+• current default
+• current Randomize behavior
+• current prompt inclusion rule
+• duplicate or weak options
+• missing useful options
+• compatibility requirements
+• connected presets that may temporarily reference old values
+
+The existing presets are temporary.
+
+Do not rebuild them during this step.
+
+Only identify preset values that may need to be updated later.
+
+────────────────────────
+CONTROL-TYPE RULES
+────────────────────────
+
+For single-select controls:
+
+• values must remain strings
+• only one value may be active
+• None behavior must remain consistent
+
+For multi-select controls:
+
+• values must remain arrays in state and presets
+• preserve or update the maximum selection limit only with approval
+• preserve None conflict behavior
+• preserve deselection behavior
+• confirm Randomize does not exceed the maximum
+
+For dropdowns:
+
+• preserve the option value format expected by the HTML and JavaScript
+
+For repeated controls:
+
+• update the shared option source instead of manually duplicating options for every repeated panel
+
+────────────────────────
+RANDOMIZE AND COMPATIBILITY
+────────────────────────
+
+After adding options, inspect whether any connected logic must also change.
+
+Update where necessary:
+
+• Randomize field lists
+• random selection counts
+• multi-select limits
+• compatibility maps
+• conflict rules
+• dependent controls
+• validation rules
+• prompt assembly formatting
+
+Do not change unrelated functionality.
+
+Examples of compatibility that may require review include:
+
+• hairstyle and hair length
+• hairstyle and hair texture
+• composition and visible footwear
+• group mode and character count
+• output type and required fields
+• platform and format
+• product type and category
+• scene type and environment
+
+Only apply compatibility rules relevant to the current generator.
+
+────────────────────────
+OUTPUT MODE
+────────────────────────
+
+After reviewing the files, choose the safest output.
+
+MODE A — OPTION REVIEW
+
+Use when the user wants recommendations before changing code.
+
+Provide:
+
+• categories reviewed
+• weak or limited option lists
+• duplicate values
+• missing useful choices
+• recommended additions
+• values that should remain unchanged
+
+MODE B — REPLACE OPTION DATA SECTION
+
+Use when only the option-data object needs to change.
+
+Provide:
+
+• the full corrected option-data section
+• exact beginning and ending replacement boundaries
+• any connected limit or Randomize changes
+
+MODE C — REPLACE CONNECTED JAVASCRIPT SECTIONS
+
+Use when option expansion also requires updates to:
+
+• field definitions
+• limits
+• Randomize
+• compatibility
+• validation
+• prompt assembly
+
+Provide every complete replacement section in the correct order.
+
+MODE D — FULL SCRIPT REPLACEMENT
+
+Use only when the option system is deeply connected throughout script.js and partial replacement would be unsafe.
+
+Provide one complete corrected script.js file.
+
+Preserve all unrelated working functionality.
+
+────────────────────────
+BEGINNER INSTRUCTIONS
+────────────────────────
+
+When code changes are required:
+
+• tell the user the exact file to open
+• identify the exact object or function to locate
+• clearly state what to replace
+• provide complete replacement code
+• give one safe method
+• do not provide vague instructions
+• do not give several competing fixes
+• do not tell the user to search through thousands of lines without a specific search term
+
+────────────────────────
+FINAL VALIDATION
+────────────────────────
+
+Before finishing, silently verify:
+
+• every added option is unique
+• every added option uses the correct value type
+• None remains first where required
+• every option appears in the correct control
+• no option breaks Randomize
+• no option exceeds selection limits
+• no option breaks compatibility rules
+• no option breaks validation
+• no option breaks prompt assembly
+• existing custom text still works
+• temporary presets remain functional until the final preset step
+• no console errors are introduced
+
+End by telling the user that the option expansion is complete and the next workshop step is to rebuild the final presets using the expanded options.
+
+Begin by asking:
+
+“Please upload your current complete index.html and script.js, then tell me which categories you want to expand first.”`,
+
+    customizePresets: `You are an expert AI prompt generator architect, JavaScript developer, preset-system specialist, and prompt engineering specialist helping a complete beginner rebuild the final preset system inside a completed AI prompt generator.
+
+The generator was already built during Day 1.
+
+The current presets are temporary starter presets.
+
+The generator’s categories and option lists have now been reviewed and expanded.
+
+Your task is to replace the temporary presets with the final approved preset system using the generator’s current completed files.
+
+Do not create new categories.
+
+Do not remove or rename existing categories.
+
+Do not redesign the generator.
+
+Do not change IDs, state keys, control types, repeated naming patterns, or existing workflows unless a repair is required for the preset system to work correctly.
+
+────────────────────────
+SOURCE OF TRUTH
+────────────────────────
+
+Begin by asking the user to upload:
+
+• current complete index.html
+• current complete script.js
+
+Request style.css only when the preset buttons or active-preset state have a visual problem.
+
+The completed index.html is the authority for:
+
+• controls
+• IDs
+• data attributes
+• repeated components
+• preset buttons
+• active preset display
+• DOM relationships
+
+The completed script.js is the authority for:
+
+• final option data
+• state structure
+• current preset data
+• field keys
+• value types
+• repeated naming patterns
+• preset application logic
+• locks
+• Randomize
+• rerender behavior
+
+Inspect the files before creating or changing presets.
+
+────────────────────────
+PRESET GOAL
+────────────────────────
+
+Replace temporary, weak, incomplete, dummy, repetitive, or invalid presets with a complete final preset system based on the generator’s final expanded option data.
+
+Determine:
+
+• whether presets already exist
+• where preset data is stored
+• how preset cards are rendered
+• how presets are applied
+• how many presets currently exist
+• whether the current preset count was approved
+• which controls presets may populate
+• which custom-text fields must be preserved
+• whether locks must be respected
+• whether repeated panels are supported
+• whether group controls are supported
+• whether active-preset state is displayed
+• whether presets rerender the interface correctly
+
+────────────────────────
+PRESET COUNT
+────────────────────────
+
+Do not automatically force 15 presets.
+
+Use this order:
+
+1. Preserve the approved preset count already present in the completed generator.
+2. If the user explicitly requests a new count, use that count.
+3. If the current preset count is clearly temporary or unfinished, ask the user how many final presets they want.
+4. If the user is unsure, recommend a practical number based on the generator’s size and complexity.
+
+Do not change the approved count without permission.
+
+────────────────────────
+PRESET DATA RULES
+────────────────────────
+
+Every preset must use only:
+
+• exact existing state keys
+• exact existing field IDs
+• exact approved repeated naming patterns
+• exact current option values
+• valid custom-text formats
+• values appropriate for the correct control type
+
+For every preset:
+
+• create a unique preset ID
+• create a unique preset name
+• define its purpose
+• define its output direction
+• assign exact values to applicable controls
+• use arrays only for multi-select controls
+• use strings only for single-select controls and text fields
+• use valid repeated-field prefixes
+• avoid duplicate combinations
+• avoid repetitive names
+• preserve required fields
+• leave fields unchanged only when intentional
+• preserve custom user-entered text when the current generator requires it
+• respect locked controls when the generator supports locks
+
+Do not use placeholders such as:
+
+• Add suitable values
+• Choose appropriate options
+• More settings here
+• Customize as desired
+• Other fields as needed
+
+────────────────────────
+REPEATED COMPONENTS
+────────────────────────
+
+When repeated controls exist, inspect and follow the exact current pattern.
+
+Examples may include:
+
+• char_1_hairstyle
+• char_2_hairstyle
+• product_1_name
+• scene_2_location
+• section_3_style
+
+Do not assume every generator uses characters.
+
+Only build repeated preset values for repeated structures that actually exist.
+
+────────────────────────
+PRESET VALIDATION
+────────────────────────
+
+Before presenting preset data, silently verify:
+
+• every preset ID is unique
+• every preset name is unique
+• every field key exists
+• every option value exists
+• every array belongs to a multi-select field
+• every string belongs to a single-value or text field
+• every repeated field follows the current naming pattern
+• no preset references removed options
+• no preset requires missing HTML
+• preset buttons identify the correct preset
+• applying a preset updates the correct state
+• applying a preset rerenders the correct controls
+• locks are respected when approved
+• custom text is preserved when approved
+• presets do not break Randomize
+• presets do not break Clear All
+• presets do not create console errors
+
+────────────────────────
+OUTPUT MODE
+────────────────────────
+
+Choose the correct mode after reviewing the files.
+
+MODE A — REVIEW ONLY
+
+Use this when the preset system is already final and valid.
+
+Provide:
+
+• preset count
+• valid presets
+• duplicate presets
+• invalid values
+• missing values
+• disconnected buttons
+• active-preset problems
+• exact issues found
+
+Do not rewrite working code unnecessarily.
+
+MODE B — REPAIR EXISTING PRESETS
+
+Use this when the preset system exists but contains errors.
+
+Provide:
+
+• concise diagnosis
+• full corrected preset data structure
+• any required corrected preset functions
+• exact replacement boundaries
+• confirmation that every value matches the current generator
+
+MODE C — REBUILD FINAL PRESET SYSTEM
+
+Use this when the current presets are temporary, weak, incomplete, or based on old option data.
+
+Provide:
+
+• complete final preset set
+• full JavaScript-ready preset data structure
+• corrected preset helper functions when required
+• corrected apply-preset logic when required
+• corrected active-preset behavior when required
+• corrected rerender behavior when required
+• exact replacement boundaries
+
+MODE D — FULL SCRIPT REPLACEMENT
+
+Use this only when preset behavior is deeply connected to the entire script.js and a patch would be unsafe.
+
+Provide one complete corrected script.js file.
+
+Preserve all unrelated working functionality.
+
+────────────────────────
+BEGINNER INSTRUCTIONS
+────────────────────────
+
+When changes are required:
+
+• tell the user the exact file to open
+• identify the exact object, function, or section to locate
+• clearly state whether to replace a section or the full file
+• give one safe fix
+• do not provide competing methods
+• do not use vague directions
+• provide the full replacement section
+• use a full file when a patch would be risky
+
+────────────────────────
+FINAL CHECK
+────────────────────────
+
+Before finishing, confirm:
+
+• final preset count is correct
+• every preset uses final current values
+• preset buttons work
+• preset application works
+• repeated panels work when applicable
+• group and single modes work when applicable
+• locks are respected when applicable
+• custom text is preserved when required
+• active preset display works when approved
+• presets do not create console errors
+• the final preset system is ready for live workshop use
+
+Begin by asking:
+
+“Please upload your current complete index.html and script.js so I can inspect the temporary presets and rebuild the final preset system using your expanded option data.”`,
+
+    addHeaderImage: `You are an expert HTML and CSS developer helping a beginner customize an AI prompt generator.
+
+Help me add a professional header image directly beneath my generator title.
+
+Walk me through this step by step.
+
+First, tell me how to add my image file to my project folder.
+
+Then tell me exactly which file to open.
+
+Then tell me how to find my main generator title in index.html.
+
+Then tell me exactly where the header image code should go.
+
+Then generate the HTML needed for the header image.
+
+Then generate the CSS needed to style the image professionally.
+
+Do not redesign my generator.
+
+Do not remove or rename any existing code.
+
+Keep the existing structure exactly the same.
+
+Ask me to paste my current top section or header section before generating the final code.`,
+
+    addMarquee: `You are an expert HTML and CSS developer helping a beginner customize an AI prompt generator.
+
+Help me add a professional scrolling marquee to my generator.
+
+Walk me through this step by step.
+
+First, help me decide what text should appear in the marquee.
+
+Then tell me exactly which file to open.
+
+Next, tell me exactly how to find the correct location in my HTML where the marquee should be added.
+
+After I paste that section of my HTML, generate only the HTML needed for the marquee.
+
+Then generate the CSS needed to style it professionally.
+
+Finally, explain how to customize:
+
+• Text
+• Speed
+• Direction
+• Colors
+• Font
+• Height
+• Background
+
+Do not redesign my generator.
+
+Do not remove or rename any existing code.
+
+Keep the existing structure exactly the same.
+
+Wait for me to paste my current HTML before generating any code.`,
+
+    updateCopyright: `You are an expert HTML, CSS, and JavaScript developer helping a beginner customize an AI prompt generator.
+
+Help me update the copyright section of my generator.
+
+Walk me through this step by step.
+
+First, tell me which file to open.
+
+Then help me find my current footer.
+
+If my generator doesn't already have a footer, tell me where to add one.
+
+After I paste that section of my HTML, generate the updated footer code.
+
+Then generate any CSS needed to style it professionally.
+
+If needed, generate the JavaScript required to automatically display the current year.
+
+Do not redesign my generator.
+
+Do not remove any existing features.
+
+Keep the existing structure exactly the same.
+
+Wait for me to paste my current footer or the bottom section of my HTML before generating any code.`,
+
+    javascriptBuilder: `You are an expert JavaScript developer, accessibility specialist, and front-end application architect specializing in professional AI prompt generators.
+
+Your task is to generate the complete external script.js file for any approved AI prompt generator.
+
+The completed index.html is the final authority for DOM structure, IDs, classes, data attributes, controls, and relationships.
+
+The completed style.css is the final authority for visual state classes and presentation hooks.
+
+The Generator Foundation and Master Generator Planner remain authoritative for approved behavior, data, workflows, presets, output assembly, validation, and persistence.
+
+Do not generate HTML.
+
+Do not generate CSS.
+
+Do not redesign or remove approved functionality.
+
+You are allowed to create the internal JavaScript architecture required to implement approved behavior, including:
+
+• configuration objects
+• state objects
+• option data
+• preset data
+• utilities
+• render functions
+• validation functions
+• output assembly functions
+• event handlers
+• event delegation
+• accessibility helpers
+• initialization functions
+
+These internal implementation details do not require separate approval.
+
+Use only selectors that exist in completed index.html.
+
+Do not stop because internal function names, state-object names, or utility names were not manually preapproved.
+
+Generate one complete script.js file.
+
+Do not divide it unless truncation would otherwise occur; if division is necessary, use the fewest possible consecutive parts without repeating code.
+
+Implement every approved feature, including where applicable:
+
+• input handling
+• dropdowns
+• single-select chips
+• multi-select chips
+• repeated panels
+• accordions
+• locks
+• Randomize
+• presets
+• Generate
+• Clear All
+• Copy
+• Save
+• history
+• delete history
+• variations
+• character counter
+• quality checker
+• validation
+• toast
+• modal
+• empty states
+• loading
+• persistence only when approved
+• keyboard accessibility
+• final initialization
+
+Do not leave disconnected controls.
+
+Do not use placeholder option arrays or generic preset values.
+
+Do not silently omit complex features.
+
+Before output, silently verify:
+
+• every approved interactive element is connected
+• every selector exists
+• every preset uses approved values
+• every data attribute is handled
+• repeated patterns are handled
+• output assembly follows the planner
+• Randomize respects locks
+• Clear All restores approved defaults
+• Copy and Save work
+• history and variations work when approved
+• toast and modal work when approved
+• startup completes without console errors
+
+Output only the complete JavaScript code inside one fenced JavaScript code block.`,
+    testDebugCustomize: `You are an expert HTML, CSS, JavaScript, UI/UX, and debugging specialist helping a complete beginner test, debug, customize, and polish a professional AI prompt generator.
+
+The completed planning documents, index.html, style.css, and script.js are the single source of truth.
+
+Guide the user one small step at a time.
+
+Include:
+
+• Manual feature testing
+• Browser console debugging
+• Diagnosing and fixing HTML, CSS, and JavaScript issues
+• Visual customization
+• Mobile responsiveness testing
+• Final production quality review
+• Preparing the generator for publishing
+
+Do not overwhelm the user.
+
+Wait for "done" after each major section before continuing.
+
+End by confirming the generator is complete and ready to publish.`,
+
+    premiumOutputModules: `You are an expert HTML, CSS, JavaScript, UI/UX, and prompt engineering developer specializing in premium AI prompt generators.
+
+The main AI prompt generator has already been built.
+
+Your task is to add Premium Output Modules to the existing generator by updating the existing:
+
+• index.html
+• style.css
+• script.js
+
+Do not rebuild the generator from scratch.
+Do not remove, rename, or break existing features.
+Do not overwrite existing code unless it is necessary to connect the premium modules correctly.
+
+Add only the premium output modules selected for this generator:
+
+• Suno AI Music Prompt
+• Video Script Prompt
+• Marketing Prompt
+• Custom GPT Builder
+
+For the Custom GPT Builder, do not generate only a single prompt.
+
+Generate the complete Custom GPT configuration, including:
+
+• Complete Custom GPT Instructions
+• Suggested Knowledge files to upload
+• Conversation Starters
+• Suggested Welcome Message
+• Behavior and response guidelines
+• Tone and personality instructions
+• Goals and responsibilities
+• Rules and limitations
+• Best practices for using the GPT
+• Testing checklist
+
+Update the HTML to include:
+
+• A Premium Outputs section
+• Separate output areas or tabs for each selected module
+• A copy button for each premium output
+• Clear labels and beginner-friendly structure
+
+Update the CSS to include:
+
+• Styling for the Premium Outputs section
+• Styling for premium module tabs/cards
+• Styling for premium output boxes
+• Styling for copy buttons
+• Responsive mobile-friendly layout
+• Visual styling that matches the existing generator
+
+Update the JavaScript to include:
+
+• Functions that generate each selected premium output
+• Logic that pulls from the same existing user inputs
+• Logic that prevents empty or broken outputs
+• Copy button functionality for each premium output
+• Integration with the existing Generate Prompt button
+• Integration with existing prompt history if appropriate
+• Error handling and toast messages
+
+Each premium output must:
+
+• Match the generator topic.
+• Use the existing generator selections.
+• Expand on the main prompt instead of repeating it.
+• Produce complete, usable deliverables instead of outlines.
+• Include all supporting content required for that output type.
+• Be professionally formatted.
+• Be immediately copy-and-paste ready.
+
+Generate the updates in this order:
+
+1. HTML code to add
+2. CSS code to add
+3. JavaScript code to add
+4. Exact beginner-friendly instructions for where to paste each code block
+
+Do not skip steps.
+Do not generate placeholder features.
+Make the added modules fully functional.`,
+  };
+
+  return snippets[type] || "Create a useful AI module for this generator.";
+}
+
+/* ==========================
+   BASIC INIT
+   ========================== */
+
+function initializeCoreEngine() {
+  setupRouter();
+  setupMobileMenu();
+  setupCopyButtons();
+
+  const closePopupBtn = byId("closeCompletionPopup");
+
+  if (closePopupBtn) {
+    closePopupBtn.addEventListener("click", closeAchievementPopup);
+  }
+
+  const savedPage =
+    appData.lastPage === "settings"
+      ? "bonuses"
+      : appData.lastPage || APP_CONFIG.defaultPage;
+
+  openPage(savedPage);
+
+  updateAchievementCount();
+
+  console.log(`Prompt Generator Companion v${APP_CONFIG.version} core loaded.`);
+}
+
+/* ==========================
+   PROGRESS CALCULATION
+   ========================== */
+
+function getCompletedJourneySteps() {
+  const steps = appData.progress.journeySteps;
+
+  return Object.values(steps).filter(Boolean).length;
+}
+
+function getTotalJourneySteps() {
+  return Object.keys(appData.progress.journeySteps).length;
+}
+
+function getProgressPercent() {
+  const completed = getCompletedJourneySteps();
+  const total = getTotalJourneySteps();
+
+  if (!total) return 0;
+
+  return Math.round((completed / total) * 100);
+}
+
+function markJourneyStepComplete(stepName) {
+  if (!appData.progress.journeySteps[stepName]) {
+    appData.progress.journeySteps[stepName] = true;
+
+    addActivity(
+      "Journey step completed",
+      `${formatStepName(stepName)} was marked complete.`,
+    );
+
+    saveAppData();
+    renderDashboard();
+    updateProgressUI();
+    updateCompletionButtonStates();
+  }
+}
+
+function formatStepName(stepName) {
+  const labels = {
+    dayOne: "Day 1 Build",
+    modules: "AI Modules",
+    publish: "GitHub + Netlify",
+    sell: "Sell Your Generator",
+  };
+
+  return labels[stepName] || stepName;
+}
+
+/* ==========================
+   PROGRESS UI
+   ========================== */
+
+function updateProgressUI() {
+  const percent = getProgressPercent();
+  const completed = getCompletedJourneySteps();
+  const total = getTotalJourneySteps();
+
+  const sidebarPercent = byId("sidebarProgressPercent");
+  const dashboardPercent = byId("dashboardProgressPercent");
+  const dashboardStatsProgress = byId("dashboardStatsProgress");
+  const sidebarText = byId("sidebarProgressText");
+  const sidebarFill = byId("sidebarProgressFill");
+  const dashboardNextStep = byId("dashboardNextStep");
+
+  if (sidebarPercent) sidebarPercent.textContent = `${percent}%`;
+  if (dashboardPercent) dashboardPercent.textContent = `${percent}%`;
+  if (dashboardStatsProgress)
+    dashboardStatsProgress.textContent = `${percent}%`;
+
+  if (sidebarText) {
+    sidebarText.textContent = `${completed} of ${total} journey steps complete`;
+  }
+
+  if (sidebarFill) {
+    sidebarFill.style.width = `${percent}%`;
+  }
+
+  if (dashboardNextStep) {
+    dashboardNextStep.textContent = getNextStepMessage();
+  }
+
+  updateCertificateStatusLabel();
+}
+
+function getNextStepMessage() {
+  const steps = appData.progress.journeySteps;
+
+  if (!steps.dayOne) {
+    return "Continue Day 1 and build the working generator foundation.";
+  }
+
+  if (!steps.modules) {
+    return "Add premium AI modules so the generator feels valuable enough to sell.";
+  }
+
+  if (!steps.publish) {
+    return "Publish the generator with GitHub and Netlify.";
+  }
+
+  if (!steps.sell) {
+    return "Package the generator and prepare it for sale.";
+  }
+
+  return "Workshop complete. Your certificate is ready.";
+}
+
+function updateCertificateStatusLabel() {
+  const statCards = $$(".stat-card");
+
+  statCards.forEach((card) => {
+    const label = card.querySelector("span");
+    const value = card.querySelector("h2");
+
+    if (!label || !value) return;
+
+    if (label.textContent.trim().toLowerCase() === "certificate") {
+      value.textContent = isWorkshopComplete() ? "Unlocked" : "Locked";
+    }
+  });
+}
+
+function isWorkshopComplete() {
+  return getProgressPercent() === 100;
+}
+
+/* ==========================
+   DASHBOARD RENDERING
+   ========================== */
+
+function renderDashboard() {
+  renderActivityFeed();
+  updateProgressUI();
+  updateAchievementCount();
+}
+
+function renderActivityFeed() {
+  const feed = byId("activityFeed");
+
+  if (!feed) return;
+
+  if (!appData.activity.length) {
+    feed.innerHTML = `
+      <div class="activity-item">
+        <strong>Ready to begin</strong>
+        <p>Your workshop activity will appear here.</p>
+      </div>
+    `;
+    return;
+  }
+
+  feed.innerHTML = appData.activity
+    .slice(0, 6)
+    .map((item) => {
+      return `
+        <div class="activity-item">
+          <strong>${escapeHTML(item.title)}</strong>
+          <p>${escapeHTML(item.description || "Progress saved.")}</p>
+          <small>${formatDate(item.date)}</small>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+function formatDate(dateString) {
+  if (!dateString) return "";
+
+  const date = new Date(dateString);
+
+  if (Number.isNaN(date.getTime())) {
+    return "";
+  }
+
+  return date.toLocaleDateString(undefined, {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
+function escapeHTML(value) {
+  return String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+/* ==========================
+   CONTINUE BUTTONS
+   ========================== */
+
+function getNextPageId() {
+  const steps = appData.progress.journeySteps;
+
+  if (!steps.dayOne) return "day-one";
+  if (!steps.modules) return "modules";
+  if (!steps.publish) return "publish";
+  if (!steps.sell) return "sell";
+
+  return "day-two";
+}
+
+function setupContinueButtons() {
+  const continueButtons = [
+    byId("topbarContinueBtn"),
+    byId("dashboardContinueBtn"),
+    byId("continueBtn"),
+  ].filter(Boolean);
+
+  continueButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const nextPage = getNextPageId();
+
+      openPage(nextPage);
+
+      addActivity("Continued workshop", `Opened ${getPageTitle(nextPage)}.`);
+    });
+  });
+}
+
+function getPageTitle(pageId) {
+  const labels = {
+    dashboard: "Command Center",
+    journey: "Workshop Journey",
+    "day-one": "Day 1",
+    "day-two": "Day 2",
+    references: "Reference Image Library",
+
+    publish: "GitHub + Netlify",
+    sell: "Sell Your Generator",
+    downloads: "Downloads",
+    challenges: "Challenges",
+    prompts: "Prompts",
+    notebook: "Notebook",
+    replays: "Replay Library",
+    bonuses: "Bonus Resources",
+  };
+
+  return labels[pageId] || pageId;
+}
+
+/* ==========================
+   DAY COMPLETE BUTTONS
+   ========================== */
+
+function setupDayCompletionButtons() {
+  const dayOneBtn = byId("markDayOneCompleteBtn");
+  const dayTwoBtn = byId("markDayTwoCompleteBtn");
+
+  if (dayOneBtn) {
+    dayOneBtn.addEventListener("click", () => {
+      appData.progress.dayOneComplete = true;
+      markJourneyStepComplete("dayOne");
+
+      unlockAchievement(
+        "day-one-complete",
+        "Day 1 Complete",
+        "You built the generator foundation.",
+      );
+
+      saveAppData();
+      renderDashboard();
+      updateCompletionButtonStates();
+      showToast("Day 1 marked complete.");
+    });
+  }
+
+  if (dayTwoBtn) {
+    dayTwoBtn.addEventListener("click", () => {
+      appData.progress.dayTwoComplete = true;
+
+      markJourneyStepComplete("modules");
+
+      unlockAchievement(
+        "day-two-complete",
+        "Day 2 Complete",
+        "You customized, expanded, tested, and completed your generator.",
+      );
+
+      saveAppData();
+      renderDashboard();
+      updateCompletionButtonStates();
+
+      showToast("Opening Sell Your Generator...");
+
+      setTimeout(() => {
+        openPage("sell");
+      }, 800);
+    });
+  }
+}
+/* ==========================
+   PROGRESS BUTTON STATES
+   ========================== */
+
+function updateCompletionButtonStates() {
+  const dayOneBtn = byId("markDayOneCompleteBtn");
+  const dayTwoBtn = byId("markDayTwoCompleteBtn");
+
+  if (dayOneBtn && appData.progress.dayOneComplete) {
+    dayOneBtn.textContent = "Day 1 Complete";
+    dayOneBtn.disabled = false;
+    dayOneBtn.classList.add("is-complete");
+  }
+
+  if (dayTwoBtn && appData.progress.dayTwoComplete) {
+    dayTwoBtn.textContent = "Mark Day 2 Complete & Continue to Selling";
+    dayTwoBtn.disabled = false;
+    dayTwoBtn.classList.add("is-complete");
+  }
+}
+
+/* ==========================
+   SECTION 2 INIT
+   ========================== */
+
+function initializeDashboardEngine() {
+  setupContinueButtons();
+  setupDayCompletionButtons();
+  updateCompletionButtonStates();
+  renderDashboard();
+
+  console.log("Section 2 loaded: Dashboard + Progress Engine");
+}
+
+/* =========================================================
+   SECTION 3: NOTEBOOK + PROFILE + SETTINGS
+   Paste directly under Section 2
+   ========================================================= */
+
+/* ==========================
+   NOTEBOOK SYSTEM
+   ========================== */
+
+function setupNotebook() {
+  const mainNote = byId("mainNote");
+  const savedNotesList = byId("savedNotesList");
+  const newNoteBtn = byId("newNoteBtn");
+  const deleteNoteBtn = byId("deleteNoteBtn");
+  const currentNoteTitle = byId("currentNoteTitle");
+  const noteTimestamp = byId("noteTimestamp");
+  const noteSaveStatus = byId("noteSaveStatus");
+
+  if (
+    !mainNote ||
+    !savedNotesList ||
+    !newNoteBtn ||
+    !deleteNoteBtn ||
+    !currentNoteTitle ||
+    !noteTimestamp ||
+    !noteSaveStatus
+  ) {
+    return;
+  }
+
+  function formatNoteDate(dateString) {
+    const date = new Date(dateString);
+
+    return date.toLocaleString(undefined, {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+    });
+  }
+
+  function getNoteTitle(content) {
+    const firstLine = content.trim().split("\n")[0];
+
+    if (!firstLine) {
+      return "Untitled Note";
+    }
+
+    return firstLine.length > 35 ? `${firstLine.slice(0, 35)}...` : firstLine;
+  }
+
+  function getActiveNote() {
+    return appData.notebookNotes.find(
+      (note) => note.id === appData.activeNoteId,
+    );
+  }
+
+  function renderSavedNotes() {
+    savedNotesList.innerHTML = "";
+
+    if (!appData.notebookNotes.length) {
+      savedNotesList.innerHTML = `
+        <p class="empty-notes-message">No saved notes yet.</p>
+      `;
+      return;
+    }
+
+    const sortedNotes = [...appData.notebookNotes].sort(
+      (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt),
+    );
+
+    sortedNotes.forEach((note) => {
+      const button = document.createElement("button");
+
+      button.type = "button";
+      button.className = "saved-note-item";
+
+      if (note.id === appData.activeNoteId) {
+        button.classList.add("active");
+      }
+
+      button.innerHTML = `
+        <strong>${escapeHTML(getNoteTitle(note.content))}</strong>
+        <span>${escapeHTML(formatNoteDate(note.updatedAt))}</span>
+      `;
+
+      button.addEventListener("click", () => {
+        appData.activeNoteId = note.id;
+        saveAppData();
+        loadActiveNote();
+        renderSavedNotes();
+      });
+
+      savedNotesList.appendChild(button);
+    });
+  }
+
+  function loadActiveNote() {
+    const note = getActiveNote();
+
+    if (!note) {
+      mainNote.value = "";
+      currentNoteTitle.textContent = "New Note";
+      noteTimestamp.textContent = "Start typing to save this note.";
+      noteSaveStatus.textContent = "Your note will save automatically.";
+      deleteNoteBtn.disabled = true;
+      return;
+    }
+
+    mainNote.value = note.content;
+    currentNoteTitle.textContent = getNoteTitle(note.content);
+    noteTimestamp.textContent = `Last saved ${formatNoteDate(note.updatedAt)}`;
+    noteSaveStatus.textContent = "Saved automatically.";
+    deleteNoteBtn.disabled = false;
+  }
+
+  function createNewNote() {
+    appData.activeNoteId = null;
+    saveAppData();
+    loadActiveNote();
+    renderSavedNotes();
+    mainNote.focus();
+  }
+
+  mainNote.addEventListener("input", () => {
+    const content = mainNote.value;
+    let note = getActiveNote();
+
+    if (!note && content.trim()) {
+      note = {
+        id: `note-${Date.now()}`,
+        content: "",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+
+      appData.notebookNotes.unshift(note);
+      appData.activeNoteId = note.id;
+    }
+
+    if (!note) {
+      return;
+    }
+
+    note.content = content;
+    note.updatedAt = new Date().toISOString();
+
+    saveAppData();
+
+    currentNoteTitle.textContent = getNoteTitle(note.content);
+    noteTimestamp.textContent = `Last saved ${formatNoteDate(note.updatedAt)}`;
+    noteSaveStatus.textContent = "Saved automatically.";
+    deleteNoteBtn.disabled = false;
+
+    renderSavedNotes();
+  });
+
+  newNoteBtn.addEventListener("click", createNewNote);
+
+  deleteNoteBtn.addEventListener("click", () => {
+    const note = getActiveNote();
+
+    if (!note) {
+      return;
+    }
+
+    const confirmDelete = window.confirm(
+      "Delete this note? This cannot be undone.",
+    );
+
+    if (!confirmDelete) {
+      return;
+    }
+
+    appData.notebookNotes = appData.notebookNotes.filter(
+      (savedNote) => savedNote.id !== note.id,
+    );
+
+    appData.activeNoteId = null;
+    saveAppData();
+
+    loadActiveNote();
+    renderSavedNotes();
+    showToast("Note deleted.");
+  });
+
+  loadActiveNote();
+  renderSavedNotes();
+}
+
+/* ==========================
+   EXPORT / IMPORT DATA
+   ========================== */
+
+function setupDataTools() {
+  const resetDataBtn = byId("resetDataBtn");
+
+  if (resetDataBtn) {
+    resetDataBtn.addEventListener("click", handleResetData);
+  }
+}
+
+async function handleResetData() {
+  const confirmReset = window.confirm(
+    "This will erase your saved notes, progress, checklists, and achievements. Reset everything?",
+  );
+
+  if (!confirmReset) return;
+
+  resetAppData();
+
+  try {
+    await clearReferenceImageDatabase();
+  } catch (error) {
+    console.warn("Reference images could not be cleared during reset.", error);
+  }
+
+  showToast("Data reset.");
+
+  setTimeout(() => {
+    window.location.reload();
+  }, 600);
+}
+
+/* ==========================
+   FILE DOWNLOAD UTILITY
+   ========================== */
+
+function downloadTextFile(filename, content) {
+  const blob = new Blob([content], {
+    type: "text/html;charset=utf-8",
+  });
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = filename;
+
+  document.body.appendChild(link);
+  link.click();
+
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+/* ==========================
+   SECTION 3 INIT
+   ========================== */
+
+function initializeProfileNotebookSettings() {
+  setupNotebook();
+  setupDataTools();
+
+  console.log("Section 3 loaded: Notebook + Bonus Resources");
+}
+
+/* =========================================================
+   SECTION 4: DOWNLOADS + REPLAYS + SEARCH
+   Paste directly under Section 3
+   ========================================================= */
+
+/* ==========================
+   DOWNLOAD RESOURCE CONTENT
+   ========================== */
+
+const DOWNLOAD_RESOURCES = {
+  "html-starter": {
+    filename: "starter-code-pack.txt",
+    title: "Starter Code Pack",
+    content: `
+STARTER CODE PACK
+
+HTML STARTER
+------------------------------
+<main class="generator">
+  <h1>Prompt Generator Companion</h1>
+  <p>Build polished AI prompt generators with clean HTML, CSS, and JavaScript</p>
+
+  <label for="businessType">Business Type</label>
+  <select id="businessType">
+    <option>Image Prompt Generator</option>
+    <option>Coaching Business</option>
+    <option>Prompt Generator</option>
+  </select>
+
+  <label for="outputType">Output Type</label>
+  <select id="outputType">
+    <option>Image Prompt</option>
+    <option>Video Script</option>
+    <option>Suno Music Prompt</option>
+  </select>
+
+  <button id="generateBtn">Generate</button>
+  <button id="copyBtn">Copy</button>
+
+  <textarea id="output" readonly></textarea>
+</main>
+
+
+CSS STARTER
+------------------------------
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #05050a;
+  color: white;
+}
+
+.generator {
+  max-width: 760px;
+  margin: 60px auto;
+  padding: 32px;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+button {
+  padding: 14px 20px;
+  border: none;
+  border-radius: 999px;
+  background: #d4af37;
+  color: #05050a;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+textarea,
+select {
+  width: 100%;
+  margin: 10px 0 18px;
+  padding: 14px;
+  border-radius: 14px;
+}
+
+
+JAVASCRIPT STARTER
+------------------------------
+const generateBtn = document.getElementById("generateBtn");
+const copyBtn = document.getElementById("copyBtn");
+const businessType = document.getElementById("businessType");
+const outputType = document.getElementById("outputType");
+const output = document.getElementById("output");
+
+generateBtn.addEventListener("click", () => {
+  output.value = \`Create a \${outputType.value} for a \${businessType.value}. Make it polished, useful, and ready to use.\`;
+});
+
+copyBtn.addEventListener("click", async () => {
+  await navigator.clipboard.writeText(output.value);
+  copyBtn.textContent = "Copied!";
+  setTimeout(() => (copyBtn.textContent = "Copy"), 1500);
+});
+`.trim(),
+  },
+
+  publish: {
+    filename: "github-netlify-publish-checklist.txt",
+    title: "GitHub + Netlify Publish Checklist",
+    content: `
+GITHUB + NETLIFY PUBLISH CHECKLIST
+
+PART 1: BEFORE PUBLISHING
+- Make sure your homepage file is named index.html.
+- Make sure your CSS file path is correct.
+- Make sure your JavaScript file path is correct.
+- Save every file.
+- Test your buttons.
+- Test your generator output.
+- Test your copy button.
+
+PART 2: GITHUB
+- Open GitHub Desktop.
+- Add your project folder.
+- Create a repository.
+- Write a commit message.
+- Click Commit.
+- Click Push.
+
+PART 3: NETLIFY
+- Log into Netlify.
+- Choose Add New Site.
+- Choose Import from Git.
+- Connect GitHub.
+- Select your repository.
+- Deploy the site.
+
+PART 4: AFTER DEPLOYMENT
+- Open your live link.
+- Test every page.
+- Test every button.
+- Test mobile view.
+- Copy the final link.
+- Add the link to your product page.
+
+PART 5: UPDATES
+- Edit your files in VS Code.
+- Save changes.
+- Commit in GitHub Desktop.
+- Push to GitHub.
+- Netlify will update automatically.
+`.trim(),
+  },
+
+  selling: {
+    filename: "sell-your-generator-guide.txt",
+    title: "Sell Your Generator Guide",
+    content: `
+SELL YOUR GENERATOR GUIDE
+
+1. PRODUCT PACKAGE
+Your buyer should receive:
+- Live generator link
+- Instructions
+- Screenshots
+- Usage rights
+- Optional template files
+
+2. PRODUCT DESCRIPTION
+Include:
+- Who it is for
+- What it helps them create
+- Why it saves time
+- What they receive
+- How to use it
+
+3. SIMPLE PRICING IDEAS
+Starter version: $7-$17
+Polished version: $27-$47
+Bundle version: $67-$97+
+
+4. PROMO CONTENT IDEAS
+- Show the generator working.
+- Show before and after outputs.
+- Explain who it helps.
+- Tell people what they get.
+- Add a clear CTA.
+
+5. BUYER INSTRUCTIONS
+Tell buyers:
+- Open the live link.
+- Choose their options.
+- Click Generate.
+- Copy the result.
+- Paste it into ChatGPT, Canva, Krea, ImageFX, Suno, or their preferred tool.
+
+6. FINAL CHECK
+- Is the product easy to understand?
+- Is the link working?
+- Are the instructions clear?
+- Does the buyer know what to do after purchase?
+`.trim(),
+  },
+};
+
+/* ==========================
+   DOWNLOAD BUTTONS
+   ========================== */
+
+function setupDownloadButtons() {
+  $$(".download-btn").forEach((button) => {
+    button.addEventListener("click", () => {
+      const downloadKey = button.dataset.download;
+      const resource = DOWNLOAD_RESOURCES[downloadKey];
+
+      if (!resource) {
+        showToast("Download file not found.");
+        return;
+      }
+
+      downloadTextFile(resource.filename, resource.content);
+
+      addActivity("Downloaded resource", `${resource.title} was downloaded.`);
+
+      unlockAchievement(
+        `download-${downloadKey}`,
+        "Resource Downloaded",
+        `${resource.title} is ready to use.`,
+      );
+
+      showToast("Download started.");
+    });
+  });
+}
+
+/* ==========================
+   REPLAY LIBRARY
+   ========================== */
+
+const REPLAY_DATA = {
+  day1: {
+    title: "Day 1 Replay",
+    message:
+      "Day 1 replay is where students review project setup, HTML, CSS, JavaScript, generator buttons, and testing.",
+    url: "",
+  },
+
+  day2: {
+    title: "Day 2 Replay",
+    message:
+      "Day 2 replay is where students review premium modules, GitHub, Netlify, product packaging, and launch strategy.",
+    url: "",
+  },
+};
+
+function setupReplayButtons() {
+  $$(".replay-btn").forEach((button) => {
+    button.addEventListener("click", () => {
+      const replayKey = button.dataset.replay;
+      const replay = REPLAY_DATA[replayKey];
+
+      if (!replay) {
+        showToast("Replay not found.");
+        return;
+      }
+
+      addActivity(replay.title, replay.message);
+
+      showToast(`${replay.title} opened.`);
+
+      if (!replay.url) {
+        showToast("Replay video coming soon.");
+        return;
+      }
+
+      window.open(replay.url, "_blank", "noopener,noreferrer");
+    });
+  });
+}
+
+/* ==========================
+   SEARCH INDEX
+   ========================== */
+
+function buildSearchIndex() {
+  return $$(".page").map((page) => {
+    const title =
+      page.querySelector("h1")?.textContent ||
+      page.querySelector("h2")?.textContent ||
+      page.id;
+
+    const text = page.textContent.replace(/\s+/g, " ").trim();
+
+    return {
+      id: page.id,
+      title,
+      text: text.toLowerCase(),
+    };
+  });
+}
+
+let searchIndex = [];
+
+function findSearchMatch(query) {
+  return searchIndex.find((item) => {
+    return (
+      item.text.includes(query) || item.title.toLowerCase().includes(query)
+    );
+  });
+}
+
+function setupGlobalSearch() {
+  const searchInput = byId("globalSearch");
+
+  if (!searchInput) return;
+
+  searchIndex = buildSearchIndex();
+
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.trim().toLowerCase();
+
+    if (!query) {
+      clearSearchHighlight();
+      return;
+    }
+
+    const match = findSearchMatch(query);
+
+    if (!match) {
+      showToast("No matching section found.");
+      return;
+    }
+
+    openPage(match.id);
+    highlightSearchTerm(query);
+  });
+
+  searchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      const query = searchInput.value.trim().toLowerCase();
+
+      if (!query) return;
+
+      const match = findSearchMatch(query);
+
+      if (match) {
+        openPage(match.id);
+        addActivity("Search used", `Searched for "${query}".`);
+      }
+    }
+  });
+}
+
+function highlightSearchTerm(query) {
+  clearSearchHighlight();
+
+  const activePage = $(".page.active-page");
+
+  if (!activePage || !query) return;
+
+  activePage.classList.add("search-match-page");
+}
+
+function clearSearchHighlight() {
+  $$(".page").forEach((page) => {
+    page.classList.remove("search-match-page");
+  });
+}
+
+/* ==========================
+   HELP CENTER QUICK TRACKING
+   ========================== */
+
+function setupHelpTracking() {
+  const helpCards = $$(".help-card");
+
+  helpCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const title = card.querySelector("h2")?.textContent || "Help topic";
+
+      addActivity("Help topic viewed", title);
+      showToast("Help topic opened.");
+    });
+  });
+}
+
+/* ==========================
+   MODULE TRACKING
+   ========================== */
+
+function setupModuleTracking() {
+  $$(".copy-snippet-btn").forEach((button) => {
+    button.addEventListener("click", () => {
+      markJourneyStepComplete("modules");
+
+      unlockAchievement(
+        "module-prompt-copied",
+        "Module Prompt Copied",
+        "You copied a premium AI module prompt.",
+      );
+    });
+  });
+}
+
+/* ==========================
+   SEARCH STYLE HELPER
+   ========================== */
+
+function injectSearchStyles() {
+  if (byId("searchStyleHelper")) return;
+
+  const style = document.createElement("style");
+  style.id = "searchStyleHelper";
+
+  style.textContent = `
+    .search-match-page {
+      outline: 2px solid rgba(212, 175, 55, 0.45);
+      outline-offset: 8px;
+      border-radius: 24px;
+    }
+  `;
+
+  document.head.appendChild(style);
+}
+
+/* ==========================
+   REFERENCE IMAGE LIBRARY
+   ========================== */
+
+const REFERENCE_LIBRARY_DB = {
+  name: "promptGeneratorReferenceLibrary",
+  version: 1,
+  storeName: "images",
+  maxFileSize: 10 * 1024 * 1024,
+  allowedTypes: ["image/png", "image/jpeg", "image/webp", "image/gif"],
+};
+
+let referenceLibraryDb = null;
+let referenceObjectUrls = [];
+
+function openReferenceLibraryDatabase() {
+  return new Promise((resolve, reject) => {
+    if (!("indexedDB" in window)) {
+      reject(new Error("IndexedDB is not supported in this browser."));
+      return;
+    }
+
+    const request = indexedDB.open(
+      REFERENCE_LIBRARY_DB.name,
+      REFERENCE_LIBRARY_DB.version,
+    );
+
+    request.onupgradeneeded = () => {
+      const database = request.result;
+
+      if (!database.objectStoreNames.contains(REFERENCE_LIBRARY_DB.storeName)) {
+        database.createObjectStore(REFERENCE_LIBRARY_DB.storeName, {
+          keyPath: "id",
+        });
+      }
+    };
+
+    request.onsuccess = () => {
+      referenceLibraryDb = request.result;
+      resolve(referenceLibraryDb);
+    };
+
+    request.onerror = () => {
+      reject(request.error || new Error("The image library could not open."));
+    };
+  });
+}
+
+function getReferenceImageStore(mode = "readonly") {
+  if (!referenceLibraryDb) {
+    throw new Error("The reference image database is not ready.");
+  }
+
+  return referenceLibraryDb
+    .transaction(REFERENCE_LIBRARY_DB.storeName, mode)
+    .objectStore(REFERENCE_LIBRARY_DB.storeName);
+}
+
+function getAllReferenceImages() {
+  return new Promise((resolve, reject) => {
+    try {
+      const request = getReferenceImageStore().getAll();
+
+      request.onsuccess = () => {
+        const images = Array.isArray(request.result) ? request.result : [];
+        images.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        resolve(images);
+      };
+
+      request.onerror = () => {
+        reject(request.error || new Error("Images could not be loaded."));
+      };
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
+function saveReferenceImage(record) {
+  return new Promise((resolve, reject) => {
+    try {
+      const request = getReferenceImageStore("readwrite").put(record);
+
+      request.onsuccess = () => resolve(record);
+      request.onerror = () =>
+        reject(request.error || new Error("The image could not be saved."));
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
+function deleteReferenceImageRecord(imageId) {
+  return new Promise((resolve, reject) => {
+    try {
+      const request = getReferenceImageStore("readwrite").delete(imageId);
+
+      request.onsuccess = () => resolve();
+      request.onerror = () =>
+        reject(request.error || new Error("The image could not be removed."));
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
+function clearReferenceImageDatabase() {
+  return new Promise((resolve, reject) => {
+    if (!referenceLibraryDb) {
+      resolve();
+      return;
+    }
+
+    try {
+      const request = getReferenceImageStore("readwrite").clear();
+
+      request.onsuccess = () => resolve();
+      request.onerror = () =>
+        reject(
+          request.error || new Error("The image library could not clear."),
+        );
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
+function validateReferenceImageFile(file) {
+  if (!REFERENCE_LIBRARY_DB.allowedTypes.includes(file.type)) {
+    return `${file.name} is not a supported image type.`;
+  }
+
+  if (file.size > REFERENCE_LIBRARY_DB.maxFileSize) {
+    return `${file.name} is larger than 10 MB.`;
+  }
+
+  return "";
+}
+
+function createReferenceImageRecord(file) {
+  const fallbackId = `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+  const uniqueId =
+    window.crypto && typeof window.crypto.randomUUID === "function"
+      ? window.crypto.randomUUID()
+      : fallbackId;
+
+  return {
+    id: `reference-${uniqueId}`,
+    name: file.name,
+    type: file.type,
+    size: file.size,
+    createdAt: new Date().toISOString(),
+    blob: file,
+  };
+}
+
+function revokeReferenceObjectUrls() {
+  referenceObjectUrls.forEach((url) => URL.revokeObjectURL(url));
+  referenceObjectUrls = [];
+}
+
+function formatReferenceFileSize(bytes) {
+  if (!Number.isFinite(bytes) || bytes <= 0) return "Unknown size";
+
+  const units = ["B", "KB", "MB"];
+  let value = bytes;
+  let unitIndex = 0;
+
+  while (value >= 1024 && unitIndex < units.length - 1) {
+    value /= 1024;
+    unitIndex += 1;
+  }
+
+  const decimals = unitIndex === 0 ? 0 : 1;
+  return `${value.toFixed(decimals)} ${units[unitIndex]}`;
+}
+
+function downloadReferenceImage(image) {
+  const url = URL.createObjectURL(image.blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = image.name || "reference-image";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  setTimeout(() => URL.revokeObjectURL(url), 500);
+}
+
+function createUploadedReferenceCard(image) {
+  const card = document.createElement("article");
+  const imageUrl = URL.createObjectURL(image.blob);
+
+  referenceObjectUrls.push(imageUrl);
+
+  card.className = "reference-image-card";
+  card.dataset.referenceImageId = image.id;
+
+  card.innerHTML = `
+    <div class="reference-image-frame">
+      <img src="${imageUrl}" alt="${escapeHTML(image.name)}" />
+    </div>
+
+    <div class="reference-image-card-body">
+      <div>
+        <h3>${escapeHTML(image.name)}</h3>
+        <p>${escapeHTML(formatReferenceFileSize(image.size))}</p>
+      </div>
+
+      <div class="reference-card-actions">
+        <button
+          class="secondary-btn reference-card-download"
+          type="button"
+        >
+          Download
+        </button>
+
+        <button
+          class="danger-btn reference-card-delete"
+          type="button"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+  `;
+
+  card
+    .querySelector(".reference-card-download")
+    ?.addEventListener("click", () => {
+      downloadReferenceImage(image);
+      showToast("Image download started.");
+    });
+
+  card
+    .querySelector(".reference-card-delete")
+    ?.addEventListener("click", async () => {
+      const confirmed = window.confirm(
+        `Remove "${image.name}" from your Reference Image Library?`,
+      );
+
+      if (!confirmed) return;
+
+      try {
+        await deleteReferenceImageRecord(image.id);
+        await renderUploadedReferenceImages();
+        showToast("Reference image removed.");
+      } catch (error) {
+        console.error(error);
+        showToast("The image could not be removed.");
+      }
+    });
+
+  return card;
+}
+
+async function renderUploadedReferenceImages() {
+  const grid = byId("uploadedReferenceGrid");
+  const countLabel = byId("referenceImageCount");
+  const clearButton = byId("clearReferenceImagesBtn");
+
+  if (!grid) return;
+
+  try {
+    const images = await getAllReferenceImages();
+
+    revokeReferenceObjectUrls();
+    grid.innerHTML = "";
+
+    if (!images.length) {
+      const empty = document.createElement("div");
+
+      empty.id = "referenceEmptyState";
+      empty.className = "reference-empty-state";
+      empty.innerHTML = `
+        <i data-lucide="images"></i>
+        <h3>No uploaded images yet</h3>
+        <p>
+          Click <strong>Choose Images</strong> to add your first
+          reference image.
+        </p>
+      `;
+
+      grid.appendChild(empty);
+    } else {
+      images.forEach((image) => {
+        grid.appendChild(createUploadedReferenceCard(image));
+      });
+    }
+
+    if (countLabel) {
+      countLabel.textContent = `${images.length} ${
+        images.length === 1 ? "image" : "images"
+      }`;
+    }
+
+    if (clearButton) {
+      clearButton.disabled = images.length === 0;
+    }
+
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+  } catch (error) {
+    console.error("Reference images could not be rendered.", error);
+    showToast("Reference images could not be loaded.");
+  }
+}
+
+async function handleReferenceImageUpload(event) {
+  const input = event.currentTarget;
+  const files = Array.from(input.files || []);
+
+  if (!files.length) return;
+
+  let savedCount = 0;
+
+  for (const file of files) {
+    const validationMessage = validateReferenceImageFile(file);
+
+    if (validationMessage) {
+      showToast(validationMessage);
+      continue;
+    }
+
+    try {
+      await saveReferenceImage(createReferenceImageRecord(file));
+      savedCount += 1;
+    } catch (error) {
+      console.error(`Could not save ${file.name}.`, error);
+      showToast(`${file.name} could not be saved.`);
+    }
+  }
+
+  input.value = "";
+  await renderUploadedReferenceImages();
+
+  if (savedCount) {
+    showToast(
+      `${savedCount} reference ${savedCount === 1 ? "image" : "images"} saved.`,
+    );
+  }
+}
+
+async function setupReferenceImageLibrary() {
+  const uploadInput = byId("referenceImageUpload");
+  const clearButton = byId("clearReferenceImagesBtn");
+
+  if (!uploadInput || !clearButton) return;
+
+  try {
+    await openReferenceLibraryDatabase();
+    await renderUploadedReferenceImages();
+  } catch (error) {
+    console.error("Reference Image Library could not start.", error);
+    uploadInput.disabled = true;
+    clearButton.disabled = true;
+    showToast("This browser could not open the image library.");
+    return;
+  }
+
+  uploadInput.addEventListener("change", handleReferenceImageUpload);
+
+  clearButton.addEventListener("click", async () => {
+    const confirmed = window.confirm(
+      "Remove every uploaded reference image from this browser?",
+    );
+
+    if (!confirmed) return;
+
+    try {
+      await clearReferenceImageDatabase();
+      await renderUploadedReferenceImages();
+      showToast("All uploaded reference images were removed.");
+    } catch (error) {
+      console.error(error);
+      showToast("The images could not be removed.");
+    }
+  });
+}
+
+/* ==========================
+   SECTION 4 INIT
+   ========================== */
+
+function initializeDownloadsReplaysSearch() {
+  setupDownloadButtons();
+  setupReplayButtons();
+  setupGlobalSearch();
+  setupHelpTracking();
+
+  setupModuleTracking();
+  injectSearchStyles();
+
+  console.log("Section 4 loaded: Downloads + Replays + Search");
+}
+
+/* =========================================================
+   SECTION 5: CERTIFICATE SYSTEM + FINAL APP POLISH
+   Paste directly under Section 4
+   ========================================================= */
+
+/* ==========================
+   CERTIFICATE SYSTEM
+   ========================== */
+
+/* ==========================
+   CHECKLIST AUTOSAVE SYSTEM
+   ========================== */
+
+function setupChecklistAutosave() {
+  const checkboxes = $$('input[type="checkbox"]');
+
+  if (!appData.checklists) {
+    appData.checklists = {};
+  }
+
+  checkboxes.forEach((checkbox, index) => {
+    const key = getCheckboxKey(checkbox, index);
+
+    checkbox.checked = Boolean(appData.checklists[key]);
+
+    checkbox.addEventListener("change", () => {
+      appData.checklists[key] = checkbox.checked;
+
+      saveAppData();
+
+      if (checkbox.checked) {
+        addActivity(
+          "Checklist updated",
+          "A workshop checkpoint was completed.",
+        );
+      }
+
+      updateChecklistAchievements();
+    });
+  });
+}
+
+function getCheckboxKey(checkbox, index) {
+  const page = checkbox.closest(".page");
+  const section = checkbox.closest(".lesson-block, .card, article");
+  const label =
+    checkbox.parentElement?.textContent?.trim() || `checkbox-${index}`;
+
+  const pageId = page?.id || "global";
+  const sectionTitle =
+    section?.querySelector("h2")?.textContent?.trim() || "section";
+
+  return `${pageId}:${sectionTitle}:${label}`;
+}
+
+function updateChecklistAchievements() {
+  const checkedCount = Object.values(appData.checklists || {}).filter(
+    Boolean,
+  ).length;
+
+  if (checkedCount >= 3) {
+    unlockAchievement(
+      "three-checkpoints",
+      "Momentum Started",
+      "You completed your first 3 workshop checkpoints.",
+    );
+  }
+
+  if (checkedCount >= 8) {
+    unlockAchievement(
+      "eight-checkpoints",
+      "Builder Mode",
+      "You completed 8 workshop checkpoints.",
+    );
+  }
+
+  if (checkedCount >= 15) {
+    unlockAchievement(
+      "fifteen-checkpoints",
+      "Serious Progress",
+      "You completed 15 workshop checkpoints.",
+    );
+  }
+}
+
+/* ==========================
+   KEYBOARD SHORTCUTS
+   ========================== */
+
+function setupKeyboardShortcuts() {
+  document.addEventListener("keydown", (event) => {
+    const isTyping =
+      event.target.matches("input") ||
+      event.target.matches("textarea") ||
+      event.target.matches("select");
+
+    if (isTyping) return;
+
+    if (event.key === "1") {
+      openPage("dashboard");
+    }
+
+    if (event.key === "2") {
+      openPage("journey");
+    }
+
+    if (event.key === "3") {
+      openPage("day-one");
+    }
+
+    if (event.key === "4") {
+      openPage("day-two");
+    }
+
+    if (event.key === "n" || event.key === "N") {
+      openPage("notebook");
+    }
+
+    if (event.key === "/" && byId("globalSearch")) {
+      event.preventDefault();
+      byId("globalSearch").focus();
+    }
+  });
+}
+
+/* ==========================
+   BUTTON SAFETY STATES
+   ========================== */
+
+function setupButtonSafety() {
+  $$("button").forEach((button) => {
+    button.addEventListener("click", () => {
+      button.classList.add("button-clicked");
+
+      setTimeout(() => {
+        button.classList.remove("button-clicked");
+      }, 180);
+    });
+  });
+}
+
+/* ==========================
+   EMPTY LINK PROTECTION
+   ========================== */
+
+function setupEmptyLinkProtection() {
+  $$('a[href="#"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+    });
+  });
+}
+
+/* ==========================
+   PAGE VISIT TRACKING
+   ========================== */
+
+function setupPageVisitTracking() {
+  $$(".nav-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      const pageId = link.dataset.page;
+
+      if (!pageId) return;
+
+      addActivity("Page opened", getPageTitle(pageId));
+    });
+  });
+}
+
+/* ==========================
+   FIRST VISIT STARTUP
+   ========================== */
+
+function setupFirstVisit() {
+  if (appData.hasVisited) return;
+
+  appData.hasVisited = true;
+
+  addActivity("Workshop started", "Glamshop Workshop Companion v7.0 is ready.");
+
+  showAchievementPopup(
+    "💙 Welcome to the Workshop!",
+    `First things first... relax. You don't have to figure everything out today. I'll guide you every step of the way, and before you know it, you'll be saying, "I really built this!"`,
+  );
+
+  saveAppData();
+}
+
+/* ==========================
+   APP HEALTH CHECK
+   ========================== */
+
+function runAppHealthCheck() {
+  const requiredIds = [
+    "dashboard",
+    "journey",
+    "day-one",
+    "day-two",
+    "references",
+
+    "publish",
+    "sell",
+
+    "challenges",
+    "prompts",
+    "notebook",
+    "replays",
+
+    "bonuses",
+    "toast",
+  ];
+
+  const missing = requiredIds.filter((id) => !byId(id));
+
+  if (missing.length) {
+    console.warn("Missing required app IDs:", missing);
+  } else {
+    console.log("App health check passed.");
+  }
+}
+
+/* ==========================
+   FINAL UI REFRESH
+   ========================== */
+
+function refreshFullUI() {
+  renderDashboard();
+  updateCompletionButtonStates();
+}
+
+/* ==========================
+   FINAL INIT
+   ========================== */
+
+function initializeFinalPolish() {
+  runAppHealthCheck();
+
+  setupChecklistAutosave();
+  setupKeyboardShortcuts();
+  setupButtonSafety();
+  setupEmptyLinkProtection();
+  setupPageVisitTracking();
+  setupFirstVisit();
+  refreshFullUI();
+
+  console.log("Section 5 loaded: Certificate System + Final Polish");
+}
+
+/* ============================= */
+/* FLIP CARD FUNCTIONALITY */
+/* ============================= */
+
+function initializeFlipCards() {
+  document.addEventListener("click", function (event) {
+    const card = event.target.closest(".flip-card");
+
+    if (!card) return;
+
+    if (
+      event.target.closest(".copy-snippet-btn") ||
+      event.target.closest(".copy-btn") ||
+      event.target.closest("button") ||
+      event.target.closest("a") ||
+      event.target.closest("input") ||
+      event.target.closest("textarea")
+    ) {
+      return;
+    }
+
+    card.classList.toggle("is-flipped");
+  });
+}
+function setupLaunchChecklistCard() {
+  const card = document.querySelector(".launch-checklist-card");
+
+  if (!card) return;
+
+  const viewButton = card.querySelector(".launch-checklist-front .primary-btn");
+
+  const backButton = card.querySelector(
+    ".launch-checklist-back .secondary-btn",
+  );
+
+  viewButton?.addEventListener("click", () => {
+    card.classList.add("is-flipped");
+  });
+
+  backButton?.addEventListener("click", () => {
+    card.classList.remove("is-flipped");
+  });
+}
+
+
+/* =========================================================
+   DAY 2 — REUSABLE APP WELCOME PAGE MASTER PROMPT
+   ========================================================= */
+
+function setupReusableWelcomeMasterPrompt() {
+  const promptBox = byId("reusableWelcomeMasterPrompt");
+  const copyButton = byId("copyReusableWelcomePromptBtn");
+  const downloadButton = byId("downloadReusableWelcomePromptBtn");
+
+  if (!promptBox || !copyButton || !downloadButton) return;
+
+  const defaultCopyText = "COPY HTML TEMPLATE";
+  let copyResetTimer;
+
+  copyButton.addEventListener("click", async () => {
+    const copied = await copyText(
+      promptBox.value,
+      "HTML template copied!",
+    );
+
+    if (!copied) return;
+
+    window.clearTimeout(copyResetTimer);
+    copyButton.textContent = "HTML COPIED";
+    copyButton.classList.add("is-success");
+
+    copyResetTimer = window.setTimeout(() => {
+      copyButton.textContent = defaultCopyText;
+      copyButton.classList.remove("is-success");
+    }, 2000);
+  });
+
+  downloadButton.addEventListener("click", () => {
+    const promptFile = new Blob([promptBox.value], {
+      type: "text/html;charset=utf-8",
+    });
+
+    const downloadUrl = URL.createObjectURL(promptFile);
+    const temporaryLink = document.createElement("a");
+
+    temporaryLink.href = downloadUrl;
+    temporaryLink.download =
+      "reusable-app-welcome-page-template.html";
+
+    document.body.appendChild(temporaryLink);
+    temporaryLink.click();
+    temporaryLink.remove();
+
+    window.setTimeout(() => {
+      URL.revokeObjectURL(downloadUrl);
+    }, 1000);
+
+    showToast("HTML template downloaded!");
+  });
+}
+
+
+/* =========================================================
+   GLAMSHOP SAVED PROMPTS
+   ========================================================= */
+
+function createSavedPromptId() {
+  if (window.crypto && typeof window.crypto.randomUUID === "function") {
+    return window.crypto.randomUUID();
+  }
+
+  return `prompt-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+}
+
+function getSavedPromptElements() {
+  return {
+    titleInput: byId("savedPromptTitle"),
+    categoryInput: byId("savedPromptCategory"),
+    promptInput: byId("savedPromptText"),
+    saveButton: byId("savePromptBtn"),
+    status: byId("promptSaveStatus"),
+    searchInput: byId("promptSearchInput"),
+    count: byId("savedPromptsCount"),
+    list: byId("savedPromptsList"),
+  };
+}
+
+function setPromptSaveStatus(message = "", isError = false) {
+  const status = byId("promptSaveStatus");
+
+  if (!status) return;
+
+  status.textContent = message;
+  status.style.color = isError ? "var(--danger)" : "var(--success)";
+}
+
+function clearSavedPromptForm() {
+  const { titleInput, categoryInput, promptInput } = getSavedPromptElements();
+
+  if (titleInput) titleInput.value = "";
+  if (categoryInput) categoryInput.value = "";
+  if (promptInput) promptInput.value = "";
+
+  titleInput?.focus();
+}
+
+function savePromptFromForm() {
+  const { titleInput, categoryInput, promptInput } = getSavedPromptElements();
+
+  const title = titleInput?.value.trim() || "";
+  const category = categoryInput?.value.trim() || "Uncategorized";
+  const promptText = promptInput?.value.trim() || "";
+
+  if (!title) {
+    setPromptSaveStatus("Add a title before saving.", true);
+    titleInput?.focus();
+    return;
+  }
+
+  if (!promptText) {
+    setPromptSaveStatus("Add prompt text before saving.", true);
+    promptInput?.focus();
+    return;
+  }
+
+  const newPrompt = {
+    id: createSavedPromptId(),
+    title,
+    category,
+    promptText,
+    createdAt: new Date().toISOString(),
+  };
+
+  appData.savedPrompts.unshift(newPrompt);
+
+  if (!saveAppData()) {
+    setPromptSaveStatus("The prompt could not be saved.", true);
+    return;
+  }
+
+  clearSavedPromptForm();
+  setPromptSaveStatus("Prompt saved.");
+  renderSavedPrompts();
+  showToast("Prompt saved!");
+}
+
+function getFilteredSavedPrompts() {
+  const searchValue = byId("promptSearchInput")?.value.trim().toLowerCase() || "";
+
+  if (!searchValue) {
+    return appData.savedPrompts;
+  }
+
+  return appData.savedPrompts.filter((prompt) => {
+    const searchableText = [
+      prompt.title,
+      prompt.category,
+      prompt.promptText,
+    ]
+      .join(" ")
+      .toLowerCase();
+
+    return searchableText.includes(searchValue);
+  });
+}
+
+function renderSavedPrompts() {
+  const { list, count } = getSavedPromptElements();
+
+  if (!list || !count) return;
+
+  const prompts = getFilteredSavedPrompts();
+  const total = appData.savedPrompts.length;
+
+  count.textContent =
+    prompts.length === total
+      ? `${total} ${total === 1 ? "prompt" : "prompts"}`
+      : `${prompts.length} of ${total} prompts`;
+
+  if (!prompts.length) {
+    const hasSearch = Boolean(byId("promptSearchInput")?.value.trim());
+
+    list.innerHTML = `
+      <div class="prompts-empty-state">
+        <i data-lucide="${hasSearch ? "search-x" : "library"}"></i>
+        <h3>${hasSearch ? "No matching prompts" : "No saved prompts yet"}</h3>
+        <p>${
+          hasSearch
+            ? "Try another search word."
+            : "Use the form to save your first prompt."
+        }</p>
+      </div>
+    `;
+
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+
+    return;
+  }
+
+  list.innerHTML = prompts
+    .map((prompt) => {
+      return `
+        <article class="saved-prompt-item" data-prompt-id="${escapeHTML(prompt.id)}">
+          <h3>${escapeHTML(prompt.title)}</h3>
+          <span class="saved-prompt-category">${escapeHTML(
+            prompt.category || "Uncategorized",
+          )}</span>
+          <p class="saved-prompt-text">${escapeHTML(prompt.promptText)}</p>
+          <div class="saved-prompt-actions">
+            <button class="secondary-btn copy-saved-prompt-btn" type="button">
+              Copy Prompt
+            </button>
+            <button class="danger-btn remove-saved-prompt-btn" type="button">
+              Remove
+            </button>
+          </div>
+        </article>
+      `;
+    })
+    .join("");
+}
+
+function findSavedPrompt(promptId) {
+  return appData.savedPrompts.find((prompt) => prompt.id === promptId);
+}
+
+async function copySavedPrompt(promptId) {
+  const prompt = findSavedPrompt(promptId);
+
+  if (!prompt) {
+    showToast("Prompt not found.");
+    return;
+  }
+
+  await copyText(prompt.promptText, "Prompt copied!");
+}
+
+function removeSavedPrompt(promptId) {
+  const prompt = findSavedPrompt(promptId);
+
+  if (!prompt) return;
+
+  const shouldRemove = window.confirm(
+    `Remove "${prompt.title}" from your saved prompts?`,
+  );
+
+  if (!shouldRemove) return;
+
+  appData.savedPrompts = appData.savedPrompts.filter(
+    (item) => item.id !== promptId,
+  );
+
+  saveAppData();
+  renderSavedPrompts();
+  showToast("Prompt removed.");
+}
+
+function setupSavedPrompts() {
+  const { saveButton, searchInput, list, promptInput } =
+    getSavedPromptElements();
+
+  if (!saveButton || !searchInput || !list || !promptInput) return;
+
+  saveButton.addEventListener("click", savePromptFromForm);
+  searchInput.addEventListener("input", renderSavedPrompts);
+
+  promptInput.addEventListener("keydown", (event) => {
+    if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+      event.preventDefault();
+      savePromptFromForm();
+    }
+  });
+
+  list.addEventListener("click", (event) => {
+    const promptCard = event.target.closest("[data-prompt-id]");
+
+    if (!promptCard) return;
+
+    const promptId = promptCard.dataset.promptId;
+
+    if (event.target.closest(".copy-saved-prompt-btn")) {
+      copySavedPrompt(promptId);
+      return;
+    }
+
+    if (event.target.closest(".remove-saved-prompt-btn")) {
+      removeSavedPrompt(promptId);
+    }
+  });
+
+  renderSavedPrompts();
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  initializeCoreEngine();
+  setupWorkshopLockPopup();
+  initializeDashboardEngine();
+  initializeProfileNotebookSettings();
+  initializeDownloadsReplaysSearch();
+  setupReferenceImageLibrary();
+  setupSavedPrompts();
+  initializeFlipCards();
+  setupLaunchChecklistCard();
+  setupReusableWelcomeMasterPrompt();
+  initializeFinalPolish();
+
+  console.log("Glamshop Workshop Companion fully initialized.");
+});
+
+</script>
 </body>
 </html>

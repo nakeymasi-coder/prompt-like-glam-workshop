@@ -2648,8 +2648,11 @@ body.light-theme .help-card p {
   position: relative;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  background:
-    linear-gradient(135deg, rgba(6, 26, 77, 0.9), rgba(5, 5, 10, 0.95));
+  background: linear-gradient(
+    135deg,
+    rgba(6, 26, 77, 0.9),
+    rgba(5, 5, 10, 0.95)
+  );
 }
 
 .reference-image-frame img {
@@ -2927,8 +2930,7 @@ body.light-theme .help-card p {
   border: 1px solid rgba(212, 175, 55, 0.34);
   border-radius: var(--radius-md);
   color: #f8e7ac;
-  background:
-    linear-gradient(rgba(2, 8, 23, 0.92), rgba(4, 7, 18, 0.96));
+  background: linear-gradient(rgba(2, 8, 23, 0.92), rgba(4, 7, 18, 0.96));
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.04),
     inset 0 0 34px rgba(6, 26, 77, 0.22);
@@ -2963,11 +2965,7 @@ body.light-theme .help-card p {
       rgba(212, 175, 55, 0.13),
       transparent 42%
     ),
-    linear-gradient(
-      145deg,
-      rgba(6, 26, 77, 0.7),
-      rgba(2, 8, 23, 0.86)
-    );
+    linear-gradient(145deg, rgba(6, 26, 77, 0.7), rgba(2, 8, 23, 0.86));
   box-shadow: var(--shadow-sm);
 }
 
@@ -3044,4 +3042,3 @@ body.light-theme .help-card p {
     transition: none;
   }
 }
-
