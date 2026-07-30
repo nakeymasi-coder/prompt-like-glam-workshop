@@ -3581,7 +3581,7 @@ const REPLAY_DATA = {
     title: "Day 1 Replay",
     message:
       "Day 1 replay is where students review project setup, HTML, CSS, JavaScript, generator buttons, and testing.",
-    url: "https://drive.google.com/file/d/1q4EOnJhgF7nMPv4_iGmuO7s-VnTfNmmn/preview",
+    url: "https://drive.google.com/file/d/1mz60XemeXKKyxwwhk0OCmD5mpNKYNysm/preview",
   },
 
   day2: {
