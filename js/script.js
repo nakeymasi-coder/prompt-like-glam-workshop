@@ -4364,6 +4364,8 @@ function runAppHealthCheck() {
     "sell",
 
     "notebook",
+    "prompts",
+    "challenges",
     "replays",
 
     "bonuses",
@@ -4507,6 +4509,115 @@ function setupReusableWelcomeMasterPrompt() {
   });
 }
 
+
+/* ==========================
+   SAVED PROMPTS
+   ========================== */
+
+function setupSavedPrompts() {
+  const storageKey = "glamWorkshopSavedPrompts";
+  const titleInput = byId("savedPromptTitle");
+  const promptInput = byId("savedPromptText");
+  const saveButton = byId("savePromptBtn");
+  const clearButton = byId("clearPromptFormBtn");
+  const list = byId("savedPromptsList");
+  const count = byId("savedPromptCount");
+
+  if (!titleInput || !promptInput || !saveButton || !list) return;
+
+  let prompts = [];
+  try {
+    prompts = JSON.parse(localStorage.getItem(storageKey) || "[]");
+    if (!Array.isArray(prompts)) prompts = [];
+  } catch {
+    prompts = [];
+  }
+
+  const saveToStorage = () => {
+    localStorage.setItem(storageKey, JSON.stringify(prompts));
+  };
+
+  const render = () => {
+    count.textContent = `${prompts.length} saved`;
+    if (!prompts.length) {
+      list.innerHTML = '<p class="empty-prompts-message">No saved prompts yet.</p>';
+      return;
+    }
+
+    list.innerHTML = "";
+    prompts.forEach((item) => {
+      const card = document.createElement("article");
+      card.className = "saved-prompt-item";
+
+      const heading = document.createElement("div");
+      heading.className = "saved-prompt-item-heading";
+
+      const title = document.createElement("h3");
+      title.textContent = item.title;
+
+      const date = document.createElement("span");
+      date.textContent = new Date(item.createdAt).toLocaleDateString();
+
+      const body = document.createElement("p");
+      body.textContent = item.text;
+
+      const actions = document.createElement("div");
+      actions.className = "saved-prompt-item-actions";
+
+      const copy = document.createElement("button");
+      copy.className = "secondary-btn";
+      copy.type = "button";
+      copy.textContent = "Copy";
+      copy.addEventListener("click", () => copyText(item.text, "Prompt copied!"));
+
+      const remove = document.createElement("button");
+      remove.className = "secondary-btn danger-btn";
+      remove.type = "button";
+      remove.textContent = "Delete";
+      remove.addEventListener("click", () => {
+        prompts = prompts.filter((prompt) => prompt.id !== item.id);
+        saveToStorage();
+        render();
+        showToast("Prompt deleted.");
+      });
+
+      heading.append(title, date);
+      actions.append(copy, remove);
+      card.append(heading, body, actions);
+      list.append(card);
+    });
+  };
+
+  const clearForm = () => {
+    titleInput.value = "";
+    promptInput.value = "";
+    titleInput.focus();
+  };
+
+  saveButton.addEventListener("click", () => {
+    const title = titleInput.value.trim();
+    const text = promptInput.value.trim();
+    if (!title || !text) {
+      showToast("Add a prompt name and prompt text first.");
+      return;
+    }
+
+    prompts.unshift({
+      id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+      title,
+      text,
+      createdAt: new Date().toISOString(),
+    });
+    saveToStorage();
+    render();
+    clearForm();
+    showToast("Prompt saved!");
+  });
+
+  clearButton?.addEventListener("click", clearForm);
+  render();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initializeCoreEngine();
   setupWorkshopLockPopup();
@@ -4517,6 +4628,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeFlipCards();
   setupLaunchChecklistCard();
   setupReusableWelcomeMasterPrompt();
+  setupSavedPrompts();
   initializeFinalPolish();
 
   console.log("Prompt Generator Companion fully initialized.");

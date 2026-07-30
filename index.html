@@ -73,6 +73,14 @@
             <i data-lucide="notebook-pen"></i>
             <span>Notebook</span>
           </a>
+          <a class="nav-link" data-page="prompts" href="#">
+            <i data-lucide="file-text"></i>
+            <span>Prompts</span>
+          </a>
+          <a class="nav-link" data-page="challenges" href="#">
+            <i data-lucide="sparkles"></i>
+            <span>Challenges</span>
+          </a>
           <a class="nav-link" data-page="replays" href="#">
             <i data-lucide="monitor-play"></i>
             <span>Replay Library</span>
@@ -2022,6 +2030,57 @@ Before writing the listing, ask me for:
             </div>
           </div>
         </section>
+        <!-- ============================= -->
+        <!-- PAGE: PROMPTS -->
+        <!-- ============================= -->
+        <section class="page" id="prompts">
+          <div class="page-header">
+            <span class="eyebrow">Prompt Vault</span>
+            <h1>Save Your Best Prompts</h1>
+            <p>Keep finished prompts organized in this companion. They stay saved on this device until you delete them.</p>
+          </div>
+          <div class="prompt-vault-layout">
+            <div class="card prompt-vault-editor">
+              <label for="savedPromptTitle">Prompt name</label>
+              <input id="savedPromptTitle" class="prompt-vault-input" type="text" placeholder="Example: Luxury Brand Photo Prompt" />
+              <label for="savedPromptText">Your prompt</label>
+              <textarea id="savedPromptText" class="prompt-vault-textarea" placeholder="Paste or write your prompt here..."></textarea>
+              <div class="prompt-vault-actions">
+                <button class="primary-btn" id="savePromptBtn" type="button">Save Prompt</button>
+                <button class="secondary-btn" id="clearPromptFormBtn" type="button">Clear</button>
+              </div>
+            </div>
+            <div class="card prompt-vault-library">
+              <div class="saved-prompts-heading">
+                <div>
+                  <span class="eyebrow">My Library</span>
+                  <h2>Saved Prompts</h2>
+                </div>
+                <span class="status-pill" id="savedPromptCount">0 saved</span>
+              </div>
+              <div id="savedPromptsList" class="saved-prompts-list">
+                <p class="empty-prompts-message">No saved prompts yet.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: CHALLENGES -->
+        <!-- ============================= -->
+        <section class="page" id="challenges">
+          <div class="page-header">
+            <span class="eyebrow">Challenges</span>
+            <h1>Creative Challenges Are Coming Soon</h1>
+            <p>New guided challenges will be added here to help you practice, finish projects, and keep building.</p>
+          </div>
+          <div class="card challenges-coming-soon">
+            <div class="coming-soon-mark">Coming Soon</div>
+            <h2>Your next creative challenge is being prepared.</h2>
+            <p>Check back for focused assignments, clear steps, and practical projects you can complete without feeling overwhelmed.</p>
+          </div>
+        </section>
+
         <!-- ============================= -->
         <!-- PAGE: REPLAYS -->
         <!-- ============================= -->
