@@ -1,14 +1,21 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :root {
-  --royal-blue: #32105f;
-  --royal-blue-2: #5b21b6;
-  --deep-blue: #14051f;
-  --midnight: #0b0610;
+  --royal-purple: #5b0fff;
+  --royal-purple-light: #8b5cff;
+  --deep-purple: #16002e;
+  --dark-purple: #09000f;
+
   --black: #050507;
   --black-soft: #0d0a12;
 
-  --gold: #c7c9d1;
-  --gold-light: #ffffff;
-  --gold-dark: #8f93a3;
+  --silver: #e5e7eb;
+  --silver-light: #ffffff;
+  --silver-dark: #aeb4c2;
 
   --white: #ffffff;
   --soft-white: rgba(255, 255, 255, 0.9);
@@ -19,9 +26,9 @@
   --glass-strong: rgba(255, 255, 255, 0.13);
   --border: rgba(255, 255, 255, 0.18);
 
-  --gold-border: rgba(199, 201, 209, 0.5);
-  --gold-glow: rgba(255, 255, 255, 0.3);
-  --blue-glow: rgba(124, 58, 237, 0.5);
+  --silver-border: rgba(229, 231, 235, 0.65);
+  --silver-glow: rgba(255, 255, 255, 0.38);
+  --purple-glow: rgba(139, 92, 255, 0.72);
 
   --danger: #ff6685;
   --success: #70efc2;
@@ -35,13 +42,12 @@
   --radius-sm: 14px;
 
   --shadow-lg:
-    0 28px 80px rgba(0, 0, 0, 0.58), 0 0 44px rgba(124, 58, 237, 0.22);
+    0 28px 80px rgba(0, 0, 0, 0.58), 0 0 44px rgba(139, 92, 255, 0.24);
 
-  --shadow-md:
-    0 18px 45px rgba(0, 0, 0, 0.4), 0 0 28px rgba(124, 58, 237, 0.18);
+  --shadow-md: 0 18px 45px rgba(0, 0, 0, 0.4), 0 0 28px rgba(139, 92, 255, 0.2);
 
   --shadow-sm:
-    0 10px 24px rgba(0, 0, 0, 0.28), 0 0 18px rgba(255, 255, 255, 0.08);
+    0 10px 24px rgba(0, 0, 0, 0.28), 0 0 18px rgba(255, 255, 255, 0.1);
 
   --font-display: "Cinzel", Georgia, serif;
   --font-body: "Inter", Arial, sans-serif;
@@ -61,16 +67,16 @@ body {
   background:
     radial-gradient(
       circle at 14% 8%,
-      rgba(212, 175, 55, 0.14),
+      rgba(229, 231, 235, 0.14),
       transparent 32%
     ),
-    radial-gradient(circle at 82% 0%, rgba(6, 26, 77, 0.78), transparent 42%),
+    radial-gradient(circle at 82% 0%, rgba(91, 15, 255, 0.78), transparent 42%),
     radial-gradient(
       circle at 62% 80%,
-      rgba(212, 175, 55, 0.08),
+      rgba(229, 231, 235, 0.08),
       transparent 34%
     ),
-    linear-gradient(135deg, #02030a 0%, #05050a 38%, #061a4d 100%);
+    linear-gradient(135deg, #02030a 0%, #05050a 38%, #5b0fff 100%);
   background-attachment: fixed;
   overflow-x: hidden;
 }
@@ -88,7 +94,7 @@ body::before {
 }
 
 ::selection {
-  background: rgba(212, 175, 55, 0.38);
+  background: rgba(229, 231, 235, 0.38);
   color: var(--white);
 }
 
@@ -130,7 +136,7 @@ svg {
   transform: translateY(-150%);
   padding: 12px 16px;
   border-radius: 999px;
-  background: var(--gold);
+  background: var(--silver);
   color: var(--black);
   font-weight: 900;
   transition: var(--transition);
@@ -163,18 +169,18 @@ svg {
   flex-direction: column;
   gap: 22px;
   background:
-    linear-gradient(180deg, rgba(6, 26, 77, 0.96), rgba(1, 3, 12, 0.97)),
+    linear-gradient(180deg, rgba(91, 15, 255, 0.96), rgba(1, 3, 12, 0.97)),
     radial-gradient(
       circle at top left,
-      rgba(212, 175, 55, 0.16),
+      rgba(229, 231, 235, 0.16),
       transparent 40%
     );
-  border-right: 1px solid rgba(212, 175, 55, 0.26);
+  border-right: 1px solid rgba(229, 231, 235, 0.26);
   box-shadow: 18px 0 55px rgba(0, 0, 0, 0.42);
   z-index: 40;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgba(212, 175, 55, 0.45) transparent;
+  scrollbar-color: rgba(229, 231, 235, 0.45) transparent;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -182,7 +188,7 @@ svg {
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-  background: rgba(212, 175, 55, 0.45);
+  background: rgba(229, 231, 235, 0.45);
   border-radius: 999px;
 }
 
@@ -203,15 +209,15 @@ svg {
   border-radius: 18px;
   background: linear-gradient(
     145deg,
-    var(--gold-light),
-    var(--gold) 45%,
-    var(--gold-dark)
+    var(--silver-light),
+    var(--silver) 45%,
+    var(--silver-dark)
   );
   color: var(--black);
   font-family: var(--font-display);
   font-weight: 900;
   letter-spacing: -0.04em;
-  box-shadow: 0 14px 34px rgba(212, 175, 55, 0.28);
+  box-shadow: 0 14px 34px rgba(229, 231, 235, 0.28);
 }
 
 .brand-block h1 {
@@ -259,14 +265,14 @@ svg {
 .nav-link svg {
   width: 18px;
   height: 18px;
-  color: rgba(212, 175, 55, 0.78);
+  color: rgba(229, 231, 235, 0.78);
   flex: 0 0 auto;
 }
 
 .nav-link:hover {
   color: var(--white);
   background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(212, 175, 55, 0.22);
+  border-color: rgba(229, 231, 235, 0.22);
   transform: translateX(3px);
 }
 
@@ -274,10 +280,10 @@ svg {
   color: var(--white);
   background: linear-gradient(
     135deg,
-    rgba(212, 175, 55, 0.2),
+    rgba(229, 231, 235, 0.2),
     rgba(255, 255, 255, 0.075)
   );
-  border-color: rgba(212, 175, 55, 0.42);
+  border-color: rgba(229, 231, 235, 0.42);
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.04),
     0 12px 28px rgba(0, 0, 0, 0.2);
@@ -292,8 +298,8 @@ svg {
   height: 28px;
   transform: translateY(-50%);
   border-radius: 999px;
-  background: linear-gradient(var(--gold-light), var(--gold));
-  box-shadow: 0 0 18px var(--gold-glow);
+  background: linear-gradient(var(--silver-light), var(--silver));
+  box-shadow: 0 0 18px var(--silver-glow);
 }
 
 .sidebar-footer {
@@ -303,7 +309,7 @@ svg {
 
 .sidebar-footer p {
   margin: 0 0 4px;
-  color: var(--gold);
+  color: var(--silver);
   font-weight: 900;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -371,7 +377,7 @@ svg {
   align-items: center;
   gap: 12px;
   padding: 0 18px;
-  border: 1px solid rgba(212, 175, 55, 0.23);
+  border: 1px solid rgba(229, 231, 235, 0.23);
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.07);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
@@ -380,7 +386,7 @@ svg {
 .topbar-search svg {
   width: 19px;
   height: 19px;
-  color: var(--gold);
+  color: var(--silver);
 }
 
 .topbar-search input {
@@ -432,12 +438,12 @@ svg {
   position: relative;
   margin: 8px 0 26px;
   padding: 34px;
-  border: 1px solid rgba(212, 175, 55, 0.24);
+  border: 1px solid rgba(229, 231, 235, 0.24);
   border-radius: var(--radius-xl);
   background:
     radial-gradient(
       circle at top right,
-      rgba(212, 175, 55, 0.18),
+      rgba(229, 231, 235, 0.18),
       transparent 38%
     ),
     linear-gradient(
@@ -509,7 +515,7 @@ svg {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: var(--gold-light);
+  color: var(--silver-light);
   font-size: 12px;
   font-weight: 950;
   letter-spacing: 0.16em;
@@ -520,7 +526,7 @@ svg {
   content: "";
   width: 26px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold));
+  background: linear-gradient(90deg, transparent, var(--silver));
 }
 
 /* =============================
@@ -557,30 +563,30 @@ svg {
   color: var(--black);
   background: linear-gradient(
     135deg,
-    var(--gold-light),
-    var(--gold) 46%,
-    var(--gold-dark)
+    var(--silver-light),
+    var(--silver) 46%,
+    var(--silver-dark)
   );
-  box-shadow: 0 15px 32px rgba(212, 175, 55, 0.22);
+  box-shadow: 0 15px 32px rgba(229, 231, 235, 0.22);
 }
 
 .gold-btn:hover,
 .primary-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 20px 44px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 20px 44px rgba(229, 231, 235, 0.3);
 }
 
 .secondary-btn,
 .ghost-btn {
   color: var(--white);
-  border: 1px solid rgba(212, 175, 55, 0.28);
+  border: 1px solid rgba(229, 231, 235, 0.28);
   background: rgba(255, 255, 255, 0.07);
 }
 
 .secondary-btn:hover,
 .ghost-btn:hover {
-  border-color: rgba(212, 175, 55, 0.55);
-  background: rgba(212, 175, 55, 0.12);
+  border-color: rgba(229, 231, 235, 0.55);
+  background: rgba(229, 231, 235, 0.12);
   transform: translateY(-2px);
 }
 
@@ -642,7 +648,7 @@ svg {
   border-radius: inherit;
   background: radial-gradient(
     circle at top right,
-    rgba(212, 175, 55, 0.13),
+    rgba(229, 231, 235, 0.13),
     transparent 38%
   );
   opacity: 0.85;
@@ -659,7 +665,7 @@ svg {
 .settings-card:hover,
 .replay-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(212, 175, 55, 0.34);
+  border-color: rgba(229, 231, 235, 0.34);
   box-shadow: 0 26px 70px rgba(0, 0, 0, 0.42);
 }
 
@@ -776,8 +782,8 @@ svg {
   font-family: var(--font-display);
   font-size: 28px;
   font-weight: 950;
-  background: linear-gradient(145deg, var(--gold-light), var(--gold));
-  box-shadow: 0 18px 40px rgba(212, 175, 55, 0.2);
+  background: linear-gradient(145deg, var(--silver-light), var(--silver));
+  box-shadow: 0 18px 40px rgba(229, 231, 235, 0.2);
 }
 
 .timeline-content {
@@ -825,10 +831,10 @@ svg {
   width: fit-content;
   margin-bottom: 14px;
   padding: 7px 11px;
-  border: 1px solid rgba(212, 175, 55, 0.34);
+  border: 1px solid rgba(229, 231, 235, 0.34);
   border-radius: 999px;
-  color: var(--gold-light);
-  background: rgba(212, 175, 55, 0.09);
+  color: var(--silver-light);
+  background: rgba(229, 231, 235, 0.09);
   font-size: 11px;
   font-weight: 950;
   letter-spacing: 0.13em;
@@ -842,8 +848,8 @@ svg {
   margin: 16px 0 0;
   padding: 18px;
   border-radius: 18px;
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  color: var(--gold-light);
+  border: 1px solid rgba(229, 231, 235, 0.2);
+  color: var(--silver-light);
   background: rgba(0, 0, 0, 0.34);
   line-height: 1.65;
 }
@@ -859,7 +865,7 @@ details {
 
 summary {
   cursor: pointer;
-  color: var(--gold-light);
+  color: var(--silver-light);
   font-weight: 900;
 }
 
@@ -870,7 +876,7 @@ details p {
 input[type="checkbox"] {
   width: 18px;
   height: 18px;
-  accent-color: var(--gold);
+  accent-color: var(--silver);
 }
 
 /* =============================
@@ -889,7 +895,7 @@ input[type="checkbox"] {
   width: 34px;
   height: 34px;
   margin-bottom: 18px;
-  color: var(--gold);
+  color: var(--silver);
 }
 
 .download-card .primary-btn,
@@ -907,7 +913,7 @@ input[type="checkbox"] {
 label {
   display: block;
   margin: 14px 0 8px;
-  color: var(--gold-light);
+  color: var(--silver-light);
   font-size: 12px;
   font-weight: 950;
   letter-spacing: 0.08em;
@@ -918,7 +924,7 @@ input,
 select,
 textarea {
   width: 100%;
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(229, 231, 235, 0.2);
   border-radius: 16px;
   outline: none;
   color: var(--white);
@@ -945,8 +951,8 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: rgba(212, 175, 55, 0.58);
-  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.11);
+  border-color: rgba(229, 231, 235, 0.58);
+  box-shadow: 0 0 0 4px rgba(229, 231, 235, 0.11);
   background: rgba(255, 255, 255, 0.095);
 }
 
@@ -963,7 +969,7 @@ select option {
   font-size: 13px;
   color: #f8e7ac;
   background: rgba(0, 0, 0, 0.44);
-  border-color: rgba(212, 175, 55, 0.28);
+  border-color: rgba(229, 231, 235, 0.28);
 }
 
 .copy-area {
@@ -1006,16 +1012,16 @@ select option {
   width: min(880px, 100%);
   padding: 58px;
   text-align: center;
-  border: 2px solid rgba(212, 175, 55, 0.52);
+  border: 2px solid rgba(229, 231, 235, 0.52);
   border-radius: 34px;
   background:
-    radial-gradient(circle at top, rgba(212, 175, 55, 0.16), transparent 42%),
+    radial-gradient(circle at top, rgba(229, 231, 235, 0.16), transparent 42%),
     linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
   box-shadow: var(--shadow-lg);
 }
 
 .certificate-small {
-  color: var(--gold-light);
+  color: var(--silver-light);
   text-transform: uppercase;
   letter-spacing: 0.18em;
   font-weight: 950;
@@ -1027,7 +1033,7 @@ select option {
 }
 
 .certificate-card h1 {
-  color: var(--gold-light);
+  color: var(--silver-light);
   font-size: clamp(38px, 5vw, 72px);
   margin: 18px 0;
 }
@@ -1046,10 +1052,10 @@ select option {
   bottom: 24px;
   z-index: 90;
   padding: 14px 18px;
-  border: 1px solid rgba(212, 175, 55, 0.42);
+  border: 1px solid rgba(229, 231, 235, 0.42);
   border-radius: 999px;
   color: var(--black);
-  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  background: linear-gradient(135deg, var(--silver-light), var(--silver));
   font-weight: 950;
   box-shadow: var(--shadow-md);
   transform: translateY(18px);
@@ -1078,15 +1084,15 @@ select option {
   position: relative;
   width: min(560px, 100%);
   padding: 38px;
-  border: 1px solid rgba(212, 175, 55, 0.46);
+  border: 1px solid rgba(229, 231, 235, 0.46);
   border-radius: 30px;
   background:
     radial-gradient(
       circle at top right,
-      rgba(212, 175, 55, 0.2),
+      rgba(229, 231, 235, 0.2),
       transparent 40%
     ),
-    linear-gradient(135deg, #071232, #05050a);
+    linear-gradient(135deg, #2b075a, #05050a);
   box-shadow: var(--shadow-lg);
   text-align: center;
 }
@@ -1129,7 +1135,7 @@ body.light-theme {
   background:
     radial-gradient(
       circle at top left,
-      rgba(212, 175, 55, 0.25),
+      rgba(229, 231, 235, 0.25),
       transparent 30%
     ),
     linear-gradient(135deg, #f8f4ea, #ffffff 48%, #dfe8ff);
@@ -1201,7 +1207,7 @@ body.light-theme .help-card p {
 .module-card-back {
   transform: rotateY(180deg);
   padding: 22px;
-  border: 1px solid rgba(212, 175, 55, 0.42);
+  border: 1px solid rgba(229, 231, 235, 0.42);
   background: linear-gradient(
     145deg,
     rgba(6, 22, 70, 0.96),
@@ -1211,7 +1217,7 @@ body.light-theme .help-card p {
 
 .module-card-back h3 {
   margin: 0 0 14px;
-  color: var(--gold);
+  color: var(--silver);
 }
 
 .module-card-back h4 {
@@ -1232,7 +1238,7 @@ body.light-theme .help-card p {
 .flip-hint {
   display: block;
   margin-top: auto;
-  color: rgba(212, 175, 55, 0.85);
+  color: rgba(229, 231, 235, 0.85);
   font-size: 0.78rem;
 }
 
@@ -1408,11 +1414,11 @@ body.light-theme .help-card p {
 .launch-kit-card {
   margin-top: 32px;
   padding: 32px;
-  border: 1px solid rgba(212, 175, 55, 0.35);
+  border: 1px solid rgba(229, 231, 235, 0.35);
   background:
     radial-gradient(
       circle at top right,
-      rgba(212, 175, 55, 0.12),
+      rgba(229, 231, 235, 0.12),
       transparent 38%
     ),
     linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(19, 43, 92, 0.32));
@@ -1486,7 +1492,7 @@ body.light-theme .help-card p {
   gap: 24px;
   min-height: 150px;
   padding: 24px;
-  border: 1px solid rgba(212, 175, 55, 0.28);
+  border: 1px solid rgba(229, 231, 235, 0.28);
   border-radius: 20px;
   background: linear-gradient(
     135deg,
@@ -1503,7 +1509,7 @@ body.light-theme .help-card p {
 
 .selling-platform-link:hover {
   transform: translateY(-4px);
-  border-color: rgba(212, 175, 55, 0.65);
+  border-color: rgba(229, 231, 235, 0.65);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
 }
 
@@ -1521,7 +1527,7 @@ body.light-theme .help-card p {
 .selling-platform-link span {
   flex-shrink: 0;
   padding: 10px 16px;
-  border: 1px solid rgba(212, 175, 55, 0.42);
+  border: 1px solid rgba(229, 231, 235, 0.42);
   border-radius: 999px;
   color: var(--gold, #d4af37);
   font-weight: 700;
@@ -1627,7 +1633,7 @@ body.light-theme .help-card p {
   background:
     radial-gradient(
       circle at top right,
-      rgba(212, 175, 55, 0.16),
+      rgba(229, 231, 235, 0.16),
       transparent 40%
     ),
     linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(15, 39, 88, 0.36));
@@ -1639,7 +1645,7 @@ body.light-theme .help-card p {
   background:
     radial-gradient(
       circle at bottom left,
-      rgba(212, 175, 55, 0.12),
+      rgba(229, 231, 235, 0.12),
       transparent 42%
     ),
     linear-gradient(135deg, rgba(15, 39, 88, 0.4), rgba(255, 255, 255, 0.05));
@@ -1654,7 +1660,7 @@ body.light-theme .help-card p {
   background:
     radial-gradient(
       circle at top right,
-      rgba(212, 175, 55, 0.16),
+      rgba(229, 231, 235, 0.16),
       transparent 40%
     ),
     linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(15, 39, 88, 0.36));
@@ -1665,7 +1671,7 @@ body.light-theme .help-card p {
   background:
     radial-gradient(
       circle at bottom left,
-      rgba(212, 175, 55, 0.12),
+      rgba(229, 231, 235, 0.12),
       transparent 42%
     ),
     linear-gradient(135deg, rgba(15, 39, 88, 0.4), rgba(255, 255, 255, 0.05));
@@ -1699,7 +1705,7 @@ body.light-theme .help-card p {
   min-height: 56px;
   display: flex;
   align-items: center;
-  border: 1px solid rgba(212, 175, 55, 0.24);
+  border: 1px solid rgba(229, 231, 235, 0.24);
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.05);
   line-height: 1.45;
@@ -1789,10 +1795,10 @@ body.light-theme .help-card p {
   place-items: center;
   width: 52px;
   height: 52px;
-  border: 1px solid rgba(212, 175, 55, 0.5);
+  border: 1px solid rgba(229, 231, 235, 0.5);
   border-radius: 16px;
-  background: rgba(212, 175, 55, 0.12);
-  color: var(--gold);
+  background: rgba(229, 231, 235, 0.12);
+  color: var(--silver);
   font-family: "Cinzel", serif;
   font-size: 1.15rem;
   font-weight: 700;
@@ -1821,8 +1827,8 @@ body.light-theme .help-card p {
 }
 
 .guide-tip {
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(229, 231, 235, 0.3);
+  background: rgba(229, 231, 235, 0.08);
 }
 
 .guide-warning {
@@ -1840,7 +1846,7 @@ body.light-theme .help-card p {
 
 .guide-file-item {
   padding: 18px;
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(229, 231, 235, 0.2);
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.03);
 }
@@ -1867,13 +1873,13 @@ body.light-theme .help-card p {
 .guide-shortcuts-table th,
 .guide-shortcuts-table td {
   padding: 14px 16px;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.18);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.18);
   text-align: left;
   vertical-align: top;
 }
 
 .guide-shortcuts-table th {
-  color: var(--gold);
+  color: var(--silver);
   font-family: "Cinzel", serif;
 }
 
@@ -1939,14 +1945,14 @@ body.light-theme .help-card p {
 .guide-screenshot img {
   display: block;
   width: 100%;
-  border: 2px solid rgba(212, 175, 55, 0.35);
+  border: 2px solid rgba(229, 231, 235, 0.35);
   border-radius: 18px;
   box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
 }
 
 .guide-screenshot figcaption {
   margin-top: 12px;
-  color: var(--gold-light);
+  color: var(--silver-light);
   font-weight: 700;
   line-height: 1.6;
   text-align: center;
@@ -1959,7 +1965,7 @@ body.light-theme .help-card p {
 .guide-video {
   width: 100%;
   border-radius: 18px;
-  border: 2px solid rgba(212, 175, 55, 0.35);
+  border: 2px solid rgba(229, 231, 235, 0.35);
   margin-top: 18px;
 }
 .lesson-complete-area {
@@ -1970,7 +1976,7 @@ body.light-theme .help-card p {
 .saved-note-item {
   width: 100%;
   padding: 14px 16px;
-  border: 1px solid rgba(212, 175, 55, 0.28);
+  border: 1px solid rgba(229, 231, 235, 0.28);
   border-radius: 16px;
   background: linear-gradient(
     145deg,
@@ -1987,15 +1993,15 @@ body.light-theme .help-card p {
 }
 .saved-note-item:hover {
   transform: translateY(-2px);
-  border-color: rgba(212, 175, 55, 0.75);
+  border-color: rgba(229, 231, 235, 0.75);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
 }
 
 .saved-note-item.active {
   border-color: var(--gold, #d4af37);
   box-shadow:
-    0 0 0 1px rgba(212, 175, 55, 0.35),
-    0 12px 30px rgba(212, 175, 55, 0.18);
+    0 0 0 1px rgba(229, 231, 235, 0.35),
+    0 12px 30px rgba(229, 231, 235, 0.18);
 }
 .saved-notes-list {
   display: flex;
@@ -2020,11 +2026,11 @@ body.light-theme .help-card p {
 .note-sidebar {
   align-self: start;
   padding: 20px;
-  border: 1px solid rgba(212, 175, 55, 0.24);
+  border: 1px solid rgba(229, 231, 235, 0.24);
   background:
     radial-gradient(
       circle at top right,
-      rgba(212, 175, 55, 0.12),
+      rgba(229, 231, 235, 0.12),
       transparent 38%
     ),
     linear-gradient(160deg, rgba(11, 30, 68, 0.96), rgba(4, 9, 20, 0.98));
@@ -2033,7 +2039,7 @@ body.light-theme .help-card p {
 .saved-notes-header {
   margin-top: 22px;
   padding-bottom: 12px;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.18);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.18);
 }
 
 .saved-notes-header h2 {
@@ -2048,7 +2054,7 @@ body.light-theme .help-card p {
   gap: 20px;
   margin-bottom: 18px;
   padding-bottom: 16px;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.18);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.18);
 }
 
 .note-editor-header h2 {
@@ -2070,7 +2076,7 @@ body.light-theme .help-card p {
 .note-editor {
   min-height: 380px;
   resize: vertical;
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(229, 231, 235, 0.2);
   border-radius: 18px;
   background: rgba(3, 8, 18, 0.72);
   color: white;
@@ -2078,8 +2084,8 @@ body.light-theme .help-card p {
 }
 
 .note-editor:focus {
-  border-color: rgba(212, 175, 55, 0.75);
-  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.12);
+  border-color: rgba(229, 231, 235, 0.75);
+  box-shadow: 0 0 0 3px rgba(229, 231, 235, 0.12);
 }
 .note-save-status {
   margin: 12px 0 0;
@@ -2196,7 +2202,7 @@ body.light-theme .help-card p {
   margin: 20px 0;
   padding: 14px 16px;
   border-radius: 14px;
-  border: 1px solid rgba(212, 175, 55, 0.35);
+  border: 1px solid rgba(229, 231, 235, 0.35);
   background: rgba(255, 255, 255, 0.08);
   color: #fff;
   font-size: 1rem;
@@ -2205,7 +2211,7 @@ body.light-theme .help-card p {
 #workshopCodeInput:focus {
   outline: none;
   border-color: #d4af37;
-  box-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
+  box-shadow: 0 0 12px rgba(229, 231, 235, 0.35);
 }
 
 #workshopCodeMessage {
@@ -2264,7 +2270,7 @@ body.light-theme .help-card p {
       rgba(33, 82, 190, 0.22),
       transparent 38%
     ),
-    linear-gradient(180deg, #020713 0%, #06163d 48%, #01040c 100%);
+    linear-gradient(180deg, #020713 0%, #2b075a 48%, #01040c 100%);
 }
 
 .workshop-journey-page::before {
@@ -2275,7 +2281,7 @@ body.light-theme .help-card p {
   background:
     radial-gradient(
       circle at 15% 30%,
-      rgba(212, 175, 55, 0.08),
+      rgba(229, 231, 235, 0.08),
       transparent 25%
     ),
     radial-gradient(circle at 85% 65%, rgba(39, 94, 220, 0.12), transparent 30%);
@@ -2305,7 +2311,7 @@ body.light-theme .help-card p {
   );
   box-shadow:
     0 24px 70px rgba(0, 0, 0, 0.55),
-    0 0 34px rgba(212, 175, 55, 0.18);
+    0 0 34px rgba(229, 231, 235, 0.18);
 }
 
 .journey-card::before {
@@ -2354,7 +2360,7 @@ body.light-theme .help-card p {
   line-height: 1.12;
   text-shadow:
     0 2px 14px rgba(0, 0, 0, 0.6),
-    0 0 18px rgba(212, 175, 55, 0.13);
+    0 0 18px rgba(229, 231, 235, 0.13);
 }
 
 .journey-card h1 {
@@ -2392,7 +2398,7 @@ body.light-theme .help-card p {
     rgba(244, 217, 120, 0.95),
     transparent
   );
-  box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 0 12px rgba(229, 231, 235, 0.3);
 }
 
 .journey-checklist {
@@ -2409,7 +2415,7 @@ body.light-theme .help-card p {
 .journey-checklist li {
   position: relative;
   padding: 14px 16px 14px 48px;
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(229, 231, 235, 0.2);
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.025);
 }
@@ -2425,20 +2431,20 @@ body.light-theme .help-card p {
   place-items: center;
   transform: translateY(-50%);
   border-radius: 50%;
-  color: #06163d;
+  color: #2b075a;
   font-weight: 900;
   background: linear-gradient(145deg, #fff0a0, #c78e1d);
-  box-shadow: 0 0 13px rgba(212, 175, 55, 0.25);
+  box-shadow: 0 0 13px rgba(229, 231, 235, 0.25);
 }
 
 .journey-important-box {
   width: min(720px, 100%);
   margin: 30px auto;
   padding: 24px 28px;
-  border: 1px solid rgba(212, 175, 55, 0.48);
+  border: 1px solid rgba(229, 231, 235, 0.48);
   border-radius: 18px;
   background: rgba(0, 0, 0, 0.22);
-  box-shadow: inset 0 0 24px rgba(212, 175, 55, 0.035);
+  box-shadow: inset 0 0 24px rgba(229, 231, 235, 0.035);
 }
 
 .journey-important-box h3 {
@@ -2461,7 +2467,7 @@ body.light-theme .help-card p {
 
 .journey-day-card {
   padding: 32px 26px;
-  border: 1px solid rgba(212, 175, 55, 0.38);
+  border: 1px solid rgba(229, 231, 235, 0.38);
   border-radius: 22px;
   background: linear-gradient(
     145deg,
@@ -2583,7 +2589,7 @@ body.light-theme .help-card p {
 .reference-library-tips {
   margin: 0;
   padding: 20px 20px 20px 42px;
-  border: 1px solid rgba(212, 175, 55, 0.24);
+  border: 1px solid rgba(229, 231, 235, 0.24);
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.045);
   color: var(--soft-white);
@@ -2623,7 +2629,7 @@ body.light-theme .help-card p {
   flex-direction: column;
   min-width: 0;
   overflow: hidden;
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  border: 1px solid rgba(229, 231, 235, 0.3);
   border-radius: var(--radius-lg);
   background: linear-gradient(
     145deg,
@@ -2639,7 +2645,7 @@ body.light-theme .help-card p {
 
 .reference-image-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(212, 175, 55, 0.62);
+  border-color: rgba(229, 231, 235, 0.62);
   box-shadow: 0 26px 65px rgba(0, 0, 0, 0.42);
 }
 
@@ -2649,7 +2655,7 @@ body.light-theme .help-card p {
   overflow: hidden;
   background: linear-gradient(
     135deg,
-    rgba(6, 26, 77, 0.9),
+    rgba(91, 15, 255, 0.9),
     rgba(5, 5, 10, 0.95)
   );
 }
@@ -2676,7 +2682,7 @@ body.light-theme .help-card p {
 
 .reference-image-card-body h3 {
   margin: 0 0 8px;
-  color: var(--gold-light);
+  color: var(--silver-light);
   font-family: var(--font-display);
   font-size: 1.15rem;
   overflow-wrap: anywhere;
@@ -2720,7 +2726,7 @@ body.light-theme .help-card p {
 
 .reference-storage-note {
   margin-top: 12px !important;
-  color: var(--gold-light) !important;
+  color: var(--silver-light) !important;
   font-size: 0.9rem;
 }
 
@@ -2758,7 +2764,7 @@ body.light-theme .help-card p {
   gap: 12px;
   padding: 34px;
   text-align: center;
-  border: 1px dashed rgba(212, 175, 55, 0.42);
+  border: 1px dashed rgba(229, 231, 235, 0.42);
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.035);
 }
@@ -2766,7 +2772,7 @@ body.light-theme .help-card p {
 .reference-empty-state svg {
   width: 46px;
   height: 46px;
-  color: var(--gold);
+  color: var(--silver);
 }
 
 .reference-empty-state h3 {
@@ -2842,16 +2848,16 @@ body.light-theme .help-card p {
 .reusable-master-prompt-resource {
   grid-column: 1 / -1;
   padding: clamp(24px, 3vw, 38px);
-  border-color: rgba(212, 175, 55, 0.38);
+  border-color: rgba(229, 231, 235, 0.38);
   background:
     radial-gradient(
       circle at top right,
-      rgba(212, 175, 55, 0.16),
+      rgba(229, 231, 235, 0.16),
       transparent 34%
     ),
     radial-gradient(
       circle at bottom left,
-      rgba(11, 42, 122, 0.34),
+      rgba(139, 92, 255, 0.34),
       transparent 40%
     ),
     linear-gradient(
@@ -2878,7 +2884,7 @@ body.light-theme .help-card p {
 
 .reusable-master-prompt-subtitle {
   margin: 0 !important;
-  color: var(--gold-light) !important;
+  color: var(--silver-light) !important;
   font-size: clamp(1rem, 1.6vw, 1.18rem);
   font-weight: 800;
 }
@@ -2926,18 +2932,18 @@ body.light-theme .help-card p {
   resize: vertical;
   overflow: auto;
   padding: 20px;
-  border: 1px solid rgba(212, 175, 55, 0.34);
+  border: 1px solid rgba(229, 231, 235, 0.34);
   border-radius: var(--radius-md);
   color: #f8e7ac;
   background: linear-gradient(rgba(2, 8, 23, 0.92), rgba(4, 7, 18, 0.96));
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.04),
-    inset 0 0 34px rgba(6, 26, 77, 0.22);
+    inset 0 0 34px rgba(91, 15, 255, 0.22);
   font-family: Consolas, Monaco, "Courier New", monospace;
   font-size: 0.9rem;
   line-height: 1.68;
   scrollbar-width: thin;
-  scrollbar-color: rgba(212, 175, 55, 0.55) rgba(255, 255, 255, 0.04);
+  scrollbar-color: rgba(229, 231, 235, 0.55) rgba(255, 255, 255, 0.04);
 }
 
 .reusable-master-prompt-box::-webkit-scrollbar {
@@ -2950,21 +2956,21 @@ body.light-theme .help-card p {
 }
 
 .reusable-master-prompt-box::-webkit-scrollbar-thumb {
-  background: linear-gradient(var(--gold-light), var(--gold-dark));
+  background: linear-gradient(var(--silver-light), var(--silver-dark));
   border-radius: 999px;
 }
 
 .reusable-master-prompt-note {
   padding: 24px;
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  border: 1px solid rgba(229, 231, 235, 0.3);
   border-radius: var(--radius-md);
   background:
     radial-gradient(
       circle at top right,
-      rgba(212, 175, 55, 0.13),
+      rgba(229, 231, 235, 0.13),
       transparent 42%
     ),
-    linear-gradient(145deg, rgba(6, 26, 77, 0.7), rgba(2, 8, 23, 0.86));
+    linear-gradient(145deg, rgba(91, 15, 255, 0.7), rgba(2, 8, 23, 0.86));
   box-shadow: var(--shadow-sm);
 }
 
@@ -2989,10 +2995,10 @@ body.light-theme .help-card p {
 .reusable-master-prompt-reminder {
   margin-bottom: 0 !important;
   padding: 14px 16px;
-  border-left: 3px solid var(--gold);
+  border-left: 3px solid var(--silver);
   border-radius: 10px;
-  color: var(--gold-light) !important;
-  background: rgba(212, 175, 55, 0.09);
+  color: var(--silver-light) !important;
+  background: rgba(229, 231, 235, 0.09);
   font-weight: 850;
 }
 
