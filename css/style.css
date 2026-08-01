@@ -1,52 +1,51 @@
-/* ==========================================================
-   AI BUSINESS BUILDER™ — CLEANED STYLE.CSS v7.1
-   Premium Luxury Workshop UI
-   Cleaned: duplicate flip-card rules removed, sections organized
-   ========================================================== */
-
-/* =============================
-   RESET + ROOT TOKENS
-   ============================= */
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 :root {
-  --royal-blue: #061a4d;
-  --royal-blue-2: #0b2a7a;
-  --deep-blue: #020817;
-  --midnight: #030510;
-  --black: #05050a;
-  --black-soft: #090a12;
-  --gold: #d4af37;
-  --gold-light: #f4dc86;
-  --gold-dark: #9f7c18;
+  --royal-blue: #32105f;
+  --royal-blue-2: #5b21b6;
+  --deep-blue: #14051f;
+  --midnight: #0b0610;
+  --black: #050507;
+  --black-soft: #0d0a12;
+
+  --gold: #c7c9d1;
+  --gold-light: #ffffff;
+  --gold-dark: #8f93a3;
+
   --white: #ffffff;
-  --soft-white: rgba(255, 255, 255, 0.86);
-  --muted-white: rgba(255, 255, 255, 0.68);
-  --faint-white: rgba(255, 255, 255, 0.42);
-  --glass: rgba(255, 255, 255, 0.07);
-  --glass-strong: rgba(255, 255, 255, 0.11);
-  --border: rgba(255, 255, 255, 0.12);
-  --gold-border: rgba(212, 175, 55, 0.42);
-  --gold-glow: rgba(212, 175, 55, 0.24);
-  --blue-glow: rgba(11, 42, 122, 0.36);
-  --danger: #ff5c7a;
-  --success: #65f0b5;
+  --soft-white: rgba(255, 255, 255, 0.9);
+  --muted-white: rgba(255, 255, 255, 0.72);
+  --faint-white: rgba(255, 255, 255, 0.46);
+
+  --glass: rgba(255, 255, 255, 0.08);
+  --glass-strong: rgba(255, 255, 255, 0.13);
+  --border: rgba(255, 255, 255, 0.18);
+
+  --gold-border: rgba(199, 201, 209, 0.5);
+  --gold-glow: rgba(255, 255, 255, 0.3);
+  --blue-glow: rgba(124, 58, 237, 0.5);
+
+  --danger: #ff6685;
+  --success: #70efc2;
+
   --sidebar-width: 310px;
   --topbar-height: 86px;
+
   --radius-xl: 32px;
   --radius-lg: 24px;
   --radius-md: 18px;
   --radius-sm: 14px;
-  --shadow-lg: 0 28px 80px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 18px 45px rgba(0, 0, 0, 0.34);
-  --shadow-sm: 0 10px 24px rgba(0, 0, 0, 0.24);
+
+  --shadow-lg:
+    0 28px 80px rgba(0, 0, 0, 0.58), 0 0 44px rgba(124, 58, 237, 0.22);
+
+  --shadow-md:
+    0 18px 45px rgba(0, 0, 0, 0.4), 0 0 28px rgba(124, 58, 237, 0.18);
+
+  --shadow-sm:
+    0 10px 24px rgba(0, 0, 0, 0.28), 0 0 18px rgba(255, 255, 255, 0.08);
+
   --font-display: "Cinzel", Georgia, serif;
   --font-body: "Inter", Arial, sans-serif;
+
   --transition: 220ms ease;
 }
 
@@ -2648,8 +2647,11 @@ body.light-theme .help-card p {
   position: relative;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  background:
-    linear-gradient(135deg, rgba(6, 26, 77, 0.9), rgba(5, 5, 10, 0.95));
+  background: linear-gradient(
+    135deg,
+    rgba(6, 26, 77, 0.9),
+    rgba(5, 5, 10, 0.95)
+  );
 }
 
 .reference-image-frame img {
@@ -2927,8 +2929,7 @@ body.light-theme .help-card p {
   border: 1px solid rgba(212, 175, 55, 0.34);
   border-radius: var(--radius-md);
   color: #f8e7ac;
-  background:
-    linear-gradient(rgba(2, 8, 23, 0.92), rgba(4, 7, 18, 0.96));
+  background: linear-gradient(rgba(2, 8, 23, 0.92), rgba(4, 7, 18, 0.96));
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.04),
     inset 0 0 34px rgba(6, 26, 77, 0.22);
@@ -2963,11 +2964,7 @@ body.light-theme .help-card p {
       rgba(212, 175, 55, 0.13),
       transparent 42%
     ),
-    linear-gradient(
-      145deg,
-      rgba(6, 26, 77, 0.7),
-      rgba(2, 8, 23, 0.86)
-    );
+    linear-gradient(145deg, rgba(6, 26, 77, 0.7), rgba(2, 8, 23, 0.86));
   box-shadow: var(--shadow-sm);
 }
 
@@ -3045,8 +3042,6 @@ body.light-theme .help-card p {
   }
 }
 
-
-
 /* ==========================
    SAVED PROMPTS PAGE
    ========================== */
@@ -3097,7 +3092,7 @@ body.light-theme .help-card p {
 .prompt-empty-state {
   text-align: center;
   padding: 48px 20px;
-  border: 1px dashed rgba(255,255,255,0.24);
+  border: 1px dashed rgba(255, 255, 255, 0.24);
   border-radius: 18px;
   margin-top: 20px;
 }
@@ -3115,10 +3110,10 @@ body.light-theme .help-card p {
 }
 
 .saved-prompt-card {
-  border: 1px solid rgba(255,255,255,0.16);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 18px;
   padding: 18px;
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .saved-prompt-card h3 {
