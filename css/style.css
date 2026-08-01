@@ -3166,3 +3166,128 @@ body.light-theme .help-card p {
     flex-direction: column;
   }
 }
+
+/* ========================================
+   VS CODE APPS YOU'LL NEED
+======================================== */
+
+.vscode-apps-section {
+  grid-column: 1 / -1;
+}
+
+.vscode-apps-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 28px;
+}
+
+.vscode-app-card {
+  overflow: hidden;
+  border: 1px solid rgba(192, 192, 192, 0.35);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.22);
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.vscode-app-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(212, 175, 55, 0.75);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.3);
+}
+
+.vscode-app-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 230px;
+  padding: 18px;
+  background: #ffffff;
+}
+
+.vscode-app-image img {
+  display: block;
+  width: 100%;
+  height: 210px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.vscode-app-content {
+  position: relative;
+  padding: 24px;
+}
+
+.vscode-app-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 30px;
+  margin-bottom: 12px;
+  padding: 0 12px;
+  border: 1px solid rgba(212, 175, 55, 0.65);
+  border-radius: 999px;
+  color: #f3d675;
+  background: rgba(212, 175, 55, 0.1);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.vscode-app-content h3 {
+  margin: 0 0 10px;
+  color: #ffffff;
+  font-size: 1.25rem;
+}
+
+.vscode-app-content p {
+  margin: 0;
+  line-height: 1.7;
+}
+
+.vscode-apps-alert {
+  margin-top: 28px;
+}
+
+body.light-theme .vscode-app-card {
+  border-color: rgba(70, 70, 90, 0.18);
+  background: #ffffff;
+}
+
+body.light-theme .vscode-app-content h3 {
+  color: #181824;
+}
+
+@media (max-width: 800px) {
+  .vscode-apps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vscode-app-image {
+    min-height: 200px;
+  }
+
+  .vscode-app-image img {
+    height: auto;
+    max-height: 240px;
+  }
+}
+
+@media (max-width: 520px) {
+  .vscode-apps-grid {
+    gap: 18px;
+  }
+
+  .vscode-app-image {
+    padding: 12px;
+  }
+
+  .vscode-app-content {
+    padding: 20px;
+  }
+}
