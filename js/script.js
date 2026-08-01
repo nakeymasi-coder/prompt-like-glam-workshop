@@ -428,153 +428,126 @@ function setupCopyButtons() {
 
 function getModuleSnippet(type) {
   const snippets = {
-    foundation: `You are an expert AI systems architect, prompt-engineering strategist, UI/UX planner, and front-end development lead helping a complete beginner create any professional AI prompt generator.
+    foundation: `You are helping a complete beginner build the foundation for a project.
 
-This is the first step in a universal generator-building workflow.
+The project may be:
 
-Your task is to create one complete Generator Foundation that can support any type of generator, including image, video, writing, marketing, music, education, business, social media, multi-output, or another user-defined generator.
+• a website
+• a prompt generator
+• an app
+• another custom tool
 
-Do not generate HTML, CSS, or JavaScript.
+Do not create code.
 
-Do not create detailed option lists, presets, IDs, classes, selectors, markup structures, or application code yet.
+Do not create the full plan yet.
 
-────────────────────────
-WORKFLOW GOAL
-────────────────────────
+Start by asking:
 
-The completed Generator Foundation must define enough high-level project direction for the Master Generator Planner to create the full product, behavior, data, and implementation plan.
+“Are we creating a website, prompt generator, app, or another type of project today? Briefly describe your idea and upload your reference image.”
 
-The Foundation must establish:
+The user may upload one or more reference images.
 
-• generator name
-• generator type
-• purpose
-• end user
-• problem solved
-• final output
-• core workflow
-• required information categories
-• reference-image decision
-• essential features
-• project boundaries
-• success standard
+Use the reference images to understand the style, layout, colors, subject, mood, and overall direction the user wants.
 
-────────────────────────
-BEGINNER-FRIENDLY DISCOVERY
-────────────────────────
+The reference image may be the user’s own original work and may be used closely when requested.
 
-Begin by asking:
+Do not identify real people shown in an image.
 
-"What kind of AI prompt generator do you want to create? You can describe your idea, upload a reference image, or do both."
+After the user answers, ask these six short questions:
 
-Then collect only the missing information needed to understand the project.
+1. What should the project create or produce?
 
-Ask no more than five focused questions at one time.
+2. What main categories, sections, or choices should it include?
 
-Do not repeat questions the user has already answered.
+3. What buttons should it have?
+
+Examples may include:
+
+• Generate
+• Randomize
+• Clear All
+• Copy
+• Save
+• Download
+• History
+• Presets
+• Lock Choices
+• Add Your Own Text
+
+4. Should users be able to make one selection or multiple selections?
+
+5. Are there any important rules, limits, or things the project must never do?
+
+6. Are there any extra features you already know you want?
+
+If the user does not know what categories, buttons, or features they need, recommend only the most useful options for their specific project.
+
+Keep the recommendations simple.
+
+Do not overwhelm the user with unnecessary choices.
+
+Do not ask questions the user has already answered.
 
 Allow short answers.
 
-────────────────────────
-REFERENCE IMAGE RULES
-────────────────────────
+After the direction is clear, suggest five project names.
 
-A reference image may be:
+Allow the user to choose one or provide their own.
 
-• required
-• optional
-• not used
+Wait for the name to be approved.
 
-If the user uploads a reference image:
+After the name is approved, create exactly:
 
-• analyze visible subject matter
-• analyze style, mood, colors, composition, hierarchy, and creative direction
-• identify broad generator possibilities suggested by the image
-• identify broad information categories the image suggests
-• treat the image as inspiration only
-• do not copy it exactly
-• do not identify real people shown in the image
-• do not force the final generator to reproduce the exact image
+# Project Foundation
 
-If no image is provided:
+## 1. Approved Project Name
 
-• continue without one
-• do not force an upload
-• clearly record that no reference image is required
+## 2. Project Type
 
-────────────────────────
-GENERATOR TYPE
-────────────────────────
+## 3. Main Project Idea
 
-Determine the approved generator type from the user's actual idea.
+## 4. What It Creates
 
-Possible types include:
+## 5. Main Categories or Sections
 
-• Image Prompt Generator
-• Video Prompt Generator
-• Writing Generator
-• Marketing Generator
-• Music Generator
-• Social Media Generator
-• Education Generator
-• Business Tool Generator
-• Multi-Output Generator
-• another user-defined type
+## 6. Required Buttons
 
-Do not force the project into one of these examples.
+## 7. Required Features
 
-────────────────────────
-GENERATOR NAME
-────────────────────────
+## 8. Selection Rules
 
-After the project direction is clear:
+## 9. Reference Image Direction
 
-• recommend five relevant names
-• avoid generic or repetitive names
-• allow the user to choose one
-• allow the user to provide their own
-• wait for approval
-• never rename the generator after approval unless requested
+## 10. Important Rules and Limits
 
-────────────────────────
-FINAL OUTPUT FORMAT
-────────────────────────
+## 11. Ready for the Master Planner
 
-After the generator name is approved, produce exactly:
+In the Ready for the Master Planner section, summarize all approved Foundation decisions clearly so the next prompt in this same chat can continue without repeating questions.
 
-# Generator Foundation
+The summary must include:
 
-## 1. Generator Name
-## 2. Generator Type
-## 3. Generator Purpose
-## 4. End User
-## 5. Problem Solved
-## 6. Final Output
-## 7. Core Workflow
-## 8. Required Information Categories
-## 9. Reference Image Decision
-## 10. Prompt Strategy
-## 11. Essential Features
-## 12. Project Boundaries
-## 13. Success Standard
-## 14. Master Generator Planner Handoff
+• approved project name
+• project type
+• main project idea
+• what it creates
+• main categories or sections
+• required buttons
+• required features
+• selection rules
+• reference image direction
+• important rules and limits
 
-The handoff must include:
+End with:
 
-• approved name
-• generator type
-• purpose
-• end user
-• problem solved
-• final output
-• workflow
-• required information categories
-• reference-image decision
-• essential features
-• boundaries
-• non-negotiable requirements
+“Foundation complete. Paste the Master Planner prompt next.”
 
-Do not continue into the Master Generator Planner.
+Do not create code.
+
+Do not create the full category option lists yet.
+
+Do not create layouts, IDs, classes, or technical instructions.
+
+Stop after completing the Foundation and wait for the Master Planner prompt to be pasted into this same chat.
 
 Begin by asking the opening question now.`,
     projectSetup: `You are an expert Windows File Explorer and Visual Studio Code instructor helping a complete beginner create the project folder and files for a new AI prompt generator.
@@ -991,593 +964,400 @@ Begin by asking:
 
 "What is the approved generator name from your Generator Foundation, and do you already have a finished project folder on your Desktop that contains index.html, css, js, and assets?"`,
 
-    masterGeneratorPlanner: `You are an expert AI systems architect, prompt-generator planner, UX systems planner, data architect, and front-end implementation planner helping a complete beginner plan any professional AI prompt generator.
+    masterGeneratorPlanner: `You are helping a complete beginner create the full plan for their project.
 
-The completed Generator Foundation is the single source of truth.
+The Project Foundation has already been completed in this same chat.
 
-Your task is to create one universal Master Generator Planner that replaces separate Category, Input, Option Data, Preset, Logic, Prompt Assembly, and implementation-contract documents.
+Review the completed Foundation and use it as the source of truth.
 
-Do not generate HTML, CSS, or JavaScript.
+Do not ask the user to paste it again.
 
-Do not redesign or rename the approved generator.
+Do not repeat questions that were already answered.
 
-Do not require the user to supply low-level CSS class names or wrapper markup.
+Do not create code yet.
 
-You are responsible for defining every approved product, behavior, data, and implementation requirement needed by the Content & Design Builder and Generator Code Builder.
+Your job is to quietly make the smart planning decisions needed to build the project.
 
-────────────────────────
-SOURCE REVIEW
-────────────────────────
+Ask only six short questions about anything important that is still missing.
 
-Begin by asking the user to paste the completed Generator Foundation.
+Only ask about things such as:
 
-Review it fully.
-
-Preserve every approved decision.
-
-Ask only for genuinely missing information.
-
-────────────────────────
-UNIVERSAL IMPLEMENTATION RULE
-────────────────────────
-
-The completed planner must define all user-facing requirements and all functional identifiers required by later builders.
-
-The planner must assign exact stable IDs to unique functional elements and exact naming patterns to repeated functional elements.
-
-The planner does not need to preapprove every decorative CSS class.
-
-The later Generator Code Builder is allowed to create:
-
-• structural wrapper elements
-• reusable CSS classes
-• layout classes
-• visual-state classes
-• ARIA attributes
-• supporting data attributes
-• internal JavaScript variable names
-• functions
-• configuration objects
-• state objects
-• utilities
-• event delegation
-
-These implementation details do not count as inventing features when they implement approved requirements consistently.
-
-────────────────────────
-REQUIRED MASTER PLANNER
-────────────────────────
-
-Produce exactly these sections:
-
-# Master Generator Planner
-
-## 1. Generator Overview
-Include approved name, type, purpose, end user, problem solved, and final output.
-
-## 2. Complete User Workflow
-Describe the complete logical workflow from opening the generator to receiving and using the output.
-
-## 3. Page and Section Structure
-Define every major section in exact top-to-bottom order.
-
-For each section include:
-
-• section name
-• purpose
-• user-facing content
-• controls
-• outputs
-• visibility behavior
-• whether repeated, collapsible, conditional, or always visible
-• exact section ID when JavaScript, navigation, or ARIA requires one
-
-## 4. Approved Categories
-For every category include:
-
-• display name
-• purpose
-• order
-• internal key
-• stable category ID
-• required or optional
-• appears in final output
-• lock support
-• Randomize support
-• preset support
-
-## 5. Inputs and Controls
-For every input include:
-
-• display label
-• internal key
-• exact stable ID
-• parent category
-• input type
-• placeholder
-• helper text
-• default value
-• required or optional
+• final categories or sections
+• choices users need
+• buttons
+• extra features
 • selection limits
-• validation
-• lock behavior
-• Randomize behavior
-• preset behavior
-• prompt/output inclusion rule
-
-Supported universal input types include:
-
-• Dropdown
-• Single-Select Chip Group
-• Multi-Select Chip Group
-• Text Input
-• Textarea
-• Toggle
-• Number Input
-• Range Input
-• File Upload only when approved
-
-## 6. Exact Option Data
-Provide complete option lists for every selectable control.
-
-Do not use placeholders.
-
-For each option include:
-
-• display value
-• internal value if different
-• order
-• default status
-• conflict rules
-• Randomize eligibility
-
-For multi-select groups define:
-
-• None behavior if used
-• minimum selections
-• maximum selections
-• conflict rules
-• deselection rules
-• Randomize rules
-
-## 7. Repeated Component Contract
-For every approved repeated structure, define:
-
-• component name
-• maximum count
-• parent container ID
-• item ID pattern
-• nested control ID pattern
-• data attribute pattern
-• repeated action pattern
-• how JavaScript identifies each instance
-
-Examples may include:
-
-• Character 1–5 panels
-• product cards
-• scene cards
-• output cards
-• preset cards
-• history cards
-• accordion sections
-• variation cards
-
-Only define patterns for components approved by this generator.
-
-## 8. Button and Action Contract
-For every unique or repeated action include:
-
-• visible label
-• unique ID or repeated data-attribute pattern
-• purpose
-• enabled/disabled conditions
-• success behavior
-• error behavior
-• confirmation behavior
-• keyboard behavior
-
-Include where approved:
-
-• Generate
-• Randomize
-• Lock
-• Clear Category
-• Clear All
-• Apply Preset
-• Copy
-• Save
-• Delete
-• Generate Variation
-• Expand/Collapse
-• Modal Confirm
-• Modal Cancel
-
-## 9. Preset System
-Define the approved preset count.
-
-For every preset include:
-
-• preset ID
-• display name
-• purpose
-• exact values
-• custom text
-• locked values
-• expected output direction
-• Apply-button data attribute
-• active-preset behavior
-
-Every preset value must match approved option data.
-
-## 10. Application Behavior
-Define behavior for every approved feature.
-
-For each feature include:
-
-• trigger
-• conditions
-• state changes
-• visual result
-• error handling
-• edge cases
-
-Include where approved:
-
-• Generate
-• Randomize
-• Locks
-• Presets
-• Clear All
-• Copy
-• Save
-• History
-• Delete
-• Variations
-• Accordions
-• repeated panels
-• validation
-• empty states
-• loading
-• toast
-• modal
-
-## 11. Prompt or Output Assembly
-Define:
-
-• exact assembly order
-• inclusion rules
-• omission rules
-• duplicate prevention
-• None handling
-• multi-select formatting
-• custom text handling
-• preset handling
-• locked-field handling
-• variation handling
-• cleanup
-• final formatting
-• quality verification
-
-## 12. Output System
-For every output include:
-
-• output name
-• exact container ID
-• purpose
-• empty-state ID and message
-• generated-state behavior
-• Copy-button relationship
-• Save-button relationship
-• variation relationship
-• quality-check relationship
-• character-counter relationship
-• overflow behavior
-
-Clarify any relationship between a setup-level variation control and a separate variation-output section.
-
-## 13. History System
-If approved, define:
-
-• history container ID
-• history item ID pattern
-• Copy action pattern
-• Delete action pattern
-• empty-state ID
-• maximum saved items
-• persistence rule
-• clear-history behavior
-
-## 14. Toast and Modal Contract
-If approved, define exact IDs for:
-
-• toast region
-• modal container
-• modal title
-• modal message
-• confirm button
-• cancel button
-• close button if used
-
-Define focus behavior, Escape behavior, and trigger-return behavior.
-
-## 15. Validation and Quality Contract
-Define:
-
-• validation summary ID
-• error-list ID
-• field-level error relationship
-• required-field behavior
-• conflict behavior
-• selection-limit behavior
-• quality-result container ID
-• quality criteria
-• result format
-• empty-state behavior
-• success and warning states
-
-## 16. DOM and Selector Contract
-Provide one consolidated implementation contract containing:
-
-• every unique functional ID
-• every repeated ID pattern
-• every required data attribute
-• every required relationship between controls and containers
-• every repeated component pattern
-• every approved state hook
-• every required ARIA relationship
-• every approved empty state
-• every approved output container
-
-Do not list decorative CSS classes.
-
-State clearly:
-
-"The Generator Code Builder may create necessary structural wrappers, reusable CSS classes, visual-state classes, ARIA attributes, and supporting data attributes required to implement this approved plan. These implementation details do not count as inventing new features when they remain consistent across index.html, style.css, and script.js."
-
-## 17. Font Delivery Decision
-Choose one approved method:
-
-• Google Fonts
-• locally hosted fonts
-• browser-safe fallback stack
-
-Provide exact font families and weights or exact fallback stack.
-
-Do not leave font loading undecided.
-
-## 18. Responsive Requirements
-Define large desktop, desktop, tablet, large mobile, and small mobile behavior.
-
-## 19. Accessibility Requirements
-Define labels, headings, keyboard behavior, focus states, ARIA, reduced motion, modal focus, accordion behavior, and touch targets.
-
-## 20. JavaScript-Ready Data Summary
-Provide a structured summary of categories, inputs, options, presets, behaviors, output mappings, repeated patterns, and persistence rules.
-
-## 21. Content & Design Builder Handoff
-Provide the complete approved product and implementation contract needed for presentation planning.
-
-## 22. Generator Code Builder Handoff
-Provide a compact complete handoff containing:
-
-• section order
-• functional IDs
-• repeated naming patterns
-• required data attributes
-• option data
-• preset data
-• behaviors
-• output mappings
-• validation
-• toast/modal IDs
-• font-loading method
-• responsive rules
-• accessibility rules
-• implementation permission
-
-────────────────────────
-FINAL VALIDATION
-────────────────────────
-
-Before presenting the planner, silently verify:
-
-• every input has an ID
-• every selectable control has full options
-• every repeated component has a naming pattern
-• every output has a container ID
-• every repeated action has a data pattern
-• preset data is complete
-• modal/toast IDs are defined when approved
-• validation and empty states are defined
-• font loading is decided
-• the DOM and selector contract is complete
-• later builders can proceed without asking for missing IDs, classes, selectors, or markup relationships
-
-Do not stop because decorative class names were not manually approved.
-
-Begin by asking for the completed Generator Foundation.`,
-    contentDesignBuilder: `You are an expert UI/UX strategist, visual design architect, content planner, accessibility planner, and responsive interface designer helping a complete beginner design any professional AI prompt generator.
-
-The completed Generator Foundation and completed Master Generator Planner are the single source of truth.
-
-Your task is to create one complete Content & Design Builder document that defines presentation, layout, content, responsive behavior, and visual states without changing approved functionality.
-
-Do not generate HTML, CSS, or JavaScript.
-
-Do not redefine categories, options, IDs, data attributes, presets, logic, prompt assembly, or functional relationships already approved by the Master Generator Planner.
-
-────────────────────────
-SOURCE REVIEW
-────────────────────────
-
-Begin by asking for:
-
-• completed Generator Foundation
-• completed Master Generator Planner
-• optional reference image
-
-Review all provided materials.
-
-Preserve every approved decision.
-
-────────────────────────
-REFERENCE IMAGE DIRECTION
-────────────────────────
-
-If a reference image is used:
-
-• analyze composition
-• palette
-• hierarchy
-• typography direction
-• spacing
-• card treatment
-• button treatment
-• background style
-• visual mood
-• qualities to borrow
-• qualities not to copy
-
-If no image is used:
-
-• continue without one
-• do not force a placeholder
-
-────────────────────────
-REQUIRED OUTPUT
-────────────────────────
-
-Produce exactly:
-
-# Content & Design Builder
-
-## 1. Visual Identity
-Define exact color values for primary, secondary, accent, backgrounds, surfaces, text, borders, hover, focus, success, warning, and error.
-
-## 2. Typography
-Define display, body, button, and label fonts, exact weights, sizes, line heights, letter spacing, and mobile adjustments.
-
-Use the approved font-loading method from the Master Generator Planner.
-
-## 3. Page Structure Presentation
-Use the exact section order and functional IDs approved by the Master Generator Planner.
-
-For every section define:
-
-• width
-• alignment
-• spacing
-• background
-• border
-• shadow
-• typography
+• important rules
+
+If the user does not know, recommend the strongest option for their project.
+
+Do not overwhelm them with long lists.
+
+After the missing information is approved, create exactly:
+
+# Master Project Planner
+
+## 1. Project Overview
+
+Include only:
+
+• project name
+• project type
+• main idea
+• what it creates
+• reference-image direction
+• important rules
+
+## 2. Page Sections
+
+List the final page sections in order.
+
+For each section, include one short sentence explaining what appears there.
+
+## 3. Categories and Choices
+
+For every category include only:
+
+• category name
+• whether users choose one or more than one
+• complete final choice list
+• whether custom text is allowed
+
+Do not explain Randomize, Locks, or Presets under every category.
+
+Automatically make all suitable categories work with Randomize, Locks, and Presets.
+
+## 4. Buttons
+
+List the final approved buttons.
+
+After each button, include one short sentence explaining what it does.
+
+Do not write long button instructions.
+
+## 5. Features
+
+List the final approved features.
+
+After each feature, include one short sentence explaining how it works.
+
+Automatically connect approved features to the correct categories, buttons, and results.
+
+## 6. Presets
+
+Choose the final presets automatically from the approved category choices.
+
+Only provide:
+
+• preset name
+• one short description
+
+Do not list every category value used inside each preset.
+
+The future code-building step should create the exact preset combinations automatically from the approved options.
+
+## 7. Final Result
+
+Briefly explain:
+
+• what the project creates
+• the order of the final result
+• what should be left out when empty
+• how repeated wording should be avoided
+
+Keep this section short.
+
+## 8. Final Build Summary
+
+Provide one compact summary containing:
+
+• project name
+• page sections
+• category names
+• buttons
+• features
+• preset names
+• important rules
+
+Do not repeat the full category option lists here.
+
+## 9. Ready for the Content and Design Builder
+
+Write a short handoff for the next prompt in this same chat.
+
+Do not repeat the entire planner.
+
+End with:
+
+“Master Planner complete. Paste the Content and Design Builder prompt next.”
+
+Do not create HTML.
+
+Do not create CSS.
+
+Do not create JavaScript.
+
+Do not use technical coding language.
+
+Do not include IDs, classes, selectors, data names, or code structure.
+
+Do not create the visual design yet.
+
+Do not repeat information across sections.
+
+Keep the completed Master Planner focused, clear, and reasonably short.
+
+Begin by reviewing the completed Project Foundation already in this chat.`,
+    contentDesignBuilder: `You are helping a complete beginner plan the look, layout, and wording for their project.
+
+The Project Foundation and Master Project Planner have already been completed in this same chat.
+
+Use them as the source of truth.
+
+Do not ask the user to paste them again.
+
+Do not change the approved categories, choices, buttons, presets, features, rules, or results.
+
+Do not create code yet.
+
+Your job is to decide how the finished project should look and how the information should be arranged.
+
+Use the approved reference image as the main visual guide.
+
+Study:
+
+• colors
+• fonts
 • layout
-• desktop behavior
-• tablet behavior
-• mobile behavior
+• spacing
+• card style
+• button style
+• background
+• overall mood
+• image placement
 
-## 4. Component Presentation
-Define visual treatment for every approved component type, including where applicable:
+Ask only the most important missing design questions.
 
-• accordions
-• category cards
-• repeated panels
-• chip groups
+Ask no more than six short questions at one time.
+
+Questions may include:
+
+1. Which colors should be used?
+
+2. Should the style feel luxury, bold, playful, clean, feminine, professional, minimal, or another direction?
+
+3. Should the page use a header image, video, logo, or text-only header?
+
+4. Should categories appear as cards, dropdowns, tabs, accordions, or another simple layout?
+
+5. Should the output appear at the bottom, in a side panel, or in a pop-up area?
+
+6. Are there any design elements the project must include or avoid?
+
+Do not ask questions that were already answered.
+
+If the user does not know, recommend the best choice based on the project and reference image.
+
+Keep recommendations simple.
+
+After the design direction is approved, create exactly:
+
+# Content and Design Plan
+
+## 1. Overall Look
+
+Describe:
+
+• visual style
+• mood
+• colors
+• background
+• overall feel
+
+## 2. Fonts
+
+Choose:
+
+• heading font
+• body font
+• button font
+
+Keep the font choices easy to read and suitable for the project.
+
+## 3. Page Order
+
+List every page section from top to bottom.
+
+For each section explain:
+
+• what appears there
+• how it should be arranged
+• whether it should always show or open when clicked
+
+## 4. Header Area
+
+Describe:
+
+• title
+• subtitle
+• logo
+• image or video
+• introductory text
+• top buttons
+
+Only include approved items.
+
+## 5. Category Design
+
+Explain how the approved categories should appear.
+
+This may include:
+
+• cards
 • dropdowns
-• text inputs
-• textareas
-• toggles
-• range controls
-• preset cards
-• output cards
-• variation cards
-• history cards
-• quality results
-• toast
-• modal
-• validation summary
-• empty states
+• selection buttons
+• tabs
+• collapsible sections
+• text boxes
+• sliders
+• uploads
 
-Do not invent unapproved components.
+Do not add new categories.
 
-## 5. Button System
-Define hierarchy, icon treatment, size, placement, default, hover, active, focus, disabled, loading, and mobile behavior for every approved action.
+## 6. Button Design
 
-## 6. State System
-Define visual treatment for:
+Describe how each approved button should look and where it should appear.
 
-• empty
-• selected
-• locked
-• active
-• generated
-• copied
-• saved
-• success
-• warning
-• error
-• loading
-• disabled
-• validation failure
-• active preset
-• open accordion
-• modal open
+Include:
 
-## 7. Output Presentation
-Define presentation for main output, variations, counters, quality results, history, Copy/Save actions, long content, and mobile overflow.
+• main buttons
+• secondary buttons
+• small action buttons
+• selected appearance
+• disabled appearance
 
-## 8. Responsive Layout
-Define large desktop, desktop, tablet, large mobile, and small mobile behavior.
+Do not rename approved buttons unless the user approves it.
 
-## 9. Accessibility Presentation
-Define contrast, focus visibility, touch targets, screen-reader text placement, reduced motion, modal visibility, and accordion indicators.
+## 7. Preset Design
 
-## 10. Interface Copy
-Provide final approved user-facing copy for title, subtitle, section headings, helper text, buttons, empty states, validation messages, success messages, footer, and disclaimer.
+If presets are approved, explain:
 
-Do not change functional labels already approved unless the user approves the revision.
+• where they appear
+• how each preset card looks
+• how users know which preset is active
+• how presets should display on mobile
 
-## 11. Image and Icon Direction
-Define header image, reference image, decorative imagery, aspect ratio, crop behavior, icon family, icon sizes, fallback behavior, and placement.
+## 8. Output Design
 
-## 12. CSS Builder Handoff
-Provide:
+Explain:
 
-• exact colors
-• typography
-• approved font-loading method
-• spacing system
-• radius system
-• shadow system
-• component presentation
-• state presentation
-• responsive rules
-• accessibility rules
-• image rules
-• interface copy
-• non-negotiable requirements
+• where the finished result appears
+• how the result card looks
+• where Copy, Save, Download, or Variation buttons appear
+• how long results should display
+• what users see before anything is generated
 
-## 13. Generator Code Builder Handoff
-Provide the exact presentation rules that must be implemented while preserving all IDs, data attributes, relationships, repeated patterns, behaviors, and option data from the Master Generator Planner.
+## 9. Extra Feature Design
 
-────────────────────────
-FINAL VALIDATION
-────────────────────────
+Explain how approved features should appear.
 
-Confirm:
+This may include:
 
-• every approved functional component has a presentation plan
-• no IDs or data contracts were changed
-• font loading matches the planner
-• section order matches the planner
-• responsive behavior is complete
-• accessibility presentation is complete
-• interface copy is complete
-• no code has been generated
-• the Generator Code Builder can proceed without inventing design decisions
+• History
+• Save
+• Locks
+• Randomize
+• Variations
+• Multiple characters
+• Multiple scenes
+• Custom text
+• Uploads
+• Quality checker
 
-Begin by asking for the completed Generator Foundation and Master Generator Planner.`,
+Only include approved features.
+
+## 10. Messages and Instructions
+
+Write the final simple wording for:
+
+• page title
+• subtitle
+• section headings
+• helper text
+• button labels
+• empty messages
+• error messages
+• success messages
+• footer
+
+Keep all wording short and beginner-friendly.
+
+## 11. Images and Icons
+
+Explain:
+
+• which images are needed
+• where they appear
+• image shape and size
+• icon style
+• what should happen if an image is missing
+• which decorative elements should be avoided
+
+## 12. Mobile Design
+
+Explain how the project should look on a phone.
+
+Include:
+
+• stacking sections
+• button size
+• category layout
+• output layout
+• image size
+• text size
+• spacing
+
+Keep mobile use simple and easy to tap.
+
+## 13. Final Design Summary
+
+Provide one clean summary containing:
+
+• visual style
+• colors
+• fonts
+• page order
+• section layout
+• button design
+• preset design
+• output design
+• feature design
+• messages
+• image direction
+• mobile design
+• non-negotiable design rules
+
+## 14. Ready for the Code Builder
+
+Summarize the approved design decisions so the next prompt in this same chat can build the project without asking the same questions again.
+
+End with:
+
+“Content and Design Plan complete. Paste the Code Builder prompt next.”
+
+Do not create HTML.
+
+Do not create CSS.
+
+Do not create JavaScript.
+
+Do not use technical coding language.
+
+Do not ask for IDs, classes, selectors, data names, or code structure.
+
+Do not continue into the next step.
+
+Begin by reviewing the completed Foundation and Master Planner already in this chat.`,
     generatorCodeBuilder: `You are an expert HTML, CSS, JavaScript, accessibility, and front-end application architect specializing in professional AI prompt generators.
 
 Your task is to generate the complete working code for any approved AI prompt generator.
@@ -4430,7 +4210,6 @@ function setupLaunchChecklistCard() {
   });
 }
 
-
 /* =========================================================
    DAY 2 — REUSABLE APP WELCOME PAGE MASTER PROMPT
    ========================================================= */
@@ -4446,10 +4225,7 @@ function setupReusableWelcomeMasterPrompt() {
   let copyResetTimer;
 
   copyButton.addEventListener("click", async () => {
-    const copied = await copyText(
-      promptBox.value,
-      "HTML template copied!",
-    );
+    const copied = await copyText(promptBox.value, "HTML template copied!");
 
     if (!copied) return;
 
@@ -4472,8 +4248,7 @@ function setupReusableWelcomeMasterPrompt() {
     const temporaryLink = document.createElement("a");
 
     temporaryLink.href = downloadUrl;
-    temporaryLink.download =
-      "reusable-app-welcome-page-template.html";
+    temporaryLink.download = "reusable-app-welcome-page-template.html";
 
     document.body.appendChild(temporaryLink);
     temporaryLink.click();
