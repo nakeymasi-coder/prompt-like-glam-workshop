@@ -73,6 +73,10 @@
             <i data-lucide="notebook-pen"></i>
             <span>Notebook</span>
           </a>
+          <a class="nav-link" data-page="prompts" href="#">
+            <i data-lucide="bookmark-check"></i>
+            <span>Saved Prompts</span>
+          </a>
           <a class="nav-link" data-page="replays" href="#">
             <i data-lucide="monitor-play"></i>
             <span>Replay Library</span>
@@ -171,7 +175,7 @@
               <div class="lesson-complete-area setup-video-buttons">
                 <a
                   class="gold-btn"
-                  href="https://drive.google.com/file/d/1N8kTFKopdiMyAs8iDAP_A_BvXRiU6sZZ/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1-p_ZhEkv-ckb2821290MXmFIVccRfGC3/view?usp=sharing"
                   id="githubSetupLink"
                   rel="noopener noreferrer"
                   target="_blank"
@@ -180,7 +184,7 @@
                 </a>
                 <a
                   class="gold-btn"
-                  href="https://drive.google.com/file/d/1_nwHC5dOAbIUglMMKvv2lcunn0wqQjfR/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1KKLF5JFjt7avnuthXSyosbEe-5eFNjca/view?usp=sharing"
                   id="netlifySetupLink"
                   rel="noopener noreferrer"
                   target="_blank"
@@ -189,20 +193,13 @@
                 </a>
                 <a
                   class="gold-btn"
-                  href="https://drive.google.com/file/d/1A7SLwe1ZIqLkmNXNPFoVp4vM1bDYfrrN/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1k4pb-S3MF683Ypfb4CCY3ShRJADzXuga/view?usp=sharing"
                   id="vsCodeSetupLink"
                   rel="noopener noreferrer"
                   target="_blank"
                 >
                   🎥 Watch VS Code Setup
                 </a>
-                <button
-                  class="gold-btn apps-needed-btn"
-                  data-open-page="vscode-apps"
-                  type="button"
-                >
-                  Apps You’ll Need →
-                </button>
               </div>
               <p style="margin-top: 20px">
                 <strong>Tip:</strong> You can also open the official GitHub,
@@ -213,105 +210,6 @@
             </article>
           </div>
         </section>
-        <!-- ============================= -->
-        <!-- PAGE: VS CODE APPS YOU WILL NEED -->
-        <!-- ============================= -->
-        <section class="page" id="vscode-apps">
-          <div class="page-header">
-            <span class="eyebrow">VS Code Setup</span>
-            <h1>Apps You’ll Need</h1>
-            <p>
-              Install these four beginner-friendly VS Code extensions before you
-              begin building. Use each image to make sure you choose the correct
-              extension.
-            </p>
-          </div>
-
-          <div class="vscode-apps-toolbar">
-            <button
-              class="secondary-btn"
-              data-open-page="requirements"
-              type="button"
-            >
-              ← Back to Setup Videos
-            </button>
-          </div>
-
-          <div class="vscode-apps-grid">
-            <article class="vscode-app-card">
-              <div class="vscode-app-card-heading">
-                <span class="lesson-tag">Extension 1</span>
-                <h2>Prettier — Code Formatter</h2>
-                <p>
-                  Cleans up and formats your code so it stays neat and readable.
-                </p>
-              </div>
-              <img
-                src="assets/images/vscode-apps/01-prettier.png"
-                alt="How to find and install the Prettier Code Formatter extension in Visual Studio Code"
-                loading="lazy"
-              />
-            </article>
-
-            <article class="vscode-app-card">
-              <div class="vscode-app-card-heading">
-                <span class="lesson-tag">Extension 2</span>
-                <h2>Live Server by Ritwick Dey</h2>
-                <p>
-                  Opens your project in a browser and shows your changes as you
-                  work.
-                </p>
-              </div>
-              <img
-                src="assets/images/vscode-apps/02-live-server.png"
-                alt="How to find and install Live Server by Ritwick Dey in Visual Studio Code"
-                loading="lazy"
-              />
-            </article>
-
-            <article class="vscode-app-card">
-              <div class="vscode-app-card-heading">
-                <span class="lesson-tag">Extension 3</span>
-                <h2>Auto Close Tag by Jun Han</h2>
-                <p>
-                  Automatically adds the matching closing HTML tag while you
-                  type.
-                </p>
-              </div>
-              <img
-                src="assets/images/vscode-apps/03-auto-close-tag.png"
-                alt="How to find and install Auto Close Tag by Jun Han in Visual Studio Code"
-                loading="lazy"
-              />
-            </article>
-
-            <article class="vscode-app-card">
-              <div class="vscode-app-card-heading">
-                <span class="lesson-tag">Extension 4</span>
-                <h2>Auto Rename Tag by Jun Han</h2>
-                <p>
-                  Updates both matching HTML tags when you rename one of them.
-                </p>
-              </div>
-              <img
-                src="assets/images/vscode-apps/04-auto-rename-tag.png"
-                alt="How to find and install Auto Rename Tag by Jun Han in Visual Studio Code"
-                loading="lazy"
-              />
-            </article>
-          </div>
-
-          <div class="vscode-apps-toolbar vscode-apps-toolbar-bottom">
-            <button
-              class="secondary-btn"
-              data-open-page="requirements"
-              type="button"
-            >
-              ← Back to Setup Videos
-            </button>
-          </div>
-        </section>
-
         <!-- ============================= -->
         <!-- PAGE: DASHBOARD -->
         <!-- ============================= -->
@@ -2129,6 +2027,53 @@ Before writing the listing, ask me for:
           </div>
         </section>
         <!-- ============================= -->
+        <!-- PAGE: SAVED PROMPTS -->
+        <!-- ============================= -->
+        <section class="page" id="prompts">
+          <div class="page-header">
+            <span class="eyebrow">Your Prompt Library</span>
+            <h1>Saved Prompts</h1>
+            <p>Save your favorite prompts here so you can find, copy, and reuse them anytime.</p>
+          </div>
+
+          <div class="prompt-library-layout">
+            <article class="lesson-block prompt-save-card">
+              <span class="lesson-tag">Add a Prompt</span>
+              <h2>Save a New Prompt</h2>
+              <label for="savedPromptTitle">Prompt Name</label>
+              <input id="savedPromptTitle" type="text" maxlength="80" placeholder="Example: Luxury Birthday Flyer" />
+
+              <label for="savedPromptText">Your Prompt</label>
+              <textarea id="savedPromptText" rows="10" placeholder="Paste or type your prompt here..."></textarea>
+
+              <div class="prompt-library-actions">
+                <button class="gold-btn" id="savePromptLibraryBtn" type="button">Save Prompt</button>
+                <button class="secondary-btn" id="clearPromptFormBtn" type="button">Clear Form</button>
+              </div>
+              <p class="prompt-library-note">Saved prompts stay in this browser on this device.</p>
+            </article>
+
+            <article class="lesson-block prompt-list-card">
+              <div class="prompt-list-heading">
+                <div>
+                  <span class="lesson-tag">Your Collection</span>
+                  <h2>My Saved Prompts</h2>
+                </div>
+                <span class="prompt-count" id="savedPromptCount">0 saved</span>
+              </div>
+
+              <div class="prompt-empty-state" id="savedPromptsEmpty">
+                <i data-lucide="bookmark"></i>
+                <h3>No saved prompts yet</h3>
+                <p>Your saved prompts will appear here.</p>
+              </div>
+
+              <div class="saved-prompts-list" id="savedPromptsList"></div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================= -->
         <!-- PAGE: REPLAYS -->
         <!-- ============================= -->
         <section class="page" id="replays">
@@ -2303,7 +2248,7 @@ Before writing the listing, ask me for:
                   <figure class="guide-screenshot">
                     <img
                       alt="Right-click the ZIP file"
-                      src="assets/images/getting-started/download-zip.png"
+                      src="assets/images/getting-started/extract-zip.png"
                     />
                     <figcaption>
                       Right-click the Workshop Companion ZIP file.
