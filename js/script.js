@@ -3561,7 +3561,7 @@ const REPLAY_DATA = {
     title: "Day 1 Replay",
     message:
       "Day 1 replay is where students review project setup, HTML, CSS, JavaScript, generator buttons, and testing.",
-    url: "",
+    url: "https://drive.google.com/file/d/1q4EOnJhgF7nMPv4_iGmuO7s-VnTfNmmn/view?usp=sharing",
   },
 
   day2: {
@@ -4431,7 +4431,6 @@ function setupLaunchChecklistCard() {
   });
 }
 
-
 /* =========================================================
    DAY 2 — REUSABLE APP WELCOME PAGE MASTER PROMPT
    ========================================================= */
@@ -4447,10 +4446,7 @@ function setupReusableWelcomeMasterPrompt() {
   let copyResetTimer;
 
   copyButton.addEventListener("click", async () => {
-    const copied = await copyText(
-      promptBox.value,
-      "HTML template copied!",
-    );
+    const copied = await copyText(promptBox.value, "HTML template copied!");
 
     if (!copied) return;
 
@@ -4473,8 +4469,7 @@ function setupReusableWelcomeMasterPrompt() {
     const temporaryLink = document.createElement("a");
 
     temporaryLink.href = downloadUrl;
-    temporaryLink.download =
-      "reusable-app-welcome-page-template.html";
+    temporaryLink.download = "reusable-app-welcome-page-template.html";
 
     document.body.appendChild(temporaryLink);
     temporaryLink.click();
@@ -4487,8 +4482,6 @@ function setupReusableWelcomeMasterPrompt() {
     showToast("HTML template downloaded!");
   });
 }
-
-
 
 /* ==========================
    SAVED PROMPTS LIBRARY
@@ -4542,7 +4535,9 @@ function renderSavedPrompts() {
     copyButton.className = "gold-btn";
     copyButton.type = "button";
     copyButton.textContent = "Copy Prompt";
-    copyButton.addEventListener("click", () => copyText(prompt.text, "Prompt copied."));
+    copyButton.addEventListener("click", () =>
+      copyText(prompt.text, "Prompt copied."),
+    );
 
     const deleteButton = document.createElement("button");
     deleteButton.className = "secondary-btn saved-prompt-delete";
@@ -4551,7 +4546,9 @@ function renderSavedPrompts() {
     deleteButton.addEventListener("click", () => {
       const shouldDelete = window.confirm(`Delete “${prompt.title}”?`);
       if (!shouldDelete) return;
-      storeSavedPrompts(getSavedPrompts().filter((item) => item.id !== prompt.id));
+      storeSavedPrompts(
+        getSavedPrompts().filter((item) => item.id !== prompt.id),
+      );
       renderSavedPrompts();
       showToast("Prompt deleted.");
     });
