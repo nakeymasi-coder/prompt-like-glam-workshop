@@ -77,6 +77,12 @@
             <i data-lucide="bookmark-check"></i>
             <span>Saved Prompts</span>
           </a>
+
+          <a class="nav-link" data-page="challenges" href="#">
+            <i data-lucide="trophy"></i>
+            <span>Challenges</span>
+          </a>
+
           <a class="nav-link" data-page="replays" href="#">
             <i data-lucide="monitor-play"></i>
             <span>Replay Library</span>
@@ -2033,7 +2039,10 @@ Before writing the listing, ask me for:
           <div class="page-header">
             <span class="eyebrow">Your Prompt Library</span>
             <h1>Saved Prompts</h1>
-            <p>Save your favorite prompts here so you can find, copy, and reuse them anytime.</p>
+            <p>
+              Save your favorite prompts here so you can find, copy, and reuse
+              them anytime.
+            </p>
           </div>
 
           <div class="prompt-library-layout">
@@ -2041,16 +2050,39 @@ Before writing the listing, ask me for:
               <span class="lesson-tag">Add a Prompt</span>
               <h2>Save a New Prompt</h2>
               <label for="savedPromptTitle">Prompt Name</label>
-              <input id="savedPromptTitle" type="text" maxlength="80" placeholder="Example: Luxury Birthday Flyer" />
+              <input
+                id="savedPromptTitle"
+                type="text"
+                maxlength="80"
+                placeholder="Example: Luxury Birthday Flyer"
+              />
 
               <label for="savedPromptText">Your Prompt</label>
-              <textarea id="savedPromptText" rows="10" placeholder="Paste or type your prompt here..."></textarea>
+              <textarea
+                id="savedPromptText"
+                rows="10"
+                placeholder="Paste or type your prompt here..."
+              ></textarea>
 
               <div class="prompt-library-actions">
-                <button class="gold-btn" id="savePromptLibraryBtn" type="button">Save Prompt</button>
-                <button class="secondary-btn" id="clearPromptFormBtn" type="button">Clear Form</button>
+                <button
+                  class="gold-btn"
+                  id="savePromptLibraryBtn"
+                  type="button"
+                >
+                  Save Prompt
+                </button>
+                <button
+                  class="secondary-btn"
+                  id="clearPromptFormBtn"
+                  type="button"
+                >
+                  Clear Form
+                </button>
               </div>
-              <p class="prompt-library-note">Saved prompts stay in this browser on this device.</p>
+              <p class="prompt-library-note">
+                Saved prompts stay in this browser on this device.
+              </p>
             </article>
 
             <article class="lesson-block prompt-list-card">
@@ -2071,6 +2103,30 @@ Before writing the listing, ask me for:
               <div class="saved-prompts-list" id="savedPromptsList"></div>
             </article>
           </div>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: CHALLENGES -->
+        <!-- ============================= -->
+
+        <section class="page" id="challenges">
+          <div class="page-header">
+            <span class="eyebrow">Something New Is Coming</span>
+            <h1>Challenges</h1>
+            <p>
+              New creative challenges are coming soon to help you practice,
+              build, and strengthen your skills.
+            </p>
+          </div>
+
+          <article class="lesson-block">
+            <span class="lesson-tag">Coming Soon</span>
+            <h2>Creative Challenges Are On The Way</h2>
+            <p>
+              Check back soon for guided challenges, creative exercises, and new
+              ways to put what you learned into action.
+            </p>
+          </article>
         </section>
 
         <!-- ============================= -->
