@@ -73,14 +73,6 @@
             <i data-lucide="notebook-pen"></i>
             <span>Notebook</span>
           </a>
-          <a class="nav-link" data-page="prompts" href="#">
-            <i data-lucide="file-text"></i>
-            <span>Prompts</span>
-          </a>
-          <a class="nav-link" data-page="challenges" href="#">
-            <i data-lucide="sparkles"></i>
-            <span>Challenges</span>
-          </a>
           <a class="nav-link" data-page="replays" href="#">
             <i data-lucide="monitor-play"></i>
             <span>Replay Library</span>
@@ -204,6 +196,13 @@
                 >
                   🎥 Watch VS Code Setup
                 </a>
+                <button
+                  class="gold-btn apps-needed-btn"
+                  data-open-page="vscode-apps"
+                  type="button"
+                >
+                  Apps You’ll Need →
+                </button>
               </div>
               <p style="margin-top: 20px">
                 <strong>Tip:</strong> You can also open the official GitHub,
@@ -214,6 +213,71 @@
             </article>
           </div>
         </section>
+        <!-- ============================= -->
+        <!-- PAGE: VS CODE APPS YOU WILL NEED -->
+        <!-- ============================= -->
+        <section class="page" id="vscode-apps">
+          <div class="page-header">
+            <span class="eyebrow">VS Code Setup</span>
+            <h1>Apps You’ll Need</h1>
+            <p>
+              Install these four beginner-friendly VS Code extensions before
+              you begin building. Use each image to make sure you choose the
+              correct extension.
+            </p>
+          </div>
+
+          <div class="vscode-apps-toolbar">
+            <button class="secondary-btn" data-open-page="requirements" type="button">
+              ← Back to Setup Videos
+            </button>
+          </div>
+
+          <div class="vscode-apps-grid">
+            <article class="vscode-app-card">
+              <div class="vscode-app-card-heading">
+                <span class="lesson-tag">Extension 1</span>
+                <h2>Prettier — Code Formatter</h2>
+                <p>Cleans up and formats your code so it stays neat and readable.</p>
+              </div>
+              <img src="assets/images/vscode-apps/01-prettier.png" alt="How to find and install the Prettier Code Formatter extension in Visual Studio Code" loading="lazy" />
+            </article>
+
+            <article class="vscode-app-card">
+              <div class="vscode-app-card-heading">
+                <span class="lesson-tag">Extension 2</span>
+                <h2>Live Server by Ritwick Dey</h2>
+                <p>Opens your project in a browser and shows your changes as you work.</p>
+              </div>
+              <img src="assets/images/vscode-apps/02-live-server.png" alt="How to find and install Live Server by Ritwick Dey in Visual Studio Code" loading="lazy" />
+            </article>
+
+            <article class="vscode-app-card">
+              <div class="vscode-app-card-heading">
+                <span class="lesson-tag">Extension 3</span>
+                <h2>Auto Close Tag by Jun Han</h2>
+                <p>Automatically adds the matching closing HTML tag while you type.</p>
+              </div>
+              <img src="assets/images/vscode-apps/03-auto-close-tag.png" alt="How to find and install Auto Close Tag by Jun Han in Visual Studio Code" loading="lazy" />
+            </article>
+
+            <article class="vscode-app-card">
+              <div class="vscode-app-card-heading">
+                <span class="lesson-tag">Extension 4</span>
+                <h2>Auto Rename Tag by Jun Han</h2>
+                <p>Updates both matching HTML tags when you rename one of them.</p>
+              </div>
+              <img src="assets/images/vscode-apps/04-auto-rename-tag.png" alt="How to find and install Auto Rename Tag by Jun Han in Visual Studio Code" loading="lazy" />
+            </article>
+          </div>
+
+          <div class="vscode-apps-toolbar vscode-apps-toolbar-bottom">
+            <button class="secondary-btn" data-open-page="requirements" type="button">
+              ← Back to Setup Videos
+            </button>
+          </div>
+        </section>
+
         <!-- ============================= -->
         <!-- PAGE: DASHBOARD -->
         <!-- ============================= -->
@@ -2030,57 +2094,6 @@ Before writing the listing, ask me for:
             </div>
           </div>
         </section>
-        <!-- ============================= -->
-        <!-- PAGE: PROMPTS -->
-        <!-- ============================= -->
-        <section class="page" id="prompts">
-          <div class="page-header">
-            <span class="eyebrow">Prompt Vault</span>
-            <h1>Save Your Best Prompts</h1>
-            <p>Keep finished prompts organized in this companion. They stay saved on this device until you delete them.</p>
-          </div>
-          <div class="prompt-vault-layout">
-            <div class="card prompt-vault-editor">
-              <label for="savedPromptTitle">Prompt name</label>
-              <input id="savedPromptTitle" class="prompt-vault-input" type="text" placeholder="Example: Luxury Brand Photo Prompt" />
-              <label for="savedPromptText">Your prompt</label>
-              <textarea id="savedPromptText" class="prompt-vault-textarea" placeholder="Paste or write your prompt here..."></textarea>
-              <div class="prompt-vault-actions">
-                <button class="primary-btn" id="savePromptBtn" type="button">Save Prompt</button>
-                <button class="secondary-btn" id="clearPromptFormBtn" type="button">Clear</button>
-              </div>
-            </div>
-            <div class="card prompt-vault-library">
-              <div class="saved-prompts-heading">
-                <div>
-                  <span class="eyebrow">My Library</span>
-                  <h2>Saved Prompts</h2>
-                </div>
-                <span class="status-pill" id="savedPromptCount">0 saved</span>
-              </div>
-              <div id="savedPromptsList" class="saved-prompts-list">
-                <p class="empty-prompts-message">No saved prompts yet.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ============================= -->
-        <!-- PAGE: CHALLENGES -->
-        <!-- ============================= -->
-        <section class="page" id="challenges">
-          <div class="page-header">
-            <span class="eyebrow">Challenges</span>
-            <h1>Creative Challenges Are Coming Soon</h1>
-            <p>New guided challenges will be added here to help you practice, finish projects, and keep building.</p>
-          </div>
-          <div class="card challenges-coming-soon">
-            <div class="coming-soon-mark">Coming Soon</div>
-            <h2>Your next creative challenge is being prepared.</h2>
-            <p>Check back for focused assignments, clear steps, and practical projects you can complete without feeling overwhelmed.</p>
-          </div>
-        </section>
-
         <!-- ============================= -->
         <!-- PAGE: REPLAYS -->
         <!-- ============================= -->

@@ -991,17 +991,19 @@ Begin by asking:
 
 "What is the approved generator name from your Generator Foundation, and do you already have a finished project folder on your Desktop that contains index.html, css, js, and assets?"`,
 
-    masterGeneratorPlanner: `You are an expert AI systems architect, prompt-generator planner, UX planner, and front-end implementation strategist helping a complete beginner plan any professional AI prompt generator.
+    masterGeneratorPlanner: `You are an expert AI systems architect, prompt-generator planner, UX systems planner, data architect, and front-end implementation planner helping a complete beginner plan any professional AI prompt generator.
 
 The completed Generator Foundation is the single source of truth.
 
-Your task is to create one concise universal Master Generator Planner that defines the generator’s approved structure, categories, controls, options, behavior, output logic, and implementation requirements.
+Your task is to create one universal Master Generator Planner that replaces separate Category, Input, Option Data, Preset, Logic, Prompt Assembly, and implementation-contract documents.
 
 Do not generate HTML, CSS, or JavaScript.
 
 Do not redesign or rename the approved generator.
 
-Do not repeat the Generator Foundation unless the information is necessary for implementation.
+Do not require the user to supply low-level CSS class names or wrapper markup.
+
+You are responsible for defining every approved product, behavior, data, and implementation requirement needed by the Content & Design Builder and Generator Code Builder.
 
 ────────────────────────
 SOURCE REVIEW
@@ -1015,311 +1017,395 @@ Preserve every approved decision.
 
 Ask only for genuinely missing information.
 
-Do not ask the user for low-level CSS classes, wrapper names, internal JavaScript function names, or decorative markup.
-
 ────────────────────────
-LENGTH AND DETAIL LIMIT
+UNIVERSAL IMPLEMENTATION RULE
 ────────────────────────
 
-Keep the complete planner between 2,500 and 4,000 words.
+The completed planner must define all user-facing requirements and all functional identifiers required by later builders.
 
-Do not create a giant technical contract.
+The planner must assign exact stable IDs to unique functional elements and exact naming patterns to repeated functional elements.
 
-Do not repeat the same rule in several sections.
+The planner does not need to preapprove every decorative CSS class.
 
-Do not include exhaustive accessibility explanations, full responsive measurement charts, or long developer handoffs.
+The later Generator Code Builder is allowed to create:
 
-Use tables only when they make categories, controls, options, or presets easier to understand.
+• structural wrapper elements
+• reusable CSS classes
+• layout classes
+• visual-state classes
+• ARIA attributes
+• supporting data attributes
+• internal JavaScript variable names
+• functions
+• configuration objects
+• state objects
+• utilities
+• event delegation
+
+These implementation details do not count as inventing features when they implement approved requirements consistently.
 
 ────────────────────────
-REQUIRED OUTPUT
+REQUIRED MASTER PLANNER
 ────────────────────────
 
-Produce exactly:
+Produce exactly these sections:
 
 # Master Generator Planner
 
 ## 1. Generator Overview
-Briefly include:
+Include approved name, type, purpose, end user, problem solved, and final output.
 
-• approved name
-• generator type
-• purpose
-• end user
-• problem solved
-• final output
+## 2. Complete User Workflow
+Describe the complete logical workflow from opening the generator to receiving and using the output.
 
-Keep this section concise.
+## 3. Page and Section Structure
+Define every major section in exact top-to-bottom order.
 
-## 2. User Workflow
-Describe the complete user journey from opening the generator to receiving the final output.
-
-Use a short numbered sequence.
-
-Do not repeat the same workflow later.
-
-## 3. Page Structure
-List each major section in exact top-to-bottom order.
-
-For each section include only:
+For each section include:
 
 • section name
 • purpose
-• main controls
-• main output
+• user-facing content
+• controls
+• outputs
 • visibility behavior
-• exact ID only when JavaScript, navigation, output, modal, toast, or accessibility requires it
+• whether repeated, collapsible, conditional, or always visible
+• exact section ID when JavaScript, navigation, or ARIA requires one
 
-Do not include decorative wrapper IDs.
-
-## 4. Categories and Controls
-For every approved category include:
+## 4. Approved Categories
+For every category include:
 
 • display name
+• purpose
+• order
 • internal key
 • stable category ID
 • required or optional
-• supports lock
-• supports Randomize
-• supports presets
 • appears in final output
+• lock support
+• Randomize support
+• preset support
 
+## 5. Inputs and Controls
 For every input include:
 
-• label
-• key
+• display label
+• internal key
 • exact stable ID
 • parent category
 • input type
-• default
+• placeholder
+• helper text
+• default value
 • required or optional
-• selection limit when applicable
-• validation rule
-• output inclusion rule
+• selection limits
+• validation
+• lock behavior
+• Randomize behavior
+• preset behavior
+• prompt/output inclusion rule
 
-Keep helper text and placeholders brief.
+Supported universal input types include:
 
-## 5. Option Data
+• Dropdown
+• Single-Select Chip Group
+• Multi-Select Chip Group
+• Text Input
+• Textarea
+• Toggle
+• Number Input
+• Range Input
+• File Upload only when approved
+
+## 6. Exact Option Data
 Provide complete option lists for every selectable control.
 
 Do not use placeholders.
 
-For each option provide only:
+For each option include:
 
 • display value
-• internal value when different
-
-Also define:
-
-• default option
-• None behavior when used
-• minimum and maximum selections
+• internal value if different
+• order
+• default status
 • conflict rules
-• Randomize eligibility only when special handling is needed
+• Randomize eligibility
 
-Do not create a large table with repeated Yes and No columns for every option.
+For multi-select groups define:
 
-## 6. Presets
-Include presets only when approved.
+• None behavior if used
+• minimum selections
+• maximum selections
+• conflict rules
+• deselection rules
+• Randomize rules
 
-For each preset include:
+## 7. Repeated Component Contract
+For every approved repeated structure, define:
 
-• preset ID
-• display name
+• component name
+• maximum count
+• parent container ID
+• item ID pattern
+• nested control ID pattern
+• data attribute pattern
+• repeated action pattern
+• how JavaScript identifies each instance
+
+Examples may include:
+
+• Character 1–5 panels
+• product cards
+• scene cards
+• output cards
+• preset cards
+• history cards
+• accordion sections
+• variation cards
+
+Only define patterns for components approved by this generator.
+
+## 8. Button and Action Contract
+For every unique or repeated action include:
+
+• visible label
+• unique ID or repeated data-attribute pattern
 • purpose
-• exact values
-• protected user-written fields
-• lock behavior
+• enabled/disabled conditions
+• success behavior
+• error behavior
+• confirmation behavior
+• keyboard behavior
 
-Every preset value must match approved option data.
-
-Do not explain preset behavior repeatedly in other sections.
-
-## 7. Actions and Behavior
-Define the behavior of only approved actions:
+Include where approved:
 
 • Generate
 • Randomize
 • Lock
 • Clear Category
-• Clear Tab or Clear All
+• Clear All
 • Apply Preset
 • Copy
-• Save when approved
-• History when approved
-• Variations when approved
-• Accordions
-• Validation
-• Toast
-• Modal
+• Save
+• Delete
+• Generate Variation
+• Expand/Collapse
+• Modal Confirm
+• Modal Cancel
 
-For each action include:
+## 9. Preset System
+Define the approved preset count.
+
+For every preset include:
+
+• preset ID
+• display name
+• purpose
+• exact values
+• custom text
+• locked values
+• expected output direction
+• Apply-button data attribute
+• active-preset behavior
+
+Every preset value must match approved option data.
+
+## 10. Application Behavior
+Define behavior for every approved feature.
+
+For each feature include:
 
 • trigger
-• what it changes
-• what it must preserve
-• error or confirmation behavior
+• conditions
+• state changes
+• visual result
+• error handling
+• edge cases
 
-Keep each action concise.
+Include where approved:
 
-## 8. Output Assembly
+• Generate
+• Randomize
+• Locks
+• Presets
+• Clear All
+• Copy
+• Save
+• History
+• Delete
+• Variations
+• Accordions
+• repeated panels
+• validation
+• empty states
+• loading
+• toast
+• modal
+
+## 11. Prompt or Output Assembly
 Define:
 
-• exact output order
+• exact assembly order
 • inclusion rules
 • omission rules
+• duplicate prevention
 • None handling
 • multi-select formatting
-• custom-text handling
-• duplicate prevention
+• custom text handling
+• preset handling
 • locked-field handling
+• variation handling
 • cleanup
-• final quality check
+• final formatting
+• quality verification
 
-Do not repeat full category descriptions.
-
-## 9. Output and Validation Contract
+## 12. Output System
 For every output include:
 
 • output name
-• exact output container ID
-• empty-state message
-• related Generate button
-• related Copy button
-• update-needed behavior
+• exact container ID
+• purpose
+• empty-state ID and message
+• generated-state behavior
+• Copy-button relationship
+• Save-button relationship
+• variation relationship
 • quality-check relationship
+• character-counter relationship
+• overflow behavior
 
-Also include:
+Clarify any relationship between a setup-level variation control and a separate variation-output section.
 
-• required fields
-• selection limits
-• conflict handling
+## 13. History System
+If approved, define:
+
+• history container ID
+• history item ID pattern
+• Copy action pattern
+• Delete action pattern
+• empty-state ID
+• maximum saved items
+• persistence rule
+• clear-history behavior
+
+## 14. Toast and Modal Contract
+If approved, define exact IDs for:
+
+• toast region
+• modal container
+• modal title
+• modal message
+• confirm button
+• cancel button
+• close button if used
+
+Define focus behavior, Escape behavior, and trigger-return behavior.
+
+## 15. Validation and Quality Contract
+Define:
+
 • validation summary ID
-• quality-result ID
+• error-list ID
+• field-level error relationship
+• required-field behavior
+• conflict behavior
+• selection-limit behavior
+• quality-result container ID
+• quality criteria
+• result format
+• empty-state behavior
+• success and warning states
 
-Do not write every possible validation message unless specifically requested.
+## 16. DOM and Selector Contract
+Provide one consolidated implementation contract containing:
 
-## 10. Essential Implementation Contract
-Provide one compact implementation checklist containing:
-
-• required unique functional IDs
-• repeated ID patterns
-• required data attributes
-• tab-to-panel relationships
-• category-to-control relationships
-• output mappings
-• approved state values
-• toast and modal IDs when approved
-• font-loading decision
-• persistence decision
+• every unique functional ID
+• every repeated ID pattern
+• every required data attribute
+• every required relationship between controls and containers
+• every repeated component pattern
+• every approved state hook
+• every required ARIA relationship
+• every approved empty state
+• every approved output container
 
 Do not list decorative CSS classes.
 
-Do not repeat every input ID already listed in Section 4 unless needed to resolve a relationship.
-
 State clearly:
 
-"The Generator Code Builder may create necessary structural wrappers, reusable CSS classes, visual-state classes, ARIA attributes, internal variables, functions, configuration objects, and utilities when they implement this approved plan without adding new user-facing features."
+"The Generator Code Builder may create necessary structural wrappers, reusable CSS classes, visual-state classes, ARIA attributes, and supporting data attributes required to implement this approved plan. These implementation details do not count as inventing new features when they remain consistent across index.html, style.css, and script.js."
 
-## 11. Responsive and Accessibility Requirements
-Use only:
+## 17. Font Delivery Decision
+Choose one approved method:
 
-• Desktop
-• Tablet
-• Mobile
+• Google Fonts
+• locally hosted fonts
+• browser-safe fallback stack
 
-Describe responsive behavior in plain language.
+Provide exact font families and weights or exact fallback stack.
 
-Include one concise accessibility checklist covering:
+Do not leave font loading undecided.
 
-• visible labels
-• keyboard access
-• visible focus
-• readable contrast
-• screen-reader-friendly feedback
-• modal focus when approved
-• reduced-motion support
-• usable touch controls
-• no horizontal overflow
+## 18. Responsive Requirements
+Define large desktop, desktop, tablet, large mobile, and small mobile behavior.
 
-Do not include breakpoint numbers, exact pixel measurements, detailed ARIA tutorials, or repeated accessibility contracts.
+## 19. Accessibility Requirements
+Define labels, headings, keyboard behavior, focus states, ARIA, reduced motion, modal focus, accordion behavior, and touch targets.
 
-## 12. Builder Handoff
-Provide one short handoff for the Content & Design Builder and Generator Code Builder.
+## 20. JavaScript-Ready Data Summary
+Provide a structured summary of categories, inputs, options, presets, behaviors, output mappings, repeated patterns, and persistence rules.
 
-Include only:
+## 21. Content & Design Builder Handoff
+Provide the complete approved product and implementation contract needed for presentation planning.
 
-• approved section order
-• categories and controls
-• option data
-• presets
-• behaviors
-• outputs
-• validation
+## 22. Generator Code Builder Handoff
+Provide a compact complete handoff containing:
+
+• section order
 • functional IDs
+• repeated naming patterns
 • required data attributes
-• responsive direction
-• accessibility direction
-• non-negotiable restrictions
-
-Do not create separate long Content & Design Builder and Generator Code Builder handoff sections.
-
-────────────────────────
-DO NOT INCLUDE
-────────────────────────
-
-Do not include:
-
-• 20 or more sections
-• repeated Generator Foundation content
-• repeated workflow explanations
-• repeated option data
-• repeated preset data
-• repeated validation rules
-• repeated accessibility rules
-• repeated responsive rules
-• full DOM inventories unless necessary
-• every decorative selector
-• CSS spacing systems
-• CSS radius systems
-• CSS shadow systems
-• detailed typography scales
-• detailed breakpoint charts
-• long ARIA implementation lessons
-• JavaScript-ready summaries that duplicate previous sections
-• separate oversized builder handoffs
-• unapproved history, Save, variation, or dashboard features
+• option data
+• preset data
+• behaviors
+• output mappings
+• validation
+• toast/modal IDs
+• font-loading method
+• responsive rules
+• accessibility rules
+• implementation permission
 
 ────────────────────────
-FINAL QUALITY CHECK
+FINAL VALIDATION
 ────────────────────────
 
 Before presenting the planner, silently verify:
 
-• every approved category is included
-• every input has a stable ID
-• every selectable control has complete options
-• every preset uses valid values
+• every input has an ID
+• every selectable control has full options
+• every repeated component has a naming pattern
 • every output has a container ID
-• every major action is defined
-• validation is complete
-• output assembly is clear
-• implementation relationships are usable
-• no approved feature was removed
-• no unapproved feature was added
-• repeated content was removed
-• the planner stays within the required length
+• every repeated action has a data pattern
+• preset data is complete
+• modal/toast IDs are defined when approved
+• validation and empty states are defined
+• font loading is decided
+• the DOM and selector contract is complete
+• later builders can proceed without asking for missing IDs, classes, selectors, or markup relationships
+
+Do not stop because decorative class names were not manually approved.
 
 Begin by asking for the completed Generator Foundation.`,
     contentDesignBuilder: `You are an expert UI/UX strategist, visual design architect, content planner, accessibility planner, and responsive interface designer helping a complete beginner design any professional AI prompt generator.
 
 The completed Generator Foundation and completed Master Generator Planner are the single source of truth.
 
-Your task is to create one concise Content & Design Builder document that explains the generator’s visual direction, content presentation, layout, responsive experience, and important interface states without changing approved functionality.
+Your task is to create one complete Content & Design Builder document that defines presentation, layout, content, responsive behavior, and visual states without changing approved functionality.
 
 Do not generate HTML, CSS, or JavaScript.
 
-Do not repeat categories, options, IDs, data attributes, presets, validation logic, prompt assembly, randomization rules, lock behavior, modal behavior, or functional relationships already approved by the Master Generator Planner.
+Do not redefine categories, options, IDs, data attributes, presets, logic, prompt assembly, or functional relationships already approved by the Master Generator Planner.
 
 ────────────────────────
 SOURCE REVIEW
@@ -1335,25 +1421,28 @@ Review all provided materials.
 
 Preserve every approved decision.
 
-If no reference image is provided:
+────────────────────────
+REFERENCE IMAGE DIRECTION
+────────────────────────
+
+If a reference image is used:
+
+• analyze composition
+• palette
+• hierarchy
+• typography direction
+• spacing
+• card treatment
+• button treatment
+• background style
+• visual mood
+• qualities to borrow
+• qualities not to copy
+
+If no image is used:
 
 • continue without one
-• do not force an upload
-• do not create a placeholder
-
-────────────────────────
-LENGTH AND DETAIL LIMIT
-────────────────────────
-
-Keep the complete document between 1,000 and 1,800 words.
-
-Do not create an exhaustive design system.
-
-Do not turn the document into a CSS specification, developer handoff, technical contract, or second Master Generator Planner.
-
-Use plain, beginner-friendly language.
-
-Do not expand simple visual decisions into long technical explanations.
+• do not force a placeholder
 
 ────────────────────────
 REQUIRED OUTPUT
@@ -1363,239 +1452,130 @@ Produce exactly:
 
 # Content & Design Builder
 
-## 1. Visual Direction
-Briefly define:
+## 1. Visual Identity
+Define exact color values for primary, secondary, accent, backgrounds, surfaces, text, borders, hover, focus, success, warning, and error.
 
-• overall design style
-• visual mood
-• background treatment
-• card treatment
-• button treatment
-• beginner experience
-• qualities to borrow from an approved reference image
-• qualities not to copy
-• visual elements that must not be used
+## 2. Typography
+Define display, body, button, and label fonts, exact weights, sizes, line heights, letter spacing, and mobile adjustments.
 
-Limit this section to two or three short paragraphs.
+Use the approved font-loading method from the Master Generator Planner.
 
-## 2. Colors and Typography
-List only:
+## 3. Page Structure Presentation
+Use the exact section order and functional IDs approved by the Master Generator Planner.
 
-• primary color
-• secondary color
-• accent color
-• main background color
-• main surface color
-• main text color
-• success color
-• warning color
-• error color
+For every section define:
 
-Include exact color values when approved.
+• width
+• alignment
+• spacing
+• background
+• border
+• shadow
+• typography
+• layout
+• desktop behavior
+• tablet behavior
+• mobile behavior
 
-Do not create multiple light, dark, soft, muted, hover, border, or background versions of every color.
+## 4. Component Presentation
+Define visual treatment for every approved component type, including where applicable:
 
-List:
-
-• one display font
-• one body font
-• where each font is used
-
-Use the approved font decision from the Master Generator Planner.
-
-Do not include:
-
-• font-size tables
-• font-weight charts
-• line-height values
-• letter-spacing values
-• fallback stacks
-• font-loading instructions
-
-## 3. Page Layout
-Preserve the exact approved section order from the Master Generator Planner.
-
-Briefly describe the visual presentation of:
-
-• header
-• introduction or instructions
-• progress area when approved
-• tabs or navigation
-• category controls
-• action buttons
-• output area
-• quality result when approved
-• notifications
-• modal when approved
-• footer when approved
-
-Use simple visual descriptions.
-
-Example:
-
-"Use a clean two-column workspace on larger screens, with controls on the left and the generated output on the right."
-
-Do not include:
-
-• exact widths
-• maximum widths
-• column percentages
-• exact gaps
-• padding values
-• margin values
-• sticky-position calculations
-• container measurements
-
-## 4. Component Appearance
-Briefly describe only the approved components, such as:
-
-• tabs
 • accordions
-• chips
-• inputs
+• category cards
+• repeated panels
+• chip groups
 • dropdowns
-• upload controls
+• text inputs
+• textareas
+• toggles
+• range controls
 • preset cards
-• buttons
 • output cards
-• alerts
-• toasts
-• modals
+• variation cards
+• history cards
+• quality results
+• toast
+• modal
+• validation summary
 • empty states
-
-Keep each component description to one or two sentences.
-
-Combine related visual states into each component description.
-
-Mention selected, active, locked, disabled, loading, error, warning, success, or generated states only when they visually affect that component.
-
-Do not create a separate detailed state system.
 
 Do not invent unapproved components.
 
-## 5. Responsive Behavior
-Use only:
+## 5. Button System
+Define hierarchy, icon treatment, size, placement, default, hover, active, focus, disabled, loading, and mobile behavior for every approved action.
 
-• Desktop
-• Tablet
-• Mobile
+## 6. State System
+Define visual treatment for:
 
-Describe behavior in plain language.
+• empty
+• selected
+• locked
+• active
+• generated
+• copied
+• saved
+• success
+• warning
+• error
+• loading
+• disabled
+• validation failure
+• active preset
+• open accordion
+• modal open
 
-Explain:
+## 7. Output Presentation
+Define presentation for main output, variations, counters, quality results, history, Copy/Save actions, long content, and mobile overflow.
 
-• whether the layout uses columns or stacks
-• how tabs behave
-• how buttons behave
-• how cards and controls resize
-• how long outputs remain readable
-• how horizontal overflow is prevented
+## 8. Responsive Layout
+Define large desktop, desktop, tablet, large mobile, and small mobile behavior.
 
-Do not include:
+## 9. Accessibility Presentation
+Define contrast, focus visibility, touch targets, screen-reader text placement, reduced motion, modal visibility, and accordion indicators.
 
-• breakpoint numbers
-• exact device widths
-• side-padding measurements
-• mobile font measurements
-• card-width measurements
-• toast-width measurements
-• modal-width measurements
+## 10. Interface Copy
+Provide final approved user-facing copy for title, subtitle, section headings, helper text, buttons, empty states, validation messages, success messages, footer, and disclaimer.
 
-## 6. Accessibility and Important Restrictions
-Provide one concise checklist covering:
+Do not change functional labels already approved unless the user approves the revision.
 
-• readable contrast
-• visible labels
-• keyboard access
-• visible focus states
-• comfortable touch controls
-• screen-reader-friendly feedback
-• reduced-motion support
-• no horizontal page overflow
+## 11. Image and Icon Direction
+Define header image, reference image, decorative imagery, aspect ratio, crop behavior, icon family, icon sizes, fallback behavior, and placement.
 
-Preserve all approved restrictions.
+## 12. CSS Builder Handoff
+Provide:
 
-Do not include technical ARIA implementation instructions.
+• exact colors
+• typography
+• approved font-loading method
+• spacing system
+• radius system
+• shadow system
+• component presentation
+• state presentation
+• responsive rules
+• accessibility rules
+• image rules
+• interface copy
+• non-negotiable requirements
 
-Do not repeat the complete validation, DOM, selector, or accessibility contracts from the Master Generator Planner.
-
-## 7. Approved Interface Copy
-Include only the main user-facing wording:
-
-• application title
-• subtitle
-• tab or main navigation names
-• main Generate button labels
-• Randomize label when approved
-• Clear label when approved
-• Copy label
-• main empty-state instruction
-• main validation message
-• main success message
-• main update-needed message when approved
-• footer wording when approved
-• disclaimer when approved
-
-Do not write separate copy for every field, accordion, error type, toast, modal, quality result, and status unless the wording was specifically approved or requested.
+## 13. Generator Code Builder Handoff
+Provide the exact presentation rules that must be implemented while preserving all IDs, data attributes, relationships, repeated patterns, behaviors, and option data from the Master Generator Planner.
 
 ────────────────────────
-DO NOT INCLUDE
+FINAL VALIDATION
 ────────────────────────
-
-Do not include:
-
-• CSS Builder Handoff
-• Generator Code Builder Handoff
-• developer handoff sections
-• CSS instructions
-• JavaScript instructions
-• HTML structure instructions
-• spacing systems
-• radius systems
-• shadow systems
-• icon-size tables
-• typography scales
-• device breakpoint charts
-• exact responsive measurements
-• exact touch-target measurements
-• repeated IDs
-• repeated data attributes
-• repeated option data
-• repeated presets
-• repeated validation logic
-• repeated prompt assembly rules
-• repeated randomization rules
-• repeated lock behavior
-• repeated modal behavior
-• repeated application behavior
-• full technical accessibility contracts
-
-The Master Generator Planner remains the single source of truth for functionality, IDs, data, logic, validation, prompt assembly, presets, and technical relationships.
-
-The Content & Design Builder must not restate those systems.
-
-────────────────────────
-FINAL QUALITY CHECK
-────────────────────────
-
-Before completing the document, silently remove:
-
-• repeated rules
-• developer-level measurements
-• technical implementation details
-• duplicate responsive instructions
-• duplicate color shades
-• content already fully defined by the Master Generator Planner
-• explanations that do not change the final visual direction
 
 Confirm:
 
-• the design direction is clear
-• the layout is understandable
-• approved functionality was preserved
-• no code was generated
-• the document remains concise
-• the Generator Code Builder can use the Master Generator Planner for technical details and this document for visual direction
+• every approved functional component has a presentation plan
+• no IDs or data contracts were changed
+• font loading matches the planner
+• section order matches the planner
+• responsive behavior is complete
+• accessibility presentation is complete
+• interface copy is complete
+• no code has been generated
+• the Generator Code Builder can proceed without inventing design decisions
 
 Begin by asking for the completed Generator Foundation and Master Generator Planner.`,
     generatorCodeBuilder: `You are an expert HTML, CSS, JavaScript, accessibility, and front-end application architect specializing in professional AI prompt generators.
@@ -3581,7 +3561,7 @@ const REPLAY_DATA = {
     title: "Day 1 Replay",
     message:
       "Day 1 replay is where students review project setup, HTML, CSS, JavaScript, generator buttons, and testing.",
-    url: "https://drive.google.com/file/d/1mz60XemeXKKyxwwhk0OCmD5mpNKYNysm/preview",
+    url: "",
   },
 
   day2: {
@@ -4364,8 +4344,6 @@ function runAppHealthCheck() {
     "sell",
 
     "notebook",
-    "prompts",
-    "challenges",
     "replays",
 
     "bonuses",
@@ -4509,115 +4487,6 @@ function setupReusableWelcomeMasterPrompt() {
   });
 }
 
-
-/* ==========================
-   SAVED PROMPTS
-   ========================== */
-
-function setupSavedPrompts() {
-  const storageKey = "glamWorkshopSavedPrompts";
-  const titleInput = byId("savedPromptTitle");
-  const promptInput = byId("savedPromptText");
-  const saveButton = byId("savePromptBtn");
-  const clearButton = byId("clearPromptFormBtn");
-  const list = byId("savedPromptsList");
-  const count = byId("savedPromptCount");
-
-  if (!titleInput || !promptInput || !saveButton || !list) return;
-
-  let prompts = [];
-  try {
-    prompts = JSON.parse(localStorage.getItem(storageKey) || "[]");
-    if (!Array.isArray(prompts)) prompts = [];
-  } catch {
-    prompts = [];
-  }
-
-  const saveToStorage = () => {
-    localStorage.setItem(storageKey, JSON.stringify(prompts));
-  };
-
-  const render = () => {
-    count.textContent = `${prompts.length} saved`;
-    if (!prompts.length) {
-      list.innerHTML = '<p class="empty-prompts-message">No saved prompts yet.</p>';
-      return;
-    }
-
-    list.innerHTML = "";
-    prompts.forEach((item) => {
-      const card = document.createElement("article");
-      card.className = "saved-prompt-item";
-
-      const heading = document.createElement("div");
-      heading.className = "saved-prompt-item-heading";
-
-      const title = document.createElement("h3");
-      title.textContent = item.title;
-
-      const date = document.createElement("span");
-      date.textContent = new Date(item.createdAt).toLocaleDateString();
-
-      const body = document.createElement("p");
-      body.textContent = item.text;
-
-      const actions = document.createElement("div");
-      actions.className = "saved-prompt-item-actions";
-
-      const copy = document.createElement("button");
-      copy.className = "secondary-btn";
-      copy.type = "button";
-      copy.textContent = "Copy";
-      copy.addEventListener("click", () => copyText(item.text, "Prompt copied!"));
-
-      const remove = document.createElement("button");
-      remove.className = "secondary-btn danger-btn";
-      remove.type = "button";
-      remove.textContent = "Delete";
-      remove.addEventListener("click", () => {
-        prompts = prompts.filter((prompt) => prompt.id !== item.id);
-        saveToStorage();
-        render();
-        showToast("Prompt deleted.");
-      });
-
-      heading.append(title, date);
-      actions.append(copy, remove);
-      card.append(heading, body, actions);
-      list.append(card);
-    });
-  };
-
-  const clearForm = () => {
-    titleInput.value = "";
-    promptInput.value = "";
-    titleInput.focus();
-  };
-
-  saveButton.addEventListener("click", () => {
-    const title = titleInput.value.trim();
-    const text = promptInput.value.trim();
-    if (!title || !text) {
-      showToast("Add a prompt name and prompt text first.");
-      return;
-    }
-
-    prompts.unshift({
-      id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
-      title,
-      text,
-      createdAt: new Date().toISOString(),
-    });
-    saveToStorage();
-    render();
-    clearForm();
-    showToast("Prompt saved!");
-  });
-
-  clearButton?.addEventListener("click", clearForm);
-  render();
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   initializeCoreEngine();
   setupWorkshopLockPopup();
@@ -4628,7 +4497,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeFlipCards();
   setupLaunchChecklistCard();
   setupReusableWelcomeMasterPrompt();
-  setupSavedPrompts();
   initializeFinalPolish();
 
   console.log("Prompt Generator Companion fully initialized.");
