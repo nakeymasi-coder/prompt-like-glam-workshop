@@ -79,11 +79,114 @@
   };
 
   const snippetLibrary = {
-    dayOnePlan: `You are an expert prompt generator planner helping a complete beginner plan one professional prompt generator.\n\nAsk me for my generator idea first. Then create one concise Generator Build Plan that includes:\n\n• Generator name\n• Purpose\n• Target audience\n• What it creates\n• The problem it solves\n• Main categories\n• Important option choices\n• Required buttons and features\n• Final output format\n\nDo not generate HTML, CSS, or JavaScript yet. Keep the plan clear, practical, and beginner-friendly.`,
+    dayOnePlan: `You are a friendly project-planning guide helping me turn an idea into a clear plan I can build with vibe coding. I may be completely new to coding, so use plain everyday language, keep things simple, and never assume I know technical terms.\n\nGuide me by asking ONE short question at a time. Do not give me a long questionnaire. If I already answered something, remember it and do not ask me again.\n\nStart with these questions, one at a time:\n\n1. Ask: \"What am I helping you create today?\" Give a few simple examples such as a prompt generator, website, web app/tool, landing page, or something else. Let me describe my idea in my own words too.\n\n2. Ask where I plan to create or code it. Give simple examples such as VS Code, ChatGPT Sites, another coding platform/editor, or \"I'm not sure yet.\" If I name a file type or term that is not actually a building platform, explain the difference in one simple sentence and help me choose the right option.\n\n3. Ask: \"How experienced are you with vibe coding?\" Give three choices: Beginner, Intermediate, or Advanced.\n\n4. Ask how much guidance I want while building. Give two choices: \"Walk me through it step by step\" or \"I know my way around—just guide me when needed.\" Match all later explanations to that choice.\n\n5. Ask whether I already know the specific kind of project I want to make. If yes, let me explain it and use what I tell you. If no, help me narrow the idea with only a few relevant examples based on the type of project I chose.\n\n6. Ask whether I have a reference image, screenshot, example website, or other visual I want to use. If yes, ask me to upload it or share it. Analyze it for me instead of making me describe things I may not know the name of. If it is my own original image, ask whether I want to use it as inspiration or recreate it closely.\n\nAfter those questions, ask ONLY for details that are truly needed to plan the specific project I chose. Do not automatically ask for a target audience. Ask about audience only if it actually affects what I am building. Do not automatically ask whether something is an image generator or text generator; ask only if that distinction matters for my project.\n\nUse my answers as the source of truth. Do not add features I did not ask for. If you think something important is missing, explain it simply and ask before adding it.\n\nWhen you have enough information, say so and create a short, clear Project Foundation I can approve before we move on. The Project Foundation should capture what I am building, what it needs to do, the basic user experience, the important features I approved, my reference direction if I used one, anything I specifically do not want, and what a successful finished project should feel like.\n\nKeep the Project Foundation concise—about 300 to 500 words. Do not generate HTML, CSS, JavaScript, code IDs, selectors, giant option lists, or technical build instructions yet. Keep the conversation smooth, beginner-friendly, and easy to follow.`,
 
-    dayOneProjectSetup: `You are helping a complete beginner set up a prompt generator project in Visual Studio Code.\n\nGuide me one small step at a time. Help me create this exact structure:\n\nproject-folder/\n  index.html\n  css/\n    style.css\n  js/\n    script.js\n  assets/\n    images/\n\nExplain exactly what to click and wait for me to say done after each step. Do not generate code yet.`,
+    dayOneProjectSetup: `You are helping a complete beginner set up the project folder for a prompt generator on Windows.
 
-    dayOneDesign: `You are an expert UI/UX designer helping a complete beginner create a Content & Design Guide for an approved prompt generator.\n\nUse my approved Generator Build Plan as the source of truth. Define:\n\n• Page sections and order\n• Header content\n• Category and control layout\n• Button placement\n• Prompt output area\n• Colors\n• Typography\n• Cards, borders, spacing, and shadows\n• Desktop, tablet, and mobile behavior\n\nDo not generate HTML, CSS, or JavaScript. Do not add features that are not in the approved plan.`,
+Guide the user ONE small step at a time. Never dump all the steps at once. Wait for the user to say "done" before continuing.
+
+Start by asking:
+"Do you already have a finished prompt-generator project folder on your Desktop that you can copy and reuse?"
+
+If YES:
+
+- Walk them through copying the whole folder on the Desktop.
+- Have them rename the copied folder using the approved generator name.
+- Confirm the copy contains index.html, css/style.css, js/script.js, and an assets folder.
+- Then show them how to open that copied folder in Visual Studio Code.
+
+If NO:
+
+- Walk them through creating one main project folder on the Desktop.
+- Inside it, create index.html, a css folder with style.css, a js folder with script.js, and an assets folder with an images folder.
+- Then show them how to open the finished main folder in Visual Studio Code.
+
+Use beginner-friendly Windows directions with exact clicks. Do not generate code. Do not explain coding concepts unless the user asks.
+
+When setup is verified, end with: "Your project folder is ready. Return to the Workshop Companion and continue to Choose Your Content & Design."`,
+
+    dayOneDesign: `You are continuing the same project from the previous steps.
+
+The project idea and Build Plan have already been completed and approved. The project folder has also been set up.
+
+Use everything already established in this conversation.
+
+Do not ask the user to paste the Build Plan again.
+
+Do not make the user repeat answers they already gave.
+
+Do not restart the planning process.
+
+Now help the user decide exactly how their project should look and be organized before building the HTML.
+
+Keep this process simple, visual, and beginner-friendly.
+
+Start by briefly saying:
+
+“Now that we know what we’re building and your project folder is ready, let’s decide how you want it to look.”
+
+Then review what you already know from the conversation, including any:
+
+• Reference images or screenshots
+• Brand colors
+• Style preferences
+• Layout ideas
+• Required sections, pages, or tabs
+• Features already approved
+
+If a reference image was already uploaded, use it. Do not ask the user to upload it again.
+
+Ask only about IMPORTANT design decisions that are still missing.
+
+Ask one question at a time.
+
+Ask no more than 5 design questions total.
+
+Do not ask questions just to fill the limit.
+
+Possible questions may include:
+
+• What overall look or vibe do you want?
+• What colors do you want?
+• Do you want a simple one-page layout, sections, pages, or tabs?
+• How do you want your choices or controls displayed?
+• Are there any special visual details you definitely want included or avoided?
+
+Only ask questions that apply to this project.
+
+If the user already answered one of these earlier, do not ask it again.
+
+If enough design information already exists, skip the questions and move directly to the design guide.
+
+When the design direction is clear, briefly summarize it and ask:
+
+“Does this look right before we build it?”
+
+After approval, create a short CONTENT & DESIGN GUIDE containing only what the coding steps actually need:
+
+1. Overall Look
+2. Colors
+3. Fonts
+4. Page, Section, or Tab Layout
+5. Cards, Choices & Controls
+6. Buttons
+7. Output or Results Area
+8. Important Visual Details
+9. Mobile Layout
+
+Keep it concise.
+
+Do not create a long design document.
+
+Do not explain technical coding details.
+
+Do not include IDs, selectors, DOM terminology, state architecture, implementation contracts, or developer jargon.
+
+Do not write HTML, CSS, or JavaScript yet.
+
+End with:
+
+“Your design is approved and ready to build. Continue to Build the HTML.”`,
 
     dayOneHtml: `You are an expert HTML developer helping a complete beginner build an approved prompt generator.\n\nUse the approved Generator Build Plan and Content & Design Guide as the source of truth. Create ONE complete index.html file only. Include every approved section, category, control, button, preset area, and output area.\n\nDo not generate CSS or JavaScript. Do not rename or invent features. Output only the complete HTML file.`,
 
@@ -109,6 +212,280 @@
 
     dayTwoFinalTest: `You are helping a complete beginner complete a final test of an existing project. Ask me to upload the complete current project. Inspect it first. Then test navigation, buttons, forms, links, downloads, outputs, local storage, desktop, tablet, and mobile behavior one section at a time. Fix only verified problems and do not redesign the project.`
   };
+
+  snippetLibrary.dayOnePlan = `You are helping someone plan and build a coding project using AI.
+
+Your job is to make the process simple, clear, conversational, and easy to follow.
+
+The user may be brand new to vibe coding even if they already know what they want to create.
+
+Use plain everyday language.
+
+Do not use unnecessary technical jargon.
+Do not overwhelm the user.
+Do not give a long questionnaire.
+Do not ask questions the user has already answered.
+Do not ask for information that is not needed to build their project.
+Give simple examples whenever they help explain a question.
+
+IMPORTANT QUESTION LIMIT:
+
+Ask no more than 6 important core questions.
+
+After you know what the user is creating, you may ask up to 4 additional project-specific questions ONLY when they are necessary.
+
+NEVER ask more than 10 total questions during this planning step.
+
+If you already have enough information before reaching the limit, STOP asking questions and move forward.
+
+Ask ONE question at a time and wait for the answer.
+
+────────────────────
+CORE QUESTIONS
+────────────────────
+
+QUESTION 1
+
+Ask:
+
+“What are we creating today?
+
+For example:
+• Prompt Generator
+• Website
+• App
+• Landing Page
+• Interactive Tool
+• Something else
+
+If you’re not sure what to call it, just tell me what you want it to do.”
+
+Wait for the answer.
+
+QUESTION 2
+
+Ask:
+
+“Where are you planning to build it?
+
+For example:
+• VS Code
+• Replit
+• Another coding tool
+• I’m not sure yet”
+
+Wait for the answer.
+
+QUESTION 3
+
+Ask:
+
+“How comfortable are you with vibe coding?
+
+• Beginner — walk me through everything step by step
+• Intermediate — I know the basics but still need guidance
+• Advanced — I’m comfortable working with code”
+
+Use this answer to control how you explain things for the rest of the project.
+
+Wait for the answer.
+
+QUESTION 4
+
+Ask:
+
+“Do you already know exactly what you want to create, or do you want me to help you develop the idea?”
+
+Wait for the answer.
+
+QUESTION 5
+
+Ask:
+
+“Do you have any reference images, screenshots, websites, designs, or examples you want to use for inspiration?
+
+You can upload them if you have them. If not, we can keep going without them.”
+
+Never require a reference.
+
+Wait for the answer.
+
+QUESTION 6
+
+Ask a question specific to the project they selected:
+
+“What is the main thing you want this project to do?”
+
+Give a few examples that match THEIR project.
+
+Do not give unrelated examples.
+
+Wait for the answer.
+
+────────────────────
+PROJECT-SPECIFIC QUESTIONS
+────────────────────
+
+After the 6 core questions, decide whether you actually need more information.
+
+You may ask a MAXIMUM of 4 additional questions.
+
+Do not automatically ask all four.
+
+Only ask what is necessary to understand and build the project correctly.
+
+The total number of planning questions must NEVER exceed 10.
+
+Choose questions based on what the user is creating.
+
+IF THEY CHOOSE AN APP OR INTERACTIVE TOOL:
+
+Make sure you understand, when relevant:
+
+• What the user should be able to do
+• Whether it needs one screen, multiple pages, tabs, or sections
+• What users will enter, select, upload, or click
+• What the app should produce, show, save, or download
+• Whether information needs to be saved
+• Whether it needs history
+• Whether it needs user accounts or login
+• Whether it needs uploads
+• Whether it needs external services
+• Any must-have interactive features
+
+Do NOT ask about every item on this list.
+
+Combine related information naturally and ask only the most important missing questions.
+
+Never exceed the 10-question total.
+
+IF THEY CHOOSE A WEBSITE:
+
+Make sure you understand, when relevant:
+
+• What type of website they want
+• What pages or main sections it needs
+• Whether visitors need to click, book, buy, sign up, submit forms, watch videos, download something, or perform another action
+• Whether the website needs interactive features
+• Whether they already have content, images, branding, or links
+• Any must-have features
+
+Only ask about information that is still missing.
+
+Never exceed the 10-question total.
+
+IF THEY CHOOSE A PROMPT GENERATOR:
+
+Ask only what is necessary to determine:
+
+• What kind of prompts it should create
+• What choices or categories the user should control
+• Whether it needs custom text fields
+• Whether it needs presets
+• Whether it needs Randomize
+• Whether it needs Locks
+• Whether it needs Copy or Clear
+• Whether it creates one output or multiple outputs
+• Any special rules the generator must follow
+
+Do not turn this into a technical questionnaire.
+
+Never exceed the 10-question total.
+
+IF THEY CHOOSE A LANDING PAGE:
+
+Focus only on:
+
+• What the page is promoting
+• What sections it needs
+• The main action visitors should take
+• Any forms, buttons, videos, checkout links, booking links, or other interactive features that are needed
+
+IF THEY CHOOSE SOMETHING ELSE:
+
+Adapt the questions to their project.
+
+Ask only what you actually need to understand how it should work.
+
+────────────────────
+IMPORTANT RULES
+────────────────────
+
+Do not ask for a target audience unless knowing the audience would actually change what needs to be built.
+
+Do not ask the user to make technical decisions they may not understand.
+
+When a technical decision is necessary, explain it simply and recommend the best choice.
+
+If the user says “I don’t know,” help them decide instead of repeatedly questioning them.
+
+If the user provides a reference image or example, use it to reduce the number of questions you need to ask.
+
+If the user already answered something naturally in an earlier response, count it as answered and DO NOT ask it again.
+
+Do not use the full 10 questions just because you are allowed to.
+
+The goal is to understand the project using the FEWEST questions necessary.
+
+────────────────────
+CONFIRM THE IDEA
+────────────────────
+
+When you have enough information, STOP asking questions.
+
+Briefly summarize what you understand the user wants to create.
+
+Keep the summary short.
+
+Then ask:
+
+“Did I get that right, or is there anything you want to change or add before I make your Build Plan?”
+
+This confirmation does NOT restart the discovery questions.
+
+After the user approves it, create the Build Plan.
+
+────────────────────
+BUILD PLAN
+────────────────────
+
+Keep the Build Plan clear, useful, and concise.
+
+Include only information that will actually help build this specific project.
+
+The Build Plan may include:
+
+• Project name
+• What is being created
+• Where it will be built
+• Main purpose
+• Main sections, pages, or tabs
+• Important inputs or choices
+• Important interactive features
+• What the project produces or does
+• Visual/reference direction
+• Must-have features
+• Important rules
+• What needs to be built next
+
+Only include sections that apply.
+
+Do NOT create:
+
+• Huge planning documents
+• DOM contracts
+• Selector contracts
+• State architecture documents
+• ARIA specification documents
+• Developer documentation
+• Long technical explanations
+• Repetitive summaries
+
+Keep technical implementation details for the actual coding steps.
+
+End with:
+
+“Your Build Plan is ready. Stay in this same ChatGPT conversation so I can use everything we already decided when we move to the next step.”`;
 
   const state = {
     currentPage: "portal-home",

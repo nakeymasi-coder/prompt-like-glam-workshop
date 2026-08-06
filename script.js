@@ -14,44 +14,76 @@
     announcements: `${APP_PREFIX}:announcements`,
     references: `${APP_PREFIX}:references`,
     downloadHistory: `${APP_PREFIX}:downloadHistory`,
-    replayHistory: `${APP_PREFIX}:replayHistory`,
-    workshopUnlocked: `${APP_PREFIX}:workshopUnlocked`
+    replayHistory: `${APP_PREFIX}:replayHistory`
   };
 
   const VALID_PAGES = new Set([
     "requirements",
     "portal-home",
-    "my-workshops",
     "announcements",
     "community",
+    "quick-help",
+    "common-mistakes",
     "settings",
     "prompt-dashboard",
     "journey",
     "day-one",
     "day-two",
     "references",
-    "publish",
+    "tools-resources",
     "sell",
     "shortcuts",
     "notebook",
     "prompts",
-    "challenges",
     "book-session",
     "replays",
     "bonuses",
-    "gettingStartedPage"
+    "downloads",
+    "certificate",
+    "website-dashboard",
+    "beacon-dashboard",
+    "chatgpt-dashboard",
+    "payhip-dashboard"
   ]);
 
-  const WORKSHOP_CODE = "GLAM2026";
+  const LOCKED_WORKSHOP_PAGES = new Set([
+    "website-dashboard",
+    "beacon-dashboard",
+    "chatgpt-dashboard",
+    "payhip-dashboard"
+  ]);
+
+  const PROMPT_WORKSHOP_PAGES = new Set([
+    "prompt-dashboard",
+    "journey",
+    "requirements",
+    "day-one",
+    "day-two",
+    "references",
+    "downloads",
+    "replays",
+    "notebook",
+    "prompts",
+    "bonuses",
+    "sell",
+    "book-session",
+    "certificate"
+  ]);
+
   const MAX_REFERENCE_IMAGE_SIZE = 1_500_000;
   const MAX_REFERENCE_IMAGES = 8;
 
+  const REPLAY_LINKS = {
+    day1: "https://drive.google.com/file/d/1q4EOnJhgF7nMPv4_iGmuO7s-VnTfNmmn/view?usp=drive_link",
+    day2: ""
+  };
+
   const snippetLibrary = {
-    dayOnePlan: `You are an expert prompt generator planner helping a complete beginner plan one professional prompt generator.\n\nAsk me for my generator idea first. Then create one concise Generator Build Plan that includes:\n\n• Generator name\n• Purpose\n• Target audience\n• What it creates\n• The problem it solves\n• Main categories\n• Important option choices\n• Required buttons and features\n• Final output format\n\nDo not generate HTML, CSS, or JavaScript yet. Keep the plan clear, practical, and beginner-friendly.`,
+    dayOnePlan: `You are an expert prompt generator planner helping a complete beginner turn one approved idea into a clear, build-ready Generator Build Plan.\n\nStart by asking me to paste my approved generator idea and any decisions I have already made. Also ask whether I am using a reference image. If I upload one, analyze it for me and ask whether I want to use it as inspiration or recreate my original image closely.\n\nUse everything I provide as the source of truth. Do not make me repeat information that is already included. Ask only one short question at a time for details that are truly missing.\n\nThen create one concise Generator Build Plan that includes:\n\n• Generator name and type\n• Purpose, intended user, and problem solved\n• What the generator creates\n• Simple user flow\n• Main information categories\n• Essential choices or custom fields\n• Required buttons and features\n• Final output structure\n• Reference-image direction, if used\n• Firm exclusions and success standard\n\nKeep the final plan between 500 and 1,000 words. Do not generate HTML, CSS, JavaScript, option lists, presets, code IDs, selectors, or technical implementation instructions. Do not invent features I did not approve. Keep it clear, practical, and beginner-friendly.`,
 
     dayOneProjectSetup: `You are helping a complete beginner set up a prompt generator project in Visual Studio Code.\n\nGuide me one small step at a time. Help me create this exact structure:\n\nproject-folder/\n  index.html\n  css/\n    style.css\n  js/\n    script.js\n  assets/\n    images/\n\nExplain exactly what to click and wait for me to say done after each step. Do not generate code yet.`,
 
-    dayOneDesign: `You are an expert UI/UX designer helping a complete beginner create a Content & Design Guide for an approved prompt generator.\n\nUse my approved Generator Build Plan as the source of truth. Define:\n\n• Page sections and order\n• Header content\n• Category and control layout\n• Button placement\n• Prompt output area\n• Colors\n• Typography\n• Cards, borders, spacing, and shadows\n• Desktop, tablet, and mobile behavior\n\nDo not generate HTML, CSS, or JavaScript. Do not add features that are not in the approved plan.`,
+    dayOneDesign: `You are an expert UI/UX designer helping a complete beginner create a Content & Design Guide for an approved prompt generator.\n\nStart by asking me to paste my completed Generator Build Plan. If the plan mentions a reference image, ask me to upload it unless it is already available in this chat.\n\nUse the completed plan and approved reference direction as the source of truth. Carry those decisions forward without asking me to repeat the generator name, purpose, audience, categories, features, exclusions, or output. Ask only one short question at a time when a visual decision is genuinely missing.\n\nCreate one concise Content & Design Guide that defines:\n\n• Visible page sections and order\n• Headings, labels, helper text, and button wording\n• Header and navigation content\n• Category and control grouping\n• Button placement and prompt output area\n• Colors and typography\n• Cards, borders, spacing, shadows, and visual details\n• Desktop, tablet, and mobile priorities\n• Reference-image placement or visual influence, if approved\n\nKeep the final guide between 500 and 1,000 words. Do not repeat option data, presets, validation rules, prompt assembly, randomization, locks, code IDs, selectors, or technical implementation contracts. Do not generate HTML, CSS, or JavaScript. Do not add or redesign features that are not in the approved plan.`,
 
     dayOneHtml: `You are an expert HTML developer helping a complete beginner build an approved prompt generator.\n\nUse the approved Generator Build Plan and Content & Design Guide as the source of truth. Create ONE complete index.html file only. Include every approved section, category, control, button, preset area, and output area.\n\nDo not generate CSS or JavaScript. Do not rename or invent features. Output only the complete HTML file.`,
 
@@ -130,7 +162,6 @@
     dom.completionTitle = document.getElementById("completionTitle");
     dom.completionText = document.getElementById("completionText");
     dom.workshopLockPopup = document.getElementById("workshopLockPopup");
-    dom.workshopCodeInput = document.getElementById("workshopCodeInput");
     dom.workshopCodeMessage = document.getElementById("workshopCodeMessage");
   }
 
@@ -194,6 +225,16 @@
     const { save = true, focus = true } = options;
     const target = document.getElementById(pageId);
 
+    if (LOCKED_WORKSHOP_PAGES.has(pageId)) {
+      openWorkshopLockPopup(`${pageLabel(pageId)} is locked and not available yet.`);
+      return false;
+    }
+
+    if (pageId === "certificate" && !readStorage(STORAGE.dayProgress, {}).dayTwo) {
+      showToast("Complete Day 2 before opening your certificate.", true);
+      return false;
+    }
+
     if (!target || !target.classList.contains("page")) {
       showToast("That portal page is not available yet.", true);
       return false;
@@ -234,7 +275,9 @@
 
   function restoreLastPage() {
     const savedPage = readStorage(STORAGE.lastPage, "portal-home");
-    const startPage = VALID_PAGES.has(savedPage) && document.getElementById(savedPage)
+    const startPage = VALID_PAGES.has(savedPage) &&
+      !LOCKED_WORKSHOP_PAGES.has(savedPage) &&
+      document.getElementById(savedPage)
       ? savedPage
       : "portal-home";
     showPage(startPage, { save: false, focus: false });
@@ -251,7 +294,9 @@
           return;
         }
 
-        writeStorage(STORAGE.lastWorkshop, pageId);
+        if (PROMPT_WORKSHOP_PAGES.has(pageId)) {
+          writeStorage(STORAGE.lastWorkshop, pageId);
+        }
         showPage(pageId);
       });
     });
@@ -298,7 +343,10 @@
       clearSearchHighlights();
       if (query.length < 2) return;
 
-      const matches = dom.pages.filter((page) => page.textContent.toLowerCase().includes(query));
+      const matches = dom.pages.filter((page) => {
+        return !LOCKED_WORKSHOP_PAGES.has(page.id) &&
+          page.textContent.toLowerCase().includes(query);
+      });
       const currentMatch = matches.find((page) => page.id === state.currentPage);
 
       if (currentMatch) {
@@ -340,27 +388,12 @@
   }
 
   function bindWorkshopCards() {
-    const portalCards = [...document.querySelectorAll("#portal-home .workshop-card")];
-    portalCards.forEach((card, index) => {
-      const button = card.querySelector("button");
-      if (!button) return;
-
-      if (index === 0) {
-        button.addEventListener("click", () => {
-          writeStorage(STORAGE.lastWorkshop, "prompt-dashboard");
-          showPage("prompt-dashboard");
-        });
-      } else {
-        button.disabled = false;
-        button.setAttribute("aria-haspopup", "dialog");
-        button.addEventListener("click", () => openWorkshopLockPopup());
-      }
-    });
-
     document.getElementById("continueBtn")?.addEventListener("click", () => {
       const lastPage = readStorage(STORAGE.lastPage, null);
       const lastWorkshop = readStorage(STORAGE.lastWorkshop, "prompt-dashboard");
-      const destination = lastPage && lastPage !== "portal-home" ? lastPage : lastWorkshop;
+      const destination = lastPage && PROMPT_WORKSHOP_PAGES.has(lastPage)
+        ? lastPage
+        : lastWorkshop;
       showPage(document.getElementById(destination) ? destination : "prompt-dashboard");
     });
   }
@@ -370,22 +403,11 @@
       link.setAttribute("aria-haspopup", "dialog");
       link.addEventListener("click", (event) => {
         event.preventDefault();
-        openWorkshopLockPopup();
+        const workshopName = link.dataset.workshop
+          || link.closest(".workshop-card")?.querySelector("h2")?.textContent.trim()
+          || "This workshop";
+        openWorkshopLockPopup(`${workshopName} is locked and not available yet.`);
       });
-    });
-
-    document.querySelectorAll("#my-workshops .workshop-card").forEach((card) => {
-      const status = card.querySelector(".workshop-status.locked");
-      const button = card.querySelector("button");
-      const target = button?.dataset.page;
-      if (!button) return;
-
-      if (status || !target || !document.getElementById(target)) {
-        button.addEventListener("click", (event) => {
-          event.preventDefault();
-          openWorkshopLockPopup();
-        });
-      }
     });
 
     document.getElementById("closeWorkshopLockPopup")?.addEventListener("click", closeWorkshopLockPopup);
@@ -393,10 +415,6 @@
       if (event.target === dom.workshopLockPopup) closeWorkshopLockPopup();
     });
 
-    document.getElementById("unlockWorkshopBtn")?.addEventListener("click", attemptWorkshopUnlock);
-    dom.workshopCodeInput?.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") attemptWorkshopUnlock();
-    });
   }
 
   function openWorkshopLockPopup(customMessage = "") {
@@ -407,40 +425,13 @@
     dom.workshopLockPopup.classList.remove("hidden");
     document.body.classList.add("modal-open");
     if (dom.workshopCodeMessage) dom.workshopCodeMessage.textContent = customMessage;
-    window.setTimeout(() => dom.workshopCodeInput?.focus(), 50);
+    window.setTimeout(() => document.getElementById("closeWorkshopLockPopup")?.focus(), 50);
   }
 
   function closeWorkshopLockPopup() {
     dom.workshopLockPopup?.classList.add("hidden");
     document.body.classList.remove("modal-open");
-    if (dom.workshopCodeInput) dom.workshopCodeInput.value = "";
     if (dom.workshopCodeMessage) dom.workshopCodeMessage.textContent = "";
-  }
-
-  function attemptWorkshopUnlock() {
-    const entered = dom.workshopCodeInput?.value.trim().toUpperCase();
-    if (!entered) {
-      setWorkshopCodeMessage("Enter the workshop code first.", true);
-      return;
-    }
-    if (entered !== WORKSHOP_CODE) {
-      setWorkshopCodeMessage("That workshop code is not correct.", true);
-      return;
-    }
-
-    writeStorage(STORAGE.workshopUnlocked, true);
-    setWorkshopCodeMessage("Workshop access unlocked on this device.", false);
-    window.setTimeout(() => {
-      closeWorkshopLockPopup();
-      showPage("journey");
-    }, 700);
-  }
-
-  function setWorkshopCodeMessage(message, isError) {
-    if (!dom.workshopCodeMessage) return;
-    dom.workshopCodeMessage.textContent = message;
-    dom.workshopCodeMessage.classList.toggle("error-message", isError);
-    dom.workshopCodeMessage.classList.toggle("success-message", !isError);
   }
 
   function bindPageButtons() {
@@ -540,12 +531,26 @@
   function bindCompletionControls() {
     document.getElementById("markDayOneCompleteBtn")?.addEventListener("click", () => {
       setDayComplete("dayOne", true);
-      showCompletion("Day 1 Complete", "Your Day 1 progress has been saved. You are ready for Day 2.", "day-two");
+      showCompletion(
+        "Day 1 Complete",
+        "Your Day 1 progress has been saved. You are ready for Day 2.",
+        "day-two",
+        "Go to Day 2"
+      );
     });
 
     document.getElementById("markDayTwoCompleteBtn")?.addEventListener("click", () => {
       setDayComplete("dayTwo", true);
-      showCompletion("Workshop Complete", "Day 2 is complete. Your project is ready for publishing and selling.", "sell");
+      showCompletion(
+        "Workshop Complete",
+        "Day 2 is complete. Your certificate is now unlocked.",
+        "certificate",
+        "View Certificate"
+      );
+    });
+
+    document.getElementById("completionActionButton")?.addEventListener("click", () => {
+      closeAchievementPopup();
     });
 
     document.getElementById("closeCompletionPopup")?.addEventListener("click", closeAchievementPopup);
@@ -563,7 +568,7 @@
     updatePortalProgress();
   }
 
-  function showCompletion(title, text, nextPage) {
+  function showCompletion(title, text, nextPage, actionLabel = "Continue") {
     if (!dom.completionPopup) {
       showToast(text);
       if (nextPage) showPage(nextPage);
@@ -572,6 +577,8 @@
 
     if (dom.completionTitle) dom.completionTitle.textContent = title;
     if (dom.completionText) dom.completionText.textContent = text;
+    const actionButton = document.getElementById("completionActionButton");
+    if (actionButton) actionButton.textContent = actionLabel;
     dom.completionPopup.dataset.nextPage = nextPage || "";
     dom.completionPopup.classList.remove("hidden");
     document.body.classList.add("modal-open");
@@ -1069,11 +1076,17 @@
     document.querySelectorAll(".replay-btn[data-replay]").forEach((button) => {
       button.addEventListener("click", () => {
         const replayName = button.dataset.replay === "day1" ? "Day 1" : "Day 2";
+        const replayUrl = REPLAY_LINKS[button.dataset.replay];
+
+        if (!replayUrl) {
+          showToast(`${replayName} replay link has not been added yet.`);
+          return;
+        }
+
         const history = readStorage(STORAGE.replayHistory, {});
         history[button.dataset.replay] = { openedAt: new Date().toISOString(), progress: 0 };
         writeStorage(STORAGE.replayHistory, history);
-        button.textContent = `${replayName} Replay Coming Soon`;
-        showToast(`${replayName} replay link has not been added yet.`);
+        window.open(replayUrl, "_blank", "noopener,noreferrer");
       });
     });
   }
@@ -1153,11 +1166,11 @@
         const current = readStorage(STORAGE.settings, {});
         current[key] = box.checked;
         writeStorage(STORAGE.settings, current);
-        document.body.setAttribute(`data-${key}`, String(box.checked));
+        document.body.setAttribute(`data-setting-${key}`, String(box.checked));
         showToast("Preference saved.");
       });
 
-      document.body.setAttribute(`data-${key}`, String(box.checked));
+      document.body.setAttribute(`data-setting-${key}`, String(box.checked));
     });
   }
 
