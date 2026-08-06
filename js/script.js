@@ -2238,6 +2238,151 @@ Do not leave placeholders or unfinished sections.
 
 Output only the complete CSS code inside one fenced CSS code block.`,
 
+    dayTwoReviewImprove: `You are continuing the same coding project from Day 1.
+
+The working project, Build Plan, design decisions, HTML, CSS, and JavaScript were already created in this conversation.
+
+Use everything already established here. Do not ask the user to paste plans or re-upload files. Do not restart the project.
+
+This is a quick Day 2 review. Do not change code yet.
+
+Briefly review what was built and identify only the most useful areas that could be improved today.
+
+Adapt your review to the project type:
+• Prompt generator — categories, option variety, presets, outputs, and generator features
+• App or interactive tool — screens, tabs, content, actions, saved information, and outputs
+• Website — sections, content, navigation, links, forms, media, and calls to action
+• Landing page — message, sections, buttons, forms, links, and conversion flow
+• Other project — review only the features that actually exist
+
+Give no more than 3 practical improvement suggestions.
+
+Then ask ONE simple question:
+
+"Which of these do you want to improve today, or is there something else you already know you want to change?"
+
+Wait for the answer. Keep the reply short and beginner-friendly.
+
+End after the choice is clear. Do not produce a long report.`,
+
+    dayTwoImproveProject: `You are continuing the same coding project from the previous Day 1 and Day 2 steps.
+
+Use the project, files, design decisions, and improvement choice already established in this conversation.
+
+Do not ask the user to paste the Build Plan again. Do not ask them to re-upload index.html, style.css, or script.js unless they tell you the local files were changed after the versions created in this conversation.
+
+Now help improve the part of the project the user selected.
+
+Adapt to the actual project:
+• Prompt generator — improve categories, option lists, custom fields, outputs, or approved generator behavior
+• App or interactive tool — improve screens, tabs, content, inputs, actions, uploads, saved information, or outputs
+• Website — improve sections, content, links, navigation, forms, media, or approved interactions
+• Landing page — improve content, sections, buttons, forms, links, or page flow
+
+Do not force prompt-generator features into other project types.
+
+Preserve everything that is already working. Do not redesign the project. Do not remove, rename, or replace unrelated sections or features.
+
+Ask no more than ONE clarification question, and only when an important decision is truly missing.
+
+When code changes are needed:
+• Tell the user the exact file to open
+• Tell them the exact text, section, object, or function to find
+• Give one safe change at a time
+• Provide the complete replacement section when practical
+• Use a full-file replacement only when a partial change would be unsafe
+• Keep HTML, CSS, and JavaScript connected
+
+Do not overwhelm the user with several competing methods.
+
+When the approved improvement is complete, say:
+
+"Your project improvement is complete. Return to the Workshop Companion and continue to Finalize Project-Specific Features."`,
+
+    dayTwoFinalizeFeatures: `You are continuing the same coding project from the previous steps.
+
+Use everything already established in this conversation, including the latest working code and the improvements completed on Day 2.
+
+Do not ask the user to repeat project decisions or paste plans again. Request a current file only if the user changed it locally after the latest version in this conversation.
+
+Now finalize only the special features that belong to this project.
+
+Adapt to the project type:
+
+PROMPT GENERATOR
+Review and finalize only approved generator-specific features such as presets, Randomize, Locks, custom text, multiple outputs, Copy, Clear, history, or variations. If presets exist, make sure every preset uses current valid option values. Do not force a preset count that was never approved.
+
+APP OR INTERACTIVE TOOL
+Finalize approved tabs, actions, forms, uploads, saved information, history, outputs, downloads, or other interactive behavior that actually exists.
+
+WEBSITE OR LANDING PAGE
+Finalize approved navigation, links, forms, buttons, media, downloads, booking or checkout links, and other interactions that actually exist.
+
+OTHER PROJECT
+Finalize only the features already approved for that project.
+
+Do not invent extra features. Do not redesign working sections. Do not remove or rename unrelated code.
+
+Ask no more than ONE clarification question when necessary.
+
+When code changes are needed, tell the user the exact file and exact section to change and provide one safe complete replacement at a time.
+
+When the relevant features are complete, say:
+
+"Your project-specific features are finalized. Return to the Workshop Companion and continue to Add Your Finishing Touches."`,
+
+    dayTwoPremiumFeatures: `You are continuing the same coding project from the previous Day 1 and Day 2 steps.
+
+This step is OPTIONAL.
+
+Use the current project and everything already established in this conversation. Do not ask the user to paste plans or re-upload files unless their local files changed.
+
+First determine whether an extra premium feature would actually improve this specific project.
+
+If the user does not want an extra feature, simply say they can skip this step.
+
+If they do want one, suggest no more than 3 relevant options based on the project they actually built.
+
+Examples may include additional generated outputs, downloads, saved history, extra content tools, media helpers, advanced forms, reusable templates, or another feature that fits the project.
+
+Do not automatically add music, marketing, video, Custom GPT, or any other module unless it makes sense for this project and the user approves it.
+
+Ask no more than ONE question to choose the feature.
+
+After approval, update only the files required for that feature. Preserve every unrelated working section, button, link, and behavior.
+
+Give beginner-friendly instructions one change at a time.
+
+When finished, say:
+
+"Your optional premium feature is complete. Return to the Workshop Companion and continue to Final Test & Fix."`,
+
+    dayTwoFinalTest: `You are continuing the same coding project from the previous steps.
+
+The project is now in its final Day 2 form. Use the latest HTML, CSS, JavaScript, and decisions already created in this conversation.
+
+Do not ask the user to upload or paste files again unless they changed the code locally or a problem cannot be diagnosed from the latest versions already in the conversation.
+
+Guide the user through the final test ONE small section at a time. Wait for the user to say "done" or describe what happened before moving forward.
+
+Test only what exists in this project:
+
+1. Confirm the project opens and the layout looks correct.
+2. Test navigation, tabs, sections, or pages when they exist.
+3. Test forms, selections, uploads, links, and buttons when they exist.
+4. Test the project's main action or result.
+5. Test special approved features such as presets, Randomize, Locks, Copy, Clear, downloads, saved data, history, booking, checkout, or other interactions.
+6. Check the project in a narrow/mobile browser window.
+7. Check the browser console only if something is broken or a JavaScript error is likely.
+
+If a problem is found, explain it in plain language and give ONE exact fix at a time. Name the exact file and exact section, text, ID, class, or function to find.
+
+Do not redesign the project during final testing. Do not replace unrelated working code.
+
+When every relevant test passes, say:
+
+"Your project passed the final test and is ready to publish. Return to the Workshop Companion and complete Day 2."`,
+
     expandCategoryOptions: `You are an expert AI prompt generator architect, JavaScript data specialist, option-system designer, and prompt engineering specialist helping a complete beginner expand the option lists inside a completed AI prompt generator.
 
 The generator was already built during Day 1.
@@ -2793,91 +2938,65 @@ Begin by asking:
 
 “Please upload your current complete index.html and script.js so I can inspect the temporary presets and rebuild the final preset system using your expanded option data.”`,
 
-    addHeaderImage: `You are an expert HTML and CSS developer helping a beginner customize an AI prompt generator.
+    addHeaderImage: `You are continuing the same coding project from the previous steps.
 
-Help me add a professional header image directly beneath my generator title.
+The current project files and design decisions already exist in this conversation. Do not ask the user to paste the Build Plan or repeat earlier choices.
 
-Walk me through this step by step.
+Help a complete beginner add or update a professional header image without redesigning the project.
 
-First, tell me how to add my image file to my project folder.
+Use the latest HTML and CSS already created in this conversation. Request the current files only if the user says they changed them locally.
 
-Then tell me exactly which file to open.
+If the image file has not been added yet, guide the user one small step at a time to place it inside the project's images folder and ask for the exact filename.
 
-Then tell me how to find my main generator title in index.html.
+Then identify the correct existing header or top section and provide only the HTML and CSS changes required for the image.
 
-Then tell me exactly where the header image code should go.
+Preserve all existing sections, IDs, buttons, links, content, and working behavior. Do not replace the whole project for this small customization.
 
-Then generate the HTML needed for the header image.
+Tell the user the exact file and exact place to make each change. Keep the instructions short.
 
-Then generate the CSS needed to style the image professionally.
+End by telling the user to save, refresh the browser, and confirm the image looks correct.`,
 
-Do not redesign my generator.
+    addMarquee: `You are continuing the same coding project from the previous steps.
 
-Do not remove or rename any existing code.
+The current project files and design decisions already exist in this conversation. Do not ask the user to paste plans or repeat information.
 
-Keep the existing structure exactly the same.
+Help a complete beginner add a clean scrolling marquee only if they want one.
 
-Ask me to paste my current top section or header section before generating the final code.`,
+Use the latest HTML and CSS already created in this conversation. Request a current file only if the user says the local version changed.
 
-    addMarquee: `You are an expert HTML and CSS developer helping a beginner customize an AI prompt generator.
+First ask ONE simple question:
 
-Help me add a professional scrolling marquee to my generator.
+"What do you want the scrolling message to say?"
 
-Walk me through this step by step.
+After the user answers, identify the best existing location for the marquee and provide only the HTML and CSS changes required.
 
-First, help me decide what text should appear in the marquee.
+Match the project's approved colors, fonts, spacing, and style. Keep the motion smooth and readable and respect reduced-motion preferences.
 
-Then tell me exactly which file to open.
+Do not redesign the project. Do not remove, rename, or replace unrelated sections, IDs, buttons, links, or features.
 
-Next, tell me exactly how to find the correct location in my HTML where the marquee should be added.
+Tell the user the exact file and exact place to make each change. Keep the instructions short.
 
-After I paste that section of my HTML, generate only the HTML needed for the marquee.
+End by telling the user to save, refresh, and confirm the marquee looks right.`,
 
-Then generate the CSS needed to style it professionally.
+    updateCopyright: `You are continuing the same coding project from the previous steps.
 
-Finally, explain how to customize:
+The current project files and design decisions already exist in this conversation. Do not ask the user to paste plans or repeat earlier information.
 
-• Text
-• Speed
-• Direction
-• Colors
-• Font
-• Height
-• Background
+Help a complete beginner finish the footer and copyright without redesigning the project.
 
-Do not redesign my generator.
+Use the latest HTML, CSS, and JavaScript already created in this conversation. Request a current file only if the user says it changed locally.
 
-Do not remove or rename any existing code.
+If the footer already exists, preserve its structure and update only what is needed. If there is no footer, add one in the correct location without disturbing other sections.
 
-Keep the existing structure exactly the same.
+Use the approved project or brand name already established in the conversation. Ask ONE question only if the correct copyright name is genuinely unknown.
 
-Wait for me to paste my current HTML before generating any code.`,
+Use the current year automatically when appropriate. Match the approved design.
 
-    updateCopyright: `You are an expert HTML, CSS, and JavaScript developer helping a beginner customize an AI prompt generator.
+Do not remove or rename existing features, links, buttons, sections, IDs, or working code.
 
-Help me update the copyright section of my generator.
+Tell the user the exact file and exact place to make each change. Keep the instructions short.
 
-Walk me through this step by step.
-
-First, tell me which file to open.
-
-Then help me find my current footer.
-
-If my generator doesn't already have a footer, tell me where to add one.
-
-After I paste that section of my HTML, generate the updated footer code.
-
-Then generate any CSS needed to style it professionally.
-
-If needed, generate the JavaScript required to automatically display the current year.
-
-Do not redesign my generator.
-
-Do not remove any existing features.
-
-Keep the existing structure exactly the same.
-
-Wait for me to paste my current footer or the bottom section of my HTML before generating any code.`,
+End by telling the user to save, refresh, and confirm the footer is correct.`,
 
     javascriptBuilder: `You are an expert JavaScript developer, accessibility specialist, and front-end application architect specializing in professional AI prompt generators.
 
@@ -3385,14 +3504,14 @@ function setupDayCompletionButtons() {
       unlockAchievement(
         "day-two-complete",
         "Day 2 Complete",
-        "You customized, expanded, tested, and completed your generator.",
+        "You improved, customized, tested, and completed your project.",
       );
 
       saveAppData();
       renderDashboard();
       updateCompletionButtonStates();
 
-      showToast("Opening Sell Your Generator...");
+      showToast("Opening Sell Your Project...");
 
       setTimeout(() => {
         openPage("sell");
@@ -3415,7 +3534,7 @@ function updateCompletionButtonStates() {
   }
 
   if (dayTwoBtn && appData.progress.dayTwoComplete) {
-    dayTwoBtn.textContent = "Mark Day 2 Complete & Continue to Selling";
+    dayTwoBtn.textContent = "Day 2 Complete — Continue to Selling";
     dayTwoBtn.disabled = false;
     dayTwoBtn.classList.add("is-complete");
   }

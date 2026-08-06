@@ -3291,3 +3291,49 @@ body.light-theme .vscode-app-content h3 {
     padding: 20px;
   }
 }
+
+/* Day 2 optional resource */
+.day-two-optional-resource {
+  margin-top: 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(145deg, rgba(91, 15, 255, 0.12), rgba(255, 255, 255, 0.04));
+  overflow: hidden;
+}
+
+.day-two-optional-resource > summary {
+  padding: 20px 24px;
+  color: var(--white);
+  font-weight: 800;
+  cursor: pointer;
+  list-style-position: inside;
+}
+
+.day-two-optional-resource > summary:hover,
+.day-two-optional-resource > summary:focus-visible {
+  color: var(--silver);
+  background: rgba(139, 92, 255, 0.12);
+  outline: none;
+}
+
+.day-two-optional-resource[open] > summary {
+  border-bottom: 1px solid var(--border);
+}
+
+.day-two-optional-resource > .lesson-block {
+  margin: 22px;
+}
+
+body.light-theme .day-two-optional-resource > summary {
+  color: #181824;
+}
+
+@media (max-width: 520px) {
+  .day-two-optional-resource > summary {
+    padding: 18px;
+  }
+
+  .day-two-optional-resource > .lesson-block {
+    margin: 14px;
+  }
+}
