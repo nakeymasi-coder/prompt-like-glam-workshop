@@ -22,13 +22,15 @@
     "portal-home",
     "announcements",
     "community",
+    "quick-help",
+    "common-mistakes",
     "settings",
     "prompt-dashboard",
     "journey",
     "day-one",
     "day-two",
     "references",
-    "publish",
+    "tools-resources",
     "sell",
     "shortcuts",
     "notebook",
@@ -63,7 +65,6 @@
     "notebook",
     "prompts",
     "bonuses",
-    "publish",
     "sell",
     "book-session",
     "certificate"
@@ -226,6 +227,11 @@
 
     if (LOCKED_WORKSHOP_PAGES.has(pageId)) {
       openWorkshopLockPopup(`${pageLabel(pageId)} is locked and not available yet.`);
+      return false;
+    }
+
+    if (pageId === "certificate" && !readStorage(STORAGE.dayProgress, {}).dayTwo) {
+      showToast("Complete Day 2 before opening your certificate.", true);
       return false;
     }
 
@@ -525,12 +531,26 @@
   function bindCompletionControls() {
     document.getElementById("markDayOneCompleteBtn")?.addEventListener("click", () => {
       setDayComplete("dayOne", true);
-      showCompletion("Day 1 Complete", "Your Day 1 progress has been saved. You are ready for Day 2.", "day-two");
+      showCompletion(
+        "Day 1 Complete",
+        "Your Day 1 progress has been saved. You are ready for Day 2.",
+        "day-two",
+        "Go to Day 2"
+      );
     });
 
     document.getElementById("markDayTwoCompleteBtn")?.addEventListener("click", () => {
       setDayComplete("dayTwo", true);
-      showCompletion("Workshop Complete", "Day 2 is complete. Your project is ready for publishing and selling.", "sell");
+      showCompletion(
+        "Workshop Complete",
+        "Day 2 is complete. Your certificate is now unlocked.",
+        "certificate",
+        "View Certificate"
+      );
+    });
+
+    document.getElementById("completionActionButton")?.addEventListener("click", () => {
+      closeAchievementPopup();
     });
 
     document.getElementById("closeCompletionPopup")?.addEventListener("click", closeAchievementPopup);
@@ -548,7 +568,7 @@
     updatePortalProgress();
   }
 
-  function showCompletion(title, text, nextPage) {
+  function showCompletion(title, text, nextPage, actionLabel = "Continue") {
     if (!dom.completionPopup) {
       showToast(text);
       if (nextPage) showPage(nextPage);
@@ -557,6 +577,8 @@
 
     if (dom.completionTitle) dom.completionTitle.textContent = title;
     if (dom.completionText) dom.completionText.textContent = text;
+    const actionButton = document.getElementById("completionActionButton");
+    if (actionButton) actionButton.textContent = actionLabel;
     dom.completionPopup.dataset.nextPage = nextPage || "";
     dom.completionPopup.classList.remove("hidden");
     document.body.classList.add("modal-open");

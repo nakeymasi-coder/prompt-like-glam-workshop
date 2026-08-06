@@ -47,11 +47,32 @@
           <a class="nav-link" data-page="community" href="#">
             <i data-lucide="messages-square"></i><span>Community</span>
           </a>
+          <a class="nav-link" data-page="notebook" href="#">
+            <i data-lucide="notebook-pen"></i><span>Notebook</span>
+          </a>
+          <a class="nav-link" data-page="prompts" href="#">
+            <i data-lucide="bookmark"></i><span>Saved Prompts</span>
+          </a>
+          <a class="nav-link" data-page="quick-help" href="#">
+            <i data-lucide="circle-help"></i><span>Quick Help</span>
+          </a>
+          <a class="nav-link" data-page="common-mistakes" href="#">
+            <i data-lucide="triangle-alert"></i><span>Common Mistakes</span>
+          </a>
+          <a class="nav-link" data-page="requirements" href="#">
+            <i data-lucide="clipboard-check"></i><span>Workshop Requirements</span>
+          </a>
+          <a class="nav-link" data-page="references" href="#">
+            <i data-lucide="images"></i><span>Reference Library</span>
+          </a>
+          <a class="nav-link" data-page="tools-resources" href="#">
+            <i data-lucide="wrench"></i><span>Tools &amp; Resources</span>
+          </a>
+          <a class="nav-link" data-page="bonuses" href="#">
+            <i data-lucide="gift"></i><span>Bonus Resources</span>
+          </a>
           <a class="nav-link" data-page="settings" href="#">
             <i data-lucide="settings"></i><span>Settings</span>
-          </a>
-          <a class="nav-link" data-page="publish" href="#">
-            <i data-lucide="wrench"></i><span>Tools &amp; Resources</span>
           </a>
 
           <hr class="sidebar-divider" />
@@ -265,6 +286,19 @@
               <li><input type="checkbox" /> Play notification sounds</li>
             </ul>
           </div>
+
+          <div class="settings-grid">
+            <article class="card settings-card">
+              <h2>Workshop Data</h2>
+              <p>
+                Reset your saved notes, checklists, and workshop progress at any
+                time.
+              </p>
+              <button class="danger-btn full-width" id="resetDataBtn">
+                Reset Everything
+              </button>
+            </article>
+          </div>
         </section>
 
         <!-- ============================= -->
@@ -285,27 +319,30 @@
               <span class="lesson-tag">WORKSHOP</span>
               <h2>Lessons &amp; Learning</h2>
               <div class="builder-buttons">
-                <button class="secondary-btn" data-open-page="requirements" type="button">Workshop Requirements</button>
                 <button class="secondary-btn" data-open-page="day-one" type="button">Day 1</button>
                 <button class="secondary-btn" data-open-page="day-two" type="button">Day 2</button>
-                <button class="secondary-btn" data-open-page="references" type="button">Reference Library</button>
-                <button class="secondary-btn" data-open-page="downloads" type="button">Downloads</button>
                 <button class="secondary-btn" data-open-page="replays" type="button">Replays</button>
               </div>
             </article>
             <article class="lesson-block">
               <span class="lesson-tag">RESOURCES</span>
-              <h2>Save, Publish &amp; Finish</h2>
+              <h2>Finish Your Workshop</h2>
               <div class="builder-buttons">
-                <button class="secondary-btn" data-open-page="notebook" type="button">Notebook</button>
-                <button class="secondary-btn" data-open-page="prompts" type="button">Saved Prompts</button>
-                <button class="secondary-btn" data-open-page="bonuses" type="button">Bonus Resources</button>
-                <button class="secondary-btn" data-open-page="publish" type="button">Publish</button>
                 <button class="secondary-btn" data-open-page="sell" type="button">Sell Your Generator</button>
                 <button class="secondary-btn" data-open-page="book-session" type="button">Book Session</button>
                 <button class="secondary-btn" data-open-page="certificate" type="button">Certificate</button>
               </div>
             </article>
+          </div>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: QUICK HELP -->
+        <!-- ============================= -->
+        <section id="quick-help" class="page">
+          <div class="page-header">
+            <h1>Quick Help</h1>
+            <p>Simple answers you can use in any workshop.</p>
           </div>
           <div class="lesson-section-grid">
             <article class="lesson-block">
@@ -388,6 +425,18 @@
                 </p>
               </details>
             </article>
+          </div>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: COMMON MISTAKES -->
+        <!-- ============================= -->
+        <section id="common-mistakes" class="page">
+          <div class="page-header">
+            <h1>Common Mistakes</h1>
+            <p>Keep these reminders handy while you build.</p>
+          </div>
+          <div class="lesson-section-grid">
             <article class="lesson-block">
               <span class="lesson-tag">REMEMBER</span>
               <h2>Common Mistakes</h2>
@@ -421,18 +470,6 @@
                   Test your generator after every major change instead of
                   waiting until the end.
                 </li>
-              </ul>
-            </article>
-            <article class="lesson-block">
-              <span class="lesson-tag">CHECKPOINT</span>
-              <h2>Before You Leave Today</h2>
-              <ul>
-                <li><input type="checkbox" /> HTML linked</li>
-                <li><input type="checkbox" /> CSS linked</li>
-                <li><input type="checkbox" /> JavaScript linked</li>
-                <li><input type="checkbox" /> Generator works</li>
-                <li><input type="checkbox" /> Copy button works</li>
-                <li><input type="checkbox" /> Ready for Day 2</li>
               </ul>
             </article>
           </div>
@@ -563,16 +600,15 @@
             <span class="eyebrow">Before Class</span>
             <h1>Workshop Requirements</h1>
             <p>
-              Before the workshop begins, please complete the items below.
-              Having everything ready before class allows us to spend our time
-              building your Prompt Generator instead of setting up software and
-              accounts.
+              Find the setup checklist for each workshop here. Complete the
+              requirements for the workshop you are attending before class so
+              we can spend our time learning and building together.
             </p>
           </div>
           <div class="lesson-section-grid">
             <article class="lesson-block">
-              <span class="lesson-tag">Required</span>
-              <h2>Complete Before Class</h2>
+              <span class="lesson-tag">Prompt Generator Workshop</span>
+              <h2>Complete Before This Workshop</h2>
               <ul>
                 <li><input type="checkbox" /> Create a GitHub account</li>
                 <li><input type="checkbox" /> Create a Netlify account</li>
@@ -662,7 +698,7 @@
 
               <p>
                 Install these four free extensions before the workshop. They
-                will help you preview your generator, keep your code organized,
+                will help you preview your project, keep your code organized,
                 and prevent common HTML mistakes.
               </p>
 
@@ -683,7 +719,7 @@
                     <span class="vscode-app-number">02</span>
                     <h3>Live Server</h3>
                     <p>
-                      Opens your generator in the browser and refreshes the page
+                      Opens your project in the browser and refreshes the page
                       when you save your changes.
                     </p>
                   </div>
@@ -1596,7 +1632,7 @@
 <section id="references" class="page">
           <div class="page-header split-header">
             <div>
-              <span class="eyebrow">Creative Inspiration</span>
+              <span class="eyebrow">Portal Reference Library</span>
               <h1>Reference Image Library</h1>
               <p>
                 View workshop examples, download images for practice, and add
@@ -1608,18 +1644,20 @@
           <div class="reference-library-intro card">
             <div>
               <span class="lesson-tag">How to Use This Page</span>
-              <h2>Choose an Image That Inspires Your Generator</h2>
+              <h2>Choose an Image That Supports Your Project</h2>
               <p>
                 Study the image for its subject, style, colors, layout,
                 atmosphere, and creative details. Then use those ideas to plan a
                 generator of your own. The goal is inspiration—not copying the
-                image exactly.
+                image exactly. Use this library for any workshop or project in
+                the portal.
               </p>
             </div>
             <ul class="reference-library-tips">
               <li>Notice the strongest visual details.</li>
               <li>
-                Think about which generator categories the image suggests.
+                Think about which workshop ideas, styles, or project details the
+                image suggests.
               </li>
               <li>Download an example to use during the workshop.</li>
               <li>Upload your own images when you find new inspiration.</li>
@@ -2752,69 +2790,6 @@ Do not generate code yet.
                 </div>
               </div>
             </article>
-            <!-- Quick Reference -->
-            <article class="card guide-reference-card">
-              <div class="guide-step-content">
-                <span class="eyebrow">Quick Reference</span>
-                <h2>Common VS Code Keyboard Shortcuts</h2>
-                <table class="guide-shortcuts-table">
-                  <thead>
-                    <tr>
-                      <th>Shortcut</th>
-                      <th>What It Does</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><code>Ctrl + A</code></td>
-                      <td>Select everything in the current file.</td>
-                    </tr>
-                    <tr>
-                      <td><code>Ctrl + C</code></td>
-                      <td>Copy the selected text.</td>
-                    </tr>
-                    <tr>
-                      <td><code>Ctrl + V</code></td>
-                      <td>Paste copied text.</td>
-                    </tr>
-                    <tr>
-                      <td><code>Ctrl + F</code></td>
-                      <td>Find text in the current file.</td>
-                    </tr>
-                    <tr>
-                      <td><code>Ctrl + H</code></td>
-                      <td>Find and replace text.</td>
-                    </tr>
-                    <tr>
-                      <td><code>Ctrl + S</code></td>
-                      <td>Save your changes.</td>
-                    </tr>
-                    <tr>
-                      <td><code>Ctrl + Z</code></td>
-                      <td>Undo your last change.</td>
-                    </tr>
-                    <tr>
-                      <td><code>Ctrl + Y</code></td>
-                      <td>Redo a change you undid.</td>
-                    </tr>
-                    <tr>
-                      <td><code>Ctrl + Shift + F</code></td>
-                      <td>Search across every file in the project.</td>
-                    </tr>
-                    <tr>
-                      <td><code>Ctrl + G</code></td>
-                      <td>Jump directly to a specific line number.</td>
-                    </tr>
-                    <tr>
-                      <td><code>Ctrl + Shift + P</code></td>
-                      <td>
-                        Open the Command Palette to access VS Code commands.
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </article>
           </div>
         </section>
 
@@ -2874,9 +2849,9 @@ Do not generate code yet.
 <section id="notebook" class="page">
           <div class="page-header">
             <span class="eyebrow">Notebook</span>
-            <h1>My Workshop Notes</h1>
+            <h1>My Notes</h1>
             <p>
-              Write, save, edit, and delete your workshop notes in one place.
+              Write, save, edit, and delete notes from any workshop in one place.
               Your notes save automatically.
             </p>
           </div>
@@ -2924,11 +2899,11 @@ Do not generate code yet.
         <!-- ============================= -->
 <section id="prompts" class="page">
           <div class="page-header">
-            <span class="eyebrow">Your Prompt Library</span>
+            <span class="eyebrow">Universal Prompt Library</span>
             <h1>Saved Prompts</h1>
             <p>
-              Save your favorite prompts here so you can find, copy, and reuse
-              them anytime.
+              Save prompts from any workshop here so you can find, copy, and
+              reuse them anytime.
             </p>
           </div>
 
@@ -3011,7 +2986,7 @@ Do not generate code yet.
                 As a bonus, you receive the complete source code for the
                 Workshop Companion. Make it your own by updating the branding,
                 colors, lessons, pages, downloads, and resources. Customize it
-                "Use it for your own Prompt Generator Workshop.
+                and use it for your own Prompt Generator Workshop.
               </p>
               <ul class="bonus-list">
                 <li>✔ Rebrand the Workshop Companion</li>
@@ -3031,23 +3006,13 @@ Do not generate code yet.
                 Open Setup Guide
               </button>
             </article>
-            <article class="card settings-card">
-              <h2>Workshop Data</h2>
-              <p>
-                Reset your saved notes, checklists, and workshop progress at any
-                time.
-              </p>
-              <button class="danger-btn full-width" id="resetDataBtn">
-                Reset Everything
-              </button>
-            </article>
           </div>
         </section>
 
         <!-- ============================= -->
-        <!-- PAGE: PUBLISH -->
+        <!-- PAGE: TOOLS & RESOURCES -->
         <!-- ============================= -->
-<section id="publish" class="page">
+<section id="tools-resources" class="page">
           <div class="page-header">
             <span class="eyebrow">Portal Resources</span>
             <h1>Tools &amp; Resources</h1>
@@ -3424,7 +3389,9 @@ Before writing the listing, ask me for:
               </div>
             </div>
           </article>
-          <a class="gold-btn" href="./diploma.html"> View My Diploma </a>
+          <button class="gold-btn" data-open-page="certificate" type="button">
+            View My Certificate
+          </button>
         </section>
 
         <!-- ============================= -->
@@ -3591,9 +3558,9 @@ Before writing the listing, ask me for:
         <span class="eyebrow">Let's Get Started</span>
         <h2 id="completionTitle">Workshop Step Complete</h2>
         <p id="completionText">Your progress has been saved.</p>
-        <a class="gold-btn" href="./diploma.html" id="completionDiplomaButton">
-          View Diploma
-        </a>
+        <button class="gold-btn" id="completionActionButton" type="button">
+          Continue
+        </button>
       </div>
     </div>
     <script src="js/script.js"></script>
