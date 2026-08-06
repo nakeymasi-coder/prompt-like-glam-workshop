@@ -14,12 +14,14 @@
     announcements: `${APP_PREFIX}:announcements`,
     references: `${APP_PREFIX}:references`,
     downloadHistory: `${APP_PREFIX}:downloadHistory`,
-    replayHistory: `${APP_PREFIX}:replayHistory`
+    replayHistory: `${APP_PREFIX}:replayHistory`,
+    workshopUnlocked: `${APP_PREFIX}:workshopUnlocked`
   };
 
   const VALID_PAGES = new Set([
     "requirements",
     "portal-home",
+    "my-workshops",
     "announcements",
     "community",
     "settings",
@@ -33,42 +35,14 @@
     "shortcuts",
     "notebook",
     "prompts",
+    "challenges",
     "book-session",
     "replays",
     "bonuses",
-    "downloads",
-    "certificate",
-    "website-dashboard",
-    "beacon-dashboard",
-    "chatgpt-dashboard",
-    "payhip-dashboard"
+    "gettingStartedPage"
   ]);
 
-  const LOCKED_WORKSHOP_PAGES = new Set([
-    "website-dashboard",
-    "beacon-dashboard",
-    "chatgpt-dashboard",
-    "payhip-dashboard"
-  ]);
-
-  const PROMPT_WORKSHOP_PAGES = new Set([
-    "prompt-dashboard",
-    "journey",
-    "requirements",
-    "day-one",
-    "day-two",
-    "references",
-    "downloads",
-    "replays",
-    "notebook",
-    "prompts",
-    "bonuses",
-    "publish",
-    "sell",
-    "book-session",
-    "certificate"
-  ]);
-
+  const WORKSHOP_CODE = "GLAM2026";
   const MAX_REFERENCE_IMAGE_SIZE = 1_500_000;
   const MAX_REFERENCE_IMAGES = 8;
 
@@ -156,6 +130,7 @@
     dom.completionTitle = document.getElementById("completionTitle");
     dom.completionText = document.getElementById("completionText");
     dom.workshopLockPopup = document.getElementById("workshopLockPopup");
+    dom.workshopCodeInput = document.getElementById("workshopCodeInput");
     dom.workshopCodeMessage = document.getElementById("workshopCodeMessage");
   }
 
@@ -219,11 +194,6 @@
     const { save = true, focus = true } = options;
     const target = document.getElementById(pageId);
 
-    if (LOCKED_WORKSHOP_PAGES.has(pageId)) {
-      openWorkshopLockPopup(`${pageLabel(pageId)} is locked and not available yet.`);
-      return false;
-    }
-
     if (!target || !target.classList.contains("page")) {
       showToast("That portal page is not available yet.", true);
       return false;
@@ -264,9 +234,7 @@
 
   function restoreLastPage() {
     const savedPage = readStorage(STORAGE.lastPage, "portal-home");
-    const startPage = VALID_PAGES.has(savedPage) &&
-      !LOCKED_WORKSHOP_PAGES.has(savedPage) &&
-      document.getElementById(savedPage)
+    const startPage = VALID_PAGES.has(savedPage) && document.getElementById(savedPage)
       ? savedPage
       : "portal-home";
     showPage(startPage, { save: false, focus: false });
@@ -283,9 +251,7 @@
           return;
         }
 
-        if (PROMPT_WORKSHOP_PAGES.has(pageId)) {
-          writeStorage(STORAGE.lastWorkshop, pageId);
-        }
+        writeStorage(STORAGE.lastWorkshop, pageId);
         showPage(pageId);
       });
     });
@@ -332,10 +298,7 @@
       clearSearchHighlights();
       if (query.length < 2) return;
 
-      const matches = dom.pages.filter((page) => {
-        return !LOCKED_WORKSHOP_PAGES.has(page.id) &&
-          page.textContent.toLowerCase().includes(query);
-      });
+      const matches = dom.pages.filter((page) => page.textContent.toLowerCase().includes(query));
       const currentMatch = matches.find((page) => page.id === state.currentPage);
 
       if (currentMatch) {
@@ -377,12 +340,27 @@
   }
 
   function bindWorkshopCards() {
+    const portalCards = [...document.querySelectorAll("#portal-home .workshop-card")];
+    portalCards.forEach((card, index) => {
+      const button = card.querySelector("button");
+      if (!button) return;
+
+      if (index === 0) {
+        button.addEventListener("click", () => {
+          writeStorage(STORAGE.lastWorkshop, "prompt-dashboard");
+          showPage("prompt-dashboard");
+        });
+      } else {
+        button.disabled = false;
+        button.setAttribute("aria-haspopup", "dialog");
+        button.addEventListener("click", () => openWorkshopLockPopup());
+      }
+    });
+
     document.getElementById("continueBtn")?.addEventListener("click", () => {
       const lastPage = readStorage(STORAGE.lastPage, null);
       const lastWorkshop = readStorage(STORAGE.lastWorkshop, "prompt-dashboard");
-      const destination = lastPage && PROMPT_WORKSHOP_PAGES.has(lastPage)
-        ? lastPage
-        : lastWorkshop;
+      const destination = lastPage && lastPage !== "portal-home" ? lastPage : lastWorkshop;
       showPage(document.getElementById(destination) ? destination : "prompt-dashboard");
     });
   }
@@ -392,11 +370,22 @@
       link.setAttribute("aria-haspopup", "dialog");
       link.addEventListener("click", (event) => {
         event.preventDefault();
-        const workshopName = link.dataset.workshop
-          || link.closest(".workshop-card")?.querySelector("h2")?.textContent.trim()
-          || "This workshop";
-        openWorkshopLockPopup(`${workshopName} is locked and not available yet.`);
+        openWorkshopLockPopup();
       });
+    });
+
+    document.querySelectorAll("#my-workshops .workshop-card").forEach((card) => {
+      const status = card.querySelector(".workshop-status.locked");
+      const button = card.querySelector("button");
+      const target = button?.dataset.page;
+      if (!button) return;
+
+      if (status || !target || !document.getElementById(target)) {
+        button.addEventListener("click", (event) => {
+          event.preventDefault();
+          openWorkshopLockPopup();
+        });
+      }
     });
 
     document.getElementById("closeWorkshopLockPopup")?.addEventListener("click", closeWorkshopLockPopup);
@@ -404,6 +393,10 @@
       if (event.target === dom.workshopLockPopup) closeWorkshopLockPopup();
     });
 
+    document.getElementById("unlockWorkshopBtn")?.addEventListener("click", attemptWorkshopUnlock);
+    dom.workshopCodeInput?.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") attemptWorkshopUnlock();
+    });
   }
 
   function openWorkshopLockPopup(customMessage = "") {
@@ -414,13 +407,40 @@
     dom.workshopLockPopup.classList.remove("hidden");
     document.body.classList.add("modal-open");
     if (dom.workshopCodeMessage) dom.workshopCodeMessage.textContent = customMessage;
-    window.setTimeout(() => document.getElementById("closeWorkshopLockPopup")?.focus(), 50);
+    window.setTimeout(() => dom.workshopCodeInput?.focus(), 50);
   }
 
   function closeWorkshopLockPopup() {
     dom.workshopLockPopup?.classList.add("hidden");
     document.body.classList.remove("modal-open");
+    if (dom.workshopCodeInput) dom.workshopCodeInput.value = "";
     if (dom.workshopCodeMessage) dom.workshopCodeMessage.textContent = "";
+  }
+
+  function attemptWorkshopUnlock() {
+    const entered = dom.workshopCodeInput?.value.trim().toUpperCase();
+    if (!entered) {
+      setWorkshopCodeMessage("Enter the workshop code first.", true);
+      return;
+    }
+    if (entered !== WORKSHOP_CODE) {
+      setWorkshopCodeMessage("That workshop code is not correct.", true);
+      return;
+    }
+
+    writeStorage(STORAGE.workshopUnlocked, true);
+    setWorkshopCodeMessage("Workshop access unlocked on this device.", false);
+    window.setTimeout(() => {
+      closeWorkshopLockPopup();
+      showPage("journey");
+    }, 700);
+  }
+
+  function setWorkshopCodeMessage(message, isError) {
+    if (!dom.workshopCodeMessage) return;
+    dom.workshopCodeMessage.textContent = message;
+    dom.workshopCodeMessage.classList.toggle("error-message", isError);
+    dom.workshopCodeMessage.classList.toggle("success-message", !isError);
   }
 
   function bindPageButtons() {
@@ -1133,11 +1153,11 @@
         const current = readStorage(STORAGE.settings, {});
         current[key] = box.checked;
         writeStorage(STORAGE.settings, current);
-        document.body.setAttribute(`data-setting-${key}`, String(box.checked));
+        document.body.setAttribute(`data-${key}`, String(box.checked));
         showToast("Preference saved.");
       });
 
-      document.body.setAttribute(`data-setting-${key}`, String(box.checked));
+      document.body.setAttribute(`data-${key}`, String(box.checked));
     });
   }
 

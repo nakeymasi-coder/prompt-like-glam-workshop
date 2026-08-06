@@ -5,100 +5,68 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta
-      content="Prompt Generator Companion: build a reusable prompt generator with HTML, CSS, and JavaScript."
       name="description"
+      content="Workshop Portal: Access your workshops, replays, downloads, resources, and learning tools in one organized place."
     />
-    <title>Prompt Generator Companion</title>
+
+    <title>Workshop Portal</title>
+
+    <meta name="generator" content="Workshop Portal v1.0" />
+
     <link href="css/style.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&amp;family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;family=Playfair+Display:wght@600;700;800&amp;display=swap"
       rel="stylesheet"
     />
     <script src="https://unpkg.com/lucide@latest"></script>
-    <meta content="Prompt Generator Companion v7.0" name="generator" />
   </head>
   <body>
-    <a class="skip-link" href="#dashboard">Skip to content</a>
+    <a class="skip-link" href="#portal-home">Skip to content</a>
     <div class="app-shell">
       <!-- ============================= -->
       <!-- SIDEBAR -->
       <!-- ============================= -->
-      <aside aria-label="Main navigation" class="sidebar">
+      <aside class="sidebar" aria-label="Main navigation">
         <div class="brand-block">
           <div>
-            <h1>Prompt Generator Companion™</h1>
-            <p>Workshop Experience</p>
+            <h1>Workshop Portal</h1>
+            <p>Learn • Build • Grow</p>
           </div>
         </div>
+
         <nav class="sidebar-nav">
-          <a
-            class="nav-link requirements-nav-link"
-            data-page="requirements"
-            href="#"
-          >
-            <i data-lucide="clipboard-check"></i>
-            <span>🚨 Workshop Requirements (Read First)</span>
+          <div class="sidebar-heading"><span>PORTAL</span></div>
+          <a class="nav-link active" data-page="portal-home" href="#">
+            <i data-lucide="home"></i><span>Portal Home</span>
           </a>
-          <a class="nav-link active" data-page="dashboard" href="#">
-            <i data-lucide="layout-dashboard"></i>
-            <span>Generator Studio</span>
+          <a class="nav-link" data-page="announcements" href="#">
+            <i data-lucide="megaphone"></i><span>Announcements</span>
           </a>
-          <a class="nav-link" data-page="journey" href="#">
-            <i data-lucide="route"></i>
-            <span>Workshop Journey</span>
+          <a class="nav-link" data-page="community" href="#">
+            <i data-lucide="messages-square"></i><span>Community</span>
           </a>
-          <a class="nav-link" data-page="day-one" href="#">
-            <i data-lucide="hammer"></i>
-            <span>Day 1: Build</span>
-          </a>
-          <a class="nav-link" data-page="day-two" href="#">
-            <i data-lucide="rocket"></i>
-            <span>Day 2: Customize + Finish</span>
-          </a>
-          <a class="nav-link" data-page="references" href="#">
-            <i data-lucide="images"></i>
-            <span>Reference Image Library</span>
-          </a>
-          <a class="nav-link" data-page="sell" href="#">
-            <i data-lucide="badge-dollar-sign"></i>
-            <span>Sell Your Generator</span>
-          </a>
-          <a class="nav-link" data-page="publish" href="#">
-            <i data-lucide="cloud-upload"></i>
-            <span>Tools &amp; Resources</span>
-          </a>
-          <a class="nav-link" data-page="shortcuts" href="#">
-            <i data-lucide="keyboard"></i>
-            <span>Keyboard Shortcuts</span>
-          </a>
-          <a class="nav-link" data-page="notebook" href="#">
-            <i data-lucide="notebook-pen"></i>
-            <span>Notebook</span>
-          </a>
-          <a class="nav-link" data-page="prompts" href="#">
-            <i data-lucide="bookmark-check"></i>
-            <span>Saved Prompts</span>
+          <a class="nav-link" data-page="settings" href="#">
+            <i data-lucide="settings"></i><span>Settings</span>
           </a>
 
-          <a class="nav-link" data-page="challenges" href="#">
-            <i data-lucide="trophy"></i>
-            <span>Challenges</span>
+          <hr class="sidebar-divider" />
+          <div class="sidebar-heading"><span>WORKSHOPS</span></div>
+          <a class="nav-link" data-page="prompt-dashboard" href="#">
+            <i data-lucide="sparkles"></i><span>Prompt Generator Workshop</span>
           </a>
-
-          <a class="nav-link" data-page="book-session" href="#">
-            <i data-lucide="calendar-check"></i>
-            <span>Book Your 1-on-1</span>
+          <a class="nav-link locked-workshop" data-workshop="Website Workshop" href="#">
+            <i data-lucide="lock"></i><span>Website Workshop</span>
           </a>
-
-          <a class="nav-link" data-page="replays" href="#">
-            <i data-lucide="monitor-play"></i>
-            <span>Replay Library</span>
+          <a class="nav-link locked-workshop" data-workshop="Beacon Workshop" href="#">
+            <i data-lucide="lock"></i><span>Beacon Workshop</span>
           </a>
-          <a class="nav-link" data-page="bonuses" href="#">
-            <i data-lucide="gift"></i>
-            <span>Bonus Resources</span>
+          <a class="nav-link locked-workshop" data-workshop="Learning ChatGPT" href="#">
+            <i data-lucide="lock"></i><span>Learning ChatGPT</span>
+          </a>
+          <a class="nav-link locked-workshop" data-workshop="Payhip Workshop" href="#">
+            <i data-lucide="lock"></i><span>Payhip Workshop</span>
           </a>
         </nav>
       </aside>
@@ -126,204 +94,180 @@
         <!-- ============================= -->
         <!-- PAGE: WORKSHOP REQUIREMENTS -->
         <!-- ============================= -->
-        <section class="page" id="requirements">
-          <div class="page-header">
-            <span class="eyebrow">Before Class</span>
-            <h1>Workshop Requirements</h1>
-            <p>
-              Before the workshop begins, please complete the items below.
-              Having everything ready before class allows us to spend our time
-              building your Prompt Generator instead of setting up software and
-              accounts.
-            </p>
+                <!-- ============================= -->
+        <!-- PAGE: PORTAL HOME -->
+        <!-- ============================= -->
+<section class="page active-page" id="portal-home">
+          <div class="page-header split-header">
+            <div>
+              <h1>Welcome to Workshop Portal</h1>
+
+              <p>
+                Choose a workshop below to continue learning. Each workshop has
+                its own lessons, downloads, notebook, replays, and certificate.
+              </p>
+            </div>
+
+            <div class="header-actions">
+              <button class="primary-btn" id="continueBtn">
+                Continue Learning
+              </button>
+            </div>
           </div>
-          <div class="lesson-section-grid">
+
+          <div class="portal-summary-grid">
             <article class="lesson-block">
-              <span class="lesson-tag">Required</span>
-              <h2>Complete Before Class</h2>
-              <ul>
-                <li><input type="checkbox" /> Create a GitHub account</li>
-                <li><input type="checkbox" /> Create a Netlify account</li>
-                <li><input type="checkbox" /> Install Visual Studio Code</li>
-                <li><input type="checkbox" /> Sign in to all three</li>
-                <li><input type="checkbox" /> Verify your email addresses</li>
-                <li>
-                  <input type="checkbox" /> Make sure everything opens correctly
-                </li>
-              </ul>
+              <span class="lesson-tag">WELCOME</span>
+
+              <h2>Start Here</h2>
+
+              <p>Choose a workshop below to continue your learning journey.</p>
             </article>
+
             <article class="lesson-block">
-              <span class="lesson-tag">Need Help?</span>
-              <h2>Setup Video Tutorials</h2>
+              <span class="lesson-tag">WORKSHOPS</span>
+
+              <h2>Available Workshops</h2>
+
               <p>
-                If you don't already know how to set up GitHub, Netlify, or
-                Visual Studio Code, don't worry.
-              </p>
-              <p>
-                A step-by-step video tutorial is included for each one. Simply
-                watch the videos, complete the setup, and come to the workshop
-                ready to build.
-              </p>
-              <div class="important-alert">
-                <h3>⚠️ IMPORTANT</h3>
-                <p>
-                  GitHub, Netlify, and Visual Studio Code setup will
-                  <strong>NOT</strong> be covered during the live workshop.
-                </p>
-                <p>
-                  These must already be installed, set up, and ready to use
-                  before class begins.
-                </p>
-              </div>
-            </article>
-            <article class="lesson-block">
-              <span class="lesson-tag">Video Tutorials</span>
-              <h2>Need Help Setting Everything Up?</h2>
-              <p>
-                I've included step-by-step video tutorials to help you set up
-                GitHub, Netlify, and Visual Studio Code before the workshop.
-              </p>
-              <p>
-                Watch each video, complete the setup, then come back here when
-                you're finished.
-              </p>
-              <div class="lesson-complete-area setup-video-buttons">
-                <a
-                  class="gold-btn"
-                  href="https://drive.google.com/file/d/1N8kTFKopdiMyAs8iDAP_A_BvXRiU6sZZ/view?usp=drive_link"
-                  id="githubSetupLink"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  🎥 GitHub Setup Tutorial
-                </a>
-                <a
-                  class="gold-btn"
-                  href="https://drive.google.com/file/d/1_nwHC5dOAbIUglMMKvv2lcunn0wqQjfR/view?usp=drive_link"
-                  id="netlifySetupLink"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  🎥 Watch Netlify Setup
-                </a>
-                <a
-                  class="gold-btn"
-                  href="https://drive.google.com/file/d/1A7SLwe1ZIqLkmNXNPFoVp4vM1bDYfrrN/view?usp=drive_link"
-                  id="vsCodeSetupLink"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  🎥 Watch VS Code Setup
-                </a>
-              </div>
-              <p style="margin-top: 20px">
-                <strong>Tip:</strong> You can also open the official GitHub,
-                Netlify, and Visual Studio Code websites anytime from the
-                <strong>Tools &amp; Resources</strong>
-                page inside this Workshop Companion.
+                Each workshop contains its own lessons, notebook, downloads,
+                replays, help center, and certificate.
               </p>
             </article>
-            <article class="lesson-block vscode-apps-section">
-              <span class="lesson-tag">VS Code Extensions</span>
+          </div>
 
-              <h2>Apps You’ll Need for VS Code</h2>
+          <div class="workshop-grid">
+            <article class="workshop-card">
+              <h2>Prompt Generator Workshop</h2>
 
               <p>
-                Install these four free extensions before the workshop. They
-                will help you preview your generator, keep your code organized,
-                and prevent common HTML mistakes.
+                Learn how to build professional AI prompt generators from
+                scratch.
               </p>
 
-              <div class="vscode-apps-grid">
-                <article class="vscode-app-card">
-                  <div class="vscode-app-image">
-                    <img
-                      src="assets/images/vscode-apps/01-prettier.png"
-                      alt="Prettier Code Formatter extension in Visual Studio Code"
-                    />
-                  </div>
+              <button class="primary-btn" data-page="prompt-dashboard">Open Workshop</button>
+            </article>
 
-                  <div class="vscode-app-content">
-                    <span class="vscode-app-number">01</span>
-                    <h3>Prettier – Code Formatter</h3>
-                    <p>
-                      Automatically cleans up and organizes your code so it is
-                      easier to read and edit.
-                    </p>
-                  </div>
-                </article>
+            <article class="workshop-card">
+              <h2>Website Workshop</h2>
 
-                <article class="vscode-app-card">
-                  <div class="vscode-app-image">
-                    <img
-                      src="assets/images/vscode-apps/02-live-server.png"
-                      alt="Live Server extension in Visual Studio Code"
-                    />
-                  </div>
+              <p>Build beautiful websites using AI and publish them online.</p>
 
-                  <div class="vscode-app-content">
-                    <span class="vscode-app-number">02</span>
-                    <h3>Live Server</h3>
-                    <p>
-                      Opens your generator in the browser and refreshes the page
-                      when you save your changes.
-                    </p>
-                  </div>
-                </article>
+              <button class="primary-btn locked-workshop" type="button">Locked</button>
+            </article>
 
-                <article class="vscode-app-card">
-                  <div class="vscode-app-image">
-                    <img
-                      src="assets/images/vscode-apps/03-auto-close-tag.png"
-                      alt="Auto Close Tag extension in Visual Studio Code"
-                    />
-                  </div>
+            <article class="workshop-card">
+              <h2>Beacon Workshop</h2>
 
-                  <div class="vscode-app-content">
-                    <span class="vscode-app-number">03</span>
-                    <h3>Auto Close Tag</h3>
-                    <p>
-                      Automatically adds the matching closing HTML tag while you
-                      are writing code.
-                    </p>
-                  </div>
-                </article>
+              <p>Learn how to use Beacon to grow your business.</p>
 
-                <article class="vscode-app-card">
-                  <div class="vscode-app-image">
-                    <img
-                      src="assets/images/vscode-apps/04-auto-rename-tag.png"
-                      alt="Auto Rename Tag extension in Visual Studio Code"
-                    />
-                  </div>
+              <button class="primary-btn locked-workshop" type="button">Locked</button>
+            </article>
 
-                  <div class="vscode-app-content">
-                    <span class="vscode-app-number">04</span>
-                    <h3>Auto Rename Tag</h3>
-                    <p>
-                      Updates the matching opening or closing HTML tag whenever
-                      you rename one of them.
-                    </p>
-                  </div>
-                </article>
-              </div>
+            <article class="workshop-card">
+              <h2>Learning ChatGPT</h2>
 
-              <div class="important-alert vscode-apps-alert">
-                <h3>⚠️ Install These Before Class</h3>
+              <p>Master ChatGPT step by step with practical lessons.</p>
 
-                <p>
-                  Open Visual Studio Code, click the
-                  <strong>Extensions</strong> icon on the left side, search for
-                  each extension by name, and click <strong>Install</strong>.
-                </p>
-              </div>
+              <button class="primary-btn locked-workshop" type="button">Locked</button>
+            </article>
+
+            <article class="workshop-card">
+              <h2>Payhip Workshop</h2>
+
+              <p>Learn how to build and sell digital products with Payhip.</p>
+
+              <button class="primary-btn locked-workshop" type="button">Locked</button>
             </article>
           </div>
         </section>
+
         <!-- ============================= -->
-        <!-- PAGE: DASHBOARD -->
+        <!-- PAGE: ANNOUNCEMENTS -->
         <!-- ============================= -->
-        <section class="page active-page" id="dashboard">
+<section class="page" id="announcements">
+          <div class="page-header">
+            <h1>Announcements</h1>
+            <p>
+              Stay up to date with workshop news, new lessons, bonuses, and
+              important updates.
+            </p>
+          </div>
+
+          <div class="lesson-block">
+            <span class="lesson-tag">LATEST</span>
+
+            <h2>Welcome!</h2>
+
+            <p>
+              New announcements will appear here whenever workshop content is
+              updated.
+            </p>
+          </div>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: COMMUNITY -->
+        <!-- ============================= -->
+<section class="page" id="community">
+          <div class="page-header">
+            <h1>Community Board</h1>
+
+            <p>
+              Ask questions, share wins, post screenshots, and help each other.
+            </p>
+          </div>
+
+          <div class="lesson-block">
+            <span class="lesson-tag">COMING SOON</span>
+
+            <h2>Community Features</h2>
+
+            <ul class="mission-list">
+              <li>💬 Ask questions</li>
+
+              <li>📸 Share screenshots</li>
+
+              <li>🎉 Celebrate wins</li>
+
+              <li>❤️ Encourage other students</li>
+
+              <li>📌 View instructor replies</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: SETTINGS -->
+        <!-- ============================= -->
+<section class="page" id="settings">
+          <div class="page-header">
+            <h1>Settings</h1>
+
+            <p>Customize your Workshop Portal experience.</p>
+          </div>
+
+          <div class="lesson-block">
+            <span class="lesson-tag">PORTAL</span>
+
+            <h2>Preferences</h2>
+
+            <ul class="mission-list">
+              <li><input type="checkbox" /> Show completed lessons</li>
+
+              <li><input type="checkbox" /> Auto-save notebook</li>
+
+              <li><input type="checkbox" /> Enable celebrations</li>
+
+              <li><input type="checkbox" /> Play notification sounds</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: PROMPT DASHBOARD -->
+        <!-- ============================= -->
+<section id="prompt-dashboard" class="page">
           <div class="page-header split-header">
             <div>
               <h1>Build Your First Prompt Generator</h1>
@@ -333,10 +277,38 @@
               </p>
             </div>
           </div>
+          <div class="portal-summary-grid" aria-label="Prompt Generator Workshop navigation">
+            <article class="lesson-block">
+              <span class="lesson-tag">WORKSHOP</span>
+              <h2>Lessons &amp; Learning</h2>
+              <div class="builder-buttons">
+                <button class="secondary-btn" data-open-page="journey" type="button">Workshop Journey</button>
+                <button class="secondary-btn" data-open-page="requirements" type="button">Workshop Requirements</button>
+                <button class="secondary-btn" data-open-page="day-one" type="button">Day 1</button>
+                <button class="secondary-btn" data-open-page="day-two" type="button">Day 2</button>
+                <button class="secondary-btn" data-open-page="references" type="button">Reference Library</button>
+                <button class="secondary-btn" data-open-page="downloads" type="button">Downloads</button>
+                <button class="secondary-btn" data-open-page="replays" type="button">Replays</button>
+              </div>
+            </article>
+            <article class="lesson-block">
+              <span class="lesson-tag">RESOURCES</span>
+              <h2>Save, Publish &amp; Finish</h2>
+              <div class="builder-buttons">
+                <button class="secondary-btn" data-open-page="notebook" type="button">Notebook</button>
+                <button class="secondary-btn" data-open-page="prompts" type="button">Saved Prompts</button>
+                <button class="secondary-btn" data-open-page="bonuses" type="button">Bonus Resources</button>
+                <button class="secondary-btn" data-open-page="publish" type="button">Publish</button>
+                <button class="secondary-btn" data-open-page="sell" type="button">Sell Your Generator</button>
+                <button class="secondary-btn" data-open-page="book-session" type="button">Book Session</button>
+                <button class="secondary-btn" data-open-page="certificate" type="button">Certificate</button>
+              </div>
+            </article>
+          </div>
           <div class="lesson-section-grid">
             <article class="lesson-block">
               <span class="lesson-tag">ROADMAP</span>
-              <h2>Today's Build</h2>
+              <h2>Available Workshops</h2>
               <ul class="mission-list">
                 <li><input type="checkbox" /> Create project folder</li>
                 <li><input type="checkbox" /> Create index.html</li>
@@ -478,10 +450,11 @@
             </article>
           </div>
         </section>
+
         <!-- ============================= -->
-        <!-- PAGE: JOURNEY -->
+        <!-- PAGE: WORKSHOP JOURNEY -->
         <!-- ============================= -->
-        <section class="page workshop-journey-page" id="journey">
+<section id="journey" class="page">
           <div class="journey-stage">
             <!-- WELCOME CARD -->
             <article class="journey-card journey-welcome-card">
@@ -594,10 +567,181 @@
             </article>
           </div>
         </section>
+
         <!-- ============================= -->
-        <!-- PAGE: DAY ONE -->
+        <!-- PAGE: WORKSHOP REQUIREMENTS -->
         <!-- ============================= -->
-        <section class="page" id="day-one">
+<section id="requirements" class="page">
+          <div class="page-header">
+            <span class="eyebrow">Before Class</span>
+            <h1>Workshop Requirements</h1>
+            <p>
+              Before the workshop begins, please complete the items below.
+              Having everything ready before class allows us to spend our time
+              building your Prompt Generator instead of setting up software and
+              accounts.
+            </p>
+          </div>
+          <div class="lesson-section-grid">
+            <article class="lesson-block">
+              <span class="lesson-tag">Required</span>
+              <h2>Complete Before Class</h2>
+              <ul>
+                <li><input type="checkbox" /> Create a GitHub account</li>
+                <li><input type="checkbox" /> Create a Netlify account</li>
+                <li><input type="checkbox" /> Install Visual Studio Code</li>
+                <li><input type="checkbox" /> Sign in to all three</li>
+                <li><input type="checkbox" /> Verify your email addresses</li>
+                <li>
+                  <input type="checkbox" /> Make sure everything opens correctly
+                </li>
+              </ul>
+            </article>
+            <article class="lesson-block">
+              <span class="lesson-tag">Need Help?</span>
+              <h2>Setup Video Tutorials</h2>
+              <p>
+                If you don't already know how to set up GitHub, Netlify, or
+                Visual Studio Code, don't worry.
+              </p>
+              <p>
+                A step-by-step video tutorial is included for each one. Simply
+                watch the videos, complete the setup, and come to the workshop
+                ready to build.
+              </p>
+              <div class="important-alert">
+                <h3>⚠️ IMPORTANT</h3>
+                <p>
+                  GitHub, Netlify, and Visual Studio Code setup will
+                  <strong>NOT</strong> be covered during the live workshop.
+                </p>
+                <p>
+                  These must already be installed, set up, and ready to use
+                  before class begins.
+                </p>
+              </div>
+            </article>
+            <article class="lesson-block">
+              <span class="lesson-tag">Video Tutorials</span>
+              <h2>Need Help Setting Everything Up?</h2>
+              <p>
+                I've included step-by-step video tutorials to help you set up
+                GitHub, Netlify, and Visual Studio Code before the workshop.
+              </p>
+              <p>
+                Watch each video, complete the setup, then come back here when
+                you're finished.
+              </p>
+              <div class="lesson-complete-area setup-video-buttons">
+                <a
+                  class="gold-btn"
+                  href="https://drive.google.com/file/d/1N8kTFKopdiMyAs8iDAP_A_BvXRiU6sZZ/view?usp=drive_link"
+                  id="githubSetupLink"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  🎥 GitHub Setup Tutorial
+                </a>
+                <a
+                  class="gold-btn"
+                  href="https://drive.google.com/file/d/1_nwHC5dOAbIUglMMKvv2lcunn0wqQjfR/view?usp=drive_link"
+                  id="netlifySetupLink"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  🎥 Watch Netlify Setup
+                </a>
+                <a
+                  class="gold-btn"
+                  href="https://drive.google.com/file/d/1A7SLwe1ZIqLkmNXNPFoVp4vM1bDYfrrN/view?usp=drive_link"
+                  id="vsCodeSetupLink"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  🎥 Watch VS Code Setup
+                </a>
+              </div>
+              <p style="margin-top: 20px">
+                <strong>Tip:</strong> You can also open the official GitHub,
+                Netlify, and Visual Studio Code websites anytime from the
+                <strong>Tools &amp; Resources</strong>
+                page inside this Workshop Companion.
+              </p>
+            </article>
+            <article class="lesson-block vscode-apps-section">
+              <span class="lesson-tag">VS Code Extensions</span>
+
+              <h2>Apps You’ll Need for VS Code</h2>
+
+              <p>
+                Install these four free extensions before the workshop. They
+                will help you preview your generator, keep your code organized,
+                and prevent common HTML mistakes.
+              </p>
+
+              <div class="vscode-apps-grid">
+                <article class="vscode-app-card">
+                  <div class="vscode-app-content">
+                    <span class="vscode-app-number">01</span>
+                    <h3>Prettier – Code Formatter</h3>
+                    <p>
+                      Automatically cleans up and organizes your code so it is
+                      easier to read and edit.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="vscode-app-card">
+                  <div class="vscode-app-content">
+                    <span class="vscode-app-number">02</span>
+                    <h3>Live Server</h3>
+                    <p>
+                      Opens your generator in the browser and refreshes the page
+                      when you save your changes.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="vscode-app-card">
+                  <div class="vscode-app-content">
+                    <span class="vscode-app-number">03</span>
+                    <h3>Auto Close Tag</h3>
+                    <p>
+                      Automatically adds the matching closing HTML tag while you
+                      are writing code.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="vscode-app-card">
+                  <div class="vscode-app-content">
+                    <span class="vscode-app-number">04</span>
+                    <h3>Auto Rename Tag</h3>
+                    <p>
+                      Updates the matching opening or closing HTML tag whenever
+                      you rename one of them.
+                    </p>
+                  </div>
+                </article>
+              </div>
+
+              <div class="important-alert vscode-apps-alert">
+                <h3>⚠️ Install These Before Class</h3>
+
+                <p>
+                  Open Visual Studio Code, click the
+                  <strong>Extensions</strong> icon on the left side, search for
+                  each extension by name, and click <strong>Install</strong>.
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: DAY 1 -->
+        <!-- ============================= -->
+<section id="day-one" class="page">
           <div class="page-header">
             <h1>Day 1: Build Your Prompt Generator</h1>
             <p>Plan it, build it, connect it, and make sure it works.</p>
@@ -609,7 +753,9 @@
                   <i data-lucide="clipboard-list"></i>
                   <span class="lesson-tag">Step 1</span>
                   <h2>Plan Your Generator</h2>
-                  <p>Turn your idea into one short, clear Generator Build Plan.</p>
+                  <p>
+                    Turn your idea into one short, clear Generator Build Plan.
+                  </p>
                   <button
                     class="secondary-btn copy-snippet-btn"
                     data-snippet="dayOnePlan"
@@ -632,9 +778,13 @@
                   </p>
                   <h4>What to do with the output</h4>
                   <ul>
-                    <li>Approve the name, purpose, categories, and features.</li>
+                    <li>
+                      Approve the name, purpose, categories, and features.
+                    </li>
                     <li>Change anything that does not fit your idea.</li>
-                    <li>Keep the approved plan in the same ChatGPT conversation.</li>
+                    <li>
+                      Keep the approved plan in the same ChatGPT conversation.
+                    </li>
                     <li>Continue to Step 2: Set Up Your Project.</li>
                   </ul>
                 </div>
@@ -646,7 +796,10 @@
                   <i data-lucide="folder-open"></i>
                   <span class="lesson-tag">Step 2</span>
                   <h2>Set Up Your Project</h2>
-                  <p>Copy a working folder or create the basic project files, one step at a time.</p>
+                  <p>
+                    Copy a working folder or create the basic project files, one
+                    step at a time.
+                  </p>
                   <button
                     class="secondary-btn copy-snippet-btn"
                     data-snippet="dayOneProjectSetup"
@@ -670,9 +823,15 @@
                   <h4>What to do with the output</h4>
                   <ul>
                     <li>Follow one setup instruction at a time.</li>
-                    <li>Confirm index.html, css, js, and assets are included.</li>
-                    <li>Open the finished main folder in Visual Studio Code.</li>
-                    <li>Continue to Step 3: Choose Your Content &amp; Design.</li>
+                    <li>
+                      Confirm index.html, css, js, and assets are included.
+                    </li>
+                    <li>
+                      Open the finished main folder in Visual Studio Code.
+                    </li>
+                    <li>
+                      Continue to Step 3: Choose Your Content &amp; Design.
+                    </li>
                   </ul>
                   <span class="flip-hint">Click again to flip back</span>
                 </div>
@@ -684,7 +843,10 @@
                   <i data-lucide="file-pen-line"></i>
                   <span class="lesson-tag">Step 3</span>
                   <h2>Choose Your Content &amp; Design</h2>
-                  <p>Choose the look, page flow, controls, buttons, and output style without technical jargon.</p>
+                  <p>
+                    Choose the look, page flow, controls, buttons, and output
+                    style without technical jargon.
+                  </p>
                   <button
                     class="secondary-btn copy-snippet-btn"
                     data-snippet="dayOneDesign"
@@ -707,7 +869,9 @@
                   </p>
                   <h4>What to do with the output</h4>
                   <ul>
-                    <li>Approve the colors, typography, layout, and page flow.</li>
+                    <li>
+                      Approve the colors, typography, layout, and page flow.
+                    </li>
                     <li>Keep the guide in the same ChatGPT conversation.</li>
                     <li>Continue to Step 4: Build the HTML.</li>
                   </ul>
@@ -721,7 +885,10 @@
                   <i data-lucide="palette"></i>
                   <span class="lesson-tag">Step 4</span>
                   <h2>Build the HTML</h2>
-                  <p>Create the complete page structure from your approved plan and design guide.</p>
+                  <p>
+                    Create the complete page structure from your approved plan
+                    and design guide.
+                  </p>
                   <button
                     class="secondary-btn copy-snippet-btn"
                     data-snippet="dayOneHtml"
@@ -744,7 +911,9 @@
                   </p>
                   <h4>What to do with the output</h4>
                   <ul>
-                    <li>Replace the contents of index.html with the complete code.</li>
+                    <li>
+                      Replace the contents of index.html with the complete code.
+                    </li>
                     <li>Save the file.</li>
                     <li>Continue to Step 5: Build the CSS.</li>
                   </ul>
@@ -758,7 +927,10 @@
                   <i data-lucide="code-2"></i>
                   <span class="lesson-tag">Step 5</span>
                   <h2>Build the CSS</h2>
-                  <p>Turn your approved visual guide into one complete stylesheet.</p>
+                  <p>
+                    Turn your approved visual guide into one complete
+                    stylesheet.
+                  </p>
                   <button
                     class="secondary-btn copy-snippet-btn"
                     data-snippet="dayOneCss"
@@ -795,7 +967,10 @@
                   <i data-lucide="palette"></i>
                   <span class="lesson-tag">Step 6</span>
                   <h2>Build the JavaScript</h2>
-                  <p>Connect the choices, buttons, presets, and prompt generation.</p>
+                  <p>
+                    Connect the choices, buttons, presets, and prompt
+                    generation.
+                  </p>
                   <button
                     class="secondary-btn copy-snippet-btn"
                     data-snippet="dayOneJavascript"
@@ -832,7 +1007,10 @@
                   <i data-lucide="file-code"></i>
                   <span class="lesson-tag">Step 7</span>
                   <h2>Quick Test</h2>
-                  <p>Check the working generator one small section at a time before Day 2.</p>
+                  <p>
+                    Check the working generator one small section at a time
+                    before Day 2.
+                  </p>
                   <button
                     class="secondary-btn copy-snippet-btn"
                     data-snippet="dayOneQuickTest"
@@ -871,10 +1049,11 @@
             </button>
           </div>
         </section>
+
         <!-- ============================= -->
-        <!-- PAGE: DAY TWO -->
+        <!-- PAGE: DAY 2 -->
         <!-- ============================= -->
-        <section class="page" id="day-two">
+<section id="day-two" class="page">
           <div class="page-header split-header">
             <div>
               <span class="eyebrow">Day 2</span>
@@ -896,8 +1075,12 @@
               </p>
               <ul>
                 <li>Keep everything that is already working.</li>
-                <li>Notice anything that feels limited, unfinished, or unclear.</li>
-                <li>Choose only the improvements that matter to your project.</li>
+                <li>
+                  Notice anything that feels limited, unfinished, or unclear.
+                </li>
+                <li>
+                  Choose only the improvements that matter to your project.
+                </li>
               </ul>
               <button
                 class="secondary-btn copy-snippet-btn"
@@ -915,8 +1098,12 @@
                 that apply to the type of project you built.
               </p>
               <ul>
-                <li>Prompt generator: improve categories and option choices.</li>
-                <li>App or tool: improve screens, tabs, content, or interactions.</li>
+                <li>
+                  Prompt generator: improve categories and option choices.
+                </li>
+                <li>
+                  App or tool: improve screens, tabs, content, or interactions.
+                </li>
                 <li>Website: improve sections, content, links, or features.</li>
                 <li>Change only what you approve.</li>
               </ul>
@@ -937,9 +1124,18 @@
                 on everyone.
               </p>
               <ul>
-                <li>Prompt generator: finalize presets and generator-specific behavior.</li>
-                <li>App or tool: finalize tabs, actions, saved information, or outputs.</li>
-                <li>Website: finalize forms, buttons, navigation, downloads, or links.</li>
+                <li>
+                  Prompt generator: finalize presets and generator-specific
+                  behavior.
+                </li>
+                <li>
+                  App or tool: finalize tabs, actions, saved information, or
+                  outputs.
+                </li>
+                <li>
+                  Website: finalize forms, buttons, navigation, downloads, or
+                  links.
+                </li>
                 <li>Skip features that do not belong to your project.</li>
               </ul>
               <button
@@ -977,7 +1173,10 @@
               </button>
 
               <h3>Footer &amp; Copyright</h3>
-              <p>Finish the bottom of the project with your correct name or brand.</p>
+              <p>
+                Finish the bottom of the project with your correct name or
+                brand.
+              </p>
               <button
                 class="secondary-btn copy-snippet-btn"
                 data-snippet="updateCopyright"
@@ -1014,8 +1213,12 @@
                 problems that are actually found.
               </p>
               <ul>
-                <li>Test the main action and all approved interactive features.</li>
-                <li>Check links, forms, buttons, tabs, or outputs that exist.</li>
+                <li>
+                  Test the main action and all approved interactive features.
+                </li>
+                <li>
+                  Check links, forms, buttons, tabs, or outputs that exist.
+                </li>
                 <li>Check desktop and mobile layouts.</li>
                 <li>Fix errors without redesigning working sections.</li>
               </ul>
@@ -1037,61 +1240,69 @@
               <ul>
                 <li>Save index.html, style.css, and script.js.</li>
                 <li>Open the project one final time.</li>
-                <li>Make sure the version you tested is the version you publish.</li>
+                <li>
+                  Make sure the version you tested is the version you publish.
+                </li>
               </ul>
               <div class="lesson-complete-area">
-                <button class="gold-btn" id="markDayTwoCompleteBtn" type="button">
+                <button
+                  class="gold-btn"
+                  id="markDayTwoCompleteBtn"
+                  type="button"
+                >
                   Mark Day 2 Complete &amp; Continue to Sell Your Project
                 </button>
               </div>
             </article>
 
             <details class="day-two-optional-resource">
-              <summary>Optional Resource: Reusable App Welcome Page Template</summary>
-            <article class="lesson-block reusable-master-prompt-resource">
-              <div class="reusable-master-prompt-heading">
-                <div>
-                  <span class="lesson-tag">Day 2 Resource</span>
-                  <h2>Reusable App Welcome Page HTML Template</h2>
-                  <p class="reusable-master-prompt-subtitle">
-                    Create branded app access pages by replacing only the name,
-                    text, and links.
-                  </p>
+              <summary>
+                Optional Resource: Reusable App Welcome Page Template
+              </summary>
+              <article class="lesson-block reusable-master-prompt-resource">
+                <div class="reusable-master-prompt-heading">
+                  <div>
+                    <span class="lesson-tag">Day 2 Resource</span>
+                    <h2>Reusable App Welcome Page HTML Template</h2>
+                    <p class="reusable-master-prompt-subtitle">
+                      Create branded app access pages by replacing only the
+                      name, text, and links.
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <p class="reusable-master-prompt-description">
-                Use this ready-made welcome page for any app, prompt generator,
-                resource, or digital product. Duplicate the file, replace the
-                bracketed text and links, then open it in VS Code and publish it
-                through GitHub and Netlify.
-              </p>
-              <div class="reusable-master-prompt-actions">
-                <button
-                  class="gold-btn"
-                  id="copyReusableWelcomePromptBtn"
-                  type="button"
-                >
-                  COPY HTML TEMPLATE
-                </button>
-                <button
-                  class="secondary-btn"
-                  id="downloadReusableWelcomePromptBtn"
-                  type="button"
-                >
-                  DOWNLOAD HTML TEMPLATE
-                </button>
-              </div>
-              <div class="reusable-master-prompt-layout">
-                <div class="reusable-master-prompt-box-wrap">
-                  <label for="reusableWelcomeMasterPrompt"
-                    >Reusable HTML Template</label
+                <p class="reusable-master-prompt-description">
+                  Use this ready-made welcome page for any app, prompt
+                  generator, resource, or digital product. Duplicate the file,
+                  replace the bracketed text and links, then open it in VS Code
+                  and publish it through GitHub and Netlify.
+                </p>
+                <div class="reusable-master-prompt-actions">
+                  <button
+                    class="gold-btn"
+                    id="copyReusableWelcomePromptBtn"
+                    type="button"
                   >
-                  <textarea
-                    class="reusable-master-prompt-box"
-                    id="reusableWelcomeMasterPrompt"
-                    readonly=""
-                    spellcheck="false"
+                    COPY HTML TEMPLATE
+                  </button>
+                  <button
+                    class="secondary-btn"
+                    id="downloadReusableWelcomePromptBtn"
+                    type="button"
                   >
+                    DOWNLOAD HTML TEMPLATE
+                  </button>
+                </div>
+                <div class="reusable-master-prompt-layout">
+                  <div class="reusable-master-prompt-box-wrap">
+                    <label for="reusableWelcomeMasterPrompt"
+                      >Reusable HTML Template</label
+                    >
+                    <textarea
+                      class="reusable-master-prompt-box"
+                      id="reusableWelcomeMasterPrompt"
+                      readonly=""
+                      spellcheck="false"
+                    >
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
@@ -1359,42 +1570,43 @@
   &lt;/main&gt;
 &lt;/body&gt;
 &lt;/html&gt;</textarea
-                  >
+                    >
+                  </div>
+                  <aside class="reusable-master-prompt-note">
+                    <span class="eyebrow">Quick Lesson</span>
+                    <h3>How to use this HTML template</h3>
+                    <p>
+                      Save one untouched copy as your master. Each time you need
+                      a new welcome page, duplicate the file and replace the
+                      information inside the brackets.
+                    </p>
+                    <p><strong>Only change:</strong></p>
+                    <ul>
+                      <li>The app name</li>
+                      <li>The welcome headline</li>
+                      <li>The welcome message</li>
+                      <li>The button names</li>
+                      <li>The main app link</li>
+                      <li>The guide link</li>
+                      <li>The bonus resource link</li>
+                      <li>The selling guide link</li>
+                      <li>The community link</li>
+                      <li>The final message</li>
+                    </ul>
+                    <p class="reusable-master-prompt-reminder">
+                      Do not rebuild the whole page every time.
+                    </p>
+                  </aside>
                 </div>
-                <aside class="reusable-master-prompt-note">
-                  <span class="eyebrow">Quick Lesson</span>
-                  <h3>How to use this HTML template</h3>
-                  <p>
-                    Save one untouched copy as your master. Each time you need a
-                    new welcome page, duplicate the file and replace the
-                    information inside the brackets.
-                  </p>
-                  <p><strong>Only change:</strong></p>
-                  <ul>
-                    <li>The app name</li>
-                    <li>The welcome headline</li>
-                    <li>The welcome message</li>
-                    <li>The button names</li>
-                    <li>The main app link</li>
-                    <li>The guide link</li>
-                    <li>The bonus resource link</li>
-                    <li>The selling guide link</li>
-                    <li>The community link</li>
-                    <li>The final message</li>
-                  </ul>
-                  <p class="reusable-master-prompt-reminder">
-                    Do not rebuild the whole page every time.
-                  </p>
-                </aside>
-              </div>
-            </article>
+              </article>
             </details>
           </div>
         </section>
+
         <!-- ============================= -->
-        <!-- PAGE: REFERENCE IMAGE LIBRARY -->
+        <!-- PAGE: REFERENCE LIBRARY -->
         <!-- ============================= -->
-        <section class="page reference-library-page" id="references">
+<section id="references" class="page">
           <div class="page-header split-header">
             <div>
               <span class="eyebrow">Creative Inspiration</span>
@@ -1528,365 +1740,9 @@
               </div>
             </div>
           </div>
-        </section>
-        <!-- ============================= -->
-        <!-- PAGE: PUBLISH -->
-        <!-- ============================= -->
-        <section class="page" id="publish">
-          <div class="page-header">
-            <h1>Open the tools used to build, publish, and create</h1>
-          </div>
-          <div class="publish-grid">
-            <article class="download-card">
-              <i data-lucide="cloud-upload"></i>
-              <h2>Publish Checklist</h2>
-              <p>GitHub and Netlify steps for students.</p>
-              <button
-                class="primary-btn download-btn"
-                data-download="publish"
-                type="button"
-              >
-                Download
-              </button>
-            </article>
-            <article class="download-card">
-              <i data-lucide="badge-dollar-sign"></i>
-              <h2>Selling Guide</h2>
-              <p>Mockups, pricing, sales copy, and launch checklist.</p>
-              <button class="primary-btn download-btn" data-download="selling">
-                Download
-              </button>
-            </article>
-            <article class="card publish-card">
-              <span class="lesson-tag">Design</span>
-              <h2>Canva</h2>
-              <p>
-                Design graphics, presentations, ebooks, and marketing assets.
-              </p>
-              <a
-                class="gold-btn"
-                href="https://www.canva.com/"
-                rel="noopener noreferrer"
-                target="_blank"
-                >Open Canva →</a
-              >
-            </article>
-            <article class="card publish-card">
-              <span class="lesson-tag">AI Assistant</span>
-              <h2>ChatGPT</h2>
-              <p>Generate code, content, prompts, and troubleshooting help.</p>
-              <a
-                class="gold-btn"
-                href="https://chatgpt.com/"
-                rel="noopener noreferrer"
-                target="_blank"
-                >Open ChatGPT →</a
-              >
-            </article>
-            <article class="card publish-card">
-              <span class="lesson-tag">AI Video</span>
-              <h2>Flow</h2>
-              <p>Create cinematic AI videos from prompts and scenes.</p>
-              <a
-                class="gold-btn"
-                href="https://labs.google/fx/tools/flow"
-                rel="noopener noreferrer"
-                target="_blank"
-                >Open Flow →</a
-              >
-            </article>
-            <article class="card publish-card">
-              <span class="lesson-tag">AI Assistant</span>
-              <h2>Gemini</h2>
-              <p>Brainstorm ideas, research topics, and generate content.</p>
-              <a
-                class="gold-btn"
-                href="https://gemini.google.com/"
-                rel="noopener noreferrer"
-                target="_blank"
-                >Open Gemini →</a
-              >
-            </article>
-            <article class="card publish-card">
-              <span class="lesson-tag">Development</span>
-              <h2>GitHub</h2>
-              <p>Save your project, track changes, and manage versions.</p>
-              <a
-                class="gold-btn"
-                href="https://github.com/"
-                rel="noopener noreferrer"
-                target="_blank"
-                >Open GitHub →</a
-              >
-            </article>
-            <article class="card publish-card">
-              <span class="lesson-tag">AI Video</span>
-              <h2>Google Vids</h2>
-              <p>
-                Create, edit, and organize polished videos with Google’s
-                AI-powered video tool.
-              </p>
-              <a
-                class="gold-btn"
-                href="https://workspace.google.com/products/vids/"
-                rel="noopener noreferrer"
-                target="_blank"
-                >Open Google Vids →</a
-              >
-            </article>
-            <article class="card publish-card">
-              <span class="lesson-tag">AI Images</span>
-              <h2>ImageFX</h2>
-              <p>Generate high-quality AI images from text prompts.</p>
-              <a
-                class="gold-btn"
-                href="https://labs.google/fx/tools/image-fx"
-                rel="noopener noreferrer"
-                target="_blank"
-                >Open ImageFX →</a
-              >
-            </article>
-            <article class="card publish-card">
-              <span class="lesson-tag">Image Upscaling</span>
-              <h2>I❤️IMG</h2>
-              <p>Increase image resolution and improve image quality.</p>
-              <a
-                class="gold-btn"
-                href="https://www.iloveimg.com/upscale-image"
-                rel="noopener noreferrer"
-                target="_blank"
-                >Open I❤️IMG →</a
-              >
-            </article>
-            <article class="card publish-card">
-              <span class="lesson-tag">AI Assistant</span>
-              <h2>Microsoft Copilot</h2>
-              <p>
-                Brainstorm, write, research, create images, and get everyday AI
-                assistance.
-              </p>
-              <a
-                class="gold-btn"
-                href="https://copilot.com/"
-                rel="noopener noreferrer"
-                target="_blank"
-                >Open Copilot →</a
-              >
-            </article>
-            <article class="card publish-card">
-              <span class="lesson-tag">Publishing</span>
-              <h2>Netlify</h2>
-              <p>Publish your project and get a live website link.</p>
-              <a
-                class="gold-btn"
-                href="https://app.netlify.com/"
-                rel="noopener noreferrer"
-                target="_blank"
-                >Open Netlify →</a
-              >
-            </article>
-            <article class="card publish-card">
-              <span class="lesson-tag">Research</span>
-              <h2>Perplexity</h2>
-              <p>Research ideas, verify information, and gather sources.</p>
-              <a
-                class="gold-btn"
-                href="https://www.perplexity.ai/"
-                rel="noopener noreferrer"
-                target="_blank"
-                >Open Perplexity →</a
-              >
-            </article>
-            <article class="card publish-card">
-              <span class="lesson-tag">AI Music</span>
-              <h2>Suno</h2>
-              <p>Generate AI songs, music, and background audio.</p>
-              <a
-                class="gold-btn"
-                href="https://suno.com/"
-                rel="noopener noreferrer"
-                target="_blank"
-                >Open Suno →</a
-              >
-            </article>
-            <article class="card publish-card">
-              <span class="lesson-tag">Development</span>
-              <h2>VS Code</h2>
-              <p>Write and edit HTML, CSS, and JavaScript files.</p>
-              <a
-                class="gold-btn"
-                href="https://code.visualstudio.com/"
-                rel="noopener noreferrer"
-                target="_blank"
-                >Open VS Code →</a
-              >
-            </article>
-          </div>
-        </section>
-        <!-- ============================= -->
-        <!-- PAGE: SELL -->
-        <!-- ============================= -->
-        <section class="page" id="sell">
-          <div class="page-header">
-            <h1>Launch Your Generator</h1>
-            <p>
-              Your generator is built. Now it’s time to package it, create your
-              product listing, and prepare it for real-world customers.
-            </p>
-          </div>
-          <div class="sell-grid">
-            <article class="card sell-card">
-              <h2>Product Checklist</h2>
-              <ul>
-                <li>Live generator link</li>
-                <li>PDF buyer instructions</li>
-                <li>Preview screenshots</li>
-                <li>Product mockup</li>
-                <li>Simple terms of use</li>
-              </ul>
-            </article>
-            <article class="card sell-card">
-              <h2>Product Listing</h2>
-              <ul>
-                <li>Clear product title</li>
-                <li>Who the product helps</li>
-                <li>What the generator creates</li>
-                <li>Key features and benefits</li>
-                <li>What the buyer receives</li>
-              </ul>
-            </article>
-            <article class="card sell-card">
-              <h2>Launch Plan</h2>
-              <ul>
-                <li>Create 3–5 short videos</li>
-                <li>Show the generator working</li>
-                <li>Share before-and-after examples</li>
-                <li>Add your product link</li>
-                <li>Invite buyers to customize it</li>
-              </ul>
-            </article>
-          </div>
-          <!-- QUICK LINKS -->
-          <div class="card selling-links-card">
-            <div class="card-header">
-              <div>
-                <span class="eyebrow">Quick Links</span>
-                <h2>Publish Your Product</h2>
-              </div>
-            </div>
-            <div class="selling-links-grid">
-              <a
-                class="selling-platform-link"
-                href="https://payhip.com/"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <div>
-                  <h3>Payhip</h3>
-                  <p>Upload, price, and sell your generator.</p>
-                </div>
-                <span>Open Payhip</span>
-              </a>
-              <a
-                class="selling-platform-link"
-                href="https://beacons.ai/"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <div>
-                  <h3>Beacons</h3>
-                  <p>Add your generator to your store or link-in-bio page.</p>
-                </div>
-                <span>Open Beacons</span>
-              </a>
-            </div>
-          </div>
-          <!-- PRODUCT DESCRIPTION PROMPT -->
-          <div class="card prompt-card sell-prompt-card">
-            <div class="card-header">
-              <div>
-                <h2>Product Description Prompt</h2>
-              </div>
-              <button
-                class="primary-btn copy-btn"
-                data-copy-target="productPrompt"
-              >
-                Copy Prompt
-              </button>
-            </div>
-            <textarea class="copy-area" id="productPrompt" readonly="">
-Write a clear, polished, and persuasive product listing for my AI prompt generator.
-
-Use the information I provide to create:
-
-• A strong product title
-• A short product description
-• A complete product description
-• Who the product is for
-• The problem it solves
-• What the generator creates
-• Key features
-• Customer benefits
-• What the buyer receives
-• Simple instructions for using it
-• Frequently asked questions
-• A clear call to action
-
-Keep the writing confident, beginner-friendly, easy to understand, and focused on the real value of the generator.
-
-Do not use exaggerated claims, complicated language, or unnecessary filler.
-
-Before writing the listing, ask me for:
-
-1. Generator name
-2. Target audience
-3. What the generator creates
-4. The problem it solves
-5. Main features
-6. What the buyer receives
-7. Product price
-8. Where the product will be sold
-</textarea
-            >
-          </div>
-          <!-- Launch Checklist -->
-          <article class="card launch-checklist-card">
-            <div class="launch-checklist-inner">
-              <div class="launch-checklist-front">
-                <span class="eyebrow">Final Step</span>
-                <h2>Launch Checklist</h2>
-                <p>
-                  Before you publish your generator, make sure you've completed
-                  the final steps.
-                </p>
-                <button class="primary-btn">View Checklist</button>
-              </div>
-              <div class="launch-checklist-back">
-                <span class="eyebrow">Ready to Launch?</span>
-                <h2>Final Checklist</h2>
-                <ul class="launch-checklist-list">
-                  <li>✅ Test every feature</li>
-                  <li>✅ Remove placeholder text</li>
-                  <li>✅ Add your branding</li>
-                  <li>✅ Take screenshots</li>
-                  <li>✅ Write your product description</li>
-                  <li>✅ Upload your generator</li>
-                  <li>✅ Test your purchase link</li>
-                  <li>✅ Announce your launch</li>
-                </ul>
-                <button class="secondary-btn">Back</button>
-              </div>
-            </div>
-          </article>
-          <a class="gold-btn" href="./diploma.html"> View My Diploma </a>
-        </section>
-
-        <!-- ============================= -->
-        <!-- PAGE: KEYBOARD SHORTCUTS -->
-        <!-- ============================= -->
-
-        <section class="page" id="shortcuts">
-          <div class="page-header">
+        
+          <div class="reference-shortcuts">
+<div class="page-header">
             <span class="eyebrow">Quick Reference</span>
             <h1>Common VS Code Keyboard Shortcuts</h1>
             <p>
@@ -1974,308 +1830,19 @@ Before writing the listing, ask me for:
               </table>
             </div>
           </article>
-        </section>
-
-        <!-- ============================= -->
-        <!-- PAGE: NOTEBOOK -->
-        <!-- ============================= -->
-        <section class="page" id="notebook">
-          <div class="page-header">
-            <span class="eyebrow">Notebook</span>
-            <h1>My Workshop Notes</h1>
-            <p>
-              Write, save, edit, and delete your workshop notes in one place.
-              Your notes save automatically.
-            </p>
-          </div>
-          <div class="notebook-layout">
-            <aside class="card note-sidebar">
-              <button class="primary-btn full-width" id="newNoteBtn">
-                New Note
-              </button>
-              <div class="saved-notes-header">
-                <h2>Saved Notes</h2>
-              </div>
-              <div class="saved-notes-list" id="savedNotesList">
-                <p class="empty-notes-message">No saved notes yet.</p>
-              </div>
-            </aside>
-            <div class="card note-editor-card">
-              <div class="note-editor-header">
-                <div>
-                  <h2 id="currentNoteTitle">New Note</h2>
-                  <p id="noteTimestamp">Start typing to save this note.</p>
-                </div>
-                <button
-                  class="secondary-btn"
-                  disabled=""
-                  id="deleteNoteBtn"
-                  type="button"
-                >
-                  Delete Note
-                </button>
-              </div>
-              <textarea
-                class="note-editor"
-                id="mainNote"
-                placeholder="Type your note here..."
-              ></textarea>
-              <p class="note-save-status" id="noteSaveStatus">
-                Your note will save automatically.
-              </p>
-            </div>
-          </div>
-        </section>
-        <!-- ============================= -->
-        <!-- PAGE: SAVED PROMPTS -->
-        <!-- ============================= -->
-        <section class="page" id="prompts">
-          <div class="page-header">
-            <span class="eyebrow">Your Prompt Library</span>
-            <h1>Saved Prompts</h1>
-            <p>
-              Save your favorite prompts here so you can find, copy, and reuse
-              them anytime.
-            </p>
-          </div>
-
-          <div class="prompt-library-layout">
-            <article class="lesson-block prompt-save-card">
-              <span class="lesson-tag">Add a Prompt</span>
-              <h2>Save a New Prompt</h2>
-              <label for="savedPromptTitle">Prompt Name</label>
-              <input
-                id="savedPromptTitle"
-                type="text"
-                maxlength="80"
-                placeholder="Example: Luxury Birthday Flyer"
-              />
-
-              <label for="savedPromptText">Your Prompt</label>
-              <textarea
-                id="savedPromptText"
-                rows="10"
-                placeholder="Paste or type your prompt here..."
-              ></textarea>
-
-              <div class="prompt-library-actions">
-                <button
-                  class="gold-btn"
-                  id="savePromptLibraryBtn"
-                  type="button"
-                >
-                  Save Prompt
-                </button>
-                <button
-                  class="secondary-btn"
-                  id="clearPromptFormBtn"
-                  type="button"
-                >
-                  Clear Form
-                </button>
-              </div>
-              <p class="prompt-library-note">
-                Saved prompts stay in this browser on this device.
-              </p>
-            </article>
-
-            <article class="lesson-block prompt-list-card">
-              <div class="prompt-list-heading">
-                <div>
-                  <span class="lesson-tag">Your Collection</span>
-                  <h2>My Saved Prompts</h2>
-                </div>
-                <span class="prompt-count" id="savedPromptCount">0 saved</span>
-              </div>
-
-              <div class="prompt-empty-state" id="savedPromptsEmpty">
-                <i data-lucide="bookmark"></i>
-                <h3>No saved prompts yet</h3>
-                <p>Your saved prompts will appear here.</p>
-              </div>
-
-              <div class="saved-prompts-list" id="savedPromptsList"></div>
-            </article>
           </div>
         </section>
 
         <!-- ============================= -->
-        <!-- PAGE: CHALLENGES -->
+        <!-- PAGE: DOWNLOADS -->
         <!-- ============================= -->
-
-        <section class="page" id="challenges">
-          <div class="page-header">
-            <span class="eyebrow">Something New Is Coming</span>
-            <h1>Challenges</h1>
-            <p>
-              New creative challenges are coming soon to help you practice,
-              build, and strengthen your skills.
-            </p>
-          </div>
-
-          <article class="lesson-block">
-            <span class="lesson-tag">Coming Soon</span>
-            <h2>Creative Challenges Are On The Way</h2>
-            <p>
-              Check back soon for guided challenges, creative exercises, and new
-              ways to put what you learned into action.
-            </p>
-          </article>
-        </section>
-
-        <!-- ============================= -->
-        <!-- PAGE: BOOK YOUR 1-ON-1 -->
-        <!-- ============================= -->
-
-        <section class="page" id="book-session">
-          <div class="page-header">
-            <span class="eyebrow">30-Day Workshop Support</span>
-            <h1>Book Your 1-on-1</h1>
-            <p>
-              Schedule your included 60-minute support session to get help
-              finishing, fixing, or improving the project you started during the
-              workshop.
-            </p>
-          </div>
-
-          <article class="lesson-block">
-            <span class="lesson-tag">One Session Per Student</span>
-            <h2>Before You Book</h2>
-
-            <ul>
-              <li>Come prepared with the exact issue you need help with.</li>
-              <li>Your session is 60 minutes and begins and ends on time.</li>
-              <li>Please cancel or reschedule at least 24 hours in advance.</li>
-              <li>
-                Missed sessions and late cancellations may not be rescheduled.
-              </li>
-              <li>
-                This booking page is available during the 30-day support period.
-              </li>
-            </ul>
-
-            <a
-              class="primary-btn"
-              href="https://scheduler.zoom.us/nakeyma-atterberry/workshop-support"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i data-lucide="calendar-check"></i>
-              Schedule Your Session
-            </a>
-          </article>
-        </section>
-
-        <!-- ============================= -->
-        <!-- PAGE: REPLAYS -->
-        <!-- ============================= -->
-        <section class="page" id="replays">
-          <div class="page-header">
-            <span class="eyebrow">Replay Library</span>
-            <h1>Two clean replays. No clutter.</h1>
-            <p>
-              Only Day 1 and Day 2 live here so students know exactly what to
-              watch.
-            </p>
-          </div>
-          <div class="replay-grid">
-            <article class="card replay-card">
-              <span class="status-pill">Day 1</span>
-              <h2>Build the Prompt Generator Companion</h2>
-              <p>
-                Project setup, HTML, CSS, JavaScript, generator buttons, and
-                testing.
-              </p>
-              <ul>
-                <li>Project folder setup</li>
-                <li>Generator layout</li>
-                <li>Category dropdowns</li>
-                <li>Generate, Randomize, Copy, Clear</li>
-              </ul>
-              <button class="primary-btn replay-btn" data-replay="day1">
-                Watch Day 1 Replay
-              </button>
-            </article>
-            <article class="card replay-card">
-              <span class="status-pill">Day 2</span>
-              <h2>Publish and Sell the Generator</h2>
-              <p>
-                AI modules, GitHub, Netlify, product packaging, and selling
-                strategy.
-              </p>
-              <ul>
-                <li>Premium AI modules</li>
-                <li>GitHub workflow</li>
-                <li>Netlify deployment</li>
-                <li>Sales page and launch plan</li>
-              </ul>
-              <button class="primary-btn replay-btn" data-replay="day2">
-                Watch Day 2 Replay
-              </button>
-            </article>
-          </div>
-        </section>
-        <!-- ============================= -->
-        <!-- PAGE: BONUS RESOURCES -->
-        <!-- ============================= -->
-        <section class="page" id="bonuses">
-          <div class="page-header">
-            <span class="eyebrow">Bonus Resources</span>
-            <h1>Your workshop extras</h1>
-            <p>
-              Customize, expand, and reuse your Workshop Companion with these
-              bonus resources
-            </p>
-          </div>
-          <div class="settings-grid">
-            <article class="card settings-card">
-              <h2>Workshop Companion Code</h2>
-              <p>
-                As a bonus, you receive the complete source code for the
-                Workshop Companion. Make it your own by updating the branding,
-                colors, lessons, pages, downloads, and resources. Customize it
-                "Use it for your own Prompt Generator Workshop.
-              </p>
-              <ul class="bonus-list">
-                <li>✔ Rebrand the Workshop Companion</li>
-                <li>✔ Edit every lesson and resource</li>
-                <li>✔ Add or remove workshop pages</li>
-                <li>✔ Customize the design and colors</li>
-                <li>✔ Use it for your own prompt generator workshop</li>
-              </ul>
-              <a
-                class="primary-btn"
-                download=""
-                href="downloads/Workshop-Companion.zip"
-              >
-                Download Workshop Companion Code
-              </a>
-              <button class="secondary-btn" data-open-page="gettingStartedPage">
-                Open Setup Guide
-              </button>
-            </article>
-            <article class="card settings-card">
-              <h2>Workshop Data</h2>
-              <p>
-                Reset your saved notes, checklists, and workshop progress at any
-                time.
-              </p>
-              <button class="danger-btn full-width" id="resetDataBtn">
-                Reset Everything
-              </button>
-            </article>
-          </div>
-        </section>
-        <!-- ========================================
-     GETTING STARTED GUIDE PAGE
-======================================== -->
-        <section class="page getting-started-page" id="gettingStartedPage">
+<section class="page getting-started-page" id="downloads">
           <div class="page-heading">
             <div>
               <span class="eyebrow">Beginner Guide</span>
-              <h1>Getting Started Guide</h1>
+              <h1>Downloads &amp; Setup Guide</h1>
               <p>
-                Follow these simple steps to download, open, and customize your
+                Download your files and follow these simple steps to open and customize your
                 Workshop Companion.
               </p>
             </div>
@@ -2338,15 +1905,6 @@ Before writing the listing, ask me for:
                 </p>
                 <h3>Follow Along with the Screenshots</h3>
                 <div class="guide-screenshot-stack">
-                  <figure class="guide-screenshot">
-                    <img
-                      alt="Right-click the ZIP file"
-                      src="assets/images/getting-started/extract-zip.png"
-                    />
-                    <figcaption>
-                      Right-click the Workshop Companion ZIP file.
-                    </figcaption>
-                  </figure>
                   <figure class="guide-screenshot">
                     <img
                       alt="Click Extract All"
@@ -3362,6 +2920,711 @@ Do not generate code yet.
             </article>
           </div>
         </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: REPLAYS -->
+        <!-- ============================= -->
+<section id="replays" class="page">
+          <div class="page-header">
+            <span class="eyebrow">Replay Library</span>
+            <h1>Two clean replays. No clutter.</h1>
+            <p>
+              Only Day 1 and Day 2 live here so students know exactly what to
+              watch.
+            </p>
+          </div>
+          <div class="replay-grid">
+            <article class="card replay-card">
+              <span class="status-pill">Day 1</span>
+              <h2>Build the Prompt Generator Companion</h2>
+              <p>
+                Project setup, HTML, CSS, JavaScript, generator buttons, and
+                testing.
+              </p>
+              <ul>
+                <li>Project folder setup</li>
+                <li>Generator layout</li>
+                <li>Category dropdowns</li>
+                <li>Generate, Randomize, Copy, Clear</li>
+              </ul>
+              <button class="primary-btn replay-btn" data-replay="day1">
+                Watch Day 1 Replay
+              </button>
+            </article>
+            <article class="card replay-card">
+              <span class="status-pill">Day 2</span>
+              <h2>Publish and Sell the Generator</h2>
+              <p>
+                AI modules, GitHub, Netlify, product packaging, and selling
+                strategy.
+              </p>
+              <ul>
+                <li>Premium AI modules</li>
+                <li>GitHub workflow</li>
+                <li>Netlify deployment</li>
+                <li>Sales page and launch plan</li>
+              </ul>
+              <button class="primary-btn replay-btn" data-replay="day2">
+                Watch Day 2 Replay
+              </button>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: NOTEBOOK -->
+        <!-- ============================= -->
+<section id="notebook" class="page">
+          <div class="page-header">
+            <span class="eyebrow">Notebook</span>
+            <h1>My Workshop Notes</h1>
+            <p>
+              Write, save, edit, and delete your workshop notes in one place.
+              Your notes save automatically.
+            </p>
+          </div>
+          <div class="notebook-layout">
+            <aside class="card note-sidebar">
+              <button class="primary-btn full-width" id="newNoteBtn">
+                New Note
+              </button>
+              <div class="saved-notes-header">
+                <h2>Saved Notes</h2>
+              </div>
+              <div class="saved-notes-list" id="savedNotesList">
+                <p class="empty-notes-message">No saved notes yet.</p>
+              </div>
+            </aside>
+            <div class="card note-editor-card">
+              <div class="note-editor-header">
+                <div>
+                  <h2 id="currentNoteTitle">New Note</h2>
+                  <p id="noteTimestamp">Start typing to save this note.</p>
+                </div>
+                <button
+                  class="secondary-btn"
+                  disabled=""
+                  id="deleteNoteBtn"
+                  type="button"
+                >
+                  Delete Note
+                </button>
+              </div>
+              <textarea
+                class="note-editor"
+                id="mainNote"
+                placeholder="Type your note here..."
+              ></textarea>
+              <p class="note-save-status" id="noteSaveStatus">
+                Your note will save automatically.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: SAVED PROMPTS -->
+        <!-- ============================= -->
+<section id="prompts" class="page">
+          <div class="page-header">
+            <span class="eyebrow">Your Prompt Library</span>
+            <h1>Saved Prompts</h1>
+            <p>
+              Save your favorite prompts here so you can find, copy, and reuse
+              them anytime.
+            </p>
+          </div>
+
+          <div class="prompt-library-layout">
+            <article class="lesson-block prompt-save-card">
+              <span class="lesson-tag">Add a Prompt</span>
+              <h2>Save a New Prompt</h2>
+              <label for="savedPromptTitle">Prompt Name</label>
+              <input
+                id="savedPromptTitle"
+                type="text"
+                maxlength="80"
+                placeholder="Example: Luxury Birthday Flyer"
+              />
+
+              <label for="savedPromptText">Your Prompt</label>
+              <textarea
+                id="savedPromptText"
+                rows="10"
+                placeholder="Paste or type your prompt here..."
+              ></textarea>
+
+              <div class="prompt-library-actions">
+                <button
+                  class="gold-btn"
+                  id="savePromptLibraryBtn"
+                  type="button"
+                >
+                  Save Prompt
+                </button>
+                <button
+                  class="secondary-btn"
+                  id="clearPromptFormBtn"
+                  type="button"
+                >
+                  Clear Form
+                </button>
+              </div>
+              <p class="prompt-library-note">
+                Saved prompts stay in this browser on this device.
+              </p>
+            </article>
+
+            <article class="lesson-block prompt-list-card">
+              <div class="prompt-list-heading">
+                <div>
+                  <span class="lesson-tag">Your Collection</span>
+                  <h2>My Saved Prompts</h2>
+                </div>
+                <span class="prompt-count" id="savedPromptCount">0 saved</span>
+              </div>
+
+              <div class="prompt-empty-state" id="savedPromptsEmpty">
+                <i data-lucide="bookmark"></i>
+                <h3>No saved prompts yet</h3>
+                <p>Your saved prompts will appear here.</p>
+              </div>
+
+              <div class="saved-prompts-list" id="savedPromptsList"></div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: BONUS RESOURCES -->
+        <!-- ============================= -->
+<section id="bonuses" class="page">
+          <div class="page-header">
+            <span class="eyebrow">Bonus Resources</span>
+            <h1>Your workshop extras</h1>
+            <p>
+              Customize, expand, and reuse your Workshop Companion with these
+              bonus resources
+            </p>
+          </div>
+          <div class="settings-grid">
+            <article class="card settings-card">
+              <h2>Workshop Companion Code</h2>
+              <p>
+                As a bonus, you receive the complete source code for the
+                Workshop Companion. Make it your own by updating the branding,
+                colors, lessons, pages, downloads, and resources. Customize it
+                "Use it for your own Prompt Generator Workshop.
+              </p>
+              <ul class="bonus-list">
+                <li>✔ Rebrand the Workshop Companion</li>
+                <li>✔ Edit every lesson and resource</li>
+                <li>✔ Add or remove workshop pages</li>
+                <li>✔ Customize the design and colors</li>
+                <li>✔ Use it for your own prompt generator workshop</li>
+              </ul>
+              <a
+                class="primary-btn"
+                download=""
+                href="downloads/Workshop-Companion.zip"
+              >
+                Download Workshop Companion Code
+              </a>
+              <button class="secondary-btn" data-open-page="downloads">
+                Open Setup Guide
+              </button>
+            </article>
+            <article class="card settings-card">
+              <h2>Workshop Data</h2>
+              <p>
+                Reset your saved notes, checklists, and workshop progress at any
+                time.
+              </p>
+              <button class="danger-btn full-width" id="resetDataBtn">
+                Reset Everything
+              </button>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: PUBLISH -->
+        <!-- ============================= -->
+<section id="publish" class="page">
+          <div class="page-header">
+            <h1>Open the tools used to build, publish, and create</h1>
+          </div>
+          <div class="publish-grid">
+            <article class="download-card">
+              <i data-lucide="cloud-upload"></i>
+              <h2>Publish Checklist</h2>
+              <p>GitHub and Netlify steps for students.</p>
+              <button
+                class="primary-btn download-btn"
+                data-download="publish"
+                type="button"
+              >
+                Download
+              </button>
+            </article>
+            <article class="download-card">
+              <i data-lucide="badge-dollar-sign"></i>
+              <h2>Selling Guide</h2>
+              <p>Mockups, pricing, sales copy, and launch checklist.</p>
+              <button class="primary-btn download-btn" data-download="selling">
+                Download
+              </button>
+            </article>
+            <article class="card publish-card">
+              <span class="lesson-tag">Design</span>
+              <h2>Canva</h2>
+              <p>
+                Design graphics, presentations, ebooks, and marketing assets.
+              </p>
+              <a
+                class="gold-btn"
+                href="https://www.canva.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+                >Open Canva →</a
+              >
+            </article>
+            <article class="card publish-card">
+              <span class="lesson-tag">AI Assistant</span>
+              <h2>ChatGPT</h2>
+              <p>Generate code, content, prompts, and troubleshooting help.</p>
+              <a
+                class="gold-btn"
+                href="https://chatgpt.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+                >Open ChatGPT →</a
+              >
+            </article>
+            <article class="card publish-card">
+              <span class="lesson-tag">AI Video</span>
+              <h2>Flow</h2>
+              <p>Create cinematic AI videos from prompts and scenes.</p>
+              <a
+                class="gold-btn"
+                href="https://labs.google/fx/tools/flow"
+                rel="noopener noreferrer"
+                target="_blank"
+                >Open Flow →</a
+              >
+            </article>
+            <article class="card publish-card">
+              <span class="lesson-tag">AI Assistant</span>
+              <h2>Gemini</h2>
+              <p>Brainstorm ideas, research topics, and generate content.</p>
+              <a
+                class="gold-btn"
+                href="https://gemini.google.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+                >Open Gemini →</a
+              >
+            </article>
+            <article class="card publish-card">
+              <span class="lesson-tag">Development</span>
+              <h2>GitHub</h2>
+              <p>Save your project, track changes, and manage versions.</p>
+              <a
+                class="gold-btn"
+                href="https://github.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+                >Open GitHub →</a
+              >
+            </article>
+            <article class="card publish-card">
+              <span class="lesson-tag">AI Video</span>
+              <h2>Google Vids</h2>
+              <p>
+                Create, edit, and organize polished videos with Google’s
+                AI-powered video tool.
+              </p>
+              <a
+                class="gold-btn"
+                href="https://workspace.google.com/products/vids/"
+                rel="noopener noreferrer"
+                target="_blank"
+                >Open Google Vids →</a
+              >
+            </article>
+            <article class="card publish-card">
+              <span class="lesson-tag">AI Images</span>
+              <h2>ImageFX</h2>
+              <p>Generate high-quality AI images from text prompts.</p>
+              <a
+                class="gold-btn"
+                href="https://labs.google/fx/tools/image-fx"
+                rel="noopener noreferrer"
+                target="_blank"
+                >Open ImageFX →</a
+              >
+            </article>
+            <article class="card publish-card">
+              <span class="lesson-tag">Image Upscaling</span>
+              <h2>I❤️IMG</h2>
+              <p>Increase image resolution and improve image quality.</p>
+              <a
+                class="gold-btn"
+                href="https://www.iloveimg.com/upscale-image"
+                rel="noopener noreferrer"
+                target="_blank"
+                >Open I❤️IMG →</a
+              >
+            </article>
+            <article class="card publish-card">
+              <span class="lesson-tag">AI Assistant</span>
+              <h2>Microsoft Copilot</h2>
+              <p>
+                Brainstorm, write, research, create images, and get everyday AI
+                assistance.
+              </p>
+              <a
+                class="gold-btn"
+                href="https://copilot.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+                >Open Copilot →</a
+              >
+            </article>
+            <article class="card publish-card">
+              <span class="lesson-tag">Publishing</span>
+              <h2>Netlify</h2>
+              <p>Publish your project and get a live website link.</p>
+              <a
+                class="gold-btn"
+                href="https://app.netlify.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+                >Open Netlify →</a
+              >
+            </article>
+            <article class="card publish-card">
+              <span class="lesson-tag">Research</span>
+              <h2>Perplexity</h2>
+              <p>Research ideas, verify information, and gather sources.</p>
+              <a
+                class="gold-btn"
+                href="https://www.perplexity.ai/"
+                rel="noopener noreferrer"
+                target="_blank"
+                >Open Perplexity →</a
+              >
+            </article>
+            <article class="card publish-card">
+              <span class="lesson-tag">AI Music</span>
+              <h2>Suno</h2>
+              <p>Generate AI songs, music, and background audio.</p>
+              <a
+                class="gold-btn"
+                href="https://suno.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+                >Open Suno →</a
+              >
+            </article>
+            <article class="card publish-card">
+              <span class="lesson-tag">Development</span>
+              <h2>VS Code</h2>
+              <p>Write and edit HTML, CSS, and JavaScript files.</p>
+              <a
+                class="gold-btn"
+                href="https://code.visualstudio.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+                >Open VS Code →</a
+              >
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: SELL -->
+        <!-- ============================= -->
+<section id="sell" class="page">
+          <div class="page-header">
+            <h1>Launch Your Generator</h1>
+            <p>
+              Your generator is built. Now it’s time to package it, create your
+              product listing, and prepare it for real-world customers.
+            </p>
+          </div>
+          <div class="sell-grid">
+            <article class="card sell-card">
+              <h2>Product Checklist</h2>
+              <ul>
+                <li>Live generator link</li>
+                <li>PDF buyer instructions</li>
+                <li>Preview screenshots</li>
+                <li>Product mockup</li>
+                <li>Simple terms of use</li>
+              </ul>
+            </article>
+            <article class="card sell-card">
+              <h2>Product Listing</h2>
+              <ul>
+                <li>Clear product title</li>
+                <li>Who the product helps</li>
+                <li>What the generator creates</li>
+                <li>Key features and benefits</li>
+                <li>What the buyer receives</li>
+              </ul>
+            </article>
+            <article class="card sell-card">
+              <h2>Launch Plan</h2>
+              <ul>
+                <li>Create 3–5 short videos</li>
+                <li>Show the generator working</li>
+                <li>Share before-and-after examples</li>
+                <li>Add your product link</li>
+                <li>Invite buyers to customize it</li>
+              </ul>
+            </article>
+          </div>
+          <!-- QUICK LINKS -->
+          <div class="card selling-links-card">
+            <div class="card-header">
+              <div>
+                <span class="eyebrow">Quick Links</span>
+                <h2>Publish Your Product</h2>
+              </div>
+            </div>
+            <div class="selling-links-grid">
+              <a
+                class="selling-platform-link"
+                href="https://payhip.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <div>
+                  <h3>Payhip</h3>
+                  <p>Upload, price, and sell your generator.</p>
+                </div>
+                <span>Open Payhip</span>
+              </a>
+              <a
+                class="selling-platform-link"
+                href="https://beacons.ai/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <div>
+                  <h3>Beacons</h3>
+                  <p>Add your generator to your store or link-in-bio page.</p>
+                </div>
+                <span>Open Beacons</span>
+              </a>
+            </div>
+          </div>
+          <!-- PRODUCT DESCRIPTION PROMPT -->
+          <div class="card prompt-card sell-prompt-card">
+            <div class="card-header">
+              <div>
+                <h2>Product Description Prompt</h2>
+              </div>
+              <button
+                class="primary-btn copy-btn"
+                data-copy-target="productPrompt"
+              >
+                Copy Prompt
+              </button>
+            </div>
+            <textarea class="copy-area" id="productPrompt" readonly="">
+Write a clear, polished, and persuasive product listing for my AI prompt generator.
+
+Use the information I provide to create:
+
+• A strong product title
+• A short product description
+• A complete product description
+• Who the product is for
+• The problem it solves
+• What the generator creates
+• Key features
+• Customer benefits
+• What the buyer receives
+• Simple instructions for using it
+• Frequently asked questions
+• A clear call to action
+
+Keep the writing confident, beginner-friendly, easy to understand, and focused on the real value of the generator.
+
+Do not use exaggerated claims, complicated language, or unnecessary filler.
+
+Before writing the listing, ask me for:
+
+1. Generator name
+2. Target audience
+3. What the generator creates
+4. The problem it solves
+5. Main features
+6. What the buyer receives
+7. Product price
+8. Where the product will be sold
+</textarea
+            >
+          </div>
+          <!-- Launch Checklist -->
+          <article class="card launch-checklist-card">
+            <div class="launch-checklist-inner">
+              <div class="launch-checklist-front">
+                <span class="eyebrow">Final Step</span>
+                <h2>Launch Checklist</h2>
+                <p>
+                  Before you publish your generator, make sure you've completed
+                  the final steps.
+                </p>
+                <button class="primary-btn">View Checklist</button>
+              </div>
+              <div class="launch-checklist-back">
+                <span class="eyebrow">Ready to Launch?</span>
+                <h2>Final Checklist</h2>
+                <ul class="launch-checklist-list">
+                  <li>✅ Test every feature</li>
+                  <li>✅ Remove placeholder text</li>
+                  <li>✅ Add your branding</li>
+                  <li>✅ Take screenshots</li>
+                  <li>✅ Write your product description</li>
+                  <li>✅ Upload your generator</li>
+                  <li>✅ Test your purchase link</li>
+                  <li>✅ Announce your launch</li>
+                </ul>
+                <button class="secondary-btn">Back</button>
+              </div>
+            </div>
+          </article>
+          <a class="gold-btn" href="./diploma.html"> View My Diploma </a>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: BOOK SESSION -->
+        <!-- ============================= -->
+<section id="book-session" class="page">
+          <div class="page-header">
+            <span class="eyebrow">30-Day Workshop Support</span>
+            <h1>Book Your 1-on-1</h1>
+            <p>
+              Schedule your included 60-minute support session to get help
+              finishing, fixing, or improving the project you started during the
+              workshop.
+            </p>
+          </div>
+
+          <article class="lesson-block">
+            <span class="lesson-tag">One Session Per Student</span>
+            <h2>Before You Book</h2>
+
+            <ul>
+              <li>Come prepared with the exact issue you need help with.</li>
+              <li>Your session is 60 minutes and begins and ends on time.</li>
+              <li>Please cancel or reschedule at least 24 hours in advance.</li>
+              <li>
+                Missed sessions and late cancellations may not be rescheduled.
+              </li>
+              <li>
+                This booking page is available during the 30-day support period.
+              </li>
+            </ul>
+
+            <a
+              class="primary-btn"
+              href="https://scheduler.zoom.us/nakeyma-atterberry/workshop-support"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i data-lucide="calendar-check"></i>
+              Schedule Your Session
+            </a>
+          </article>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: CERTIFICATE -->
+        <!-- ============================= -->
+<section class="page" id="certificate">
+          <div class="page-header">
+            <span class="eyebrow">Workshop Complete</span>
+            <h1>Certificate</h1>
+            <p>
+              When you finish the Prompt Generator Workshop, open your certificate
+              to view, download, print, or save it.
+            </p>
+          </div>
+          <article class="lesson-block">
+            <span class="lesson-tag">Your Achievement</span>
+            <h2>Prompt Generator Workshop Certificate</h2>
+            <p>Your certificate is ready from the original workshop companion.</p>
+            <a class="primary-btn" href="./diploma.html">View Certificate</a>
+          </article>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: WEBSITE DASHBOARD -->
+        <!-- ============================= -->
+<section class="page workshop-placeholder" id="website-dashboard">
+          <div class="page-header">
+            <span class="eyebrow">Workshop</span>
+            <h1>Website Workshop</h1>
+            <p>Build a website with ChatGPT Sites and connect Payhip for checkout.</p>
+          </div>
+          <article class="lesson-block">
+            <span class="lesson-tag">Locked</span>
+            <h2>Workshop Dashboard</h2>
+            <p>This workshop is not open yet. Its lessons and resources will live here when it is released.</p>
+          </article>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: BEACON DASHBOARD -->
+        <!-- ============================= -->
+<section class="page workshop-placeholder" id="beacon-dashboard">
+          <div class="page-header">
+            <span class="eyebrow">Workshop</span>
+            <h1>Beacon Workshop</h1>
+            <p>Learn the Beacon workflow step by step when this workshop opens.</p>
+          </div>
+          <article class="lesson-block">
+            <span class="lesson-tag">Locked</span>
+            <h2>Workshop Dashboard</h2>
+            <p>This workshop is not open yet. Its lessons and resources will live here when it is released.</p>
+          </article>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: CHATGPT DASHBOARD -->
+        <!-- ============================= -->
+<section class="page workshop-placeholder" id="chatgpt-dashboard">
+          <div class="page-header">
+            <span class="eyebrow">Workshop</span>
+            <h1>Learning ChatGPT</h1>
+            <p>Learn ChatGPT step by step with practical beginner-friendly lessons.</p>
+          </div>
+          <article class="lesson-block">
+            <span class="lesson-tag">Locked</span>
+            <h2>Workshop Dashboard</h2>
+            <p>This workshop is not open yet. Its lessons and resources will live here when it is released.</p>
+          </article>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: PAYHIP DASHBOARD -->
+        <!-- ============================= -->
+<section class="page workshop-placeholder" id="payhip-dashboard">
+          <div class="page-header">
+            <span class="eyebrow">Workshop</span>
+            <h1>Payhip Workshop</h1>
+            <p>Learn how to build and sell your products with Payhip when this workshop opens.</p>
+          </div>
+          <article class="lesson-block">
+            <span class="lesson-tag">Locked</span>
+            <h2>Workshop Dashboard</h2>
+            <p>This workshop is not open yet. Its lessons and resources will live here when it is released.</p>
+          </article>
+        </section>
       </main>
     </div>
     <!-- ============================= -->
@@ -3378,24 +3641,11 @@ Do not generate code yet.
           ×
         </button>
         <span class="eyebrow">Workshop Locked</span>
-        <h2>🔒 This Lesson Is Locked Until Workshop Day</h2>
+        <h2>🔒 This Workshop Is Coming Soon</h2>
         <p>
-          This lesson will unlock when the live workshop begins. Enter the
-          workshop code I'll provide during class to unlock your Workshop
-          Companion.
-        </p>
-        <input
-          autocomplete="off"
-          id="workshopCodeInput"
-          placeholder="Enter workshop code"
-          type="text"
-        />
-        <button class="gold-btn" id="unlockWorkshopBtn" type="button">
-          🔓 Unlock My Workshop
-        </button>
-        <p class="workshop-help-text">
-          Need help getting ready? Visit <strong>Start Here</strong> and
-          <strong>Tools &amp; Resources</strong> before class.
+          This workshop is visible so you can see what is coming next, but it
+          is not open yet. When it is ready, its lessons and resources will be
+          available from this portal.
         </p>
         <p id="workshopCodeMessage"></p>
       </div>
@@ -3407,7 +3657,6 @@ Do not generate code yet.
           aria-label="Close popup"
           class="close-popup"
           id="closeCompletionPopup"
-          onclick="closeAchievementPopup()"
           type="button"
         >
           ×
