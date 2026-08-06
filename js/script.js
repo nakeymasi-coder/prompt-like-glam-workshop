@@ -72,6 +72,11 @@
   const MAX_REFERENCE_IMAGE_SIZE = 1_500_000;
   const MAX_REFERENCE_IMAGES = 8;
 
+  const REPLAY_LINKS = {
+    day1: "https://drive.google.com/file/d/1q4EOnJhgF7nMPv4_iGmuO7s-VnTfNmmn/view?usp=drive_link",
+    day2: ""
+  };
+
   const snippetLibrary = {
     dayOnePlan: `You are an expert prompt generator planner helping a complete beginner plan one professional prompt generator.\n\nAsk me for my generator idea first. Then create one concise Generator Build Plan that includes:\n\n• Generator name\n• Purpose\n• Target audience\n• What it creates\n• The problem it solves\n• Main categories\n• Important option choices\n• Required buttons and features\n• Final output format\n\nDo not generate HTML, CSS, or JavaScript yet. Keep the plan clear, practical, and beginner-friendly.`,
 
@@ -1049,11 +1054,17 @@
     document.querySelectorAll(".replay-btn[data-replay]").forEach((button) => {
       button.addEventListener("click", () => {
         const replayName = button.dataset.replay === "day1" ? "Day 1" : "Day 2";
+        const replayUrl = REPLAY_LINKS[button.dataset.replay];
+
+        if (!replayUrl) {
+          showToast(`${replayName} replay link has not been added yet.`);
+          return;
+        }
+
         const history = readStorage(STORAGE.replayHistory, {});
         history[button.dataset.replay] = { openedAt: new Date().toISOString(), progress: 0 };
         writeStorage(STORAGE.replayHistory, history);
-        button.textContent = `${replayName} Replay Coming Soon`;
-        showToast(`${replayName} replay link has not been added yet.`);
+        window.open(replayUrl, "_blank", "noopener,noreferrer");
       });
     });
   }
