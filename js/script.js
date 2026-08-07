@@ -14,7 +14,7 @@
     announcements: `${APP_PREFIX}:announcements`,
     references: `${APP_PREFIX}:references`,
     downloadHistory: `${APP_PREFIX}:downloadHistory`,
-    replayHistory: `${APP_PREFIX}:replayHistory`
+    replayHistory: `${APP_PREFIX}:replayHistory`,
   };
 
   const VALID_PAGES = new Set([
@@ -43,14 +43,14 @@
     "website-dashboard",
     "beacon-dashboard",
     "chatgpt-dashboard",
-    "payhip-dashboard"
+    "payhip-dashboard",
   ]);
 
   const LOCKED_WORKSHOP_PAGES = new Set([
     "website-dashboard",
     "beacon-dashboard",
     "chatgpt-dashboard",
-    "payhip-dashboard"
+    "payhip-dashboard",
   ]);
 
   const PROMPT_WORKSHOP_PAGES = new Set([
@@ -67,15 +67,15 @@
     "bonuses",
     "sell",
     "book-session",
-    "certificate"
+    "certificate",
   ]);
 
   const MAX_REFERENCE_IMAGE_SIZE = 1_500_000;
   const MAX_REFERENCE_IMAGES = 8;
 
   const REPLAY_LINKS = {
-    day1: "https://drive.google.com/file/d/1q4EOnJhgF7nMPv4_iGmuO7s-VnTfNmmn/view?usp=drive_link",
-    day2: ""
+    day1: "https://drive.google.com/file/d/1R5-puzbimQdwxj0atVYkDeuhm36pHnyT/view?usp=sharing",
+    day2: "",
   };
 
   const snippetLibrary = {
@@ -210,7 +210,7 @@ End with:
 
     dayTwoPremiumFeatures: `Review my current working project and recommend only premium features that make this specific project more useful. Do not add anything automatically. After I approve a feature, update one file at a time and preserve every working section and connection.`,
 
-    dayTwoFinalTest: `You are helping a complete beginner complete a final test of an existing project. Ask me to upload the complete current project. Inspect it first. Then test navigation, buttons, forms, links, downloads, outputs, local storage, desktop, tablet, and mobile behavior one section at a time. Fix only verified problems and do not redesign the project.`
+    dayTwoFinalTest: `You are helping a complete beginner complete a final test of an existing project. Ask me to upload the complete current project. Inspect it first. Then test navigation, buttons, forms, links, downloads, outputs, local storage, desktop, tablet, and mobile behavior one section at a time. Fix only verified problems and do not redesign the project.`,
   };
 
   snippetLibrary.dayOnePlan = `You are helping someone plan and build a coding project using AI.
@@ -493,7 +493,7 @@ End with:
     activeNoteId: null,
     prompts: [],
     referenceImages: [],
-    saveTimer: null
+    saveTimer: null,
   };
 
   const dom = {};
@@ -603,11 +603,16 @@ End with:
     const target = document.getElementById(pageId);
 
     if (LOCKED_WORKSHOP_PAGES.has(pageId)) {
-      openWorkshopLockPopup(`${pageLabel(pageId)} is locked and not available yet.`);
+      openWorkshopLockPopup(
+        `${pageLabel(pageId)} is locked and not available yet.`,
+      );
       return false;
     }
 
-    if (pageId === "certificate" && !readStorage(STORAGE.dayProgress, {}).dayTwo) {
+    if (
+      pageId === "certificate" &&
+      !readStorage(STORAGE.dayProgress, {}).dayTwo
+    ) {
       showToast("Complete Day 2 before opening your certificate.", true);
       return false;
     }
@@ -636,7 +641,10 @@ End with:
     if (save) writeStorage(STORAGE.lastPage, pageId);
 
     closeMobileMenu();
-    window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? "auto" : "smooth" });
+    window.scrollTo({
+      top: 0,
+      behavior: prefersReducedMotion() ? "auto" : "smooth",
+    });
 
     if (focus) {
       const heading = target.querySelector("h1, h2");
@@ -652,11 +660,12 @@ End with:
 
   function restoreLastPage() {
     const savedPage = readStorage(STORAGE.lastPage, "portal-home");
-    const startPage = VALID_PAGES.has(savedPage) &&
+    const startPage =
+      VALID_PAGES.has(savedPage) &&
       !LOCKED_WORKSHOP_PAGES.has(savedPage) &&
       document.getElementById(savedPage)
-      ? savedPage
-      : "portal-home";
+        ? savedPage
+        : "portal-home";
     showPage(startPage, { save: false, focus: false });
   }
 
@@ -667,7 +676,9 @@ End with:
         const pageId = control.dataset.page;
 
         if (!pageId || !document.getElementById(pageId)) {
-          openWorkshopLockPopup("This workshop is not available in your portal yet.");
+          openWorkshopLockPopup(
+            "This workshop is not available in your portal yet.",
+          );
           return;
         }
 
@@ -691,12 +702,20 @@ End with:
       const isOpen = dom.sidebar?.classList.toggle("open") ?? false;
       document.body.classList.toggle("menu-open", isOpen);
       dom.mobileMenuBtn.setAttribute("aria-expanded", String(isOpen));
-      dom.mobileMenuBtn.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+      dom.mobileMenuBtn.setAttribute(
+        "aria-label",
+        isOpen ? "Close menu" : "Open menu",
+      );
     });
 
     document.addEventListener("click", (event) => {
-      if (window.innerWidth > 900 || !dom.sidebar?.classList.contains("open")) return;
-      if (dom.sidebar.contains(event.target) || dom.mobileMenuBtn?.contains(event.target)) return;
+      if (window.innerWidth > 900 || !dom.sidebar?.classList.contains("open"))
+        return;
+      if (
+        dom.sidebar.contains(event.target) ||
+        dom.mobileMenuBtn?.contains(event.target)
+      )
+        return;
       closeMobileMenu();
     });
 
@@ -721,10 +740,14 @@ End with:
       if (query.length < 2) return;
 
       const matches = dom.pages.filter((page) => {
-        return !LOCKED_WORKSHOP_PAGES.has(page.id) &&
-          page.textContent.toLowerCase().includes(query);
+        return (
+          !LOCKED_WORKSHOP_PAGES.has(page.id) &&
+          page.textContent.toLowerCase().includes(query)
+        );
       });
-      const currentMatch = matches.find((page) => page.id === state.currentPage);
+      const currentMatch = matches.find(
+        (page) => page.id === state.currentPage,
+      );
 
       if (currentMatch) {
         highlightSearchCards(currentMatch, query);
@@ -756,7 +779,9 @@ End with:
   }
 
   function clearSearchHighlights() {
-    document.querySelectorAll(".search-match").forEach((item) => item.classList.remove("search-match"));
+    document
+      .querySelectorAll(".search-match")
+      .forEach((item) => item.classList.remove("search-match"));
   }
 
   function pageLabel(pageId) {
@@ -767,11 +792,17 @@ End with:
   function bindWorkshopCards() {
     document.getElementById("continueBtn")?.addEventListener("click", () => {
       const lastPage = readStorage(STORAGE.lastPage, null);
-      const lastWorkshop = readStorage(STORAGE.lastWorkshop, "prompt-dashboard");
-      const destination = lastPage && PROMPT_WORKSHOP_PAGES.has(lastPage)
-        ? lastPage
-        : lastWorkshop;
-      showPage(document.getElementById(destination) ? destination : "prompt-dashboard");
+      const lastWorkshop = readStorage(
+        STORAGE.lastWorkshop,
+        "prompt-dashboard",
+      );
+      const destination =
+        lastPage && PROMPT_WORKSHOP_PAGES.has(lastPage)
+          ? lastPage
+          : lastWorkshop;
+      showPage(
+        document.getElementById(destination) ? destination : "prompt-dashboard",
+      );
     });
   }
 
@@ -780,18 +811,25 @@ End with:
       link.setAttribute("aria-haspopup", "dialog");
       link.addEventListener("click", (event) => {
         event.preventDefault();
-        const workshopName = link.dataset.workshop
-          || link.closest(".workshop-card")?.querySelector("h2")?.textContent.trim()
-          || "This workshop";
-        openWorkshopLockPopup(`${workshopName} is locked and not available yet.`);
+        const workshopName =
+          link.dataset.workshop ||
+          link
+            .closest(".workshop-card")
+            ?.querySelector("h2")
+            ?.textContent.trim() ||
+          "This workshop";
+        openWorkshopLockPopup(
+          `${workshopName} is locked and not available yet.`,
+        );
       });
     });
 
-    document.getElementById("closeWorkshopLockPopup")?.addEventListener("click", closeWorkshopLockPopup);
+    document
+      .getElementById("closeWorkshopLockPopup")
+      ?.addEventListener("click", closeWorkshopLockPopup);
     dom.workshopLockPopup?.addEventListener("click", (event) => {
       if (event.target === dom.workshopLockPopup) closeWorkshopLockPopup();
     });
-
   }
 
   function openWorkshopLockPopup(customMessage = "") {
@@ -801,8 +839,12 @@ End with:
     }
     dom.workshopLockPopup.classList.remove("hidden");
     document.body.classList.add("modal-open");
-    if (dom.workshopCodeMessage) dom.workshopCodeMessage.textContent = customMessage;
-    window.setTimeout(() => document.getElementById("closeWorkshopLockPopup")?.focus(), 50);
+    if (dom.workshopCodeMessage)
+      dom.workshopCodeMessage.textContent = customMessage;
+    window.setTimeout(
+      () => document.getElementById("closeWorkshopLockPopup")?.focus(),
+      50,
+    );
   }
 
   function closeWorkshopLockPopup() {
@@ -812,39 +854,65 @@ End with:
   }
 
   function bindPageButtons() {
-    document.querySelector("#sell .launch-checklist-front .primary-btn")?.addEventListener("click", () => {
-      document.querySelector(".launch-checklist-card")?.classList.add("is-flipped");
-    });
-    document.querySelector("#sell .launch-checklist-back .secondary-btn")?.addEventListener("click", () => {
-      document.querySelector(".launch-checklist-card")?.classList.remove("is-flipped");
-    });
+    document
+      .querySelector("#sell .launch-checklist-front .primary-btn")
+      ?.addEventListener("click", () => {
+        document
+          .querySelector(".launch-checklist-card")
+          ?.classList.add("is-flipped");
+      });
+    document
+      .querySelector("#sell .launch-checklist-back .secondary-btn")
+      ?.addEventListener("click", () => {
+        document
+          .querySelector(".launch-checklist-card")
+          ?.classList.remove("is-flipped");
+      });
 
-    document.getElementById("copyReusableWelcomePromptBtn")?.addEventListener("click", () => {
-      copyElementValue("reusableWelcomeMasterPrompt", "HTML template copied.");
-    });
+    document
+      .getElementById("copyReusableWelcomePromptBtn")
+      ?.addEventListener("click", () => {
+        copyElementValue(
+          "reusableWelcomeMasterPrompt",
+          "HTML template copied.",
+        );
+      });
 
-    document.getElementById("downloadReusableWelcomePromptBtn")?.addEventListener("click", () => {
-      const content = document.getElementById("reusableWelcomeMasterPrompt")?.value || "";
-      downloadTextFile("reusable-app-welcome-page.html", decodeHtmlEntities(content), "text/html");
-      recordDownload("Reusable App Welcome Page Template");
-    });
+    document
+      .getElementById("downloadReusableWelcomePromptBtn")
+      ?.addEventListener("click", () => {
+        const content =
+          document.getElementById("reusableWelcomeMasterPrompt")?.value || "";
+        downloadTextFile(
+          "reusable-app-welcome-page.html",
+          decodeHtmlEntities(content),
+          "text/html",
+        );
+        recordDownload("Reusable App Welcome Page Template");
+      });
   }
 
   function bindCopyButtons() {
-    document.querySelectorAll(".copy-snippet-btn[data-snippet]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const text = snippetLibrary[button.dataset.snippet];
-        if (!text) {
-          showToast("That workshop prompt has not been added yet.", true);
-          return;
-        }
-        copyText(text, "Workshop prompt copied.");
+    document
+      .querySelectorAll(".copy-snippet-btn[data-snippet]")
+      .forEach((button) => {
+        button.addEventListener("click", () => {
+          const text = snippetLibrary[button.dataset.snippet];
+          if (!text) {
+            showToast("That workshop prompt has not been added yet.", true);
+            return;
+          }
+          copyText(text, "Workshop prompt copied.");
+        });
       });
-    });
 
-    document.querySelectorAll(".copy-btn[data-copy-target]").forEach((button) => {
-      button.addEventListener("click", () => copyElementValue(button.dataset.copyTarget));
-    });
+    document
+      .querySelectorAll(".copy-btn[data-copy-target]")
+      .forEach((button) => {
+        button.addEventListener("click", () =>
+          copyElementValue(button.dataset.copyTarget),
+        );
+      });
   }
 
   async function copyText(text, successMessage = "Copied!") {
@@ -906,31 +974,39 @@ End with:
   }
 
   function bindCompletionControls() {
-    document.getElementById("markDayOneCompleteBtn")?.addEventListener("click", () => {
-      setDayComplete("dayOne", true);
-      showCompletion(
-        "Day 1 Complete",
-        "Your Day 1 progress has been saved. You are ready for Day 2.",
-        "day-two",
-        "Go to Day 2"
-      );
-    });
+    document
+      .getElementById("markDayOneCompleteBtn")
+      ?.addEventListener("click", () => {
+        setDayComplete("dayOne", true);
+        showCompletion(
+          "Day 1 Complete",
+          "Your Day 1 progress has been saved. You are ready for Day 2.",
+          "day-two",
+          "Go to Day 2",
+        );
+      });
 
-    document.getElementById("markDayTwoCompleteBtn")?.addEventListener("click", () => {
-      setDayComplete("dayTwo", true);
-      showCompletion(
-        "Workshop Complete",
-        "Day 2 is complete. Your certificate is now unlocked.",
-        "certificate",
-        "View Certificate"
-      );
-    });
+    document
+      .getElementById("markDayTwoCompleteBtn")
+      ?.addEventListener("click", () => {
+        setDayComplete("dayTwo", true);
+        showCompletion(
+          "Workshop Complete",
+          "Day 2 is complete. Your certificate is now unlocked.",
+          "certificate",
+          "View Certificate",
+        );
+      });
 
-    document.getElementById("completionActionButton")?.addEventListener("click", () => {
-      closeAchievementPopup();
-    });
+    document
+      .getElementById("completionActionButton")
+      ?.addEventListener("click", () => {
+        closeAchievementPopup();
+      });
 
-    document.getElementById("closeCompletionPopup")?.addEventListener("click", closeAchievementPopup);
+    document
+      .getElementById("closeCompletionPopup")
+      ?.addEventListener("click", closeAchievementPopup);
     dom.completionPopup?.addEventListener("click", (event) => {
       if (event.target === dom.completionPopup) closeAchievementPopup();
     });
@@ -959,7 +1035,10 @@ End with:
     dom.completionPopup.dataset.nextPage = nextPage || "";
     dom.completionPopup.classList.remove("hidden");
     document.body.classList.add("modal-open");
-    window.setTimeout(() => document.getElementById("closeCompletionPopup")?.focus(), 50);
+    window.setTimeout(
+      () => document.getElementById("closeCompletionPopup")?.focus(),
+      50,
+    );
   }
 
   function closeAchievementPopup() {
@@ -970,13 +1049,16 @@ End with:
   }
 
   function bindChecklists() {
-    const checkboxes = [...document.querySelectorAll(".page input[type='checkbox']")];
+    const checkboxes = [
+      ...document.querySelectorAll(".page input[type='checkbox']"),
+    ];
     const saved = readStorage(STORAGE.checklist, {});
 
     checkboxes.forEach((checkbox, index) => {
       const key = checkboxKey(checkbox, index);
       checkbox.dataset.storageKey = key;
-      if (Object.prototype.hasOwnProperty.call(saved, key)) checkbox.checked = Boolean(saved[key]);
+      if (Object.prototype.hasOwnProperty.call(saved, key))
+        checkbox.checked = Boolean(saved[key]);
 
       checkbox.addEventListener("change", () => {
         const current = readStorage(STORAGE.checklist, {});
@@ -989,24 +1071,37 @@ End with:
 
   function checkboxKey(checkbox, index) {
     const page = checkbox.closest(".page")?.id || "page";
-    const item = checkbox.closest("li")?.textContent.replace(/\s+/g, " ").trim() || `checkbox-${index}`;
+    const item =
+      checkbox.closest("li")?.textContent.replace(/\s+/g, " ").trim() ||
+      `checkbox-${index}`;
     return `${page}:${item}`;
   }
 
   function updatePortalProgress() {
-    const checkboxes = [...document.querySelectorAll(".page input[type='checkbox']")]
-      .filter((box) => !box.closest("#settings"));
+    const checkboxes = [
+      ...document.querySelectorAll(".page input[type='checkbox']"),
+    ].filter((box) => !box.closest("#settings"));
     const completed = checkboxes.filter((box) => box.checked).length;
-    const percentage = checkboxes.length ? Math.round((completed / checkboxes.length) * 100) : 0;
+    const percentage = checkboxes.length
+      ? Math.round((completed / checkboxes.length) * 100)
+      : 0;
     const dayProgress = readStorage(STORAGE.dayProgress, {});
-    const adjusted = Math.max(percentage, dayProgress.dayTwo ? 100 : dayProgress.dayOne ? 50 : 0);
+    const adjusted = Math.max(
+      percentage,
+      dayProgress.dayTwo ? 100 : dayProgress.dayOne ? 50 : 0,
+    );
 
-    document.documentElement.style.setProperty("--portal-progress", `${adjusted}%`);
+    document.documentElement.style.setProperty(
+      "--portal-progress",
+      `${adjusted}%`,
+    );
     document.body.dataset.progress = String(adjusted);
 
     let progressBadge = document.getElementById("portalProgressBadge");
     if (!progressBadge) {
-      const headerActions = document.querySelector("#portal-home .header-actions");
+      const headerActions = document.querySelector(
+        "#portal-home .header-actions",
+      );
       if (headerActions) {
         progressBadge = document.createElement("div");
         progressBadge.id = "portalProgressBadge";
@@ -1024,8 +1119,12 @@ End with:
     if (!Array.isArray(state.notes)) state.notes = [];
     state.activeNoteId = readStorage(STORAGE.activeNote, null);
 
-    document.getElementById("newNoteBtn")?.addEventListener("click", createNewNote);
-    document.getElementById("deleteNoteBtn")?.addEventListener("click", deleteActiveNote);
+    document
+      .getElementById("newNoteBtn")
+      ?.addEventListener("click", createNewNote);
+    document
+      .getElementById("deleteNoteBtn")
+      ?.addEventListener("click", deleteActiveNote);
 
     const editor = document.getElementById("mainNote");
     editor?.addEventListener("input", () => {
@@ -1036,7 +1135,10 @@ End with:
     });
 
     renderNotesList();
-    if (state.activeNoteId && state.notes.some((note) => note.id === state.activeNoteId)) {
+    if (
+      state.activeNoteId &&
+      state.notes.some((note) => note.id === state.activeNoteId)
+    ) {
       loadNote(state.activeNoteId);
     } else if (state.notes[0]) {
       loadNote(state.notes[0].id);
@@ -1052,7 +1154,7 @@ End with:
       title: "New Note",
       content: "",
       createdAt: now.toISOString(),
-      updatedAt: now.toISOString()
+      updatedAt: now.toISOString(),
     };
     state.notes.unshift(note);
     state.activeNoteId = note.id;
@@ -1075,7 +1177,8 @@ End with:
 
     if (editor) editor.value = note.content;
     if (title) title.textContent = note.title;
-    if (timestamp) timestamp.textContent = `Last saved ${formatDate(note.updatedAt)}`;
+    if (timestamp)
+      timestamp.textContent = `Last saved ${formatDate(note.updatedAt)}`;
     if (deleteButton) deleteButton.disabled = false;
     updateNoteCharacterCount(note.content.length);
     setNoteStatus("Saved in this browser.");
@@ -1099,7 +1202,8 @@ End with:
     const title = document.getElementById("currentNoteTitle");
     const timestamp = document.getElementById("noteTimestamp");
     if (title) title.textContent = note.title;
-    if (timestamp) timestamp.textContent = `Last saved ${formatDate(note.updatedAt)}`;
+    if (timestamp)
+      timestamp.textContent = `Last saved ${formatDate(note.updatedAt)}`;
     setNoteStatus("Saved automatically.");
   }
 
@@ -1107,7 +1211,8 @@ End with:
     if (!state.activeNoteId) return;
     const note = state.notes.find((item) => item.id === state.activeNoteId);
     if (!note) return;
-    if (!window.confirm(`Delete “${note.title}”? This cannot be undone.`)) return;
+    if (!window.confirm(`Delete “${note.title}”? This cannot be undone.`))
+      return;
 
     state.notes = state.notes.filter((item) => item.id !== state.activeNoteId);
     state.activeNoteId = state.notes[0]?.id || null;
@@ -1162,7 +1267,10 @@ End with:
   }
 
   function deriveNoteTitle(content) {
-    const firstLine = content.split(/\r?\n/).find((line) => line.trim())?.trim();
+    const firstLine = content
+      .split(/\r?\n/)
+      .find((line) => line.trim())
+      ?.trim();
     if (!firstLine) return "New Note";
     return firstLine.length > 48 ? `${firstLine.slice(0, 45)}...` : firstLine;
   }
@@ -1188,8 +1296,12 @@ End with:
     state.prompts = readStorage(STORAGE.prompts, []);
     if (!Array.isArray(state.prompts)) state.prompts = [];
 
-    document.getElementById("savePromptLibraryBtn")?.addEventListener("click", savePrompt);
-    document.getElementById("clearPromptFormBtn")?.addEventListener("click", clearPromptForm);
+    document
+      .getElementById("savePromptLibraryBtn")
+      ?.addEventListener("click", savePrompt);
+    document
+      .getElementById("clearPromptFormBtn")
+      ?.addEventListener("click", clearPromptForm);
 
     addPromptSearchField();
     renderSavedPrompts();
@@ -1198,7 +1310,8 @@ End with:
   function addPromptSearchField() {
     const card = document.querySelector("#prompts .prompt-list-card");
     const heading = card?.querySelector(".prompt-list-heading");
-    if (!card || !heading || document.getElementById("savedPromptSearch")) return;
+    if (!card || !heading || document.getElementById("savedPromptSearch"))
+      return;
 
     const search = document.createElement("input");
     search.id = "savedPromptSearch";
@@ -1225,7 +1338,7 @@ End with:
       id: createId("prompt"),
       title,
       text,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
     });
     writeStorage(STORAGE.prompts, state.prompts);
     clearPromptForm();
@@ -1245,11 +1358,19 @@ End with:
     const list = document.getElementById("savedPromptsList");
     const empty = document.getElementById("savedPromptsEmpty");
     const count = document.getElementById("savedPromptCount");
-    const search = document.getElementById("savedPromptSearch")?.value.trim().toLowerCase() || "";
+    const search =
+      document
+        .getElementById("savedPromptSearch")
+        ?.value.trim()
+        .toLowerCase() || "";
     if (!list) return;
 
     const filtered = state.prompts.filter((prompt) => {
-      return !search || prompt.title.toLowerCase().includes(search) || prompt.text.toLowerCase().includes(search);
+      return (
+        !search ||
+        prompt.title.toLowerCase().includes(search) ||
+        prompt.text.toLowerCase().includes(search)
+      );
     });
 
     list.innerHTML = "";
@@ -1272,8 +1393,14 @@ End with:
           <button type="button" class="danger-btn delete-saved-prompt">Delete</button>
         </div>`;
 
-      article.querySelector(".copy-saved-prompt")?.addEventListener("click", () => copyText(prompt.text, "Prompt copied."));
-      article.querySelector(".delete-saved-prompt")?.addEventListener("click", () => deletePrompt(prompt.id));
+      article
+        .querySelector(".copy-saved-prompt")
+        ?.addEventListener("click", () =>
+          copyText(prompt.text, "Prompt copied."),
+        );
+      article
+        .querySelector(".delete-saved-prompt")
+        ?.addEventListener("click", () => deletePrompt(prompt.id));
       list.appendChild(article);
     });
   }
@@ -1291,8 +1418,12 @@ End with:
     state.referenceImages = readStorage(STORAGE.references, []);
     if (!Array.isArray(state.referenceImages)) state.referenceImages = [];
 
-    document.getElementById("referenceImageUpload")?.addEventListener("change", handleReferenceUpload);
-    document.getElementById("clearReferenceImagesBtn")?.addEventListener("click", clearReferenceImages);
+    document
+      .getElementById("referenceImageUpload")
+      ?.addEventListener("change", handleReferenceUpload);
+    document
+      .getElementById("clearReferenceImagesBtn")
+      ?.addEventListener("click", clearReferenceImages);
     renderReferenceImages();
   }
 
@@ -1300,9 +1431,15 @@ End with:
     const files = [...(event.target.files || [])];
     if (!files.length) return;
 
-    const availableSlots = Math.max(0, MAX_REFERENCE_IMAGES - state.referenceImages.length);
+    const availableSlots = Math.max(
+      0,
+      MAX_REFERENCE_IMAGES - state.referenceImages.length,
+    );
     if (!availableSlots) {
-      showToast(`You can save up to ${MAX_REFERENCE_IMAGES} images in this browser.`, true);
+      showToast(
+        `You can save up to ${MAX_REFERENCE_IMAGES} images in this browser.`,
+        true,
+      );
       event.target.value = "";
       return;
     }
@@ -1311,7 +1448,10 @@ End with:
     let skipped = 0;
 
     for (const file of accepted) {
-      if (!file.type.startsWith("image/") || file.size > MAX_REFERENCE_IMAGE_SIZE) {
+      if (
+        !file.type.startsWith("image/") ||
+        file.size > MAX_REFERENCE_IMAGE_SIZE
+      ) {
         skipped += 1;
         continue;
       }
@@ -1321,7 +1461,7 @@ End with:
           id: createId("image"),
           name: file.name,
           dataUrl,
-          addedAt: new Date().toISOString()
+          addedAt: new Date().toISOString(),
         });
       } catch (error) {
         console.warn("Reference image could not be read.", error);
@@ -1334,14 +1474,20 @@ End with:
     }
     event.target.value = "";
     renderReferenceImages();
-    showToast(skipped ? "Some images were skipped. Use images under 1.5 MB." : "Reference images saved.", skipped > 0);
+    showToast(
+      skipped
+        ? "Some images were skipped. Use images under 1.5 MB."
+        : "Reference images saved.",
+      skipped > 0,
+    );
   }
 
   function fileToDataUrl(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => resolve(String(reader.result));
-      reader.onerror = () => reject(reader.error || new Error("File could not be read."));
+      reader.onerror = () =>
+        reject(reader.error || new Error("File could not be read."));
       reader.readAsDataURL(file);
     });
   }
@@ -1353,7 +1499,8 @@ End with:
     if (!grid) return;
 
     grid.innerHTML = "";
-    if (count) count.textContent = `${state.referenceImages.length} image${state.referenceImages.length === 1 ? "" : "s"}`;
+    if (count)
+      count.textContent = `${state.referenceImages.length} image${state.referenceImages.length === 1 ? "" : "s"}`;
     if (clearButton) clearButton.disabled = state.referenceImages.length === 0;
 
     if (!state.referenceImages.length) {
@@ -1375,13 +1522,17 @@ End with:
           <div><h3>${escapeHtml(image.name)}</h3><p>Saved ${escapeHtml(formatDate(image.addedAt))}</p></div>
           <button type="button" class="danger-btn remove-reference-image">Remove</button>
         </div>`;
-      card.querySelector(".remove-reference-image")?.addEventListener("click", () => removeReferenceImage(image.id));
+      card
+        .querySelector(".remove-reference-image")
+        ?.addEventListener("click", () => removeReferenceImage(image.id));
       grid.appendChild(card);
     });
   }
 
   function removeReferenceImage(imageId) {
-    state.referenceImages = state.referenceImages.filter((item) => item.id !== imageId);
+    state.referenceImages = state.referenceImages.filter(
+      (item) => item.id !== imageId,
+    );
     writeStorage(STORAGE.references, state.referenceImages);
     renderReferenceImages();
     showToast("Reference image removed.");
@@ -1389,7 +1540,10 @@ End with:
 
   function clearReferenceImages() {
     if (!state.referenceImages.length) return;
-    if (!window.confirm("Remove all uploaded reference images from this browser?")) return;
+    if (
+      !window.confirm("Remove all uploaded reference images from this browser?")
+    )
+      return;
     state.referenceImages = [];
     writeStorage(STORAGE.references, []);
     renderReferenceImages();
@@ -1401,28 +1555,30 @@ End with:
       publish: {
         filename: "Workshop-Publish-Checklist.txt",
         title: "Publish Checklist",
-        body: `WORKSHOP PUBLISH CHECKLIST\n\n1. Save index.html, css/style.css, and js/script.js.\n2. Test the project with Live Server.\n3. Confirm every button, link, image, and download works.\n4. Commit the final files to GitHub.\n5. Push the latest commit.\n6. Connect the repository to Netlify.\n7. Publish the site.\n8. Open the live link and test it again.\n9. Test the mobile layout.\n10. Save the final live URL.`
+        body: `WORKSHOP PUBLISH CHECKLIST\n\n1. Save index.html, css/style.css, and js/script.js.\n2. Test the project with Live Server.\n3. Confirm every button, link, image, and download works.\n4. Commit the final files to GitHub.\n5. Push the latest commit.\n6. Connect the repository to Netlify.\n7. Publish the site.\n8. Open the live link and test it again.\n9. Test the mobile layout.\n10. Save the final live URL.`,
       },
       selling: {
         filename: "Workshop-Selling-Guide.txt",
         title: "Selling Guide",
-        body: `WORKSHOP SELLING GUIDE\n\n1. Prepare the live generator link.\n2. Create buyer instructions.\n3. Take clear screenshots.\n4. Create a product mockup.\n5. Write a clear product title and description.\n6. Explain who the product helps.\n7. List what the buyer receives.\n8. Add simple terms of use.\n9. Upload the product to your selling platform.\n10. Test the purchase and delivery process before launch.`
-      }
+        body: `WORKSHOP SELLING GUIDE\n\n1. Prepare the live generator link.\n2. Create buyer instructions.\n3. Take clear screenshots.\n4. Create a product mockup.\n5. Write a clear product title and description.\n6. Explain who the product helps.\n7. List what the buyer receives.\n8. Add simple terms of use.\n9. Upload the product to your selling platform.\n10. Test the purchase and delivery process before launch.`,
+      },
     };
 
-    document.querySelectorAll(".download-btn[data-download]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const item = downloadContent[button.dataset.download];
-        if (!item) {
-          showToast("That download is not available yet.", true);
-          return;
-        }
-        downloadTextFile(item.filename, item.body);
-        recordDownload(item.title);
-        button.textContent = "Downloaded";
-        button.dataset.status = "downloaded";
+    document
+      .querySelectorAll(".download-btn[data-download]")
+      .forEach((button) => {
+        button.addEventListener("click", () => {
+          const item = downloadContent[button.dataset.download];
+          if (!item) {
+            showToast("That download is not available yet.", true);
+            return;
+          }
+          downloadTextFile(item.filename, item.body);
+          recordDownload(item.title);
+          button.textContent = "Downloaded";
+          button.dataset.status = "downloaded";
+        });
       });
-    });
   }
 
   function downloadTextFile(filename, content, type = "text/plain") {
@@ -1461,7 +1617,10 @@ End with:
         }
 
         const history = readStorage(STORAGE.replayHistory, {});
-        history[button.dataset.replay] = { openedAt: new Date().toISOString(), progress: 0 };
+        history[button.dataset.replay] = {
+          openedAt: new Date().toISOString(),
+          progress: 0,
+        };
         writeStorage(STORAGE.replayHistory, history);
         window.open(replayUrl, "_blank", "noopener,noreferrer");
       });
@@ -1514,15 +1673,19 @@ End with:
       <button type="button" class="secondary-btn community-like-btn" aria-pressed="false">♡ Like</button>
       <button type="button" class="secondary-btn community-reply-btn">Reply</button>`;
 
-    actions.querySelector(".community-like-btn")?.addEventListener("click", (event) => {
-      const button = event.currentTarget;
-      const liked = button.getAttribute("aria-pressed") !== "true";
-      button.setAttribute("aria-pressed", String(liked));
-      button.textContent = liked ? "♥ Liked" : "♡ Like";
-    });
-    actions.querySelector(".community-reply-btn")?.addEventListener("click", () => {
-      showToast("Community replies are coming soon.");
-    });
+    actions
+      .querySelector(".community-like-btn")
+      ?.addEventListener("click", (event) => {
+        const button = event.currentTarget;
+        const liked = button.getAttribute("aria-pressed") !== "true";
+        button.setAttribute("aria-pressed", String(liked));
+        button.textContent = liked ? "♥ Liked" : "♡ Like";
+      });
+    actions
+      .querySelector(".community-reply-btn")
+      ?.addEventListener("click", () => {
+        showToast("Community replies are coming soon.");
+      });
 
     block.prepend(pinned);
     block.appendChild(actions);
@@ -1537,7 +1700,8 @@ End with:
       const label = box.closest("li")?.textContent.trim() || `setting-${index}`;
       const key = slugify(label);
       box.dataset.setting = key;
-      if (Object.prototype.hasOwnProperty.call(saved, key)) box.checked = Boolean(saved[key]);
+      if (Object.prototype.hasOwnProperty.call(saved, key))
+        box.checked = Boolean(saved[key]);
 
       box.addEventListener("change", () => {
         const current = readStorage(STORAGE.settings, {});
@@ -1552,12 +1716,16 @@ End with:
   }
 
   function bindExternalLinkConfirmation() {
-    document.querySelectorAll("#book-session a[target='_blank']").forEach((link) => {
-      link.addEventListener("click", (event) => {
-        const approved = window.confirm("This will open the booking page in a new tab. Continue?");
-        if (!approved) event.preventDefault();
+    document
+      .querySelectorAll("#book-session a[target='_blank']")
+      .forEach((link) => {
+        link.addEventListener("click", (event) => {
+          const approved = window.confirm(
+            "This will open the booking page in a new tab. Continue?",
+          );
+          if (!approved) event.preventDefault();
+        });
       });
-    });
 
     document.querySelectorAll("a[target='_blank']").forEach((link) => {
       link.rel = "noopener noreferrer";
@@ -1566,7 +1734,9 @@ End with:
 
   function bindReset() {
     document.getElementById("resetDataBtn")?.addEventListener("click", () => {
-      const approved = window.confirm("Reset all saved notes, prompts, checklists, progress, preferences, and uploaded reference images on this device?");
+      const approved = window.confirm(
+        "Reset all saved notes, prompts, checklists, progress, preferences, and uploaded reference images on this device?",
+      );
       if (!approved) return;
 
       Object.values(STORAGE).forEach(removeStorage);
@@ -1580,7 +1750,11 @@ End with:
       if (event.key === "Escape") {
         closeMobileMenu();
         closeWorkshopLockPopup();
-        if (dom.completionPopup && !dom.completionPopup.classList.contains("hidden")) closeAchievementPopup();
+        if (
+          dom.completionPopup &&
+          !dom.completionPopup.classList.contains("hidden")
+        )
+          closeAchievementPopup();
       }
 
       if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
@@ -1591,7 +1765,8 @@ End with:
   }
 
   function createId(prefix) {
-    if (window.crypto?.randomUUID) return `${prefix}-${window.crypto.randomUUID()}`;
+    if (window.crypto?.randomUUID)
+      return `${prefix}-${window.crypto.randomUUID()}`;
     return `${prefix}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
   }
 
@@ -1601,9 +1776,10 @@ End with:
     return new Intl.DateTimeFormat(undefined, {
       month: "short",
       day: "numeric",
-      year: date.getFullYear() !== new Date().getFullYear() ? "numeric" : undefined,
+      year:
+        date.getFullYear() !== new Date().getFullYear() ? "numeric" : undefined,
       hour: "numeric",
-      minute: "2-digit"
+      minute: "2-digit",
     }).format(date);
   }
 
@@ -1631,6 +1807,8 @@ End with:
   }
 
   function prefersReducedMotion() {
-    return window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+    return (
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false
+    );
   }
 })();
