@@ -75,7 +75,7 @@
 
   const REPLAY_LINKS = {
     day1: "https://drive.google.com/file/d/1R5-puzbimQdwxj0atVYkDeuhm36pHnyT/view?usp=sharing",
-    day2: "",
+    day2: "https://drive.google.com/file/d/1EXFI6FIvZATbPO9tfLVoxczRD-TMx15j/view?usp=sharing",
   };
 
   const snippetLibrary = {
