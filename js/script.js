@@ -1523,18 +1523,10 @@ End with:
   }
 
   function bindSavedPrompts() {
-    state.prompts = readStorage(STORAGE.prompts, []);
-    if (!Array.isArray(state.prompts)) state.prompts = [];
-
-    document
-      .getElementById("savePromptLibraryBtn")
-      ?.addEventListener("click", savePrompt);
-    document
-      .getElementById("clearPromptFormBtn")
-      ?.addEventListener("click", clearPromptForm);
-
-    addPromptSearchField();
-    renderSavedPrompts();
+    // Saved Prompts is handled by js/saved-prompts-prd.js.
+    // Keep the legacy helpers below intact for backward compatibility,
+    // but do not bind or render them here so both systems do not compete.
+    return;
   }
 
   function addPromptSearchField() {
