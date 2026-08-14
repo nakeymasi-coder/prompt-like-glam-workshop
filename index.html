@@ -41,6 +41,13 @@
           <a class="nav-link active" data-page="portal-home" href="#">
             <i data-lucide="home"></i><span>Portal Home</span>
           </a>
+          <a class="nav-link" data-page="requirements" href="#">
+            <i data-lucide="clipboard-check"></i
+            ><span>Workshop Requirements</span>
+          </a>
+          <a class="nav-link" data-page="tools-resources" href="#">
+            <i data-lucide="wrench"></i><span>Tools &amp; Resources</span>
+          </a>
           <a class="nav-link" data-page="announcements" href="#">
             <i data-lucide="megaphone"></i><span>Announcements</span>
           </a>
@@ -59,15 +66,8 @@
           <a class="nav-link" data-page="common-mistakes" href="#">
             <i data-lucide="triangle-alert"></i><span>Common Mistakes</span>
           </a>
-          <a class="nav-link" data-page="requirements" href="#">
-            <i data-lucide="clipboard-check"></i
-            ><span>Workshop Requirements</span>
-          </a>
           <a class="nav-link" data-page="references" href="#">
             <i data-lucide="images"></i><span>Reference Library</span>
-          </a>
-          <a class="nav-link" data-page="tools-resources" href="#">
-            <i data-lucide="wrench"></i><span>Tools &amp; Resources</span>
           </a>
           <a class="nav-link" data-page="bonuses" href="#">
             <i data-lucide="gift"></i><span>Bonus Resources</span>
@@ -138,40 +138,53 @@
         <section class="page active-page" id="portal-home">
           <div class="page-header split-header">
             <div>
-              <h1>Welcome to Workshop Portal</h1>
-
+              <span class="eyebrow">Workshop Portal</span>
+              <h1>Welcome to Your Workshop Portal</h1>
               <p>
-                Choose a workshop below to continue learning. Each workshop has
-                its own lessons, downloads, notebook, replays, and certificate.
+                Access the workshops you purchased, continue where you left off,
+                and find your lessons, resources, replays, downloads, and
+                workshop tools all in one place.
               </p>
-            </div>
-
-            <div class="header-actions">
-              <button class="primary-btn" id="continueBtn">
-                Continue Learning
-              </button>
             </div>
           </div>
 
-          <div class="portal-summary-grid">
-            <article class="lesson-block">
-              <span class="lesson-tag">WELCOME</span>
+          <article class="lesson-block">
+            <span class="lesson-tag">START HERE</span>
 
-              <h2>Start Here</h2>
+            <h2>How to Use Your Portal</h2>
 
-              <p>Choose a workshop below to continue your learning journey.</p>
-            </article>
+            <div class="portal-summary-grid">
+              <div>
+                <h3>1. Choose Your Workshop</h3>
+                <p>Select the workshop you purchased from the choices below.</p>
+              </div>
 
-            <article class="lesson-block">
-              <span class="lesson-tag">WORKSHOPS</span>
+              <div>
+                <h3>2. Unlock Your Workshop</h3>
+                <p>
+                  Enter the license key you received after purchase. Existing
+                  Prompt Generator Workshop students can use their original
+                  student access code.
+                </p>
+              </div>
 
-              <h2>Available Workshops</h2>
+              <div>
+                <h3>3. Start Learning</h3>
+                <p>
+                  Once your workshop is unlocked, enter it and follow the
+                  lessons and steps in order.
+                </p>
+              </div>
+            </div>
+          </article>
 
-              <p>
-                Each workshop contains its own lessons, notebook, downloads,
-                replays, help center, and certificate.
-              </p>
-            </article>
+          <div class="page-header">
+            <span class="eyebrow">Your Workshops</span>
+            <h2>Choose a Workshop</h2>
+            <p>
+              Open the workshop you purchased below. Upcoming workshops will
+              stay locked until they are released.
+            </p>
           </div>
 
           <div class="workshop-grid">
@@ -195,7 +208,10 @@
             <article class="workshop-card">
               <h2>Website Workshop</h2>
 
-              <p>Build beautiful websites using AI and publish them online.</p>
+              <p>
+                Build a complete business website, connect your products, test
+                everything, and publish it online.
+              </p>
 
               <button
                 class="primary-btn"
@@ -209,7 +225,7 @@
             <article class="workshop-card">
               <h2>Beacon Workshop</h2>
 
-              <p>Learn how to use Beacon to grow your business.</p>
+              <p>Learn how to use Beacon to build and grow your business.</p>
 
               <button class="primary-btn locked-workshop" type="button">
                 Locked
@@ -219,7 +235,10 @@
             <article class="workshop-card">
               <h2>Learning ChatGPT</h2>
 
-              <p>Master ChatGPT step by step with practical lessons.</p>
+              <p>
+                Learn ChatGPT step by step with practical beginner-friendly
+                lessons.
+              </p>
 
               <button class="primary-btn locked-workshop" type="button">
                 Locked
@@ -229,7 +248,10 @@
             <article class="workshop-card">
               <h2>Payhip Workshop</h2>
 
-              <p>Learn how to build and sell digital products with Payhip.</p>
+              <p>
+                Learn how to set up, organize, and sell your products with
+                Payhip.
+              </p>
 
               <button class="primary-btn locked-workshop" type="button">
                 Locked
@@ -268,31 +290,164 @@
         <!-- ============================= -->
         <section class="page" id="community">
           <div class="page-header">
+            <span class="eyebrow">Workshop Community</span>
             <h1>Community Board</h1>
-
             <p>
-              Ask questions, share wins, post screenshots, and help each other.
+              Ask questions, share wins, post screenshots, get feedback, and
+              connect with other workshop students.
             </p>
           </div>
 
-          <div class="lesson-block">
-            <span class="lesson-tag">COMING SOON</span>
+          <article class="lesson-block" id="communityAuthCard">
+            <span class="lesson-tag">MEMBER ACCESS</span>
+            <h2>Join the Workshop Community</h2>
+            <p id="communityAccessNotice">
+              Unlock at least one workshop first, then create your community
+              account or sign in below.
+            </p>
 
-            <h2>Community Features</h2>
+            <div id="communityAuthFields">
+              <label for="communityDisplayName">Display Name</label>
+              <input
+                id="communityDisplayName"
+                type="text"
+                maxlength="60"
+                placeholder="How your name should appear"
+                autocomplete="name"
+              />
 
-            <ul class="mission-list">
-              <li>💬 Ask questions</li>
+              <label for="communityEmail">Email</label>
+              <input
+                id="communityEmail"
+                type="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+              />
 
-              <li>📸 Share screenshots</li>
+              <label for="communityPassword">Password</label>
+              <input
+                id="communityPassword"
+                type="password"
+                minlength="8"
+                placeholder="Create or enter your password"
+                autocomplete="current-password"
+              />
 
-              <li>🎉 Celebrate wins</li>
+              <div class="builder-buttons">
+                <button
+                  class="primary-btn"
+                  id="communitySignUpBtn"
+                  type="button"
+                >
+                  Create Community Account
+                </button>
 
-              <li>❤️ Encourage other students</li>
+                <button
+                  class="secondary-btn"
+                  id="communitySignInBtn"
+                  type="button"
+                >
+                  Sign In
+                </button>
+              </div>
+            </div>
 
-              <li>📌 View instructor replies</li>
-            </ul>
+            <div id="communitySignedInBar" hidden>
+              <p>
+                Signed in as
+                <strong id="communitySignedInName">Workshop Member</strong>
+              </p>
+              <button
+                class="secondary-btn"
+                id="communitySignOutBtn"
+                type="button"
+              >
+                Sign Out
+              </button>
+            </div>
+
+            <p id="communityAuthMessage" aria-live="polite"></p>
+          </article>
+
+          <div id="communityApp" hidden>
+            <article class="lesson-block">
+              <span class="lesson-tag">CREATE A POST</span>
+              <h2>Share With the Community</h2>
+
+              <label for="communityPostCategory">Post Type</label>
+              <select id="communityPostCategory">
+                <option value="questions">Question</option>
+                <option value="wins">Win</option>
+                <option value="feedback">Feedback</option>
+                <option value="updates">Instructor Update</option>
+              </select>
+
+              <label for="communityPostBody">Your Post</label>
+              <textarea
+                id="communityPostBody"
+                rows="6"
+                maxlength="5000"
+                placeholder="Ask a question, share a win, request feedback, or post an update..."
+              ></textarea>
+
+              <label for="communityPostImage">Screenshot or Image (optional)</label>
+              <input
+                id="communityPostImage"
+                type="file"
+                accept="image/png,image/jpeg,image/webp,image/gif"
+              />
+
+              <div class="builder-buttons">
+                <button class="primary-btn" id="communityPostBtn" type="button">
+                  Post to Community
+                </button>
+                <button
+                  class="secondary-btn"
+                  id="communityClearPostBtn"
+                  type="button"
+                >
+                  Clear
+                </button>
+              </div>
+
+              <p id="communityPostMessage" aria-live="polite"></p>
+            </article>
+
+            <article class="lesson-block">
+              <div class="prompt-list-heading">
+                <div>
+                  <span class="lesson-tag">COMMUNITY FEED</span>
+                  <h2>Latest Posts</h2>
+                </div>
+                <button
+                  class="secondary-btn"
+                  id="communityRefreshBtn"
+                  type="button"
+                >
+                  Refresh
+                </button>
+              </div>
+
+              <label for="communityFeedFilter">Show</label>
+              <select id="communityFeedFilter">
+                <option value="all">All Posts</option>
+                <option value="questions">Questions</option>
+                <option value="wins">Wins</option>
+                <option value="feedback">Feedback</option>
+                <option value="updates">Instructor Updates</option>
+              </select>
+
+              <div
+                id="communityFeed"
+                class="saved-prompts-list"
+                aria-live="polite"
+              >
+                <p>Sign in to load the community.</p>
+              </div>
+            </article>
           </div>
         </section>
+
 
         <!-- ============================= -->
         <!-- PAGE: SETTINGS -->
@@ -414,7 +569,7 @@
         <!-- PAGE: PROMPT DASHBOARD -->
         <!-- ============================= -->
         <section id="prompt-dashboard" class="page">
-          <div class="page-header split-header">
+          <div class="page-header">
             <div>
               <h1>Build Your First Prompt Generator</h1>
               <p>
@@ -3829,6 +3984,7 @@ Before writing the listing, ask me for:
         </button>
       </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/script.js"></script>
     <script>
       if (window.lucide) {

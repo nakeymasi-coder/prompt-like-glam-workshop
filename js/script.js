@@ -2,6 +2,10 @@
   "use strict";
 
   const APP_PREFIX = "glamWorkshopPortal";
+  const SUPABASE_URL = "https://zaylygsgbqtulnilcvrg.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_9OrEqYDv9NV8E29JakoepA_rIgYDsMk";
+  const COMMUNITY_IMAGE_BUCKET = "community-images";
+  const MAX_COMMUNITY_IMAGE_SIZE = 5_000_000;
   const STORAGE = {
     lastPage: `${APP_PREFIX}:lastPage`,
     lastWorkshop: `${APP_PREFIX}:lastWorkshop`,
@@ -499,6 +503,12 @@ End with:
     prompts: [],
     referenceImages: [],
     saveTimer: null,
+    communityClient: null,
+    communityUser: null,
+    communityProfile: null,
+    communityIsAdmin: false,
+    communityChannel: null,
+    communityRefreshTimer: null,
   };
 
   const dom = {};
@@ -525,7 +535,7 @@ End with:
     bindDownloads();
     bindReplays();
     bindAnnouncements();
-    bindCommunityPlaceholders();
+    bindCommunity();
     bindSettings();
     bindExternalLinkConfirmation();
     bindReset();
@@ -1879,36 +1889,819 @@ End with:
     announcement.appendChild(button);
   }
 
-  function bindCommunityPlaceholders() {
-    const block = document.querySelector("#community .lesson-block");
-    if (!block || block.querySelector(".community-placeholder-actions")) return;
+  async function bindCommunity() {
+    const authCard = document.getElementById("communityAuthCard");
+    if (!authCard) return;
 
-    const pinned = document.createElement("div");
-    pinned.className = "community-pinned-note";
-    pinned.innerHTML = `<strong>📌 Pinned:</strong> Community posting and replies are coming soon.`;
+    if (!window.supabase?.createClient) {
+      setCommunityAuthMessage(
+        "The community connection could not load. Refresh the page and try again.",
+        true,
+      );
+      return;
+    }
 
-    const actions = document.createElement("div");
-    actions.className = "community-placeholder-actions";
-    actions.innerHTML = `
-      <button type="button" class="secondary-btn community-like-btn" aria-pressed="false">♡ Like</button>
-      <button type="button" class="secondary-btn community-reply-btn">Reply</button>`;
+    state.communityClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY,
+    );
 
-    actions
-      .querySelector(".community-like-btn")
-      ?.addEventListener("click", (event) => {
-        const button = event.currentTarget;
-        const liked = button.getAttribute("aria-pressed") !== "true";
-        button.setAttribute("aria-pressed", String(liked));
-        button.textContent = liked ? "♥ Liked" : "♡ Like";
+    document
+      .getElementById("communitySignUpBtn")
+      ?.addEventListener("click", communitySignUp);
+    document
+      .getElementById("communitySignInBtn")
+      ?.addEventListener("click", communitySignIn);
+    document
+      .getElementById("communitySignOutBtn")
+      ?.addEventListener("click", communitySignOut);
+    document
+      .getElementById("communityPostBtn")
+      ?.addEventListener("click", createCommunityPost);
+    document
+      .getElementById("communityClearPostBtn")
+      ?.addEventListener("click", clearCommunityPostForm);
+    document
+      .getElementById("communityRefreshBtn")
+      ?.addEventListener("click", loadCommunityFeed);
+    document
+      .getElementById("communityFeedFilter")
+      ?.addEventListener("change", loadCommunityFeed);
+
+    const {
+      data: { session },
+    } = await state.communityClient.auth.getSession();
+
+    await applyCommunitySession(session);
+
+    state.communityClient.auth.onAuthStateChange((_event, nextSession) => {
+      window.setTimeout(() => applyCommunitySession(nextSession), 0);
+    });
+  }
+
+  function hasWorkshopCommunityAccess() {
+    return Boolean(
+      readStorage(STORAGE.promptWorkshopAccess, false) ||
+        readStorage(STORAGE.websiteWorkshopAccess, false),
+    );
+  }
+
+  async function communitySignUp() {
+    if (!state.communityClient) return;
+
+    if (!hasWorkshopCommunityAccess()) {
+      setCommunityAuthMessage(
+        "Unlock one of your purchased workshops before creating a community account.",
+        true,
+      );
+      return;
+    }
+
+    const displayName =
+      document.getElementById("communityDisplayName")?.value.trim() || "";
+    const email = document.getElementById("communityEmail")?.value.trim() || "";
+    const password =
+      document.getElementById("communityPassword")?.value || "";
+
+    if (!displayName) {
+      setCommunityAuthMessage("Enter the name you want shown on your posts.", true);
+      return;
+    }
+
+    if (!email || !password) {
+      setCommunityAuthMessage("Enter your email and a password.", true);
+      return;
+    }
+
+    if (password.length < 8) {
+      setCommunityAuthMessage("Use a password with at least 8 characters.", true);
+      return;
+    }
+
+    setCommunityAuthMessage("Creating your community account...");
+
+    const { data, error } = await state.communityClient.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          display_name: displayName,
+        },
+      },
+    });
+
+    if (error) {
+      setCommunityAuthMessage(error.message, true);
+      return;
+    }
+
+    if (!data.session) {
+      setCommunityAuthMessage(
+        "Account created. Check your email to confirm your account, then return here and sign in.",
+      );
+      return;
+    }
+
+    await ensureCommunityProfile(data.user, displayName);
+    setCommunityAuthMessage("Community account created.");
+  }
+
+  async function communitySignIn() {
+    if (!state.communityClient) return;
+
+    if (!hasWorkshopCommunityAccess()) {
+      setCommunityAuthMessage(
+        "Unlock one of your purchased workshops before entering the community.",
+        true,
+      );
+      return;
+    }
+
+    const email = document.getElementById("communityEmail")?.value.trim() || "";
+    const password =
+      document.getElementById("communityPassword")?.value || "";
+
+    if (!email || !password) {
+      setCommunityAuthMessage("Enter your email and password.", true);
+      return;
+    }
+
+    setCommunityAuthMessage("Signing you in...");
+
+    const { data, error } =
+      await state.communityClient.auth.signInWithPassword({
+        email,
+        password,
       });
-    actions
-      .querySelector(".community-reply-btn")
+
+    if (error) {
+      setCommunityAuthMessage(error.message, true);
+      return;
+    }
+
+    const displayName =
+      document.getElementById("communityDisplayName")?.value.trim() ||
+      data.user?.user_metadata?.display_name ||
+      email.split("@")[0];
+
+    await ensureCommunityProfile(data.user, displayName);
+    setCommunityAuthMessage("Signed in.");
+  }
+
+  async function communitySignOut() {
+    if (!state.communityClient) return;
+    await state.communityClient.auth.signOut();
+    setCommunityAuthMessage("Signed out.");
+  }
+
+  async function applyCommunitySession(session) {
+    state.communityUser = session?.user || null;
+    state.communityProfile = null;
+    state.communityIsAdmin = false;
+
+    const fields = document.getElementById("communityAuthFields");
+    const signedInBar = document.getElementById("communitySignedInBar");
+    const app = document.getElementById("communityApp");
+    const name = document.getElementById("communitySignedInName");
+    const notice = document.getElementById("communityAccessNotice");
+
+    if (!state.communityUser) {
+      if (fields) fields.hidden = false;
+      if (signedInBar) signedInBar.hidden = true;
+      if (app) app.hidden = true;
+      if (notice) {
+        notice.textContent = hasWorkshopCommunityAccess()
+          ? "Create your community account or sign in below."
+          : "Unlock at least one workshop first, then create your community account or sign in below.";
+      }
+      stopCommunityRealtime();
+      return;
+    }
+
+    if (!hasWorkshopCommunityAccess()) {
+      await state.communityClient.auth.signOut();
+      setCommunityAuthMessage(
+        "Your community account is valid, but this browser has not unlocked a workshop yet.",
+        true,
+      );
+      return;
+    }
+
+    await ensureCommunityProfile(
+      state.communityUser,
+      state.communityUser.user_metadata?.display_name,
+    );
+    await loadCurrentCommunityProfile();
+    await loadCommunityAdminStatus();
+
+    if (fields) fields.hidden = true;
+    if (signedInBar) signedInBar.hidden = false;
+    if (app) app.hidden = false;
+    if (name) {
+      name.textContent =
+        state.communityProfile?.display_name ||
+        state.communityUser.email ||
+        "Workshop Member";
+    }
+    if (notice) notice.textContent = "Your workshop community account is connected.";
+
+    const categorySelect = document.getElementById("communityPostCategory");
+    const updatesOption = categorySelect?.querySelector('option[value="updates"]');
+    if (updatesOption) updatesOption.disabled = !state.communityIsAdmin;
+    if (categorySelect?.value === "updates" && !state.communityIsAdmin) {
+      categorySelect.value = "questions";
+    }
+
+    await loadCommunityFeed();
+    startCommunityRealtime();
+  }
+
+  async function ensureCommunityProfile(user, preferredName = "") {
+    if (!state.communityClient || !user) return;
+
+    const displayName =
+      String(preferredName || "").trim() ||
+      user.user_metadata?.display_name ||
+      user.email?.split("@")[0] ||
+      "Workshop Member";
+
+    const { error } = await state.communityClient
+      .from("community_profiles")
+      .upsert(
+        {
+          user_id: user.id,
+          display_name: displayName.slice(0, 60),
+        },
+        { onConflict: "user_id" },
+      );
+
+    if (error) console.warn("Community profile could not be saved.", error);
+  }
+
+  async function loadCurrentCommunityProfile() {
+    if (!state.communityClient || !state.communityUser) return;
+
+    const { data, error } = await state.communityClient
+      .from("community_profiles")
+      .select("user_id, display_name, avatar_url")
+      .eq("user_id", state.communityUser.id)
+      .maybeSingle();
+
+    if (error) {
+      console.warn("Community profile could not be loaded.", error);
+      return;
+    }
+
+    state.communityProfile = data || null;
+  }
+
+  async function loadCommunityAdminStatus() {
+    if (!state.communityClient || !state.communityUser) return;
+
+    const { data, error } =
+      await state.communityClient.rpc("is_community_admin");
+
+    if (error) {
+      console.warn("Community admin status could not be checked.", error);
+      state.communityIsAdmin = false;
+      return;
+    }
+
+    state.communityIsAdmin = Boolean(data);
+  }
+
+  function setCommunityAuthMessage(message, isError = false) {
+    const element = document.getElementById("communityAuthMessage");
+    if (!element) return;
+    element.textContent = message || "";
+    element.classList.toggle("error", Boolean(isError));
+  }
+
+  function setCommunityPostMessage(message, isError = false) {
+    const element = document.getElementById("communityPostMessage");
+    if (!element) return;
+    element.textContent = message || "";
+    element.classList.toggle("error", Boolean(isError));
+  }
+
+  async function createCommunityPost() {
+    if (!state.communityClient || !state.communityUser) {
+      setCommunityPostMessage("Sign in before posting.", true);
+      return;
+    }
+
+    const category =
+      document.getElementById("communityPostCategory")?.value || "questions";
+    const body =
+      document.getElementById("communityPostBody")?.value.trim() || "";
+    const imageInput = document.getElementById("communityPostImage");
+    const imageFile = imageInput?.files?.[0] || null;
+
+    if (!body) {
+      setCommunityPostMessage("Write something before posting.", true);
+      return;
+    }
+
+    if (category === "updates" && !state.communityIsAdmin) {
+      setCommunityPostMessage(
+        "Instructor Updates can only be posted by the instructor.",
+        true,
+      );
+      return;
+    }
+
+    if (imageFile && imageFile.size > MAX_COMMUNITY_IMAGE_SIZE) {
+      setCommunityPostMessage("Use an image smaller than 5 MB.", true);
+      return;
+    }
+
+    const button = document.getElementById("communityPostBtn");
+    if (button) {
+      button.disabled = true;
+      button.textContent = "Posting...";
+    }
+    setCommunityPostMessage("Posting to the community...");
+
+    let imagePath = null;
+
+    try {
+      if (imageFile) {
+        imagePath = await uploadCommunityImage(imageFile);
+      }
+
+      const { error } = await state.communityClient
+        .from("community_posts")
+        .insert({
+          author_id: state.communityUser.id,
+          category,
+          body,
+          image_path: imagePath,
+        });
+
+      if (error) throw error;
+
+      clearCommunityPostForm();
+      setCommunityPostMessage("Your post is live.");
+      await loadCommunityFeed();
+    } catch (error) {
+      console.warn("Community post could not be created.", error);
+      setCommunityPostMessage(
+        error?.message || "Your post could not be created.",
+        true,
+      );
+    } finally {
+      if (button) {
+        button.disabled = false;
+        button.textContent = "Post to Community";
+      }
+    }
+  }
+
+  async function uploadCommunityImage(file) {
+    if (!state.communityClient || !state.communityUser) return null;
+
+    const extension =
+      file.name.split(".").pop()?.toLowerCase().replace(/[^a-z0-9]/g, "") ||
+      "jpg";
+    const path = `${state.communityUser.id}/${Date.now()}-${createId("img")}.${extension}`;
+
+    const { error } = await state.communityClient.storage
+      .from(COMMUNITY_IMAGE_BUCKET)
+      .upload(path, file, {
+        cacheControl: "3600",
+        upsert: false,
+      });
+
+    if (error) throw error;
+    return path;
+  }
+
+  function clearCommunityPostForm() {
+    const body = document.getElementById("communityPostBody");
+    const image = document.getElementById("communityPostImage");
+    if (body) body.value = "";
+    if (image) image.value = "";
+    setCommunityPostMessage("");
+  }
+
+  async function loadCommunityFeed() {
+    const feed = document.getElementById("communityFeed");
+    if (!feed || !state.communityClient || !state.communityUser) return;
+
+    feed.innerHTML = "<p>Loading community posts...</p>";
+
+    let query = state.communityClient
+      .from("community_posts")
+      .select(
+        "id, author_id, category, body, image_path, is_pinned, created_at, updated_at",
+      )
+      .order("is_pinned", { ascending: false })
+      .order("created_at", { ascending: false })
+      .limit(100);
+
+    const filter = document.getElementById("communityFeedFilter")?.value || "all";
+    if (filter !== "all") query = query.eq("category", filter);
+
+    const { data: posts, error } = await query;
+
+    if (error) {
+      console.warn("Community feed could not be loaded.", error);
+      feed.innerHTML = `<p>Community posts could not be loaded. Please try again.</p>`;
+      return;
+    }
+
+    if (!posts?.length) {
+      feed.innerHTML =
+        "<p>No posts here yet. Be the first person to start the conversation.</p>";
+      return;
+    }
+
+    const postIds = posts.map((post) => post.id);
+    const authorIds = [...new Set(posts.map((post) => post.author_id))];
+
+    const [
+      { data: profiles },
+      { data: comments },
+      { data: reactions },
+    ] = await Promise.all([
+      state.communityClient
+        .from("community_profiles")
+        .select("user_id, display_name, avatar_url")
+        .in("user_id", authorIds),
+      state.communityClient
+        .from("community_comments")
+        .select("id, post_id, author_id, body, created_at")
+        .in("post_id", postIds)
+        .order("created_at", { ascending: true }),
+      state.communityClient
+        .from("community_reactions")
+        .select("post_id, user_id, reaction")
+        .in("post_id", postIds),
+    ]);
+
+    const commentAuthors = [
+      ...new Set((comments || []).map((comment) => comment.author_id)),
+    ];
+    let allProfiles = profiles || [];
+
+    const missingProfileIds = commentAuthors.filter(
+      (id) => !allProfiles.some((profile) => profile.user_id === id),
+    );
+
+    if (missingProfileIds.length) {
+      const { data: extraProfiles } = await state.communityClient
+        .from("community_profiles")
+        .select("user_id, display_name, avatar_url")
+        .in("user_id", missingProfileIds);
+      allProfiles = [...allProfiles, ...(extraProfiles || [])];
+    }
+
+    const profileMap = new Map(
+      allProfiles.map((profile) => [profile.user_id, profile]),
+    );
+
+    feed.innerHTML = "";
+
+    for (const post of posts) {
+      const postComments = (comments || []).filter(
+        (comment) => comment.post_id === post.id,
+      );
+      const postReactions = (reactions || []).filter(
+        (reaction) => reaction.post_id === post.id,
+      );
+      const signedImageUrl = post.image_path
+        ? await getCommunityImageUrl(post.image_path)
+        : null;
+
+      feed.appendChild(
+        buildCommunityPostCard({
+          post,
+          profile: profileMap.get(post.author_id),
+          comments: postComments,
+          reactions: postReactions,
+          profileMap,
+          signedImageUrl,
+        }),
+      );
+    }
+
+    refreshIcons();
+  }
+
+  function buildCommunityPostCard({
+    post,
+    profile,
+    comments,
+    reactions,
+    profileMap,
+    signedImageUrl,
+  }) {
+    const article = document.createElement("article");
+    article.className = "lesson-block community-post-card";
+    article.dataset.postId = post.id;
+
+    const liked = reactions.some(
+      (reaction) => reaction.user_id === state.communityUser?.id,
+    );
+    const canDelete =
+      post.author_id === state.communityUser?.id || state.communityIsAdmin;
+
+    const categoryLabels = {
+      questions: "Question",
+      wins: "Win",
+      feedback: "Feedback",
+      updates: "Instructor Update",
+    };
+
+    const commentsHtml = comments
+      .map((comment) => {
+        const commenter = profileMap.get(comment.author_id);
+        const canDeleteComment =
+          comment.author_id === state.communityUser?.id || state.communityIsAdmin;
+
+        return `
+          <div class="community-comment" data-comment-id="${comment.id}">
+            <p>
+              <strong>${escapeHtml(commenter?.display_name || "Workshop Member")}</strong>
+              <span> · ${escapeHtml(formatDate(comment.created_at))}</span>
+            </p>
+            <p>${escapeHtml(comment.body).replaceAll("\n", "<br>")}</p>
+            ${
+              canDeleteComment
+                ? '<button type="button" class="danger-btn community-delete-comment-btn">Delete Reply</button>'
+                : ""
+            }
+          </div>`;
+      })
+      .join("");
+
+    article.innerHTML = `
+      <div class="saved-prompt-heading">
+        <div>
+          <span class="lesson-tag">${escapeHtml(categoryLabels[post.category] || post.category)}</span>
+          ${post.is_pinned ? '<span class="status-pill">📌 Pinned</span>' : ""}
+          <h3>${escapeHtml(profile?.display_name || "Workshop Member")}</h3>
+          <p>${escapeHtml(formatDate(post.created_at))}</p>
+        </div>
+      </div>
+
+      <p>${escapeHtml(post.body).replaceAll("\n", "<br>")}</p>
+
+      ${
+        signedImageUrl
+          ? `<div class="reference-image-frame"><img src="${escapeHtml(signedImageUrl)}" alt="Community post image"></div>`
+          : ""
+      }
+
+      <div class="builder-buttons community-post-actions">
+        <button
+          type="button"
+          class="secondary-btn community-like-post-btn"
+          aria-pressed="${liked}"
+        >
+          ${liked ? "♥ Liked" : "♡ Like"} (${reactions.length})
+        </button>
+
+        <button type="button" class="secondary-btn community-reply-toggle-btn">
+          Reply (${comments.length})
+        </button>
+
+        ${
+          state.communityIsAdmin
+            ? `<button type="button" class="secondary-btn community-pin-post-btn">${post.is_pinned ? "Unpin" : "Pin"}</button>`
+            : ""
+        }
+
+        ${
+          canDelete
+            ? '<button type="button" class="danger-btn community-delete-post-btn">Delete</button>'
+            : ""
+        }
+      </div>
+
+      <div class="community-reply-area" hidden>
+        <label>Write a Reply</label>
+        <textarea
+          class="community-reply-input"
+          rows="3"
+          maxlength="3000"
+          placeholder="Write your reply..."
+        ></textarea>
+        <button type="button" class="primary-btn community-submit-reply-btn">
+          Post Reply
+        </button>
+      </div>
+
+      <div class="community-comments">
+        ${commentsHtml || "<p>No replies yet.</p>"}
+      </div>
+    `;
+
+    article
+      .querySelector(".community-like-post-btn")
+      ?.addEventListener("click", () => toggleCommunityLike(post.id, liked));
+
+    article
+      .querySelector(".community-reply-toggle-btn")
       ?.addEventListener("click", () => {
-        showToast("Community replies are coming soon.");
+        const area = article.querySelector(".community-reply-area");
+        if (!area) return;
+        area.hidden = !area.hidden;
+        if (!area.hidden) article.querySelector(".community-reply-input")?.focus();
       });
 
-    block.prepend(pinned);
-    block.appendChild(actions);
+    article
+      .querySelector(".community-submit-reply-btn")
+      ?.addEventListener("click", () => submitCommunityReply(article, post.id));
+
+    article
+      .querySelector(".community-delete-post-btn")
+      ?.addEventListener("click", () => deleteCommunityPost(post.id, post.image_path));
+
+    article
+      .querySelector(".community-pin-post-btn")
+      ?.addEventListener("click", () =>
+        setCommunityPostPinned(post.id, !post.is_pinned),
+      );
+
+    article
+      .querySelectorAll(".community-comment")
+      .forEach((commentElement) => {
+        commentElement
+          .querySelector(".community-delete-comment-btn")
+          ?.addEventListener("click", () =>
+            deleteCommunityComment(commentElement.dataset.commentId),
+          );
+      });
+
+    return article;
+  }
+
+  async function getCommunityImageUrl(path) {
+    if (!state.communityClient || !path) return null;
+
+    const { data, error } = await state.communityClient.storage
+      .from(COMMUNITY_IMAGE_BUCKET)
+      .createSignedUrl(path, 3600);
+
+    if (error) {
+      console.warn("Community image URL could not be created.", error);
+      return null;
+    }
+
+    return data?.signedUrl || null;
+  }
+
+  async function toggleCommunityLike(postId, currentlyLiked) {
+    if (!state.communityClient || !state.communityUser) return;
+
+    let error;
+
+    if (currentlyLiked) {
+      ({ error } = await state.communityClient
+        .from("community_reactions")
+        .delete()
+        .eq("post_id", postId)
+        .eq("user_id", state.communityUser.id));
+    } else {
+      ({ error } = await state.communityClient
+        .from("community_reactions")
+        .insert({
+          post_id: postId,
+          user_id: state.communityUser.id,
+          reaction: "like",
+        }));
+    }
+
+    if (error) {
+      showToast("That reaction could not be saved.", true);
+      return;
+    }
+
+    await loadCommunityFeed();
+  }
+
+  async function submitCommunityReply(article, postId) {
+    if (!state.communityClient || !state.communityUser) return;
+
+    const input = article.querySelector(".community-reply-input");
+    const body = input?.value.trim() || "";
+
+    if (!body) {
+      showToast("Write your reply first.", true);
+      return;
+    }
+
+    const { error } = await state.communityClient
+      .from("community_comments")
+      .insert({
+        post_id: postId,
+        author_id: state.communityUser.id,
+        body,
+      });
+
+    if (error) {
+      showToast(error.message || "Reply could not be posted.", true);
+      return;
+    }
+
+    if (input) input.value = "";
+    await loadCommunityFeed();
+  }
+
+  async function deleteCommunityComment(commentId) {
+    if (!state.communityClient || !commentId) return;
+    if (!window.confirm("Delete this reply?")) return;
+
+    const { error } = await state.communityClient
+      .from("community_comments")
+      .delete()
+      .eq("id", commentId);
+
+    if (error) {
+      showToast("Reply could not be deleted.", true);
+      return;
+    }
+
+    await loadCommunityFeed();
+  }
+
+  async function deleteCommunityPost(postId, imagePath = null) {
+    if (!state.communityClient || !postId) return;
+    if (!window.confirm("Delete this community post?")) return;
+
+    const { error } = await state.communityClient
+      .from("community_posts")
+      .delete()
+      .eq("id", postId);
+
+    if (error) {
+      showToast("Post could not be deleted.", true);
+      return;
+    }
+
+    if (imagePath) {
+      await state.communityClient.storage
+        .from(COMMUNITY_IMAGE_BUCKET)
+        .remove([imagePath]);
+    }
+
+    await loadCommunityFeed();
+  }
+
+  async function setCommunityPostPinned(postId, shouldPin) {
+    if (!state.communityClient || !state.communityIsAdmin) return;
+
+    const { error } = await state.communityClient
+      .from("community_posts")
+      .update({ is_pinned: Boolean(shouldPin) })
+      .eq("id", postId);
+
+    if (error) {
+      showToast("Pinned status could not be changed.", true);
+      return;
+    }
+
+    await loadCommunityFeed();
+  }
+
+  function startCommunityRealtime() {
+    if (!state.communityClient || !state.communityUser) return;
+    stopCommunityRealtime();
+
+    state.communityChannel = state.communityClient
+      .channel("workshop-community-feed")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "community_posts" },
+        scheduleCommunityRefresh,
+      )
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "community_comments" },
+        scheduleCommunityRefresh,
+      )
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "community_reactions" },
+        scheduleCommunityRefresh,
+      )
+      .subscribe();
+  }
+
+  function stopCommunityRealtime() {
+    if (state.communityClient && state.communityChannel) {
+      state.communityClient.removeChannel(state.communityChannel);
+    }
+    state.communityChannel = null;
+    clearTimeout(state.communityRefreshTimer);
+  }
+
+  function scheduleCommunityRefresh() {
+    clearTimeout(state.communityRefreshTimer);
+    state.communityRefreshTimer = window.setTimeout(() => {
+      if (state.communityUser) loadCommunityFeed();
+    }, 250);
   }
 
   function bindSettings() {
