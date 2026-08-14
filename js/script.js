@@ -15,6 +15,8 @@
     references: `${APP_PREFIX}:references`,
     downloadHistory: `${APP_PREFIX}:downloadHistory`,
     websiteWorkshopAccess: `${APP_PREFIX}:websiteWorkshopAccess`,
+    websiteWorkshopDate: `${APP_PREFIX}:websiteWorkshopDate`,
+    promptWorkshopAccess: `${APP_PREFIX}:promptWorkshopAccess`,
     replayHistory: `${APP_PREFIX}:replayHistory`,
   };
 
@@ -26,6 +28,7 @@
     "quick-help",
     "common-mistakes",
     "settings",
+    "prompt-access",
     "prompt-dashboard",
     "journey",
     "day-one",
@@ -41,6 +44,7 @@
     "bonuses",
     "downloads",
     "certificate",
+    "website-access",
     "website-dashboard",
     "beacon-dashboard",
     "chatgpt-dashboard",
@@ -508,6 +512,7 @@ End with:
     bindGlobalSearch();
     bindWorkshopCards();
     bindWebsiteWorkshopAccess();
+    bindPromptWorkshopAccess();
     bindLockedWorkshops();
     bindPageButtons();
     bindCopyButtons();
@@ -604,7 +609,31 @@ End with:
     const { save = true, focus = true } = options;
     const target = document.getElementById(pageId);
 
-    if (LOCKED_WORKSHOP_PAGES.has(pageId)) {
+    if (pageId === "prompt-dashboard") {
+      const hasPromptAccess = readStorage(
+        STORAGE.promptWorkshopAccess,
+        false,
+      );
+
+      if (!hasPromptAccess) {
+        return showPage("prompt-access", {
+          save,
+          focus,
+        });
+      }
+    } else if (pageId === "website-dashboard") {
+      const hasWebsiteAccess = readStorage(
+        STORAGE.websiteWorkshopAccess,
+        false,
+      );
+
+      if (!hasWebsiteAccess) {
+        return showPage("website-access", {
+          save,
+          focus,
+        });
+      }
+    } else if (LOCKED_WORKSHOP_PAGES.has(pageId)) {
       openWorkshopLockPopup(
         `${pageLabel(pageId)} is locked and not available yet.`,
       );
@@ -661,14 +690,7 @@ End with:
   }
 
   function restoreLastPage() {
-    const savedPage = readStorage(STORAGE.lastPage, "portal-home");
-    const startPage =
-      VALID_PAGES.has(savedPage) &&
-      !LOCKED_WORKSHOP_PAGES.has(savedPage) &&
-      document.getElementById(savedPage)
-        ? savedPage
-        : "portal-home";
-    showPage(startPage, { save: false, focus: false });
+    showPage("portal-home", { save: false, focus: false });
   }
 
   function bindNavigation() {
@@ -872,6 +894,126 @@ End with:
         }
 
         showToast("Website Workshop unlocked!");
+      } catch (error) {
+        if (message) {
+          message.textContent =
+            "We could not verify your access right now. Please try again.";
+        }
+      } finally {
+        unlockBtn.disabled = false;
+        unlockBtn.textContent = "Unlock Workshop";
+      }
+    });
+  }
+
+  function bindPromptWorkshopAccess() {
+    const unlockBtn = document.getElementById("unlockPromptWorkshopBtn");
+    const licenseInput = document.getElementById("promptLicenseKey");
+    const message = document.getElementById("promptLicenseMessage");
+    const lockedState = document.getElementById("promptWorkshopLockedState");
+    const unlockedState = document.getElementById(
+      "promptWorkshopUnlockedState",
+    );
+    const existingStudentInput = document.getElementById(
+      "existingPromptStudentCode",
+    );
+    const existingStudentBtn = document.getElementById(
+      "unlockExistingPromptStudentBtn",
+    );
+    const existingStudentMessage = document.getElementById(
+      "existingPromptStudentMessage",
+    );
+
+    if (!unlockBtn || !licenseInput || !lockedState || !unlockedState) return;
+
+    const savedAccess = readStorage(STORAGE.promptWorkshopAccess, false);
+
+    if (savedAccess === true) {
+      lockedState.hidden = true;
+      unlockedState.hidden = false;
+    }
+
+    existingStudentBtn?.addEventListener("click", () => {
+      const studentCode = existingStudentInput?.value.trim();
+
+      if (!studentCode) {
+        if (existingStudentMessage) {
+          existingStudentMessage.textContent =
+            "Please enter your original student access code.";
+        }
+        return;
+      }
+
+      if (studentCode !== "GLAM2026") {
+        if (existingStudentMessage) {
+          existingStudentMessage.textContent =
+            "That existing student code is incorrect.";
+        }
+        return;
+      }
+
+      writeStorage(STORAGE.promptWorkshopAccess, true);
+
+      lockedState.hidden = true;
+      unlockedState.hidden = false;
+
+      if (existingStudentMessage) {
+        existingStudentMessage.textContent = "";
+      }
+
+      showToast("Prompt Generator Workshop unlocked!");
+    });
+
+    unlockBtn.addEventListener("click", async () => {
+      const licenseKey = licenseInput.value.trim();
+
+      if (!licenseKey) {
+        message.textContent =
+          "Please enter your Prompt Generator Workshop access key.";
+        return;
+      }
+
+      unlockBtn.disabled = true;
+      unlockBtn.textContent = "Checking Access...";
+
+      if (message) {
+        message.textContent = "Verifying your purchase...";
+      }
+
+      try {
+        const response = await fetch(
+          "/.netlify/functions/verify-prompt-license",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              licenseKey,
+            }),
+          },
+        );
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+          if (message) {
+            message.textContent =
+              result.message || "That access key could not be verified.";
+          }
+          return;
+        }
+
+        writeStorage(STORAGE.promptWorkshopAccess, true);
+
+        lockedState.hidden = true;
+        unlockedState.hidden = false;
+
+        if (message) {
+          message.textContent = "";
+        }
+
+        showToast("Prompt Generator Workshop unlocked!");
       } catch (error) {
         if (message) {
           message.textContent =

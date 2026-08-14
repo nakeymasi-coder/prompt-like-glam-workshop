@@ -78,10 +78,10 @@
 
           <hr class="sidebar-divider" />
           <div class="sidebar-heading"><span>WORKSHOPS</span></div>
-          <a class="nav-link" data-page="prompt-dashboard" href="#">
+          <a class="nav-link" data-page="prompt-access" href="#">
             <i data-lucide="sparkles"></i><span>Prompt Generator Workshop</span>
           </a>
-          <a class="nav-link" data-page="portal-home" href="#">
+          <a class="nav-link" data-page="website-access" href="#">
             <i data-lucide="globe"></i>
             <span>Website Workshop</span>
           </a>
@@ -183,49 +183,27 @@
                 scratch.
               </p>
 
-              <button class="primary-btn" data-page="prompt-dashboard">
-                Open Workshop
+              <button
+                class="primary-btn"
+                data-page="prompt-access"
+                type="button"
+              >
+                Open Prompt Generator Workshop
               </button>
             </article>
 
-            <article class="workshop-card" id="websiteWorkshopCard">
+            <article class="workshop-card">
               <h2>Website Workshop</h2>
 
               <p>Build beautiful websites using AI and publish them online.</p>
 
-              <div id="websiteWorkshopLockedState">
-                <p><strong>🔒 Workshop Locked</strong></p>
-
-                <input
-                  id="websiteLicenseKey"
-                  type="text"
-                  placeholder="Enter your workshop access key"
-                  autocomplete="off"
-                />
-
-                <button
-                  class="primary-btn"
-                  id="unlockWebsiteWorkshopBtn"
-                  type="button"
-                >
-                  Unlock Workshop
-                </button>
-
-                <p id="websiteLicenseMessage"></p>
-              </div>
-
-              <div id="websiteWorkshopUnlockedState" hidden>
-                <p><strong>✅ Workshop Unlocked</strong></p>
-
-                <a
-                  class="primary-btn"
-                  href="https://website-workshop-landing-page.netlify.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Open Workshop
-                </a>
-              </div>
+              <button
+                class="primary-btn"
+                data-page="website-access"
+                type="button"
+              >
+                Open Website Workshop
+              </button>
             </article>
 
             <article class="workshop-card">
@@ -354,6 +332,82 @@
               </button>
             </article>
           </div>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: PROMPT ACCESS -->
+        <!-- ============================= -->
+        <section class="page" id="prompt-access">
+          <div class="page-header">
+            <span class="eyebrow">Prompt Generator Workshop</span>
+            <h1>Unlock Your Prompt Generator Workshop</h1>
+            <p>Choose the access option that applies to you.</p>
+          </div>
+
+          <article class="lesson-block" id="promptWorkshopCard">
+            <span class="lesson-tag">NEW PURCHASE</span>
+
+            <h2>Enter Your Workshop License Key</h2>
+
+            <div id="promptWorkshopLockedState">
+              <input
+                id="promptLicenseKey"
+                type="text"
+                placeholder="Enter your Prompt Generator Workshop access key"
+                autocomplete="off"
+              />
+
+              <button
+                class="primary-btn"
+                id="unlockPromptWorkshopBtn"
+                type="button"
+              >
+                Unlock Workshop
+              </button>
+
+              <p id="promptLicenseMessage"></p>
+            </div>
+
+            <div id="promptWorkshopUnlockedState" hidden>
+              <p><strong>✅ Workshop Unlocked</strong></p>
+
+              <button
+                class="primary-btn"
+                data-page="prompt-dashboard"
+                type="button"
+              >
+                Enter Prompt Generator Workshop
+              </button>
+            </div>
+          </article>
+
+          <article class="lesson-block">
+            <span class="lesson-tag">EXISTING STUDENT</span>
+
+            <h2>Already Purchased the Original Workshop?</h2>
+
+            <p>
+              Use the original student access code you received with your
+              workshop.
+            </p>
+
+            <input
+              id="existingPromptStudentCode"
+              type="password"
+              placeholder="Enter original student code"
+              autocomplete="off"
+            />
+
+            <button
+              class="secondary-btn"
+              id="unlockExistingPromptStudentBtn"
+              type="button"
+            >
+              Existing Student Access
+            </button>
+
+            <p id="existingPromptStudentMessage"></p>
+          </article>
         </section>
 
         <!-- ============================= -->
@@ -3592,6 +3646,55 @@ Before writing the listing, ask me for:
               Your certificate is ready from the original workshop companion.
             </p>
             <a class="primary-btn" href="./diploma.html">View Certificate</a>
+          </article>
+        </section>
+
+        <!-- ============================= -->
+        <!-- PAGE: WEBSITE ACCESS -->
+        <!-- ============================= -->
+        <section class="page" id="website-access">
+          <div class="page-header">
+            <span class="eyebrow">Website Workshop</span>
+            <h1>Unlock Your Website Workshop</h1>
+            <p>
+              Enter the access key you received after purchasing the Website
+              Workshop.
+            </p>
+          </div>
+
+          <article class="lesson-block" id="websiteWorkshopCard">
+            <div id="websiteWorkshopLockedState">
+              <p><strong>🔒 Workshop Locked</strong></p>
+
+              <input
+                id="websiteLicenseKey"
+                type="text"
+                placeholder="Enter your Website Workshop access key"
+                autocomplete="off"
+              />
+
+              <button
+                class="primary-btn"
+                id="unlockWebsiteWorkshopBtn"
+                type="button"
+              >
+                Unlock Workshop
+              </button>
+
+              <p id="websiteLicenseMessage"></p>
+            </div>
+
+            <div id="websiteWorkshopUnlockedState" hidden>
+              <p><strong>✅ Workshop Unlocked</strong></p>
+
+              <button
+                class="primary-btn"
+                data-page="website-dashboard"
+                type="button"
+              >
+                Enter Website Workshop
+              </button>
+            </div>
           </article>
         </section>
 
