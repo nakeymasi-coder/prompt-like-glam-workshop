@@ -14,6 +14,7 @@
     announcements: `${APP_PREFIX}:announcements`,
     references: `${APP_PREFIX}:references`,
     downloadHistory: `${APP_PREFIX}:downloadHistory`,
+    websiteWorkshopAccess: `${APP_PREFIX}:websiteWorkshopAccess`,
     replayHistory: `${APP_PREFIX}:replayHistory`,
   };
 
@@ -506,6 +507,7 @@ End with:
     bindMobileMenu();
     bindGlobalSearch();
     bindWorkshopCards();
+    bindWebsiteWorkshopAccess();
     bindLockedWorkshops();
     bindPageButtons();
     bindCopyButtons();
@@ -803,6 +805,82 @@ End with:
       showPage(
         document.getElementById(destination) ? destination : "prompt-dashboard",
       );
+    });
+  }
+
+  function bindWebsiteWorkshopAccess() {
+    const unlockBtn = document.getElementById("unlockWebsiteWorkshopBtn");
+    const licenseInput = document.getElementById("websiteLicenseKey");
+    const message = document.getElementById("websiteLicenseMessage");
+    const lockedState = document.getElementById("websiteWorkshopLockedState");
+    const unlockedState = document.getElementById(
+      "websiteWorkshopUnlockedState",
+    );
+
+    if (!unlockBtn || !licenseInput || !lockedState || !unlockedState) return;
+
+    const savedAccess = readStorage(STORAGE.websiteWorkshopAccess, false);
+
+    if (savedAccess === true) {
+      lockedState.hidden = true;
+      unlockedState.hidden = false;
+    }
+
+    unlockBtn.addEventListener("click", async () => {
+      const licenseKey = licenseInput.value.trim();
+
+      if (!licenseKey) {
+        message.textContent = "Please enter your workshop access key.";
+        return;
+      }
+
+      unlockBtn.disabled = true;
+      unlockBtn.textContent = "Checking Access...";
+
+      if (message) {
+        message.textContent = "Verifying your purchase...";
+      }
+
+      try {
+        const response = await fetch("/.netlify/functions/verify-license", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            licenseKey,
+          }),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+          if (message) {
+            message.textContent =
+              result.message || "That access key could not be verified.";
+          }
+          return;
+        }
+
+        writeStorage(STORAGE.websiteWorkshopAccess, true);
+
+        lockedState.hidden = true;
+        unlockedState.hidden = false;
+
+        if (message) {
+          message.textContent = "";
+        }
+
+        showToast("Website Workshop unlocked!");
+      } catch (error) {
+        if (message) {
+          message.textContent =
+            "We could not verify your access right now. Please try again.";
+        }
+      } finally {
+        unlockBtn.disabled = false;
+        unlockBtn.textContent = "Unlock Workshop";
+      }
     });
   }
 

@@ -193,19 +193,44 @@
               </button>
             </article>
 
-            <article class="workshop-card">
+            <article class="workshop-card" id="websiteWorkshopCard">
               <h2>Website Workshop</h2>
 
               <p>Build beautiful websites using AI and publish them online.</p>
 
-              <a
-                class="primary-btn"
-                href="https://website-workshop-landing-page.netlify.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Open Workshop
-              </a>
+              <div id="websiteWorkshopLockedState">
+                <p><strong>🔒 Workshop Locked</strong></p>
+
+                <input
+                  id="websiteLicenseKey"
+                  type="text"
+                  placeholder="Enter your workshop access key"
+                  autocomplete="off"
+                />
+
+                <button
+                  class="primary-btn"
+                  id="unlockWebsiteWorkshopBtn"
+                  type="button"
+                >
+                  Unlock Workshop
+                </button>
+
+                <p id="websiteLicenseMessage"></p>
+              </div>
+
+              <div id="websiteWorkshopUnlockedState" hidden>
+                <p><strong>✅ Workshop Unlocked</strong></p>
+
+                <a
+                  class="primary-btn"
+                  href="https://website-workshop-landing-page.netlify.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open Workshop
+                </a>
+              </div>
             </article>
 
             <article class="workshop-card">
