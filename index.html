@@ -14,6 +14,7 @@
     <meta name="generator" content="Workshop Portal v1.0" />
 
     <link href="css/style.css" rel="stylesheet" />
+    <link href="css/saved-prompts-prd.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
@@ -3197,56 +3198,56 @@ Do not generate code yet.
         </section>
 
         <!-- ============================= -->
-        <!-- PAGE: SAVED PROMPTS -->
+        <!-- PAGE: SAVED PROMPTS — PRD UPDATE -->
         <!-- ============================= -->
         <section id="prompts" class="page">
           <div class="page-header">
             <span class="eyebrow">Universal Prompt Library</span>
             <h1>Saved Prompts</h1>
-            <p>
-              Save prompts from any workshop here so you can find, copy, and
-              reuse them anytime.
-            </p>
+            <p>Save prompts from any workshop here so you can search, organize, review, edit, and export them anytime.</p>
           </div>
 
           <div class="prompt-library-layout">
             <article class="lesson-block prompt-save-card">
               <span class="lesson-tag">Add a Prompt</span>
-              <h2>Save a New Prompt</h2>
+              <h2 id="savedPromptFormHeading">Save a New Prompt</h2>
+
               <label for="savedPromptTitle">Prompt Name</label>
-              <input
-                id="savedPromptTitle"
-                type="text"
-                maxlength="80"
-                placeholder="Example: Luxury Birthday Flyer"
-              />
+              <input id="savedPromptTitle" type="text" maxlength="80" placeholder="Example: Luxury Birthday Flyer" />
+
+              <label for="savedPromptCategory">Category — Optional</label>
+              <select id="savedPromptCategory">
+                <option value="">No Category</option>
+                <option value="Image Prompt">Image Prompt</option>
+                <option value="Video Prompt">Video Prompt</option>
+                <option value="Marketing Prompt">Marketing Prompt</option>
+                <option value="Website Prompt">Website Prompt</option>
+                <option value="Product Prompt">Product Prompt</option>
+                <option value="Social Media Prompt">Social Media Prompt</option>
+                <option value="Other">Other</option>
+              </select>
 
               <label for="savedPromptText">Your Prompt</label>
-              <textarea
-                id="savedPromptText"
-                rows="10"
-                placeholder="Paste or type your prompt here..."
-              ></textarea>
+              <textarea id="savedPromptText" rows="10" placeholder="Paste or type your prompt here..."></textarea>
+
+              <label for="savedPromptReferenceImage">Reference Image — Optional</label>
+              <input id="savedPromptReferenceImage" type="file" accept="image/jpeg,image/png,image/webp" />
+              <p class="prompt-library-note">JPG, JPEG, PNG, or WEBP. Images larger than 2 MB will be rejected before processing.</p>
+
+              <div id="savedPromptImagePreviewWrap" class="saved-prompt-upload-preview" hidden>
+                <img id="savedPromptImagePreview" alt="Selected reference preview" />
+                <button class="secondary-btn" id="removeSavedPromptImageBtn" type="button">Remove Image</button>
+              </div>
+
+              <p id="savedPromptFormMessage" class="prompt-form-message" aria-live="polite"></p>
 
               <div class="prompt-library-actions">
-                <button
-                  class="gold-btn"
-                  id="savePromptLibraryBtn"
-                  type="button"
-                >
-                  Save Prompt
-                </button>
-                <button
-                  class="secondary-btn"
-                  id="clearPromptFormBtn"
-                  type="button"
-                >
-                  Clear Form
-                </button>
+                <button class="gold-btn" id="savePromptLibraryBtn" type="button">Save Prompt</button>
+                <button class="secondary-btn" id="cancelPromptEditBtn" type="button" hidden>Cancel</button>
+                <button class="secondary-btn" id="clearPromptFormBtn" type="button">Clear Form</button>
               </div>
-              <p class="prompt-library-note">
-                Saved prompts stay in this browser on this device.
-              </p>
+
+              <p class="prompt-library-note">Saved prompts stay in this browser on this device.</p>
             </article>
 
             <article class="lesson-block prompt-list-card">
@@ -3258,10 +3259,49 @@ Do not generate code yet.
                 <span class="prompt-count" id="savedPromptCount">0 saved</span>
               </div>
 
+              <div class="saved-prompt-toolbar">
+                <div class="saved-prompt-toolbar-field saved-prompt-search-field">
+                  <label for="savedPromptSearch">Search</label>
+                  <input id="savedPromptSearch" type="search" placeholder="Search saved prompts..." />
+                </div>
+
+                <div class="saved-prompt-toolbar-field">
+                  <label for="savedPromptCategoryFilter">Category</label>
+                  <select id="savedPromptCategoryFilter">
+                    <option value="all">All Categories</option>
+                    <option value="Image Prompt">Image Prompt</option>
+                    <option value="Video Prompt">Video Prompt</option>
+                    <option value="Marketing Prompt">Marketing Prompt</option>
+                    <option value="Website Prompt">Website Prompt</option>
+                    <option value="Product Prompt">Product Prompt</option>
+                    <option value="Social Media Prompt">Social Media Prompt</option>
+                    <option value="Other">Other</option>
+                    <option value="uncategorized">No Category</option>
+                  </select>
+                </div>
+
+                <div class="saved-prompt-toolbar-field">
+                  <label for="savedPromptSort">Sort</label>
+                  <select id="savedPromptSort">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="az">A–Z</option>
+                  </select>
+                </div>
+
+                <button class="secondary-btn saved-prompt-export-all" id="exportAllPromptsBtn" type="button">Export All Prompts</button>
+              </div>
+
               <div class="prompt-empty-state" id="savedPromptsEmpty">
                 <i data-lucide="bookmark"></i>
-                <h3>No saved prompts yet</h3>
-                <p>Your saved prompts will appear here.</p>
+                <h3>You haven’t saved any prompts yet.</h3>
+                <p>Prompts you save during the workshop will appear here so you can come back to them anytime.</p>
+              </div>
+
+              <div class="prompt-empty-state" id="savedPromptsNoMatches" hidden>
+                <i data-lucide="search-x"></i>
+                <h3>No saved prompts match your search.</h3>
+                <button class="secondary-btn" id="clearSavedPromptSearchBtn" type="button">Clear Search</button>
               </div>
 
               <div class="saved-prompts-list" id="savedPromptsList"></div>
@@ -3986,6 +4026,7 @@ Before writing the listing, ask me for:
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/script.js"></script>
+    <script src="js/saved-prompts-prd.js"></script>
     <script>
       if (window.lucide) {
         lucide.createIcons();
