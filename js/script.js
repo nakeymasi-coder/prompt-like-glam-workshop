@@ -29,6 +29,7 @@
     "portal-home",
     "announcements",
     "community",
+    "back-room",
     "quick-help",
     "common-mistakes",
     "settings",
@@ -515,7 +516,7 @@ End with:
 
   document.addEventListener("DOMContentLoaded", init);
 
-  function init() {
+  async function init() {
     cacheDom();
     bindNavigation();
     bindMobileMenu();
@@ -535,7 +536,7 @@ End with:
     bindDownloads();
     bindReplays();
     bindAnnouncements();
-    bindCommunity();
+    await bindCommunity();
     bindSettings();
     bindExternalLinkConfirmation();
     bindReset();
@@ -615,40 +616,69 @@ End with:
     }, 2600);
   }
 
-  function showPage(pageId, options = {}) {
-    const { save = true, focus = true } = options;
-    const target = document.getElementById(pageId);
+ function showPage(pageId, options = {}) {
+  const { save = true, focus = true } = options;
 
-    if (pageId === "prompt-dashboard") {
-      const hasPromptAccess = readStorage(
-        STORAGE.promptWorkshopAccess,
-        false,
-      );
+  // PRIVATE BACK ROOM
+  if (pageId === "back-room" && !state.communityIsAdmin) {
+    showToast("Back Room access is for the instructor only.", true);
+    pageId = "portal-home";
+  }
 
-      if (!hasPromptAccess) {
-        return showPage("prompt-access", {
-          save,
-          focus,
-        });
-      }
-    } else if (pageId === "website-dashboard") {
-      const hasWebsiteAccess = readStorage(
-        STORAGE.websiteWorkshopAccess,
-        false,
-      );
+  // GLOBAL WORKSHOP AVAILABILITY FROM BACK ROOM
+  const workshopAvailability = state.portalWorkshops || {};
 
-      if (!hasWebsiteAccess) {
-        return showPage("website-access", {
-          save,
-          focus,
-        });
-      }
-    } else if (LOCKED_WORKSHOP_PAGES.has(pageId)) {
-      openWorkshopLockPopup(
-        `${pageLabel(pageId)} is locked and not available yet.`,
-      );
-      return false;
+  if (
+    (pageId === "prompt-access" ||
+      pageId === "prompt-dashboard") &&
+    workshopAvailability.prompt === false
+  ) {
+    showToast("The Prompt Generator Workshop is not currently available.", true);
+    pageId = "portal-home";
+  }
+
+  if (
+    (pageId === "website-access" ||
+      pageId === "website-dashboard") &&
+    workshopAvailability.website === false
+  ) {
+    showToast("The Website Workshop is not currently available.", true);
+    pageId = "portal-home";
+  }
+
+  const target = document.getElementById(pageId);
+
+  // EXISTING INDIVIDUAL WORKSHOP ACCESS
+  if (pageId === "prompt-dashboard") {
+    const hasPromptAccess = readStorage(
+      STORAGE.promptWorkshopAccess,
+      false,
+    );
+
+    if (!hasPromptAccess) {
+      return showPage("prompt-access", {
+        save,
+        focus,
+      });
     }
+  } else if (pageId === "website-dashboard") {
+    const hasWebsiteAccess = readStorage(
+      STORAGE.websiteWorkshopAccess,
+      false,
+    );
+
+    if (!hasWebsiteAccess) {
+      return showPage("website-access", {
+        save,
+        focus,
+      });
+    }
+  } else if (LOCKED_WORKSHOP_PAGES.has(pageId)) {
+    openWorkshopLockPopup(
+      `${pageLabel(pageId)} is locked and not available yet.`,
+    );
+    return false;
+  }
 
     if (
       pageId === "certificate" &&
@@ -699,9 +729,16 @@ End with:
     return true;
   }
 
-  function restoreLastPage() {
-    showPage("portal-home", { save: false, focus: false });
-  }
+function restoreLastPage() {
+  const requestedPage = new URLSearchParams(window.location.search).get("page");
+
+  const firstPage =
+    requestedPage && VALID_PAGES.has(requestedPage)
+      ? requestedPage
+      : "portal-home";
+
+  showPage(firstPage, { save: false, focus: false });
+}
 
   function bindNavigation() {
     document.querySelectorAll("[data-page]").forEach((control) => {
@@ -1279,9 +1316,9 @@ End with:
   }
 
   function bindChecklists() {
-    const checkboxes = [
-      ...document.querySelectorAll(".page input[type='checkbox']"),
-    ];
+  const checkboxes = [
+  ...document.querySelectorAll(".page input[type='checkbox']"),
+].filter((box) => !box.closest("#back-room"));
     const saved = readStorage(STORAGE.checklist, {});
 
     checkboxes.forEach((checkbox, index) => {
@@ -1310,7 +1347,11 @@ End with:
   function updatePortalProgress() {
     const checkboxes = [
       ...document.querySelectorAll(".page input[type='checkbox']"),
-    ].filter((box) => !box.closest("#settings"));
+    ].filter(
+  (box) =>
+    !box.closest("#settings") &&
+    !box.closest("#back-room"),
+);
     const completed = checkboxes.filter((box) => box.checked).length;
     const percentage = checkboxes.length
       ? Math.round((completed / checkboxes.length) * 100)
@@ -1897,6 +1938,10 @@ End with:
       SUPABASE_URL,
       SUPABASE_PUBLISHABLE_KEY,
     );
+    await loadPortalAnnouncement();
+    await loadPortalReplays();
+    await loadPortalWorkshops();
+await loadPortalResource();
 
     document
       .getElementById("communitySignUpBtn")
@@ -1904,6 +1949,10 @@ End with:
     document
       .getElementById("communitySignInBtn")
       ?.addEventListener("click", communitySignIn);
+      
+document
+  .getElementById("communityForgotPasswordBtn")
+  ?.addEventListener("click", communityForgotPassword);
     document
       .getElementById("communitySignOutBtn")
       ?.addEventListener("click", communitySignOut);
@@ -1916,6 +1965,21 @@ End with:
     document
       .getElementById("communityRefreshBtn")
       ?.addEventListener("click", loadCommunityFeed);
+      document
+  .getElementById("saveBackRoomAnnouncementBtn")
+  ?.addEventListener("click", saveBackRoomAnnouncement);
+  document
+  .getElementById("saveBackRoomReplaysBtn")
+  ?.addEventListener("click", saveBackRoomReplays);
+
+  document
+  .getElementById("saveBackRoomWorkshopsBtn")
+  ?.addEventListener("click", saveBackRoomWorkshops);
+  
+  document
+  .getElementById("saveBackRoomResourceBtn")
+  ?.addEventListener("click", saveBackRoomResource);
+
     document
       .getElementById("communityFeedFilter")
       ?.addEventListener("change", loadCommunityFeed);
@@ -1924,11 +1988,27 @@ End with:
       data: { session },
     } = await state.communityClient.auth.getSession();
 
-    await applyCommunitySession(session);
+    const isPasswordReset =
+  new URLSearchParams(window.location.search).get("reset") === "1";
 
-    state.communityClient.auth.onAuthStateChange((_event, nextSession) => {
-      window.setTimeout(() => applyCommunitySession(nextSession), 0);
-    });
+if (isPasswordReset && session?.user) {
+  state.communityUser = session.user;
+  showPasswordResetPanel();
+} else {
+  await applyCommunitySession(session);
+}
+
+state.communityClient.auth.onAuthStateChange((event, nextSession) => {
+  window.setTimeout(async () => {
+    if (event === "PASSWORD_RECOVERY") {
+      state.communityUser = nextSession?.user || null;
+      showPasswordResetPanel();
+      return;
+    }
+
+    await applyCommunitySession(nextSession);
+  }, 0);
+});
   }
 
   function hasWorkshopCommunityAccess() {
@@ -1998,16 +2078,42 @@ End with:
     setCommunityAuthMessage("Community account created.");
   }
 
+  async function communityForgotPassword() {
+  if (!state.communityClient) return;
+
+  const email =
+    document.getElementById("communityEmail")?.value.trim() || "";
+
+  if (!email) {
+    setCommunityAuthMessage(
+      "Enter your email address first, then click Forgot Password.",
+      true,
+    );
+    return;
+  }
+
+  setCommunityAuthMessage("Sending your password reset email...");
+
+  const { error } =
+    await state.communityClient.auth.resetPasswordForEmail(email, {
+      redirectTo:
+        "https://workshop-poratl.netlify.app/portal.html?reset=1",
+    });
+
+  if (error) {
+    setCommunityAuthMessage(error.message, true);
+    return;
+  }
+
+  setCommunityAuthMessage(
+    "Password reset email sent. Check your inbox and spam folder.",
+  );
+}
+
   async function communitySignIn() {
     if (!state.communityClient) return;
 
-    if (!hasWorkshopCommunityAccess()) {
-      setCommunityAuthMessage(
-        "Unlock one of your purchased workshops before entering the community.",
-        true,
-      );
-      return;
-    }
+    
 
     const email = document.getElementById("communityEmail")?.value.trim() || "";
     const password =
@@ -2040,6 +2146,110 @@ End with:
     setCommunityAuthMessage("Signed in.");
   }
 
+  function showPasswordResetPanel() {
+  const existing = document.getElementById("passwordResetPanel");
+  if (existing) {
+    existing.hidden = false;
+    return;
+  }
+
+  const panel = document.createElement("div");
+  panel.id = "passwordResetPanel";
+  panel.style.position = "fixed";
+  panel.style.inset = "0";
+  panel.style.zIndex = "9999";
+  panel.style.display = "grid";
+  panel.style.placeItems = "center";
+  panel.style.padding = "20px";
+  panel.style.background = "rgba(2, 7, 17, 0.92)";
+  panel.style.backdropFilter = "blur(18px)";
+
+  panel.innerHTML = `
+    <div class="lesson-block" style="width:min(520px,100%);margin:0;">
+      <span class="lesson-tag">SECURE ACCOUNT RESET</span>
+      <h2>Create Your New Password</h2>
+      <p>Enter a new password below. Use at least 8 characters.</p>
+
+      <label for="newCommunityPassword">New Password</label>
+      <input
+        id="newCommunityPassword"
+        type="password"
+        minlength="8"
+        autocomplete="new-password"
+        placeholder="Enter your new password"
+      />
+
+      <label for="confirmCommunityPassword">Confirm New Password</label>
+      <input
+        id="confirmCommunityPassword"
+        type="password"
+        minlength="8"
+        autocomplete="new-password"
+        placeholder="Enter it again"
+      />
+
+      <div class="builder-buttons" style="margin-top:18px;">
+        <button
+          class="primary-btn"
+          id="saveNewCommunityPasswordBtn"
+          type="button"
+        >
+          Save New Password
+        </button>
+      </div>
+
+      <p id="passwordResetMessage" aria-live="polite"></p>
+    </div>
+  `;
+
+  document.body.appendChild(panel);
+
+  document
+    .getElementById("saveNewCommunityPasswordBtn")
+    ?.addEventListener("click", saveNewCommunityPassword);
+}
+
+async function saveNewCommunityPassword() {
+  if (!state.communityClient) return;
+
+  const password =
+    document.getElementById("newCommunityPassword")?.value || "";
+  const confirmPassword =
+    document.getElementById("confirmCommunityPassword")?.value || "";
+  const message = document.getElementById("passwordResetMessage");
+
+  if (password.length < 8) {
+    if (message) message.textContent = "Use at least 8 characters.";
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    if (message) message.textContent = "The passwords do not match.";
+    return;
+  }
+
+  if (message) message.textContent = "Saving your new password...";
+
+  const { error } = await state.communityClient.auth.updateUser({
+    password,
+  });
+
+  if (error) {
+    if (message) message.textContent = error.message;
+    return;
+  }
+
+  if (message) {
+    message.textContent =
+      "Password updated successfully. You can now sign in with your new password.";
+  }
+
+  window.setTimeout(() => {
+    document.getElementById("passwordResetPanel")?.remove();
+    window.history.replaceState({}, "", "portal.html?page=community");
+  }, 1800);
+}
+
   async function communitySignOut() {
     if (!state.communityClient) return;
     await state.communityClient.auth.signOut();
@@ -2058,6 +2268,11 @@ End with:
     const notice = document.getElementById("communityAccessNotice");
 
     if (!state.communityUser) {
+      const backRoomNav = document.getElementById("backRoomNav");
+
+if (backRoomNav) {
+  backRoomNav.hidden = true;
+}
       if (fields) fields.hidden = false;
       if (signedInBar) signedInBar.hidden = true;
       if (app) app.hidden = true;
@@ -2069,8 +2284,8 @@ End with:
       stopCommunityRealtime();
       return;
     }
-
-    if (!hasWorkshopCommunityAccess()) {
+await loadCommunityAdminStatus();
+  if (!hasWorkshopCommunityAccess() && !state.communityIsAdmin) {
       await state.communityClient.auth.signOut();
       setCommunityAuthMessage(
         "Your community account is valid, but this browser has not unlocked a workshop yet.",
@@ -2084,8 +2299,19 @@ End with:
       state.communityUser.user_metadata?.display_name,
     );
     await loadCurrentCommunityProfile();
-    await loadCommunityAdminStatus();
+  const backRoomStatus = document.getElementById("backRoomAdminStatus");
 
+if (backRoomStatus) {
+  backRoomStatus.textContent = state.communityIsAdmin
+    ? "Instructor access confirmed. Your Back Room controls are active."
+    : "Instructor access is not available for this account.";
+}
+
+const backRoomNav = document.getElementById("backRoomNav");
+
+if (backRoomNav) {
+  backRoomNav.hidden = !state.communityIsAdmin;
+}
     if (fields) fields.hidden = true;
     if (signedInBar) signedInBar.hidden = false;
     if (app) app.hidden = false;
@@ -2161,6 +2387,474 @@ End with:
 
     state.communityIsAdmin = Boolean(data);
   }
+
+  async function loadPortalAnnouncement() {
+  if (!state.communityClient) return;
+
+  const { data, error } = await state.communityClient
+    .from("portal_settings")
+    .select("value")
+    .eq("key", "announcement")
+    .maybeSingle();
+
+  if (error) {
+    console.warn("Portal announcement could not be loaded.", error);
+    return;
+  }
+
+  const announcement = data?.value;
+  const titleInput = document.getElementById("backRoomAnnouncementTitle");
+const bodyInput = document.getElementById("backRoomAnnouncementBody");
+
+if (titleInput) {
+  titleInput.value = announcement?.title || "";
+}
+
+if (bodyInput) {
+  bodyInput.value = announcement?.body || "";
+}
+
+  if (!announcement?.active) return;
+
+  const page = document.getElementById("announcements");
+  const block = page?.querySelector(".lesson-block");
+
+  if (!block) return;
+
+  const title = block.querySelector("h2");
+  const body = block.querySelector("p");
+
+  if (title && announcement.title) {
+    title.textContent = announcement.title;
+  }
+
+  if (body && announcement.body) {
+    body.textContent = announcement.body;
+  }
+}
+
+async function loadPortalReplays() {
+  if (!state.communityClient) return;
+
+  const { data, error } = await state.communityClient
+    .from("portal_settings")
+    .select("value")
+    .eq("key", "replays")
+    .maybeSingle();
+
+  if (error) {
+    console.warn("Replay links could not be loaded.", error);
+    return;
+  }
+
+  const replays = data?.value;
+
+  if (!replays) return;
+
+  if (replays.day1) {
+    REPLAY_LINKS.day1 = replays.day1;
+  }
+
+  if (replays.day2) {
+    REPLAY_LINKS.day2 = replays.day2;
+  }
+
+  const day1Input = document.getElementById("backRoomReplayDay1");
+  const day2Input = document.getElementById("backRoomReplayDay2");
+
+  if (day1Input) day1Input.value = replays.day1 || "";
+  if (day2Input) day2Input.value = replays.day2 || "";
+}
+
+async function loadPortalWorkshops() {
+  if (!state.communityClient) return;
+
+  const defaults = {
+    prompt: true,
+    website: true,
+    beacon: false,
+    chatgpt: false,
+    payhip: false,
+  };
+
+  const { data, error } = await state.communityClient
+    .from("portal_settings")
+    .select("value")
+    .eq("key", "workshops")
+    .maybeSingle();
+
+  if (error) {
+    console.warn("Workshop settings could not be loaded.", error);
+  }
+
+  const workshops = {
+    ...defaults,
+    ...(data?.value || {}),
+  };
+
+  state.portalWorkshops = workshops;
+
+  const fields = {
+    prompt: "backRoomPromptWorkshopEnabled",
+    website: "backRoomWebsiteWorkshopEnabled",
+    beacon: "backRoomBeaconWorkshopEnabled",
+    chatgpt: "backRoomChatGPTWorkshopEnabled",
+    payhip: "backRoomPayhipWorkshopEnabled",
+  };
+
+  Object.entries(fields).forEach(([key, id]) => {
+    const checkbox = document.getElementById(id);
+
+    if (checkbox) {
+      checkbox.checked = Boolean(workshops[key]);
+    }
+  });
+}
+
+async function loadPortalResource() {
+  if (!state.communityClient) return;
+
+  const { data, error } = await state.communityClient
+    .from("portal_settings")
+    .select("value")
+    .eq("key", "featured_resource")
+    .maybeSingle();
+
+  if (error) {
+    console.warn("Featured resource could not be loaded.", error);
+    return;
+  }
+
+  const resource = data?.value;
+
+  const titleInput = document.getElementById("backRoomResourceTitle");
+  const urlInput = document.getElementById("backRoomResourceUrl");
+
+  if (titleInput) {
+    titleInput.value = resource?.title || "";
+  }
+
+  if (urlInput) {
+    urlInput.value = resource?.url || "";
+  }
+
+  const page = document.getElementById("tools-resources");
+
+  if (!page) return;
+
+  let resourceBlock = document.getElementById("featuredPortalResource");
+
+  if (!resource?.active || !resource.title || !resource.url) {
+    resourceBlock?.remove();
+    return;
+  }
+
+  if (!resourceBlock) {
+    resourceBlock = document.createElement("article");
+    resourceBlock.id = "featuredPortalResource";
+    resourceBlock.className = "lesson-block";
+
+    const pageHeader = page.querySelector(".page-header");
+
+    if (pageHeader) {
+      pageHeader.insertAdjacentElement("afterend", resourceBlock);
+    } else {
+      page.prepend(resourceBlock);
+    }
+  }
+
+  resourceBlock.innerHTML = "";
+
+  const tag = document.createElement("span");
+  tag.className = "lesson-tag";
+  tag.textContent = "FEATURED RESOURCE";
+
+  const heading = document.createElement("h2");
+  heading.textContent = resource.title;
+
+  const description = document.createElement("p");
+  description.textContent =
+    "A featured workshop resource selected by your instructor.";
+
+  const link = document.createElement("a");
+  link.className = "primary-btn";
+  link.href = resource.url;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.textContent = "Open Resource";
+
+  resourceBlock.append(tag, heading, description, link);
+}
+
+async function saveBackRoomResource() {
+  if (!state.communityClient || !state.communityUser) return;
+
+  const message = document.getElementById("backRoomMessage");
+
+  if (!state.communityIsAdmin) {
+    if (message) message.textContent = "Instructor access is required.";
+    return;
+  }
+
+  const title =
+    document.getElementById("backRoomResourceTitle")?.value.trim() || "";
+
+  const url =
+    document.getElementById("backRoomResourceUrl")?.value.trim() || "";
+
+  if (!title || !url) {
+    if (message) {
+      message.textContent = "Add both a resource name and link before saving.";
+    }
+    return;
+  }
+
+  try {
+    new URL(url);
+  } catch {
+    if (message) {
+      message.textContent = "Please enter a valid resource link.";
+    }
+    return;
+  }
+
+  if (message) {
+    message.textContent = "Saving resource...";
+  }
+
+  const { error } = await state.communityClient
+    .from("portal_settings")
+    .upsert(
+      {
+        key: "featured_resource",
+        value: {
+          title,
+          url,
+          active: true,
+        },
+        updated_by: state.communityUser.id,
+      },
+      {
+        onConflict: "key",
+      },
+    );
+
+  if (error) {
+    console.warn("Resource could not be saved.", error);
+
+    if (message) {
+      message.textContent =
+        error.message || "Resource could not be saved.";
+    }
+
+    return;
+  }
+
+  if (message) {
+    message.textContent = "Resource saved for your students.";
+  }
+
+  await loadPortalResource();
+
+  showToast("Resource saved.");
+}
+
+
+
+
+async function saveBackRoomWorkshops() {
+  if (!state.communityClient || !state.communityUser) return;
+
+  const message = document.getElementById("backRoomMessage");
+
+  if (!state.communityIsAdmin) {
+    if (message) message.textContent = "Instructor access is required.";
+    return;
+  }
+
+  const workshops = {
+    prompt: Boolean(
+      document.getElementById("backRoomPromptWorkshopEnabled")?.checked,
+    ),
+    website: Boolean(
+      document.getElementById("backRoomWebsiteWorkshopEnabled")?.checked,
+    ),
+    beacon: Boolean(
+      document.getElementById("backRoomBeaconWorkshopEnabled")?.checked,
+    ),
+    chatgpt: Boolean(
+      document.getElementById("backRoomChatGPTWorkshopEnabled")?.checked,
+    ),
+    payhip: Boolean(
+      document.getElementById("backRoomPayhipWorkshopEnabled")?.checked,
+    ),
+  };
+
+  if (message) {
+    message.textContent = "Saving workshop settings...";
+  }
+
+  const { error } = await state.communityClient
+    .from("portal_settings")
+    .upsert(
+      {
+        key: "workshops",
+        value: workshops,
+        updated_by: state.communityUser.id,
+      },
+      {
+        onConflict: "key",
+      },
+    );
+
+  if (error) {
+    console.warn("Workshop settings could not be saved.", error);
+
+    if (message) {
+      message.textContent =
+        error.message || "Workshop settings could not be saved.";
+    }
+
+    return;
+  }
+state.portalWorkshops = workshops;
+
+
+  if (message) {
+    message.textContent = "Workshop settings saved for your students.";
+  }
+
+  showToast("Workshop access updated.");
+}
+
+
+
+async function saveBackRoomReplays() {
+  if (!state.communityClient || !state.communityUser) return;
+
+  const message = document.getElementById("backRoomMessage");
+
+  if (!state.communityIsAdmin) {
+    if (message) message.textContent = "Instructor access is required.";
+    return;
+  }
+
+  const day1 =
+    document.getElementById("backRoomReplayDay1")?.value.trim() || "";
+
+  const day2 =
+    document.getElementById("backRoomReplayDay2")?.value.trim() || "";
+
+  if (!day1 && !day2) {
+    if (message) {
+      message.textContent = "Add at least one replay link before saving.";
+    }
+    return;
+  }
+
+  if (message) message.textContent = "Saving replay links...";
+
+  const { error } = await state.communityClient
+    .from("portal_settings")
+    .upsert(
+      {
+        key: "replays",
+        value: {
+          day1,
+          day2,
+        },
+        updated_by: state.communityUser.id,
+      },
+      {
+        onConflict: "key",
+      },
+    );
+
+  if (error) {
+    console.warn("Replay links could not be saved.", error);
+
+    if (message) {
+      message.textContent = error.message || "Replay links could not be saved.";
+    }
+
+    return;
+  }
+
+  REPLAY_LINKS.day1 = day1;
+  REPLAY_LINKS.day2 = day2;
+
+  if (message) {
+    message.textContent = "Replay links saved for your students.";
+  }
+
+  showToast("Replay links saved.");
+}
+
+  async function saveBackRoomAnnouncement() {
+  if (!state.communityClient || !state.communityUser) return;
+
+  const message = document.getElementById("backRoomMessage");
+
+  if (!state.communityIsAdmin) {
+    if (message) {
+      message.textContent = "Instructor access is required.";
+    }
+    return;
+  }
+
+  const title =
+    document.getElementById("backRoomAnnouncementTitle")?.value.trim() || "";
+
+  const body =
+    document.getElementById("backRoomAnnouncementBody")?.value.trim() || "";
+
+  if (!title || !body) {
+    if (message) {
+      message.textContent =
+        "Add both an announcement title and message before saving.";
+    }
+    return;
+  }
+
+  if (message) {
+    message.textContent = "Saving announcement...";
+  }
+
+  const { error } = await state.communityClient
+    .from("portal_settings")
+    .upsert(
+      {
+        key: "announcement",
+        value: {
+          title,
+          body,
+          active: true,
+        },
+        updated_by: state.communityUser.id,
+      },
+      {
+        onConflict: "key",
+      },
+    );
+
+  if (error) {
+    console.warn("Announcement could not be saved.", error);
+
+    if (message) {
+      message.textContent = error.message || "Announcement could not be saved.";
+    }
+
+    return;
+  }
+
+  if (message) {
+    message.textContent = "Announcement saved for your students.";
+  }
+
+  await loadPortalAnnouncement();
+
+  showToast("Announcement saved.");
+}
 
   function setCommunityAuthMessage(message, isError = false) {
     const element = document.getElementById("communityAuthMessage");
