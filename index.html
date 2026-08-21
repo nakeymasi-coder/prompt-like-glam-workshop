@@ -9,6 +9,9 @@
   <meta property="og:description" content="Learn it. Build it. Grow it." />
   <meta property="og:image" content="og.png" />
   <link rel="icon" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -16,12 +19,15 @@
     <header class="topbar">
       <button class="brand" id="brandHome" aria-label="Workshop mansion home">
         <b>GH</b>
-        <span><strong>GLAM HUSTLE HUB</strong><small>WORKSHOP MANSION</small></span>
+        <span>
+          <strong>GLAM HUSTLE HUB</strong>
+          <small>WORKSHOP MANSION</small>
+        </span>
       </button>
 
-      <button class="menu" id="menuButton">MENU</button>
+      <button class="menu" id="menuButton" aria-label="Open navigation">MENU</button>
 
-      <nav class="nav" id="mainNav">
+      <nav class="nav" id="mainNav" aria-label="Main navigation">
         <button class="active" data-home>MANSION</button>
         <button data-open-portal="portal-home" data-label="Workshop Portal">PORTAL</button>
         <button data-open-portal="website-access" data-label="My Workshops">WORKSHOPS</button>
@@ -33,7 +39,7 @@
 
       <div class="profile">
         <i>G</i>
-        <span><small>WELCOME BACK,</small><strong>CREATOR</strong></span>
+        <span><small>WELCOME BACK</small><strong>CREATOR</strong></span>
       </div>
     </header>
 
@@ -43,30 +49,68 @@
       <div class="light-orb orb-three"></div>
     </div>
 
-    <section class="title">
+    <section class="hero-intro" aria-labelledby="mansion-title">
       <p>GLAM HUSTLE HUB PRESENTS</p>
-      <h1><span>WELCOME TO YOUR</span>WORKSHOP MANSION</h1>
-      <div>— &nbsp; Learn it. Build it. Grow it. &nbsp; —</div>
+      <h1 id="mansion-title"><span>Welcome to Your</span>Workshop Mansion</h1>
+      <div>Learn it. Build it. Grow it.</div>
     </section>
 
     <section class="mansion" aria-label="Interactive workshop mansion">
       <div class="image-wrap">
-        <img src="workshop-mansion.png" alt="Luxury sapphire, black, chrome, and white workshop mansion with glowing paths and distinct interactive rooms" />
-        <div class="shade"></div>
+        <div class="sky-glow" aria-hidden="true"></div>
+        <div class="cloud cloud-one" aria-hidden="true"></div>
+        <div class="cloud cloud-two" aria-hidden="true"></div>
+        <div class="cloud cloud-three" aria-hidden="true"></div>
 
-        <div class="mansion-magic" aria-hidden="true">
-          <i class="beam beam-left"></i><i class="beam beam-center"></i><i class="beam beam-right"></i>
-          <div class="fountain-aura"><i></i><i></i><i></i></div>
-          <span class="window-glint glint-1"></span><span class="window-glint glint-2"></span><span class="window-glint glint-3"></span>
-          <span class="window-glint glint-4"></span><span class="window-glint glint-5"></span><span class="window-glint glint-6"></span>
-          <div class="chrome-sweep"></div>
+        <div class="palace-shell" aria-hidden="true">
+          <div class="palace-wing wing-left"></div>
+          <div class="palace-wing wing-right"></div>
+          <div class="palace-crownline"></div>
+          <div class="palace-base"></div>
         </div>
 
-        <div id="roomHotspots"></div>
+        <div class="central-tower">
+          <div class="tower-halo"></div>
+          <div class="tower-cap">
+            <span>WELCOME TO</span>
+            <strong>GLAM</strong>
+            <small>HUSTLE HUB</small>
+          </div>
+
+          <div class="tower-message">
+            <p>YOUR DIGITAL BUSINESS HEADQUARTERS</p>
+            <h2>WORKSHOP<br />MANSION</h2>
+            <div class="gold-rule"><i></i><b>✦</b><i></i></div>
+          </div>
+
+          <button class="grand-entrance" data-open-portal="portal-home" data-label="Workshop Portal">
+            <span>ENTER THE HUB</span>
+            <small>Open your workshop portal</small>
+          </button>
+
+          <div class="glass-hall" aria-hidden="true">
+            <div class="hall-ceiling"></div>
+            <div class="hall-light"></div>
+            <div class="hall-floor"></div>
+          </div>
+
+          <div class="tower-steps" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i>
+          </div>
+        </div>
+
+        <div id="roomHotspots" aria-label="Workshop mansion rooms"></div>
+
+        <div class="courtyard" aria-hidden="true">
+          <div class="water water-left"></div>
+          <div class="water water-right"></div>
+          <div class="pathway"></div>
+          <div class="courtyard-copy">LEARN IT <b>•</b> BUILD IT <b>•</b> GROW IT</div>
+        </div>
       </div>
     </section>
 
-    <div class="tip">CLICK ANY ROOM TO ENTER &nbsp; ↗</div>
+    <div class="tip">CLICK ANY ROOM TO ENTER &nbsp; ✦</div>
 
     <div class="backdrop" id="roomModal" hidden>
       <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="room-title">
@@ -90,7 +134,11 @@
 
     <div class="door-transition" id="doorTransition" role="status" aria-live="polite" hidden>
       <div class="transition-bling" id="transitionBling" aria-hidden="true"></div>
-      <div class="arrival"><small>WELCOME INSIDE</small><strong id="transitionLabel">Workshop Portal</strong><span>THE DOORS ARE OPENING</span></div>
+      <div class="arrival">
+        <small>WELCOME INSIDE</small>
+        <strong id="transitionLabel">Workshop Portal</strong>
+        <span>THE DOORS ARE OPENING</span>
+      </div>
       <div class="hallway-light"></div>
       <div class="door door-left"><i></i><b>GH</b></div>
       <div class="door door-right"><i></i><b>GH</b></div>
