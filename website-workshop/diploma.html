@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Website Workshop Certificate</title>
+    <style>
+      :root{
+        --sapphire:#168FEA;
+        --deep:#103B63;
+        --gold:#B9872F;
+        --champagne:#E8D19B;
+        --ivory:#FFF9EE;
+        --ink:#322D27;
+      }
+
+      *{box-sizing:border-box}
+
+      body{
+        min-height:100vh;
+        margin:0;
+        padding:32px;
+        display:grid;
+        place-items:center;
+        color:var(--ink);
+        font-family:Arial,sans-serif;
+        background:
+          radial-gradient(circle at 88% 6%,rgba(22,143,234,.13),transparent 25%),
+          radial-gradient(circle at 14% 8%,rgba(232,209,155,.32),transparent 30%),
+          linear-gradient(145deg,#fffdf9,#fff4dd 55%,#f0dbad);
+      }
+
+      .certificate{
+        position:relative;
+        width:min(100%,1050px);
+        min-height:700px;
+        padding:76px clamp(32px,7vw,92px);
+        overflow:hidden;
+        text-align:center;
+        background:
+          linear-gradient(120deg,rgba(255,255,255,.84),transparent 34%),
+          radial-gradient(circle at 86% 12%,rgba(22,143,234,.10),transparent 28%),
+          linear-gradient(145deg,#fff,#fff9ec 65%,#f3e1bb);
+        border:2px solid rgba(185,135,47,.66);
+        outline:8px double rgba(185,135,47,.34);
+        outline-offset:-20px;
+        box-shadow:
+          0 30px 80px rgba(87,60,20,.18),
+          inset 0 1px 0 #fff;
+      }
+
+      .certificate::before,
+      .certificate::after{
+        content:"";
+        position:absolute;
+        width:230px;
+        height:230px;
+        border-radius:50%;
+        border:1px solid rgba(22,143,234,.14);
+        box-shadow:
+          0 0 0 25px rgba(255,255,255,.30),
+          0 0 0 50px rgba(185,135,47,.05);
+      }
+
+      .certificate::before{right:-90px;top:-95px}
+      .certificate::after{left:-90px;bottom:-95px}
+
+      .kicker{
+        display:inline-block;
+        padding:8px 15px;
+        border:1px solid rgba(185,135,47,.35);
+        border-radius:999px;
+        color:#8D641E;
+        background:rgba(255,255,255,.64);
+        font-size:.72rem;
+        font-weight:900;
+        letter-spacing:.22em;
+      }
+
+      h1{
+        margin:28px 0 12px;
+        color:var(--deep);
+        font:800 clamp(2.8rem,7vw,5.8rem)/.98 Georgia,serif;
+      }
+
+      .presented{
+        margin-top:34px;
+        color:#766b5e;
+        font-size:1.02rem;
+      }
+
+      input{
+        width:min(100%,620px);
+        margin:10px auto 20px;
+        padding:12px 8px;
+        color:var(--deep);
+        background:transparent;
+        border:0;
+        border-bottom:2px solid rgba(185,135,47,.55);
+        outline:none;
+        text-align:center;
+        font:700 clamp(1.8rem,4vw,3rem) Georgia,serif;
+      }
+
+      input:focus{
+        border-bottom-color:var(--sapphire);
+      }
+
+      #message{
+        max-width:760px;
+        margin:10px auto 0;
+        color:#6f6558;
+        font-size:1.05rem;
+        line-height:1.72;
+      }
+
+      .seal{
+        width:82px;
+        height:82px;
+        margin:35px auto 0;
+        display:grid;
+        place-items:center;
+        border-radius:50%;
+        color:white;
+        background:linear-gradient(145deg,#35a9ff,#168FEA 52%,#103B63);
+        border:4px double #f2d99d;
+        box-shadow:0 12px 28px rgba(22,143,234,.23);
+        font:800 1.7rem Georgia,serif;
+      }
+
+      .actions{
+        display:flex;
+        justify-content:center;
+        gap:12px;
+        flex-wrap:wrap;
+        margin-top:32px;
+      }
+
+      button,a{
+        min-height:46px;
+        padding:12px 20px;
+        border-radius:999px;
+        border:1px solid rgba(185,135,47,.52);
+        font-weight:900;
+        text-decoration:none;
+        cursor:pointer;
+      }
+
+      .print{
+        color:#523b13;
+        background:linear-gradient(135deg,#fff,#fff3ce 38%,#e5c77f);
+        box-shadow:0 10px 24px rgba(90,62,19,.13);
+      }
+
+      .back{
+        color:#103B63;
+        background:linear-gradient(145deg,#fff,#edf8ff);
+      }
+
+      @media(max-width:640px){
+        body{padding:16px}
+        .certificate{
+          min-height:620px;
+          padding:58px 28px;
+          outline-offset:-13px;
+        }
+      }
+
+      @media print{
+        @page{size:landscape;margin:0}
+        body{
+          padding:0;
+          background:#fff;
+        }
+        .certificate{
+          width:100vw;
+          min-height:100vh;
+          box-shadow:none;
+          outline-offset:-20px;
+        }
+        .actions{display:none}
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="certificate">
+      <span class="kicker">CERTIFICATE OF COMPLETION</span>
+      <h1 id="title">Website Workshop Complete</h1>
+
+      <p class="presented">This certificate is proudly presented to</p>
+      <input aria-label="Student name" placeholder="Type your name" />
+
+      <p id="message">for successfully completing the workshop.</p>
+
+      <div class="seal" aria-hidden="true">G</div>
+
+      <div class="actions">
+        <button class="print" type="button" onclick="window.print()">
+          Print or Save as PDF
+        </button>
+        <a class="back" href="index.html">Back to Website Workshop</a>
+      </div>
+    </main>
+    <script>
+      document.title = 'Website Workshop Complete';
+      document.querySelector("#title").textContent = 'Website Workshop Complete';
+      document.querySelector("#message").textContent = 'You planned your website, prepared Payhip, connected GitHub, built and personalized the site in ChatGPT Sites, tested it, sent it to GitHub, and verified the public website.';
+    </script>
+</body>
+</html>

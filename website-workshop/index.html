@@ -1,0 +1,3098 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Glam Website Workshop companion for planning, building, testing, and publishing a digital product website."
+    />
+    <title>Website Workshop — Glam Vault Luxe</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Lato:wght@400;700;900&family=Playfair+Display:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+:root {
+  --sapphire: #168fea;
+  --deep-sapphire: #103b63;
+  --silver: #c9ced6;
+  --silver-bright: #eef2f7;
+  --white: #ffffff;
+  --black: #171a1e;
+  --ink: #1c2730;
+  --muted: #66727d;
+  --soft: #f6fbff;
+  --soft-blue: #edf7ff;
+  --line: rgba(22, 143, 234, 0.18);
+  --line-strong: rgba(22, 143, 234, 0.34);
+  --shadow: 0 18px 50px rgba(16, 59, 99, 0.12);
+  --shadow-soft: 0 10px 28px rgba(16, 59, 99, 0.09);
+  --radius-xl: 28px;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --sidebar: 300px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Lato", Arial, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 92% 3%, rgba(22, 143, 234, 0.16), transparent 24%),
+    radial-gradient(circle at 30% 0%, rgba(238, 242, 247, 0.95), transparent 26%),
+    linear-gradient(180deg, #ffffff 0%, #f8fcff 48%, #edf7ff 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(16, 59, 99, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 59, 99, 0.025) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(circle at center, black, transparent 82%);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+.button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+/* SIDEBAR */
+
+aside#sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--sidebar);
+  min-height: 100vh;
+  padding: 26px 20px 30px;
+  overflow-y: auto;
+  color: var(--white);
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.14), transparent 24%),
+    linear-gradient(180deg, #168fea 0%, #126fb4 44%, #103b63 100%);
+  border-right: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 18px 0 50px rgba(16, 59, 99, 0.18);
+  z-index: 20;
+}
+
+.brand {
+  padding: 4px 8px 22px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.brand-kicker {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--silver-bright);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+}
+
+.brand h2 {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.5rem;
+}
+
+.brand p {
+  margin: 7px 0 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.85rem;
+}
+
+.view-switcher {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin: 18px 0 22px;
+  padding: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.view-btn {
+  min-height: 38px;
+  border: 0;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.72);
+  background: transparent;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.view-btn.active {
+  color: var(--deep-sapphire);
+  background: linear-gradient(180deg, #ffffff, #eef4f8);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+}
+
+.nav-group {
+  margin: 18px 0;
+}
+
+.nav-heading {
+  display: block;
+  margin: 0 10px 7px;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.67rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.nav-btn {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 43px;
+  margin: 4px 0;
+  padding: 10px 13px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.86);
+  background: transparent;
+  text-align: left;
+  font-weight: 800;
+  transition: 180ms ease;
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: translateX(2px);
+}
+
+.nav-btn.active::before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  width: 5px;
+  height: 24px;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffffff, #c9ced6);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.8);
+}
+
+.progress {
+  margin-top: 26px;
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.progress-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.77rem;
+}
+
+.progress-track {
+  height: 8px;
+  margin-top: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.progress-track i {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #ffffff, #cfd8e3);
+  transition: width 250ms ease;
+}
+
+/* MAIN */
+
+main {
+  margin-left: var(--sidebar);
+  min-height: 100vh;
+  padding: 28px clamp(22px, 4vw, 64px) 64px;
+}
+
+.top-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+  padding: 22px 0 18px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.96),
+    rgba(255, 255, 255, 0.82) 75%,
+    transparent
+  );
+  backdrop-filter: blur(16px);
+}
+
+#eyebrow {
+  margin: 0 0 7px;
+  color: var(--sapphire);
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+#pageTitle {
+  max-width: 920px;
+  margin: 0;
+  color: var(--deep-sapphire);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2.15rem, 4vw, 4.3rem);
+  line-height: 1.04;
+}
+
+#pageIntro {
+  max-width: 800px;
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.continue-btn,
+.primary,
+.secondary,
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 11px 17px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  text-decoration: none;
+  font-weight: 900;
+  transition: 180ms ease;
+}
+
+.continue-btn,
+.primary {
+  color: var(--white);
+  background: linear-gradient(135deg, #168fea 0%, #0f78ca 58%, #103b63 100%);
+  box-shadow: 0 12px 28px rgba(22, 143, 234, 0.22);
+}
+
+.continue-btn:hover,
+.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 17px 36px rgba(22, 143, 234, 0.3);
+}
+
+.secondary {
+  color: var(--deep-sapphire);
+  background: linear-gradient(180deg, #ffffff, #eef4f8);
+  border-color: rgba(16, 59, 99, 0.14);
+}
+
+.secondary:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-1px);
+}
+
+/* HERO */
+
+.hero-panel {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 22px;
+  padding: clamp(28px, 5vw, 52px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at 88% 18%, rgba(22, 143, 234, 0.2), transparent 26%),
+    radial-gradient(circle at 78% 100%, rgba(201, 206, 214, 0.36), transparent 24%),
+    linear-gradient(135deg, #ffffff 0%, #f2f9ff 58%, #e9f6ff 100%);
+  box-shadow: var(--shadow);
+}
+
+.hero-panel::after {
+  content: "";
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  right: -70px;
+  top: -70px;
+  border-radius: 50%;
+  border: 1px solid rgba(22, 143, 234, 0.15);
+  box-shadow:
+    0 0 0 24px rgba(22, 143, 234, 0.04),
+    0 0 0 48px rgba(22, 143, 234, 0.025);
+}
+
+.hero-kicker {
+  color: var(--sapphire);
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.hero-panel h2 {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 8px 0 12px;
+  color: var(--deep-sapphire);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.08;
+}
+
+.hero-panel p {
+  position: relative;
+  z-index: 1;
+  color: var(--muted);
+}
+
+/* CARDS */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 18px;
+  padding: 24px;
+  border: 1px solid rgba(22, 143, 234, 0.16);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(248, 252, 255, 0.98));
+  box-shadow: var(--shadow-soft);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(22, 143, 234, 0.9),
+    rgba(201, 206, 214, 0.95),
+    transparent
+  );
+}
+
+.card h3 {
+  margin: 6px 0 10px;
+  color: var(--deep-sapphire);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.35rem;
+}
+
+.card h4 {
+  color: var(--deep-sapphire);
+}
+
+.card p,
+.card li {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 27px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  color: #0b6bb8;
+  background: rgba(22, 143, 234, 0.09);
+  border: 1px solid rgba(22, 143, 234, 0.15);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+/* FORMS */
+
+.field {
+  display: grid;
+  gap: 7px;
+  margin: 14px 0;
+}
+
+.field > span {
+  color: var(--deep-sapphire);
+  font-weight: 900;
+}
+
+textarea,
+input,
+select {
+  width: 100%;
+  border: 1px solid rgba(16, 59, 99, 0.18);
+  border-radius: 12px;
+  padding: 13px 14px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.95);
+  outline: 0;
+}
+
+textarea:focus,
+input:focus,
+select:focus {
+  border-color: rgba(22, 143, 234, 0.65);
+  box-shadow: 0 0 0 4px rgba(22, 143, 234, 0.09);
+}
+
+textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.lesson-prompt,
+#generatedPrompt {
+  min-height: 300px;
+  margin-top: 12px;
+  font-family: "Lato", Arial, sans-serif;
+  line-height: 1.55;
+  background: #f8fbfd;
+}
+
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 10px 0;
+  color: var(--muted);
+}
+
+.check input {
+  width: auto;
+  margin-top: 4px;
+  accent-color: var(--sapphire);
+}
+
+/* COMPLETION GATES */
+
+.checkpoint {
+  margin-top: 22px;
+  padding: 18px;
+  border: 1px solid rgba(22, 143, 234, 0.17);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #f5fbff, #ffffff);
+}
+
+.complete-gate:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.lesson.done {
+  border-color: rgba(22, 143, 234, 0.42);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(22, 143, 234, 0.11), transparent 28%),
+    #ffffff;
+}
+
+/* INSTRUCTOR VIEW */
+
+.instructor-panel {
+  position: relative;
+  margin-bottom: 22px;
+  padding: 24px;
+  border: 1px solid rgba(201, 206, 214, 0.8);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at 90% 0%, rgba(22, 143, 234, 0.12), transparent 30%),
+    linear-gradient(135deg, #171a1e 0%, #103b63 100%);
+  color: var(--white);
+  box-shadow: 0 20px 50px rgba(16, 59, 99, 0.2);
+}
+
+.instructor-badge {
+  display: inline-flex;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #f6f8fb, #c9ced6);
+  color: #171a1e;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.instructor-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(100px, 1fr));
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.instructor-grid div {
+  padding: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.instructor-grid strong,
+.instructor-grid span {
+  display: block;
+}
+
+.instructor-grid strong {
+  color: #dfe8f1;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.instructor-grid span {
+  margin-top: 5px;
+  font-weight: 900;
+}
+
+.instructor-note,
+.instructor-script {
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.08);
+  line-height: 1.55;
+}
+
+.instructor-script {
+  border-left: 3px solid #168fea;
+}
+
+/* SUPPORT */
+
+.issue-picker {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.issue-btn {
+  min-height: 100px;
+  padding: 18px;
+  border: 1px solid rgba(22, 143, 234, 0.16);
+  border-radius: 16px;
+  background: #ffffff;
+  color: var(--deep-sapphire);
+  text-align: left;
+  box-shadow: var(--shadow-soft);
+}
+
+.issue-btn span,
+.issue-btn strong {
+  display: block;
+}
+
+.issue-btn span {
+  margin-bottom: 7px;
+  color: var(--sapphire);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.issue-btn strong {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.1rem;
+}
+
+.stack-list {
+  display: grid;
+  gap: 12px;
+}
+
+.list-card,
+.help-card {
+  margin-bottom: 0;
+}
+
+.small-btn {
+  min-height: 36px;
+  padding: 8px 13px;
+  font-size: 0.78rem;
+}
+
+.empty-state {
+  text-align: center;
+}
+
+.progress-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(16, 59, 99, 0.09);
+  color: var(--muted);
+}
+
+.progress-row.complete-row {
+  color: var(--deep-sapphire);
+}
+
+.progress-row span {
+  color: var(--sapphire);
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.saved-note {
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--soft-blue);
+}
+
+.saved-note button {
+  float: right;
+  border: 0;
+  background: transparent;
+  color: var(--deep-sapphire);
+  font-weight: 900;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid rgba(16, 59, 99, 0.12);
+  margin: 24px 0;
+}
+
+#toast {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 99;
+  padding: 13px 17px;
+  border-radius: 999px;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--sapphire), var(--deep-sapphire));
+  box-shadow: 0 14px 34px rgba(16, 59, 99, 0.24);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: 220ms ease;
+  pointer-events: none;
+}
+
+#toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu {
+  display: none;
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 50;
+  width: 46px;
+  height: 46px;
+  border: 0;
+  border-radius: 14px;
+  color: var(--white);
+  background: var(--deep-sapphire);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+  .instructor-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 820px) {
+  .menu {
+    display: grid;
+    place-items: center;
+  }
+
+  aside#sidebar {
+    transform: translateX(-100%);
+    transition: 220ms ease;
+  }
+
+  aside#sidebar.open {
+    transform: translateX(0);
+  }
+
+  main {
+    margin-left: 0;
+    padding-top: 70px;
+  }
+
+  .top-header {
+    position: static;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .continue-btn {
+    width: 100%;
+  }
+
+  .instructor-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 540px) {
+  .grid,
+  .issue-picker,
+  .instructor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card,
+  .hero-panel,
+  .instructor-panel {
+    padding: 19px;
+  }
+
+  #pageTitle {
+    font-size: 2.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================
+   THE GLAM VAULT — WEBSITE WORKSHOP LUXE THEME
+   Ivory • Champagne Gold • Crystal White • Sapphire Accents
+   Visual layer only. Existing workshop behavior is preserved.
+   ========================================================== */
+
+:root{
+  --sapphire:#168FEA;
+  --deep-sapphire:#103B63;
+  --sapphire-soft:#E6F5FF;
+  --champagne:#E8D19B;
+  --champagne-2:#D7B86E;
+  --gold:#B9872F;
+  --gold-deep:#8D641E;
+  --ivory:#FFF9EE;
+  --ivory-2:#FFFDF8;
+  --pearl:#F8F0E1;
+  --white:#FFFFFF;
+  --black:#171A1E;
+  --ink:#322D27;
+  --muted:#756C60;
+  --soft:#FFFDF8;
+  --soft-blue:#EFF8FF;
+  --line:rgba(185,135,47,.24);
+  --line-strong:rgba(185,135,47,.46);
+  --shadow:0 24px 62px rgba(91,64,22,.12);
+  --shadow-soft:0 13px 34px rgba(91,64,22,.09);
+}
+
+body{
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 91% 4%,rgba(22,143,234,.11),transparent 24%),
+    radial-gradient(circle at 70% 15%,rgba(255,255,255,.92),transparent 23%),
+    radial-gradient(circle at 22% 0%,rgba(232,209,155,.30),transparent 30%),
+    linear-gradient(150deg,#fffdf9 0%,#fff7e7 52%,#f3e2be 100%) !important;
+  background-attachment:fixed;
+}
+
+body::before{
+  background:
+    radial-gradient(circle,rgba(255,255,255,.72) 0 1px,transparent 1.7px) 0 0/82px 82px,
+    radial-gradient(circle,rgba(22,143,234,.10) 0 1px,transparent 1.5px) 34px 28px/138px 138px,
+    linear-gradient(rgba(185,135,47,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(185,135,47,.025) 1px,transparent 1px);
+  background-size:82px 82px,138px 138px,72px 72px,72px 72px;
+  mask-image:radial-gradient(circle at center,black,transparent 88%);
+}
+
+/* SIDEBAR — IVORY PALACE */
+aside#sidebar{
+  color:var(--ink) !important;
+  background:
+    linear-gradient(120deg,rgba(255,255,255,.86),transparent 34%),
+    radial-gradient(circle at 10% 0%,rgba(22,143,234,.09),transparent 26%),
+    linear-gradient(180deg,#fffdf8 0%,#fbf2df 58%,#f1dfb9 100%) !important;
+  border-right:1px solid rgba(185,135,47,.40) !important;
+  box-shadow:18px 0 54px rgba(91,64,22,.13) !important;
+}
+
+.brand{
+  position:relative;
+  margin-bottom:16px;
+  padding:18px 17px 20px !important;
+  overflow:hidden;
+  border:1px solid rgba(185,135,47,.50) !important;
+  border-radius:20px;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.88),rgba(255,248,227,.98) 42%,rgba(232,209,155,.93)) !important;
+  box-shadow:0 14px 32px rgba(91,64,22,.12),inset 0 1px 0 #fff;
+}
+
+.brand::after{
+  content:"";
+  position:absolute;
+  right:-34px;
+  bottom:-38px;
+  width:108px;
+  height:108px;
+  border:1px solid rgba(22,143,234,.18);
+  border-radius:50%;
+  box-shadow:0 0 0 18px rgba(22,143,234,.035),0 0 0 36px rgba(185,135,47,.035);
+}
+
+.brand-kicker{
+  position:relative;
+  z-index:1;
+  color:var(--gold-deep) !important;
+}
+
+.brand h2{
+  position:relative;
+  z-index:1;
+  color:var(--deep-sapphire) !important;
+  font-family:"Playfair Display",Georgia,serif !important;
+  font-size:1.58rem !important;
+}
+
+.brand p{
+  position:relative;
+  z-index:1;
+  color:#786541 !important;
+}
+
+.view-switcher{
+  border:1px solid rgba(185,135,47,.28) !important;
+  background:rgba(255,255,255,.56) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.84);
+}
+
+.view-btn{
+  color:#8b7b62 !important;
+}
+
+.view-btn.active{
+  color:#533c13 !important;
+  background:linear-gradient(145deg,#fffef9,#f4dfad) !important;
+  border:1px solid rgba(185,135,47,.42);
+  box-shadow:0 8px 18px rgba(91,64,22,.10) !important;
+}
+
+.nav-heading{
+  color:#967b4f !important;
+}
+
+.nav-btn{
+  color:#635a4e !important;
+  border-color:transparent !important;
+}
+
+.nav-btn:hover{
+  color:var(--deep-sapphire) !important;
+  background:linear-gradient(135deg,#fff,rgba(230,245,255,.74)) !important;
+  border-color:rgba(22,143,234,.16) !important;
+}
+
+.nav-btn.active{
+  color:#4f3913 !important;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.86),rgba(255,247,224,.98) 42%,rgba(231,207,153,.96)) !important;
+  border-color:rgba(185,135,47,.52) !important;
+  box-shadow:0 11px 24px rgba(91,64,22,.13),inset 0 1px 0 #fff !important;
+}
+
+.nav-btn.active::before{
+  background:linear-gradient(180deg,#168FEA,#f4dc9d,#b9872f) !important;
+  box-shadow:0 0 14px rgba(22,143,234,.18) !important;
+}
+
+.progress{
+  color:#5e5549;
+  background:linear-gradient(145deg,rgba(255,255,255,.72),rgba(255,247,226,.86)) !important;
+  border-color:rgba(185,135,47,.28) !important;
+  box-shadow:0 10px 24px rgba(91,64,22,.08);
+}
+
+.progress-track{
+  background:rgba(185,135,47,.13) !important;
+}
+
+.progress-track i{
+  background:linear-gradient(90deg,#168FEA 0%,#7bc9ff 32%,#ead49c 65%,#b9872f 100%) !important;
+}
+
+/* MAIN + STICKY HEADER */
+main{
+  color:var(--ink);
+}
+
+.top-header{
+  padding:20px 0 18px !important;
+  background:linear-gradient(180deg,rgba(255,253,248,.98),rgba(255,249,238,.91) 78%,transparent) !important;
+  backdrop-filter:blur(18px) saturate(135%);
+}
+
+#eyebrow{
+  color:var(--gold-deep) !important;
+}
+
+#pageTitle{
+  color:var(--deep-sapphire) !important;
+  font-family:"Playfair Display",Georgia,serif !important;
+}
+
+#pageIntro{
+  color:var(--muted) !important;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.vault-back-btn,
+.continue-btn,
+.primary{
+  min-height:45px;
+  padding:11px 18px;
+  border-radius:999px;
+  text-decoration:none;
+  font-weight:900;
+  transition:180ms ease;
+}
+
+.vault-back-btn{
+  color:#5a4217;
+  background:linear-gradient(145deg,#fffef9,#f4dfad);
+  border:1px solid rgba(185,135,47,.48);
+  box-shadow:0 9px 22px rgba(91,64,22,.10),inset 0 1px 0 #fff;
+}
+
+.vault-back-btn:hover{
+  transform:translateY(-2px);
+  border-color:var(--gold);
+  box-shadow:0 13px 28px rgba(91,64,22,.14);
+}
+
+.continue-btn,
+.primary{
+  color:#523b13 !important;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.86) 0%,rgba(255,248,226,.98) 34%,rgba(238,214,160,.98) 70%,rgba(214,177,98,.98) 100%) !important;
+  border:1px solid rgba(185,135,47,.62) !important;
+  box-shadow:0 12px 28px rgba(91,64,22,.15),inset 0 1px 0 #fff !important;
+}
+
+.continue-btn:hover,
+.primary:hover{
+  color:#39290d !important;
+  background:linear-gradient(135deg,#fff,#fff3cc 34%,#efd18a 72%,#c99435 100%) !important;
+  border-color:var(--gold) !important;
+  box-shadow:0 16px 34px rgba(91,64,22,.20),0 0 22px rgba(22,143,234,.07) !important;
+}
+
+.secondary{
+  color:var(--deep-sapphire) !important;
+  background:linear-gradient(145deg,#fff,#fff5df) !important;
+  border-color:rgba(185,135,47,.34) !important;
+}
+
+/* HERO */
+.hero-panel{
+  border:1px solid rgba(185,135,47,.31) !important;
+  background:
+    linear-gradient(105deg,rgba(255,255,255,.70),transparent 32%),
+    radial-gradient(circle at 88% 15%,rgba(22,143,234,.13),transparent 27%),
+    radial-gradient(circle at 75% 92%,rgba(232,209,155,.40),transparent 31%),
+    linear-gradient(135deg,#fffdf9 0%,#fff5df 56%,#f1ddb2 100%) !important;
+  box-shadow:0 26px 62px rgba(91,64,22,.12),inset 0 1px 0 #fff !important;
+}
+
+.hero-panel::after{
+  border-color:rgba(22,143,234,.14) !important;
+  box-shadow:0 0 0 24px rgba(255,255,255,.28),0 0 0 48px rgba(185,135,47,.045) !important;
+}
+
+.hero-kicker{
+  color:var(--gold-deep) !important;
+}
+
+.hero-panel h2{
+  color:var(--deep-sapphire) !important;
+}
+
+.hero-panel p{
+  color:var(--muted) !important;
+}
+
+/* CARDS / LESSONS */
+.card,
+.lesson,
+.list-card,
+.help-card,
+.empty-state{
+  border-color:rgba(185,135,47,.24) !important;
+  background:linear-gradient(145deg,#fff,#fff8e9) !important;
+  box-shadow:0 15px 38px rgba(91,64,22,.09),inset 0 1px 0 #fff !important;
+}
+
+.card::before{
+  background:linear-gradient(90deg,transparent,#168FEA 16%,#8ed0ff 27%,#ecd79e 56%,#b9872f 78%,transparent) !important;
+}
+
+.card h3,
+.card h4,
+.lesson h3,
+.lesson h4{
+  color:var(--deep-sapphire) !important;
+}
+
+.card p,
+.card li,
+.lesson p,
+.lesson li{
+  color:var(--muted) !important;
+}
+
+.tag{
+  color:var(--deep-sapphire) !important;
+  background:linear-gradient(135deg,rgba(230,245,255,.88),rgba(255,247,225,.94)) !important;
+  border:1px solid rgba(22,143,234,.16);
+}
+
+.lesson.done{
+  border-color:rgba(185,135,47,.36) !important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(22,143,234,.08),transparent 28%),
+    linear-gradient(145deg,#fff,#fff8e9) !important;
+}
+
+/* INSTRUCTOR VIEW — NO DARK BLACK/NAVY PANEL */
+.instructor-panel{
+  color:var(--ink) !important;
+  border:1px solid rgba(185,135,47,.34) !important;
+  background:
+    radial-gradient(circle at 92% 0%,rgba(22,143,234,.12),transparent 28%),
+    linear-gradient(135deg,#fffdf9 0%,#f8e8c7 62%,#ead09a 100%) !important;
+  box-shadow:0 20px 48px rgba(91,64,22,.12) !important;
+}
+
+.instructor-badge{
+  color:#fff !important;
+  background:linear-gradient(135deg,#103B63,#168FEA) !important;
+  border:1px solid rgba(234,209,148,.64);
+}
+
+.instructor-grid div,
+.instructor-note,
+.instructor-script{
+  color:#564d43 !important;
+  background:rgba(255,255,255,.60) !important;
+  border-color:rgba(185,135,47,.20) !important;
+}
+
+.instructor-grid strong{
+  color:var(--gold-deep) !important;
+}
+
+.instructor-script{
+  border-left-color:var(--sapphire) !important;
+}
+
+/* SUPPORT / FORMS */
+.issue-btn,
+.field input,
+.field textarea,
+.field select,
+input,
+textarea,
+select{
+  color:var(--ink) !important;
+  background:#fffdf9 !important;
+  border-color:rgba(185,135,47,.24) !important;
+}
+
+.issue-btn{
+  box-shadow:0 12px 30px rgba(91,64,22,.08) !important;
+}
+
+.issue-btn:hover{
+  border-color:rgba(22,143,234,.24) !important;
+  background:linear-gradient(145deg,#fff,#f1f9ff) !important;
+}
+
+.issue-btn span{
+  color:var(--sapphire) !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:var(--sapphire) !important;
+  box-shadow:0 0 0 4px rgba(22,143,234,.10) !important;
+  outline:none;
+}
+
+.saved-note{
+  color:#51483d;
+  background:linear-gradient(145deg,#fff8e9,#edf8ff) !important;
+  border:1px solid rgba(185,135,47,.18);
+}
+
+.progress-row{
+  border-color:rgba(185,135,47,.14) !important;
+}
+
+.progress-row span{
+  color:var(--sapphire) !important;
+}
+
+hr{
+  border-color:rgba(185,135,47,.18) !important;
+}
+
+#toast{
+  color:#4d3813 !important;
+  background:linear-gradient(135deg,#fffdf7,#ead09a) !important;
+  border:1px solid rgba(185,135,47,.42);
+  box-shadow:0 14px 34px rgba(91,64,22,.18) !important;
+}
+
+.menu{
+  color:#fff !important;
+  background:linear-gradient(145deg,#168FEA,#103B63) !important;
+  border:1px solid rgba(232,209,155,.60);
+  box-shadow:0 9px 22px rgba(16,59,99,.18);
+}
+
+::selection{
+  color:#fff;
+  background:var(--sapphire);
+}
+
+::-webkit-scrollbar{
+  width:10px;
+  height:10px;
+}
+
+::-webkit-scrollbar-track{
+  background:#f7ecd8;
+}
+
+::-webkit-scrollbar-thumb{
+  background:linear-gradient(#e5ce96,#b9872f);
+  border:2px solid #f7ecd8;
+  border-radius:999px;
+}
+
+@media(max-width:820px){
+  .top-actions{
+    width:100%;
+  }
+
+  .vault-back-btn,
+  .continue-btn{
+    width:100%;
+  }
+
+  aside#sidebar{
+    box-shadow:20px 0 55px rgba(91,64,22,.18) !important;
+  }
+}
+
+
+</style>
+  </head>
+
+  <body data-build="GLAM-VAULT-LUXE-SELF-CONTAINED">
+    <button id="menuBtn" class="menu" aria-label="Open menu">☰</button>
+
+    <aside id="sidebar">
+      <div class="brand">
+        <span class="brand-kicker">GLAM WORKSHOP</span>
+        <h2 id="sideTitle"></h2>
+        <p>Learn • Build • Publish</p>
+      </div>
+
+      <div class="view-switcher" aria-label="Portal view">
+        <button id="studentViewBtn" class="view-btn active" type="button">
+          Student View
+        </button>
+        <button id="instructorViewBtn" class="view-btn" type="button">
+          Instructor View
+        </button>
+      </div>
+
+      <nav id="nav"></nav>
+
+      <div class="progress">
+        <div class="progress-head">
+          <span>Workshop Progress</span>
+          <strong id="progressText">0% complete</strong>
+        </div>
+        <div class="progress-track">
+          <i id="progressBar"></i>
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <header class="top-header">
+        <div>
+          <p id="eyebrow"></p>
+          <h1 id="pageTitle"></h1>
+          <p id="pageIntro"></p>
+        </div>
+        <div class="top-actions">
+          <a
+            class="vault-back-btn"
+            id="vaultBackBtn"
+            href="../portal.html?page=website-access"
+          >
+            ← Back to The Glam Vault
+          </a>
+          <button id="continueBtn" class="continue-btn" type="button">
+            Continue Workshop
+          </button>
+        </div>
+      </header>
+
+      <div id="page"></div>
+    </main>
+
+    <div id="toast" role="status" aria-live="polite"></div>
+
+    <script>
+/* WEBSITE WORKSHOP — CONTENT + TEACHING SOURCE OF TRUTH */
+window.WORKSHOP_SETTINGS = {
+  workshop: {
+    title: "Website Workshop",
+    eyebrow: "Glam Workshop Companion",
+    description:
+      "Plan, build, test, and publish one polished digital product website in a guided three-hour beginner workshop.",
+    storageKey: "glam-website-workshop-v5",
+  },
+
+  groups: [
+    {
+      label: "START",
+      pages: [
+        ["dashboard", "Workshop Dashboard"],
+        ["requirements", "Workshop Requirements"],
+        ["planner", "Website Planner"],
+      ],
+    },
+    {
+      label: "BUILD",
+      pages: [
+        ["module-plan", "1. Plan"],
+        ["module-payhip", "2. Prepare Payhip"],
+        ["module-github-connect", "3. Connect GitHub"],
+        ["module-build", "4. Build in ChatGPT Sites"],
+        ["module-personalize", "5. Personalize + Connect"],
+        ["module-test", "6. Test + Fix"],
+        ["module-publish", "7. Send to GitHub + Publish"],
+      ],
+    },
+    {
+      label: "SUPPORT",
+      pages: [
+        ["progress-page", "Your Progress"],
+        ["fix-later", "Fix Later"],
+        ["troubleshooting", "Troubleshooting"],
+        ["help-queue", "Help Queue"],
+        ["recovery", "Recovery Center"],
+        ["notes", "Notebook"],
+        ["help", "Quick Help"],
+      ],
+    },
+    {
+      label: "AFTER CLASS",
+      pages: [
+        ["next-steps", "Next Steps"],
+        ["completion", "Completion"],
+      ],
+    },
+  ],
+
+  dashboardCards: [
+    {
+      tag: "Start Here",
+      title: "Workshop Requirements",
+      text: "Confirm your accounts, Payhip products, images, business information, and GitHub access before class.",
+      page: "requirements",
+    },
+    {
+      tag: "Plan",
+      title: "Website Planner",
+      text: "Fill in your real website information once. The portal will turn it into your ready-to-copy website prompt.",
+      page: "planner",
+    },
+    {
+      tag: "Build",
+      title: "Continue Workshop",
+      text: "Jump directly to your first unfinished workshop step.",
+      action: "continue",
+    },
+    {
+      tag: "Support",
+      title: "Fix Later",
+      text: "Park non-blocking design tweaks here so small details do not steal your workshop time.",
+      page: "fix-later",
+    },
+  ],
+
+  requirements: {
+    title: "Workshop Requirements",
+    intro:
+      "Complete these before class so workshop time stays focused on building, testing, and publishing.",
+    sections: [
+      {
+        title: "Accounts + Access",
+        items: [
+          "I can log in to ChatGPT.",
+          "I can open ChatGPT Sites.",
+          "I can log in to Payhip.",
+          "I can log in to GitHub.",
+          "I know which GitHub account I am using for this workshop.",
+          "I tested all required logins before class.",
+          "I am using a laptop or desktop computer.",
+          "My browser is updated.",
+        ],
+      },
+      {
+        title: "Business Information",
+        items: [
+          "Business or website name",
+          "One-sentence business description",
+          "Short About paragraph",
+          "Contact email",
+          "Social media links",
+          "Preferred call to action",
+          "Email signup link, if using one",
+        ],
+      },
+      {
+        title: "Brand Materials",
+        items: [
+          "Logo or text-based business name",
+          "Two or three brand colors",
+          "One hero image",
+          "One About image",
+          "Two or three product images",
+          "Images are organized somewhere easy to find",
+        ],
+      },
+      {
+        title: "Payhip Products",
+        items: [
+          "Two or three Payhip products are published",
+          "Product names are final enough for class",
+          "Prices are correct",
+          "Product images are uploaded",
+          "Public customer-facing product links are tested",
+        ],
+      },
+    ],
+  },
+
+  planner: {
+    title: "Website Planner",
+    intro:
+      "Fill this out once. Your answers save automatically in this browser and feed your generated website prompt.",
+    fields: [
+      ["websiteName", "Website name"],
+      ["productType", "What I sell"],
+      ["audience", "Who I help"],
+      ["result", "What my products help them accomplish"],
+      ["brandColors", "Brand colors"],
+      ["visualStyle", "Three visual style words"],
+      ["heroHeadline", "Hero headline"],
+      ["heroSupport", "Hero supporting sentence"],
+      ["heroCta", "Primary button text"],
+      ["heroLink", "Primary hero button destination"],
+      ["about", "About paragraph"],
+      ["contactEmail", "Contact email"],
+      ["socialLinks", "Social links"],
+      ["emailSignup", "Email signup link"],
+    ],
+    products: 3,
+  },
+
+  sessions: [
+    {
+      id: "module-plan",
+      title: "Module 1 — Plan the Website",
+      intro:
+        "Make the decisions ChatGPT Sites needs before building. Do not stop to perfect every sentence.",
+      instructor: {
+        total: "20 minutes",
+        teach: "5 min",
+        demonstrate: "5 min",
+        studentWork: "8 min",
+        checkpoint: "2 min",
+        watchFor:
+          "Students getting stuck polishing taglines or rewriting About copy.",
+        say:
+          "If it is not perfect, mark it Improve Later and keep moving. We need enough information to build.",
+        moveOnWhen:
+          "Every student has a website name, hero direction, at least two products, About copy, and contact information.",
+      },
+      lessons: [
+        {
+          id: "plan-website",
+          tag: "WIN 1",
+          title: "Your Website Plan Is Ready",
+          instructions:
+            "Complete the Website Planner with short, usable answers. The portal will use those answers to build your Master Website Prompt.",
+          gate: [
+            "Website name is entered.",
+            "At least two products are planned.",
+            "Hero headline is entered.",
+            "About copy is entered.",
+            "Contact email is entered.",
+          ],
+        },
+      ],
+    },
+
+    {
+      id: "module-payhip",
+      title: "Module 2 — Prepare Payhip",
+      intro:
+        "Make sure customers can actually open the products your website will promote.",
+      instructor: {
+        total: "20 minutes",
+        teach: "4 min",
+        demonstrate: "6 min",
+        studentWork: "8 min",
+        checkpoint: "2 min",
+        watchFor:
+          "Students copying a private editing/dashboard URL instead of the public customer-facing product page.",
+        say:
+          "If the link does not work while you are logged out, it is not ready for your customer.",
+        moveOnWhen:
+          "At least two featured products open publicly and their links are saved in the planner.",
+      },
+      lessons: [
+        {
+          id: "prepare-payhip",
+          tag: "WIN 2",
+          title: "Your Products Are Ready to Connect",
+          instructions:
+            "Open each featured Payhip product, verify the title, price, image, description, and public URL, then test it while logged out.",
+          gate: [
+            "At least two products are public.",
+            "Prices are correct.",
+            "Product images load.",
+            "Public Payhip links open while logged out.",
+            "Links are saved in the Website Planner.",
+          ],
+        },
+      ],
+    },
+
+    {
+      id: "module-github-connect",
+      title: "Module 3 — Connect GitHub",
+      intro:
+        "Connect the correct GitHub account now so publishing does not become a surprise at the end.",
+      instructor: {
+        total: "15 minutes",
+        teach: "3 min",
+        demonstrate: "5 min",
+        studentWork: "5 min",
+        checkpoint: "2 min",
+        watchFor:
+          "Students signed into the wrong GitHub account or unsure which account they want to publish from.",
+        say:
+          "We are connecting GitHub now so the road is clear later. We are not editing code in GitHub.",
+        moveOnWhen:
+          "Students know the correct GitHub account and the connection is approved or clearly identified for follow-up.",
+      },
+      lessons: [
+        {
+          id: "connect-github",
+          tag: "CONNECTION",
+          title: "Connect the Correct GitHub Account",
+          instructions:
+            "Confirm the GitHub account you will use, connect or authorize it through the current ChatGPT workflow, and verify the correct account appears before continuing.",
+          gate: [
+            "I am signed into the correct GitHub account.",
+            "I approved the requested GitHub connection.",
+            "I know which account/repository destination I will use later.",
+          ],
+        },
+      ],
+    },
+
+    {
+      id: "module-build",
+      title: "Module 4 — Build in ChatGPT Sites",
+      intro:
+        "Create the full first website before spending time on tiny design details.",
+      instructor: {
+        total: "50 minutes",
+        teach: "5 min",
+        demonstrate: "10 min",
+        studentWork: "30 min",
+        checkpoint: "5 min",
+        watchFor:
+          "Students changing fonts, button shapes, or animation before confirming the complete section structure.",
+        say:
+          "Do not decorate an unfinished house. Scroll from top to bottom and make sure the structure exists first.",
+        moveOnWhen:
+          "The required one-page structure exists and the core business, product, About, contact, and footer content is visible.",
+      },
+      lessons: [
+        {
+          id: "build-sites",
+          tag: "WIN 3",
+          title: "Your First Website Exists",
+          instructions:
+            "Use the generated Master Website Prompt from your planner. Build the complete first version in ChatGPT Sites, then review the whole page before requesting small changes.",
+          generatedPrompt: true,
+          gate: [
+            "The website preview opens.",
+            "All required sections appear in the approved order.",
+            "The hero explains what the business sells.",
+            "At least two products appear.",
+            "About, contact, and footer sections appear.",
+            "No fake claims or fake customer reviews were invented.",
+          ],
+        },
+      ],
+    },
+
+    {
+      id: "module-personalize",
+      title: "Module 5 — Personalize and Connect",
+      intro:
+        "Replace placeholders, upload real images, and connect the website to the student’s real business.",
+      instructor: {
+        total: "25 minutes",
+        teach: "3 min",
+        demonstrate: "7 min",
+        studentWork: "12 min",
+        checkpoint: "3 min",
+        watchFor:
+          "One giant revision prompt that changes unrelated working sections.",
+        say:
+          "One clear group of changes at a time. If it already works, protect it.",
+        moveOnWhen:
+          "The required customer-facing content is real and the product buttons point to the correct Payhip pages.",
+      },
+      lessons: [
+        {
+          id: "personalize-connect",
+          tag: "WIN 4",
+          title: "Your Real Business Is on the Website",
+          instructions:
+            "Replace placeholder copy, add real images, and connect product, contact, signup, navigation, and social links.",
+          prompt: `Keep the current website design and preserve everything that is already working.
+
+Make only these changes:
+1. [CHANGE]
+2. [CHANGE]
+3. [CHANGE]
+
+Do not redesign unrelated sections.
+Do not remove approved features.
+Do not change working links that I did not mention.`,
+          gate: [
+            "Business name is correct everywhere.",
+            "Hero uses the correct message and image.",
+            "Product names and prices match Payhip.",
+            "Product buttons use the correct public Payhip URLs.",
+            "About and contact information are real.",
+            "Required customer-facing placeholder text is gone.",
+          ],
+        },
+      ],
+    },
+
+    {
+      id: "module-test",
+      title: "Module 6 — Test and Fix",
+      intro:
+        "Test what customers need. Cosmetic issues that do not block the sale go into Fix Later.",
+      instructor: {
+        total: "20 minutes",
+        teach: "3 min",
+        demonstrate: "5 min",
+        studentWork: "10 min",
+        checkpoint: "2 min",
+        watchFor:
+          "Students trying to perfect spacing or animation instead of testing links and mobile usability.",
+        say:
+          "Functional first. Pretty second. If it does not block a customer, park it in Fix Later.",
+        moveOnWhen:
+          "All critical links, navigation, product buttons, images, and mobile layout pass.",
+      },
+      lessons: [
+        {
+          id: "test-fix",
+          tag: "WIN 5",
+          title: "Your Website Passed Testing",
+          instructions:
+            "Run the Final Audit Prompt and complete the testing checklist before publishing.",
+          prompt: `Audit this website without redesigning it.
+
+Check:
+- spelling and missing text
+- unfinished placeholders
+- broken or incorrect buttons
+- Payhip product URLs
+- desktop responsiveness
+- mobile responsiveness
+- text or images that overlap
+- awkward image cropping
+- missing accessibility labels
+- sections that are difficult to read
+- anything that could prevent a customer from viewing or buying a product
+
+Fix only confirmed problems.
+Preserve every approved section, feature, image, button, link, and design choice that is already working.
+Then give me a short list of what you fixed.`,
+          gate: [
+            "All required customer-facing tests pass.",
+            "Payhip product buttons work.",
+            "Navigation works.",
+            "Mobile layout is usable.",
+            "Remaining non-blocking issues are in Fix Later.",
+          ],
+        },
+      ],
+    },
+
+    {
+      id: "module-publish",
+      title: "Module 7 — Send to GitHub and Publish",
+      intro:
+        "Send the finished tested website to GitHub, publish it, and verify the public site.",
+      instructor: {
+        total: "20 minutes",
+        teach: "3 min",
+        demonstrate: "7 min",
+        studentWork: "8 min",
+        checkpoint: "2 min",
+        watchFor:
+          "Wrong GitHub account, wrong repository, or assuming the site is live before testing the public URL.",
+        say:
+          "We are not done because GitHub received it. We are done when another person can open the live website and the buttons work.",
+        moveOnWhen:
+          "The public URL opens while logged out and the main product links work.",
+      },
+      lessons: [
+        {
+          id: "publish-github",
+          tag: "WIN 6",
+          title: "YOU'RE LIVE",
+          instructions:
+            "Use the GitHub connection/publishing option available in the current ChatGPT Sites interface. Confirm the correct account and destination, complete the handoff, publish, and test the public URL while logged out.",
+          gate: [
+            "The correct GitHub account was used.",
+            "The website project reached GitHub.",
+            "The public website opens without the owner’s login.",
+            "The mobile version works.",
+            "Payhip buttons open the intended products.",
+            "The public website URL is saved in the portal.",
+          ],
+        },
+      ],
+    },
+  ],
+
+  testingChecklist: [
+    "Business name is spelled correctly.",
+    "Hero headline is complete.",
+    "Product names and prices are correct.",
+    "Contact email is correct.",
+    "No required section contains placeholder text.",
+    "No fake testimonials, statistics, or claims appear.",
+    "Header navigation moves to the correct sections.",
+    "Primary hero button works.",
+    "Every product button opens the correct Payhip page.",
+    "Email signup link works, if included.",
+    "Contact and social links work.",
+    "Popup closes correctly, if included.",
+    "Images load.",
+    "Nothing overlaps or extends off-screen.",
+    "Mobile navigation works.",
+    "Product cards stack correctly on mobile.",
+    "There is no sideways scrolling.",
+  ],
+
+  troubleshooting: [
+    {
+      category: "Payhip",
+      problem: "My Payhip button does not work",
+      classification: "Blocker",
+      checks: [
+        "Open the Payhip URL in a private browser window.",
+        "Confirm it is the public product page and not an editing/dashboard page.",
+        "Compare the website button URL with the planner.",
+      ],
+      fix:
+        "Replace only that button with the correct full public Payhip URL and test again.",
+      workaround:
+        "Temporarily link to the public Payhip storefront if the exact product URL is not ready.",
+    },
+    {
+      category: "Mobile",
+      problem: "Something looks wrong on mobile",
+      classification: "Blocker if unreadable",
+      checks: [
+        "Open the mobile preview.",
+        "Look for cut-off headlines, sideways scrolling, overlapping cards, or hidden buttons.",
+      ],
+      fix:
+        "Request a mobile-only correction for the named section while preserving desktop.",
+      workaround:
+        "Shorten overly long copy or use a simpler layout for that section.",
+    },
+    {
+      category: "Images",
+      problem: "My image is not showing correctly",
+      classification: "Workaround",
+      checks: [
+        "Confirm the image finished uploading.",
+        "Confirm the correct image was selected.",
+        "Check whether the issue is missing image versus awkward crop.",
+      ],
+      fix:
+        "Replace only the named section image and preserve the rest of the layout.",
+      workaround:
+        "Use the current placeholder and put the image correction in Fix Later.",
+    },
+    {
+      category: "GitHub",
+      problem: "GitHub will not connect",
+      classification: "Publishing blocker",
+      checks: [
+        "Confirm the student is signed into the intended GitHub account.",
+        "Confirm the requested connection was approved.",
+        "Reconnect if the wrong account is showing.",
+      ],
+      fix:
+        "Reconnect the correct GitHub account and retry the handoff.",
+      workaround:
+        "Finish testing the website in ChatGPT Sites and complete publishing during troubleshooting time.",
+    },
+    {
+      category: "Publishing",
+      problem: "My published website is not updating",
+      classification: "Workaround",
+      checks: [
+        "Open the live site in a private browser window.",
+        "Refresh after the publishing process finishes.",
+        "Confirm the newest version was actually sent.",
+      ],
+      fix:
+        "Send the updated finished version again and retest the public URL.",
+      workaround:
+        "Use the last working published version while the update completes.",
+    },
+  ],
+
+  resources: [
+    {
+      title: "ChatGPT",
+      description:
+        "Plan, build, revise, test, and prepare your website for publishing.",
+      url: "https://chatgpt.com/",
+    },
+    {
+      title: "Payhip",
+      description:
+        "Manage products and copy public customer-facing product links.",
+      url: "https://payhip.com/",
+    },
+    {
+      title: "GitHub",
+      description:
+        "Receive the finished website project and publish the website.",
+      url: "https://github.com/",
+    },
+  ],
+
+  help: [
+    {
+      title: "Where do I begin?",
+      text:
+        "Open Workshop Requirements first, complete your Website Planner, then follow the numbered modules in order.",
+    },
+    {
+      title: "Do I need coding experience?",
+      text:
+        "No. This workshop uses ChatGPT Sites for the complete website build and revision process.",
+    },
+    {
+      title: "Do I need VS Code?",
+      text: "No. VS Code is not part of this workshop.",
+    },
+    {
+      title: "Do I need a ZIP file?",
+      text:
+        "No. Students do not download, unzip, or manually edit a website project folder.",
+    },
+    {
+      title: "Why are we connecting GitHub before publishing?",
+      text:
+        "Connecting it early removes a common publishing blocker. GitHub is still the publishing destination, not the editing workspace.",
+    },
+    {
+      title: "What if my website is not perfect?",
+      text:
+        "Publish the smallest complete working version first. Put optional design improvements into Fix Later.",
+    },
+  ],
+
+  nextSteps: {
+    title: "Next Steps",
+    intro:
+      "Keep improving the working website without rebuilding the entire thing.",
+    sections: [
+      [
+        "Today",
+        "Finish any incomplete required content and save your public website URL.",
+      ],
+      [
+        "This Week",
+        "Ask two trusted people to test the website on different phones. Fix broken links, confusing wording, and awkward mobile sections.",
+      ],
+      [
+        "Next",
+        "Add optional testimonials, email signup, a custom domain, and more products only after the core website is working.",
+      ],
+    ],
+  },
+
+  completion: {
+    title: "Website Workshop Complete",
+    message:
+      "You planned your website, prepared Payhip, connected GitHub, built and personalized the site in ChatGPT Sites, tested it, sent it to GitHub, and verified the public website.",
+    buttonText: "View My Certificate",
+    diplomaUrl: "diploma.html",
+  },
+};
+</script>
+    <script>
+(() => {
+  const c = window.WORKSHOP_SETTINGS;
+  const defaultState = {
+    done: [],
+    notes: [],
+    requirements: [],
+    tests: [],
+    planner: {},
+    products: [{}, {}, {}],
+    finalUrl: "",
+    fixLater: [],
+    helpQueue: [],
+    recoverySnapshots: [],
+    recycleBin: [],
+    lastSnapshotAt: 0,
+    view: "student",
+  };
+
+  const saved = JSON.parse(localStorage.getItem(c.workshop.storageKey) || "{}");
+  const s = { ...defaultState, ...saved };
+
+  ["done", "notes", "requirements", "tests", "fixLater", "helpQueue", "recoverySnapshots", "recycleBin"].forEach(
+    (key) => {
+      if (!Array.isArray(s[key])) s[key] = [];
+    },
+  );
+  if (!Array.isArray(s.products)) s.products = [{}, {}, {}];
+  if (!s.planner || typeof s.planner !== "object") s.planner = {};
+
+  let current = "dashboard";
+  const $ = (x) => document.querySelector(x);
+  const page = $("#page");
+
+  function esc(value = "") {
+    return String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;");
+  }
+
+  function snapshotPayload() {
+    return {
+      done: [...s.done],
+      notes: [...s.notes],
+      requirements: [...s.requirements],
+      tests: [...s.tests],
+      planner: { ...s.planner },
+      products: s.products.map((p) => ({ ...p })),
+      finalUrl: s.finalUrl || "",
+      fixLater: s.fixLater.map((x) => ({ ...x })),
+      helpQueue: s.helpQueue.map((x) => ({ ...x })),
+      savedAt: Date.now(),
+    };
+  }
+
+  function createRecoverySnapshot(force = false) {
+    const now = Date.now();
+    const tenMinutes = 10 * 60 * 1000;
+
+    if (!force && s.lastSnapshotAt && now - s.lastSnapshotAt < tenMinutes) return;
+
+    const snap = snapshotPayload();
+    s.recoverySnapshots.unshift(snap);
+    s.recoverySnapshots = s.recoverySnapshots.slice(0, 12);
+    s.lastSnapshotAt = now;
+  }
+
+  function save(options = {}) {
+    if (options.snapshot !== false) createRecoverySnapshot(Boolean(options.forceSnapshot));
+    localStorage.setItem(c.workshop.storageKey, JSON.stringify(s));
+    progress();
+  }
+
+  function restoreSnapshot(snapshot) {
+    if (!snapshot) return;
+    const currentSnapshots = [...s.recoverySnapshots];
+    const currentRecycleBin = [...s.recycleBin];
+
+    Object.assign(s, {
+      done: [...(snapshot.done || [])],
+      notes: [...(snapshot.notes || [])],
+      requirements: [...(snapshot.requirements || [])],
+      tests: [...(snapshot.tests || [])],
+      planner: { ...(snapshot.planner || {}) },
+      products: (snapshot.products || [{}, {}, {}]).map((p) => ({ ...p })),
+      finalUrl: snapshot.finalUrl || "",
+      fixLater: (snapshot.fixLater || []).map((x) => ({ ...x })),
+      helpQueue: (snapshot.helpQueue || []).map((x) => ({ ...x })),
+      recoverySnapshots: currentSnapshots,
+      recycleBin: currentRecycleBin,
+    });
+
+    save({ snapshot: false });
+  }
+
+  function pushRecycle(type, item, label) {
+    s.recycleBin.unshift({
+      id: Date.now(),
+      type,
+      item,
+      label,
+      deletedAt: Date.now(),
+    });
+    s.recycleBin = s.recycleBin.slice(0, 20);
+  }
+
+  function restoreDeleted(id) {
+    const index = s.recycleBin.findIndex((x) => x.id === id);
+    if (index < 0) return;
+
+    const entry = s.recycleBin[index];
+
+    if (entry.type === "note") s.notes.unshift(entry.item);
+    if (entry.type === "fixLater") s.fixLater.unshift(entry.item);
+    if (entry.type === "helpQueue") s.helpQueue.unshift(entry.item);
+
+    s.recycleBin.splice(index, 1);
+    save({ forceSnapshot: true });
+    toast("Restored!");
+    render();
+  }
+
+  function workshopBackupText() {
+    const lines = [
+      "GLAM WEBSITE WORKSHOP BACKUP",
+      `Saved: ${new Date().toLocaleString()}`,
+      "",
+      "=== WEBSITE PLANNER ===",
+    ];
+
+    c.planner.fields.forEach(([key, label]) => {
+      lines.push(`${label}: ${s.planner[key] || ""}`);
+    });
+
+    s.products.forEach((product, i) => {
+      lines.push("", `=== PRODUCT ${i + 1} ===`);
+      ["name", "price", "description", "image", "link"].forEach((key) => {
+        lines.push(`${key}: ${product[key] || ""}`);
+      });
+    });
+
+    lines.push("", "=== WORKSHOP PROGRESS ===");
+    allLessons().forEach((lesson) => {
+      lines.push(`${s.done.includes(lesson.id) ? "[DONE]" : "[ ]"} ${lesson.title}`);
+    });
+
+    lines.push("", "=== NOTES ===");
+    if (s.notes.length) s.notes.forEach((note, i) => lines.push(`${i + 1}. ${note}`));
+    else lines.push("No saved notes.");
+
+    lines.push("", "=== FIX LATER ===");
+    if (s.fixLater.length) s.fixLater.forEach((item, i) => lines.push(`${i + 1}. ${item.text}`));
+    else lines.push("No Fix Later items.");
+
+    lines.push("", "=== FINAL WEBSITE URL ===");
+    lines.push(s.finalUrl || "Not saved yet.");
+
+    return lines.join("\n");
+  }
+
+  function downloadWorkshopBackup() {
+    const blob = new Blob([workshopBackupText()], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `website-workshop-backup-${new Date().toISOString().slice(0, 10)}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    toast("Workshop backup downloaded!");
+  }
+
+  function toast(text) {
+    const el = $("#toast");
+    el.textContent = text;
+    el.classList.add("show");
+    setTimeout(() => el.classList.remove("show"), 1800);
+  }
+
+  function allLessons() {
+    return c.sessions.flatMap((session) => session.lessons);
+  }
+
+  function nextIncompletePage() {
+    for (const session of c.sessions) {
+      if (session.lessons.some((lesson) => !s.done.includes(lesson.id))) {
+        return session.id;
+      }
+    }
+    return "completion";
+  }
+
+  function progress() {
+    const lessons = allLessons();
+    const percent = lessons.length
+      ? Math.round((s.done.length / lessons.length) * 100)
+      : 0;
+    $("#progressText").textContent = `${percent}% complete`;
+    $("#progressBar").style.width = percent + "%";
+  }
+
+  function title(name, intro) {
+    $("#pageTitle").textContent = name;
+    $("#pageIntro").textContent = intro || "";
+  }
+
+  function cards(items) {
+    return `<div class="grid">${items
+      .map(
+        (x) => `<article class="card">
+          <span class="tag">${esc(x.tag || "")}</span>
+          <h3>${esc(x.title)}</h3>
+          <p>${esc(x.text || x.description || "")}</p>
+          ${
+            x.page
+              ? `<div class="actions"><button class="primary go" data-page="${esc(x.page)}">Open</button></div>`
+              : x.action === "continue"
+                ? `<div class="actions"><button class="primary continue-action">Continue</button></div>`
+                : x.url
+                  ? `<div class="actions"><a class="button primary" href="${esc(x.url)}" target="_blank" rel="noopener">Open</a></div>`
+                  : ""
+          }
+        </article>`,
+      )
+      .join("")}</div>`;
+  }
+
+  function generatedWebsitePrompt() {
+    const p = s.planner;
+    const productBlocks = s.products
+      .map(
+        (product, index) => `PRODUCT ${index + 1}
+Name: ${product.name || "[PRODUCT NAME]"}
+Price: ${product.price || "[PRICE]"}
+Description: ${product.description || "[DESCRIPTION]"}
+Button link: ${product.link || "[PAYHIP LINK]"}`,
+      )
+      .join("\n\n");
+
+    return `Create a polished, beginner-friendly, one-page digital product website for my business.
+
+BUSINESS INFORMATION
+Business name: ${p.websiteName || "[BUSINESS NAME]"}
+What I sell: ${p.productType || "[PRODUCT TYPE]"}
+Audience: ${p.audience || "[AUDIENCE]"}
+Primary result: ${p.result || "[RESULT]"}
+Brand colors: ${p.brandColors || "[BRAND COLORS]"}
+Visual style: ${p.visualStyle || "[THREE STYLE WORDS]"}
+
+CREATE THESE SECTIONS IN THIS EXACT ORDER
+1. Announcement bar
+2. Header with business name or logo and simple navigation
+3. Hero section with a strong headline, supporting copy, primary button, and hero image
+4. Short moving marquee
+5. Featured products section
+6. Featured collection or product-highlight section
+7. About section with image and text
+8. Smooth testimonial or image carousel
+9. Email signup section
+10. Contact section
+11. Optional promotional popup that is easy to close
+12. Footer with contact information, social links, and copyright
+
+HERO
+Headline: ${p.heroHeadline || "[HERO HEADLINE]"}
+Supporting sentence: ${p.heroSupport || "[HERO SUPPORTING COPY]"}
+Primary button text: ${p.heroCta || "SHOP NOW"}
+Primary button destination: ${p.heroLink || "[PRIMARY LINK]"}
+
+${productBlocks}
+
+ABOUT COPY
+${p.about || "[ABOUT PARAGRAPH]"}
+
+CONTACT INFORMATION
+Email: ${p.contactEmail || "[EMAIL]"}
+Social links: ${p.socialLinks || "[SOCIAL LINKS]"}
+Email signup link: ${p.emailSignup || "[EMAIL SIGNUP LINK]"}
+
+BUILD REQUIREMENTS
+- Make the website easy for complete beginners and customers to navigate.
+- Use clear visual hierarchy and generous spacing.
+- Keep the page polished and professional, not cluttered.
+- Make all buttons obvious and readable.
+- Make the site responsive for desktop, tablet, and mobile.
+- Preserve every product name, price, description, and URL exactly.
+- Do not add fake reviews, fake statistics, fake awards, or invented business claims.
+- Do not add unrelated sections.
+- Use placeholders only where I have not supplied information.
+- Create the complete first version before asking me questions.`;
+  }
+
+  function renderDashboard() {
+    title(c.workshop.title, c.workshop.description);
+    const next = nextIncompletePage();
+    page.innerHTML = `
+      <section class="hero-panel">
+        <span class="hero-kicker">YOUR WORKSHOP HOME</span>
+        <h2>${s.done.length ? "Keep building. Your next step is ready." : "Build your website one clear win at a time."}</h2>
+        <p>${s.done.length} of ${allLessons().length} workshop wins complete.</p>
+        <button class="primary continue-action">Continue Workshop</button>
+      </section>
+      ${cards(c.dashboardCards)}
+    `;
+  }
+
+  function renderRequirements() {
+    title(c.requirements.title, c.requirements.intro);
+    let count = 0;
+    page.innerHTML = c.requirements.sections
+      .map((section) => {
+        const items = section.items
+          .map((item) => {
+            const id = `req-${count++}`;
+            return `<label class="check">
+              <input type="checkbox" data-list="requirements" value="${id}" ${s.requirements.includes(id) ? "checked" : ""}>
+              <span>${esc(item)}</span>
+            </label>`;
+          })
+          .join("");
+        return `<article class="card">
+          <span class="tag">BEFORE CLASS</span>
+          <h3>${esc(section.title)}</h3>
+          ${items}
+        </article>`;
+      })
+      .join("");
+  }
+
+  function renderPlanner() {
+    title(c.planner.title, c.planner.intro);
+
+    const fields = c.planner.fields
+      .map(
+        ([key, label]) => `<label class="field">
+          <span>${esc(label)}</span>
+          <textarea data-planner="${esc(key)}" rows="2">${esc(s.planner[key] || "")}</textarea>
+        </label>`,
+      )
+      .join("");
+
+    const products = Array.from({ length: c.planner.products }, (_, i) => {
+      const p = s.products[i] || {};
+      return `<article class="card product-planner">
+        <span class="tag">PRODUCT ${i + 1}</span>
+        ${["name", "price", "description", "image", "link"]
+          .map(
+            (key) => `<label class="field">
+              <span>${esc(key[0].toUpperCase() + key.slice(1))}</span>
+              <input data-product="${i}" data-product-key="${key}" value="${esc(p[key] || "")}">
+            </label>`,
+          )
+          .join("")}
+      </article>`;
+    }).join("");
+
+    page.innerHTML = `
+      <article class="card planner-card">
+        <h3>Business + Website Content</h3>
+        ${fields}
+      </article>
+
+      <div class="grid">${products}</div>
+
+      <article class="card prompt-output-card">
+        <span class="tag">SMART PROMPT BUILDER</span>
+        <h3>Your Website Prompt</h3>
+        <p>This updates from your saved planner information.</p>
+        <textarea id="generatedPrompt" readonly>${esc(generatedWebsitePrompt())}</textarea>
+        <div class="actions">
+          <button class="primary" id="copyGeneratedPrompt">Copy My Website Prompt</button>
+          <button class="secondary" id="copyPlannerBackup">Copy Planner Backup</button>
+        </div>
+      </article>
+    `;
+  }
+
+  function renderSession(session) {
+    title(session.title, session.intro);
+
+    const instructorPanel =
+      s.view === "instructor"
+        ? `<aside class="instructor-panel">
+            <div class="instructor-badge">INSTRUCTOR VIEW</div>
+            <div class="instructor-grid">
+              <div><strong>Total</strong><span>${esc(session.instructor.total)}</span></div>
+              <div><strong>Teach</strong><span>${esc(session.instructor.teach)}</span></div>
+              <div><strong>Demonstrate</strong><span>${esc(session.instructor.demonstrate)}</span></div>
+              <div><strong>Student Work</strong><span>${esc(session.instructor.studentWork)}</span></div>
+              <div><strong>Checkpoint</strong><span>${esc(session.instructor.checkpoint)}</span></div>
+            </div>
+            <div class="instructor-note"><strong>Watch for:</strong> ${esc(session.instructor.watchFor)}</div>
+            <div class="instructor-script"><strong>Say:</strong> “${esc(session.instructor.say)}”</div>
+            <div class="instructor-note"><strong>Move on when:</strong> ${esc(session.instructor.moveOnWhen)}</div>
+          </aside>`
+        : "";
+
+    const lessons = session.lessons
+      .map((lesson) => {
+        const prompt =
+          lesson.generatedPrompt
+            ? generatedWebsitePrompt()
+            : lesson.prompt || "";
+
+        const gates = (lesson.gate || [])
+          .map(
+            (item, i) => `<label class="check gate-check">
+              <input type="checkbox" data-gate="${esc(lesson.id)}-${i}">
+              <span>${esc(item)}</span>
+            </label>`,
+          )
+          .join("");
+
+        return `<article class="card lesson ${s.done.includes(lesson.id) ? "done" : ""}">
+          <span class="tag">${esc(lesson.tag)}</span>
+          <h3>${esc(lesson.title)}</h3>
+          <p>${esc(lesson.instructions)}</p>
+
+          ${
+            prompt
+              ? `<textarea class="lesson-prompt" readonly>${esc(prompt)}</textarea>
+                 <div class="actions"><button class="primary copy-prompt">Copy Prompt</button></div>`
+              : ""
+          }
+
+          <div class="checkpoint">
+            <h4>Before You Continue</h4>
+            ${gates}
+            <button class="complete-gate primary" data-complete="${esc(lesson.id)}" disabled>
+              I'm Ready for the Next Step
+            </button>
+          </div>
+        </article>`;
+      })
+      .join("");
+
+    page.innerHTML = instructorPanel + lessons;
+    refreshGateButtons();
+  }
+
+  function refreshGateButtons() {
+    page.querySelectorAll(".complete-gate").forEach((button) => {
+      const card = button.closest(".lesson");
+      const checks = [...card.querySelectorAll("[data-gate]")];
+      button.disabled = !checks.length || !checks.every((x) => x.checked);
+    });
+  }
+
+  function renderProgress() {
+    title(
+      "Your Progress",
+      "You are finished when the meaningful workshop wins are complete—not when every design detail feels perfect.",
+    );
+
+    page.innerHTML = `<article class="card">
+      <h3>Workshop Wins</h3>
+      ${allLessons()
+        .map(
+          (lesson) => `<div class="progress-row ${s.done.includes(lesson.id) ? "complete-row" : ""}">
+            <span>${s.done.includes(lesson.id) ? "✓" : "○"}</span>
+            <strong>${esc(lesson.title)}</strong>
+          </div>`,
+        )
+        .join("")}
+
+      <hr>
+
+      <label class="field">
+        <span>Final published website URL</span>
+        <input id="finalUrl" value="${esc(s.finalUrl || "")}" placeholder="https://...">
+      </label>
+
+      <div class="actions">
+        <button class="primary" id="saveFinalUrl">Save Website URL</button>
+        <button class="secondary" id="openFinalUrl" ${s.finalUrl ? "" : "disabled"}>Open Live Website</button>
+        <button class="secondary" id="copyFinalUrl" ${s.finalUrl ? "" : "disabled"}>Copy URL</button>
+      </div>
+
+      <p id="finalUrlStatus">${s.finalUrl ? "✓ Website URL saved" : "Paste your published website URL above, then click Save Website URL."}</p>
+    </article>`;
+  }
+
+  function renderFixLater() {
+    title(
+      "Fix Later",
+      "Park anything that does not block the customer. Functional first. Pretty second.",
+    );
+
+    page.innerHTML = `
+      <article class="card">
+        <h3>Add Something to Fix Later</h3>
+        <label class="field">
+          <span>What do you want to improve later?</span>
+          <textarea id="fixLaterText" placeholder="Example: Hero image feels too tall"></textarea>
+        </label>
+        <div class="actions">
+          <button class="primary" id="addFixLater">Add to Fix Later</button>
+        </div>
+      </article>
+
+      <div class="stack-list">
+        ${
+          s.fixLater.length
+            ? s.fixLater
+                .map(
+                  (item, i) => `<article class="card list-card">
+                    <span class="tag">FIX LATER</span>
+                    <p>${esc(item.text)}</p>
+                    <button class="secondary small-btn" data-fix-delete="${i}">Remove</button>
+                  </article>`,
+                )
+                .join("")
+            : `<article class="card empty-state"><p>Your Fix Later list is empty. Good—keep building.</p></article>`
+        }
+      </div>
+    `;
+  }
+
+  function renderTroubleshooting() {
+    title(
+      "Troubleshooting",
+      "Choose what is happening. The portal will show only the fix that applies.",
+    );
+
+    page.innerHTML = `
+      <div class="issue-picker">
+        ${c.troubleshooting
+          .map(
+            (item, i) => `<button class="issue-btn" data-issue="${i}">
+              <span>${esc(item.category)}</span>
+              <strong>${esc(item.problem)}</strong>
+            </button>`,
+          )
+          .join("")}
+      </div>
+
+      <div id="issueAnswer"></div>
+    `;
+  }
+
+  function renderIssue(index) {
+    const item = c.troubleshooting[index];
+    const answer = $("#issueAnswer");
+    answer.innerHTML = `<article class="card trouble-answer">
+      <span class="tag">${esc(item.classification)}</span>
+      <h3>${esc(item.problem)}</h3>
+      <h4>Check</h4>
+      <ol>${item.checks.map((x) => `<li>${esc(x)}</li>`).join("")}</ol>
+      <h4>Fix</h4>
+      <p>${esc(item.fix)}</p>
+      <h4>Workaround</h4>
+      <p>${esc(item.workaround)}</p>
+      <div class="actions">
+        <button class="primary add-help-from-issue" data-issue="${index}">I Still Need Help</button>
+        <button class="secondary add-fix-from-issue" data-issue="${index}">Add to Fix Later</button>
+      </div>
+    </article>`;
+    bind();
+  }
+
+  function renderHelpQueue() {
+    title(
+      "Help Queue",
+      s.view === "instructor"
+        ? "Instructor view: blockers first, cosmetic issues last."
+        : "Add your issue here if you need Glam to help during the live workshop.",
+    );
+
+    page.innerHTML = `
+      <article class="card">
+        <h3>Add a Help Request</h3>
+        <label class="field">
+          <span>Your name</span>
+          <input id="helpName" placeholder="First name">
+        </label>
+        <label class="field">
+          <span>What is happening?</span>
+          <textarea id="helpProblem" placeholder="Describe the exact problem"></textarea>
+        </label>
+        <label class="field">
+          <span>Priority</span>
+          <select id="helpPriority">
+            <option value="Blocker">Blocker — I cannot continue</option>
+            <option value="Workaround">Workaround — I can keep going</option>
+            <option value="Fix Later">Fix Later — cosmetic only</option>
+          </select>
+        </label>
+        <div class="actions">
+          <button class="primary" id="addHelpRequest">Add Me to the Queue</button>
+        </div>
+      </article>
+
+      <div class="stack-list">
+        ${
+          s.helpQueue.length
+            ? [...s.helpQueue]
+                .sort((a, b) => {
+                  const rank = { Blocker: 0, Workaround: 1, "Fix Later": 2 };
+                  return rank[a.priority] - rank[b.priority];
+                })
+                .map(
+                  (item) => `<article class="card help-card">
+                    <span class="tag">${esc(item.priority)}</span>
+                    <h3>${esc(item.name || "Student")}</h3>
+                    <p>${esc(item.problem)}</p>
+                    ${
+                      s.view === "instructor"
+                        ? `<button class="secondary small-btn" data-help-delete="${item.id}">Resolved</button>`
+                        : ""
+                    }
+                  </article>`,
+                )
+                .join("")
+            : `<article class="card empty-state"><p>No one is waiting for help.</p></article>`
+        }
+      </div>
+    `;
+  }
+
+  function renderRecovery() {
+    title(
+      "Recovery Center",
+      "Restore recent workshop versions, undo deleted items, or download a backup of your work.",
+    );
+
+    const snapshots = s.recoverySnapshots.length
+      ? s.recoverySnapshots
+          .map((snap, i) => {
+            const when = new Date(snap.savedAt).toLocaleString();
+            return `<article class="card recovery-card">
+              <span class="tag">RECOVERY VERSION</span>
+              <h3>${esc(i === 0 ? "Most Recent Snapshot" : `Previous Snapshot ${i + 1}`)}</h3>
+              <p>Saved ${esc(when)}</p>
+              <div class="actions">
+                <button class="secondary restore-snapshot" data-snapshot="${i}">Restore This Version</button>
+              </div>
+            </article>`;
+          })
+          .join("")
+      : `<article class="card empty-state">
+          <p>No recovery snapshots yet. The portal creates them automatically as you work.</p>
+        </article>`;
+
+    const deleted = s.recycleBin.length
+      ? s.recycleBin
+          .map((entry) => `<article class="card deleted-card">
+            <span class="tag">RECENTLY DELETED</span>
+            <h3>${esc(entry.label || "Deleted item")}</h3>
+            <p>Deleted ${esc(new Date(entry.deletedAt).toLocaleString())}</p>
+            <div class="actions">
+              <button class="secondary restore-deleted" data-restore-delete="${entry.id}">Undo Delete</button>
+            </div>
+          </article>`)
+          .join("")
+      : `<article class="card empty-state"><p>Nothing has been deleted recently.</p></article>`;
+
+    page.innerHTML = `
+      <section class="hero-panel recovery-hero">
+        <span class="hero-kicker">STUDENT SAFETY</span>
+        <h2>Your work has a safety net.</h2>
+        <p>The portal keeps recent browser-based recovery snapshots. You can also download your own backup file at any time.</p>
+        <div class="actions">
+          <button class="primary" id="createSnapshot">Save Recovery Point Now</button>
+          <button class="secondary" id="downloadBackup">Download My Workshop Backup</button>
+        </div>
+      </section>
+
+      <div class="recovery-grid">
+        <div>
+          <h2 class="section-title">Recent Versions</h2>
+          ${snapshots}
+        </div>
+
+        <div>
+          <h2 class="section-title">Recently Deleted</h2>
+          ${deleted}
+        </div>
+      </div>
+
+      <article class="card recovery-note">
+        <h3>Important</h3>
+        <p>Recovery snapshots are saved in this browser on this device. If you switch browsers, use another computer, clear browser data, or use private/incognito mode, those browser saves may not be available. Download a workshop backup for an extra copy you control.</p>
+      </article>
+    `;
+  }
+
+  function renderResources() {
+    title("Tools & Resources", "Everything needed for this workshop in one place.");
+    page.innerHTML = cards(c.resources);
+  }
+
+  function renderNotes() {
+    title("Notebook", "Save workshop notes in this browser.");
+    page.innerHTML = `<article class="card">
+      <textarea id="note" placeholder="Type your note here..."></textarea>
+      <div class="actions"><button class="primary" id="saveNote">Save Note</button></div>
+      <div class="note-list">
+        ${s.notes
+          .map(
+            (note, i) => `<div class="saved-note">
+              <button data-note-delete="${i}">×</button>${esc(note)}
+            </div>`,
+          )
+          .join("")}
+      </div>
+    </article>`;
+  }
+
+  function renderHelp() {
+    title("Quick Help", "Simple answers when students get stuck.");
+    page.innerHTML = cards(c.help);
+  }
+
+  function renderNextSteps() {
+    title(c.nextSteps.title, c.nextSteps.intro);
+    page.innerHTML = cards(
+      c.nextSteps.sections.map(([title, text]) => ({ title, text })),
+    );
+  }
+
+  function renderCompletion() {
+    const complete = s.done.length === allLessons().length && allLessons().length;
+    title(
+      c.completion.title,
+      complete ? c.completion.message : "Finish every workshop win to unlock completion.",
+    );
+    page.innerHTML = `<article class="card completion-card">
+      <span class="tag">${complete ? "WORKSHOP COMPLETE" : "KEEP GOING"}</span>
+      <h3>${complete ? "You built and published your website." : "Your next win is waiting."}</h3>
+      <p>${complete ? esc(c.completion.message) : `${s.done.length} of ${allLessons().length} workshop wins complete.`}</p>
+      ${
+        complete
+          ? `<a class="button primary diploma-link" href="${esc(c.completion.diplomaUrl)}">${esc(c.completion.buttonText)}</a>`
+          : `<button class="primary continue-action">Continue Workshop</button>`
+      }
+    </article>`;
+  }
+
+  function render() {
+    document.querySelectorAll(".nav-btn").forEach((button) =>
+      button.classList.toggle("active", button.dataset.page === current),
+    );
+
+    if (current === "dashboard") renderDashboard();
+    else if (current === "requirements") renderRequirements();
+    else if (current === "planner") renderPlanner();
+    else if (c.sessions.some((x) => x.id === current))
+      renderSession(c.sessions.find((x) => x.id === current));
+    else if (current === "progress-page") renderProgress();
+    else if (current === "fix-later") renderFixLater();
+    else if (current === "troubleshooting") renderTroubleshooting();
+    else if (current === "help-queue") renderHelpQueue();
+    else if (current === "recovery") renderRecovery();
+    else if (current === "resources") renderResources();
+    else if (current === "notes") renderNotes();
+    else if (current === "help") renderHelp();
+    else if (current === "next-steps") renderNextSteps();
+    else renderCompletion();
+
+    bind();
+  }
+
+  function plannerBackup() {
+    const lines = ["WEBSITE WORKSHOP PLANNER", ""];
+    c.planner.fields.forEach(([key, label]) => {
+      lines.push(`${label}: ${s.planner[key] || ""}`);
+    });
+    s.products.forEach((product, i) => {
+      lines.push("", `PRODUCT ${i + 1}`);
+      ["name", "price", "description", "image", "link"].forEach((key) => {
+        lines.push(`${key}: ${product[key] || ""}`);
+      });
+    });
+    if (s.finalUrl) lines.push("", `Published website URL: ${s.finalUrl}`);
+    return lines.join("\n");
+  }
+
+  function setView(view) {
+    s.view = view;
+    save();
+
+    $("#studentViewBtn").classList.toggle("active", view === "student");
+    $("#instructorViewBtn").classList.toggle("active", view === "instructor");
+
+    render();
+  }
+
+  function bind() {
+    page.querySelectorAll(".go").forEach(
+      (button) => (button.onclick = () => go(button.dataset.page)),
+    );
+
+    page.querySelectorAll(".continue-action").forEach(
+      (button) => (button.onclick = () => go(nextIncompletePage())),
+    );
+
+    page.querySelectorAll(".copy-prompt").forEach((button) => {
+      button.onclick = async () => {
+        const text = button.closest(".lesson").querySelector("textarea").value;
+        await navigator.clipboard.writeText(text);
+        toast("Prompt copied!");
+      };
+    });
+
+    page.querySelectorAll("[data-gate]").forEach((check) => {
+      check.onchange = refreshGateButtons;
+    });
+
+    page.querySelectorAll(".complete-gate").forEach((button) => {
+      button.onclick = () => {
+        const id = button.dataset.complete;
+        if (!s.done.includes(id)) s.done.push(id);
+        save();
+        toast("Workshop win complete!");
+        go(nextIncompletePage());
+      };
+    });
+
+    page.querySelectorAll("[data-list]").forEach((check) => {
+      check.onchange = () => {
+        const key = check.dataset.list;
+        s[key] = check.checked
+          ? [...new Set([...s[key], check.value])]
+          : s[key].filter((x) => x !== check.value);
+        save();
+      };
+    });
+
+    page.querySelectorAll("[data-planner]").forEach((input) => {
+      input.oninput = () => {
+        s.planner[input.dataset.planner] = input.value;
+        save();
+        const generated = $("#generatedPrompt");
+        if (generated) generated.value = generatedWebsitePrompt();
+      };
+    });
+
+    page.querySelectorAll("[data-product]").forEach((input) => {
+      input.oninput = () => {
+        const index = +input.dataset.product;
+        s.products[index] = s.products[index] || {};
+        s.products[index][input.dataset.productKey] = input.value;
+        save();
+        const generated = $("#generatedPrompt");
+        if (generated) generated.value = generatedWebsitePrompt();
+      };
+    });
+
+    const copyGeneratedPrompt = $("#copyGeneratedPrompt");
+    if (copyGeneratedPrompt) {
+      copyGeneratedPrompt.onclick = async () => {
+        await navigator.clipboard.writeText(generatedWebsitePrompt());
+        toast("Website prompt copied!");
+      };
+    }
+
+    const copyPlannerBackup = $("#copyPlannerBackup");
+    if (copyPlannerBackup) {
+      copyPlannerBackup.onclick = async () => {
+        await navigator.clipboard.writeText(plannerBackup());
+        toast("Planner backup copied!");
+      };
+    }
+
+    const finalUrl = $("#finalUrl");
+    const saveFinalUrl = $("#saveFinalUrl");
+    const openFinalUrl = $("#openFinalUrl");
+    const copyFinalUrl = $("#copyFinalUrl");
+
+    if (saveFinalUrl && finalUrl) {
+      saveFinalUrl.onclick = () => {
+        let value = finalUrl.value.trim();
+
+        if (!value) {
+          return toast("Paste your published website URL first.");
+        }
+
+        if (!/^https?:\/\//i.test(value)) {
+          value = "https://" + value;
+          finalUrl.value = value;
+        }
+
+        try {
+          new URL(value);
+        } catch {
+          return toast("That does not look like a complete website URL.");
+        }
+
+        s.finalUrl = value;
+        save();
+
+        const status = $("#finalUrlStatus");
+        if (status) status.textContent = "✓ Website URL saved";
+
+        if (openFinalUrl) openFinalUrl.disabled = false;
+        if (copyFinalUrl) copyFinalUrl.disabled = false;
+
+        toast("Website URL saved!");
+      };
+    }
+
+    if (openFinalUrl) {
+      openFinalUrl.onclick = () => {
+        if (!s.finalUrl) return toast("Save your website URL first.");
+        window.open(s.finalUrl, "_blank", "noopener,noreferrer");
+      };
+    }
+
+    if (copyFinalUrl) {
+      copyFinalUrl.onclick = async () => {
+        if (!s.finalUrl) return toast("Save your website URL first.");
+        await navigator.clipboard.writeText(s.finalUrl);
+        toast("Website URL copied!");
+      };
+    }
+
+    const addFixLater = $("#addFixLater");
+    if (addFixLater) {
+      addFixLater.onclick = () => {
+        const text = $("#fixLaterText").value.trim();
+        if (!text) return toast("Add the item you want to fix later.");
+        s.fixLater.unshift({ text });
+        save();
+        render();
+      };
+    }
+
+    page.querySelectorAll("[data-fix-delete]").forEach((button) => {
+      button.onclick = () => {
+        const index = +button.dataset.fixDelete;
+        const item = s.fixLater[index];
+        if (!item) return;
+        if (!confirm("Remove this Fix Later item? You can recover it from Recovery Center.")) return;
+        pushRecycle("fixLater", item, item.text || "Fix Later item");
+        s.fixLater.splice(index, 1);
+        save({ forceSnapshot: true });
+        toast("Removed. Undo is available in Recovery Center.");
+        render();
+      };
+    });
+
+    page.querySelectorAll(".issue-btn").forEach((button) => {
+      button.onclick = () => renderIssue(+button.dataset.issue);
+    });
+
+    page.querySelectorAll(".add-help-from-issue").forEach((button) => {
+      button.onclick = () => {
+        const issue = c.troubleshooting[+button.dataset.issue];
+        s.helpQueue.push({
+          id: Date.now(),
+          name: "Student",
+          problem: issue.problem,
+          priority: issue.classification.includes("Blocker")
+            ? "Blocker"
+            : "Workaround",
+        });
+        save();
+        toast("Added to Help Queue");
+      };
+    });
+
+    page.querySelectorAll(".add-fix-from-issue").forEach((button) => {
+      button.onclick = () => {
+        const issue = c.troubleshooting[+button.dataset.issue];
+        s.fixLater.unshift({ text: issue.problem });
+        save();
+        toast("Added to Fix Later");
+      };
+    });
+
+    const addHelpRequest = $("#addHelpRequest");
+    if (addHelpRequest) {
+      addHelpRequest.onclick = () => {
+        const name = $("#helpName").value.trim();
+        const problem = $("#helpProblem").value.trim();
+        const priority = $("#helpPriority").value;
+        if (!problem) return toast("Tell Glam what is happening.");
+        s.helpQueue.push({
+          id: Date.now(),
+          name: name || "Student",
+          problem,
+          priority,
+        });
+        save();
+        render();
+      };
+    }
+
+    page.querySelectorAll("[data-help-delete]").forEach((button) => {
+      button.onclick = () => {
+        const id = +button.dataset.helpDelete;
+        const item = s.helpQueue.find((x) => x.id === id);
+        if (!item) return;
+        if (!confirm("Mark this help request resolved? You can recover it from Recovery Center.")) return;
+        pushRecycle("helpQueue", item, `${item.name || "Student"} — ${item.problem || "Help request"}`);
+        s.helpQueue = s.helpQueue.filter((x) => x.id !== id);
+        save({ forceSnapshot: true });
+        toast("Resolved. Undo is available in Recovery Center.");
+        render();
+      };
+    });
+
+    const saveNote = $("#saveNote");
+    if (saveNote) {
+      saveNote.onclick = () => {
+        const note = $("#note");
+        if (!note.value.trim()) return toast("Type a note first.");
+        s.notes.unshift(note.value.trim());
+        save();
+        render();
+      };
+    }
+
+    page.querySelectorAll("[data-note-delete]").forEach((button) => {
+      button.onclick = () => {
+        const index = +button.dataset.noteDelete;
+        const item = s.notes[index];
+        if (item == null) return;
+        if (!confirm("Delete this note? You can recover it from Recovery Center.")) return;
+        pushRecycle("note", item, item.slice(0, 60) || "Note");
+        s.notes.splice(index, 1);
+        save({ forceSnapshot: true });
+        toast("Deleted. Undo is available in Recovery Center.");
+        render();
+      };
+    });
+
+    const createSnapshot = $("#createSnapshot");
+    if (createSnapshot) {
+      createSnapshot.onclick = () => {
+        createRecoverySnapshot(true);
+        localStorage.setItem(c.workshop.storageKey, JSON.stringify(s));
+        toast("Recovery point saved!");
+        render();
+      };
+    }
+
+    const downloadBackup = $("#downloadBackup");
+    if (downloadBackup) {
+      downloadBackup.onclick = downloadWorkshopBackup;
+    }
+
+    page.querySelectorAll(".restore-snapshot").forEach((button) => {
+      button.onclick = () => {
+        const snapshot = s.recoverySnapshots[+button.dataset.snapshot];
+        if (!snapshot) return;
+        if (!confirm("Restore this previous workshop version? Your current version will also remain in Recovery Center.")) return;
+        createRecoverySnapshot(true);
+        restoreSnapshot(snapshot);
+        toast("Previous version restored!");
+        render();
+      };
+    });
+
+    page.querySelectorAll(".restore-deleted").forEach((button) => {
+      button.onclick = () => restoreDeleted(+button.dataset.restoreDelete);
+    });
+  }
+
+  function go(id) {
+    current = id;
+    render();
+    document.querySelector("aside").classList.remove("open");
+    scrollTo(0, 0);
+  }
+
+  function buildNav() {
+    $("#nav").innerHTML = c.groups
+      .map(
+        (group) => `<div class="nav-group">
+          <span class="nav-heading">${esc(group.label)}</span>
+          ${group.pages
+            .map(
+              ([id, label]) =>
+                `<button class="nav-btn" data-page="${esc(id)}">${esc(label)}</button>`,
+            )
+            .join("")}
+        </div>`,
+      )
+      .join("");
+
+    document.querySelectorAll(".nav-btn").forEach((button) => {
+      button.onclick = () => {
+        const pageId = button.dataset.page;
+
+        // Completion should always open the diploma directly.
+        // Same-tab navigation avoids browser popup blocking.
+        if (pageId === "completion") {
+          window.location.href = c.completion.diplomaUrl;
+          return;
+        }
+
+        go(pageId);
+      };
+    });
+  }
+
+  function init() {
+    document.title = c.workshop.title;
+    $("#sideTitle").textContent = c.workshop.title;
+    $("#eyebrow").textContent = c.workshop.eyebrow;
+
+    buildNav();
+
+    $("#studentViewBtn").onclick = () => setView("student");
+    $("#instructorViewBtn").onclick = () => setView("instructor");
+    $("#studentViewBtn").classList.toggle("active", s.view === "student");
+    $("#instructorViewBtn").classList.toggle(
+      "active",
+      s.view === "instructor",
+    );
+
+    $("#continueBtn").onclick = () => go(nextIncompletePage());
+
+    const vaultBackBtn = $("#vaultBackBtn");
+    if (vaultBackBtn) {
+      vaultBackBtn.onclick = (event) => {
+        event.preventDefault();
+
+        // If the workshop was opened from a Glam Vault portal page,
+        // return to that exact portal rather than a hard-coded older screen.
+        if (
+          document.referrer &&
+          /portal\.html/i.test(document.referrer)
+        ) {
+          window.history.back();
+          return;
+        }
+
+        window.location.href = vaultBackBtn.href;
+      };
+    }
+
+    $("#menuBtn").onclick = () =>
+      document.querySelector("aside").classList.toggle("open");
+
+    if (!s.recoverySnapshots.length) {
+      createRecoverySnapshot(true);
+      localStorage.setItem(c.workshop.storageKey, JSON.stringify(s));
+    }
+
+    progress();
+    render();
+  }
+
+  init();
+})();
+</script>
+  </body>
+</html>

@@ -640,7 +640,8 @@ End with:
   if (
     (pageId === "website-access" ||
       pageId === "website-dashboard") &&
-    workshopAvailability.website === false
+    workshopAvailability.website === false &&
+    !state.communityIsAdmin
   ) {
     showToast("The Website Workshop is not currently available.", true);
     pageId = "portal-home";
@@ -662,17 +663,12 @@ End with:
       });
     }
   } else if (pageId === "website-dashboard") {
-    const hasWebsiteAccess = readStorage(
-      STORAGE.websiteWorkshopAccess,
-      false,
-    );
-
-    if (!hasWebsiteAccess) {
-      return showPage("website-access", {
-        save,
-        focus,
-      });
-    }
+    // The internal website-dashboard section is only a placeholder.
+    // Keep everyone on the real Website Workshop access page instead.
+    return showPage("website-access", {
+      save,
+      focus,
+    });
   } else if (LOCKED_WORKSHOP_PAGES.has(pageId)) {
     openWorkshopLockPopup(
       `${pageLabel(pageId)} is locked and not available yet.`,
@@ -890,7 +886,7 @@ function restoreLastPage() {
 
     const savedAccess = readStorage(STORAGE.websiteWorkshopAccess, false);
 
-    if (savedAccess === true) {
+    if (savedAccess === true || state.communityIsAdmin) {
       lockedState.hidden = true;
       unlockedState.hidden = false;
     }
@@ -2312,6 +2308,23 @@ const backRoomNav = document.getElementById("backRoomNav");
 if (backRoomNav) {
   backRoomNav.hidden = !state.communityIsAdmin;
 }
+
+// Instructor/admin Website Workshop bypass.
+// Do not write websiteWorkshopAccess to localStorage here; that would leave
+// this browser unlocked after the instructor signs out.
+if (state.communityIsAdmin) {
+  const websiteLockedState = document.getElementById("websiteWorkshopLockedState");
+  const websiteUnlockedState = document.getElementById("websiteWorkshopUnlockedState");
+
+  if (websiteLockedState) websiteLockedState.hidden = true;
+  if (websiteUnlockedState) websiteUnlockedState.hidden = false;
+
+  // Stay on website-access. The real Website Workshop button lives there.
+  if (state.currentPage === "website-dashboard") {
+    showPage("website-access", { save: true, focus: false });
+  }
+}
+
     if (fields) fields.hidden = true;
     if (signedInBar) signedInBar.hidden = false;
     if (app) app.hidden = false;
