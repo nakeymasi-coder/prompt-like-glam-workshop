@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Replay Theater | The Glam Vault</title>
+<style>
+:root{
+  --ivory:#fffdf8;--cream:#fff7e8;--pearl:#f6efe2;--gold:#d7a640;
+  --gold2:#b77a18;--champagne:#f2d894;--ink:#5a3b16;--muted:#8a6c46;
+  --shadow:0 28px 80px rgba(105,72,22,.18);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;font-family:Montserrat,Arial,sans-serif;color:var(--ink);
+  background:radial-gradient(circle at 50% 8%,rgba(255,255,255,.98),transparent 25%),
+  linear-gradient(180deg,#dcecf5 0%,#f7fbfd 26%,#fff9ed 72%,#fffdf7 100%);
+}
+.shell{width:min(1180px,94vw);margin:auto;padding:34px 0 64px}
+.hero,.panel{
+  border:1px solid rgba(215,166,64,.40);background:linear-gradient(145deg,#fff,#fff8e9 70%,#f2d894);
+  box-shadow:var(--shadow),inset 0 1px #fff
+}
+.hero{padding:34px;border-radius:28px;text-align:center;margin-bottom:22px}
+.eyebrow{color:#a77d39;font-size:.72rem;font-weight:900;letter-spacing:.27em;text-transform:uppercase}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif}
+h1{margin:8px 0;color:#8a5711;font-size:clamp(2.2rem,5vw,4rem);line-height:.95}
+.hero p{margin:14px auto 0;max-width:760px;color:var(--muted);line-height:1.65}
+.toolbar{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:12px;
+  text-decoration:none;font-weight:900;cursor:pointer
+}
+.primary{border:1px solid #a66d16;background:linear-gradient(145deg,#f0c868,#b77413);color:#fff}
+.secondary{border:1px solid rgba(183,122,24,.35);background:#fff;color:#8a5711}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.panel{padding:27px;border-radius:24px}
+.panel h2{margin:7px 0 8px;color:#8a5711;font-size:1.75rem}
+.panel>p{color:var(--muted);line-height:1.6}
+.status{font-size:.72rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase;color:#a77d39}
+.locked{
+  margin-top:18px;padding:18px;border:1px dashed rgba(183,122,24,.42);
+  border-radius:16px;background:rgba(255,247,232,.75);color:#8a6c46;line-height:1.55
+}
+.replay{margin-top:14px;padding:18px;border:1px solid rgba(215,166,64,.26);border-radius:16px;background:rgba(255,255,255,.76)}
+.replay h3{margin:0 0 6px;color:#7e5111}
+.replay p{color:#8a6c46;line-height:1.55}
+.passcode{display:block;margin-top:10px;font-weight:900;color:#7e5111}
+.notice{text-align:center;margin-top:22px;color:#8a6c46}
+.hidden{display:none!important}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.shell{padding-top:20px}}
+</style>
+</head>
+<body>
+<main class="shell">
+  <section class="hero">
+    <span class="eyebrow">Replay Theater</span>
+    <h1>Your Workshop Replays</h1>
+    <p>Sign in once. The Replay Theater automatically shows the recordings that belong to workshops on your student account.</p>
+    <div class="toolbar">
+      <a id="loginButton" class="btn primary" href="student-login.html">Student Login</a>
+      <button id="signOutButton" class="btn secondary hidden" type="button">Sign Out</button>
+      <a class="btn secondary" href="index.html">Back to The Vault</a>
+    </div>
+  </section>
+
+  <section class="grid">
+    <article class="panel">
+      <span class="status">Website Workshop</span>
+      <h2>Website Workshop Replay</h2>
+      <p>Website Workshop access automatically controls this replay.</p>
+      <div id="websiteContent"></div>
+    </article>
+
+    <article class="panel">
+      <span class="status">Prompt Generator Workshop</span>
+      <h2>Prompt Generator Replays</h2>
+      <p>Prompt Generator ownership automatically controls these recordings.</p>
+      <div id="promptContent"></div>
+    </article>
+  </section>
+
+  <p id="notice" class="notice"></p>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="workshop-access.js"></script>
+<script>
+const websiteContent = document.getElementById("websiteContent");
+const promptContent = document.getElementById("promptContent");
+const loginButton = document.getElementById("loginButton");
+const signOutButton = document.getElementById("signOutButton");
+const notice = document.getElementById("notice");
+
+function lockedMarkup(name){
+  return `<div class="locked"><strong>🔒 ${name} is locked.</strong><br>
+  This workshop is not currently attached to the signed-in student account.</div>`;
+}
+
+function replayMarkup(item){
+  const passcode = item.passcode ? `<span class="passcode">Replay passcode: ${item.passcode}</span>` : "";
+  return `<div class="replay">
+    <h3>${item.title}</h3>
+    <p>${item.description || ""}</p>
+    <a class="btn primary" href="${item.resource_url}" target="_blank" rel="noopener">Watch Replay</a>
+    ${passcode}
+  </div>`;
+}
+
+async function load(){
+  try{
+    const session = await GlamWorkshopAccess.getSession();
+
+    if(!session){
+      loginButton.classList.remove("hidden");
+      signOutButton.classList.add("hidden");
+      websiteContent.innerHTML = lockedMarkup("Website Workshop");
+      promptContent.innerHTML = lockedMarkup("Prompt Generator Workshop");
+      notice.textContent = "Log in to see the workshops connected to your account.";
+      return;
+    }
+
+    loginButton.classList.add("hidden");
+    signOutButton.classList.remove("hidden");
+
+    await GlamWorkshopAccess.syncLegacyAccess();
+
+    const [entitlements, resources] = await Promise.all([
+      GlamWorkshopAccess.getEntitlements(),
+      GlamWorkshopAccess.getReplayResources()
+    ]);
+
+    const owned = new Set(entitlements.map(x => x.workshop_id));
+
+    websiteContent.innerHTML = owned.has("website-workshop")
+      ? resources.filter(x => x.workshop_id === "website-workshop").map(replayMarkup).join("") || "<div class='locked'>Replay not added yet.</div>"
+      : lockedMarkup("Website Workshop");
+
+    promptContent.innerHTML = owned.has("prompt-generator-workshop")
+      ? resources.filter(x => x.workshop_id === "prompt-generator-workshop").map(replayMarkup).join("") || "<div class='locked'>Replays not added yet.</div>"
+      : lockedMarkup("Prompt Generator Workshop");
+
+    notice.textContent = `Signed in as ${session.user.email}`;
+  }catch(error){
+    notice.textContent = error.message || "We could not load your workshop access.";
+  }
+}
+
+signOutButton.onclick = async () => {
+  await GlamWorkshopAccess.signOut();
+  location.reload();
+};
+
+load();
+</script>
+</body>
+</html>
