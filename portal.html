@@ -5189,21 +5189,22 @@ body .download-btn{
 body .sidebar .nav-link.active,
 body .sidebar .nav-link.active:hover,
 body .sidebar .nav-link[aria-current="page"]{
-  color:#5a4217 !important;
+  color:#fff !important;
   background:
-    linear-gradient(135deg,rgba(255,255,255,.72),rgba(247,245,241,.96) 38%,rgba(238,214,158,.96) 100%) !important;
-  border:1px solid rgba(167,171,182,.58) !important;
+    linear-gradient(135deg,rgba(255,255,255,.16),transparent 38%),
+    linear-gradient(135deg,#103B63 0%,#168FEA 70%,#35a9ff 100%) !important;
+  border:1px solid rgba(255,255,255,.45) !important;
   box-shadow:
-    0 12px 26px rgba(104,73,24,.15),
-    inset 0 1px 0 rgba(255,255,255,.95),
-    inset 0 0 18px rgba(255,255,255,.34) !important;
+    0 12px 26px rgba(31,82,140,.24),
+    inset 0 1px 0 rgba(255,255,255,.35),
+    inset 0 0 18px rgba(255,255,255,.12) !important;
 }
 
 body .sidebar .nav-link.active i,
 body .sidebar .nav-link.active svg,
 body .sidebar .nav-link[aria-current="page"] i,
 body .sidebar .nav-link[aria-current="page"] svg{
-  color:#168FEA !important;
+  color:#fff !important;
 }
 
 body .sidebar .nav-link.active::before{
@@ -5289,10 +5290,10 @@ body .topbar-search svg{
 body .brand-block{
   color:#5b6472 !important;
   background:
-    linear-gradient(135deg,rgba(255,255,255,.90),rgba(247,245,241,.96) 38%,rgba(239,216,165,.98) 100%) !important;
+    linear-gradient(135deg,rgba(255,255,255,.92),rgba(223,242,255,.55) 45%,rgba(22,143,234,.16) 100%) !important;
   border:1px solid rgba(167,171,182,.62) !important;
   box-shadow:
-    0 16px 34px rgba(122,130,144,.15),
+    0 16px 34px rgba(31,82,140,.14),
     inset 0 1px 0 rgba(255,255,255,.98),
     inset 0 0 24px rgba(255,255,255,.32) !important;
 }
@@ -10458,6 +10459,7 @@ End with:
   async function init() {
     cacheDom();
     bindNavigation();
+    restoreLastPage();
     bindMobileMenu();
     bindGlobalSearch();
     bindWorkshopCards();
@@ -10475,12 +10477,15 @@ End with:
     bindDownloads();
     bindReplays();
     bindAnnouncements();
-    await bindCommunity();
+    try {
+      await bindCommunity();
+    } catch (communityError) {
+      console.warn("Community load skipped:", communityError);
+    }
     bindSettings();
     bindExternalLinkConfirmation();
     bindReset();
     bindKeyboardSupport();
-    restoreLastPage();
     updatePortalProgress();
     refreshIcons();
   }
