@@ -11450,8 +11450,12 @@ function restoreLastPage() {
       }
 
       try {
+        const verificationUrl =
+          window.location.origin === "https://nakeymasi-coder.github.io"
+            ? "https://workshop-poratl.netlify.app/.netlify/functions/verify-brand-world-license"
+            : "/.netlify/functions/verify-brand-world-license";
         const response = await fetch(
-          "https://workshop-poratl.netlify.app/.netlify/functions/verify-brand-world-license",
+          verificationUrl,
           {
             method: "POST",
             headers: {
