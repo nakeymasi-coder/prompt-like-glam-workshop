@@ -11124,6 +11124,12 @@ End with:
         focus,
       });
     }
+  } else if (
+    pageId === "brand-world-workshop" &&
+    !state.communityIsAdmin &&
+    !readStorage(STORAGE.brandWorldWorkshopAccess, false)
+  ) {
+    return showPage("brand-world-access", { save, focus });
   } else if (pageId === "website-dashboard") {
     // The internal website-dashboard section is only a placeholder.
     // Keep everyone on the real Website Workshop access page instead.
@@ -11182,7 +11188,6 @@ End with:
         window.setTimeout(() => heading.focus({ preventScroll: true }), 100);
       }
     }
-TEST
     updatePortalProgress();
     return true;
   }
@@ -11446,7 +11451,7 @@ function restoreLastPage() {
 
       try {
         const response = await fetch(
-          "/.netlify/functions/verify-brand-world-license",
+          "https://workshop-poratl.netlify.app/.netlify/functions/verify-brand-world-license",
           {
             method: "POST",
             headers: {
