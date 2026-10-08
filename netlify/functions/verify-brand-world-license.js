@@ -1,4 +1,49 @@
 export default async (req) => {
+  const allowedOrigins = new Set([
+    "https://nakeymasi-coder.github.io",
+    "https://workshop-poratl.netlify.app",
+    "https://deploy-preview-2--workshop-poratl.netlify.app",
+  ]);
+  const origin = req.headers.get("Origin");
+  const headers = {
+    "Content-Type": "application/json",
+    Vary: "Origin",
+    ...(allowedOrigins.has(origin)
+      ? { "Access-Control-Allow-Origin": origin }
+      : {}),
+  };
+
+  if (origin && !allowedOrigins.has(origin)) {
+    return new Response(
+      JSON.stringify({ success: false, message: "This origin is not allowed." }),
+      { status: 403, headers },
+    );
+  }
+
+  if (req.method === "OPTIONS") {
+    if (!origin || req.headers.get("Access-Control-Request-Method") !== "POST") {
+      return new Response(null, {
+        status: 405,
+        headers: { ...headers, Allow: "POST, OPTIONS" },
+      });
+    }
+    return new Response(null, {
+      status: 204,
+      headers: {
+        ...headers,
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
+    });
+  }
+
+  if (req.method !== "POST") {
+    return new Response(
+      JSON.stringify({ success: false, message: "Use POST to verify access." }),
+      { status: 405, headers: { ...headers, Allow: "POST, OPTIONS" } },
+    );
+  }
+
   try {
     const body = await req.json();
     const licenseKey = body.licenseKey;
@@ -11,7 +56,7 @@ export default async (req) => {
         }),
         {
           status: 400,
-          headers: { "Content-Type": "application/json" },
+          headers,
         },
       );
     }
@@ -52,7 +97,7 @@ export default async (req) => {
           }),
           {
             status: 200,
-            headers: { "Content-Type": "application/json" },
+            headers,
           },
         );
       }
@@ -65,7 +110,7 @@ export default async (req) => {
       }),
       {
         status: 401,
-        headers: { "Content-Type": "application/json" },
+        headers,
       },
     );
   } catch (error) {
@@ -76,7 +121,7 @@ export default async (req) => {
       }),
       {
         status: 500,
-        headers: { "Content-Type": "application/json" },
+        headers,
       },
     );
   }
