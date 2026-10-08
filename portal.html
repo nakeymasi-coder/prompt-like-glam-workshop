@@ -5837,6 +5837,10 @@ body .brand-block::before{
             <i data-lucide="globe"></i>
             <span>Website Workshop</span>
           </a>
+          <a class="nav-link" data-page="brand-world-access" href="#">
+            <i data-lucide="clapperboard"></i>
+            <span>Build Your Brand World</span>
+          </a>
           <a
             class="nav-link locked-workshop"
             data-workshop="Beacon Workshop"
@@ -5986,7 +5990,7 @@ body .brand-block::before{
 
               <button
                 class="primary-btn"
-                data-page="brand-world-workshop"
+                data-page="brand-world-access"
                 type="button"
               >
                 View Workshop Details
@@ -6059,17 +6063,19 @@ body .brand-block::before{
               <strong>$197</strong>
             </p>
             <div class="builder-buttons">
-              <button
+              <a
                 class="primary-btn"
-                data-page="announcements"
-                type="button"
+                href="https://payhip.com/b/yp4q2"
+                target="_blank"
+                rel="noopener"
               >
-                Get Notified When Registration Opens
-              </button>
+                Register Now — $197
+              </a>
             </div>
             <p>
-              The registration link will be posted here and in Announcements
-              as soon as it is live.
+              Only 20 spots. After checkout you will receive an access key by
+              email — enter it on the Build Your Brand World access page to
+              unlock the workshop.
             </p>
           </article>
 
@@ -6520,6 +6526,14 @@ body .brand-block::before{
           type="checkbox"
         />
         Website Workshop
+      </label>
+
+      <label>
+        <input
+          id="backRoomBrandWorldWorkshopEnabled"
+          type="checkbox"
+        />
+        Build Your Brand World
       </label>
 
       <label>
@@ -10235,6 +10249,64 @@ Before writing the listing, ask me for:
         </section>
 
         <!-- ============================= -->
+        <!-- PAGE: BRAND WORLD ACCESS -->
+        <!-- ============================= -->
+        <section class="page" id="brand-world-access">
+          <div class="page-header">
+            <span class="eyebrow">Build Your Brand World</span>
+            <h1>Unlock Your Animation Workshop</h1>
+            <p>
+              Enter the access key you received after purchasing the Build
+              Your Brand World mini-week.
+            </p>
+          </div>
+
+          <article class="lesson-block" id="brandWorldCard">
+            <div id="brandWorldLockedState">
+              <p><strong>🔒 Workshop Locked</strong></p>
+
+              <input
+                id="brandWorldLicenseKey"
+                type="text"
+                placeholder="Enter your Brand World access key"
+                autocomplete="off"
+              />
+
+              <button
+                class="primary-btn"
+                id="unlockBrandWorldBtn"
+                type="button"
+              >
+                Unlock Workshop
+              </button>
+
+              <p id="brandWorldLicenseMessage"></p>
+            </div>
+
+            <div id="brandWorldUnlockedState" hidden>
+              <p><strong>✅ Workshop Unlocked</strong></p>
+
+              <p>
+                You are in! The live mini-week runs October 30 – November 1
+                at 5pm Eastern on Zoom. Your worksheets and prep materials
+                live below.
+              </p>
+
+              <button
+                class="primary-btn"
+                data-page="brand-world-workshop"
+                type="button"
+              >
+                Open Workshop Details
+              </button>
+              <a class="secondary-btn" href="replay-theater.html">
+                Open Replay Theater
+              </a>
+            </div>
+          </article>
+        </section>
+
+        <!-- ============================= -->
         <!-- PAGE: WEBSITE DASHBOARD -->
         <!-- ============================= -->
         <section class="page workshop-placeholder" id="website-dashboard">
@@ -10387,6 +10459,7 @@ Before writing the listing, ask me for:
     references: `${APP_PREFIX}:references`,
     downloadHistory: `${APP_PREFIX}:downloadHistory`,
     websiteWorkshopAccess: `${APP_PREFIX}:websiteWorkshopAccess`,
+    brandWorldWorkshopAccess: `${APP_PREFIX}:brandWorldWorkshopAccess`,
     websiteWorkshopDate: `${APP_PREFIX}:websiteWorkshopDate`,
     promptWorkshopAccess: `${APP_PREFIX}:promptWorkshopAccess`,
     replayHistory: `${APP_PREFIX}:replayHistory`,
@@ -10419,6 +10492,7 @@ Before writing the listing, ask me for:
     "certificate",
     "website-access",
     "website-dashboard",
+    "brand-world-access",
     "brand-world-workshop",
     "beacon-dashboard",
     "chatgpt-dashboard",
@@ -10895,6 +10969,7 @@ End with:
     bindWorkshopCards();
     bindWebsiteWorkshopAccess();
     bindPromptWorkshopAccess();
+    bindBrandWorldWorkshopAccess();
     bindLockedWorkshops();
     bindPageButtons();
     bindCopyButtons();
@@ -11018,6 +11093,19 @@ End with:
     !state.communityIsAdmin
   ) {
     showToast("The Website Workshop is not currently available.", true);
+    pageId = "portal-home";
+  }
+
+  if (
+    (pageId === "brand-world-access" ||
+      pageId === "brand-world-workshop") &&
+    workshopAvailability.brandWorld === false &&
+    !state.communityIsAdmin
+  ) {
+    showToast(
+      "The Build Your Brand World workshop is not currently available.",
+      true,
+    );
     pageId = "portal-home";
   }
 
@@ -11313,6 +11401,83 @@ function restoreLastPage() {
         }
 
         showToast("Website Workshop unlocked!");
+      } catch (error) {
+        if (message) {
+          message.textContent =
+            "We could not verify your access right now. Please try again.";
+        }
+      } finally {
+        unlockBtn.disabled = false;
+        unlockBtn.textContent = "Unlock Workshop";
+      }
+    });
+  }
+
+  function bindBrandWorldWorkshopAccess() {
+    const unlockBtn = document.getElementById("unlockBrandWorldBtn");
+    const licenseInput = document.getElementById("brandWorldLicenseKey");
+    const message = document.getElementById("brandWorldLicenseMessage");
+    const lockedState = document.getElementById("brandWorldLockedState");
+    const unlockedState = document.getElementById("brandWorldUnlockedState");
+
+    if (!unlockBtn || !licenseInput || !lockedState || !unlockedState) return;
+
+    const savedAccess = readStorage(STORAGE.brandWorldWorkshopAccess, false);
+
+    if (savedAccess === true || state.communityIsAdmin) {
+      lockedState.hidden = true;
+      unlockedState.hidden = false;
+    }
+
+    unlockBtn.addEventListener("click", async () => {
+      const licenseKey = licenseInput.value.trim();
+
+      if (!licenseKey) {
+        message.textContent = "Please enter your workshop access key.";
+        return;
+      }
+
+      unlockBtn.disabled = true;
+      unlockBtn.textContent = "Checking Access...";
+
+      if (message) {
+        message.textContent = "Verifying your purchase...";
+      }
+
+      try {
+        const response = await fetch(
+          "/.netlify/functions/verify-brand-world-license",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              licenseKey,
+            }),
+          },
+        );
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+          if (message) {
+            message.textContent =
+              result.message || "That access key could not be verified.";
+          }
+          return;
+        }
+
+        writeStorage(STORAGE.brandWorldWorkshopAccess, true);
+
+        lockedState.hidden = true;
+        unlockedState.hidden = false;
+
+        if (message) {
+          message.textContent = "";
+        }
+
+        showToast("Build Your Brand World unlocked!");
       } catch (error) {
         if (message) {
           message.textContent =
@@ -12435,7 +12600,8 @@ state.communityClient.auth.onAuthStateChange((event, nextSession) => {
   function hasWorkshopCommunityAccess() {
     return Boolean(
       readStorage(STORAGE.promptWorkshopAccess, false) ||
-        readStorage(STORAGE.websiteWorkshopAccess, false),
+        readStorage(STORAGE.websiteWorkshopAccess, false) ||
+        readStorage(STORAGE.brandWorldWorkshopAccess, false),
     );
   }
 
@@ -12969,6 +13135,7 @@ async function loadPortalWorkshops() {
   const defaults = {
     prompt: true,
     website: true,
+    brandWorld: true,
     beacon: false,
     chatgpt: false,
     payhip: false,
@@ -12994,6 +13161,7 @@ async function loadPortalWorkshops() {
   const fields = {
     prompt: "backRoomPromptWorkshopEnabled",
     website: "backRoomWebsiteWorkshopEnabled",
+    brandWorld: "backRoomBrandWorldWorkshopEnabled",
     beacon: "backRoomBeaconWorkshopEnabled",
     chatgpt: "backRoomChatGPTWorkshopEnabled",
     payhip: "backRoomPayhipWorkshopEnabled",
@@ -13175,6 +13343,9 @@ async function saveBackRoomWorkshops() {
     ),
     website: Boolean(
       document.getElementById("backRoomWebsiteWorkshopEnabled")?.checked,
+    ),
+    brandWorld: Boolean(
+      document.getElementById("backRoomBrandWorldWorkshopEnabled")?.checked,
     ),
     beacon: Boolean(
       document.getElementById("backRoomBeaconWorkshopEnabled")?.checked,
