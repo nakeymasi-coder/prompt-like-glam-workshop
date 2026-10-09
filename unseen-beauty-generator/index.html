@@ -291,12 +291,9 @@ footer{text-align:center; color:#7A8CA0; margin-top:44px; font-size:.9rem;}
       <div class="hero-imgwrap">
         <img src="hero.webp" alt="A radiant group of diverse queens in sapphire and pearl gowns">
         <div class="hero-overlay">
-          <div class="kicker">👑 Glam Hustle Hub presents</div>
           <h1>BE <span class="seen">SEEN</span></h1>
           <div class="tagline">The Unseen Beauty Prompt Generator</div>
           <p class="sub">Build stunning, dignified AI portraits celebrating the women the world overlooks — survivors, warriors &amp; queens. Pick her, style her, crown her with her power word.</p>
-          <div class="hero-cta"><button class="btn btn-primary" id="homeStart" type="button">✨ Start Building Her Portrait</button></div>
-          <div class="dignity">🤍 Every portrait celebrates strength — never pity.</div>
         </div>
       </div>
     </header>
@@ -561,7 +558,6 @@ document.getElementById('drawerClose').onclick=closeDrawer;
 document.getElementById('scrim').onclick=closeDrawer;
 document.querySelectorAll('#drawer a').forEach(a=>{ a.onclick=()=>showPage(a.dataset.page); });
 document.querySelectorAll('[data-goto]').forEach(b=>{ b.onclick=()=>showPage(b.dataset.goto); });
-document.getElementById('homeStart').onclick=()=>showPage('pg-queen');
 document.getElementById('toCustom').onclick=()=>showPage('pg-custom');
 document.getElementById('yoursBtn').onclick=()=>showPage('pg-custom');
 document.getElementById('topSaved').onclick=()=>showPage('pg-saved');
