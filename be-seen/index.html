@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BE SEEN — Unseen Beauty Prompt Generator | Tonight's Live Lesson</title>
+<meta name="description" content="Join Glam live as we build the Be Seen Unseen Beauty Prompt Generator — bold AI portraits of the women the world overlooks. Today 4 PM Eastern on TikTok.">
+<meta property="og:title" content="BE SEEN — Tonight's Live Lesson">
+<meta property="og:description" content="We're building a prompt generator for the unseen… and making them SEEN. Today 4 PM Eastern, live on TikTok.">
+<meta property="og:image" content="images/00-flyer.png">
+<style>
+  :root{
+    --sapphire:#5B9BD5; --sapphire-deep:#2B6CB0; --sapphire-dark:#1E4E79;
+    --chrome:#C9D4E0; --pearl:#FDFBF6; --ink:#1F2A37; --gold:#FFE9A8;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif; color:var(--ink);
+    background:linear-gradient(165deg,#FDFBF6 0%,#EAF2FB 45%,#DCE9F7 75%,#F4EFE6 100%); min-height:100vh;}
+  .wrap{max-width:1020px; margin:0 auto; padding:0 18px 60px;}
+
+  /* HERO */
+  .hero{text-align:center; padding:64px 24px 52px; margin-top:26px; border-radius:28px; color:#fff;
+    background:linear-gradient(135deg,#1E4E79 0%,#2B6CB0 30%,#5B9BD5 55%,#9DC3E6 78%,#C9D4E0 100%);
+    box-shadow:0 20px 50px rgba(43,108,176,.30); position:relative; overflow:hidden;}
+  .hero::after{content:""; position:absolute; inset:0;
+    background:radial-gradient(circle at 20% 15%,rgba(255,255,255,.30),transparent 45%),
+               radial-gradient(circle at 85% 80%,rgba(255,255,255,.22),transparent 40%); pointer-events:none;}
+  .hero>*{position:relative; z-index:1;}
+  .hero .kicker{letter-spacing:4px; font-weight:700; font-size:.95rem; opacity:.95;}
+  .hero h1{font-size:clamp(3rem,9vw,5.2rem); letter-spacing:3px; margin:10px 0 4px;
+    text-shadow:0 3px 18px rgba(15,35,60,.4);}
+  .hero h1 .gold{background:linear-gradient(90deg,#fff,#FFE9A8); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .hero .when{font-size:clamp(1.15rem,3vw,1.6rem); font-weight:800; color:var(--gold); margin-top:10px;
+    text-shadow:0 2px 10px rgba(15,35,60,.45);}
+  .hero .where{font-size:clamp(1rem,2.6vw,1.25rem); margin-top:6px; font-weight:600;}
+  .hero p.tag{max-width:640px; margin:16px auto 0; font-size:1.05rem; line-height:1.6; opacity:.96;}
+  .cta-row{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:28px;}
+  .btn{display:inline-block; text-decoration:none; font-weight:800; font-size:1.05rem;
+    padding:15px 32px; border-radius:999px; transition:transform .15s ease, box-shadow .15s ease;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn-gold{background:linear-gradient(135deg,#FFD76A,#FFE9A8); color:#1E4E79; box-shadow:0 10px 26px rgba(0,0,0,.25);}
+  .btn-white{background:#fff; color:var(--sapphire-deep); box-shadow:0 10px 26px rgba(0,0,0,.22);}
+
+  /* SECTIONS */
+  section.card{background:rgba(255,255,255,.9); border:1px solid #E3ECF5; border-radius:22px;
+    padding:34px 28px; margin-top:30px; box-shadow:0 12px 34px rgba(43,108,176,.10);}
+  section.card h2{font-size:1.7rem; color:var(--sapphire-dark); margin-bottom:6px; text-align:center;}
+  section.card .sub{text-align:center; color:#5A6B7E; margin-bottom:24px; font-size:1rem;}
+
+  .unseen-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-top:8px;}
+  .unseen-item{background:linear-gradient(160deg,#fff,#EAF2FB); border:2px solid #D8E4F0; border-radius:14px;
+    padding:15px 16px; font-weight:700; color:#2B4A68; display:flex; align-items:center; gap:12px;}
+  .unseen-item .dot{width:14px; height:14px; border-radius:50%; flex:0 0 14px;
+    background:linear-gradient(135deg,#2B6CB0,#5B9BD5);}
+
+  /* LESSON PLAN */
+  .lesson{display:flex; gap:18px; padding:20px; border-radius:16px; margin-bottom:14px;
+    background:linear-gradient(160deg,#FFFFFF,#F2F7FD); border:2px solid #E3ECF5;}
+  .lesson:last-child{margin-bottom:0;}
+  .lesson-num{width:52px; height:52px; border-radius:16px; flex:0 0 52px; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg,#2B6CB0,#5B9BD5,#9DC3E6); color:#fff; font-weight:800; font-size:1.3rem;
+    box-shadow:0 6px 16px rgba(43,108,176,.3);}
+  .lesson h3{font-size:1.15rem; color:#1F2A37; margin-bottom:6px;}
+  .lesson h3 .time{font-weight:600; font-size:.85rem; color:#5B9BD5; margin-left:8px;}
+  .lesson p{color:#4A5B6E; line-height:1.6; font-size:.98rem;}
+  .lesson p b{color:#2B6CB0;}
+
+  /* GALLERY */
+  .gallery{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px;}
+  .g-item{border-radius:16px; overflow:hidden; border:2px solid #D8E4F0; background:#fff;
+    box-shadow:0 8px 22px rgba(43,108,176,.12); transition:transform .15s ease;}
+  .g-item:hover{transform:translateY(-4px);}
+  .g-item img{width:100%; aspect-ratio:1/1; object-fit:cover; display:block;}
+  .g-item .cap{padding:10px 12px; font-weight:700; font-size:.9rem; color:#2B4A68; text-align:center;}
+
+  /* TAKEAWAYS */
+  .takeaways{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px;}
+  .take{background:linear-gradient(160deg,#fff,#EAF2FB); border:2px solid #D8E4F0; border-radius:16px; padding:22px; text-align:center;}
+  .take .emoji{font-size:2.2rem;}
+  .take h3{margin:10px 0 8px; color:#1F2A37; font-size:1.05rem;}
+  .take p{color:#5A6B7E; font-size:.93rem; line-height:1.55;}
+  .take a{color:#2B6CB0; font-weight:700;}
+
+  /* FOOTER CTA (standing rule) */
+  .site-cta{text-align:center; margin-top:44px; padding:36px 24px; border-radius:22px;
+    background:linear-gradient(135deg,#1E4E79,#2B6CB0 60%,#5B9BD5); box-shadow:0 14px 36px rgba(43,108,176,.28);}
+  .site-cta h2{color:#fff; font-size:1.5rem; margin-bottom:18px;}
+  .site-cta .btnrow{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .site-cta .btn{flex:0 1 260px; text-align:center;}
+  .site-cta .made{margin-top:18px; color:rgba(255,255,255,.85); font-size:.85rem;}
+  @media(max-width:600px){ .lesson{flex-direction:column;} .lesson-num{width:46px; height:46px; flex-basis:46px;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">TONIGHT'S LIVE LESSON</div>
+    <h1>BE <span class="gold">SEEN</span></h1>
+    <div class="when">TODAY &bull; 4 PM EASTERN</div>
+    <div class="where">LIVE on TikTok @glamorousgrammyglowup</div>
+    <p class="tag">We're building a prompt generator for the unseen&hellip; and making them <b>SEEN</b>. Bold, beautiful AI portraits of the women the world overlooks — and tonight, you build <b>your own</b> generator with me, live.</p>
+    <div class="cta-row">
+      <a class="btn btn-gold" href="https://www.tiktok.com/@glamorousgrammyglowup" target="_blank" rel="noopener">Join the Live on TikTok</a>
+      <a class="btn btn-white" href="be-seen-generator-prompt.txt" download>Download the Master Prompt</a>
+    </div>
+  </header>
+
+  <section class="card">
+    <h2>Who Are the Unseen?</h2>
+    <p class="sub">The queens the world overlooks — the ones we're celebrating tonight.</p>
+    <div class="unseen-grid">
+      <div class="unseen-item"><span class="dot"></span>Domestic violence survivors</div>
+      <div class="unseen-item"><span class="dot"></span>Queens with alopecia</div>
+      <div class="unseen-item"><span class="dot"></span>Women in wheelchairs</div>
+      <div class="unseen-item"><span class="dot"></span>Women with prosthetics</div>
+      <div class="unseen-item"><span class="dot"></span>Women with vitiligo</div>
+      <div class="unseen-item"><span class="dot"></span>Deaf &amp; blind queens</div>
+      <div class="unseen-item"><span class="dot"></span>Plus-size goddesses</div>
+      <div class="unseen-item"><span class="dot"></span>Women with disabilities</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Tonight's Lesson Plan</h2>
+    <p class="sub">What we're doing live, step by step. No experience needed — just bring yourself.</p>
+
+    <div class="lesson">
+      <div class="lesson-num">1</div>
+      <div><h3>Meet the Unseen <span class="time">~10 min</span></h3>
+      <p>We open with the queens: survivors, alopecia queens, wheelchair queens, and every woman the world overlooks. <b>Why we celebrate them loudly</b> — with power, never pity.</p></div>
+    </div>
+
+    <div class="lesson">
+      <div class="lesson-num">2</div>
+      <div><h3>Anatomy of a Power Prompt <span class="time">~15 min</span></h3>
+      <p>I break down the exact prompt template behind every portrait — <b>queen + beauty details + power word + typography + art vibe</b> — in plain, everyday language. You'll see how one prompt becomes a masterpiece.</p></div>
+    </div>
+
+    <div class="lesson">
+      <div class="lesson-num">3</div>
+      <div><h3>Build It LIVE <span class="time">~20 min</span></h3>
+      <p>Watch me build the <b>Be Seen Unseen Beauty Prompt Generator</b> from scratch, live on screen. 12 queens, 24 power words, 21 typography styles — you'll see every piece click into place.</p></div>
+    </div>
+
+    <div class="lesson">
+      <div class="lesson-num">4</div>
+      <div><h3>Make It Yours <span class="time">~15 min</span></h3>
+      <p>Now it's your turn. Take the master prompt and <b>customize it your way</b> — your queens, your words, your style. I'll show you how to bend the generator to your vision.</p></div>
+    </div>
+
+    <div class="lesson">
+      <div class="lesson-num">5</div>
+      <div><h3>Generate &amp; Glow <span class="time">~15 min</span></h3>
+      <p>We generate portraits <b>live together</b> and show them off. Bring your results — the comments are about to be a whole gallery of queens.</p></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>A Taste of What's Coming</h2>
+    <p class="sub">Just a few of the queens — the rest we build tonight.</p>
+    <div class="gallery">
+      <div class="g-item"><img src="images/01-survivor.jpg" alt="DV Survivor portrait"><div class="cap">DV Survivor &bull; SURVIVOR</div></div>
+      <div class="g-item"><img src="images/02-alopecia.jpg" alt="Alopecia queen portrait"><div class="cap">Alopecia Queen &bull; CROWNED</div></div>
+      <div class="g-item"><img src="images/03-wheelchair.jpg" alt="Wheelchair queen portrait"><div class="cap">Wheelchair Queen &bull; UNBREAKABLE</div></div>
+      <div class="g-item"><img src="images/04-vitiligo.jpg" alt="Vitiligo beauty portrait"><div class="cap">Vitiligo Beauty &bull; BEAUTIFULLY WHOLE</div></div>
+      <div class="g-item"><img src="images/05-prosthetic.jpg" alt="Prosthetic goddess portrait"><div class="cap">Prosthetic Goddess &bull; FEARLESS</div></div>
+      <div class="g-item"><img src="images/06-deaf.jpg" alt="Deaf queen portrait"><div class="cap">Deaf Queen &bull; SEEN</div></div>
+      <div class="g-item"><img src="images/07-plus-size.jpg" alt="Plus-size goddess portrait"><div class="cap">Plus-Size Goddess &bull; ENOUGH</div></div>
+      <div class="g-item"><img src="images/00-flyer.png" alt="Be Seen live announcement"><div class="cap">Tonight &bull; 4 PM Eastern</div></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>What You Walk Away With</h2>
+    <p class="sub">You don't just watch — you leave with the goods.</p>
+    <div class="takeaways">
+      <div class="take"><div class="emoji">📝</div><h3>The Master Prompt</h3>
+        <p>The complete copy-paste prompt that rebuilds the generator in any AI chat. <a href="be-seen-generator-prompt.txt" download>Download it here</a>.</p></div>
+      <div class="take"><div class="emoji">🛠️</div><h3>The Web Generator</h3>
+        <p>Use the click-and-go version anytime — <a href="../unseen-beauty-generator/" target="_blank" rel="noopener">open the Be Seen generator</a>.</p></div>
+      <div class="take"><div class="emoji">👑</div><h3>Your Own Generator</h3>
+        <p>Customized your way — your queens, your words, your style. Built live, yours forever.</p></div>
+    </div>
+  </section>
+
+  <div class="site-cta">
+    <h2>Pull Up Tonight — 4 PM Eastern on TikTok</h2>
+    <div class="btnrow">
+      <a class="btn btn-gold" href="https://www.skool.com/the-glam-vault-9512" target="_blank" rel="noopener">✨ Join The Glam Vault</a>
+      <a class="btn btn-white" href="https://glamhustlehub.com" target="_blank" rel="noopener">🛍️ Shop Glam Hustle Hub</a>
+    </div>
+    <div class="made">made with ♥ by Celestia, Glam's AI assistant</div>
+  </div>
+
+</div>
+</body>
+</html>
