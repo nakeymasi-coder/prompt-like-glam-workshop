@@ -85,17 +85,16 @@
   #copyAll{border:2px solid var(--sapphire); background:#fff; color:var(--sapphire-deep); font-weight:800;
     padding:9px 16px; border-radius:999px; cursor:pointer; font-size:13px;}
   footer{text-align:center; margin-top:34px;}
+  .cta-row{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:6px;}
   .ctabtn{
-    display:inline-block; text-decoration:none; color:#fff; font-weight:800; font-size:16px;
+    flex:1 1 0; max-width:270px; min-width:200px; text-align:center;
+    display:inline-block; text-decoration:none; color:#fff; font-weight:800; font-size:15px;
     background:linear-gradient(100deg,var(--sapphire-deep),var(--sapphire));
-    padding:14px 30px; border-radius:999px;
+    padding:14px 18px; border-radius:999px;
     box-shadow:0 8px 22px rgba(78,138,203,.35);
   }
   .ctabtn:active{transform:scale(.98);}
-  footer .tiny{margin-top:12px; font-size:12px; color:#8a94a6;}
-  .shopline{margin-top:14px;}
-  .shopline a{color:var(--sapphire-deep); font-weight:700; font-size:14px; text-decoration:none;}
-  .shopline a:hover{text-decoration:underline;}
+  footer .tiny{margin-top:14px; font-size:12px; color:#8a94a6;}
   footer .tiny b{color:var(--sapphire-deep);}
 </style>
 </head>
@@ -131,8 +130,10 @@
 
   <div id="out"></div>
   <footer>
-  <a class="ctabtn" href="https://www.skool.com/the-glam-vault-9512" target="_blank" rel="noopener">✨ Join The Glam Vault</a>
-  <div class="shopline"><a href="https://glamhustlehub.com" target="_blank" rel="noopener">🛍️ Shop more at glamhustlehub.com</a></div>
+  <div class="cta-row">
+    <a class="ctabtn" href="https://www.skool.com/the-glam-vault-9512" target="_blank" rel="noopener">✨ Join The Glam Vault</a>
+    <a class="ctabtn" href="https://glamhustlehub.com" target="_blank" rel="noopener">🛍️ Shop Glam Hustle Hub</a>
+  </div>
   <div class="tiny">made with <b>♥</b> by Maren, Glam's AI assistant</div>
 </footer>
 </div>
