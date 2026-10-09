@@ -1,0 +1,147 @@
+============================================================
+BE SEEN — UNSEEN BEAUTY PROMPT GENERATOR
+THE CURRICULUM PACK
+by Glam Hustle Hub
+============================================================
+
+WHAT THIS IS
+------------
+This pack teaches you how to build your OWN prompt generator —
+starting from the Be Seen generator's 12 queens, then adding
+whatever queens YOU want to celebrate. You don't just copy mine.
+You learn the method, then you make it yours.
+
+WHAT'S INSIDE
+-------------
+1. THE METHOD — the prompt formula, explained plain
+2. THE 5 LESSONS — the full live lesson plan, expanded
+3. CREATE YOUR OWN QUEEN — the worksheet for adding categories
+4. THE MASTER PROMPT — your copy-paste generator builder
+   (separate file: be-seen-generator-prompt.txt)
+
+============================================================
+PART 1: THE METHOD
+============================================================
+
+Every portrait prompt is built from 5 pieces, in this order:
+
+  [QUEEN] + [BEAUTY DETAILS] + [POWER WORD] + [TYPOGRAPHY] + [VIBE]
+
+Put together, it reads like this:
+
+  "Ultra-detailed [VIBE] portrait of [QUEEN], a woman [AGE]
+   with [SKIN] skin and a [BODY] figure, [HAIR], wearing
+   [OUTFIT], [SETTING]. The word "[POWER WORD]" appears as
+   [TYPOGRAPHY], [PLACEMENT]. Empowering, dignified and
+   celebratory mood — strength and beauty, never pity.
+   Radiant lighting, ultra detailed, 8k, professional
+   photography, masterpiece."
+
+That's the whole secret. Each bracket is a menu of choices.
+Swap the choices, get a brand-new portrait. THAT is what
+makes it a generator instead of a single prompt.
+
+THE GOLDEN RULE (never break it):
+Every description leads with BEAUTY, carries STRENGTH,
+and never touches PITY. No sad words. No weepy words.
+We celebrate — we don't mourn.
+
+============================================================
+PART 2: THE 5 LESSONS
+============================================================
+
+LESSON 1: MEET THE UNSEEN (~10 min)
+Objective: Fall in love with who we're celebrating and why.
+- The 12 starter queens: DV Survivor, Alopecia Queen,
+  Wheelchair Queen, Prosthetic Goddess, Vitiligo Beauty,
+  Burn Survivor, Mastectomy Warrior, Deaf Queen, Blind Queen,
+  Cane Queen, Plus-Size Goddess, Service Dog Duo.
+- The reframe: these women are not "inspiring despite"
+  anything — they are stunning, period.
+- Activity: Pick the queen that speaks to YOU. Say why
+  out loud or in the comments.
+
+LESSON 2: ANATOMY OF A POWER PROMPT (~15 min)
+Objective: Understand the 5-piece formula.
+- Walk through one finished prompt and point to each piece:
+  queen, beauty details, power word, typography, vibe.
+- Show how swapping ONE piece (same queen, new typography)
+  makes a totally different portrait.
+- Key line: "The formula never changes. Only the choices do.
+  That's what makes it a generator."
+- Activity: Take the DV Survivor prompt and swap the power
+  word SURVIVOR for UNBREAKABLE. Read the new prompt aloud.
+
+LESSON 3: BUILD IT LIVE (~20 min)
+Objective: Watch the generator get assembled from scratch.
+- Start with the 12 queens as the foundation list.
+- Add the beauty menus: skin, age, body, hair, outfit, setting.
+- Add the 24 power words. Add the 21 typography styles.
+- Add the 6 art vibes. Lock in the template.
+- Generate the first live portraits together.
+- Key line: "You're watching a product get born."
+
+LESSON 4: MAKE IT YOURS (~15 min)
+Objective: Customize — this is where it becomes THEIRS.
+- The 3-part formula for a new queen (see Part 3).
+- Live demo: take a suggestion from the audience and build
+  a brand-new queen category on the spot.
+- Remind them: start with my 12, but the list is theirs to grow.
+- Activity: Everyone writes ONE new queen using the worksheet.
+
+LESSON 5: GENERATE & GLOW (~15 min)
+Objective: Create, share, celebrate.
+- Everyone generates at least one portrait with their
+  new queen (or a starter queen).
+- Share in the comments/chat — the gallery moment.
+- Close: "The unseen just got SEEN — by YOU."
+- Send them home with the master prompt file.
+
+============================================================
+PART 3: CREATE YOUR OWN QUEEN — THE WORKSHEET
+============================================================
+
+Copy this worksheet for every new category you add.
+
+1. NAME HER
+   Give the group a proud, celebratory name.
+   Examples: Stroke Survivor ... Little Person Queen ...
+   Chronic Illness Queen ... Autism Mom Warrior ...
+   My queen: ___________________________________________
+
+2. DESCRIBE HER WITH DIGNITY (1–2 sentences)
+   Rules: beauty FIRST, strength ALWAYS, pity NEVER.
+   Template: "a [uplifting adjective] [person],
+   [what makes her radiant], [her strength]"
+   GOOD: "a radiant queen living with chronic illness,
+   her quiet strength glowing through every portrait,
+   unbothered and luminous"
+   BAD: "a poor sick woman suffering" (never like this)
+   My description: ____________________________________
+   ___________________________________________________
+
+3. TEST HER
+   Plug her into the template with a power word and a
+   typography style. Read it aloud. Does she sound like
+   a QUEEN? If yes — she's in. If anything sounds sad,
+   rewrite until it shines.
+
+4. ADD HER TO YOUR LIST
+   Give her the next number on your queen list and use
+   her exactly like the starters from now on.
+
+============================================================
+PART 4: THE MASTER PROMPT
+============================================================
+
+The file be-seen-generator-prompt.txt is your copy-paste
+generator builder. Paste it into ChatGPT or any AI chat
+and it walks you (or your students) through all 6 steps,
+then teaches the "add your own queens" method at the end.
+
+Give this file to your audience. It's the take-home.
+
+============================================================
+(c) Glam Hustle Hub — made with love. Every woman deserves
+to be seen.
+============================================================
