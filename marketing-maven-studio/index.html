@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketing Maven Studio — by Glam</title>
+<style>
+  :root{
+    --sapphire:#8FBDEB;
+    --sapphire-deep:#4E8ACB;
+    --sapphire-soft:#DCEBFB;
+    --silver:#C9CFD8;
+    --silver-light:#E8EBF0;
+    --pearl:#FCFBF9;
+    --ink:#22303C;
+    --ink-soft:#5A6B7A;
+    --black:#14181D;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:linear-gradient(180deg,#F4F8FD 0%,var(--pearl) 40%,#FFFFFF 100%);
+    color:var(--ink);
+    line-height:1.6;
+    padding-bottom:80px;
+  }
+  .hero{
+    background:linear-gradient(120deg,var(--sapphire) 0%,#B9CFE8 35%,var(--silver) 65%,var(--pearl) 100%);
+    padding:56px 24px 48px;
+    text-align:center;
+    border-bottom:1px solid rgba(78,138,203,.25);
+  }
+  .hero h1{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:clamp(2rem,5vw,3.2rem);
+    color:var(--black);
+    letter-spacing:.5px;
+  }
+  .hero h1 .accent{color:var(--sapphire-deep)}
+  .hero p.tag{margin-top:10px;font-size:1.08rem;color:#2C3E50;max-width:640px;margin-left:auto;margin-right:auto}
+  .hero .byline{margin-top:8px;font-size:.9rem;color:var(--ink-soft);letter-spacing:2px;text-transform:uppercase}
+  .steps-bar{
+    display:flex;justify-content:center;gap:8px;flex-wrap:wrap;
+    margin:28px auto 0;max-width:860px;padding:0 16px;
+  }
+  .step-pill{
+    background:#fff;border:1px solid var(--silver);border-radius:999px;
+    padding:8px 16px;font-size:.85rem;color:var(--ink-soft);white-space:nowrap;
+    box-shadow:0 2px 8px rgba(78,138,203,.08);
+  }
+  .step-pill b{color:var(--sapphire-deep);margin-right:6px}
+  .wrap{max-width:860px;margin:0 auto;padding:0 20px}
+  .howto{
+    margin:32px 0 8px;background:#fff;border:1px solid var(--silver-light);
+    border-radius:18px;padding:22px 26px;box-shadow:0 6px 24px rgba(78,138,203,.10);
+  }
+  .howto h2{font-family:Georgia,serif;font-size:1.25rem;margin-bottom:10px;color:var(--black)}
+  .howto ol{margin-left:20px;color:var(--ink-soft)}
+  .howto ol li{margin:6px 0}
+  .howto ol li b{color:var(--ink)}
+  .card{
+    background:#fff;border:1px solid var(--silver-light);border-radius:20px;
+    padding:28px;margin:26px 0;box-shadow:0 8px 30px rgba(78,138,203,.10);
+  }
+  .card h2{
+    font-family:Georgia,serif;font-size:1.5rem;color:var(--black);margin-bottom:4px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .card h2 .num{
+    background:linear-gradient(135deg,var(--sapphire),var(--silver));
+    color:#fff;font-family:inherit;font-size:1rem;width:34px;height:34px;border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;
+    box-shadow:0 3px 10px rgba(78,138,203,.35);
+  }
+  .card .sub{color:var(--ink-soft);font-size:.95rem;margin-bottom:18px}
+  label{display:block;font-weight:600;margin:14px 0 6px;font-size:.95rem}
+  input[type=text],textarea,select{
+    width:100%;padding:13px 15px;border:1.5px solid var(--silver);border-radius:12px;
+    font-size:1rem;font-family:inherit;background:var(--pearl);color:var(--ink);
+    transition:border-color .2s, box-shadow .2s;
+  }
+  input[type=text]:focus,textarea:focus{outline:none;border-color:var(--sapphire-deep);box-shadow:0 0 0 3px rgba(143,189,235,.25)}
+  textarea{min-height:110px;resize:vertical}
+  .btn{
+    display:inline-block;border:none;cursor:pointer;font-size:1rem;font-weight:700;
+    padding:14px 28px;border-radius:999px;margin-top:16px;
+    background:linear-gradient(120deg,var(--sapphire-deep),var(--sapphire));
+    color:#fff;box-shadow:0 6px 18px rgba(78,138,203,.4);
+    transition:transform .15s, box-shadow .15s;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(78,138,203,.5)}
+  .btn.ghost{
+    background:#fff;color:var(--sapphire-deep);border:2px solid var(--sapphire);
+    box-shadow:none;margin-left:10px;
+  }
+  .btn.ghost:hover{box-shadow:0 6px 16px rgba(78,138,203,.25)}
+  .btn.small{padding:9px 18px;font-size:.88rem;margin-top:10px}
+  .prompt-box{
+    background:#F2F7FD;border:1.5px dashed var(--sapphire-deep);border-radius:14px;
+    padding:18px;margin-top:16px;white-space:pre-wrap;font-size:.93rem;color:var(--ink);
+    max-height:340px;overflow-y:auto;
+  }
+  .copied-note{color:#2E7D32;font-size:.85rem;margin-top:8px;display:none;font-weight:600}
+  .winners{display:grid;gap:14px;margin-top:6px}
+  .winner-field{background:var(--pearl);border:1px solid var(--silver-light);border-radius:14px;padding:16px}
+  .winner-field label{margin-top:0}
+  .imgprompt{margin-top:14px}
+  .upload-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+  @media(max-width:640px){.upload-row{grid-template-columns:1fr}}
+  .slot{
+    border:2px dashed var(--silver);border-radius:14px;background:var(--pearl);
+    min-height:170px;display:flex;align-items:center;justify-content:center;
+    text-align:center;cursor:pointer;position:relative;overflow:hidden;
+    color:var(--ink-soft);font-size:.88rem;padding:10px;
+    transition:border-color .2s;
+  }
+  .slot:hover{border-color:var(--sapphire-deep)}
+  .slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .slot input{position:absolute;inset:0;opacity:0;cursor:pointer}
+  .slot .cap{position:absolute;bottom:0;left:0;right:0;background:rgba(20,24,29,.72);color:#fff;font-size:.75rem;padding:6px}
+  #boardPreview{
+    margin-top:18px;border:1px solid var(--silver-light);border-radius:14px;overflow:hidden;
+    background:linear-gradient(160deg,#EAF3FD,#F6F8FB 45%,#FFFFFF);
+  }
+  #boardPreview .bp-head{padding:26px 20px 18px;text-align:center;background:linear-gradient(120deg,var(--sapphire) 0%,#C3D4E8 50%,var(--silver-light) 100%)}
+  #boardPreview .bp-head h3{font-family:Georgia,serif;font-size:1.6rem;color:var(--black)}
+  #boardPreview .bp-head p{font-size:.92rem;color:#33475B;margin-top:6px;font-style:italic}
+  #boardPreview .bp-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:16px}
+  @media(max-width:640px){#boardPreview .bp-grid{grid-template-columns:1fr}}
+  #boardPreview .bp-panel{background:#fff;border-radius:10px;overflow:hidden;border:1px solid var(--silver-light)}
+  #boardPreview .bp-panel .ph{height:150px;background:linear-gradient(135deg,var(--sapphire-soft),var(--silver-light));display:flex;align-items:center;justify-content:center;color:var(--ink-soft);font-size:.8rem;background-size:cover;background-position:center}
+  #boardPreview .bp-panel .pc{padding:10px 12px;font-size:.82rem}
+  #boardPreview .bp-panel .pc b{display:block;font-size:.78rem;color:var(--sapphire-deep);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+  #boardPreview .bp-foot{text-align:center;padding:14px;font-size:.78rem;color:var(--ink-soft);letter-spacing:1px}
+  footer{text-align:center;color:var(--ink-soft);font-size:.85rem;margin-top:50px}
+  footer .rule{width:120px;height:3px;margin:0 auto 14px;border-radius:2px;background:linear-gradient(90deg,var(--sapphire),var(--silver),var(--pearl))}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Marketing Maven <span class="accent">Studio</span></h1>
+  <p class="tag">Turn one product and one sentence into a full marketing plan, three winning ideas, and a beautiful vision board — your way.</p>
+  <div class="byline">by Glam</div>
+  <div class="steps-bar">
+    <span class="step-pill"><b>1</b>Your Product</span>
+    <span class="step-pill"><b>2</b>Marketing Plan</span>
+    <span class="step-pill"><b>3</b>Pick 3 Winners</span>
+    <span class="step-pill"><b>4</b>Vision Board Prompts</span>
+    <span class="step-pill"><b>5</b>Build &amp; Download</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="howto">
+    <h2>How it works</h2>
+    <ol>
+      <li><b>Tell it your product</b> — name + one sentence about what it does.</li>
+      <li><b>Copy your custom AI prompt</b> — paste it into ChatGPT or Gemini to generate your full marketing plan.</li>
+      <li><b>Pick your 3 winning ideas</b> — one each from content, social, and partnerships.</li>
+      <li><b>Generate vision board image prompts</b> — vivid, ready to paste into any image generator.</li>
+      <li><b>Build your board</b> — drop in your 3 images and download a polished vision board PNG.</li>
+    </ol>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="card" id="step1">
+    <h2><span class="num">1</span>Your Product</h2>
+    <p class="sub">Everything downstream is built from these two lines — make them good.</p>
+    <label for="productName">Product name</label>
+    <input type="text" id="productName" placeholder="e.g. The Curvy Tee Fit Guide">
+    <label for="valueProp">One-sentence value proposition</label>
+    <textarea id="valueProp" placeholder="e.g. A $27 digital guide that helps plus-size women find their perfect tee fit in under 5 minutes."></textarea>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="card" id="step2">
+    <h2><span class="num">2</span>Generate Your Marketing Plan</h2>
+    <p class="sub">This builds a custom prompt using your product info. Copy it, paste it into ChatGPT or Gemini, and let the AI do the brainstorming.</p>
+    <button class="btn" onclick="buildPlanPrompt()">Build my AI prompt</button>
+    <div id="planPromptWrap" style="display:none">
+      <div class="prompt-box" id="planPrompt"></div>
+      <button class="btn small" onclick="copyText('planPrompt','copiedPlan')">Copy prompt</button>
+      <span class="copied-note" id="copiedPlan">Copied! Paste it into ChatGPT or Gemini.</span>
+      <p style="margin-top:14px;color:var(--ink-soft);font-size:.92rem">Paste the AI's marketing plan below if you want to keep it with this session (optional):</p>
+      <textarea id="planPaste" placeholder="Paste your AI-generated marketing plan here for reference..."></textarea>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="card" id="step3">
+    <h2><span class="num">3</span>Pick Your 3 Winning Ideas</h2>
+    <p class="sub">From your AI's plan, choose the single best idea in each category. These become your vision board.</p>
+    <div class="winners">
+      <div class="winner-field">
+        <label for="winContent">🏆 Top Content Marketing idea</label>
+        <input type="text" id="winContent" placeholder="e.g. '5-Minute Fit Check' blog + Pinterest series">
+      </div>
+      <div class="winner-field">
+        <label for="winSocial">🏆 Top Social Media idea</label>
+        <input type="text" id="winSocial" placeholder="e.g. Try-on haul Reels with real curvy models">
+      </div>
+      <div class="winner-field">
+        <label for="winPartner">🏆 Top Partnership idea</label>
+        <input type="text" id="winPartner" placeholder="e.g. Collab with 3 plus-size fashion micro-influencers">
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="card" id="step4">
+    <h2><span class="num">4</span>Vision Board Image Prompts</h2>
+    <p class="sub">One click turns each winning idea into a vivid image-generation prompt. Copy them into Midjourney, DALL·E, ChatGPT, or any image tool.</p>
+    <button class="btn" onclick="buildImagePrompts()">Generate my 3 image prompts</button>
+    <div id="imgPromptsWrap" style="display:none">
+      <div class="imgprompt">
+        <label>🖼️ Vision board panel 1 — Content</label>
+        <div class="prompt-box" id="imgPrompt1"></div>
+        <button class="btn small ghost" onclick="copyText('imgPrompt1','copiedImg1')">Copy</button>
+        <span class="copied-note" id="copiedImg1">Copied!</span>
+      </div>
+      <div class="imgprompt">
+        <label>🖼️ Vision board panel 2 — Social</label>
+        <div class="prompt-box" id="imgPrompt2"></div>
+        <button class="btn small ghost" onclick="copyText('imgPrompt2','copiedImg2')">Copy</button>
+        <span class="copied-note" id="copiedImg2">Copied!</span>
+      </div>
+      <div class="imgprompt">
+        <label>🖼️ Vision board panel 3 — Partnership</label>
+        <div class="prompt-box" id="imgPrompt3"></div>
+        <button class="btn small ghost" onclick="copyText('imgPrompt3','copiedImg3')">Copy</button>
+        <span class="copied-note" id="copiedImg3">Copied!</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="card" id="step5">
+    <h2><span class="num">5</span>Build &amp; Download Your Vision Board</h2>
+    <p class="sub">Upload your 3 generated images, preview your board, then download it as a polished PNG.</p>
+    <div class="upload-row">
+      <div class="slot" id="slot1"><span>＋<br>Upload panel 1<br>(Content)</span><input type="file" accept="image/*" onchange="loadSlotImage(1,this)"></div>
+      <div class="slot" id="slot2"><span>＋<br>Upload panel 2<br>(Social)</span><input type="file" accept="image/*" onchange="loadSlotImage(2,this)"></div>
+      <div class="slot" id="slot3"><span>＋<br>Upload panel 3<br>(Partnership)</span><input type="file" accept="image/*" onchange="loadSlotImage(3,this)"></div>
+    </div>
+    <button class="btn" onclick="renderPreview()">Preview my vision board</button>
+    <div id="boardPreview" style="display:none">
+      <div class="bp-head">
+        <h3 id="bpTitle">Your Product</h3>
+        <p id="bpSub">Your value proposition</p>
+      </div>
+      <div class="bp-grid">
+        <div class="bp-panel"><div class="ph" id="bpPh1">Panel 1</div><div class="pc"><b>Content</b><span id="bpCap1"></span></div></div>
+        <div class="bp-panel"><div class="ph" id="bpPh2">Panel 2</div><div class="pc"><b>Social</b><span id="bpCap2"></span></div></div>
+        <div class="bp-panel"><div class="ph" id="bpPh3">Panel 3</div><div class="pc"><b>Partnership</b><span id="bpCap3"></span></div></div>
+      </div>
+      <div class="bp-foot">MARKETING MAVEN STUDIO • BY GLAM</div>
+    </div>
+    <div id="dlWrap" style="display:none">
+      <button class="btn ghost" onclick="downloadBoard()">⬇ Download board as PNG</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="rule"></div>
+    Marketing Maven Studio • made by Glam<br>
+    Your inputs never leave your browser.
+  </footer>
+</div>
+<script>
+var slotImages = {1:null, 2:null, 3:null};   // HTMLImageElement per panel
+var slotNames  = {1:"Panel 1", 2:"Panel 2", 3:"Panel 3"};
+
+function val(id){ return document.getElementById(id).value.trim(); }
+
+function productName(){ return val("productName") || "[Your Product]"; }
+function valueProp(){ return val("valueProp") || "[your one-sentence value proposition]"; }
+
+/* ---------- Step 2: build the AI marketing-plan prompt ---------- */
+function buildPlanPrompt(){
+  var name = productName(), prop = valueProp();
+  var prompt =
+"You are a senior marketing strategist who specializes in helping small digital-product businesses grow without a big team or budget.\n\n" +
+"I need a complete, practical marketing brainstorm for my product.\n\n" +
+"PRODUCT NAME: " + name + "\n" +
+"VALUE PROPOSITION: " + prop + "\n\n" +
+"Please create the following, formatted cleanly with clear headings so I can paste it straight into a Google Doc:\n\n" +
+"PART 1 \u2014 CONTENT MARKETING IDEAS\n" +
+"Brainstorm at least 5 specific content marketing ideas (blog posts, videos, lead magnets, email angles, SEO plays \u2014 whatever fits this product best).\n\n" +
+"PART 2 \u2014 SOCIAL MEDIA CAMPAIGNS\n" +
+"Brainstorm at least 5 specific social media campaign ideas (platforms, formats, hooks, posting cadence).\n\n" +
+"PART 3 \u2014 PARTNERSHIP OPPORTUNITIES\n" +
+"Brainstorm at least 5 specific partnership or collaboration ideas (influencers, affiliates, bundles, cross-promos, communities).\n\n" +
+"PART 4 \u2014 TOP PICKS WITH PROS & CONS\n" +
+"For EACH of the three categories above, select the single best idea and give a short analysis:\n" +
+"- Why it wins\n" +
+"- Pros (3 bullet points)\n" +
+"- Cons (2 bullet points)\n\n" +
+"PART 5 \u2014 SUGGESTED NEXT STEPS\n" +
+"A simple, actionable checklist of exactly 3 next steps I can take this week to get moving.\n\n" +
+"Tone: practical, encouraging, zero fluff. Tailor every idea to THIS product \u2014 no generic advice.";
+  document.getElementById("planPrompt").textContent = prompt;
+  document.getElementById("planPromptWrap").style.display = "block";
+  document.getElementById("planPromptWrap").scrollIntoView({behavior:"smooth", block:"nearest"});
+}
+
+/* ---------- Copy helper ---------- */
+function copyText(elId, noteId){
+  var text = document.getElementById(elId).textContent;
+  function done(){
+    var n = document.getElementById(noteId);
+    n.style.display = "inline";
+    setTimeout(function(){ n.style.display = "none"; }, 2500);
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done, function(){ fallbackCopy(text); done(); });
+  } else { fallbackCopy(text); done(); }
+}
+function fallbackCopy(text){
+  var ta = document.createElement("textarea");
+  ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand("copy"); } catch(e){}
+  document.body.removeChild(ta);
+}
+
+/* ---------- Step 4: vision board image prompts ---------- */
+function buildImagePrompts(){
+  var name = productName(), prop = valueProp();
+  var ideas = [
+    {idea: val("winContent") || "[your top content marketing idea]", cat:"Content Marketing"},
+    {idea: val("winSocial")  || "[your top social media idea]",     cat:"Social Media"},
+    {idea: val("winPartner") || "[your top partnership idea]",       cat:"Partnership"}
+  ];
+  for (var i = 0; i < 3; i++){
+    var p =
+"Create a stunning vision board panel image for this marketing idea:\n\n" +
+"\"" + ideas[i].idea + "\"\n" +
+"(Category: " + ideas[i].cat + ")\n\n" +
+"Product: " + name + " \u2014 " + prop + "\n\n" +
+"Style: bright, airy, luxurious flat-lay and lifestyle collage. Light sapphire blue, chrome silver, and pearl white color palette. Soft natural window light, high-end feminine marketing aesthetic, inspiring and aspirational mood, ultra-detailed, professional photography style. No text, no words, no logos, no watermarks.";
+    document.getElementById("imgPrompt" + (i+1)).textContent = p;
+  }
+  document.getElementById("imgPromptsWrap").style.display = "block";
+  document.getElementById("imgPromptsWrap").scrollIntoView({behavior:"smooth", block:"nearest"});
+}
+
+/* ---------- Step 5: image uploads ---------- */
+function loadSlotImage(n, input){
+  var file = input.files && input.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e){
+    var img = new Image();
+    img.onload = function(){
+      slotImages[n] = img;
+      var slot = document.getElementById("slot" + n);
+      var old = slot.querySelector("img"); if (old) old.remove();
+      var oldCap = slot.querySelector(".cap"); if (oldCap) oldCap.remove();
+      var shown = document.createElement("img");
+      shown.src = e.target.result; shown.alt = "Panel " + n;
+      slot.appendChild(shown);
+      var cap = document.createElement("div");
+      cap.className = "cap"; cap.textContent = file.name;
+      slot.appendChild(cap);
+      // live-update preview if visible
+      if (document.getElementById("boardPreview").style.display !== "none") renderPreview();
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ---------- Step 5: preview ---------- */
+function renderPreview(){
+  document.getElementById("bpTitle").textContent = productName().replace(/^\[|\]$/g,"") || "Your Product";
+  document.getElementById("bpSub").textContent = valueProp().replace(/^\[|\]$/g,"") || "Your value proposition";
+  var caps = [val("winContent"), val("winSocial"), val("winPartner")];
+  var labels = ["Content","Social","Partnership"];
+  for (var i = 1; i <= 3; i++){
+    document.getElementById("bpCap" + i).textContent = caps[i-1] || ("Your top " + labels[i-1].toLowerCase() + " idea");
+    var ph = document.getElementById("bpPh" + i);
+    if (slotImages[i]){
+      ph.style.backgroundImage = "url(" + slotImages[i].src + ")";
+      ph.textContent = "";
+    } else {
+      ph.style.backgroundImage = "none";
+      ph.textContent = "Panel " + i;
+    }
+  }
+  document.getElementById("boardPreview").style.display = "block";
+  document.getElementById("dlWrap").style.display = "block";
+  document.getElementById("boardPreview").scrollIntoView({behavior:"smooth", block:"nearest"});
+}
+
+/* ---------- Step 5: PNG download ---------- */
+function wrapText(ctx, text, x, y, maxWidth, lineHeight){
+  var words = text.split(" "), line = "";
+  for (var n = 0; n < words.length; n++){
+    var test = line + words[n] + " ";
+    if (ctx.measureText(test).width > maxWidth && n > 0){
+      ctx.fillText(line, x, y); line = words[n] + " "; y += lineHeight;
+    } else line = test;
+  }
+  ctx.fillText(line, x, y);
+  return y + lineHeight;
+}
+function drawCover(ctx, img, dx, dy, dw, dh){
+  var ir = img.width / img.height, dr = dw / dh, sw, sh, sx, sy;
+  if (ir > dr){ sh = img.height; sw = sh * dr; sx = (img.width - sw)/2; sy = 0; }
+  else { sw = img.width; sh = sw / dr; sx = 0; sy = (img.height - sh)/2; }
+  ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
+}
+function roundRect(ctx, x, y, w, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.arcTo(x+w, y, x+w, y+h, r); ctx.arcTo(x+w, y+h, x, y+h, r);
+  ctx.arcTo(x, y+h, x, y, r); ctx.arcTo(x, y, x+w, y, r);
+  ctx.closePath();
+}
+function downloadBoard(){
+  var W = 1600, H = 2000;
+  var c = document.createElement("canvas"); c.width = W; c.height = H;
+  var ctx = c.getContext("2d");
+
+  // background
+  ctx.fillStyle = "#FCFBF9"; ctx.fillRect(0, 0, W, H);
+
+  // header ombre
+  var hg = ctx.createLinearGradient(0, 0, W, 0);
+  hg.addColorStop(0, "#8FBDEB"); hg.addColorStop(0.45, "#B9CFE8");
+  hg.addColorStop(0.75, "#C9CFD8"); hg.addColorStop(1, "#EDEFF2");
+  ctx.fillStyle = hg; ctx.fillRect(0, 0, W, 430);
+
+  // title + value prop
+  ctx.textAlign = "center"; ctx.fillStyle = "#14181D";
+  ctx.font = "700 76px Georgia, serif";
+  var title = document.getElementById("bpTitle").textContent;
+  wrapText(ctx, title, W/2, 170, W - 160, 92);
+  ctx.fillStyle = "#33475B"; ctx.font = "italic 40px Georgia, serif";
+  var sub = document.getElementById("bpSub").textContent;
+  wrapText(ctx, sub, W/2, 300, W - 200, 54);
+
+  // panels
+  var labels = ["CONTENT", "SOCIAL", "PARTNERSHIP"];
+  var caps = [val("winContent"), val("winSocial"), val("winPartner")];
+  var pw = 460, ph = 860, gap = 40, x0 = (W - (pw*3 + gap*2)) / 2, y0 = 500;
+  var catColors = ["#4E8ACB", "#6E9BD4", "#8FA9C9"];
+  for (var i = 0; i < 3; i++){
+    var x = x0 + i * (pw + gap);
+    // image area
+    ctx.save();
+    roundRect(ctx, x, y0, pw, ph, 26); ctx.clip();
+    if (slotImages[i+1]){ drawCover(ctx, slotImages[i+1], x, y0, pw, ph); }
+    else {
+      var pg = ctx.createLinearGradient(x, y0, x, y0 + ph);
+      pg.addColorStop(0, "#DCEBFB"); pg.addColorStop(1, "#E8EBF0");
+      ctx.fillStyle = pg; ctx.fillRect(x, y0, pw, ph);
+      ctx.fillStyle = "#5A6B7A"; ctx.font = "36px sans-serif";
+      ctx.fillText("Panel " + (i+1), x + pw/2, y0 + ph/2);
+    }
+    ctx.restore();
+    // caption card
+    var cy = y0 + ph + 24, ch = 200;
+    ctx.fillStyle = "#FFFFFF";
+    ctx.strokeStyle = "#E8EBF0"; ctx.lineWidth = 2;
+    roundRect(ctx, x, cy, pw, ch, 20); ctx.fill(); ctx.stroke();
+    ctx.textAlign = "left"; ctx.fillStyle = catColors[i];
+    ctx.font = "700 30px sans-serif";
+    ctx.fillText(labels[i], x + 30, cy + 52);
+    ctx.fillStyle = "#22303C"; ctx.font = "34px sans-serif";
+    var cap = caps[i] || ("Your top " + labels[i].toLowerCase() + " idea");
+    // manual wrap for caption
+    var words = cap.split(" "), line = "", ly = cy + 104;
+    ctx.textAlign = "left";
+    for (var n = 0; n < words.length && ly < cy + ch - 20; n++){
+      var test = line + words[n] + " ";
+      if (ctx.measureText(test).width > pw - 60 && n > 0){
+        ctx.fillText(line, x + 30, ly); line = words[n] + " "; ly += 44;
+      } else line = test;
+    }
+    ctx.fillText(line, x + 30, ly);
+  }
+
+  // footer
+  ctx.textAlign = "center"; ctx.fillStyle = "#5A6B7A";
+  ctx.font = "600 30px sans-serif";
+  ctx.fillText("M A R K E T I N G   M A V E N   S T U D I O   \u2022   B Y   G L A M", W/2, 1850);
+
+  var a = document.createElement("a");
+  var safe = productName().replace(/[^a-z0-9]+/gi, "-").toLowerCase().replace(/^-+|-+$/g, "") || "vision-board";
+  a.download = safe + "-vision-board.png";
+  a.href = c.toDataURL("image/png");
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+</script>
+</body>
+</html>
