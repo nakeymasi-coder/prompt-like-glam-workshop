@@ -24,25 +24,28 @@
   }
   .hero{
     background:linear-gradient(120deg,var(--sapphire) 0%,#B9CFE8 35%,var(--silver) 65%,var(--pearl) 100%);
-    padding:56px 24px 48px;text-align:center;border-bottom:1px solid rgba(78,138,203,.25);
+    padding:52px 24px 44px;text-align:center;border-bottom:1px solid rgba(78,138,203,.25);
   }
   .hero h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(2rem,5vw,3.2rem);color:var(--black);letter-spacing:.5px}
   .hero h1 .accent{color:var(--sapphire-deep)}
   .hero p.tag{margin-top:10px;font-size:1.08rem;color:#2C3E50;max-width:660px;margin-left:auto;margin-right:auto}
   .hero .byline{margin-top:8px;font-size:.9rem;color:var(--ink-soft);letter-spacing:2px;text-transform:uppercase}
-  .steps-bar{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:28px auto 0;max-width:900px;padding:0 16px}
-  .step-pill{background:#fff;border:1px solid var(--silver);border-radius:999px;padding:8px 16px;font-size:.85rem;color:var(--ink-soft);white-space:nowrap;box-shadow:0 2px 8px rgba(78,138,203,.08)}
-  .step-pill b{color:var(--sapphire-deep);margin-right:6px}
   .wrap{max-width:900px;margin:0 auto;padding:0 20px}
-  .howto{margin:32px 0 8px;background:#fff;border:1px solid var(--silver-light);border-radius:18px;padding:22px 26px;box-shadow:0 6px 24px rgba(78,138,203,.10)}
-  .howto h2{font-family:Georgia,serif;font-size:1.25rem;margin-bottom:10px;color:var(--black)}
-  .howto ol{margin-left:20px;color:var(--ink-soft)}
-  .howto ol li{margin:6px 0}
-  .howto ol li b{color:var(--ink)}
-  .card{background:#fff;border:1px solid var(--silver-light);border-radius:20px;padding:28px;margin:26px 0;box-shadow:0 8px 30px rgba(78,138,203,.10)}
-  .card h2{font-family:Georgia,serif;font-size:1.5rem;color:var(--black);margin-bottom:4px;display:flex;align-items:center;gap:10px}
-  .card h2 .num{background:linear-gradient(135deg,var(--sapphire),var(--silver));color:#fff;font-size:1rem;width:34px;height:34px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 10px rgba(78,138,203,.35)}
+  /* progress */
+  .progress{display:flex;justify-content:center;gap:6px;margin:30px auto 0;max-width:700px;padding:0 16px;flex-wrap:wrap}
+  .pstep{flex:1;min-width:90px;text-align:center;font-size:.78rem;color:var(--ink-soft);padding-top:10px;position:relative}
+  .pstep::before{content:"";position:absolute;top:0;left:10%;right:10%;height:4px;border-radius:4px;background:var(--silver-light)}
+  .pstep.done{color:var(--sapphire-deep);font-weight:700}
+  .pstep.done::before{background:var(--sapphire-deep)}
+  .pstep.now{color:var(--black);font-weight:700}
+  .pstep.now::before{background:linear-gradient(90deg,var(--sapphire),var(--silver))}
+  /* cards / steps */
+  .card{background:#fff;border:1px solid var(--silver-light);border-radius:20px;padding:30px;margin:26px 0;box-shadow:0 8px 30px rgba(78,138,203,.10)}
+  .card h2{font-family:Georgia,serif;font-size:1.5rem;color:var(--black);margin-bottom:4px}
   .card .sub{color:var(--ink-soft);font-size:.95rem;margin-bottom:18px}
+  .step{display:none}
+  .step.show{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
   label{display:block;font-weight:600;margin:14px 0 6px;font-size:.95rem}
   input[type=text],input[type=number],textarea,select{width:100%;border:1px solid var(--silver);border-radius:12px;padding:12px 14px;font-size:1rem;font-family:inherit;color:var(--ink);background:#fff}
   input:focus,textarea:focus,select:focus{outline:2px solid var(--sapphire);border-color:var(--sapphire-deep)}
@@ -52,6 +55,19 @@
   .chip{border:1px solid var(--silver);background:#fff;border-radius:999px;padding:9px 16px;font-size:.92rem;cursor:pointer;transition:all .15s;color:var(--ink)}
   .chip:hover{border-color:var(--sapphire-deep)}
   .chip.on{background:linear-gradient(135deg,var(--sapphire-soft),#fff);border-color:var(--sapphire-deep);color:var(--black);font-weight:600;box-shadow:0 2px 10px rgba(78,138,203,.25)}
+  /* purpose cards */
+  .purposes{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:6px}
+  .purpose{border:2px solid var(--silver-light);border-radius:18px;padding:22px 16px;text-align:center;cursor:pointer;background:#fff;transition:all .15s}
+  .purpose:hover{border-color:var(--sapphire);transform:translateY(-2px);box-shadow:0 8px 24px rgba(78,138,203,.18)}
+  .purpose.on{border-color:var(--sapphire-deep);background:linear-gradient(160deg,var(--sapphire-soft),#fff);box-shadow:0 8px 24px rgba(78,138,203,.25)}
+  .purpose .ico{font-size:2.2rem;display:block;margin-bottom:8px}
+  .purpose b{display:block;color:var(--black);font-size:1.02rem}
+  .purpose span{font-size:.82rem;color:var(--ink-soft)}
+  /* q&a */
+  .qa{margin:6px 0 4px}
+  .yesno{display:flex;gap:10px;margin-top:8px}
+  .yesno .chip{min-width:110px;text-align:center}
+  /* fields */
   .lib{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:10px}
   .lib button{border:1px solid var(--silver);background:#fff;border-radius:12px;padding:12px 8px;font-size:.9rem;cursor:pointer;color:var(--ink);transition:all .15s}
   .lib button:hover{border-color:var(--sapphire-deep);background:var(--sapphire-soft)}
@@ -66,112 +82,98 @@
   .reqrow{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:.9rem}
   .reqrow input{width:18px;height:18px;accent-color:var(--sapphire-deep)}
   .empty{border:1px dashed var(--silver);border-radius:14px;padding:24px;text-align:center;color:var(--ink-soft);font-size:.92rem;margin-top:10px}
-  .btn{background:linear-gradient(135deg,var(--sapphire-deep),#6EA3D8);color:#fff;border:none;border-radius:14px;padding:14px 26px;font-size:1.02rem;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(78,138,203,.35);transition:transform .12s}
+  /* nav + buttons */
+  .nav{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
+  .btn{background:linear-gradient(135deg,var(--sapphire-deep),#6EA3D8);color:#fff;border:none;border-radius:14px;padding:14px 30px;font-size:1.02rem;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(78,138,203,.35);transition:transform .12s}
   .btn:hover{transform:translateY(-1px)}
+  .btn.ghost{background:#fff;color:var(--ink-soft);border:1px solid var(--silver);box-shadow:none}
   .btn.secondary{background:#fff;color:var(--sapphire-deep);border:2px solid var(--sapphire-deep);box-shadow:none}
-  .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+  .btn:disabled{opacity:.45;cursor:default;transform:none}
   .preview-frame{width:100%;height:520px;border:1px solid var(--silver-light);border-radius:14px;margin-top:14px;background:#fff}
   .codebox{background:#14181D;color:#DCEBFB;border-radius:14px;padding:20px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.8rem;max-height:380px;overflow:auto;white-space:pre;margin-top:14px}
   .note{background:var(--sapphire-soft);border-radius:14px;padding:16px 20px;font-size:.92rem;color:#2C3E50;margin-top:18px}
   .note b{color:var(--black)}
   .footer{text-align:center;color:var(--ink-soft);font-size:.85rem;margin-top:50px;padding:0 20px}
   .footer .heart{color:var(--sapphire-deep)}
-  @media(max-width:560px){.card{padding:20px}.field .frow{grid-template-columns:1fr}.btn{width:100%}}
+  @media(max-width:560px){.card{padding:20px}.field .frow{grid-template-columns:1fr}.nav .btn{padding:12px 18px;font-size:.95rem}}
 </style>
 </head>
 <body>
 
 <div class="hero">
   <h1>Glam Form <span class="accent">Builder</span></h1>
-  <p class="tag">Pick your fields, style it your way, preview it live — then take home a complete, standalone HTML form you can use anywhere.</p>
+  <p class="tag">Answer a few quick questions and watch your form build itself — then preview it live and take it home.</p>
   <div class="byline">by Glam &middot; Glam Hustle Hub</div>
-  <div class="steps-bar">
-    <span class="step-pill"><b>1</b> Basics</span>
-    <span class="step-pill"><b>2</b> Fields</span>
-    <span class="step-pill"><b>3</b> Submit</span>
-    <span class="step-pill"><b>4</b> Preview</span>
-    <span class="step-pill"><b>5</b> Take it home</span>
-  </div>
 </div>
 
 <div class="wrap">
+  <div class="progress" id="progress"></div>
 
-  <div class="howto">
-    <h2>How this works</h2>
-    <ol>
-      <li><b>Name your form</b> and pick a starting template (Step 1).</li>
-      <li><b>Add fields</b> from the library and edit each one — labels, required, options (Step 2).</li>
-      <li><b>Set your button and thank-you message</b> (Step 3).</li>
-      <li><b>Preview it live</b> — see exactly what your visitors will see (Step 4).</li>
-      <li><b>Copy or download</b> your finished form as one standalone HTML file (Step 5).</li>
-    </ol>
-  </div>
-
-  <!-- STEP 1 -->
   <div class="card">
-    <h2><span class="num">1</span> Form basics</h2>
-    <p class="sub">Give your form a name and pick a starting point. You can change everything afterward.</p>
-    <label for="fTitle">Form title</label>
-    <input type="text" id="fTitle" placeholder="e.g. Custom Tee Order Form" value="Contact Us">
-    <label for="fSub">Subtitle</label>
-    <input type="text" id="fSub" placeholder="e.g. We usually reply within 24 hours" value="Fill this out and we'll be in touch.">
-    <label>Start from a template</label>
-    <div class="chips" id="tplChips">
-      <span class="chip on">Contact</span><span class="chip">Order</span><span class="chip">Signup</span>
-      <span class="chip">Booking</span><span class="chip">Feedback</span><span class="chip">Blank</span>
+    <!-- STEP 1: purpose -->
+    <div class="step" data-step="1">
+      <h2>What should your form do?</h2>
+      <p class="sub">Tap the one that fits — I'll ask the right follow-up questions and suggest your fields.</p>
+      <div class="purposes" id="purposes"></div>
     </div>
-    <label>Accent color</label>
-    <div class="chips" id="accentChips">
-      <span class="chip on" data-c="#4E8ACB">Sapphire</span>
-      <span class="chip" data-c="#8A94A6">Silver</span>
-      <span class="chip" data-c="#14181D">Black</span>
-      <span class="chip" data-c="#2E7D5B">Emerald</span>
+
+    <!-- STEP 2: questions -->
+    <div class="step" data-step="2">
+      <h2>A few quick questions</h2>
+      <p class="sub" id="qSub">So I can set everything up for you.</p>
+      <div id="questions"></div>
+    </div>
+
+    <!-- STEP 3: fields -->
+    <div class="step" data-step="3">
+      <h2>Your fields</h2>
+      <p class="sub">I suggested these based on your answers — tap any field type below to add more, or edit each one.</p>
+      <div class="lib" id="fieldLib"></div>
+      <div id="fieldList" style="margin-top:16px"></div>
+    </div>
+
+    <!-- STEP 4: style -->
+    <div class="step" data-step="4">
+      <h2>Make it yours</h2>
+      <p class="sub">Name it, style it, and write your thank-you message.</p>
+      <label for="fTitle">Form title</label>
+      <input type="text" id="fTitle" placeholder="e.g. Custom Tee Order Form">
+      <label for="fSub">Subtitle</label>
+      <input type="text" id="fSub" placeholder="e.g. We usually reply within 24 hours">
+      <label>Accent color</label>
+      <div class="chips" id="accentChips">
+        <span class="chip on" data-c="#4E8ACB">Sapphire</span>
+        <span class="chip" data-c="#8A94A6">Silver</span>
+        <span class="chip" data-c="#14181D">Black</span>
+        <span class="chip" data-c="#2E7D5B">Emerald</span>
+      </div>
+      <label for="btnText">Submit button text</label>
+      <input type="text" id="btnText" value="Send it">
+      <label for="okTitle">Thank-you headline</label>
+      <input type="text" id="okTitle" value="You're in!">
+      <label for="okMsg">Thank-you message</label>
+      <textarea id="okMsg">Thanks for reaching out — we'll get back to you soon.</textarea>
+      <div class="note"><b>Heads up:</b> this form shows your thank-you message when submitted but doesn't send the answers anywhere yet (demo mode). For a form that collects real responses, build it in Glam Form Studio or connect this HTML to your own form service.</div>
+    </div>
+
+    <!-- STEP 5: preview + take home -->
+    <div class="step" data-step="5">
+      <h2>Preview &amp; take it home</h2>
+      <p class="sub">This is exactly what your visitors will see. Then grab your finished form as one standalone file.</p>
+      <div class="btn-row" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:0">
+        <button class="btn" onclick="refreshPreview()">Refresh preview</button>
+        <button class="btn secondary" onclick="copyForm(this)">Copy HTML</button>
+        <button class="btn secondary" onclick="downloadForm()">Download .html</button>
+      </div>
+      <iframe class="preview-frame" id="preview" title="Form preview"></iframe>
+      <div class="codebox" id="codebox" style="display:none"></div>
+    </div>
+
+    <div class="nav">
+      <button class="btn ghost" id="backBtn" onclick="goStep(cur-1)">← Back</button>
+      <button class="btn" id="nextBtn" onclick="goStep(cur+1)">Continue →</button>
     </div>
   </div>
-
-  <!-- STEP 2 -->
-  <div class="card">
-    <h2><span class="num">2</span> Your fields</h2>
-    <p class="sub">Tap a field type to add it, then edit each field below. Use the arrows to reorder, × to remove.</p>
-    <div class="lib" id="fieldLib"></div>
-    <div id="fieldList" style="margin-top:16px"></div>
-  </div>
-
-  <!-- STEP 3 -->
-  <div class="card">
-    <h2><span class="num">3</span> Submit &amp; thank-you</h2>
-    <p class="sub">What happens when someone hits submit.</p>
-    <label for="btnText">Submit button text</label>
-    <input type="text" id="btnText" value="Send it">
-    <label for="okTitle">Thank-you headline</label>
-    <input type="text" id="okTitle" value="You're in!">
-    <label for="okMsg">Thank-you message</label>
-    <textarea id="okMsg">Thanks for reaching out — we'll get back to you soon.</textarea>
-    <div class="note"><b>Heads up:</b> this form shows your thank-you message when submitted but doesn't send the answers anywhere yet (demo mode). For a form that collects real responses, build it in Glam Form Studio or connect this HTML to your own form service.</div>
-  </div>
-
-  <!-- STEP 4 -->
-  <div class="card">
-    <h2><span class="num">4</span> Live preview</h2>
-    <p class="sub">This is exactly what your visitors will see. Hit refresh after making changes.</p>
-    <div class="btn-row" style="margin-top:0">
-      <button class="btn" onclick="refreshPreview()">Refresh preview</button>
-    </div>
-    <iframe class="preview-frame" id="preview" title="Form preview"></iframe>
-  </div>
-
-  <!-- STEP 5 -->
-  <div class="card">
-    <h2><span class="num">5</span> Take it home</h2>
-    <p class="sub">Your finished form as one standalone HTML file — no dependencies, works anywhere you paste or host it.</p>
-    <div class="btn-row" style="margin-top:0">
-      <button class="btn" onclick="buildCode()">Generate my form code</button>
-      <button class="btn secondary" onclick="copyForm(this)">Copy HTML</button>
-      <button class="btn secondary" onclick="downloadForm()">Download .html</button>
-    </div>
-    <div class="codebox" id="codebox" style="display:none"></div>
-  </div>
-
 </div>
 
 <div class="footer">
@@ -180,36 +182,69 @@
 
 <script>
 "use strict";
-// ---------- state ----------
+// ================= state =================
+var cur = 1;
+var purpose = null;
+var answers = {};
 var fields = [];
 var fid = 0;
-var FIELDTYPES = [
-  {k:"text", n:"Short text"},
-  {k:"email", n:"Email"},
-  {k:"tel", n:"Phone"},
-  {k:"number", n:"Number"},
-  {k:"textarea", n:"Long text"},
-  {k:"select", n:"Dropdown"},
-  {k:"radio", n:"Multiple choice"},
-  {k:"checkbox", n:"Checkboxes"},
-  {k:"date", n:"Date"},
-  {k:"file", n:"File upload"},
-  {k:"rating", n:"Star rating"}
+
+var PURPOSES = [
+  {k:"order",   ico:"🛍️", n:"Take orders",  d:"Sell products or take custom orders"},
+  {k:"contact", ico:"💌", n:"Contact me",   d:"Let people reach out with a message"},
+  {k:"signup",  ico:"📝", n:"Signups",      d:"Grow your email or text list"},
+  {k:"booking", ico:"📅", n:"Bookings",     d:"Let people book a time with you"},
+  {k:"feedback",ico:"⭐", n:"Feedback",     d:"Collect reviews and ratings"},
+  {k:"blank",   ico:"✨", n:"Start blank",  d:"I'll pick every field myself"}
 ];
-var DEFAULT_LABELS = {text:"Your answer",email:"Email address",tel:"Phone number",number:"Quantity",textarea:"Tell us more",select:"Choose one",radio:"Pick one",checkbox:"Select all that apply",date:"Preferred date",file:"Upload a file",rating:"How would you rate us?"};
-var PRESETS = {
-  "Contact":[["text","Full name",1,""],["email","Email address",1,""],["tel","Phone number",0,""],["textarea","Your message",1,""]],
-  "Order":[["text","Full name",1,""],["email","Email address",1,""],["tel","Phone number",1,""],["select","Choose your product",1,"Tee — $39\nHoodie — $69\nHat — $29"],["number","Quantity",1,""],["textarea","Notes for your order",0,""]],
-  "Signup":[["text","Full name",1,""],["email","Email address",1,""],["tel","Phone number",0,""],["checkbox","Keep me in the loop",0,"Email updates\nText updates"]],
-  "Booking":[["text","Full name",1,""],["email","Email address",1,""],["tel","Phone number",1,""],["date","Preferred date",1,""],["textarea","Anything we should know?",0,""]],
-  "Feedback":[["text","Your name",0,""],["email","Email address",0,""],["rating","How would you rate us?",1,""],["textarea","Your feedback",1,""]],
-  "Blank":[]
+
+var FIELDTYPES = [
+  {k:"text", n:"Short text"},{k:"email", n:"Email"},{k:"tel", n:"Phone"},
+  {k:"number", n:"Number"},{k:"time", n:"Time"},{k:"textarea", n:"Long text"},
+  {k:"select", n:"Dropdown"},{k:"radio", n:"Multiple choice"},{k:"checkbox", n:"Checkboxes"},
+  {k:"date", n:"Date"},{k:"file", n:"File upload"},{k:"rating", n:"Star rating"}
+];
+var DEFAULT_LABELS = {text:"Your answer",email:"Email address",tel:"Phone number",number:"Quantity",time:"Preferred time",textarea:"Tell us more",select:"Choose one",radio:"Pick one",checkbox:"Select all that apply",date:"Preferred date",file:"Upload a file",rating:"How would you rate us?"};
+
+// questions per purpose: {key, label, type: text|yesno, def}
+var QUESTIONS = {
+  order: [
+    {key:"product", label:"What are you selling?", type:"text", ph:"e.g. Custom tees"},
+    {key:"price", label:"Price (optional)", type:"text", ph:"e.g. $39"},
+    {key:"qty", label:"Do you need a quantity field?", type:"yesno", def:true},
+    {key:"phone", label:"Do you need their phone number?", type:"yesno", def:true},
+    {key:"notes", label:"Add a notes box for special requests?", type:"yesno", def:true}
+  ],
+  contact: [
+    {key:"phone", label:"Do you need their phone number?", type:"yesno", def:false},
+    {key:"topic", label:"Add a “What's this about?” dropdown?", type:"yesno", def:true},
+    {key:"topics", label:"Dropdown options (one per line)", type:"text", ph:"General question\nOrder help\nFeedback", showIf:{key:"topic", val:true}}
+  ],
+  signup: [
+    {key:"for", label:"What are they signing up for?", type:"text", ph:"e.g. My weekly glam newsletter"},
+    {key:"phone", label:"Do you want their phone number too?", type:"yesno", def:false}
+  ],
+  booking: [
+    {key:"service", label:"What are they booking?", type:"text", ph:"e.g. 1:1 glam strategy call"},
+    {key:"phone", label:"Do you need their phone number?", type:"yesno", def:true},
+    {key:"time", label:"Let them pick a time too?", type:"yesno", def:true},
+    {key:"notes", label:"Add a notes box?", type:"yesno", def:true}
+  ],
+  feedback: [
+    {key:"about", label:"What are they rating?", type:"text", ph:"e.g. your recent order", defv:"our service"},
+    {key:"name", label:"Ask for their name?", type:"yesno", def:true}
+  ],
+  blank: []
 };
 
-// ---------- helpers ----------
+// ================= helpers =================
 function val(id){ return document.getElementById(id).value.trim(); }
 function esc(s){
-  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+function accent(){
+  var el = document.querySelector("#accentChips .chip.on");
+  return el ? el.getAttribute("data-c") : "#4E8ACB";
 }
 function chipGroup(id, single, cb){
   var box = document.getElementById(id);
@@ -220,24 +255,146 @@ function chipGroup(id, single, cb){
     if(cb) cb(t);
   });
 }
-function accent(){
-  var el = document.querySelector("#accentChips .chip.on");
-  return el ? el.getAttribute("data-c") : "#4E8ACB";
+
+// ================= wizard =================
+var STEPNAMES = ["Purpose","Questions","Fields","Style","Preview"];
+function renderProgress(){
+  document.getElementById("progress").innerHTML = STEPNAMES.map(function(n,i){
+    var s = i+1, cls = s<cur ? "done" : (s===cur ? "now" : "");
+    return '<div class="pstep '+cls+'">'+s+". "+n+"</div>";
+  }).join("");
+}
+function goStep(n){
+  if(n<1) n=1; if(n>5) n=5;
+  if(n===3 && cur===2) buildFieldsFromAnswers();
+  if(n===4 && cur===3) prefillStyle();
+  if(n===5 && cur===4) refreshPreview();
+  cur = n;
+  document.querySelectorAll(".step").forEach(function(s){
+    s.classList.toggle("show", +s.getAttribute("data-step")===cur);
+  });
+  renderProgress();
+  document.getElementById("backBtn").style.visibility = cur===1 ? "hidden" : "visible";
+  document.getElementById("nextBtn").textContent = cur===5 ? "Done ✓" : (cur===1 && !purpose ? "Pick one above ↑" : "Continue →");
+  document.getElementById("nextBtn").disabled = (cur===1 && !purpose);
+  window.scrollTo({top:0, behavior:"smooth"});
 }
 
-// ---------- fields ----------
+// ---- step 1: purpose ----
+function renderPurposes(){
+  document.getElementById("purposes").innerHTML = PURPOSES.map(function(p){
+    return '<div class="purpose'+(purpose===p.k?" on":"")+'" data-k="'+p.k+'">' +
+      '<span class="ico">'+p.ico+'</span><b>'+p.n+"</b><span>"+p.d+"</span></div>";
+  }).join("");
+  document.getElementById("purposes").onclick = function(e){
+    var c = e.target.closest(".purpose"); if(!c) return;
+    purpose = c.getAttribute("data-k");
+    answers = {};
+    renderPurposes();
+    goStep(cur); // refresh next button state
+  };
+}
+
+// ---- step 2: questions ----
+function renderQuestions(){
+  var box = document.getElementById("questions");
+  var qs = QUESTIONS[purpose] || [];
+  if(!qs.length){
+    box.innerHTML = '<div class="note">No questions needed — you\'ll pick every field yourself in the next step.</div>';
+    return;
+  }
+  box.innerHTML = qs.map(function(q, i){
+    var vis = q.showIf ? (answers[q.showIf.key]===q.showIf.val) : true;
+    var inner = "";
+    if(q.type==="text"){
+      inner = '<input type="text" data-q="'+q.key+'" value="'+esc(answers[q.key]!=null?answers[q.key]:(q.defv||""))+'" placeholder="'+esc(q.ph||"")+'" oninput="answerText(this)">';
+    } else {
+      var v = answers[q.key]!=null ? answers[q.key] : q.def;
+      inner = '<div class="yesno"><span class="chip'+(v?" on":"")+'" data-q="'+q.key+'" data-v="1" onclick="answerYesNo(this)">Yes</span>' +
+              '<span class="chip'+(!v?" on":"")+'" data-q="'+q.key+'" data-v="0" onclick="answerYesNo(this)">No</span></div>';
+    }
+    return '<div class="qa" data-qi="'+i+'" style="'+(vis?"":"display:none")+'"><label>'+q.label+"</label>"+inner+"</div>";
+  }).join("");
+}
+function answerText(el){ answers[el.getAttribute("data-q")] = el.value; }
+function answerYesNo(el){
+  var k = el.getAttribute("data-q");
+  answers[k] = el.getAttribute("data-v")==="1";
+  var yes = el.parentNode.children[0], no = el.parentNode.children[1];
+  yes.classList.toggle("on", answers[k]); no.classList.toggle("on", !answers[k]);
+  renderQuestions(); // re-evaluate showIf
+  restoreYesNo(k);
+}
+function restoreYesNo(changedKey){
+  var qs = QUESTIONS[purpose]||[];
+  qs.forEach(function(q){
+    if(q.type!=="yesno" || q.key===changedKey) return;
+    var v = answers[q.key]!=null ? answers[q.key] : q.def;
+    var chips = document.querySelectorAll('[data-q="'+q.key+'"]');
+    if(chips.length===2){ chips[0].classList.toggle("on", !!v); chips[1].classList.toggle("on", !v); }
+  });
+}
+
+// ---- step 3: fields ----
 function addField(type, label, required, optionsText, placeholder){
   var f = {
     id: ++fid, type: type,
     label: label || DEFAULT_LABELS[type],
     required: !!required,
     placeholder: placeholder || "",
-    options: optionsText ? optionsText.split("\n").map(function(s){return s.trim();}).filter(Boolean) : []
+    options: optionsText ? String(optionsText).split("\n").map(function(s){return s.trim();}).filter(Boolean) : []
   };
   if((type==="select"||type==="radio"||type==="checkbox") && !f.options.length){
     f.options = ["Option 1","Option 2","Option 3"];
   }
   fields.push(f);
+  renderFields();
+}
+function buildFieldsFromAnswers(){
+  fields = [];
+  function F(type,label,req,opts,ph){
+    fields.push({id:++fid,type:type,label:label||DEFAULT_LABELS[type],required:!!req,placeholder:ph||"",
+      options:(opts||"").split("\n").map(function(s){return s.trim();}).filter(Boolean)});
+  }
+  function yn(k, def){ return answers[k]!=null ? answers[k] : def; }
+  var a = answers;
+  if(purpose==="order"){
+    var prod = (a.product||"").trim();
+    F("text","Full name",true);
+    F("email","Email address",true);
+    if(yn("phone",true)) F("tel","Phone number",true);
+    if(prod) F("select","Choose your product",true, prod + (a.price?" — "+a.price:""));
+    if(yn("qty",true)) F("number","Quantity",true);
+    if(yn("notes",true)) F("textarea","Notes for your order",false);
+  } else if(purpose==="contact"){
+    F("text","Full name",true);
+    F("email","Email address",true);
+    if(yn("phone",false)) F("tel","Phone number",false);
+    if(yn("topic",true)) F("select","What's this about?",true, a.topics||"General question\nOrder help\nFeedback");
+    F("textarea","Your message",true);
+  } else if(purpose==="signup"){
+    var what = (a.for||"").trim();
+    F("text","Full name",true);
+    F("email","Email address",true);
+    if(yn("phone",false)) F("tel","Phone number",false);
+    if(what) F("checkbox","Email me about",false, what);
+    else F("checkbox","Keep me in the loop",false,"Email updates\nText updates");
+  } else if(purpose==="booking"){
+    var svc = (a.service||"").trim();
+    F("text","Full name",true);
+    F("email","Email address",true);
+    if(yn("phone",true)) F("tel","Phone number",true);
+    F("date","Preferred date",true);
+    if(yn("time",true)) F("time","Preferred time",false);
+    if(svc) F("select","Service",true, svc);
+    if(yn("notes",true)) F("textarea","Anything we should know?",false);
+  } else if(purpose==="feedback"){
+    var about = (a.about||"our service").trim();
+    if(yn("name",true)) F("text","Your name",false);
+    F("email","Email address",false);
+    F("rating","How would you rate "+about+"?",true);
+    F("textarea","Tell us more",true);
+  }
   renderFields();
 }
 function renderFields(){
@@ -246,7 +403,7 @@ function renderFields(){
     box.innerHTML = '<div class="empty">No fields yet — tap a field type above to add your first one.</div>';
     return;
   }
-  box.innerHTML = fields.map(function(f, i){
+  box.innerHTML = fields.map(function(f){
     var tn = FIELDTYPES.filter(function(t){return t.k===f.type;})[0].n;
     var optHtml = "";
     if(f.type==="select"||f.type==="radio"||f.type==="checkbox"){
@@ -277,10 +434,7 @@ function editField(el){
   else if(k==="options") f.options = el.value.split("\n").map(function(s){return s.trim();}).filter(Boolean);
   else f[k] = el.value;
 }
-function removeField(id){
-  fields = fields.filter(function(f){return f.id!==id;});
-  renderFields();
-}
+function removeField(id){ fields = fields.filter(function(f){return f.id!==id;}); renderFields(); }
 function moveField(id, dir){
   var i = fields.findIndex(function(f){return f.id===id;});
   var j = i + dir;
@@ -288,58 +442,71 @@ function moveField(id, dir){
   var t = fields[i]; fields[i]=fields[j]; fields[j]=t;
   renderFields();
 }
-function applyPreset(name){
-  fields = [];
-  (PRESETS[name]||[]).forEach(function(p){
-    addFieldSilent(p[0], p[1], p[2], p[3]);
-  });
-  renderFields();
-}
-function addFieldSilent(type, label, required, optionsText){
-  var f = { id: ++fid, type: type, label: label || DEFAULT_LABELS[type], required: !!required, placeholder: "",
-    options: optionsText ? optionsText.split("\n").map(function(s){return s.trim();}).filter(Boolean) : [] };
-  fields.push(f);
+
+// ---- step 4: style ----
+function prefillStyle(){
+  var titles = {
+    order: (answers.product||"").trim() ? answers.product.trim()+" Order Form" : "Order Form",
+    contact: "Contact Us",
+    signup: (answers.for||"").trim() ? "Sign up: "+answers.for.trim() : "Sign Up",
+    booking: (answers.service||"").trim() ? "Book: "+answers.service.trim() : "Book an Appointment",
+    feedback: "We'd love your feedback",
+    blank: "My Form"
+  };
+  var subs = {
+    order: "Fill this out and we'll confirm your order.",
+    contact: "Fill this out and we'll be in touch.",
+    signup: "Drop your details below — you're one step away.",
+    booking: "Pick a date that works for you.",
+    feedback: "Tell us how we did — it takes 30 seconds.",
+    blank: ""
+  };
+  var btns = {order:"Place my order", contact:"Send it", signup:"Sign me up", booking:"Book now", feedback:"Send feedback", blank:"Submit"};
+  var tEl = document.getElementById("fTitle"), sEl = document.getElementById("fSub"), bEl = document.getElementById("btnText");
+  if(!tEl.value.trim()) tEl.value = titles[purpose]||"My Form";
+  if(!sEl.value.trim()) sEl.value = subs[purpose]||"";
+  if(bEl.value.trim()==="Send it" || !bEl.value.trim()) bEl.value = btns[purpose]||"Send it";
 }
 
-// ---------- form generation ----------
-function fieldHTML(f, accentColor){
+// ================= form generation =================
+function fieldHTML(f, ac){
   var req = f.required ? " required" : "";
   var name = "field_" + f.id;
-  var lab = '<label for="'+name+'">'+esc(f.label)+(f.required?' <span style="color:'+accentColor+'">*</span>':"")+"</label>";
-  var inpStyle = "width:100%;border:1.5px solid #E2E6EC;border-radius:10px;padding:12px 14px;font-size:1rem;font-family:inherit;";
+  var star = f.required ? ' <span style="color:'+ac+'">*</span>' : "";
+  var lab = '<label for="'+name+'">'+esc(f.label)+star+"</label>";
+  var flab = '<div class="flabel">'+esc(f.label)+star+"</div>";
+  var inp = "width:100%;border:1.5px solid #E2E6EC;border-radius:10px;padding:12px 14px;font-size:1rem;font-family:inherit;";
   switch(f.type){
-    case "text": case "email": case "tel": case "number": case "date":
-      return lab+'<input id="'+name+'" name="'+esc(f.label)+'" type="'+f.type+'" placeholder="'+esc(f.placeholder)+'"'+req+' style="'+inpStyle+'">';
+    case "text": case "email": case "tel": case "number": case "date": case "time":
+      return lab+'<input id="'+name+'" name="'+esc(f.label)+'" type="'+f.type+'" placeholder="'+esc(f.placeholder)+'"'+req+' style="'+inp+'">';
     case "textarea":
-      return lab+'<textarea id="'+name+'" name="'+esc(f.label)+'" placeholder="'+esc(f.placeholder)+'"'+req+' style="'+inpStyle+'min-height:110px;resize:vertical;"></textarea>';
+      return lab+'<textarea id="'+name+'" name="'+esc(f.label)+'" placeholder="'+esc(f.placeholder)+'"'+req+' style="'+inp+'min-height:110px;resize:vertical;"></textarea>';
     case "select":
       var opts = f.options.map(function(o){return '<option>'+esc(o)+"</option>";}).join("");
-      return lab+'<select id="'+name+'" name="'+esc(f.label)+'"'+req+' style="'+inpStyle+'"><option value="">Choose…</option>'+opts+"</select>";
+      return lab+'<select id="'+name+'" name="'+esc(f.label)+'"'+req+' style="'+inp+'"><option value="">Choose…</option>'+opts+"</select>";
     case "radio":
-      return '<div class="flabel">'+esc(f.label)+(f.required?' <span style="color:'+accentColor+'">*</span>':"")+"</div>" +
-        f.options.map(function(o,i){
-          return '<label class="choice"><input type="radio" name="'+esc(f.label)+'" value="'+esc(o)+'"'+(f.required&&i===0?" required":"")+'> '+esc(o)+"</label>";
-        }).join("");
+      return flab + f.options.map(function(o,i){
+        return '<label class="choice"><input type="radio" name="'+esc(f.label)+'" value="'+esc(o)+'"'+(f.required&&i===0?" required":"")+'> '+esc(o)+"</label>";
+      }).join("");
     case "checkbox":
-      return '<div class="flabel">'+esc(f.label)+(f.required?' <span style="color:'+accentColor+'">*</span>':"")+"</div>" +
-        f.options.map(function(o){
-          return '<label class="choice"><input type="checkbox" name="'+esc(f.label)+'" value="'+esc(o)+'"> '+esc(o)+"</label>";
-        }).join("");
+      return flab + f.options.map(function(o){
+        return '<label class="choice"><input type="checkbox" name="'+esc(f.label)+'" value="'+esc(o)+'"> '+esc(o)+"</label>";
+      }).join("");
     case "file":
-      return lab+'<input id="'+name+'" name="'+esc(f.label)+'" type="file"'+req+' style="'+inpStyle+'">';
+      return lab+'<input id="'+name+'" name="'+esc(f.label)+'" type="file"'+req+' style="'+inp+'">';
     case "rating":
       var stars = "";
       for(var i=5;i>=1;i--){
         stars += '<input type="radio" id="star'+f.id+"_"+i+'" name="'+esc(f.label)+'" value="'+i+'"'+req+'><label for="star'+f.id+"_"+i+'">★</label>';
       }
-      return '<div class="flabel">'+esc(f.label)+(f.required?' <span style="color:'+accentColor+'">*</span>':"")+'</div><div class="stars">'+stars+"</div>";
+      return flab+'<div class="stars">'+stars+"</div>";
   }
   return "";
 }
 function genFormHTML(){
-  var title = val("fTitle") || "Contact Us";
+  var title = val("fTitle") || "My Form";
   var sub = val("fSub");
-  var btnText = val("btnText") || "Send it";
+  var btnText = val("btnText") || "Submit";
   var okTitle = val("okTitle") || "You're in!";
   var okMsg = val("okMsg") || "Thanks — we'll be in touch soon.";
   var ac = accent();
@@ -382,16 +549,9 @@ function genFormHTML(){
   "</body>\n</html>";
 }
 
-// ---------- actions ----------
+// ================= actions =================
 function refreshPreview(){
   document.getElementById("preview").srcdoc = genFormHTML();
-}
-function buildCode(){
-  var code = genFormHTML();
-  var box = document.getElementById("codebox");
-  box.style.display = "block";
-  box.textContent = code;
-  box.scrollIntoView({behavior:"smooth", block:"center"});
 }
 function copyForm(btn){
   var code = genFormHTML();
@@ -411,16 +571,16 @@ function downloadForm(){
   setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500);
 }
 
-// ---------- init ----------
+// ================= init =================
 (function(){
   var lib = document.getElementById("fieldLib");
   lib.innerHTML = FIELDTYPES.map(function(t){
     return '<button onclick="addField(\''+t.k+'\')">+ '+t.n+"</button>";
   }).join("");
-  chipGroup("tplChips", true, function(t){ applyPreset(t.textContent.trim()); });
   chipGroup("accentChips", true);
-  applyPreset("Contact");
-  refreshPreview();
+  renderPurposes();
+  renderQuestions();
+  goStep(1);
 })();
 </script>
 </body>
