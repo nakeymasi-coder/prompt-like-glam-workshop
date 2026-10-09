@@ -5757,6 +5757,128 @@ body .brand-block::before{
 }
 
     </style>
+    <style id="tools-resources-layout-fix">
+/* Tools & Resources: keep tile contents stacked at every viewport size.
+   Scoped to this page so shared download cards elsewhere remain unchanged. */
+#tools-resources .publish-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, max(270px, calc((100% - 48px) / 3))), 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+
+#tools-resources .publish-grid > article {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 14px;
+  min-width: 0;
+  min-height: 280px;
+  padding: 26px;
+}
+
+#tools-resources .publish-grid > article > * {
+  max-width: 100%;
+  min-width: 0;
+}
+
+#tools-resources .publish-grid .lesson-tag {
+  min-height: 32px;
+  margin: 0;
+  align-items: center;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+#tools-resources .publish-grid > article > svg,
+#tools-resources .publish-grid > article > i {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  margin: 0;
+}
+
+#tools-resources .publish-grid h2 {
+  margin: 0;
+  font-size: clamp(1.4rem, 2vw, 1.625rem);
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+#tools-resources .publish-grid p {
+  width: 100%;
+  margin: 0 0 6px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+#tools-resources .publish-grid .gold-btn,
+#tools-resources .publish-grid .primary-btn {
+  flex: 0 0 auto;
+  min-width: 0;
+  min-height: 46px;
+  margin-top: auto;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.4;
+}
+
+#tools-resources .tools-directory-heading {
+  margin-top: 30px;
+}
+
+#tools-resources .tools-directory-heading h1 {
+  margin: 0;
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
+  line-height: 1.2;
+}
+
+#tools-resources #featuredPortalResource {
+  margin-bottom: 26px;
+}
+
+#tools-resources .guide-step-content {
+  min-width: 0;
+}
+
+#tools-resources .guide-shortcuts-table {
+  min-width: 0;
+  table-layout: fixed;
+  line-height: 1.5;
+}
+
+#tools-resources .guide-shortcuts-table th:first-child {
+  width: 36%;
+}
+
+#tools-resources .guide-shortcuts-table code {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 640px) {
+  #tools-resources .publish-grid {
+    gap: 18px;
+  }
+
+  #tools-resources .publish-grid > article {
+    min-height: 0;
+    padding: 22px;
+  }
+
+  #tools-resources .publish-grid .gold-btn,
+  #tools-resources .publish-grid .primary-btn {
+    min-height: 48px;
+  }
+
+  #tools-resources .guide-shortcuts-table th,
+  #tools-resources .guide-shortcuts-table td {
+    padding: 12px 10px;
+    font-size: 0.875rem;
+    overflow-wrap: anywhere;
+  }
+}
+    </style>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
