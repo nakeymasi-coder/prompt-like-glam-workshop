@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be Seen · Unseen Beauty Prompt Generator</title>
+<meta name="description" content="Create stunning, dignified AI portrait prompts celebrating the women the world overlooks — survivors, warriors and queens.">
+<style>
+  :root{
+    --sapphire:#5B9BD5; --sapphire-deep:#2B6CB0; --sapphire-pale:#BFD9F2;
+    --chrome:#C9D4E0; --chrome-deep:#8FA3B8; --pearl:#FDFBF6; --ink:#1F2A37;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Segoe UI',system-ui,-apple-system,sans-serif; color:var(--ink);
+    background:linear-gradient(160deg,#FDFBF6 0%,#EAF2FB 40%,#DCE9F7 70%,#F4EFE6 100%);
+    min-height:100vh;
+  }
+  .wrap{max-width:1060px; margin:0 auto; padding:28px 18px 80px;}
+  header.hero{
+    text-align:center; padding:46px 24px 40px; border-radius:26px; color:#fff;
+    background:linear-gradient(135deg,#2B6CB0 0%,#5B9BD5 35%,#9DC3E6 60%,#C9D4E0 85%,#E9EDF2 100%);
+    box-shadow:0 18px 45px rgba(43,108,176,.28); position:relative; overflow:hidden;
+  }
+  header.hero::after{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.35),transparent 45%),
+               radial-gradient(circle at 85% 75%,rgba(255,255,255,.25),transparent 40%);
+    pointer-events:none;
+  }
+  header.hero h1{font-size:clamp(2rem,5vw,3.1rem); letter-spacing:1px; text-shadow:0 2px 14px rgba(20,40,70,.35); position:relative; z-index:1;}
+  header.hero h1 .seen{background:linear-gradient(90deg,#fff,#FFE9A8); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  header.hero p{margin-top:12px; font-size:clamp(1rem,2.4vw,1.2rem); max-width:720px; margin-left:auto; margin-right:auto; position:relative; z-index:1; text-shadow:0 1px 8px rgba(20,40,70,.3);}
+  .dignity{
+    margin:18px auto 0; display:inline-block; background:rgba(255,255,255,.92); color:#2B6CB0;
+    padding:10px 20px; border-radius:999px; font-weight:600; font-size:.95rem; position:relative; z-index:1;
+    box-shadow:0 4px 14px rgba(20,40,70,.18);
+  }
+  section.step{
+    background:rgba(255,255,255,.86); border:1px solid #E3ECF5; border-radius:20px;
+    padding:26px 22px; margin-top:26px; box-shadow:0 10px 30px rgba(43,108,176,.10);
+    backdrop-filter:blur(4px);
+  }
+  .step-head{display:flex; align-items:center; gap:12px; margin-bottom:6px;}
+  .step-num{
+    width:40px; height:40px; border-radius:50%; flex:0 0 40px;
+    background:linear-gradient(135deg,#2B6CB0,#5B9BD5,#C9D4E0);
+    color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:1.1rem;
+    box-shadow:0 4px 12px rgba(43,108,176,.35);
+  }
+  .step-head h2{font-size:1.35rem; color:#1F2A37;}
+  .step-sub{color:#5A6B7E; margin:2px 0 16px 52px; font-size:.98rem;}
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px;}
+  .grid.tight{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));}
+  .card{
+    border:2px solid #E3ECF5; border-radius:14px; padding:14px 12px; cursor:pointer;
+    background:#fff; transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    text-align:center; user-select:none;
+  }
+  .card:hover{transform:translateY(-3px); box-shadow:0 10px 22px rgba(43,108,176,.16);}
+  .card.selected{
+    border-color:var(--sapphire-deep);
+    background:linear-gradient(160deg,#FFFFFF,#EAF2FB);
+    box-shadow:0 10px 24px rgba(43,108,176,.22);
+  }
+  .card .emoji{font-size:2rem; display:block; margin-bottom:8px;}
+  .card .name{font-weight:700; font-size:.98rem; color:#1F2A37;}
+  .card .desc{font-size:.82rem; color:#6B7C90; margin-top:6px; line-height:1.4;}
+  .chip{
+    border:2px solid #E3ECF5; background:#fff; border-radius:999px; padding:10px 16px;
+    cursor:pointer; font-size:.95rem; font-weight:600; color:#33475C; transition:all .15s ease; user-select:none;
+  }
+  .chip:hover{transform:translateY(-2px); box-shadow:0 8px 18px rgba(43,108,176,.14);}
+  .chip.selected{
+    background:linear-gradient(135deg,#2B6CB0,#5B9BD5); color:#fff; border-color:#2B6CB0;
+    box-shadow:0 8px 18px rgba(43,108,176,.30);
+  }
+  .chips{display:flex; flex-wrap:wrap; gap:10px;}
+  label.lbl{display:block; font-weight:700; margin:20px 0 10px; color:#2B4A68;}
+  label.lbl:first-of-type{margin-top:4px;}
+  input[type=text], select{
+    width:100%; padding:13px 15px; border-radius:12px; border:2px solid #D8E4F0;
+    font-size:1rem; background:#fff; color:#1F2A37; outline:none;
+  }
+  input[type=text]:focus, select:focus{border-color:var(--sapphire-deep); box-shadow:0 0 0 3px rgba(91,155,213,.18);}
+  .btnrow{display:flex; flex-wrap:wrap; gap:12px; margin-top:22px;}
+  button.btn{
+    border:none; cursor:pointer; font-weight:800; font-size:1.05rem; border-radius:14px;
+    padding:15px 28px; transition:transform .15s ease, box-shadow .15s ease;
+  }
+  button.btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:linear-gradient(135deg,#2B6CB0,#5B9BD5 60%,#9DC3E6); color:#fff; box-shadow:0 10px 24px rgba(43,108,176,.35);}
+  .btn-ghost{background:#fff; color:#2B6CB0; border:2px solid #BFD9F2;}
+  .btn-chrome{background:linear-gradient(135deg,#8FA3B8,#C9D4E0,#F2F5F8); color:#1F2A37; box-shadow:0 8px 20px rgba(140,160,180,.35);}
+  .countrow{display:flex; align-items:center; gap:14px; margin-top:20px; flex-wrap:wrap;}
+  .countrow input[type=range]{flex:1; min-width:180px; accent-color:#2B6CB0;}
+  .countval{font-weight:800; color:#2B6CB0; font-size:1.2rem; min-width:88px; text-align:center;
+    background:#EAF2FB; border-radius:10px; padding:6px 10px;}
+  #output{margin-top:26px; display:none;}
+  .prompt-card{
+    background:#fff; border:2px solid #D8E4F0; border-radius:16px; padding:18px; margin-bottom:14px;
+    box-shadow:0 8px 22px rgba(43,108,176,.10);
+  }
+  .prompt-card .phead{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;}
+  .prompt-card .pnum{font-weight:800; color:#2B6CB0;}
+  .prompt-card p.ptxt{line-height:1.65; font-size:.98rem; color:#2E3D4F; white-space:pre-wrap;}
+  .mini-btn{
+    border:2px solid #BFD9F2; background:#fff; color:#2B6CB0; font-weight:700; border-radius:10px;
+    padding:8px 16px; cursor:pointer; font-size:.9rem; transition:all .15s ease;
+  }
+  .mini-btn:hover{background:#EAF2FB;}
+  .mini-btn.copied{background:#2B6CB0; color:#fff; border-color:#2B6CB0;}
+  #pill{
+    position:fixed; bottom:22px; left:50%; transform:translateX(-50%) translateY(120px);
+    background:linear-gradient(135deg,#2B6CB0,#5B9BD5); color:#fff; font-weight:700;
+    padding:14px 26px; border-radius:999px; box-shadow:0 12px 30px rgba(43,108,176,.4);
+    transition:transform .3s ease; z-index:50; cursor:pointer; border:none; font-size:1rem;
+  }
+  #pill.show{transform:translateX(-50%) translateY(0);}
+  footer{text-align:center; color:#7A8CA0; margin-top:44px; font-size:.9rem;}
+  footer .sig{font-weight:700; color:#2B6CB0;}
+  @media(max-width:560px){ .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>BE <span class="seen">SEEN</span></h1>
+    <p>The Unseen Beauty Prompt Generator — create stunning, dignified AI portraits celebrating the women the world overlooks: survivors, warriors &amp; queens.</p>
+    <div class="dignity">🤍 Every portrait celebrates strength — never pity.</div>
+  </header>
+
+  <!-- STEP 1: HERO -->
+  <section class="step">
+    <div class="step-head"><div class="step-num">1</div><h2>Choose your queen</h2></div>
+    <p class="step-sub">Pick the woman the world needs to see. Each one is written with dignity and beauty first.</p>
+    <div class="grid" id="heroGrid"></div>
+  </section>
+
+  <!-- STEP 2: DETAILS -->
+  <section class="step">
+    <div class="step-head"><div class="step-num">2</div><h2>Her beauty details</h2></div>
+    <p class="step-sub">Shape how she shows up — every option keeps her gorgeous and real.</p>
+
+    <label class="lbl">Skin tone</label>
+    <div class="chips" id="skinChips"></div>
+
+    <label class="lbl">Age</label>
+    <div class="chips" id="ageChips"></div>
+
+    <label class="lbl">Body</label>
+    <div class="chips" id="bodyChips"></div>
+
+    <label class="lbl">Hair / crown</label>
+    <div class="chips" id="hairChips"></div>
+
+    <label class="lbl">Outfit</label>
+    <div class="chips" id="outfitChips"></div>
+
+    <label class="lbl">Setting</label>
+    <div class="chips" id="settingChips"></div>
+  </section>
+
+  <!-- STEP 3: WORD -->
+  <section class="step">
+    <div class="step-head"><div class="step-num">3</div><h2>Her power word</h2></div>
+    <p class="step-sub">The word that appears in the portrait — pick one or write her own.</p>
+    <div class="chips" id="wordChips"></div>
+    <label class="lbl" style="margin-top:18px;">Or write a custom word / short phrase</label>
+    <input type="text" id="customWord" maxlength="40" placeholder="e.g. Still She Rises">
+  </section>
+
+  <!-- STEP 4: TYPOGRAPHY -->
+  <section class="step">
+    <div class="step-head"><div class="step-num">4</div><h2>Typography style</h2></div>
+    <p class="step-sub">How her power word looks — from bubble letters to rhinestone bling.</p>
+    <div class="grid tight" id="typeGrid"></div>
+  </section>
+
+  <!-- STEP 5: VIBE -->
+  <section class="step">
+    <div class="step-head"><div class="step-num">5</div><h2>Art vibe</h2></div>
+    <p class="step-sub">The overall look and feel of the portrait.</p>
+    <div class="grid tight" id="vibeGrid"></div>
+
+    <div class="countrow">
+      <label class="lbl" style="margin:0;">Variations:</label>
+      <input type="range" id="countRange" min="1" max="10" value="4">
+      <div class="countval"><span id="countNum">4</span> prompts</div>
+    </div>
+
+    <div class="btnrow">
+      <button class="btn btn-primary" id="genBtn">✨ Generate Prompts</button>
+      <button class="btn btn-chrome" id="surpriseBtn">🎲 Surprise Me</button>
+      <button class="btn btn-ghost" id="copyAllBtn" style="display:none;">📋 Copy All</button>
+    </div>
+  </section>
+
+  <!-- OUTPUT -->
+  <section class="step" id="output">
+    <div class="step-head"><div class="step-num">✓</div><h2>Your prompts</h2></div>
+    <p class="step-sub">Paste these into your favorite AI image tool — Midjourney, DALL·E, Firefly, Ideogram, whatever you love.</p>
+    <div id="promptList"></div>
+  </section>
+
+  <footer>
+    Made with 🤍 by <span class="sig">Glam Hustle Hub</span> · Every woman deserves to be seen.
+  </footer>
+</div>
+
+<button id="pill">⬇ See your prompts</button>
+
+<script>
+/* ============================== DATA ============================== */
+const HEROES = [
+  {name:"DV Survivor", emoji:"🕊️", desc:"Radiant, healing, unbreakable spirit",
+   prompt:"a radiant domestic violence survivor, serene and powerful, soft light honoring her healed strength"},
+  {name:"Alopecia Queen", emoji:"👑", desc:"Bald, bold & breathtakingly beautiful",
+   prompt:"a stunning queen with alopecia, her smooth bald head glowing like polished bronze, regal and confident"},
+  {name:"Wheelchair Queen", emoji:"♿", desc:"Seated like royalty, rolling in glam",
+   prompt:"a glamorous queen seated like royalty in a sleek modern wheelchair, poised and radiant"},
+  {name:"Prosthetic Goddess", emoji:"🦿", desc:"Strutting with her blade / jeweled limb",
+   prompt:"a confident goddess with a beautiful jeweled prosthetic leg, strutting with fierce elegance"},
+  {name:"Vitiligo Beauty", emoji:"🎨", desc:"Her skin tells a story in living art",
+   prompt:"a breathtaking beauty whose vitiligo patterns sweep across her skin like living art"},
+  {name:"Burn Survivor", emoji:"🔥", desc:"Healed, glowing, unbothered",
+   prompt:"a radiant burn survivor, her healed skin glowing with grace, unbothered and luminous"},
+  {name:"Mastectomy Warrior", emoji:"🎀", desc:"Her scar worn like a crown jewel",
+   prompt:"a powerful mastectomy warrior, her scar worn like a crown jewel, fierce and tender"},
+  {name:"Deaf Queen", emoji:"🤟", desc:"Signing love, loud in her silence",
+   prompt:"a joyful Deaf queen signing 'I love you' in ASL, expressive eyes full of warmth"},
+  {name:"Blind Queen", emoji:"🕶️", desc:"Elegant shades, chic cane, vision within",
+   prompt:"an elegant blind queen in stylish sunglasses holding a chic white cane, serene confidence"},
+  {name:"Cane Queen", emoji:"💎", desc:"Graceful, jeweled cane in hand",
+   prompt:"a graceful queen leaning on a jeweled cane, elegance in every step"},
+  {name:"Plus-Size Goddess", emoji:"💃", desc:"Curves celebrated, never hidden",
+   prompt:"a gorgeous plus-size goddess, her curves celebrated and styled to perfection, never hidden"},
+  {name:"Service Dog Duo", emoji:"🐕‍🦺", desc:"Her loyal partner by her side",
+   prompt:"a warm queen with her loyal service dog sitting proudly beside her, a team of hearts"}
+];
+const SKINS = ["deep ebony","rich mahogany","warm cocoa","caramel","honey","golden bronze","olive","porcelain"];
+const AGES = ["in her 20s","in her 30s","in her 40s","in her 50s","in her 60s","in her 70s"];
+const BODIES = ["slim-thick","curvy","plus-size","athletic","soft and full"];
+const HAIR = ["bald and proud","a regal gold headwrap","voluminous natural curls","long goddess braids","elegant locs","a sleek bob","a satin bonnet crown","silver-streaked coils"];
+const OUTFITS = ["a flowing sapphire gown","a sharp pearl-white power suit","casual glam — fitted tee and jeans","a golden ankara print dress","athleisure chic in chrome tones","a blush-pink cocktail dress","a denim jacket over a graphic tee","an emerald evening gown"];
+const SETTINGS = ["in a glowing photography studio","in a golden sunflower field at sunset","on sparkling city streets at night","in a luxurious marble interior","in a blooming garden","on a beach at sunrise","before a soft ombre backdrop","on a grand staircase"];
+const WORDS = ["SURVIVOR","STILL STANDING","UNBREAKABLE","SEEN","WORTHY","WARRIOR","RADIANT","ENOUGH","FEARLESS","REBORN","BEAUTIFULLY WHOLE","MY STORY","SHE PERSISTED","CROWNED"];
+const TYPES = [
+  {name:"Bubble Letters", emoji:"🫧", prompt:"playful glossy 3D bubble letters in candy sapphire and pearl tones", place:"floating above her like a joyful crown"},
+  {name:"3D Block", emoji:"🧱", prompt:"bold 3D block letters with chrome-silver bevels", place:"arched proudly behind her"},
+  {name:"Graffiti Wildstyle", emoji:"🎨", prompt:"vibrant graffiti wildstyle letters with sapphire and gold flourishes", place:"blazing across the background wall"},
+  {name:"Elegant Script", emoji:"✒️", prompt:"flowing elegant calligraphy script in liquid gold", place:"sweeping gracefully beneath her portrait"},
+  {name:"Chrome Liquid", emoji:"💧", prompt:"molten liquid-chrome letters with mirror shine", place:"rippling across the lower frame"},
+  {name:"Rhinestone Bling", emoji:"💎", prompt:"sparkling rhinestone-encrusted letters that catch the light", place:"glittering above her like a marquee"},
+  {name:"Varsity", emoji:"🏟️", prompt:"classic chenille varsity letters in sapphire and white", place:"stitched boldly across the scene"},
+  {name:"Retro Groovy", emoji:"🌼", prompt:"retro 70s groovy letters in warm sunset ombre", place:"dancing playfully around her"},
+  {name:"Bold Minimal", emoji:"⬛", prompt:"clean bold sans-serif letters in deep navy", place:"anchoring the bottom with quiet power"},
+  {name:"Watercolor Brush", emoji:"🖌️", prompt:"soft watercolor brush-stroke letters in sapphire washes", place:"painted gently across the sky"},
+  {name:"Neon Glow", emoji:"💡", prompt:"glowing neon-sign letters in electric sapphire", place:"buzzing to life behind her"},
+  {name:"Gold Foil", emoji:"✨", prompt:"luxurious gold-foil stamped letters with rich texture", place:"pressed elegantly into the corner like a seal"}
+];
+const VIBES = [
+  {name:"Glam Portrait", emoji:"💄", prompt:"luxurious beauty-portrait style, soft studio lighting, flawless glow"},
+  {name:"Editorial", emoji:"📸", prompt:"high-fashion magazine editorial style, dramatic and striking"},
+  {name:"Soft & Dreamy", emoji:"☁️", prompt:"soft dreamy style, gentle haze, ethereal light"},
+  {name:"Bold Pop Art", emoji:"💥", prompt:"bold pop-art style, vivid color blocks, graphic punch"},
+  {name:"Golden Hour", emoji:"🌅", prompt:"golden-hour glow style, warm sunlight, radiant warmth"},
+  {name:"Cinematic", emoji:"🎬", prompt:"cinematic style, rich depth, film-still grandeur"}
+];
+
+/* ============================== STATE ============================== */
+const state = { hero:0, skin:1, age:2, body:1, hair:0, outfit:0, setting:0, word:0, type:5, vibe:0 };
+
+/* ============================== BUILD UI ============================== */
+function el(tag, cls, html){ const e=document.createElement(tag); if(cls)e.className=cls; if(html!=null)e.innerHTML=html; return e; }
+
+function buildHeroGrid(){
+  const g=document.getElementById('heroGrid'); g.innerHTML='';
+  HEROES.forEach((h,i)=>{
+    const c=el('div','card'+(i===state.hero?' selected':''),`<span class="emoji">${h.emoji}</span><span class="name">${h.name}</span><span class="desc">${h.desc}</span>`);
+    c.onclick=()=>{ state.hero=i; buildHeroGrid(); };
+    g.appendChild(c);
+  });
+}
+function buildChips(id, arr, key){
+  const w=document.getElementById(id); w.innerHTML='';
+  arr.forEach((v,i)=>{
+    const c=el('button','chip'+(i===state[key]?' selected':''), v);
+    c.type='button';
+    c.onclick=()=>{ state[key]=i; buildChips(id,arr,key); };
+    w.appendChild(c);
+  });
+}
+function buildTypeGrid(){
+  const g=document.getElementById('typeGrid'); g.innerHTML='';
+  TYPES.forEach((t,i)=>{
+    const c=el('div','card'+(i===state.type?' selected':''),`<span class="emoji">${t.emoji}</span><span class="name">${t.name}</span>`);
+    c.onclick=()=>{ state.type=i; buildTypeGrid(); };
+    g.appendChild(c);
+  });
+}
+function buildVibeGrid(){
+  const g=document.getElementById('vibeGrid'); g.innerHTML='';
+  VIBES.forEach((v,i)=>{
+    const c=el('div','card'+(i===state.vibe?' selected':''),`<span class="emoji">${v.emoji}</span><span class="name">${v.name}</span>`);
+    c.onclick=()=>{ state.vibe=i; buildVibeGrid(); };
+    g.appendChild(c);
+  });
+}
+
+/* ============================== PROMPT ENGINE ============================== */
+function powerWord(){
+  const custom=document.getElementById('customWord').value.trim();
+  return custom ? custom.toUpperCase() : WORDS[state.word];
+}
+function buildPrompt(typeIdx, vibeIdx, settingIdx){
+  const h=HEROES[state.hero], t=TYPES[typeIdx], v=VIBES[vibeIdx];
+  const word=powerWord();
+  return `Ultra-detailed ${v.prompt} portrait of ${h.prompt}, a woman ${AGES[state.age]} with ${SKINS[state.skin]} skin and a ${BODIES[state.body]} figure, ${HAIR[state.hair]}, wearing ${OUTFITS[state.outfit]}, ${SETTINGS[settingIdx]}. The word "${word}" appears as ${t.prompt}, ${t.place}. Empowering, dignified and celebratory mood — strength and beauty, never pity. Radiant lighting, ultra detailed, 8k, professional photography, masterpiece.`;
+}
+function generate(){
+  const n=parseInt(document.getElementById('countRange').value,10);
+  const list=document.getElementById('promptList'); list.innerHTML='';
+  for(let i=0;i<n;i++){
+    const tIdx=(state.type+i)%TYPES.length;
+    const vIdx=(state.vibe+i)%VIBES.length;
+    const sIdx=(state.setting+i)%SETTINGS.length;
+    const txt=buildPrompt(tIdx,vIdx,sIdx);
+    const card=el('div','prompt-card');
+    const head=el('div','phead',`<span class="pnum">Prompt ${i+1} · ${TYPES[tIdx].name} · ${VIBES[vIdx].name}</span>`);
+    const btn=el('button','mini-btn','📋 Copy');
+    btn.onclick=()=>{ navigator.clipboard.writeText(txt).then(()=>{ btn.textContent='✓ Copied!'; btn.classList.add('copied'); setTimeout(()=>{btn.textContent='📋 Copy';btn.classList.remove('copied');},1600); }); };
+    head.appendChild(btn);
+    card.appendChild(head);
+    card.appendChild(el('p','ptxt',escapeHtml(txt)));
+    list.appendChild(card);
+  }
+  document.getElementById('output').style.display='block';
+  document.getElementById('copyAllBtn').style.display='inline-block';
+  document.getElementById('output').scrollIntoView({behavior:'smooth'});
+  updatePill();
+}
+function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function surprise(){
+  const rnd=a=>Math.floor(Math.random()*a.length);
+  state.hero=rnd(HEROES); state.skin=rnd(SKINS); state.age=rnd(AGES); state.body=rnd(BODIES);
+  state.hair=rnd(HAIR); state.outfit=rnd(OUTFITS); state.setting=rnd(SETTINGS);
+  state.word=rnd(WORDS); state.type=rnd(TYPES); state.vibe=rnd(VIBES);
+  document.getElementById('customWord').value='';
+  buildHeroGrid();
+  buildChips('skinChips',SKINS,'skin'); buildChips('ageChips',AGES,'age'); buildChips('bodyChips',BODIES,'body');
+  buildChips('hairChips',HAIR,'hair'); buildChips('outfitChips',OUTFITS,'outfit'); buildChips('settingChips',SETTINGS,'setting');
+  buildChips('wordChips',WORDS,'word'); buildTypeGrid(); buildVibeGrid();
+  generate();
+}
+
+function updatePill(){
+  const out=document.getElementById('output');
+  const pill=document.getElementById('pill');
+  const visible=out.style.display==='block';
+  const rect=out.getBoundingClientRect();
+  const inView=rect.top < window.innerHeight && rect.bottom > 0;
+  pill.classList.toggle('show', visible && !inView);
+}
+window.addEventListener('scroll',updatePill,{passive:true});
+document.getElementById('pill').onclick=()=>document.getElementById('output').scrollIntoView({behavior:'smooth'});
+document.getElementById('genBtn').onclick=generate;
+document.getElementById('surpriseBtn').onclick=surprise;
+document.getElementById('copyAllBtn').onclick=function(){
+  const texts=[...document.querySelectorAll('#promptList .ptxt')].map(p=>p.textContent);
+  navigator.clipboard.writeText(texts.join('\n\n---\n\n')).then(()=>{
+    this.textContent='✓ All Copied!'; setTimeout(()=>this.textContent='📋 Copy All',1600);
+  });
+};
+document.getElementById('countRange').oninput=function(){ document.getElementById('countNum').textContent=this.value; };
+
+/* init */
+buildHeroGrid();
+buildChips('skinChips',SKINS,'skin'); buildChips('ageChips',AGES,'age'); buildChips('bodyChips',BODIES,'body');
+buildChips('hairChips',HAIR,'hair'); buildChips('outfitChips',OUTFITS,'outfit'); buildChips('settingChips',SETTINGS,'setting');
+buildChips('wordChips',WORDS,'word'); buildTypeGrid(); buildVibeGrid();
+</script>
+</body>
+</html>
