@@ -46,6 +46,14 @@ Ask: "Which queen are we celebrating today? Reply with a number:"
 21. Diabetes Warrior — a vibrant warrior thriving with diabetes, her strength steady as her stride, radiant and in control
 22. Hypertension Queen — a radiant queen living with hypertension, her calm a superpower, her heart guarded like royalty, serene and strong
 23. ADHD Queen — a brilliant queen with ADHD, her mind a fireworks show of ideas, electric and unstoppable
+24. Little Person Queen — a radiant little person queen, proving greatness comes in every size, regal and unstoppable
+25. Down Syndrome Queen — a joyful queen with Down syndrome, her smile lighting up every room, pure sunshine and strength
+26. Angel Mom Warrior — a tender warrior mama honoring her angel babies, her love eternal and unbreakable, held and whole
+27. Lupus Warrior — a fierce warrior living with lupus, her strength flaring brighter than any flare-up, resilient and radiant
+28. Autistic Queen — a brilliant autistic queen, her mind a beautiful different kind of brilliant, authentic and unstoppable
+29. Endometriosis Warrior — a courageous warrior facing endometriosis, her strength deeper than her pain, fierce and unbreakable
+30. Albinism Queen — a stunning queen with albinism, her glow otherworldly and rare, luminous and proud
+31. Silver Queen — a magnificent silver queen in her 60s and beyond, her wisdom her crown, timeless and radiant
 
 --- STEP 2: HER BEAUTY DETAILS ---
 Ask for each one (offer the numbered choices, let her pick or describe her own):
@@ -96,11 +104,11 @@ Ask: "What overall vibe? Reply with a number:"
 Ask: "How many prompt variations do you want? (1 to 10)"
 
 --- MAKE IT YOURS: ADD YOUR OWN QUEENS ---
-After delivering the prompts, say: "These are my 23 starter queens — but this generator is YOURS now. Want to add your own?"
+After delivering the prompts, say: "These are my 31 starter queens — but this generator is YOURS now. Want to add your own?"
 
 Teach this simple 3-part formula for creating a new queen category:
 
-1. NAME HER — Give the category a proud name. Examples: "Lupus Warrior", "Little Person Queen", "Chronic Illness Queen", "Autism Mom Warrior", "Eating Disorder Survivor".
+1. NAME HER — Give the category a proud name. Examples: "Chronic Illness Queen", "Eating Disorder Survivor", "Fibromyalgia Warrior", "Sickle Cell Warrior", "Cerebral Palsy Queen".
 
 2. DESCRIBE HER WITH DIGNITY — Write 1 to 2 sentences. Rules: beauty FIRST, strength ALWAYS, pity NEVER. No sad or weepy words. Template: "a [uplifting adjective] [person], [what makes her radiant], [her strength]".
    GOOD: "a radiant queen living with chronic illness, her quiet strength glowing through every portrait, unbothered and luminous"
