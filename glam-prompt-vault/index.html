@@ -25,6 +25,7 @@
     border-bottom: 1px solid #E8EBF0; padding: 12px 16px;
   }
   .toolbar-inner { max-width: 860px; margin: 0 auto; }
+  .chipsbar { background: rgba(252,251,249,.96); border-bottom: 1px solid #E8EBF0; padding: 2px 16px 8px; }
   .search-row { display: flex; gap: 10px; }
   .search {
     flex: 1; padding: 13px 16px; font-size: 16px; border-radius: 999px;
@@ -47,7 +48,7 @@
   .chip.active {
     background: linear-gradient(135deg, #4E8ACB, #8FBDEB); color: #fff; border-color: #4E8ACB;
   }
-  .status { max-width: 860px; margin: 0 auto; padding: 10px 18px 0; color: #5A6B7A; font-size: 13.5px; }
+  .status { max-width: 860px; margin: 0 auto; padding: 10px 18px 0; color: #5A6B7A; font-size: 13.5px; scroll-margin-top: 140px; }
   .grid { max-width: 860px; margin: 0 auto; padding: 12px 16px 60px; display: grid; gap: 12px; }
   .card {
     background: #fff; border: 1px solid #E8EBF0; border-radius: 16px; padding: 16px 16px 14px;
@@ -185,9 +186,9 @@
       <input id="search" class="search" type="search" placeholder="Search prompts… try &quot;valentine&quot;, &quot;nails&quot;, &quot;chibi&quot;, &quot;money&quot;" autocomplete="off">
       <button id="surprise" class="surprise">🎲 Surprise me</button>
     </div>
-    <div id="chips" class="chips"></div>
   </div>
 </div>
+<div class="chipsbar"><div class="toolbar-inner"><div id="chips" class="chips"></div></div></div>
 
 <div class="status" id="status"></div>
 <div class="grid" id="grid"></div>
@@ -357,12 +358,16 @@ chipsEl.addEventListener("click", e => {
   if (!b) return;
   activeChip = b.dataset.chip;
   renderChips(); render();
+  if (statusEl.scrollIntoView) statusEl.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
 let searchT;
 searchEl.addEventListener("input", () => {
   clearTimeout(searchT);
   searchT = setTimeout(() => { query = searchEl.value; renderActive(); }, 160);
+});
+searchEl.addEventListener("keydown", e => {
+  if (e.key === "Enter" && statusEl.scrollIntoView) statusEl.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 document.addEventListener("keydown", e => {
   if (e.key === "/" && document.activeElement !== searchEl) { e.preventDefault(); searchEl.focus(); }
