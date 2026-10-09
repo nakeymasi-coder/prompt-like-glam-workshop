@@ -189,8 +189,22 @@ const PALETTES = {
 };
 const PEOPLE_STYLES = {
   "Real people": ["Ultra Realistic","Photorealistic","Cinematic Portrait","Studio Photography"],
-  "Cartoon people": ["Chibi","Anime","Pixar-Style 3D","Classic Cartoon","Flat Vector","Sticker Style","Graffiti Character","Watercolor Illustration"]
+  "Cartoon people": ["Chibi","Anime","Pixar-Style 3D","Classic Cartoon","Flat Vector","Sticker Style","Graffiti Character","Watercolor Illustration","Glossy Toon"]
 };
+/* Rich descriptors for people styles that need more than a name to render right.
+   Any style not listed here falls back to "<name> style" exactly as before. */
+const PEOPLE_STYLE_DESC = {
+  "Glossy Toon": "high-gloss 3D cartoon illustration style, exaggerated expressive mascot characters with big glossy eyes and bold dynamic poses, airbrushed dimensional shading, luminous highlights, smooth vinyl-toy shine, crisp commercial tee-graphic finish"
+};
+function peopleStyle(c){
+  if(!c.people.length) return "";
+  const picks = sample(c.people, Math.min(3, c.people.length));
+  return ", rendered in " + picks.map(p=>PEOPLE_STYLE_DESC[p]||(p+" style")).join("; ");
+}
+/* When Glossy Toon is picked, steer text-bearing designs toward funny wordplay. */
+function glossyBoost(c){
+  return c.people.includes("Glossy Toon") ? " with clever pun-style wordplay — funny, fun and empowering sayings (never sad, dark or depressing)" : "";
+}
 const PLACEMENTS = ["Center chest","Oversized front","Full back print","Left chest hit","Sleeve print","Allover print","Pocket area","Hem tag / neck label"];
 const BLANK_COLORS = ["Black","White","Heather grey","Navy","Cream","Sand","Forest green","Burgundy","Royal blue","Hot pink","Lavender","Chocolate","Charcoal","Olive","Baby blue"];
 const MOCKUPS = ["Flat lay product shot","Ghost mannequin","On-model lifestyle photo","Hanging product shot","Close-up fabric detail"];
@@ -1096,18 +1110,16 @@ Message themes: ${fmt(themeFor(d),"bold empowering slogans")}. Lettering style: 
 ${palLine} Premium apparel graphic, perfectly spelled text, high-contrast print, centered composition.${qual}
 ${print}. Negative prompt: ${NEG}, no illustration.`);
     case "statement-char": {
-      const ps = c.people.length?fmt(c.people,"ultra realistic"):null;
       return (
 `Statement T-shirt design with illustrated character for ${intro} — a ${base}.
-Character: ${fmt(themeFor(d),"brand mascot character")}${ps?`, rendered in ${ps} style`:""}, paired with a bold coordinating slogan in the brand's voice. Lettering style: ${fmt(letterFor(d),"bold readable type")}. Supporting elements: ${fmt(elsFor(d),"themed accents")}.
+Character: ${fmt(themeFor(d),"brand mascot character")}${peopleStyle(c)}, paired with a bold coordinating slogan in the brand's voice${glossyBoost(c)}. Lettering style: ${fmt(letterFor(d),"bold readable type")}. Supporting elements: ${fmt(elsFor(d),"themed accents")}.
 ${palLine} Premium apparel graphic, dynamic composition, perfectly spelled text.${qual}
 ${print}. Negative prompt: ${NEG}, no extra limbs, no deformed features.`);
     }
     case "character": {
-      const ps = c.people.length?fmt(c.people,"ultra realistic"):null;
       return (
 `Standalone brand mascot / character design for ${intro} — a ${base}.
-Character: ${fmt(themeFor(d),"original brand mascot")}${ps?`, rendered in ${ps} style`:""}. Signature elements: ${fmt(elsFor(d),"themed accessories")}.
+Character: ${fmt(themeFor(d),"original brand mascot")}${peopleStyle(c)}. Signature elements: ${fmt(elsFor(d),"themed accessories")}.
 ${palLine} Premium character art, expressive, merch-ready, clean silhouette.${qual}
 Presented as ${c.mock.length?fmt(c.mock,"character turnaround sheet"):"character turnaround sheet"}. Negative prompt: ${NEG}, no extra limbs, no deformed features.`);
     }
@@ -1118,7 +1130,7 @@ ${palLine} Premium apparel graphic, elegant composition, perfectly spelled text.
 ${print}. Negative prompt: ${NEG}, no irreverent imagery.`);
     case "humor": return (
 `Funny T-shirt design for ${intro} — a ${base}.
-Humor themes: ${fmt(themeFor(d),"witty laugh-out-loud lines")}. Lettering style: ${fmt(letterFor(d),"bold playful type")}. Playful elements: ${fmt(elsFor(d),"fun accents")}.
+Humor themes: ${fmt(themeFor(d),"witty laugh-out-loud lines")}${glossyBoost(c)}. Lettering style: ${fmt(letterFor(d),"bold playful type")}. Playful elements: ${fmt(elsFor(d),"fun accents")}${peopleStyle(c)}.
 ${palLine} Premium apparel graphic, bold readable text, punchy composition.${qual}
 ${print}. Negative prompt: ${NEG}.`);
   }
