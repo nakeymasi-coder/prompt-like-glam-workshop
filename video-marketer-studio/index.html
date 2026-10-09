@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Marketer Studio — by Glam</title>
+<style>
+  :root{
+    --sapphire:#8FBDEB;
+    --sapphire-deep:#4E8ACB;
+    --sapphire-soft:#DCEBFB;
+    --silver:#C9CFD8;
+    --silver-light:#E8EBF0;
+    --pearl:#FCFBF9;
+    --ink:#22303C;
+    --ink-soft:#5A6B7A;
+    --black:#14181D;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:linear-gradient(180deg,#F4F8FD 0%,var(--pearl) 40%,#FFFFFF 100%);
+    color:var(--ink);
+    line-height:1.6;
+    padding-bottom:80px;
+  }
+  .hero{
+    background:linear-gradient(120deg,var(--sapphire) 0%,#B9CFE8 35%,var(--silver) 65%,var(--pearl) 100%);
+    padding:56px 24px 48px;
+    text-align:center;
+    border-bottom:1px solid rgba(78,138,203,.25);
+  }
+  .hero h1{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:clamp(2rem,5vw,3.2rem);
+    color:var(--black);
+    letter-spacing:.5px;
+  }
+  .hero h1 .accent{color:var(--sapphire-deep)}
+  .hero p.tag{margin-top:10px;font-size:1.08rem;color:#2C3E50;max-width:640px;margin-left:auto;margin-right:auto}
+  .hero .byline{margin-top:8px;font-size:.9rem;color:var(--ink-soft);letter-spacing:2px;text-transform:uppercase}
+  .steps-bar{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:28px auto 0;max-width:900px;padding:0 16px}
+  .step-pill{background:#fff;border:1px solid var(--silver);border-radius:999px;padding:8px 16px;font-size:.85rem;color:var(--ink-soft);white-space:nowrap;box-shadow:0 2px 8px rgba(78,138,203,.08)}
+  .step-pill b{color:var(--sapphire-deep);margin-right:6px}
+  .wrap{max-width:860px;margin:0 auto;padding:0 20px}
+  .howto{margin:32px 0 8px;background:#fff;border:1px solid var(--silver-light);border-radius:18px;padding:22px 26px;box-shadow:0 6px 24px rgba(78,138,203,.10)}
+  .howto h2{font-family:Georgia,serif;font-size:1.25rem;margin-bottom:10px;color:var(--black)}
+  .howto ol{margin-left:20px;color:var(--ink-soft)}
+  .howto ol li{margin:6px 0}
+  .howto ol li b{color:var(--ink)}
+  .card{background:#fff;border:1px solid var(--silver-light);border-radius:20px;padding:28px;margin:26px 0;box-shadow:0 8px 30px rgba(78,138,203,.10)}
+  .card h2{font-family:Georgia,serif;font-size:1.5rem;color:var(--black);margin-bottom:4px;display:flex;align-items:center;gap:10px}
+  .card h2 .num{background:linear-gradient(135deg,var(--sapphire),var(--silver));color:#fff;font-size:1rem;width:34px;height:34px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 10px rgba(78,138,203,.35)}
+  .card .sub{color:var(--ink-soft);font-size:.95rem;margin-bottom:18px}
+  label{display:block;font-weight:600;margin:14px 0 6px;font-size:.95rem}
+  input[type=text],textarea,select{width:100%;border:1px solid var(--silver);border-radius:12px;padding:12px 14px;font-size:1rem;font-family:inherit;color:var(--ink);background:#fff}
+  input[type=text]:focus,textarea:focus,select:focus{outline:2px solid var(--sapphire);border-color:var(--sapphire-deep)}
+  textarea{min-height:110px;resize:vertical}
+  .hint{font-size:.82rem;color:var(--ink-soft);margin-top:4px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+  .chip{border:1px solid var(--silver);background:#fff;border-radius:999px;padding:9px 16px;font-size:.92rem;cursor:pointer;transition:all .15s;color:var(--ink)}
+  .chip:hover{border-color:var(--sapphire-deep)}
+  .chip.on{background:linear-gradient(135deg,var(--sapphire-soft),#fff);border-color:var(--sapphire-deep);color:var(--black);font-weight:600;box-shadow:0 2px 10px rgba(78,138,203,.25)}
+  .btn{background:linear-gradient(135deg,var(--sapphire-deep),#6EA3D8);color:#fff;border:none;border-radius:14px;padding:14px 26px;font-size:1.02rem;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(78,138,203,.35);transition:transform .12s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn:active{transform:translateY(0)}
+  .btn.secondary{background:#fff;color:var(--sapphire-deep);border:2px solid var(--sapphire-deep);box-shadow:none}
+  .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+  .prompt-box{background:var(--pearl);border:1px dashed var(--sapphire-deep);border-radius:14px;padding:20px;white-space:pre-wrap;font-size:.95rem;line-height:1.65;color:var(--ink);max-height:420px;overflow-y:auto}
+  .copybar{display:flex;justify-content:flex-end;margin-top:12px}
+  .copybtn{background:#fff;border:1px solid var(--sapphire-deep);color:var(--sapphire-deep);border-radius:10px;padding:9px 18px;font-weight:700;cursor:pointer;font-size:.92rem}
+  .copybtn:hover{background:var(--sapphire-soft)}
+  .out{margin-top:22px;display:none}
+  .out.show{display:block}
+  .block{background:var(--pearl);border:1px solid var(--silver-light);border-radius:14px;padding:16px 18px;margin:12px 0}
+  .block h4{font-size:1rem;color:var(--black);margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .block p{font-size:.95rem;color:var(--ink)}
+  .minicopy{background:#fff;border:1px solid var(--silver);border-radius:8px;padding:6px 12px;font-size:.8rem;cursor:pointer;color:var(--ink-soft);flex-shrink:0}
+  .minicopy:hover{border-color:var(--sapphire-deep);color:var(--sapphire-deep)}
+  .note{background:var(--sapphire-soft);border-radius:14px;padding:16px 20px;font-size:.92rem;color:#2C3E50;margin-top:18px}
+  .note b{color:var(--black)}
+  .footer{text-align:center;color:var(--ink-soft);font-size:.85rem;margin-top:50px;padding:0 20px}
+  .footer .heart{color:var(--sapphire-deep)}
+  @media(max-width:560px){.card{padding:20px}.btn{width:100%}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Video Marketer <span class="accent">Studio</span></h1>
+  <p class="tag">A guided, step-by-step studio that builds a cohesive video-led marketing campaign for your product — strategy, ad copy, an 8-second video ad prompt, and a landing page pack.</p>
+  <div class="byline">by Glam &middot; Glam Hustle Hub</div>
+  <div class="steps-bar">
+    <span class="step-pill"><b>1</b> Your product</span>
+    <span class="step-pill"><b>2</b> Strategist prompt</span>
+    <span class="step-pill"><b>3</b> Ad copy kit</span>
+    <span class="step-pill"><b>4</b> Video ad prompt</span>
+    <span class="step-pill"><b>5</b> Landing page pack</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="howto">
+    <h2>How this works</h2>
+    <ol>
+      <li><b>Tell it about your product</b> (Step 1) — name, who it's for, what makes it great.</li>
+      <li><b>Copy the Campaign Strategist prompt</b> (Step 2) into ChatGPT or Gemini. It does the deep research, strategy, and ad copy for you.</li>
+      <li><b>Build your ad copy kit</b> (Step 3) from what the AI gives you.</li>
+      <li><b>Generate your 8-second video ad prompt</b> (Step 4) and run it in Google Flow, Vidu, Runway, Pika, or Kling.</li>
+      <li><b>Download your landing page pack</b> (Step 5) — every word your page needs, plus a ready-to-edit HTML starter.</li>
+    </ol>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="card">
+    <h2><span class="num">1</span> Your product</h2>
+    <p class="sub">Everything below flows into your strategist prompt, ad copy, video prompt, and landing page. Nothing leaves your browser.</p>
+
+    <label for="pName">Product name</label>
+    <input type="text" id="pName" placeholder="e.g. The Curvy Tee Fit Guide">
+
+    <label for="pOne">One-sentence value prop</label>
+    <input type="text" id="pOne" placeholder="e.g. A $27 digital guide that helps plus-size women find tees that actually fit their curves.">
+
+    <label for="pAud">Target audience</label>
+    <input type="text" id="pAud" placeholder="e.g. Plus-size women 35–55 who shop online and love feeling glamorous">
+
+    <label>Core benefits <span class="hint">(check up to 3 — these become your value props)</span></label>
+    <div class="chips" id="benefitChips">
+      <span class="chip">Saves time</span><span class="chip">Saves money</span>
+      <span class="chip">Boosts confidence</span><span class="chip">Solves a daily frustration</span>
+      <span class="chip">Beginner-friendly</span><span class="chip">Feels luxurious</span>
+      <span class="chip">Builds community</span><span class="chip">Gives a skill</span>
+      <span class="chip">Health / wellness win</span><span class="chip">Makes life easier</span>
+    </div>
+
+    <label for="pCustomBenefit">Your own benefit (optional)</label>
+    <input type="text" id="pCustomBenefit" placeholder="Type your own, then it shows up in your packs too">
+
+    <label>Campaign tone</label>
+    <div class="chips" id="toneChips">
+      <span class="chip on">Bold &amp; glam</span><span class="chip">Warm &amp; friendly</span>
+      <span class="chip">Luxury</span><span class="chip">Playful &amp; fun</span>
+      <span class="chip">Faith-led</span><span class="chip">Straightforward</span>
+    </div>
+
+    <label for="pAssets">Existing assets (optional)</label>
+    <textarea id="pAssets" placeholder="List anything you already have — photos, testimonials, a logo, product mockups, a website link..."></textarea>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="card">
+    <h2><span class="num">2</span> Your Campaign Strategist prompt</h2>
+    <p class="sub">This prompt turns ChatGPT or Gemini into your video campaign strategist: discovery recap, deep research, strategy, and ad copy. Copy it, paste it in, and let the AI do the heavy lifting.</p>
+    <div class="btn-row">
+      <button class="btn" onclick="buildStrategist()">Generate my strategist prompt</button>
+    </div>
+    <div class="out" id="stratOut">
+      <div class="prompt-box" id="stratPrompt"></div>
+      <div class="copybar"><button class="copybtn" onclick="copyText('stratPrompt',this)">Copy prompt</button></div>
+    </div>
+    <div class="note"><b>Then:</b> paste this into ChatGPT or Gemini, and when it answers, come back — your ad copy, video prompt, and landing page pack all build on its output.</div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="card">
+    <h2><span class="num">3</span> Your ad copy kit</h2>
+    <p class="sub">Take the winning angle from your AI's answer, pick a hook style, and this assembles your headlines, hook, primary text, and call to action.</p>
+
+    <label for="aAngle">Winning angle from your AI's strategy</label>
+    <input type="text" id="aAngle" placeholder="e.g. Finally, tees made for real curves — no more guessing your size">
+
+    <label>Hook style</label>
+    <div class="chips" id="hookChips">
+      <span class="chip on">Curiosity</span><span class="chip">Bold claim</span>
+      <span class="chip">Relatable pain</span><span class="chip">Transformation</span>
+      <span class="chip">Question</span><span class="chip">Social proof</span>
+    </div>
+
+    <label for="aOffer">Offer / call to action</label>
+    <input type="text" id="aOffer" placeholder="e.g. Get instant access for $27">
+
+    <div class="btn-row">
+      <button class="btn" onclick="buildAdCopy()">Build my ad copy kit</button>
+    </div>
+    <div class="out" id="adOut"></div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="card">
+    <h2><span class="num">4</span> Your 8-second video ad prompt</h2>
+    <p class="sub">An 8-second ad runs in three beats: the hook (0–2s), the proof (2–5s), the CTA (5–8s). Describe each shot and get one copy-ready prompt for Flow, Vidu, Runway, Pika, or Kling.</p>
+
+    <label for="vHook">Shot 1 — the hook (0–2 seconds): what do we see?</label>
+    <input type="text" id="vHook" placeholder="e.g. Close-up of a woman smiling, holding up a tee that actually fits her curves">
+
+    <label for="vProof">Shot 2 — the proof (2–5 seconds): what do we see?</label>
+    <input type="text" id="vProof" placeholder="e.g. Quick montage of her twirling in three different fitted tees, confetti sparkle">
+
+    <label for="vCta">Shot 3 — the CTA (5–8 seconds): what do we see?</label>
+    <input type="text" id="vCta" placeholder="e.g. Product mockup fills the screen with bold on-screen text of the offer">
+
+    <label for="vText">On-screen text</label>
+    <input type="text" id="vText" placeholder="e.g. FINALLY — tees for real curves">
+
+    <label>Video mood</label>
+    <div class="chips" id="moodChips">
+      <span class="chip on">Glam &amp; radiant</span><span class="chip">Warm &amp; cozy</span>
+      <span class="chip">High-energy</span><span class="chip">Luxury calm</span>
+      <span class="chip">Playful</span>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn" onclick="buildVideoPrompt()">Generate my video prompt</button>
+    </div>
+    <div class="out" id="vidOut">
+      <div class="prompt-box" id="vidPrompt"></div>
+      <div class="copybar"><button class="copybtn" onclick="copyText('vidPrompt',this)">Copy video prompt</button></div>
+    </div>
+    <div class="note"><b>Tip:</b> paste this into Google Flow, Vidu, Runway, Pika, or Kling. Generate 2–3 versions and keep the one with the strongest first two seconds — that's what stops the scroll.</div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="card">
+    <h2><span class="num">5</span> Your landing page pack</h2>
+    <p class="sub">Every word your landing page needs — sticky header, hero, value prop grid, and call to action — plus a ready-to-edit HTML starter you can hand to any page builder.</p>
+
+    <div class="btn-row">
+      <button class="btn" onclick="buildLanding()">Build my landing page pack</button>
+      <button class="btn secondary" onclick="downloadLanding()">Download HTML starter</button>
+    </div>
+    <div class="out" id="lpOut"></div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Made with <span class="heart">&#10084;</span> by Glam &middot; Glam Hustle Hub &middot; Video Marketer Studio
+</div>
+
+<script>
+"use strict";
+// ---------- helpers ----------
+function chipGroup(id, single){
+  var box = document.getElementById(id);
+  box.addEventListener("click", function(e){
+    if(!e.target.classList.contains("chip")) return;
+    if(single){ box.querySelectorAll(".chip").forEach(function(c){ c.classList.remove("on"); }); e.target.classList.add("on"); }
+    else{
+      if(e.target.classList.contains("on")){ e.target.classList.remove("on"); return; }
+      var on = box.querySelectorAll(".chip.on");
+      if(on.length >= 3) return;
+      e.target.classList.add("on");
+    }
+  });
+}
+function chipVal(id){
+  var box = document.getElementById(id);
+  var el = box.querySelector(".chip.on");
+  return el ? el.textContent.trim() : "";
+}
+function chipVals(id){
+  var box = document.getElementById(id);
+  return Array.prototype.map.call(box.querySelectorAll(".chip.on"), function(c){ return c.textContent.trim(); });
+}
+function val(id){ return document.getElementById(id).value.trim(); }
+function show(id){ document.getElementById(id).classList.add("show"); }
+function benefits(){
+  var b = chipVals("benefitChips");
+  var c = val("pCustomBenefit");
+  if(c) b.push(c);
+  return b.slice(0,3);
+}
+function copyText(boxId, btn){
+  var t = document.getElementById(boxId).innerText;
+  function done(){ btn.textContent = "Copied!"; setTimeout(function(){ btn.textContent = "Copy prompt"; }, 1600); }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(t).then(done).catch(function(){ fallback(); });
+  } else { fallback(); }
+  function fallback(){
+    var ta = document.createElement("textarea");
+    ta.value = t; document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); }catch(e){}
+    document.body.removeChild(ta); done();
+  }
+}
+function minicopy(text, btn){
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){ flash(btn); });
+  } else { flash(btn); }
+  function flash(b){ var o=b.textContent; b.textContent="Copied"; setTimeout(function(){ b.textContent=o; },1200); }
+}
+function prod(){ return {
+  name: val("pName") || "[Your Product]",
+  one: val("pOne") || "[your one-sentence value prop]",
+  aud: val("pAud") || "[your target audience]",
+  bens: benefits(),
+  tone: chipVal("toneChips") || "Bold & glam",
+  assets: val("pAssets")
+};}
+
+// ---------- STEP 2: strategist prompt ----------
+function buildStrategist(){
+  var p = prod();
+  var bens = p.bens.length ? p.bens.map(function(b,i){ return "  - " + b; }).join("\n") : "  - [add your core benefits]";
+  var assets = p.assets ? p.assets : "[none listed]";
+  var text =
+"Act as my video campaign strategist and asset creator for my product.\n\n" +
+"MY PRODUCT\n" +
+"Name: " + p.name + "\n" +
+"Value prop: " + p.one + "\n" +
+"Target audience: " + p.aud + "\n" +
+"Core benefits:\n" + bens + "\n" +
+"Campaign tone: " + p.tone + "\n" +
+"Existing assets: " + assets + "\n\n" +
+"WORKFLOW\n" +
+"1. DISCOVERY RECAP — Restate back what I'm selling, who it's for, and the #1 promise, in your own words, so I can confirm we're aligned.\n" +
+"2. DEEP RESEARCH — Research the market, my competitors, and my audience's biggest pain points around this product. Summarize: 3 competitor angles I should know, and 5 pain points my audience actually says out loud.\n" +
+"3. STRATEGY — Give me a cohesive campaign strategy: the tone of voice, the positioning (one line), and the single winning angle for a video-led campaign.\n" +
+"4. AD COPY — Write me ready-to-use ad copy: 3 scroll-stopping hooks (first 2 seconds), 3 headlines, 1 primary ad text (under 80 words), and 2 call-to-action lines.\n" +
+"5. VIDEO SHOT LIST — A shot-by-shot plan for an 8-second video ad: Shot 1 (0-2s, the hook), Shot 2 (2-5s, the proof), Shot 3 (5-8s, the CTA). For each shot: what we see, on-screen text, and camera move.\n" +
+"6. NEXT STEPS — A simple checklist of 3 things I should do this week to launch.\n\n" +
+"Keep everything in plain, everyday language. No jargon. Make every line something I could copy straight into my marketing.";
+  document.getElementById("stratPrompt").innerText = text;
+  show("stratOut");
+  document.getElementById("stratOut").scrollIntoView({behavior:"smooth", block:"center"});
+}
+
+// ---------- STEP 3: ad copy kit ----------
+function buildAdCopy(){
+  var p = prod();
+  var angle = val("aAngle") || p.one;
+  var hook = chipVal("hookChips") || "Curiosity";
+  var offer = val("aOffer") || "Get instant access today";
+  var hooks = {
+    "Curiosity": "Wait… why did nobody tell me about " + p.name + " sooner?",
+    "Bold claim": "This is the last " + p.name + " you'll ever need. Here's why.",
+    "Relatable pain": "If you've ever felt " + p.aud.split(" ").slice(0,6).join(" ") + " frustration — this is for you.",
+    "Transformation": "From frustrated to flourishing — my " + p.name + " story.",
+    "Question": "What if " + p.name + " actually lived up to the hype?",
+    "Social proof": "Everybody's talking about " + p.name + ". I finally tried it."
+  };
+  var benLine = p.bens.length ? p.bens.join(" • ") : "real results, zero guesswork";
+  var blocks = [
+    {t:"Hook (first 2 seconds)", x: hooks[hook] || hooks["Curiosity"]},
+    {t:"Headline options", x:"1. " + angle + "\n2. " + benLine + " — that's the " + p.name + " promise\n3. Made for " + p.aud + ". Finally."},
+    {t:"Primary ad text", x: angle + ". " + p.name + " was made for " + p.aud + " who want " + benLine + ". " + offer + "."},
+    {t:"Call to action", x: offer + " — tap below to get " + p.name + " now."}
+  ];
+  var html = blocks.map(function(b){
+    return '<div class="block"><h4>' + b.t + '<button class="minicopy" onclick="minicopy(this.parentNode.nextElementSibling.innerText,this)">Copy</button></h4><p style="white-space:pre-wrap">' + escapeHtml(b.x) + "</p></div>";
+  }).join("");
+  html += '<div class="copybar"><button class="copybtn" onclick="copyAllBlocks(this)">Copy whole kit</button></div>';
+  var out = document.getElementById("adOut");
+  out.innerHTML = html;
+  show("adOut");
+  out.scrollIntoView({behavior:"smooth", block:"center"});
+}
+function copyAllBlocks(btn){
+  var out = document.getElementById("adOut");
+  var parts = [];
+  out.querySelectorAll(".block").forEach(function(b){
+    parts.push(b.querySelector("h4").childNodes[0].textContent.trim() + "\n" + b.querySelector("p").innerText);
+  });
+  var t = parts.join("\n\n");
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(t).then(function(){ btn.textContent="Copied!"; setTimeout(function(){ btn.textContent="Copy whole kit"; },1600); });
+  }
+}
+function escapeHtml(s){
+  return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+// ---------- STEP 4: video prompt ----------
+function buildVideoPrompt(){
+  var p = prod();
+  var mood = chipVal("moodChips") || "Glam & radiant";
+  var moodLine = {
+    "Glam & radiant":"glamorous, radiant, sparkling feminine energy, bright airy lighting",
+    "Warm & cozy":"warm, cozy, inviting, soft golden-hour lighting",
+    "High-energy":"high-energy, punchy, fast cuts, vibrant color",
+    "Luxury calm":"luxurious, calm, slow elegant camera moves, soft studio light",
+    "Playful":"playful, fun, bouncy energy, bright cheerful color"
+  }[mood];
+  var s1 = val("vHook") || "Close-up, smiling face full of excitement";
+  var s2 = val("vProof") || "Quick montage showing the product's key benefit in action";
+  var s3 = val("vCta") || "Product fills the screen with bold offer text";
+  var onscreen = val("vText") || p.name;
+  var text =
+"8-SECOND VIDEO AD PROMPT — " + p.name + "\n" +
+"Style: " + moodLine + ". Vertical 9:16. Photorealistic, ultra-detailed, smooth motion.\n\n" +
+"SHOT 1 (0-2 seconds, THE HOOK):\n" + s1 + ". Punchy push-in camera move. On-screen text: \"" + onscreen + "\".\n\n" +
+"SHOT 2 (2-5 seconds, THE PROOF):\n" + s2 + ". Dynamic but smooth camera, quick cuts. Keep the energy rising.\n\n" +
+"SHOT 3 (5-8 seconds, THE CTA):\n" + s3 + ". Slow confident push-in. Big readable on-screen text with the offer.\n\n" +
+"No watermarks. No gibberish text. Faces natural and expressive. End on a bright, satisfying freeze of the product.";
+  document.getElementById("vidPrompt").innerText = text;
+  show("vidOut");
+  document.getElementById("vidOut").scrollIntoView({behavior:"smooth", block:"center"});
+}
+
+// ---------- STEP 5: landing page pack ----------
+function landingData(){
+  var p = prod();
+  var bens = p.bens.length ? p.bens : ["Real results without the guesswork","Made for people like you","Simple, clear, and beginner-friendly"];
+  while(bens.length < 3) bens.push("Crafted with care, built to last");
+  var angle = val("aAngle") || p.one;
+  var offer = val("aOffer") || "Get instant access today";
+  var onscreen = val("vText") || p.name;
+  return { p:p, bens:bens.slice(0,3), angle:angle, offer:offer, onscreen:onscreen };
+}
+function buildLanding(){
+  var d = landingData();
+  function block(title, text){
+    return '<div class="block"><h4>' + title + '<button class="minicopy" onclick="minicopy(this.parentNode.nextElementSibling.innerText,this)">Copy</button></h4><p style="white-space:pre-wrap">' + escapeHtml(text) + "</p></div>";
+  }
+  var html = "";
+  html += block("Sticky header", d.p.name + "  |  " + d.offer);
+  html += block("Hero headline", d.angle);
+  html += block("Hero subheadline", d.p.one + " Made for " + d.p.aud + ".");
+  html += block("Value prop grid (3)",
+    "1. " + d.bens[0] + "\n2. " + d.bens[1] + "\n3. " + d.bens[2]);
+  html += block("Video section caption", "Watch: " + d.onscreen + " — see " + d.p.name + " in action (8 seconds).");
+  html += block("Call to action", d.offer + " — tap below to get " + d.p.name + " now.");
+  html += block("Footer line", "© " + new Date().getFullYear() + " " + d.p.name + ". All rights reserved.");
+  html += '<div class="note"><b>Tip:</b> paste these blocks straight into your page builder (GoHighLevel, Systeme, Carrd, WordPress — anywhere), or hit <b>Download HTML starter</b> for a clean one-page template with everything filled in.</div>';
+  var out = document.getElementById("lpOut");
+  out.innerHTML = html;
+  show("lpOut");
+  out.scrollIntoView({behavior:"smooth", block:"center"});
+}
+function downloadLanding(){
+  var d = landingData();
+  var year = new Date().getFullYear();
+  var props = d.bens.map(function(b){ return '      <div class="prop"><h3>' + escapeHtml(b) + "</h3></div>"; }).join("\n");
+  var html =
+'<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n<title>' + escapeHtml(d.p.name) + "</title>\n" +
+"<style>\n" +
+"  *{box-sizing:border-box;margin:0;padding:0}\n" +
+"  body{font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#22303C;line-height:1.6}\n" +
+"  header{position:sticky;top:0;background:#fff;border-bottom:1px solid #E8EBF0;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;z-index:10}\n" +
+"  header b{font-size:1.05rem}\n" +
+"  .cta{background:#4E8ACB;color:#fff;border:none;border-radius:999px;padding:12px 26px;font-size:1rem;font-weight:700;cursor:pointer}\n" +
+"  .hero{text-align:center;padding:80px 24px;background:linear-gradient(120deg,#8FBDEB,#B9CFE8 40%,#E8EBF0)}\n" +
+"  .hero h1{font-size:clamp(1.8rem,4.5vw,2.8rem);max-width:700px;margin:0 auto 14px}\n" +
+"  .hero p{font-size:1.1rem;color:#2C3E50;max-width:600px;margin:0 auto 26px}\n" +
+"  .video{background:#14181D;color:#fff;text-align:center;padding:60px 24px}\n" +
+"  .video .frame{max-width:340px;margin:20px auto;border-radius:18px;border:2px dashed #8FBDEB;padding:60px 20px;color:#8FBDEB}\n" +
+"  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;max-width:900px;margin:0 auto;padding:60px 24px}\n" +
+"  .prop{background:#FCFBF9;border:1px solid #E8EBF0;border-radius:16px;padding:26px;text-align:center}\n" +
+"  .final{text-align:center;padding:70px 24px;background:#F4F8FD}\n" +
+"  .final h2{font-size:1.8rem;margin-bottom:16px}\n" +
+"  footer{text-align:center;padding:26px;color:#5A6B7A;font-size:.85rem}\n" +
+"</style>\n</head>\n<body>\n" +
+"<header><b>" + escapeHtml(d.p.name) + '</b><button class="cta">' + escapeHtml(d.offer) + "</button></header>\n" +
+'<section class="hero">\n  <h1>' + escapeHtml(d.angle) + "</h1>\n" +
+"  <p>" + escapeHtml(d.p.one) + " Made for " + escapeHtml(d.p.aud) + ".</p>\n" +
+'  <button class="cta">' + escapeHtml(d.offer) + "</button>\n</section>\n" +
+'<section class="video">\n  <h2>See it in action</h2>\n  <p>' + escapeHtml(d.onscreen) + "</p>\n" +
+'  <div class="frame">Drop your 8-second video ad here</div>\n</section>\n' +
+'<section class="grid">\n' + props + "\n</section>\n" +
+'<section class="final">\n  <h2>Ready?</h2>\n  <button class="cta">' + escapeHtml(d.offer) + "</button>\n</section>\n" +
+"<footer>© " + year + " " + escapeHtml(d.p.name) + ". All rights reserved.</footer>\n" +
+"</body>\n</html>";
+  var blob = new Blob([html], {type:"text/html"});
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "landing-page-starter.html";
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+
+// ---------- init ----------
+chipGroup("benefitChips", false);
+chipGroup("toneChips", true);
+chipGroup("hookChips", true);
+chipGroup("moodChips", true);
+</script>
+</body>
+</html>
