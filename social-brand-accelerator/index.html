@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Brand Accelerator — by Glam</title>
+<style>
+  :root{
+    --sapphire:#8FBDEB; --sapphire-deep:#4E8ACB; --sapphire-soft:#DCEBFB;
+    --chrome:#C9CFD8; --chrome-light:#E8EBF0; --pearl:#FCFBF9;
+    --ink:#22303C; --muted:#5A6B7A; --card:#ffffff;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:linear-gradient(160deg,#F4F8FD 0%,#E8EBF0 45%,#FCFBF9 100%);
+    color:var(--ink); min-height:100vh; padding:0 0 70px;
+  }
+  header.hero{text-align:center; padding:30px 18px 8px;}
+  .badge{
+    display:inline-block; font-size:12px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--sapphire-deep); background:var(--sapphire-soft); border:1px solid var(--chrome);
+    padding:6px 14px; border-radius:999px; margin-bottom:10px; font-weight:700;
+  }
+  h1{
+    margin:6px 0 4px; font-size:30px; line-height:1.15;
+    background:linear-gradient(100deg,var(--sapphire-deep),var(--sapphire));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  header.hero p{margin:4px 0 0; color:var(--muted); font-size:14px;}
+  /* sticky step nav */
+  nav.steps{
+    position:sticky; top:0; z-index:50;
+    display:flex; justify-content:center; gap:8px; flex-wrap:wrap;
+    background:rgba(252,251,249,.92); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--chrome-light);
+    padding:10px 12px; margin-top:14px;
+  }
+  .stepdot{
+    border:2px solid var(--chrome); background:#fff; color:var(--muted);
+    width:40px; height:40px; border-radius:50%; font-weight:800; font-size:14px;
+    cursor:pointer; transition:all .15s ease; text-decoration:none;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .stepdot small{font-size:9px; display:block; font-weight:700;}
+  .stepdot.wide{width:auto; border-radius:999px; padding:0 14px; gap:6px; height:40px;}
+  .stepdot.on{
+    background:linear-gradient(100deg,var(--sapphire-deep),var(--sapphire));
+    color:#fff; border-color:transparent; box-shadow:0 4px 14px rgba(78,138,203,.35);
+  }
+  .wrap{max-width:680px; margin:0 auto; padding:0 16px;}
+  section.phase{scroll-margin-top:80px; margin-top:26px;}
+  .phasehead{display:flex; align-items:center; gap:10px; margin-bottom:4px;}
+  .phasenum{
+    width:34px; height:34px; border-radius:50%; flex:0 0 34px;
+    background:linear-gradient(100deg,var(--sapphire-deep),var(--sapphire));
+    color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:15px;
+  }
+  .phasehead h2{margin:0; font-size:20px;}
+  .phasesub{color:var(--muted); font-size:14px; margin:2px 0 12px 44px;}
+  .panel{
+    background:var(--card); border-radius:20px; padding:18px; margin-top:12px;
+    box-shadow:0 10px 30px rgba(78,138,203,.10); border:1px solid var(--chrome-light);
+  }
+  .label{font-size:13px; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:var(--sapphire-deep); margin:16px 0 8px;}
+  .label:first-child{margin-top:0;}
+  .chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    border:2px solid var(--chrome-light); background:#fff; color:var(--ink);
+    padding:9px 14px; border-radius:999px; font-size:14px; font-weight:600; cursor:pointer;
+    transition:all .15s ease;
+  }
+  .chip.on{
+    background:linear-gradient(100deg,var(--sapphire-deep),var(--sapphire)); color:#fff; border-color:transparent;
+    box-shadow:0 4px 14px rgba(78,138,203,.35);
+  }
+  input[type=text]{
+    width:100%; padding:13px 15px; border-radius:14px; border:2px solid var(--chrome-light);
+    font-size:15px; outline:none; background:#fff; color:var(--ink);
+  }
+  input[type=text]:focus{border-color:var(--sapphire);}
+  .btnrow{display:flex; gap:10px; margin-top:16px; flex-wrap:wrap;}
+  button.big{
+    flex:1; min-width:180px; border:none; border-radius:16px; padding:15px; font-size:16px; font-weight:800;
+    cursor:pointer; color:#fff;
+    background:linear-gradient(100deg,var(--sapphire-deep),var(--sapphire));
+    box-shadow:0 8px 22px rgba(78,138,203,.35);
+  }
+  button.big:active{transform:scale(.98);}
+  button.ghost{
+    border:2px solid var(--chrome); background:var(--pearl); color:var(--muted);
+    border-radius:16px; padding:15px 18px; font-size:16px; font-weight:800; cursor:pointer;
+  }
+  .promptbox{
+    background:#fff; border:1px solid var(--chrome-light); border-radius:16px;
+    padding:14px; margin-top:10px; white-space:pre-wrap; word-wrap:break-word;
+    font-size:13.5px; line-height:1.55; color:var(--ink); max-height:340px; overflow-y:auto;
+  }
+  .copybtn{
+    border:none; background:var(--sapphire-soft); color:var(--sapphire-deep); font-weight:800; font-size:13px;
+    padding:9px 16px; border-radius:999px; cursor:pointer; margin-top:10px;
+  }
+  .copybtn.done{background:#dcfce7; color:#166534;}
+  .tip{
+    margin-top:12px; font-size:13px; color:var(--muted); background:var(--sapphire-soft);
+    border-radius:12px; padding:10px 14px; line-height:1.5;
+  }
+  .card{
+    background:#fff; border:1px solid var(--chrome-light); border-radius:16px;
+    padding:14px; margin-top:12px; box-shadow:0 6px 18px rgba(78,138,203,.07);
+  }
+  .card h3{margin:0 0 6px; font-size:16px; color:var(--sapphire-deep);}
+  .card p{margin:0 0 6px; font-size:13.5px; color:var(--muted); line-height:1.5;}
+  /* calendar */
+  .week{margin-top:16px; border:1px solid var(--chrome-light); border-radius:16px; overflow:hidden; background:#fff;}
+  .weekhead{
+    background:linear-gradient(100deg,var(--sapphire-deep),var(--sapphire));
+    color:#fff; font-weight:800; padding:10px 14px; font-size:15px;
+  }
+  .weekgrid{display:grid; grid-template-columns:repeat(7,1fr); gap:6px; padding:10px;}
+  .day{border-radius:10px; padding:8px 6px; font-size:11px; line-height:1.35; min-height:86px;}
+  .day b{display:block; font-size:11px; margin-bottom:4px;}
+  .day span{display:block;}
+  .day .st{color:var(--sapphire-deep); font-weight:700;}
+  .day.post{background:var(--sapphire-soft);}
+  .day.rest{background:var(--pearl); border:1px dashed var(--chrome); color:var(--muted);}
+  .hookline{padding:10px 14px; font-size:13px; background:var(--pearl); border-top:1px solid var(--chrome-light); color:var(--ink);}
+  .hookline b{color:var(--sapphire-deep);}
+  @media (max-width:560px){ .weekgrid{grid-template-columns:repeat(2,1fr);} .day{min-height:0;} }
+  /* footer */
+  footer{text-align:center; margin-top:44px;}
+  .cta-row{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:6px;}
+  .ctabtn{
+    flex:1 1 0; max-width:270px; min-width:200px; text-align:center;
+    display:inline-block; text-decoration:none; color:#fff; font-weight:800; font-size:15px;
+    background:linear-gradient(100deg,var(--sapphire-deep),var(--sapphire));
+    padding:14px 18px; border-radius:999px;
+    box-shadow:0 8px 22px rgba(78,138,203,.35);
+  }
+  .ctabtn:active{transform:scale(.98);}
+  footer .tiny{margin-top:14px; font-size:12px; color:#8a94a6;}
+  footer .tiny b{color:var(--sapphire-deep);}
+  .empty-note{text-align:center; color:#8a94a6; padding:20px 10px; font-size:14px; line-height:1.6;}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="badge">⚡ Glam's AI Growth Studio</div>
+  <h1>Social Brand Accelerator</h1>
+  <p>Your 4-step AI consultant for scaling your brand's social presence.</p>
+</header>
+
+<nav class="steps" id="stepnav">
+  <a class="stepdot wide on" href="#phase1"><span>1</span><small>Intake</small></a>
+  <a class="stepdot wide" href="#phase2"><span>2</span><small>Audit</small></a>
+  <a class="stepdot wide" href="#phase3"><span>3</span><small>Strategy</small></a>
+  <a class="stepdot wide" href="#phase4"><span>4</span><small>Visuals</small></a>
+  <a class="stepdot wide" href="#phase5"><span>5</span><small>Partner</small></a>
+</nav>
+
+<div class="wrap">
+
+  <!-- PHASE 1 -->
+  <section class="phase" id="phase1">
+    <div class="phasehead"><div class="phasenum">1</div><h2>Brand Intake</h2></div>
+    <p class="phasesub">Tell the accelerator about your brand — everything downstream is personalized from this.</p>
+    <div class="panel">
+      <div class="label">Your platforms <span style="font-weight:400;text-transform:none;letter-spacing:0;">(pick all you use)</span></div>
+      <div class="chips" id="platforms"></div>
+
+      <div class="label">Your niche &amp; goal</div>
+      <input type="text" id="niche" placeholder="e.g. plus-size fashion, grow to 10k followers">
+
+      <div class="label">Current follower count</div>
+      <input type="text" id="followers" placeholder="e.g. 2,400 (or 0 if you're starting fresh)">
+
+      <div class="label">Posts per week</div>
+      <div class="chips" id="freq"></div>
+
+      <div class="label">Your content strengths <span style="font-weight:400;text-transform:none;letter-spacing:0;">(pick all that fit)</span></div>
+      <div class="chips" id="strengths"></div>
+
+      <div class="label">Your biggest struggle</div>
+      <div class="chips" id="struggle"></div>
+
+      <div class="btnrow">
+        <button class="ghost" id="surprise" title="Randomize my picks">🎲 Surprise me</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHASE 2 -->
+  <section class="phase" id="phase2">
+    <div class="phasehead"><div class="phasenum">2</div><h2>Research &amp; Audit Prompt</h2></div>
+    <p class="phasesub">Copy this into ChatGPT or Gemini — it audits your positioning and researches what's working right now.</p>
+    <div class="panel">
+      <button class="big" id="genAudit">📋 Build My Audit Prompt</button>
+      <div id="auditOut"></div>
+      <div class="tip">💡 <b>Tip:</b> attach your profile screenshots or analytics when you paste this into ChatGPT/Gemini — the audit gets 10x sharper with real data.</div>
+    </div>
+  </section>
+
+  <!-- PHASE 3 -->
+  <section class="phase" id="phase3">
+    <div class="phasehead"><div class="phasenum">3</div><h2>30-Day Strategy</h2></div>
+    <p class="phasesub">Your content pillars, a real 30-day posting framework generated instantly, plus a deep-strategy AI prompt.</p>
+    <div class="panel">
+      <div class="label">Your content pillars <span style="font-weight:400;text-transform:none;letter-spacing:0;">(pick 3–4)</span></div>
+      <div class="chips" id="pillars"></div>
+      <div class="btnrow">
+        <button class="big" id="genCal">🗓️ Generate My 30-Day Calendar</button>
+      </div>
+      <div id="calOut"><div class="empty-note">Your personalized 30-day calendar will appear here.</div></div>
+    </div>
+    <div class="panel">
+      <div class="label" style="margin-top:0;">Deep-strategy AI prompt</div>
+      <p style="font-size:13.5px;color:var(--muted);margin:0 0 6px;line-height:1.5;">Paste this after your audit to get insider engagement tips, a detailed 30-day action plan, and your ideal posting schedule.</p>
+      <button class="big" id="genStrategy">📋 Build My Strategy Prompt</button>
+      <div id="strategyOut"></div>
+    </div>
+  </section>
+
+  <!-- PHASE 4 -->
+  <section class="phase" id="phase4">
+    <div class="phasehead"><div class="phasenum">4</div><h2>Visual Assets</h2></div>
+    <p class="phasesub">Copy-ready image prompts for your strategy infographic and brand style guides.</p>
+    <div class="panel">
+      <button class="big" id="genVisuals">🎨 Build My Image Prompts</button>
+      <div id="visualsOut"><div class="empty-note">Your personalized image prompts will appear here.</div></div>
+    </div>
+  </section>
+
+  <!-- PHASE 5 -->
+  <section class="phase" id="phase5">
+    <div class="phasehead"><div class="phasenum">5</div><h2>Brand Partner AI</h2></div>
+    <p class="phasesub">Give your AI a permanent memory of your brand — so every future chat picks up where you left off.</p>
+    <div class="panel">
+      <button class="big" id="genPartner">🧠 Build My Brand Memory Card</button>
+      <div id="partnerOut"></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="cta-row">
+      <a class="ctabtn" href="https://www.skool.com/the-glam-vault-9512" target="_blank" rel="noopener">✨ Join The Glam Vault</a>
+      <a class="ctabtn" href="https://glamhustlehub.com" target="_blank" rel="noopener">🛍️ Shop Glam Hustle Hub</a>
+    </div>
+    <div class="tiny">made with <b>♥</b> by Celestia, Glam's AI assistant</div>
+  </footer>
+
+</div>
+
+<script>
+/* ---------- helpers ---------- */
+function esc(s){
+  return String(s == null ? "" : s)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+}
+function copyText(text, btn){
+  function done(){
+    if(!btn) return;
+    var orig = btn.getAttribute("data-label") || btn.textContent;
+    if(!btn.getAttribute("data-label")) btn.setAttribute("data-label", orig);
+    btn.textContent = "Copied ✓";
+    btn.classList.add("done");
+    setTimeout(function(){ btn.textContent = btn.getAttribute("data-label"); btn.classList.remove("done"); }, 1800);
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done).catch(function(){ fallback(); });
+  } else { fallback(); }
+  function fallback(){
+    var ta = document.createElement("textarea");
+    ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); } catch(e){}
+    document.body.removeChild(ta); done();
+  }
+}
+function chipGroup(elId, items, opts){
+  var el = document.getElementById(elId);
+  var multi = opts.multi !== false;
+  opts.selected.forEach(function(){});
+  items.forEach(function(item){
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "chip"; b.textContent = item;
+    if(opts.selected.indexOf(item) !== -1) b.classList.add("on");
+    b.addEventListener("click", function(){
+      var i = opts.selected.indexOf(item);
+      if(multi){
+        if(i === -1){ opts.selected.push(item); b.classList.add("on"); }
+        else { opts.selected.splice(i,1); b.classList.remove("on"); }
+      } else {
+        opts.selected.length = 0; opts.selected.push(item);
+        Array.prototype.forEach.call(el.children, function(c){ c.classList.remove("on"); });
+        b.classList.add("on");
+      }
+      if(opts.onChange) opts.onChange();
+    });
+    el.appendChild(b);
+  });
+}
+function setChips(elId, values){
+  var el = document.getElementById(elId);
+  Array.prototype.forEach.call(el.children, function(c){
+    c.classList.toggle("on", values.indexOf(c.textContent) !== -1);
+  });
+}
+
+/* ---------- state ---------- */
+var state = {
+  platforms: ["TikTok","Instagram"],
+  niche: "",
+  followers: "",
+  freq: ["3-4"],
+  strengths: [],
+  struggle: ["Consistency"],
+  pillars: ["Educate","Entertain","Trends"]
+};
+
+var PLATFORMS = ["TikTok","Instagram","YouTube","Facebook","Threads","Pinterest","LinkedIn","X"];
+var FREQS = ["1-2","3-4","5+"];
+var STRENGTHS = ["Talking head","Tutorials","Behind-the-scenes","Trends","Storytimes","Lives","Carousels","Aesthetic visuals"];
+var STRUGGLES = ["Consistency","Ideas","Engagement","Growth","Monetization"];
+var PILLARS = ["Educate","Entertain","Behind-the-scenes","Trends","Community","Promote"];
+
+chipGroup("platforms", PLATFORMS, {multi:true, selected:state.platforms});
+chipGroup("freq", FREQS, {multi:false, selected:state.freq});
+chipGroup("strengths", STRENGTHS, {multi:true, selected:state.strengths});
+chipGroup("struggle", STRUGGLES, {multi:false, selected:state.struggle});
+chipGroup("pillars", PILLARS, {multi:true, selected:state.pillars});
+
+document.getElementById("niche").addEventListener("input", function(e){ state.niche = e.target.value; });
+document.getElementById("followers").addEventListener("input", function(e){ state.followers = e.target.value; });
+
+/* ---------- step nav highlight ---------- */
+var dots = Array.prototype.slice.call(document.querySelectorAll("#stepnav .stepdot"));
+var sections = ["phase1","phase2","phase3","phase4","phase5"];
+window.addEventListener("scroll", function(){
+  var cur = 0;
+  sections.forEach(function(id, i){
+    var s = document.getElementById(id);
+    if(s && s.getBoundingClientRect().top < 140) cur = i;
+  });
+  dots.forEach(function(d, i){ d.classList.toggle("on", i === cur); });
+}, {passive:true});
+
+/* ---------- surprise me ---------- */
+document.getElementById("surprise").addEventListener("click", function(){
+  function pick(arr, n){
+    var c = arr.slice(), out = [];
+    while(out.length < n && c.length){ out.push(c.splice(Math.floor(Math.random()*c.length),1)[0]); }
+    return out;
+  }
+  state.platforms = pick(PLATFORMS, 1 + Math.floor(Math.random()*3));
+  state.freq = pick(FREQS, 1);
+  state.strengths = pick(STRENGTHS, 2 + Math.floor(Math.random()*3));
+  state.struggle = pick(STRUGGLES, 1);
+  state.pillars = pick(PILLARS, 3 + Math.floor(Math.random()*2));
+  var niches = [
+    "plus-size fashion, grow to 10k followers",
+    "faith-based encouragement for busy moms",
+    "budget-friendly home cooking",
+    "AI tips for beginner creators",
+    "natural hair care routines",
+    "small business marketing on a budget"
+  ];
+  var followers = ["850","2,400","0 — starting fresh","12k","5,700"];
+  state.niche = niches[Math.floor(Math.random()*niches.length)];
+  state.followers = followers[Math.floor(Math.random()*followers.length)];
+  document.getElementById("niche").value = state.niche;
+  document.getElementById("followers").value = state.followers;
+  setChips("platforms", state.platforms);
+  setChips("freq", state.freq);
+  setChips("strengths", state.strengths);
+  setChips("struggle", state.struggle);
+  setChips("pillars", state.pillars);
+});
+
+/* ---------- snapshot helpers ---------- */
+function platformsText(){ return state.platforms.length ? state.platforms.join(", ") : "not chosen yet"; }
+function nicheText(){ return (state.niche || "").trim() || "my niche (not specified yet)"; }
+function followersText(){ return (state.followers || "").trim() || "not specified"; }
+function freqText(){ return state.freq[0] + " posts per week"; }
+function strengthsText(){ return state.strengths.length ? state.strengths.join(", ") : "not chosen yet"; }
+function struggleText(){ return state.struggle[0]; }
+function pillarsText(){ return state.pillars.length ? state.pillars.join(", ") : "Educate, Entertain, Trends"; }
+
+function promptCard(title, desc, text, btnId){
+  var safe = esc(text);
+  return '<div class="card"><h3>' + esc(title) + '</h3>' +
+    (desc ? '<p>' + esc(desc) + '</p>' : '') +
+    '<div class="promptbox" id="' + btnId + '-box">' + safe + '</div>' +
+    '<button class="copybtn" id="' + btnId + '">📋 Copy</button></div>';
+}
+function wireCopy(btnId, text){
+  document.getElementById(btnId).addEventListener("click", function(){
+    copyText(text, document.getElementById(btnId));
+  });
+}
+
+/* ---------- PHASE 2: audit prompt ---------- */
+document.getElementById("genAudit").addEventListener("click", function(){
+  var p = "You are a senior social media strategist and brand auditor with 10+ years growing creator brands. " +
+  "Audit my brand positioning and research what is working RIGHT NOW for my platform and niche.\n\n" +
+  "MY BRAND SNAPSHOT\n" +
+  "- Platforms: " + platformsText() + "\n" +
+  "- Niche and goal: " + nicheText() + "\n" +
+  "- Current follower count: " + followersText() + "\n" +
+  "- Posting frequency: " + freqText() + "\n" +
+  "- Content strengths: " + strengthsText() + "\n" +
+  "- Biggest struggle: " + struggleText() + "\n\n" +
+  "YOUR MISSION — do all three parts:\n\n" +
+  "PART 1 — POSITIONING AUDIT\n" +
+  "Analyze my positioning as if you reviewed my profiles: Is my niche clear in one sentence? " +
+  "Who exactly is my ideal follower, and what transformation do I promise them? " +
+  "Rate my current positioning 1-10 and list the 3 fastest fixes.\n\n" +
+  "PART 2 — 2026 TREND RESEARCH\n" +
+  "Research the top content trends, formats, and algorithm shifts for " + platformsText() + " in my niche (" + nicheText() + ") " +
+  "heading into 2026/2027. Name 5 specific trends with a one-line explanation of each, and flag which of my strengths (" + strengthsText() + ") " +
+  "map best to each trend.\n\n" +
+  "PART 3 — FINDINGS REPORT\n" +
+  "Deliver a findings report with: (a) my 3 biggest opportunities, (b) my 3 biggest risks, " +
+  "(c) 10 content ideas tailored to my niche and strengths, (d) a recommended posting rhythm for " + freqText() + " on " + platformsText() + ", " +
+  "and (e) one 30-day quick-win goal that attacks my biggest struggle (" + struggleText() + ").\n\n" +
+  "Be specific, honest, and practical. No fluff.";
+  var out = document.getElementById("auditOut");
+  out.innerHTML = promptCard("Your personalized audit prompt", "Paste this into ChatGPT or Gemini.", p, "copyAudit");
+  wireCopy("copyAudit", p);
+});
+
+/* ---------- PHASE 3: calendar ---------- */
+var HOOK_STARTERS = [
+  "Stop doing {n} the hard way — here is what actually works",
+  "Nobody talks about this side of {n}…",
+  "I tried the viral {n} trend so you do not have to",
+  "3 {n} mistakes keeping you stuck (and the fix)",
+  "POV: you finally figured out {n}",
+  "The {n} routine I wish someone gave me on day one"
+];
+function weekHook(w, niche){
+  var t = HOOK_STARTERS[w % HOOK_STARTERS.length];
+  return t.split("{n}").join(niche);
+}
+document.getElementById("genCal").addEventListener("click", function(){
+  var freqMap = {"1-2":2, "3-4":4, "5+":6};
+  var perWeek = freqMap[state.freq[0]] || 4;
+  var postDays = perWeek === 2 ? [1,4] : perWeek === 4 ? [0,2,4,6] : [0,1,2,3,4,5];
+  var days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+  var pillars = state.pillars.length ? state.pillars : ["Educate","Entertain"];
+  var strengths = state.strengths.length ? state.strengths : ["Talking head"];
+  var niche = nicheText();
+  var html = "";
+  for(var w = 0; w < 4; w++){
+    var theme = pillars[w % pillars.length];
+    html += '<div class="week"><div class="weekhead">Week ' + (w+1) + ' — ' + esc(theme) + '</div><div class="weekgrid">';
+    var k = 0;
+    for(var d = 0; d < 7; d++){
+      var dayNum = w*7 + d + 1;
+      if(postDays.indexOf(d) !== -1){
+        var pl = pillars[(w + k) % pillars.length];
+        var st = strengths[(w + k) % strengths.length];
+        html += '<div class="day post"><b>Day ' + dayNum + ' · ' + days[d] + '</b><span>' + esc(pl) + '</span><span class="st">' + esc(st) + '</span></div>';
+        k++;
+      } else {
+        html += '<div class="day rest"><b>Day ' + dayNum + ' · ' + days[d] + '</b><span>Rest / engage</span></div>';
+      }
+    }
+    html += '</div><div class="hookline">🪝 <b>Week ' + (w+1) + ' hook starter:</b> &quot;' + esc(weekHook(w, niche)) + '&quot;</div></div>';
+  }
+  html += '<div class="week"><div class="weekhead">Days 29–30 — Review &amp; Reset</div><div class="weekgrid">' +
+    '<div class="day post"><b>Day 29</b><span>Analytics review</span><span class="st">Behind-the-scenes</span></div>' +
+    '<div class="day post"><b>Day 30</b><span>Month recap post</span><span class="st">Storytimes</span></div>' +
+    '</div><div class="hookline">🪝 <b>Final hook starter:</b> &quot;' + esc(weekHook(4, niche)) + '&quot;</div></div>';
+  var out = document.getElementById("calOut");
+  out.innerHTML = html + '<button class="copybtn" id="copyCal">📋 Copy calendar as text</button>';
+  var text = calendarAsText(pillars, strengths, postDays, days, niche);
+  wireCopy("copyCal", text);
+});
+function calendarAsText(pillars, strengths, postDays, days, niche){
+  var lines = ["MY 30-DAY CONTENT CALENDAR", "Platforms: " + platformsText(), "Niche/goal: " + niche, "Frequency: " + freqText(), ""];
+  for(var w = 0; w < 4; w++){
+    lines.push("WEEK " + (w+1) + " — " + pillars[w % pillars.length]);
+    var k = 0;
+    for(var d = 0; d < 7; d++){
+      var dayNum = w*7 + d + 1;
+      if(postDays.indexOf(d) !== -1){
+        lines.push("  Day " + dayNum + " (" + days[d] + "): " + pillars[(w+k)%pillars.length] + " — " + strengths[(w+k)%strengths.length]);
+        k++;
+      } else {
+        lines.push("  Day " + dayNum + " (" + days[d] + "): Rest / engage with comments");
+      }
+    }
+    lines.push('  Hook starter: "' + weekHook(w, niche) + '"', "");
+  }
+  lines.push("DAY 29: Analytics review (Behind-the-scenes)");
+  lines.push("DAY 30: Month recap post (Storytimes)");
+  lines.push('Final hook starter: "' + weekHook(4, niche) + '"');
+  return lines.join("\n");
+}
+
+/* ---------- PHASE 3: strategy prompt ---------- */
+document.getElementById("genStrategy").addEventListener("click", function(){
+  var p = "You are my personal social media growth strategist. Use my brand snapshot below — and the audit findings I will paste after it — " +
+  "to build my complete 30-day growth strategy.\n\n" +
+  "MY BRAND SNAPSHOT\n" +
+  "- Platforms: " + platformsText() + "\n" +
+  "- Niche and goal: " + nicheText() + "\n" +
+  "- Current follower count: " + followersText() + "\n" +
+  "- Posting frequency: " + freqText() + "\n" +
+  "- Content strengths: " + strengthsText() + "\n" +
+  "- Content pillars: " + pillarsText() + "\n" +
+  "- Biggest struggle: " + struggleText() + "\n\n" +
+  "[PASTE YOUR PHASE 2 AUDIT FINDINGS HERE]\n\n" +
+  "YOUR MISSION — deliver all four:\n\n" +
+  "1. INSIDER ENGAGEMENT TIPS — 10 specific, non-obvious engagement tricks for " + platformsText() + " in 2026: " +
+  "comment strategies, hook formulas, CTA placements, and algorithm-friendly behaviors. Tailor every tip to my struggle (" + struggleText() + ").\n\n" +
+  "2. 30-DAY ACTION PLAN — week by week, built on my pillars (" + pillarsText() + ") and strengths (" + strengthsText() + "). " +
+  "Each week: a theme, exact post assignments for " + freqText() + ", and one measurable goal.\n\n" +
+  "3. POSTING SCHEDULE — the best days and times to post on " + platformsText() + " for my niche (" + nicheText() + "), " +
+  "with a simple weekly template I can repeat.\n\n" +
+  "4. STRUGGLE FIX — a targeted mini-plan that attacks my biggest struggle (" + struggleText() + ") head-on, " +
+  "with daily habits that take under 20 minutes.\n\n" +
+  "Be concrete and specific to my niche. No generic advice.";
+  var out = document.getElementById("strategyOut");
+  out.innerHTML = promptCard("Your personalized strategy prompt", "Paste this after your audit results.", p, "copyStrategy");
+  wireCopy("copyStrategy", p);
+});
+
+/* ---------- PHASE 4: visual prompts ---------- */
+document.getElementById("genVisuals").addEventListener("click", function(){
+  var plat = platformsText(), niche = nicheText(), strengths = strengthsText();
+  var info = "Create a clean, modern infographic summarizing a 30-day social media content strategy. " +
+    "Title at top: 'My 30-Day Content Strategy'. Four columns labeled Week 1 through Week 4, themed: " + pillarsText() + ". " +
+    "Include small icons for post types (" + strengths + "), a posting rhythm of " + freqText() + " on " + plat + ", " +
+    "and a footer strip reading 'Niche: " + niche + "'. Style: light sapphire blue, chrome silver, and pearl white palette, " +
+    "airy premium aesthetic, elegant sans-serif typography, soft gradients, subtle sparkle accents. " +
+    "Vertical 4:5 layout, high detail, no photo of people, infographic style.";
+  var photo = "Professional brand photography style guide, flat-lay and portrait examples for a " + niche + " creator on " + plat + ". " +
+    "Show 6 example shots: talking-head setup, behind-the-scenes workspace, product or topic close-up, lifestyle in-action, " +
+    "text-overlay hook frame, and community or audience moment. Style: bright airy lighting, light sapphire and pearl white tones, " +
+    "chrome silver accents, clean uncluttered backgrounds, premium glamorous feel. Photorealistic, vertical 4:5.";
+  var palette = "Brand color palette swatch sheet for a " + niche + " creator brand. " +
+    "Display 6 coordinated color swatches with hex codes: light sapphire blue, deeper sapphire, soft powder blue, " +
+    "chrome silver, light silver-gray, and pearl white. Elegant minimal layout, each swatch labeled with its mood word " +
+    "(trust, growth, calm, premium, clarity, purity). Soft gradient background, luxury stationery aesthetic, high detail.";
+  var feed = "Instagram-style 3x3 feed grid layout mockup for a " + niche + " creator. " +
+    "Nine cohesive post tiles alternating: quote graphics, talking-head stills, behind-the-scenes photos, and trend clips — " +
+    "all unified by a light sapphire, chrome silver, and pearl white color story. Clean consistent editing style, " +
+    "airy premium look, one strong visual identity across all nine tiles. Flat mockup view, high detail.";
+  var out = document.getElementById("visualsOut");
+  out.innerHTML =
+    promptCard("📊 Strategy infographic prompt", "For Ideogram, Canva, or Midjourney.", info, "copyInfo") +
+    promptCard("📸 Photo style guide prompt", "Defines your signature visual look.", photo, "copyPhoto") +
+    promptCard("🎨 Brand color palette prompt", "Your coordinated brand colors.", palette, "copyPalette") +
+    promptCard("🧱 Feed layout example prompt", "A cohesive 9-tile grid to aim for.", feed, "copyFeed");
+  wireCopy("copyInfo", info);
+  wireCopy("copyPhoto", photo);
+  wireCopy("copyPalette", palette);
+  wireCopy("copyFeed", feed);
+});
+
+/* ---------- PHASE 5: brand partner ---------- */
+document.getElementById("genPartner").addEventListener("click", function(){
+  var card = "MY BRAND MEMORY CARD — Social Brand Accelerator\n" +
+    "Platforms: " + platformsText() + "\n" +
+    "Niche and goal: " + nicheText() + "\n" +
+    "Current followers: " + followersText() + "\n" +
+    "Posting frequency: " + freqText() + "\n" +
+    "Content strengths: " + strengthsText() + "\n" +
+    "Content pillars: " + pillarsText() + "\n" +
+    "Biggest struggle: " + struggleText() + "\n" +
+    "Paste this at the start of a new ChatGPT/Gemini chat so it remembers my brand.";
+  var partner = "You are my permanent social media growth partner. You know my brand inside and out:\n\n" +
+    "- Platforms: " + platformsText() + "\n" +
+    "- Niche and goal: " + nicheText() + "\n" +
+    "- Current followers: " + followersText() + "\n" +
+    "- Posting frequency: " + freqText() + "\n" +
+    "- Content strengths: " + strengthsText() + "\n" +
+    "- Content pillars: " + pillarsText() + "\n" +
+    "- Biggest struggle: " + struggleText() + "\n\n" +
+    "YOUR ROLE:\n" +
+    "1. Answer my marketing and content questions with advice tailored to my niche, platforms, and strengths.\n" +
+    "2. Brainstorm hooks, captions, and content ideas on demand — always in my brand voice and pillars.\n" +
+    "3. Review my progress: when I share stats or results, analyze them and tell me exactly what to double down on or fix.\n" +
+    "4. Keep me consistent: remind me of my posting rhythm (" + freqText() + ") and nudge me when I drift.\n" +
+    "5. Stay current: factor in 2026 platform trends for " + platformsText() + " in every recommendation.\n\n" +
+    "Always be specific to my brand — never generic. Start by confirming you remember my brand in two sentences, " +
+    "then ask what we are working on today.";
+  var out = document.getElementById("partnerOut");
+  out.innerHTML =
+    promptCard("🧠 Brand Memory Card", "Paste this at the start of any new ChatGPT/Gemini chat so it remembers your brand.", card, "copyCard") +
+    promptCard("🤝 Growth Partner prompt", "Makes the AI your permanent growth partner.", partner, "copyPartner");
+  wireCopy("copyCard", card);
+  wireCopy("copyPartner", partner);
+});
+</script>
+</body>
+</html>
