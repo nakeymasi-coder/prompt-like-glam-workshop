@@ -83,6 +83,30 @@
     font-size:1rem; background:#fff; color:#1F2A37; outline:none;
   }
   input[type=text]:focus, select:focus{border-color:var(--sapphire-deep); box-shadow:0 0 0 3px rgba(91,155,213,.18);}
+  textarea{
+    width:100%; padding:13px 15px; border-radius:12px; border:2px solid #D8E4F0;
+    font-size:1rem; background:#fff; color:#1F2A37; outline:none; font-family:inherit; resize:vertical;
+  }
+  textarea:focus{border-color:var(--sapphire-deep); box-shadow:0 0 0 3px rgba(91,155,213,.18);}
+  .hint{font-size:.88rem; color:#5A6B7E; margin-top:8px;}
+  .goodbad{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px;}
+  .goodbad div{border-radius:12px; padding:12px 14px; font-size:.88rem; line-height:1.5;}
+  .good{background:#EAF7EE; border:1.5px solid #BFE3C9; color:#27633B;}
+  .bad{background:#FDECEC; border:1.5px solid #F3C2C2; color:#8C3535;}
+  .warn{margin-top:12px; background:#FFF6E5; border:1.5px solid #F0D48A; color:#8A5A00; border-radius:12px; padding:12px 14px; font-size:.92rem; line-height:1.5;}
+  .win{margin-top:12px; background:#EAF7EE; border:1.5px solid #BFE3C9; color:#27633B; border-radius:12px; padding:14px 16px; font-size:.95rem; line-height:1.55;}
+  .win .btn{margin-top:10px;}
+  .yours{margin-top:22px; background:linear-gradient(160deg,#FFFFFF,#EAF2FB); border:2px dashed #9DC3E6; border-radius:16px; padding:20px; text-align:center;}
+  .yours p{font-weight:700; color:#2B4A68; margin-bottom:14px; font-size:1.02rem;}
+  .formula{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px; margin:14px 0 6px;}
+  .formula div{background:#F4F8FD; border:1.5px solid #D8E4F0; border-radius:12px; padding:12px 14px; font-size:.88rem; line-height:1.55; color:#33475C;}
+  .formula b{color:#2B6CB0;}
+  footer .ctarow{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:16px;}
+  .cta-pill{flex:1 1 220px; max-width:320px; text-decoration:none; font-weight:800; font-size:1.02rem; border-radius:999px; padding:15px 22px; text-align:center; color:#fff; background:linear-gradient(135deg,#2B6CB0,#5B9BD5 60%,#9DC3E6); box-shadow:0 10px 24px rgba(43,108,176,.35); transition:transform .15s ease;}
+  .cta-pill:hover{transform:translateY(-2px);}
+  footer .tagline{font-size:.95rem; margin-bottom:6px;}
+  footer .sigline{font-size:.82rem; color:#8FA3B8;}
+  @media(max-width:560px){ .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));} .goodbad{grid-template-columns:1fr;} }
   .btnrow{display:flex; flex-wrap:wrap; gap:12px; margin-top:22px;}
   button.btn{
     border:none; cursor:pointer; font-weight:800; font-size:1.05rem; border-radius:14px;
@@ -202,10 +226,50 @@
     <div class="step-head"><div class="step-num">✓</div><h2>Your prompts</h2></div>
     <p class="step-sub">Paste these into your favorite AI image tool — Midjourney, DALL·E, Firefly, Ideogram, whatever you love.</p>
     <div id="promptList"></div>
+    <div class="yours">
+      <p>💛 These are my 12 starter queens — but this generator is YOURS now. Want to add your own?</p>
+      <button class="btn btn-chrome" id="yoursBtn" type="button">👑 Add Your Own Queen</button>
+    </div>
+  </section>
+
+  <!-- MAKE IT YOURS -->
+  <section class="step" id="customQueen">
+    <div class="step-head"><div class="step-num">👑</div><h2>Make it yours — add your own queen</h2></div>
+    <p class="step-sub">Create a new queen with this simple 3-part formula. She joins the list in Step 1 and works exactly like the others.</p>
+    <div class="formula">
+      <div><b>1. NAME HER</b><br>Give the category a proud name.<br><i>Examples: Stroke Survivor, Little Person Queen, Chronic Illness Queen, Autism Mom Warrior, Depression Survivor.</i></div>
+      <div><b>2. DESCRIBE HER WITH DIGNITY</b><br>Beauty FIRST, strength ALWAYS, pity NEVER. No sad or weepy words. Template: "a [uplifting adjective] [person], [what makes her radiant], [her strength]".</div>
+      <div><b>3. USE HER</b><br>Tap the button below — she joins your queen list, and you can build prompts with her right away.</div>
+    </div>
+
+    <label class="lbl" for="cqName">Her proud name</label>
+    <input type="text" id="cqName" maxlength="40" placeholder="e.g. Stroke Survivor">
+
+    <label class="lbl">Her emoji</label>
+    <div class="chips" id="cqEmojiChips"></div>
+
+    <label class="lbl" for="cqDesc">Her dignity-first description</label>
+    <textarea id="cqDesc" rows="3" maxlength="240" placeholder="a radiant queen living with chronic illness, her quiet strength glowing through every portrait, unbothered and luminous"></textarea>
+    <p class="hint">💛 Beauty FIRST · strength ALWAYS · pity NEVER — no sad, weepy, or sorrowful words, ever.</p>
+    <div class="goodbad">
+      <div class="good"><b>GOOD ✓</b><br>"a radiant queen living with chronic illness, her quiet strength glowing through every portrait, unbothered and luminous"</div>
+      <div class="bad"><b>BAD ✗</b><br>"a poor sick woman suffering from illness" — never like this.</div>
+    </div>
+    <div class="warn" id="cqWarn" style="display:none;"></div>
+    <div class="win" id="cqWin" style="display:none;"></div>
+
+    <div class="btnrow">
+      <button class="btn btn-primary" id="cqAdd" type="button">👑 Add Her to My Queens</button>
+    </div>
   </section>
 
   <footer>
-    Made with 🤍 by <span class="sig">Glam Hustle Hub</span> · Every woman deserves to be seen.
+    <div class="ctarow">
+      <a class="cta-pill" href="https://www.skool.com/the-glam-vault-9512" target="_blank" rel="noopener">✨ Join The Glam Vault</a>
+      <a class="cta-pill" href="https://glamhustlehub.com" target="_blank" rel="noopener">🛍️ Shop Glam Hustle Hub</a>
+    </div>
+    <p class="tagline">Every woman deserves to be seen.</p>
+    <p class="sigline">made with ♥ by Celestia, Glam's AI assistant</p>
   </footer>
 </div>
 
@@ -360,7 +424,7 @@ function surprise(){
   buildHeroGrid();
   buildChips('skinChips',SKINS,'skin'); buildChips('ageChips',AGES,'age'); buildChips('bodyChips',BODIES,'body');
   buildChips('hairChips',HAIR,'hair'); buildChips('outfitChips',OUTFITS,'outfit'); buildChips('settingChips',SETTINGS,'setting');
-  buildChips('wordChips',WORDS,'word'); buildTypeGrid(); buildVibeGrid();
+  buildChips('wordChips',WORDS,'word'); buildTypeGrid(); buildVibeGrid(); buildCqEmojiChips();
   generate();
 }
 
@@ -384,11 +448,66 @@ document.getElementById('copyAllBtn').onclick=function(){
 };
 document.getElementById('countRange').oninput=function(){ document.getElementById('countNum').textContent=this.value; };
 
+/* ============================== MAKE IT YOURS ============================== */
+const CQ_EMOJI = ["👑","🕊️","🔥","💎","🌟","🌸","🦋","💃","🌈","✨","💪","🤟","🎀","🪞","🌺","⚡"];
+let cqEmoji = 0;
+const PITY = [/\bsuffer(ing|er|s)?\b/i, /\bpoor\b/i, /\bsad\b/i, /\bweep(y|ing)?\b/i,
+  /\bsorrow(ful)?\b/i, /\bpit(y|iful|iable)\b/i, /\btragic\b/i, /\bmiserable\b/i,
+  /\bunfortunate\b/i, /\bvictim\b/i, /\bafflicted\b/i, /\bhelpless\b/i,
+  /\bhopeless\b/i, /\bbroken\b/i, /\bdamaged\b/i, /\bsickly\b/i];
+
+function buildCqEmojiChips(){
+  const w=document.getElementById('cqEmojiChips'); w.innerHTML='';
+  CQ_EMOJI.forEach((e,i)=>{
+    const c=el('button','chip'+(i===cqEmoji?' selected':''), e);
+    c.type='button'; c.style.fontSize='1.4rem'; c.style.padding='8px 14px';
+    c.onclick=()=>{ cqEmoji=i; buildCqEmojiChips(); };
+    w.appendChild(c);
+  });
+}
+function findPityWord(text){
+  for(const re of PITY){ const m=text.match(re); if(m) return m[0]; }
+  return null;
+}
+document.getElementById('cqAdd').onclick=function(){
+  const name=document.getElementById('cqName').value.trim();
+  const desc=document.getElementById('cqDesc').value.trim();
+  const warn=document.getElementById('cqWarn'), win=document.getElementById('cqWin');
+  warn.style.display='none'; win.style.display='none';
+  if(!name || !desc){
+    warn.innerHTML='💛 Almost! Give her <b>a proud name</b> and <b>a dignity-first description</b> — then tap the button again.';
+    warn.style.display='block'; return;
+  }
+  const pity=findPityWord(desc);
+  if(pity){
+    warn.innerHTML='Hmm — "<b>'+escapeHtml(pity)+'</b>" leans toward pity, and every queen here celebrates strength, never sorrow. Swap it for a word about her radiance or power, then try again. 💛';
+    warn.style.display='block'; return;
+  }
+  const dup=HEROES.find(h=>h.name.toLowerCase()===name.toLowerCase());
+  if(dup){
+    warn.innerHTML='<b>'+escapeHtml(name)+'</b> is already one of your queens — pick her in Step 1 and let\'s build! 👑';
+    warn.style.display='block'; return;
+  }
+  const short=desc.length>64 ? desc.slice(0,64).trim()+'…' : desc;
+  HEROES.push({name:name, emoji:CQ_EMOJI[cqEmoji], desc:'Your custom queen · '+short, prompt:desc});
+  state.hero=HEROES.length-1;
+  buildHeroGrid();
+  win.innerHTML='🎉 <b>'+escapeHtml(name)+'</b> is in! She\'s sitting pretty in Step 1, already selected for you.<br><button class="btn btn-primary" id="cqGo" type="button">✨ Generate With Her Now</button>';
+  win.style.display='block';
+  document.getElementById('cqGo').onclick=()=>{
+    document.getElementById('genBtn').scrollIntoView({behavior:'smooth', block:'center'});
+    setTimeout(generate, 600);
+  };
+  document.getElementById('cqName').value=''; document.getElementById('cqDesc').value='';
+  document.getElementById('heroGrid').scrollIntoView({behavior:'smooth', block:'center'});
+};
+document.getElementById('yoursBtn').onclick=()=>document.getElementById('customQueen').scrollIntoView({behavior:'smooth'});
+
 /* init */
 buildHeroGrid();
 buildChips('skinChips',SKINS,'skin'); buildChips('ageChips',AGES,'age'); buildChips('bodyChips',BODIES,'body');
 buildChips('hairChips',HAIR,'hair'); buildChips('outfitChips',OUTFITS,'outfit'); buildChips('settingChips',SETTINGS,'setting');
-buildChips('wordChips',WORDS,'word'); buildTypeGrid(); buildVibeGrid();
+buildChips('wordChips',WORDS,'word'); buildTypeGrid(); buildVibeGrid(); buildCqEmojiChips();
 </script>
 </body>
 </html>
