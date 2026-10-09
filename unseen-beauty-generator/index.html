@@ -53,6 +53,34 @@
     padding:9px 18px; border-radius:999px; box-shadow:0 4px 12px rgba(20,40,70,.16);
   }
   .stats b{font-weight:800;}
+  .how{margin-top:26px; text-align:center;}
+  .how h2{font-size:clamp(1.4rem,3.4vw,1.9rem); color:#1F2A37;}
+  .how-sub{color:#5A6B7E; margin:8px 0 20px; font-size:1rem;}
+  .how-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; text-align:left;}
+  .how-card{
+    background:rgba(255,255,255,.9); border:1px solid #E3ECF5; border-radius:18px; padding:22px 20px;
+    box-shadow:0 10px 28px rgba(43,108,176,.10);
+  }
+  .how-num{
+    width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,#2B6CB0,#5B9BD5,#C9D4E0);
+    color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:1.05rem;
+    margin-bottom:12px; box-shadow:0 4px 12px rgba(43,108,176,.35);
+  }
+  .how-card h3{font-size:1.08rem; color:#1F2A37; margin-bottom:8px;}
+  .how-card p{font-size:.93rem; color:#5A6B7E; line-height:1.55;}
+  .final-cta{
+    margin-top:26px; text-align:center; padding:46px 26px; border-radius:22px; color:#fff;
+    background:linear-gradient(135deg,#2B6CB0 0%,#5B9BD5 40%,#9DC3E6 75%,#C9D4E0 100%);
+    box-shadow:0 18px 45px rgba(43,108,176,.28); position:relative; overflow:hidden;
+  }
+  .final-cta::after{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(circle at 80% 20%,rgba(255,255,255,.3),transparent 45%);
+    pointer-events:none;
+  }
+  .final-cta h2{font-size:clamp(1.5rem,4vw,2.1rem); position:relative; z-index:1; text-shadow:0 2px 12px rgba(20,40,70,.3);}
+  .final-cta p{margin:12px 0 24px; font-size:1.02rem; position:relative; z-index:1; text-shadow:0 1px 8px rgba(20,40,70,.3);}
+  .final-cta .btn{position:relative; z-index:1; font-size:1.08rem; padding:16px 36px; box-shadow:0 12px 30px rgba(20,40,70,.35);}
   section.step{
     background:rgba(255,255,255,.86); border:1px solid #E3ECF5; border-radius:20px;
     padding:26px 22px; margin-top:26px; box-shadow:0 10px 30px rgba(43,108,176,.10);
@@ -183,6 +211,29 @@
     <div class="dignity">🤍 Every portrait celebrates strength — never pity.</div>
   </header>
 
+  <!-- HOW IT WORKS -->
+  <section class="how">
+    <h2>How it works</h2>
+    <p class="how-sub">Three steps. Under a minute. One unforgettable queen.</p>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-num">1</div>
+        <h3>👑 Pick your queen</h3>
+        <p>Choose from 50 queens the world overlooks — survivors, warriors, and queens, each one written with dignity first.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-num">2</div>
+        <h3>✨ Style her</h3>
+        <p>Shape her beauty details, crown her with a power word, and choose the typography and art vibe.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-num">3</div>
+        <h3>📋 Get your prompts</h3>
+        <p>Copy ready-to-use prompts straight into Midjourney, DALL·E, Ideogram, Firefly — any AI image tool you love.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- STEP 1: HERO -->
   <section class="step" id="step1">
     <div class="step-head"><div class="step-num">1</div><h2>Choose your queen</h2></div>
@@ -289,6 +340,13 @@
     <div class="btnrow">
       <button class="btn btn-primary" id="cqAdd" type="button">👑 Add Her to My Queens</button>
     </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <h2>Ready to make her seen? 👑</h2>
+    <p>Build her portrait in under a minute — strength and beauty, never pity.</p>
+    <button class="btn btn-primary" id="finalStart" type="button">✨ Build Her Portrait Now</button>
   </section>
 
   <footer>
@@ -971,6 +1029,7 @@ document.getElementById('cqAdd').onclick=function(){
 };
 document.getElementById('yoursBtn').onclick=()=>document.getElementById('customQueen').scrollIntoView({behavior:'smooth'});
 document.getElementById('heroStart').onclick=()=>document.getElementById('step1').scrollIntoView({behavior:'smooth'});
+document.getElementById('finalStart').onclick=()=>document.getElementById('step1').scrollIntoView({behavior:'smooth'});
 
 /* init */
 buildHeroGrid();
