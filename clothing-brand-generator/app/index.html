@@ -8,17 +8,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --pink:#FF1493; --pink-soft:#ff5fae; --purple:#4A148C; --purple-soft:#7B2FF7;
-    --gold:#D4AF37; --gold-soft:#f3d97b; --ink:#3a2b4d; --muted:#8a7a9e;
-    --card:#ffffff; --blush:#fff5fa; --lav:#f7f0ff; --line:#f2d9e8;
+    --pink:#2B6CB0; --pink-soft:#7FB3E0; --purple:#1E4E8C; --purple-soft:#3B82C4;
+    --gold:#8E9AAF; --gold-soft:#D5DBE3; --ink:#1C2742; --muted:#5A6B8C;
+    --card:#ffffff; --blush:#FDFEFF; --lav:#F1F6FC; --line:#D9E4F2;
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:'Nunito',system-ui,sans-serif;color:var(--ink);
-    background:linear-gradient(160deg,#fff5fa 0%,#f7f0ff 45%,#fffdf5 100%);min-height:100vh}
+    background:linear-gradient(160deg,#FDFEFF 0%,#F1F6FC 45%,#F8FBFE 100%);min-height:100vh}
   .wrap{max-width:960px;margin:0 auto;padding:20px 16px 60px}
   header.hero{text-align:center;padding:34px 18px 26px;border-radius:24px;color:#fff;
     background:linear-gradient(120deg,var(--pink) 0%,var(--purple-soft) 55%,var(--purple) 100%);
-    box-shadow:0 12px 32px rgba(255,20,147,.28);position:relative;overflow:hidden}
+    box-shadow:0 12px 32px rgba(43,108,176,.28);position:relative;overflow:hidden}
   header.hero::after{content:"";position:absolute;inset:0;
     background:radial-gradient(circle at 15% 20%,rgba(255,255,255,.25),transparent 40%),
                radial-gradient(circle at 85% 80%,rgba(212,175,55,.35),transparent 45%);pointer-events:none}
@@ -35,18 +35,18 @@
   label.f-label{display:block;font-weight:800;font-size:13px;color:var(--purple);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.4px}
   input[type=text],select,textarea{width:100%;padding:12px 14px;border:2px solid var(--line);border-radius:12px;
     font-family:inherit;font-size:15px;color:var(--ink);background:#fff}
-  input[type=text]:focus,select:focus,textarea:focus{outline:none;border-color:var(--pink);box-shadow:0 0 0 3px rgba(255,20,147,.12)}
-  select{appearance:none;background:#fff url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='%23FF1493'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat right 14px center}
+  input[type=text]:focus,select:focus,textarea:focus{outline:none;border-color:var(--pink);box-shadow:0 0 0 3px rgba(43,108,176,.12)}
+  select{appearance:none;background:#fff url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='%232B6CB0'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat right 14px center}
   .opt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;margin-top:8px}
   .opt{display:flex;align-items:center;gap:9px;padding:9px 12px;border:2px solid var(--line);border-radius:12px;
     background:#fff;cursor:pointer;font-size:14px;font-weight:600;transition:.15s;user-select:none}
   .opt:hover{border-color:var(--pink-soft);transform:translateY(-1px)}
-  .opt.on{border-color:var(--pink);background:linear-gradient(135deg,#fff0f7,#f7f0ff);box-shadow:0 3px 10px rgba(255,20,147,.15)}
+  .opt.on{border-color:var(--pink);background:linear-gradient(135deg,#FDFEFF,#F1F6FC);box-shadow:0 3px 10px rgba(43,108,176,.15)}
   .opt input{accent-color:var(--pink);width:17px;height:17px;flex:none;cursor:pointer}
   .design-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-top:8px}
   .design-card{border:2px solid var(--line);border-radius:14px;padding:12px;background:var(--blush);cursor:pointer;transition:.15s}
   .design-card:hover{border-color:var(--pink-soft)}
-  .design-card.on{border-color:var(--pink);background:linear-gradient(135deg,#ffe9f4,#f3e9ff);box-shadow:0 4px 14px rgba(255,20,147,.18)}
+  .design-card.on{border-color:var(--pink);background:linear-gradient(135deg,#EAF2FB,#DCE9F7);box-shadow:0 4px 14px rgba(43,108,176,.18)}
   .design-card .t{font-weight:800;font-size:14.5px;display:flex;align-items:center;gap:8px}
   .design-card .d{font-size:12.5px;color:var(--muted);margin-top:4px}
   .design-card input{accent-color:var(--pink);width:17px;height:17px;flex:none}
@@ -56,9 +56,9 @@
   .custom-row input{flex:1}
   .custom-row .btn{flex:none}
   .mine{font-size:10px;font-weight:800;border-radius:99px;padding:1px 8px;margin-left:6px;vertical-align:1px;
-    background:linear-gradient(135deg,#FFD700,#ff9d00);color:#5a3d00;white-space:nowrap}
+    background:linear-gradient(135deg,#E4E9F0,#8E9AAF);color:#33415C;white-space:nowrap}
   .cx{margin-left:auto;flex:none;background:none;border:none;color:#c9a3bd;font-size:18px;cursor:pointer;font-weight:700;line-height:1;padding:0 0 0 8px}
-  .cx:hover{color:#FF1493}
+  .cx:hover{color:#2B6CB0}
   .swatch{display:inline-block;width:15px;height:15px;border-radius:50%;border:1px solid rgba(0,0,0,.15);margin-right:2px;vertical-align:-2px}
   .pal-card{flex-direction:column;align-items:flex-start;gap:6px}
   .pal-card .pname{font-weight:800;font-size:13.5px;display:flex;align-items:center;gap:8px;width:100%}
@@ -69,8 +69,8 @@
   #output .prompt-card p{white-space:pre-wrap;font-size:14px;line-height:1.65;margin:0 0 12px;background:var(--blush);padding:12px;border-radius:10px}
   .btn{display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;font-family:'Fredoka',sans-serif;
     font-weight:600;font-size:16px;padding:13px 26px;border-radius:99px;transition:.15s;color:#fff}
-  .btn-pink{background:linear-gradient(135deg,var(--pink),var(--purple-soft));box-shadow:0 6px 18px rgba(255,20,147,.35)}
-  .btn-gold{background:linear-gradient(135deg,var(--gold),#b8912c);box-shadow:0 6px 18px rgba(212,175,55,.35)}
+  .btn-pink{background:linear-gradient(135deg,var(--pink),var(--purple-soft));box-shadow:0 6px 18px rgba(43,108,176,.35)}
+  .btn-gold{background:linear-gradient(135deg,var(--gold),#6E7A8C);box-shadow:0 6px 18px rgba(212,175,55,.35)}
   .btn-purple{background:linear-gradient(135deg,var(--purple-soft),var(--purple));box-shadow:0 6px 18px rgba(74,20,140,.3)}
   .btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
   .btn.small{font-size:13px;padding:8px 18px}
@@ -86,7 +86,7 @@
   .toast.show{opacity:1}
   footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:30px}
   #promptFab{position:fixed;right:18px;bottom:18px;z-index:50;display:none;
-    box-shadow:0 8px 24px rgba(255,20,147,.45)}
+    box-shadow:0 8px 24px rgba(43,108,176,.45)}
   @media (max-width:480px){ #promptFab{right:12px;bottom:12px;font-size:14px;padding:11px 20px} }
 </style>
 </head>
@@ -873,8 +873,8 @@ function optGrid(items, group, palCard){
   const boxes = items.map(v=>boxHtml(v,group,palCard,false)).join("")
     + customs.map(v=>boxHtml(v,group,palCard,true)).join("");
   return `<div data-grid="${group}"><div style="margin:6px 0 2px;font-size:12px">
-      <a href="#" data-act="all" data-group="${group}" style="color:#FF1493;font-weight:700">select all</a> ·
-      <a href="#" data-act="none" data-group="${group}" style="color:#8a7a9e;font-weight:700">clear</a></div>
+      <a href="#" data-act="all" data-group="${group}" style="color:#2B6CB0;font-weight:700">select all</a> ·
+      <a href="#" data-act="none" data-group="${group}" style="color:#5A6B8C;font-weight:700">clear</a></div>
     <div class="opt-grid">${boxes}</div></div>`;
 }
 function customRow(group, placeholder){
@@ -1015,7 +1015,7 @@ function renderFinish(){
   $("#peopleSection").innerHTML = showPeople ? `
     <label class="f-label">People & character styles <span style="font-weight:600;text-transform:none">(real + cartoon)</span></label>
     ${Object.keys(PEOPLE_STYLES).map(cat=>`
-      <div style="font-weight:800;font-size:13px;color:#4A148C;margin:10px 0 2px">${cat}</div>
+      <div style="font-weight:800;font-size:13px;color:#1E4E8C;margin:10px 0 2px">${cat}</div>
       ${optGrid(PEOPLE_STYLES[cat],"people")}`).join("")}
     ${customRow("people","＋ Add your own character style (optional)")}` : "";
   $("#printSection").innerHTML = `
@@ -1027,7 +1027,7 @@ function renderFinish(){
     ${customRow("mockup","＋ Add your own mockup style (optional)")}
     <label class="f-label">Quality & finish</label>${optGrid(QUALITY_TAGS,"quality")}
     ${customRow("quality","＋ Add your own quality tag (optional)")}
-    <label class="f-label">Variations per design type: <span id="varCount" style="color:#FF1493">3</span></label>
+    <label class="f-label">Variations per design type: <span id="varCount" style="color:#2B6CB0">3</span></label>
     <div class="count-row"><input type="range" id="variations" min="1" max="10" value="3"></div>`;
   const v = $("#variations");
   v.addEventListener("input",()=>{ $("#varCount").textContent = v.value; generate(); });
