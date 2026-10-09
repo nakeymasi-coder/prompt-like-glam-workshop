@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glam's Hook Generator — Built Live by Maren</title>
+<style>
+  :root{
+    --pink:#FF1493; --purple:#4A148C; --gold:#D4AF37;
+    --ink:#3a2b4d; --soft:#fff7fb; --card:#ffffff;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  body{
+    margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:linear-gradient(160deg,#fff7fb 0%,#fdf3ff 45%,#fffaf0 100%);
+    color:var(--ink); min-height:100vh; padding:0 0 60px;
+  }
+  header{
+    text-align:center; padding:28px 18px 10px;
+  }
+  header .badge{
+    display:inline-block; font-size:12px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--purple); background:#f3e8ff; border:1px solid #e3c8ff;
+    padding:6px 14px; border-radius:999px; margin-bottom:10px; font-weight:700;
+  }
+  h1{
+    margin:6px 0 4px; font-size:30px; line-height:1.15;
+    background:linear-gradient(100deg,var(--pink),var(--purple));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  header p{margin:4px 0 0; color:#7a6a8f; font-size:14px;}
+  .wrap{max-width:640px; margin:0 auto; padding:0 16px;}
+  .panel{
+    background:var(--card); border-radius:20px; padding:18px; margin-top:16px;
+    box-shadow:0 10px 30px rgba(255,20,147,.08); border:1px solid #ffe3f1;
+  }
+  .label{font-size:13px; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:var(--purple); margin:14px 0 8px;}
+  .label:first-child{margin-top:0;}
+  .chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    border:2px solid #f0d7e8; background:#fff; color:var(--ink);
+    padding:9px 14px; border-radius:999px; font-size:14px; font-weight:600; cursor:pointer;
+    transition:all .15s ease;
+  }
+  .chip.on{
+    background:linear-gradient(100deg,var(--pink),#c026d3); color:#fff; border-color:transparent;
+    box-shadow:0 4px 14px rgba(255,20,147,.35);
+  }
+  input[type=text]{
+    width:100%; padding:13px 15px; border-radius:14px; border:2px solid #f0d7e8;
+    font-size:15px; outline:none; background:#fffdfd;
+  }
+  input[type=text]:focus{border-color:var(--pink);}
+  .btnrow{display:flex; gap:10px; margin-top:16px;}
+  button.big{
+    flex:1; border:none; border-radius:16px; padding:15px; font-size:16px; font-weight:800;
+    cursor:pointer; color:#fff;
+    background:linear-gradient(100deg,var(--pink),var(--purple));
+    box-shadow:0 8px 22px rgba(255,20,147,.35);
+  }
+  button.big:active{transform:scale(.98);}
+  button.ghost{
+    border:2px solid var(--gold); background:#fffdf5; color:#8a6d1c;
+    border-radius:16px; padding:15px 18px; font-size:16px; font-weight:800; cursor:pointer;
+  }
+  .results{margin-top:18px; display:flex; flex-direction:column; gap:12px;}
+  .hook{
+    background:#fff; border:1px solid #ffe3f1; border-left:5px solid var(--pink);
+    border-radius:16px; padding:14px 14px 12px; box-shadow:0 6px 18px rgba(74,20,140,.06);
+  }
+  .hook .h{font-size:16px; font-weight:800; margin:0 0 6px; line-height:1.35;}
+  .hook .c{font-size:13.5px; color:#7a6a8f; margin:0 0 4px; line-height:1.45;}
+  .hook .cta{font-size:13px; color:var(--purple); font-weight:700; margin:0 0 10px;}
+  .copybtn{
+    border:none; background:#f3e8ff; color:var(--purple); font-weight:800; font-size:13px;
+    padding:8px 14px; border-radius:999px; cursor:pointer;
+  }
+  .copybtn.done{background:#dcfce7; color:#166534;}
+  .empty{
+    text-align:center; color:#a08fb8; padding:34px 10px; font-size:15px; line-height:1.6;
+  }
+  .toolbar{display:flex; justify-content:space-between; align-items:center; margin-top:16px;}
+  .toolbar h2{margin:0; font-size:18px; color:var(--purple);}
+  #copyAll{border:2px solid var(--pink); background:#fff; color:var(--pink); font-weight:800;
+    padding:9px 16px; border-radius:999px; cursor:pointer; font-size:13px;}
+  footer{text-align:center; margin-top:26px; font-size:12px; color:#b39ddb;}
+  footer b{color:var(--pink);}
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">⚡ Built live on TikTok by Maren</div>
+  <h1>Glam's Hook Generator</h1>
+  <p>Scroll-stopping hooks for creators &amp; entrepreneurs — in one tap.</p>
+</header>
+
+<div class="wrap">
+  <div class="panel">
+    <div class="label">Your niche</div>
+    <div class="chips" id="niches"></div>
+
+    <div class="label">Platform</div>
+    <div class="chips" id="platforms"></div>
+
+    <div class="label">Your vibe</div>
+    <div class="chips" id="vibes"></div>
+
+    <div class="label">Video style</div>
+    <div class="chips" id="styles"></div>
+
+    <div class="label">Your topic (optional)</div>
+    <input type="text" id="topic" placeholder="e.g. my new workshop, my skincare routine…">
+
+    <div class="btnrow">
+      <button class="big" id="gen">✨ Generate Hooks</button>
+      <button class="ghost" id="surprise">🎲</button>
+    </div>
+  </div>
+
+  <div id="out"></div>
+  <footer>made with <b>♥</b> by Maren, Glam's AI assistant</footer>
+</div>
+
+<script>
+const NICHES = ["Beauty & Skincare","AI & Tech","Cooking & Recipes","Faith & Encouragement","Business & Coaching","Fitness & Wellness","Crafts & DIY","Fashion & Style"];
+const PLATFORMS = ["TikTok","Instagram Reels","YouTube Shorts","Facebook"];
+const VIBES = ["Bold","Warm","Funny","Inspiring"];
+const STYLES = ["Talking head","Tutorial","Storytime","Promo"];
+
+const HOOKS = {
+  Bold: [
+    "Stop doing {niche} the hard way — here's what actually works.",
+    "POV: you're a {niche} beginner and nobody told you THIS.",
+    "The {niche} hack I wish somebody told me at 40.",
+    "Nobody is talking about this {niche} trick. So I will.",
+    "I said what I said: {niche} does NOT have to be complicated.",
+    "If your {niche} isn't working, it's probably this one mistake.",
+    "Unpopular opinion about {niche} — but somebody had to say it.",
+    "This {niche} tip took me from stuck to sold out."
+  ],
+  Warm: [
+    "Sis, if {niche} has been stressing you out, come sit with me a minute.",
+    "You don't need to be perfect at {niche} — you just need to start.",
+    "A gentle reminder for my {niche} girls: you're doing better than you think.",
+    "Let me walk you through {niche} step by step — no judgment here.",
+    "If I can figure out {niche} at my big age, so can you. Here's how.",
+    "Your {niche} journey doesn't have to look like anyone else's.",
+    "Come learn {niche} with me — I'll make it simple, I promise.",
+    "For the woman who keeps putting off {niche}: this one's for you."
+  ],
+  Funny: [
+    "Me trying {niche} for the first time vs. me now — it's giving growth.",
+    "My {niche} era started as a joke and now it's my whole personality.",
+    "Things I wish I knew before starting {niche} — a comedy in 3 parts.",
+    "Nobody: … Absolutely nobody: … Me: let me tell you about {niche}.",
+    "My {niche} journey: 10% talent, 90% Googling at midnight.",
+    "Plot twist: {niche} is actually fun when you stop overthinking it.",
+    "Ranking my {niche} fails so you don't have to repeat them.",
+    "Tell me why {niche} clicked for me AFTER I spent all that money."
+  ],
+  Inspiring: [
+    "She started {niche} scared. Now look at her. That could be you.",
+    "Your {niche} breakthrough is on the other side of starting.",
+    "One year from now you'll wish you started {niche} today.",
+    "You don't need permission to be great at {niche}. Just begin.",
+    "The best time to start {niche} was yesterday. The second best is now.",
+    "Watch me turn my {niche} dream into my daily reality.",
+    "Every expert in {niche} was once a beginner who refused to quit.",
+    "This is your sign to take {niche} seriously — starting today."
+  ]
+};
+
+const CAPTIONS = [
+  "Save this for later — you'll want to come back to it. 💾",
+  "Tag a friend who needs to hear this today. 👇",
+  "Which one are you trying first? Tell me in the comments!",
+  "Follow for more — I post {niche} tips every single day. ✨",
+  "Drop a 🔥 if this helped you!",
+  "Share this with somebody who's been sleeping on {niche}."
+];
+const CTAS = [
+  "Comment READY and I'll send you my free starter guide.",
+  "Link in bio to go deeper — let's do this together.",
+  "DM me the word START and I'll personally point you in the right direction.",
+  "Hit follow — tomorrow I'm dropping part 2."
+];
+
+const state = { niche:"Beauty & Skincare", platform:"TikTok", vibe:"Bold", style:"Talking head" };
+
+function chips(el, items, key){
+  const box = document.getElementById(el);
+  box.innerHTML = "";
+  items.forEach(v=>{
+    const b = document.createElement("button");
+    b.className = "chip" + (state[key]===v ? " on" : "");
+    b.textContent = v;
+    b.onclick = ()=>{ state[key]=v; chips(el, items, key); };
+    box.appendChild(b);
+  });
+}
+chips("niches", NICHES, "niche");
+chips("platforms", PLATFORMS, "platform");
+chips("vibes", VIBES, "vibe");
+chips("styles", STYLES, "style");
+
+function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
+function shuffled(a){ return a.slice().sort(()=>Math.random()-.5); }
+
+function generate(){
+  const topic = document.getElementById("topic").value.trim();
+  const nicheWord = topic ? topic : state.niche.toLowerCase();
+  const list = shuffled(HOOKS[state.vibe]).slice(0,6);
+  const out = document.getElementById("out");
+  let html = `<div class="toolbar"><h2>Your hooks ✨</h2><button id="copyAll">Copy all</button></div><div class="results">`;
+  list.forEach((h,i)=>{
+    const hook = h.replaceAll("{niche}", nicheWord);
+    const cap = pick(CAPTIONS).replaceAll("{niche}", nicheWord);
+    const cta = pick(CTAS);
+    html += `<div class="hook">
+      <p class="h">${i+1}. ${hook}</p>
+      <p class="c"><b>Caption idea:</b> ${cap}</p>
+      <p class="cta">📣 ${cta}</p>
+      <button class="copybtn" data-i="${i}">Copy hook</button>
+    </div>`;
+  });
+  html += `</div>`;
+  out.innerHTML = html;
+  const cards = out.querySelectorAll(".hook");
+  out.querySelectorAll(".copybtn").forEach(btn=>{
+    btn.onclick = ()=>{
+      const card = cards[+btn.dataset.i];
+      const text = card.querySelector(".h").textContent + "\n" +
+                   card.querySelector(".c").textContent + "\n" +
+                   card.querySelector(".cta").textContent;
+      navigator.clipboard.writeText(text).then(()=>{
+        btn.textContent = "Copied! ✓"; btn.classList.add("done");
+        setTimeout(()=>{ btn.textContent="Copy hook"; btn.classList.remove("done"); }, 1500);
+      });
+    };
+  });
+  document.getElementById("copyAll").onclick = ()=>{
+    const text = [...cards].map(c =>
+      c.querySelector(".h").textContent + "\n" +
+      c.querySelector(".c").textContent + "\n" +
+      c.querySelector(".cta").textContent
+    ).join("\n\n---\n\n");
+    navigator.clipboard.writeText(text).then(()=>{
+      const b = document.getElementById("copyAll");
+      b.textContent = "Copied all! ✓";
+      setTimeout(()=> b.textContent = "Copy all", 1500);
+    });
+  };
+  out.scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+document.getElementById("gen").onclick = generate;
+document.getElementById("surprise").onclick = ()=>{
+  state.niche = pick(NICHES); state.platform = pick(PLATFORMS);
+  state.vibe = pick(VIBES); state.style = pick(STYLES);
+  chips("niches", NICHES, "niche"); chips("platforms", PLATFORMS, "platform");
+  chips("vibes", VIBES, "vibe"); chips("styles", STYLES, "style");
+  generate();
+};
+document.getElementById("out").innerHTML =
+  `<div class="panel empty">👆 Pick your niche, vibe &amp; style, then hit <b>Generate Hooks</b> —<br>watch what happens.</div>`;
+</script>
+</body>
+</html>
