@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glam Form Builder — by Glam</title>
+<style>
+  :root{
+    --sapphire:#8FBDEB;
+    --sapphire-deep:#4E8ACB;
+    --sapphire-soft:#DCEBFB;
+    --silver:#C9CFD8;
+    --silver-light:#E8EBF0;
+    --pearl:#FCFBF9;
+    --ink:#22303C;
+    --ink-soft:#5A6B7A;
+    --black:#14181D;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:linear-gradient(180deg,#F4F8FD 0%,var(--pearl) 40%,#FFFFFF 100%);
+    color:var(--ink);line-height:1.6;padding-bottom:80px;
+  }
+  .hero{
+    background:linear-gradient(120deg,var(--sapphire) 0%,#B9CFE8 35%,var(--silver) 65%,var(--pearl) 100%);
+    padding:56px 24px 48px;text-align:center;border-bottom:1px solid rgba(78,138,203,.25);
+  }
+  .hero h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(2rem,5vw,3.2rem);color:var(--black);letter-spacing:.5px}
+  .hero h1 .accent{color:var(--sapphire-deep)}
+  .hero p.tag{margin-top:10px;font-size:1.08rem;color:#2C3E50;max-width:660px;margin-left:auto;margin-right:auto}
+  .hero .byline{margin-top:8px;font-size:.9rem;color:var(--ink-soft);letter-spacing:2px;text-transform:uppercase}
+  .steps-bar{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:28px auto 0;max-width:900px;padding:0 16px}
+  .step-pill{background:#fff;border:1px solid var(--silver);border-radius:999px;padding:8px 16px;font-size:.85rem;color:var(--ink-soft);white-space:nowrap;box-shadow:0 2px 8px rgba(78,138,203,.08)}
+  .step-pill b{color:var(--sapphire-deep);margin-right:6px}
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px}
+  .howto{margin:32px 0 8px;background:#fff;border:1px solid var(--silver-light);border-radius:18px;padding:22px 26px;box-shadow:0 6px 24px rgba(78,138,203,.10)}
+  .howto h2{font-family:Georgia,serif;font-size:1.25rem;margin-bottom:10px;color:var(--black)}
+  .howto ol{margin-left:20px;color:var(--ink-soft)}
+  .howto ol li{margin:6px 0}
+  .howto ol li b{color:var(--ink)}
+  .card{background:#fff;border:1px solid var(--silver-light);border-radius:20px;padding:28px;margin:26px 0;box-shadow:0 8px 30px rgba(78,138,203,.10)}
+  .card h2{font-family:Georgia,serif;font-size:1.5rem;color:var(--black);margin-bottom:4px;display:flex;align-items:center;gap:10px}
+  .card h2 .num{background:linear-gradient(135deg,var(--sapphire),var(--silver));color:#fff;font-size:1rem;width:34px;height:34px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 10px rgba(78,138,203,.35)}
+  .card .sub{color:var(--ink-soft);font-size:.95rem;margin-bottom:18px}
+  label{display:block;font-weight:600;margin:14px 0 6px;font-size:.95rem}
+  input[type=text],input[type=number],textarea,select{width:100%;border:1px solid var(--silver);border-radius:12px;padding:12px 14px;font-size:1rem;font-family:inherit;color:var(--ink);background:#fff}
+  input:focus,textarea:focus,select:focus{outline:2px solid var(--sapphire);border-color:var(--sapphire-deep)}
+  textarea{min-height:80px;resize:vertical}
+  .hint{font-size:.82rem;color:var(--ink-soft);margin-top:4px;font-weight:400}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+  .chip{border:1px solid var(--silver);background:#fff;border-radius:999px;padding:9px 16px;font-size:.92rem;cursor:pointer;transition:all .15s;color:var(--ink)}
+  .chip:hover{border-color:var(--sapphire-deep)}
+  .chip.on{background:linear-gradient(135deg,var(--sapphire-soft),#fff);border-color:var(--sapphire-deep);color:var(--black);font-weight:600;box-shadow:0 2px 10px rgba(78,138,203,.25)}
+  .lib{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:10px}
+  .lib button{border:1px solid var(--silver);background:#fff;border-radius:12px;padding:12px 8px;font-size:.9rem;cursor:pointer;color:var(--ink);transition:all .15s}
+  .lib button:hover{border-color:var(--sapphire-deep);background:var(--sapphire-soft)}
+  .field{background:var(--pearl);border:1px solid var(--silver-light);border-radius:14px;padding:16px 18px;margin:12px 0}
+  .field .frow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .field .ftop{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .field .ftype{font-weight:700;color:var(--sapphire-deep);font-size:.9rem;text-transform:uppercase;letter-spacing:1px}
+  .field .ftools{display:flex;gap:6px}
+  .tbtn{background:#fff;border:1px solid var(--silver);border-radius:8px;padding:5px 10px;font-size:.78rem;cursor:pointer;color:var(--ink-soft)}
+  .tbtn:hover{border-color:var(--sapphire-deep);color:var(--sapphire-deep)}
+  .tbtn.danger:hover{border-color:#c0392b;color:#c0392b}
+  .reqrow{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:.9rem}
+  .reqrow input{width:18px;height:18px;accent-color:var(--sapphire-deep)}
+  .empty{border:1px dashed var(--silver);border-radius:14px;padding:24px;text-align:center;color:var(--ink-soft);font-size:.92rem;margin-top:10px}
+  .btn{background:linear-gradient(135deg,var(--sapphire-deep),#6EA3D8);color:#fff;border:none;border-radius:14px;padding:14px 26px;font-size:1.02rem;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(78,138,203,.35);transition:transform .12s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn.secondary{background:#fff;color:var(--sapphire-deep);border:2px solid var(--sapphire-deep);box-shadow:none}
+  .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+  .preview-frame{width:100%;height:520px;border:1px solid var(--silver-light);border-radius:14px;margin-top:14px;background:#fff}
+  .codebox{background:#14181D;color:#DCEBFB;border-radius:14px;padding:20px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.8rem;max-height:380px;overflow:auto;white-space:pre;margin-top:14px}
+  .note{background:var(--sapphire-soft);border-radius:14px;padding:16px 20px;font-size:.92rem;color:#2C3E50;margin-top:18px}
+  .note b{color:var(--black)}
+  .footer{text-align:center;color:var(--ink-soft);font-size:.85rem;margin-top:50px;padding:0 20px}
+  .footer .heart{color:var(--sapphire-deep)}
+  @media(max-width:560px){.card{padding:20px}.field .frow{grid-template-columns:1fr}.btn{width:100%}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Glam Form <span class="accent">Builder</span></h1>
+  <p class="tag">Pick your fields, style it your way, preview it live — then take home a complete, standalone HTML form you can use anywhere.</p>
+  <div class="byline">by Glam &middot; Glam Hustle Hub</div>
+  <div class="steps-bar">
+    <span class="step-pill"><b>1</b> Basics</span>
+    <span class="step-pill"><b>2</b> Fields</span>
+    <span class="step-pill"><b>3</b> Submit</span>
+    <span class="step-pill"><b>4</b> Preview</span>
+    <span class="step-pill"><b>5</b> Take it home</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="howto">
+    <h2>How this works</h2>
+    <ol>
+      <li><b>Name your form</b> and pick a starting template (Step 1).</li>
+      <li><b>Add fields</b> from the library and edit each one — labels, required, options (Step 2).</li>
+      <li><b>Set your button and thank-you message</b> (Step 3).</li>
+      <li><b>Preview it live</b> — see exactly what your visitors will see (Step 4).</li>
+      <li><b>Copy or download</b> your finished form as one standalone HTML file (Step 5).</li>
+    </ol>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="card">
+    <h2><span class="num">1</span> Form basics</h2>
+    <p class="sub">Give your form a name and pick a starting point. You can change everything afterward.</p>
+    <label for="fTitle">Form title</label>
+    <input type="text" id="fTitle" placeholder="e.g. Custom Tee Order Form" value="Contact Us">
+    <label for="fSub">Subtitle</label>
+    <input type="text" id="fSub" placeholder="e.g. We usually reply within 24 hours" value="Fill this out and we'll be in touch.">
+    <label>Start from a template</label>
+    <div class="chips" id="tplChips">
+      <span class="chip on">Contact</span><span class="chip">Order</span><span class="chip">Signup</span>
+      <span class="chip">Booking</span><span class="chip">Feedback</span><span class="chip">Blank</span>
+    </div>
+    <label>Accent color</label>
+    <div class="chips" id="accentChips">
+      <span class="chip on" data-c="#4E8ACB">Sapphire</span>
+      <span class="chip" data-c="#8A94A6">Silver</span>
+      <span class="chip" data-c="#14181D">Black</span>
+      <span class="chip" data-c="#2E7D5B">Emerald</span>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="card">
+    <h2><span class="num">2</span> Your fields</h2>
+    <p class="sub">Tap a field type to add it, then edit each field below. Use the arrows to reorder, × to remove.</p>
+    <div class="lib" id="fieldLib"></div>
+    <div id="fieldList" style="margin-top:16px"></div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="card">
+    <h2><span class="num">3</span> Submit &amp; thank-you</h2>
+    <p class="sub">What happens when someone hits submit.</p>
+    <label for="btnText">Submit button text</label>
+    <input type="text" id="btnText" value="Send it">
+    <label for="okTitle">Thank-you headline</label>
+    <input type="text" id="okTitle" value="You're in!">
+    <label for="okMsg">Thank-you message</label>
+    <textarea id="okMsg">Thanks for reaching out — we'll get back to you soon.</textarea>
+    <div class="note"><b>Heads up:</b> this form shows your thank-you message when submitted but doesn't send the answers anywhere yet (demo mode). For a form that collects real responses, build it in Glam Form Studio or connect this HTML to your own form service.</div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="card">
+    <h2><span class="num">4</span> Live preview</h2>
+    <p class="sub">This is exactly what your visitors will see. Hit refresh after making changes.</p>
+    <div class="btn-row" style="margin-top:0">
+      <button class="btn" onclick="refreshPreview()">Refresh preview</button>
+    </div>
+    <iframe class="preview-frame" id="preview" title="Form preview"></iframe>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="card">
+    <h2><span class="num">5</span> Take it home</h2>
+    <p class="sub">Your finished form as one standalone HTML file — no dependencies, works anywhere you paste or host it.</p>
+    <div class="btn-row" style="margin-top:0">
+      <button class="btn" onclick="buildCode()">Generate my form code</button>
+      <button class="btn secondary" onclick="copyForm(this)">Copy HTML</button>
+      <button class="btn secondary" onclick="downloadForm()">Download .html</button>
+    </div>
+    <div class="codebox" id="codebox" style="display:none"></div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Made with <span class="heart">&#10084;</span> by Glam &middot; Glam Hustle Hub &middot; Glam Form Builder
+</div>
+
+<script>
+"use strict";
+// ---------- state ----------
+var fields = [];
+var fid = 0;
+var FIELDTYPES = [
+  {k:"text", n:"Short text"},
+  {k:"email", n:"Email"},
+  {k:"tel", n:"Phone"},
+  {k:"number", n:"Number"},
+  {k:"textarea", n:"Long text"},
+  {k:"select", n:"Dropdown"},
+  {k:"radio", n:"Multiple choice"},
+  {k:"checkbox", n:"Checkboxes"},
+  {k:"date", n:"Date"},
+  {k:"file", n:"File upload"},
+  {k:"rating", n:"Star rating"}
+];
+var DEFAULT_LABELS = {text:"Your answer",email:"Email address",tel:"Phone number",number:"Quantity",textarea:"Tell us more",select:"Choose one",radio:"Pick one",checkbox:"Select all that apply",date:"Preferred date",file:"Upload a file",rating:"How would you rate us?"};
+var PRESETS = {
+  "Contact":[["text","Full name",1,""],["email","Email address",1,""],["tel","Phone number",0,""],["textarea","Your message",1,""]],
+  "Order":[["text","Full name",1,""],["email","Email address",1,""],["tel","Phone number",1,""],["select","Choose your product",1,"Tee — $39\nHoodie — $69\nHat — $29"],["number","Quantity",1,""],["textarea","Notes for your order",0,""]],
+  "Signup":[["text","Full name",1,""],["email","Email address",1,""],["tel","Phone number",0,""],["checkbox","Keep me in the loop",0,"Email updates\nText updates"]],
+  "Booking":[["text","Full name",1,""],["email","Email address",1,""],["tel","Phone number",1,""],["date","Preferred date",1,""],["textarea","Anything we should know?",0,""]],
+  "Feedback":[["text","Your name",0,""],["email","Email address",0,""],["rating","How would you rate us?",1,""],["textarea","Your feedback",1,""]],
+  "Blank":[]
+};
+
+// ---------- helpers ----------
+function val(id){ return document.getElementById(id).value.trim(); }
+function esc(s){
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+function chipGroup(id, single, cb){
+  var box = document.getElementById(id);
+  box.addEventListener("click", function(e){
+    var t = e.target.closest(".chip"); if(!t) return;
+    if(single){ box.querySelectorAll(".chip").forEach(function(c){ c.classList.remove("on"); }); t.classList.add("on"); }
+    else { t.classList.toggle("on"); }
+    if(cb) cb(t);
+  });
+}
+function accent(){
+  var el = document.querySelector("#accentChips .chip.on");
+  return el ? el.getAttribute("data-c") : "#4E8ACB";
+}
+
+// ---------- fields ----------
+function addField(type, label, required, optionsText, placeholder){
+  var f = {
+    id: ++fid, type: type,
+    label: label || DEFAULT_LABELS[type],
+    required: !!required,
+    placeholder: placeholder || "",
+    options: optionsText ? optionsText.split("\n").map(function(s){return s.trim();}).filter(Boolean) : []
+  };
+  if((type==="select"||type==="radio"||type==="checkbox") && !f.options.length){
+    f.options = ["Option 1","Option 2","Option 3"];
+  }
+  fields.push(f);
+  renderFields();
+}
+function renderFields(){
+  var box = document.getElementById("fieldList");
+  if(!fields.length){
+    box.innerHTML = '<div class="empty">No fields yet — tap a field type above to add your first one.</div>';
+    return;
+  }
+  box.innerHTML = fields.map(function(f, i){
+    var tn = FIELDTYPES.filter(function(t){return t.k===f.type;})[0].n;
+    var optHtml = "";
+    if(f.type==="select"||f.type==="radio"||f.type==="checkbox"){
+      optHtml = '<label>Options <span class="hint">(one per line)</span></label>' +
+        '<textarea data-f="'+f.id+'" data-k="options" oninput="editField(this)">'+esc(f.options.join("\n"))+"</textarea>";
+    }
+    var phHtml = "";
+    if(["text","email","tel","number","textarea"].indexOf(f.type) > -1){
+      phHtml = '<div><label>Placeholder</label><input type="text" data-f="'+f.id+'" data-k="placeholder" value="'+esc(f.placeholder)+'" oninput="editField(this)"></div>';
+    }
+    return '<div class="field">' +
+      '<div class="ftop"><span class="ftype">'+tn+'</span>' +
+      '<span class="ftools">' +
+        '<button class="tbtn" onclick="moveField('+f.id+',-1)">↑</button>' +
+        '<button class="tbtn" onclick="moveField('+f.id+',1)">↓</button>' +
+        '<button class="tbtn danger" onclick="removeField('+f.id+')">× Remove</button>' +
+      "</span></div>" +
+      '<div class="frow"><div><label>Label</label><input type="text" data-f="'+f.id+'" data-k="label" value="'+esc(f.label)+'" oninput="editField(this)"></div>' + phHtml + "</div>" +
+      optHtml +
+      '<label class="reqrow"><input type="checkbox" data-f="'+f.id+'" data-k="required" '+(f.required?"checked":"")+' onchange="editField(this)"> Required field</label>' +
+      "</div>";
+  }).join("");
+}
+function editField(el){
+  var id = +el.getAttribute("data-f"), k = el.getAttribute("data-k");
+  var f = fields.filter(function(x){return x.id===id;})[0]; if(!f) return;
+  if(k==="required") f.required = el.checked;
+  else if(k==="options") f.options = el.value.split("\n").map(function(s){return s.trim();}).filter(Boolean);
+  else f[k] = el.value;
+}
+function removeField(id){
+  fields = fields.filter(function(f){return f.id!==id;});
+  renderFields();
+}
+function moveField(id, dir){
+  var i = fields.findIndex(function(f){return f.id===id;});
+  var j = i + dir;
+  if(i<0 || j<0 || j>=fields.length) return;
+  var t = fields[i]; fields[i]=fields[j]; fields[j]=t;
+  renderFields();
+}
+function applyPreset(name){
+  fields = [];
+  (PRESETS[name]||[]).forEach(function(p){
+    addFieldSilent(p[0], p[1], p[2], p[3]);
+  });
+  renderFields();
+}
+function addFieldSilent(type, label, required, optionsText){
+  var f = { id: ++fid, type: type, label: label || DEFAULT_LABELS[type], required: !!required, placeholder: "",
+    options: optionsText ? optionsText.split("\n").map(function(s){return s.trim();}).filter(Boolean) : [] };
+  fields.push(f);
+}
+
+// ---------- form generation ----------
+function fieldHTML(f, accentColor){
+  var req = f.required ? " required" : "";
+  var name = "field_" + f.id;
+  var lab = '<label for="'+name+'">'+esc(f.label)+(f.required?' <span style="color:'+accentColor+'">*</span>':"")+"</label>";
+  var inpStyle = "width:100%;border:1.5px solid #E2E6EC;border-radius:10px;padding:12px 14px;font-size:1rem;font-family:inherit;";
+  switch(f.type){
+    case "text": case "email": case "tel": case "number": case "date":
+      return lab+'<input id="'+name+'" name="'+esc(f.label)+'" type="'+f.type+'" placeholder="'+esc(f.placeholder)+'"'+req+' style="'+inpStyle+'">';
+    case "textarea":
+      return lab+'<textarea id="'+name+'" name="'+esc(f.label)+'" placeholder="'+esc(f.placeholder)+'"'+req+' style="'+inpStyle+'min-height:110px;resize:vertical;"></textarea>';
+    case "select":
+      var opts = f.options.map(function(o){return '<option>'+esc(o)+"</option>";}).join("");
+      return lab+'<select id="'+name+'" name="'+esc(f.label)+'"'+req+' style="'+inpStyle+'"><option value="">Choose…</option>'+opts+"</select>";
+    case "radio":
+      return '<div class="flabel">'+esc(f.label)+(f.required?' <span style="color:'+accentColor+'">*</span>':"")+"</div>" +
+        f.options.map(function(o,i){
+          return '<label class="choice"><input type="radio" name="'+esc(f.label)+'" value="'+esc(o)+'"'+(f.required&&i===0?" required":"")+'> '+esc(o)+"</label>";
+        }).join("");
+    case "checkbox":
+      return '<div class="flabel">'+esc(f.label)+(f.required?' <span style="color:'+accentColor+'">*</span>':"")+"</div>" +
+        f.options.map(function(o){
+          return '<label class="choice"><input type="checkbox" name="'+esc(f.label)+'" value="'+esc(o)+'"> '+esc(o)+"</label>";
+        }).join("");
+    case "file":
+      return lab+'<input id="'+name+'" name="'+esc(f.label)+'" type="file"'+req+' style="'+inpStyle+'">';
+    case "rating":
+      var stars = "";
+      for(var i=5;i>=1;i--){
+        stars += '<input type="radio" id="star'+f.id+"_"+i+'" name="'+esc(f.label)+'" value="'+i+'"'+req+'><label for="star'+f.id+"_"+i+'">★</label>';
+      }
+      return '<div class="flabel">'+esc(f.label)+(f.required?' <span style="color:'+accentColor+'">*</span>':"")+'</div><div class="stars">'+stars+"</div>";
+  }
+  return "";
+}
+function genFormHTML(){
+  var title = val("fTitle") || "Contact Us";
+  var sub = val("fSub");
+  var btnText = val("btnText") || "Send it";
+  var okTitle = val("okTitle") || "You're in!";
+  var okMsg = val("okMsg") || "Thanks — we'll be in touch soon.";
+  var ac = accent();
+  var body = fields.length
+    ? fields.map(function(f){ return '<div class="frow">'+fieldHTML(f, ac)+"</div>"; }).join("\n")
+    : '<p style="color:#8A94A6;text-align:center;">No fields yet.</p>';
+  return '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
+  "<title>"+esc(title)+"</title>\n" +
+  "<style>\n" +
+  "  *{box-sizing:border-box;margin:0;padding:0}\n" +
+  "  body{font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:#F4F6FA;color:#22303C;padding:40px 16px;}\n" +
+  "  .form-card{max-width:600px;margin:0 auto;background:#fff;border-radius:20px;padding:36px;box-shadow:0 10px 40px rgba(0,0,0,.08);}\n" +
+  "  .form-card h1{font-size:1.7rem;margin-bottom:6px;}\n" +
+  "  .form-card .sub{color:#5A6B7A;margin-bottom:24px;}\n" +
+  "  .frow{margin-bottom:18px;}\n" +
+  "  .frow label,.flabel{display:block;font-weight:600;margin-bottom:6px;font-size:.95rem;}\n" +
+  "  .frow input:focus,.frow textarea:focus,.frow select:focus{outline:2px solid "+ac+";border-color:"+ac+";}\n" +
+  "  .choice{display:flex!important;align-items:center;gap:8px;font-weight:400!important;margin:8px 0;cursor:pointer;}\n" +
+  "  .choice input{width:18px;height:18px;accent-color:"+ac+";}\n" +
+  "  .stars{display:flex;flex-direction:row-reverse;justify-content:flex-end;gap:4px;}\n" +
+  "  .stars input{display:none;}\n" +
+  "  .stars label{font-size:2rem;color:#D8DDE5;cursor:pointer;}\n" +
+  "  .stars input:checked ~ label,.stars label:hover,.stars label:hover ~ label{color:"+ac+";}\n" +
+  "  .submit{width:100%;background:"+ac+";color:#fff;border:none;border-radius:12px;padding:15px;font-size:1.05rem;font-weight:700;cursor:pointer;margin-top:6px;}\n" +
+  "  .submit:hover{filter:brightness(.94);}\n" +
+  "  .success{text-align:center;padding:30px 10px;}\n" +
+  "  .success .check{font-size:3.4rem;}\n" +
+  "  .success h2{margin:12px 0 8px;}\n" +
+  "  .success p{color:#5A6B7A;}\n" +
+  "</style>\n</head>\n<body>\n" +
+  '<div class="form-card">\n  <div id="formView">\n' +
+  "    <h1>"+esc(title)+"</h1>\n" +
+  (sub ? '    <p class="sub">'+esc(sub)+"</p>\n" : "") +
+  '    <form id="gfb" onsubmit="return gfbSubmit(event)">\n' + body + '\n' +
+  '      <button type="submit" class="submit">'+esc(btnText)+"</button>\n    </form>\n  </div>\n" +
+  '  <div id="okView" class="success" style="display:none">\n    <div class="check">✓</div>\n' +
+  "    <h2>"+esc(okTitle)+"</h2>\n    <p>"+esc(okMsg)+"</p>\n  </div>\n</div>\n" +
+  "<script>\nfunction gfbSubmit(e){e.preventDefault();document.getElementById('formView').style.display='none';document.getElementById('okView').style.display='block';window.scrollTo(0,0);return false;}\n<\/script>\n" +
+  "<!-- Built with Glam Form Builder. Demo mode: shows the thank-you message on submit. Connect to your own form service to collect real responses. -->\n" +
+  "</body>\n</html>";
+}
+
+// ---------- actions ----------
+function refreshPreview(){
+  document.getElementById("preview").srcdoc = genFormHTML();
+}
+function buildCode(){
+  var code = genFormHTML();
+  var box = document.getElementById("codebox");
+  box.style.display = "block";
+  box.textContent = code;
+  box.scrollIntoView({behavior:"smooth", block:"center"});
+}
+function copyForm(btn){
+  var code = genFormHTML();
+  function done(){ var o=btn.textContent; btn.textContent="Copied!"; setTimeout(function(){btn.textContent=o;},1600); }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(code).then(done).catch(done);
+  } else { done(); }
+}
+function downloadForm(){
+  var code = genFormHTML();
+  var blob = new Blob([code], {type:"text/html"});
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  var t = (val("fTitle")||"form").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"") || "form";
+  a.download = t + ".html";
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+
+// ---------- init ----------
+(function(){
+  var lib = document.getElementById("fieldLib");
+  lib.innerHTML = FIELDTYPES.map(function(t){
+    return '<button onclick="addField(\''+t.k+'\')">+ '+t.n+"</button>";
+  }).join("");
+  chipGroup("tplChips", true, function(t){ applyPreset(t.textContent.trim()); });
+  chipGroup("accentChips", true);
+  applyPreset("Contact");
+  refreshPreview();
+})();
+</script>
+</body>
+</html>
