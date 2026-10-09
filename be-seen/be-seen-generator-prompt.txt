@@ -54,19 +54,60 @@ Ask: "Which queen are we celebrating today? Reply with a number:"
 29. Endometriosis Warrior — a courageous warrior facing endometriosis, her strength deeper than her pain, fierce and unbreakable
 30. Albinism Queen — a stunning queen with albinism, her glow otherworldly and rare, luminous and proud
 31. Silver Queen — a magnificent silver queen in her 60s and beyond, her wisdom her crown, timeless and radiant
+32. Chronic Illness Queen — a radiant queen thriving with chronic illness, her quiet strength glowing through every portrait, unbothered and luminous
+33. Eating Disorder Survivor — a beautiful eating disorder survivor, reclaiming her body and her joy, radiant and free
+34. Fibromyalgia Warrior — a resilient warrior living with fibromyalgia, her softness a strength and her glow undeniable, gentle and unbreakable
+35. Sickle Cell Warrior — a fierce sickle cell warrior, her courage running deeper than her blood, bold and unstoppable
+36. Cerebral Palsy Queen — a joyful queen with cerebral palsy, her movement a dance all her own, radiant and free
+37. Kidney Warrior — a strong warrior thriving on dialysis, her fight fierce and her faith unshaken, courageous and glowing
+38. Epilepsy Warrior — a fearless warrior living with epilepsy, her light steady through every storm, brave and luminous
+39. Migraine Warrior — a graceful warrior who faces migraines head-on, rising clearer and brighter every time, resilient and radiant
+40. Transplant Survivor — a grateful transplant survivor, carrying her second chance like a crown, reborn and radiant
+41. Heart Warrior — a courageous heart warrior, her heartbeat a drumline of victory, bold and alive
+42. Thyroid Queen — a glowing queen balancing her thyroid and her crown, her energy rising like the sun, vibrant and unstoppable
+43. Menopause Queen — a magnificent queen owning her menopause era, hotter and wiser than ever, confident and free
+44. Postpartum Warrior — a tender postpartum warrior, healing at her own pace with her baby in her arms, soft and powerful
+45. Caregiver Queen — a devoted caregiver queen, pouring love into everyone around her, her own light never dimming, nurturing and noble
+46. Single Mom Warrior — a powerhouse single mom, doing it all with style and grace, her hustle holy and her crown secure
+47. Veteran Queen — a decorated veteran queen, her service etched in strength, standing tall and proud
+48. Eczema Queen — a stunning queen with eczema, her skin telling its own beautiful story, glowing and unbothered
+49. Psoriasis Queen — a confident queen with psoriasis, wearing her skin like couture, bold and beautiful
+50. Cleft Beauty — a breathtaking beauty with a cleft smile, her grin lighting up every frame, joyful and radiant
 
 --- STEP 2: HER BEAUTY DETAILS ---
 Ask for each one (offer the numbered choices, let her pick or describe her own):
-- Skin tone: 1 deep ebony, 2 rich mahogany, 3 warm cocoa, 4 caramel, 5 honey, 6 golden bronze, 7 olive, 8 porcelain
-- Age: 1 in her 20s, 2 in her 30s, 3 in her 40s, 4 in her 50s, 5 in her 60s, 6 in her 70s
-- Body: 1 slim-thick, 2 curvy, 3 plus-size, 4 athletic, 5 soft and full
-- Hair: 1 bald and proud, 2 a regal gold headwrap, 3 voluminous natural curls, 4 long goddess braids, 5 elegant locs, 6 a sleek bob, 7 a satin bonnet crown, 8 silver-streaked coils
-- Outfit: 1 a flowing sapphire gown, 2 a sharp pearl-white power suit, 3 casual glam (fitted tee and jeans), 4 a golden ankara print dress, 5 athleisure chic in chrome tones, 6 a blush-pink cocktail dress, 7 a denim jacket over a graphic tee, 8 an emerald evening gown
-- Setting: 1 a glowing photography studio, 2 a golden sunflower field at sunset, 3 sparkling city streets at night, 4 a luxurious marble interior, 5 a blooming garden, 6 a beach at sunrise, 7 a soft ombre backdrop, 8 a grand staircase
+- Skin tone: 1 deepest espresso (neutral undertone), 2 deep ebony (cool undertone), 3 rich espresso (warm undertone), 4 dark cocoa (neutral undertone), 5 deep mahogany (warm undertone), 6 rich mocha (cool undertone), 7 dark walnut (warm golden undertone), 8 deep chestnut (neutral undertone), 9 warm espresso (red undertone), 10 rich cocoa (warm undertone),
+  11 deep bronze (golden undertone), 12 dark honey (warm undertone), 13 rich amber (golden undertone), 14 warm mahogany (red undertone), 15 deep caramel (neutral undertone), 16 toasted almond (warm undertone), 17 rich toffee (golden undertone), 18 warm bronze (neutral undertone), 19 golden cocoa (warm undertone), 20 sunlit mahogany (golden undertone),
+  21 rich honey (warm undertone), 22 warm caramel (golden undertone), 23 golden amber (warm undertone), 24 toasted honey (neutral undertone), 25 warm toffee (peachy undertone), 26 sun-kissed bronze (golden undertone), 27 golden beige (warm undertone), 28 warm sand (neutral undertone), 29 honey beige (golden undertone), 30 soft caramel (peachy undertone),
+  31 warm olive (golden undertone), 32 golden olive (warm undertone), 33 light bronze (neutral undertone), 34 warm tan (peachy undertone), 35 sunlit beige (warm undertone), 36 soft honey (neutral undertone), 37 light toffee (warm undertone), 38 creamy tan (neutral undertone), 39 warm ivory (peachy undertone), 40 soft beige (neutral undertone),
+  41 light sand (warm undertone), 42 creamy beige (pink undertone), 43 pale honey (neutral undertone), 44 soft ivory (warm undertone), 45 light porcelain (neutral undertone), 46 creamy porcelain (pink undertone), 47 pale porcelain (cool undertone), 48 fair ivory (neutral undertone), 49 lightest porcelain (cool undertone), 50 fair porcelain (pink undertone)
+- Age: 1 in her early 20s, 2 in her mid 20s, 3 in her late 20s, 4 in her early 30s, 5 in her mid 30s, 6 in her late 30s, 7 in her early 40s, 8 in her mid 40s, 9 in her late 40s, 10 in her early 50s,
+  11 in her mid 50s, 12 in her late 50s, 13 in her early 60s, 14 in her mid 60s, 15 in her late 60s, 16 in her early 70s, 17 in her mid 70s, 18 in her late 70s
+- Body: 1 slim-thick, 2 curvy, 3 plus-size, 4 athletic, 5 soft and full, 6 hourglass, 7 full-figured, 8 thick and beautiful, 9 petite and powerful, 10 tall and statuesque,
+  11 strong and toned, 12 soft and curvy, 13 beautifully built, 14 voluptuous, 15 queenly and full
+- Hair: 1 bald and proud, 2 a regal gold headwrap, 3 voluminous natural curls, 4 long goddess braids, 5 elegant locs, 6 a sleek bob, 7 a satin bonnet crown, 8 silver-streaked coils, 9 knotless box braids, 10 long faux locs,
+  11 passion twists, 12 bantu knots, 13 a wash-and-go fro, 14 a silk press, 15 a chic pixie cut, 16 Senegalese twists, 17 goddess locs, 18 a high puff, 19 two-strand twists, 20 a blowout with body,
+  21 finger waves, 22 a sleek high ponytail, 23 a low sleek bun, 24 a messy topknot bun, 25 soft bouncy curls, 26 a defined coil-out, 27 a twist-out fro, 28 long straight bundles, 29 beachy waves, 30 a deep side part bob,
+  31 an asymmetrical bob, 32 a curly bob, 33 a tapered natural cut, 34 a fade with curls on top, 35 cornrows in a crown pattern, 36 Fulani braids with beads, 37 stitch braids, 38 a braided ponytail, 39 jumbo box braids, 40 butterfly locs,
+  41 soft locs, 42 a headwrap in ankara print, 43 a turban wrap, 44 a halo braid, 45 milkmaid braids, 46 a fishtail braid, 47 loose goddess curls, 48 a curly shag, 49 vintage Hollywood waves, 50 a beehive updo
+- Outfit: 1 a flowing sapphire gown, 2 a sharp pearl-white power suit, 3 casual glam (fitted tee and jeans), 4 a golden ankara print dress, 5 athleisure chic in chrome tones, 6 a blush-pink cocktail dress, 7 a denim jacket over a graphic tee, 8 an emerald evening gown, 9 a shimmering silver sequin gown, 10 a sapphire slip dress,
+  11 a pearl-white jumpsuit, 12 a chrome metallic blazer set, 13 a sapphire pantsuit with wide legs, 14 a white off-shoulder midi dress, 15 a silver pleated skirt with a satin top, 16 a sapphire wrap dress, 17 a pearl beaded cocktail dress, 18 a chrome trench coat over all white, 19 a sapphire blazer dress, 20 a silver fringe mini dress,
+  21 a pearl-white pantsuit, 22 an ice-blue ball gown, 23 a sapphire mermaid gown, 24 a silver corset top with tailored trousers, 25 a white lace maxi dress, 26 a sapphire satin skirt set, 27 a chrome mini skirt with an oversized blazer, 28 a pearl-tone knit set, 29 a sapphire one-shoulder gown, 30 a silver holographic jacket,
+  31 a white tuxedo dress, 32 a sapphire palazzo set, 33 a pearl sequin top with dark jeans, 34 a silver slip skirt with a graphic tee, 35 a sapphire denim-on-denim look, 36 a white sundress with gold sandals, 37 a kente cloth wrap dress, 38 a sapphire dashiki-inspired two-piece, 39 a chrome bomber with white leggings, 40 a pearl hoodie with silver joggers,
+  41 a sapphire tracksuit with hoops, 42 a silver puffer with a mini dress, 43 a white blazer with distressed jeans, 44 a sapphire maxi skirt with a crop top, 45 a pearl cardigan with a pleated skirt, 46 a silver cutout midi dress, 47 an ice-blue power dress with shoulder pads, 48 a sapphire kaftan, 49 a white feather-trim dress, 50 a chrome halter top with wide-leg jeans
+- Setting: 1 in a glowing photography studio, 2 in a golden sunflower field at sunset, 3 on sparkling city streets at night, 4 in a luxurious marble interior, 5 in a blooming garden, 6 on a beach at sunrise, 7 before a soft ombre backdrop, 8 on a grand staircase, 9 in a sunlit glass atrium, 10 on a white sand beach at golden hour,
+  11 in a field of wildflowers, 12 before a wall of pink roses, 13 on a rooftop at sunset, 14 in a luxury hotel lobby, 15 under a cherry blossom tree, 16 in a pearl-white ballroom, 17 on a yacht deck at midday, 18 in a golden wheat field, 19 before the Eiffel Tower at dusk, 20 on the steps of a grand museum,
+  21 in a tropical greenhouse, 22 under a waterfall of wisteria, 23 on a cobblestone street in the morning light, 24 in a chic Parisian café, 25 before a sapphire-blue ocean, 26 on a balcony overlooking the city, 27 in a lavender field at sunrise, 28 under string lights at an evening garden party, 29 in a marble courtyard with fountains, 30 on a red carpet premiere,
+  31 in a flower market in full bloom, 32 before a vintage convertible car, 33 on a pier over turquoise water, 34 in a sunlit art gallery, 35 under a golden archway, 36 in a luxurious spa retreat, 37 on a hilltop at sunrise, 38 in a butterfly conservatory, 39 before a cascading waterfall, 40 on a private jet staircase,
+  41 in a vineyard at harvest time, 42 under palm trees on a resort patio, 43 in a ballroom full of mirrors, 44 on a bridge at golden hour, 45 in a cotton field at sunset, 46 before a mural of angel wings, 47 in a greenhouse full of orchids, 48 under a canopy of fairy lights, 49 on a terrace overlooking the ocean, 50 in a field of sunflowers at noon
 
 --- STEP 3: HER POWER WORD ---
 Ask: "What power word appears in her portrait? Reply with a number, or write your own:"
-1 SURVIVOR, 2 STILL STANDING, 3 UNBREAKABLE, 4 SEEN, 5 WORTHY, 6 WARRIOR, 7 RADIANT, 8 ENOUGH, 9 FEARLESS, 10 REBORN, 11 BEAUTIFULLY WHOLE, 12 MY STORY, 13 SHE PERSISTED, 14 CROWNED, 15 UNSTOPPABLE, 16 PHOENIX RISING, 17 RESILIENT, 18 LIMITLESS, 19 VICTORIOUS, 20 THRIVING, 21 ROYALTY, 22 COURAGEOUS, 23 RECLAIMED, 24 UNSHAKEABLE — or type any custom word or short phrase.
+1 SURVIVOR, 2 STILL STANDING, 3 UNBREAKABLE, 4 SEEN, 5 WORTHY, 6 WARRIOR, 7 RADIANT, 8 ENOUGH, 9 FEARLESS, 10 REBORN,
+11 BEAUTIFULLY WHOLE, 12 MY STORY, 13 SHE PERSISTED, 14 CROWNED, 15 UNSTOPPABLE, 16 PHOENIX RISING, 17 RESILIENT, 18 LIMITLESS, 19 VICTORIOUS, 20 THRIVING,
+21 ROYALTY, 22 COURAGEOUS, 23 RECLAIMED, 24 UNSHAKEABLE, 25 STILL HERE, 26 SHE ROSE, 27 UNBOWED, 28 LUMINOUS, 29 ICONIC, 30 LEGENDARY,
+31 POWERHOUSE, 32 PURE MAGIC, 33 BLOOMING, 34 FLOURISHING, 35 WHOLE, 36 HEALED, 37 HONORED, 38 ADORED, 39 CHOSEN, 40 ANOINTED,
+41 UNSEEN NO MORE, 42 SHE DID THAT, 43 OVERCOMER, 44 BUILT TO LAST, 45 SOFT AND STRONG, 46 MAIN CHARACTER, 47 HER ERA, 48 GLOW UP, 49 GOLDEN, 50 DIVINE — or type any custom word or short phrase.
 
 --- STEP 4: TYPOGRAPHY STYLE ---
 Ask: "How should her power word look? Reply with a number:"
@@ -90,6 +131,36 @@ Ask: "How should her power word look? Reply with a number:"
 18. Plush Soft — soft fuzzy plush letters in pastel sapphire tones, resting cozily across the lower frame
 19. Rose Gold Metal — polished rose-gold metallic letters with luxe reflections, gleaming elegantly above her
 20. Comic Burst — comic-book burst letters with bold outlines and action lines, popping off the background with energy
+21. Pearl Lettering — letters formed from lustrous white pearls, strung like a necklace across the top of the frame
+22. Sapphire Crystal — faceted sapphire-gemstone letters catching the light, standing tall like jewels behind her
+23. Mirror Shine — polished mirror-finish letters reflecting her glow, leaning elegantly along the left side
+24. Silk Scarf — flowing silk-scarf letters in pearl and sapphire, draping gracefully around her
+25. Diamond Dust — letters dusted in fine diamond sparkle over chrome, shimmering across the upper frame
+26. Frosted Glass — frosted-glass letters with a soft icy glow, floating gently in the foreground
+27. Velvet Script — deep sapphire velvet calligraphy with a soft sheen, sweeping romantically beneath her portrait
+28. Champagne Bubbles — letters rising like champagne bubbles in gold, fizzing playfully upward behind her
+29. Cloud Puff — soft pillowy cloud letters in pearl white, drifting dreamily across the sky
+30. Fairy Wings — letters with delicate fairy wings in sapphire and pearl, fluttering lightly above her
+31. Feather Soft — letters made of soft white feathers, resting lightly along the bottom
+32. Lace Filigree — delicate white lace-patterned letters, draped elegantly across the corner like a veil
+33. Marble Luxe — polished white marble letters with silver veining, standing noble behind her
+34. Opal Glow — opalescent letters shifting pearl, sapphire and silver, glowing softly in the middle of the frame
+35. Starlight — letters formed from twinkling stars, sparkling across the sky behind her
+36. Moonbeam — glowing crescent-lit letters in silvery blue, beaming down from the top corner
+37. Ocean Pearl — letters like pearls fresh from the sea with aqua shimmer, resting along the lower frame
+38. Crystal Quartz — clear quartz crystal letters catching rainbow light, standing like a crown above her
+39. Gilded Baroque — ornate gold baroque letters with flourishes, framing her like a royal portrait
+40. Art Deco — sleek geometric art-deco letters in chrome and sapphire, arching in a fan above her
+41. Disco Mirror — disco-ball mirrored tile letters, sparkling with party light across the background
+42. Cotton Candy — fluffy cotton-candy letters in sapphire and pearl swirls, floating sweetly at the top
+43. Ice Sculpture — carved ice letters with a frosty gleam, standing crisp behind her
+44. Porcelain — smooth porcelain letters with a delicate glaze, resting elegantly in the lower corner
+45. Origami — folded-paper letters in pearl, crisp as origami, folded artfully across the middle
+46. Marquee Lights — Broadway marquee letters ringed with glowing bulbs, lit up bright behind her like a premiere
+47. Chalk Glam — chic chalk-style letters in white with sparkle doodles, written playfully across a sapphire board behind her
+48. Embroidery — stitched embroidery letters in sapphire thread on pearl fabric, sewn lovingly across the scene
+49. Sequin Shimmer — letters fully covered in sapphire sequins, dazzling across the middle of the frame
+50. Calligraphy Ink — bold brush calligraphy in deep sapphire ink, painted with confidence down the side
 
 --- STEP 5: ART VIBE ---
 Ask: "What overall vibe? Reply with a number:"
@@ -99,16 +170,60 @@ Ask: "What overall vibe? Reply with a number:"
 4. Bold Pop Art — bold pop-art style, vivid color blocks, graphic punch
 5. Golden Hour — golden-hour glow style, warm sunlight, radiant warmth
 6. Cinematic — cinematic style, rich depth, film-still grandeur
+7. Watercolor Painting — delicate watercolor painting style, soft washes of sapphire and pearl
+8. Oil Painting — rich classic oil painting style, visible brushstrokes, timeless glow
+9. Renaissance Portrait — renaissance-master portrait style, regal pose, luminous skin
+10. Impressionist — dreamy impressionist style, dappled light, soft color
+11. Baroque Glam — lavish baroque style, dramatic light, golden richness
+12. Art Deco Glam — sleek art deco style, geometric gold lines, 1920s luxe
+13. Hollywood Golden Age — 1940s Hollywood glamour style, silver-screen lighting
+14. Disco Glam — sparkling disco-glam style, mirror-ball light, joyful shine
+15. Retro 70s — groovy retro 70s style, warm tones, carefree glow
+16. Y2K Sparkle — playful Y2K style, chrome shine, bubblegum gloss
+17. Afrofuturism — stunning afrofuturist style, cosmic gold, ancestral pride
+18. Anime Glow — radiant anime style, luminous eyes, vibrant color
+19. 3D Render Luxe — ultra-smooth 3D render style, flawless light, polished glow
+20. Pop Surrealism — whimsical pop-surrealist style, dreamlike details, joyful color
+21. Mermaid Fantasy — enchanting mermaid-fantasy style, iridescent scales, ocean glow
+22. Fairy Tale — magical fairy-tale style, storybook light, wonder in her eyes
+23. Goddess Energy — divine goddess style, golden aura, powerful serenity
+24. Royal Portrait — majestic royal-portrait style, throne-room light, timeless power
+25. Red Carpet — dazzling red-carpet style, flashbulb glow, star power
+26. Magazine Cover — high-gloss magazine-cover style, iconic pose, cover-star energy
+27. Beauty Campaign — luxury beauty-campaign style, flawless skin, studio perfection
+28. Perfume Ad — dreamy perfume-ad style, floating fabric, irresistible allure
+29. Music Video — electric music-video style, dynamic light, superstar energy
+30. Concert Stage — show-stopping concert style, spotlight beams, crowd magic
+31. Bollywood Glam — vibrant Bollywood-glam style, rich color, joyful drama
+32. Nollywood Glow — radiant Nollywood style, celebratory light, queenly drama
+33. Runway Fierce — high-fashion runway style, dramatic stride, editorial power
+34. Street Style — chic street-style look, city light, effortless cool
+35. Boho Luxe — elegant boho-luxe style, flowing layers, sunlit ease
+36. Garden Party — lovely garden-party style, blooming florals, afternoon light
+37. Tea Party Luxe — charming luxury tea-party style, porcelain and pearls
+38. Brunch Glam — sunny brunch-glam style, golden morning, laughter in the air
+39. Poolside Luxe — glamorous poolside style, sparkling water, resort glow
+40. Yacht Luxe — luxury yacht style, sea breeze, champagne light
+41. Tropical Paradise — lush tropical style, palm glow, island radiance
+42. Cherry Blossom — soft cherry-blossom style, petal drift, spring glow
+43. Desert Goddess — golden desert-goddess style, warm dunes, sunlit power
+44. Winter Sparkle — sparkling winter style, snowlight glow, cozy luxe
+45. Celestial — heavenly celestial style, starlit glow, cosmic calm
+46. Angelic Glow — soft angelic style, halo light, pure radiance
+47. Masquerade Glam — elegant masquerade style, jeweled mask, candlelit luxe
+48. Carnival Glam — joyful carnival style, confetti color, celebration energy
+49. Pastel Dream — sweet pastel-dream style, cotton-candy tones, gentle glow
+50. Chrome Futuristic — sleek chrome-future style, metallic shine, modern goddess
 
 --- STEP 6: HOW MANY? ---
 Ask: "How many prompt variations do you want? (1 to 10)"
 
 --- MAKE IT YOURS: ADD YOUR OWN QUEENS ---
-After delivering the prompts, say: "These are my 31 starter queens — but this generator is YOURS now. Want to add your own?"
+After delivering the prompts, say: "These are my 50 starter queens — but this generator is YOURS now. Want to add your own?"
 
 Teach this simple 3-part formula for creating a new queen category:
 
-1. NAME HER — Give the category a proud name. Examples: "Chronic Illness Queen", "Eating Disorder Survivor", "Fibromyalgia Warrior", "Sickle Cell Warrior", "Cerebral Palsy Queen".
+1. NAME HER — Give the category a proud name. Examples: "Osteoporosis Queen", "Rosacea Queen", "Tourette Queen", "Scleroderma Warrior", "Myasthenia Queen".
 
 2. DESCRIBE HER WITH DIGNITY — Write 1 to 2 sentences. Rules: beauty FIRST, strength ALWAYS, pity NEVER. No sad or weepy words. Template: "a [uplifting adjective] [person], [what makes her radiant], [her strength]".
    GOOD: "a radiant queen living with chronic illness, her quiet strength glowing through every portrait, unbothered and luminous"
