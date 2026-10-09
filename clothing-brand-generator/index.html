@@ -152,10 +152,10 @@ section{max-width:1060px;margin:0 auto;padding:80px 20px}
 .show{background:#fff;border-radius:20px;overflow:hidden;border:1px solid rgba(59,130,196,.16);
   box-shadow:0 16px 44px rgba(43,108,176,.12);transition:transform .3s}
 .show:hover{transform:translateY(-6px)}
+.show img{width:100%;height:340px;object-fit:cover;object-position:top center;display:block}
 .show-head{padding:16px 22px;background:linear-gradient(120deg,#F0F6FE,#EAF1FB);border-bottom:1px solid rgba(59,130,196,.14);
   font-family:'Unbounded';font-size:12px;font-weight:700;letter-spacing:1px;color:var(--purple)}
-.show-body{padding:22px;font-size:.95rem;line-height:1.7;color:#3E5578}
-.show-foot{padding:0 22px 20px}
+.show-body{padding:18px 22px 22px;font-size:.95rem;line-height:1.65;color:#3E5578}
 /* final cta */
 .final{max-width:1060px;margin:0 auto 90px;padding:0 20px}
 .final-panel{position:relative;overflow:hidden;border-radius:32px;padding:80px 30px;text-align:center;color:#fff;
@@ -194,7 +194,7 @@ footer b{background:var(--grad);-webkit-background-clip:text;background-clip:tex
 
 <nav>
   <div class="logo">✨ Glam's Prompt Studio</div>
-  <a class="btn btn-sm" href="./app/">Launch Generator</a>
+  <a class="btn btn-sm" href="#get-access">Get Instant Access</a>
 </nav>
 
 <header class="hero">
@@ -211,7 +211,7 @@ footer b{background:var(--grad);-webkit-background-clip:text;background-clip:tex
   <h1>Turn Your Brand Ideas Into<br><span class="shimmer">Scroll-Stopping Designs</span></h1>
   <p class="sub">Pick your brand vibe, check a few boxes, and get <b>ready-to-use AI image prompts</b> for every design style — typography, allover patterns, statement tees, mascots, faith designs &amp; more. No designer needed.</p>
   <div class="cta-row">
-    <a class="btn" href="./app/">🚀 Launch the Generator</a>
+    <a class="btn" href="#get-access">🚀 Get Instant Access</a>
     <a class="btn ghost" href="#how">See How It Works</a>
   </div>
 
@@ -266,28 +266,38 @@ footer b{background:var(--grad);-webkit-background-clip:text;background-clip:tex
 <section>
   <div class="sec-head reveal">
     <div class="kicker">Fresh out of the generator</div>
-    <h2>Prompts That <span class="shimmer">Actually Slap</span></h2>
-    <p>Real prompt styles the generator writes for you — detailed, print-ready, and tuned for fabric.</p>
+    <h2>Real Clothes, <span class="shimmer">Real Prompts</span></h2>
+    <p>Actual designs made from actual generator prompts — detailed, print-ready, and tuned for fabric.</p>
   </div>
   <div class="shows">
     <div class="show reveal">
-      <div class="show-head">✨ TYPOGRAPHY / LOGO DESIGN</div>
-      <div class="show-body">"Oversized black hoodie for Y2K glam brand 'Velvet Reign' — chrome liquid letters across the chest, hot pink + gold palette, rhinestone sparkle accents, graphic worked into the fabric weave following the folds, ultra-detailed, studio mockup…"</div>
-      <div class="show-foot"><a class="btn btn-sm" href="./app/">Make Yours</a></div>
+      <img src="./images/img-hoodie.webp" alt="Black hoodie with camo and gold glam hustle hub lettering" loading="lazy">
+      <div class="show-head">✨ TYPOGRAPHY / STREETWEAR</div>
+      <div class="show-body">Camo + gold "glam hustle hub" lettering on a black hoodie — print worked right into the fleece.</div>
     </div>
     <div class="show reveal">
-      <div class="show-head">✨ SCRIPTURE / FAITH DESIGN</div>
-      <div class="show-body">"Cream Christian streetwear tee — 'Highly CHOSEN' in faith cursive + bold slab serif, gold foil lettering with soft vintage wash, centered chest placement, print embedded in the cotton texture, cozy faith-based aesthetic…"</div>
-      <div class="show-foot"><a class="btn btn-sm" href="./app/">Make Yours</a></div>
+      <img src="./images/img-white-tee.webp" alt="White tee with bold glam hustle hub graphic, coffee run" loading="lazy">
+      <div class="show-head">✨ STATEMENT TEE</div>
+      <div class="show-body">Bold collegiate graphic on a white tee — coffee-run ready, print sitting in the cotton.</div>
+    </div>
+    <div class="show reveal">
+      <img src="./images/img-red-tee.webp" alt="Red tee with retro rocket glam hustle hub graphic at a festival" loading="lazy">
+      <div class="show-head">✨ BOLD GRAPHIC</div>
+      <div class="show-body">Retro rocket graphic on a red tee — festival energy, colors that pop off the fabric.</div>
+    </div>
+    <div class="show reveal">
+      <img src="./images/img-pattern-set.webp" alt="Matching mommy and me allover pattern sports sets" loading="lazy">
+      <div class="show-head">✨ ALLOVER PATTERN</div>
+      <div class="show-body">Matching mommy-and-me sports pattern sets — the generator does full pattern looks too.</div>
     </div>
   </div>
 </section>
 
 <div class="final">
-  <div class="final-panel reveal">
-    <h2>Your Next Bestseller Starts With a Prompt ✨</h2>
-    <p>Join the creators turning blank tees into brands. Free to use — your saved options are always waiting for you.</p>
-    <a class="btn btn-light" href="./app/">🚀 Launch the Generator — It's Free</a>
+  <div class="final-panel reveal" id="get-access">
+    <h2>Start Creating Scroll-Stopping Designs Today ✨</h2>
+    <p>Join the creators turning blank tees into brands. Pay once, create forever — your saved options are always waiting for you.</p>
+    <a class="btn btn-light" href="PAYHIP_LINK">🚀 Get Instant Access Now</a>
   </div>
 </div>
 
