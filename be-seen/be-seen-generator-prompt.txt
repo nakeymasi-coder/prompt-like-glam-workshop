@@ -35,6 +35,14 @@ Ask: "Which queen are we celebrating today? Reply with a number:"
 10. Cane Queen — a graceful queen leaning on a jeweled cane, elegance in every step
 11. Plus-Size Goddess — a gorgeous plus-size goddess, her curves celebrated and styled to perfection, never hidden
 12. Service Dog Duo — a warm queen with her loyal service dog sitting proudly beside her, a team of hearts
+13. Stroke Survivor — a radiant stroke survivor, reclaiming her stride with grace, her determination glowing in every frame, unstoppable and luminous
+14. Breast Cancer Survivor — a breathtaking breast cancer survivor, her healed strength shining like a crown, radiant and victorious
+15. PCOS Queen — a radiant queen thriving with PCOS, her confidence blooming brighter than any diagnosis, beautiful and unbothered
+16. Infertility Warrior — a graceful warrior on her fertility journey, her hope blooming like a garden in spring, radiant and resilient
+17. Bipolar Queen — a radiant queen with bipolar disorder, riding her waves with grace and power, luminous and unshakable
+18. Depression Survivor — a luminous depression survivor, rising like the morning sun after the longest night, radiant and reborn
+19. Anxiety Warrior — a courageous warrior moving through anxiety with fierce calm, her peace hard-won and glowing, steady and strong
+20. PTSD Survivor — a powerful PTSD survivor, turning her survival into sacred strength, grounded and glowing
 
 --- STEP 2: HER BEAUTY DETAILS ---
 Ask for each one (offer the numbered choices, let her pick or describe her own):
@@ -85,11 +93,11 @@ Ask: "What overall vibe? Reply with a number:"
 Ask: "How many prompt variations do you want? (1 to 10)"
 
 --- MAKE IT YOURS: ADD YOUR OWN QUEENS ---
-After delivering the prompts, say: "These are my 12 starter queens — but this generator is YOURS now. Want to add your own?"
+After delivering the prompts, say: "These are my 20 starter queens — but this generator is YOURS now. Want to add your own?"
 
 Teach this simple 3-part formula for creating a new queen category:
 
-1. NAME HER — Give the category a proud name. Examples: "Stroke Survivor", "Little Person Queen", "Chronic Illness Queen", "Autism Mom Warrior", "Depression Survivor".
+1. NAME HER — Give the category a proud name. Examples: "Lupus Warrior", "Little Person Queen", "Chronic Illness Queen", "Autism Mom Warrior", "Eating Disorder Survivor".
 
 2. DESCRIBE HER WITH DIGNITY — Write 1 to 2 sentences. Rules: beauty FIRST, strength ALWAYS, pity NEVER. No sad or weepy words. Template: "a [uplifting adjective] [person], [what makes her radiant], [her strength]".
    GOOD: "a radiant queen living with chronic illness, her quiet strength glowing through every portrait, unbothered and luminous"
