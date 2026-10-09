@@ -283,6 +283,23 @@ footer{text-align:center; color:#7A8CA0; margin-top:44px; font-size:.9rem;}
   .help-steps b{color:#2B6CB0;}
   .help-tip{font-size:.9rem; color:#5A6B7E; margin-top:6px; line-height:1.5;}
 
+
+  /* ---------- fabs, locks, none ---------- */
+  .fabstack{position:fixed; left:20px; bottom:20px; z-index:75; display:flex; flex-direction:column; gap:10px;}
+  .fabstack button{
+    width:56px; height:56px; border-radius:50%; border:none; cursor:pointer; font-size:1.5rem;
+    background:linear-gradient(135deg,#2B6CB0,#5B9BD5); color:#fff;
+    box-shadow:0 10px 26px rgba(43,108,176,.5), 0 0 22px rgba(91,155,213,.55);
+    transition:transform .15s ease, box-shadow .25s ease;
+  }
+  .fabstack button:hover{transform:scale(1.1); box-shadow:0 10px 26px rgba(43,108,176,.5), 0 0 38px rgba(91,155,213,.9);}
+  .lockbtn{border:none; background:rgba(43,108,176,.08); border-radius:10px; font-size:1rem; cursor:pointer; padding:3px 9px; margin-left:8px; vertical-align:middle;}
+  .lockbtn.on{background:#2B6CB0;}
+  .chip.none{border-style:dashed; color:#7A8CA0;}
+  .chip.none.selected{background:linear-gradient(135deg,#7A8CA0,#9DB2C6); border-color:#7A8CA0; border-style:dashed;}
+  .card.none{border-style:dashed;}
+  .card.none .emoji{filter:grayscale(1); opacity:.7;}
+
 </style>
 </head>
 <body>
@@ -328,7 +345,7 @@ footer{text-align:center; color:#7A8CA0; margin-top:44px; font-size:.9rem;}
   <!-- STEP 1 -->
   <div class="page" id="pg-queen">
     <section class="step">
-      <div class="step-head"><div class="step-num">1</div><h2>Choose your queen</h2></div>
+      <div class="step-head"><div class="step-num">1</div><h2>Choose your queen</h2><button class="lockbtn" data-lock="queen" title="Lock this choice">🔓</button></div>
       <p class="step-sub">Pick the women the world needs to see. Tap to select — pick as many as you like.</p>
       <p class="multihint">💡 Multi-select is on: choose several queens to build portraits for all of them at once.</p>
       <div class="grid" id="heroGrid"></div>
@@ -348,17 +365,17 @@ footer{text-align:center; color:#7A8CA0; margin-top:44px; font-size:.9rem;}
     <section class="step">
       <div class="step-head"><div class="step-num">2</div><h2>Her beauty details</h2></div>
       <p class="step-sub">Shape how she shows up — tap to select, pick several if you want variety. Your custom additions save automatically.</p>
-      <label class="lbl">Skin tone</label><div class="chips" id="skinChips"></div>
+      <label class="lbl">Skin tone <button class="lockbtn" data-lock="skin" title="Lock this choice">🔓</button></label><div class="chips" id="skinChips"></div>
       <div class="addrow"><input type="text" id="add-skin" maxlength="60" placeholder="Add your own skin tone…"><button class="mini-btn" data-add="skin" type="button">＋ Add</button></div>
-      <label class="lbl">Age</label><div class="chips" id="ageChips"></div>
+      <label class="lbl">Age <button class="lockbtn" data-lock="age" title="Lock this choice">🔓</button></label><div class="chips" id="ageChips"></div>
       <div class="addrow"><input type="text" id="add-age" maxlength="40" placeholder="Add your own age…"><button class="mini-btn" data-add="age" type="button">＋ Add</button></div>
-      <label class="lbl">Body</label><div class="chips" id="bodyChips"></div>
+      <label class="lbl">Body <button class="lockbtn" data-lock="body" title="Lock this choice">🔓</button></label><div class="chips" id="bodyChips"></div>
       <div class="addrow"><input type="text" id="add-body" maxlength="40" placeholder="Add your own…"><button class="mini-btn" data-add="body" type="button">＋ Add</button></div>
-      <label class="lbl">Hair / crown</label><div class="chips" id="hairChips"></div>
+      <label class="lbl">Hair / crown <button class="lockbtn" data-lock="hair" title="Lock this choice">🔓</button></label><div class="chips" id="hairChips"></div>
       <div class="addrow"><input type="text" id="add-hair" maxlength="60" placeholder="Add your own hairstyle…"><button class="mini-btn" data-add="hair" type="button">＋ Add</button></div>
-      <label class="lbl">Outfit</label><div class="chips" id="outfitChips"></div>
+      <label class="lbl">Outfit <button class="lockbtn" data-lock="outfit" title="Lock this choice">🔓</button></label><div class="chips" id="outfitChips"></div>
       <div class="addrow"><input type="text" id="add-outfit" maxlength="80" placeholder="Add your own outfit…"><button class="mini-btn" data-add="outfit" type="button">＋ Add</button></div>
-      <label class="lbl">Setting</label><div class="chips" id="settingChips"></div>
+      <label class="lbl">Setting <button class="lockbtn" data-lock="setting" title="Lock this choice">🔓</button></label><div class="chips" id="settingChips"></div>
       <div class="addrow"><input type="text" id="add-setting" maxlength="80" placeholder="Add your own setting…"><button class="mini-btn" data-add="setting" type="button">＋ Add</button></div>
       <div class="pagenav">
         <button class="btn btn-ghost" data-goto="pg-queen" type="button">← Back</button>
@@ -373,7 +390,7 @@ footer{text-align:center; color:#7A8CA0; margin-top:44px; font-size:.9rem;}
       <div class="step-head"><div class="step-num">3</div><h2>Her power word</h2></div>
       <p class="step-sub">The word that appears in the portrait — tap to select, pick several for variety.</p>
       <div class="chips" id="wordChips"></div>
-      <label class="lbl" style="margin-top:18px;">Or write a custom word / short phrase</label>
+      <label class="lbl" style="margin-top:18px;">Or write a custom word / short phrase <button class="lockbtn" data-lock="word" title="Lock this choice">🔓</button></label>
       <div class="addrow"><input type="text" id="customWord" maxlength="40" placeholder="e.g. Still She Rises"><button class="mini-btn" data-add="word" type="button">＋ Save</button></div>
       <p class="hint">💡 Type a word above to use it just this once — or hit ＋ Save to keep it as an option forever.</p>
       <div class="pagenav">
@@ -386,10 +403,10 @@ footer{text-align:center; color:#7A8CA0; margin-top:44px; font-size:.9rem;}
   <!-- STEP 4 -->
   <div class="page" id="pg-type">
     <section class="step">
-      <div class="step-head"><div class="step-num">4</div><h2>Typography style</h2></div>
+      <div class="step-head"><div class="step-num">4</div><h2>Typography style</h2><button class="lockbtn" data-lock="type" title="Lock this choice">🔓</button></div>
       <p class="step-sub">How her power word looks — tap to select, pick several for variety.</p>
       <div class="grid tight" id="typeGrid"></div>
-      <label class="lbl" style="margin-top:18px;">Or describe your own style</label>
+      <label class="lbl" style="margin-top:18px;">Or describe your own style <button class="lockbtn" data-lock="type" title="Lock this choice">🔓</button></label>
       <div class="addrow2">
         <input type="text" id="add-type-desc" maxlength="80" placeholder="How the letters look…">
         <input type="text" id="add-type-place" maxlength="80" placeholder="Where they sit…">
@@ -405,10 +422,10 @@ footer{text-align:center; color:#7A8CA0; margin-top:44px; font-size:.9rem;}
   <!-- STEP 5 -->
   <div class="page" id="pg-vibe">
     <section class="step">
-      <div class="step-head"><div class="step-num">5</div><h2>Art vibe &amp; generate</h2></div>
+      <div class="step-head"><div class="step-num">5</div><h2>Art vibe &amp; generate</h2><button class="lockbtn" data-lock="vibe" title="Lock this choice">🔓</button></div>
       <p class="step-sub">The overall look and feel — tap to select, pick several for variety.</p>
       <div class="grid tight" id="vibeGrid"></div>
-      <label class="lbl" style="margin-top:18px;">Or describe your own vibe</label>
+      <label class="lbl" style="margin-top:18px;">Or describe your own vibe <button class="lockbtn" data-lock="vibe" title="Lock this choice">🔓</button></label>
       <div class="addrow"><input type="text" id="add-vibe" maxlength="80" placeholder="e.g. dreamy pastel illustration style…"><button class="mini-btn" data-add="vibe" type="button">＋ Add</button></div>
       <div class="countrow">
         <label class="lbl" style="margin:0;">Variations:</label>
@@ -510,6 +527,11 @@ footer{text-align:center; color:#7A8CA0; margin-top:44px; font-size:.9rem;}
       <div><b>2.</b> Style her: beauty details, power word, typography, art vibe. Multi-select is on everywhere.</div>
       <div><b>3.</b> Hit <b>✨ Generate</b> — copy your prompts into Midjourney, DALL·E, Ideogram, Firefly, whatever you love. Tap <b>♥</b> to save favorites.</div>
     </div>
+    <div class="help-steps">
+      <div><b>🔒 Locks:</b> tap the lock next to any category to keep your pick fixed when you hit Surprise Me.</div>
+      <div><b>None:</b> the first option in every category — leave it picked and the app chooses for you.</div>
+      <div><b>🎲 / 📋</b> bottom-left: Surprise Me and Copy are always one tap away, on every page.</div>
+    </div>
     <p class="help-tip">💡 Anything custom you add is saved automatically — it'll be here next time.</p>
     <div class="stats" style="margin:14px 0 4px;">
       <span><b>50</b> Queens</span><span><b>50</b> Power Words</span>
@@ -517,6 +539,11 @@ footer{text-align:center; color:#7A8CA0; margin-top:44px; font-size:.9rem;}
     </div>
     <div class="dignity" style="margin-top:14px;">🤍 Every portrait celebrates strength — never pity.</div>
   </div>
+</div>
+
+<div class="fabstack">
+  <button id="fabSurprise" title="Surprise me" aria-label="Surprise me">🎲</button>
+  <button id="fabCopy" title="Copy my prompts" aria-label="Copy prompts">📋</button>
 </div>
 <div class="toast" id="toast"></div>
 
@@ -548,11 +575,26 @@ CUSTOM.vibe.forEach(v=>VIBES.push({name:v.n, emoji:'✨', prompt:v.p, custom:tru
 let SAVED = lsGet(LS_S, []);
 
 /* ============================== STATE (multi-select) ============================== */
-const sel = { queen:[0], skin:[1], age:[2], body:[1], hair:[0], outfit:[0], setting:[0], word:[0], type:[5], vibe:[0] };
+const sel = { queen:[-1], skin:[-1], age:[-1], body:[-1], hair:[-1], outfit:[-1], setting:[-1], word:[-1], type:[-1], vibe:[-1] };
+const locked = { queen:false, skin:false, age:false, body:false, hair:false, outfit:false, setting:false, word:false, type:false, vibe:false };
+const COMPAT = {
+  'Alopecia Queen':{hair:['bald and proud','a regal gold headwrap','a satin bonnet crown','a turban wrap','a headwrap in ankara print']},
+  'Plus-Size Goddess':{body:['plus-size','curvy','soft and full','full-figured','thick and beautiful','soft and curvy','voluptuous','queenly and full']},
+  'Silver Queen':{age:['in her early 60s','in her mid 60s','in her late 60s','in her early 70s','in her mid 70s','in her late 70s']},
+  'Little Person Queen':{body:BODIES.filter(b=>b!=='tall and statuesque')}
+};
 function toggleSel(cat, i){
-  const a = sel[cat], x = a.indexOf(i);
-  if(x > -1){ if(a.length > 1) a.splice(x,1); }
-  else a.push(i);
+  const a = sel[cat];
+  if(i===-1){ sel[cat]=[-1]; return; }
+  const x = a.indexOf(i);
+  if(x > -1){ a.splice(x,1); if(!a.length) a.push(-1); }
+  else{ const n=a.indexOf(-1); if(n>-1) a.splice(n,1); a.push(i); }
+}
+function noneChip(cat){
+  return `<button type="button" class="chip none${sel[cat].indexOf(-1)>-1?' selected':''}" data-pick="${cat}:-1">None</button>`;
+}
+function noneCard(cat){
+  return `<div class="card none${sel[cat].indexOf(-1)>-1?' selected':''}" data-pick="${cat}:-1"><span class="emoji">🎲</span><span class="name">None</span><span class="desc">Surprise me</span></div>`;
 }
 
 /* ============================== HELPERS ============================== */
@@ -616,11 +658,11 @@ function isCustomIdx(cat, i){
   return i >= base;
 }
 function renderQueens(){
-  const g=document.getElementById('heroGrid'); g.innerHTML='';
+  const g=document.getElementById('heroGrid'); g.innerHTML=noneCard('queen');
   HEROES.forEach((h,i)=>{ g.insertAdjacentHTML('beforeend', cardHTML(h,i,'queen')); });
 }
 function renderChips(id, arr, cat){
-  const w=document.getElementById(id); w.innerHTML='';
+  const w=document.getElementById(id); w.innerHTML=noneChip(cat);
   arr.forEach((v,i)=>{ w.insertAdjacentHTML('beforeend', chipHTML(v,i,cat,isCustomIdx(cat,i))); });
 }
 function renderDetails(){
@@ -629,14 +671,21 @@ function renderDetails(){
 }
 function renderWords(){ renderChips('wordChips',WORDS,'word'); }
 function renderTypes(){
-  const g=document.getElementById('typeGrid'); g.innerHTML='';
+  const g=document.getElementById('typeGrid'); g.innerHTML=noneCard('type');
   TYPES.forEach((t,i)=>{ g.insertAdjacentHTML('beforeend', cardHTML({emoji:t.emoji,name:t.name,desc:'',custom:t.custom},i,'type')); });
 }
 function renderVibes(){
-  const g=document.getElementById('vibeGrid'); g.innerHTML='';
+  const g=document.getElementById('vibeGrid'); g.innerHTML=noneCard('vibe');
   VIBES.forEach((v,i)=>{ g.insertAdjacentHTML('beforeend', cardHTML({emoji:v.emoji,name:v.name,desc:'',custom:v.custom},i,'vibe')); });
 }
 document.addEventListener('click', e=>{
+  const lk=e.target.closest('[data-lock]');
+  if(lk){
+    const cat=lk.dataset.lock; locked[cat]=!locked[cat];
+    lk.textContent=locked[cat]?'🔒':'🔓'; lk.classList.toggle('on',locked[cat]);
+    toast(locked[cat]?'Locked 🔒 — Surprise Me will keep it':'Unlocked 🔓');
+    return;
+  }
   const del=e.target.closest('[data-delcustom]');
   if(del){
     e.stopPropagation();
@@ -799,14 +848,30 @@ function buildPrompt(qi,si,ai,bi,hi,oi,sei,wi,ti,vi,word){
   const h=HEROES[qi], t=TYPES[ti], v=VIBES[vi];
   return `Ultra-detailed ${v.prompt} portrait of ${h.prompt}, a woman ${AGES[ai]} with ${SKINS[si]} skin and a ${BODIES[bi]} figure, ${HAIR[hi]}, wearing ${OUTFITS[oi]}, ${SETTINGS[sei]}. The word "${word}" appears as ${t.prompt}, ${t.place}. Empowering, dignified and celebratory mood — strength and beauty, never pity. Radiant lighting, ultra detailed, 8k, professional photography, masterpiece.`;
 }
+function effIdx(cat, arr, i){
+  const s=sel[cat];
+  if(s.indexOf(-1)>-1) return Math.floor(Math.random()*arr.length);
+  return s[i % s.length];
+}
+function resolveCompat(qi, cat, idx){
+  const rule=COMPAT[HEROES[qi].name];
+  if(!rule || !rule[cat]) return idx;
+  const arr = cat==='hair'?HAIR : cat==='body'?BODIES : AGES;
+  if(rule[cat].indexOf(arr[idx])>-1) return idx;
+  const allowed=rule[cat].map(v=>arr.indexOf(v)).filter(x=>x>-1);
+  return allowed[Math.floor(Math.random()*allowed.length)];
+}
 function generate(){
   const n=parseInt(document.getElementById('countRange').value,10);
   const customW=powerWord();
   const list=document.getElementById('promptList'); list.innerHTML='';
   for(let i=0;i<n;i++){
-    const qi=pick(sel.queen,i), si=pick(sel.skin,i), ai=pick(sel.age,i), bi=pick(sel.body,i),
-          hi=pick(sel.hair,i), oi=pick(sel.outfit,i), sei=pick(sel.setting,i),
-          wi=pick(sel.word,i), ti=pick(sel.type,i), vi=pick(sel.vibe,i);
+    const qi=effIdx('queen',HEROES,i);
+    const si=effIdx('skin',SKINS,i);
+    let ai=effIdx('age',AGES,i), bi=effIdx('body',BODIES,i), hi=effIdx('hair',HAIR,i);
+    ai=resolveCompat(qi,'age',ai); bi=resolveCompat(qi,'body',bi); hi=resolveCompat(qi,'hair',hi);
+    const oi=effIdx('outfit',OUTFITS,i), sei=effIdx('setting',SETTINGS,i),
+          wi=effIdx('word',WORDS,i), ti=effIdx('type',TYPES,i), vi=effIdx('vibe',VIBES,i);
     const word=customW || WORDS[wi];
     const txt=buildPrompt(qi,si,ai,bi,hi,oi,sei,wi,ti,vi,word);
     const card=el('div','prompt-card');
@@ -828,12 +893,25 @@ function generate(){
 }
 function surprise(){
   const rnd=a=>Math.floor(Math.random()*a.length);
-  sel.queen=[rnd(HEROES)]; sel.skin=[rnd(SKINS)]; sel.age=[rnd(AGES)]; sel.body=[rnd(BODIES)];
-  sel.hair=[rnd(HAIR)]; sel.outfit=[rnd(OUTFITS)]; sel.setting=[rnd(SETTINGS)];
-  sel.word=[rnd(WORDS)]; sel.type=[rnd(TYPES)]; sel.vibe=[rnd(VIBES)];
+  if(!locked.queen) sel.queen=[rnd(HEROES)];
+  if(!locked.skin) sel.skin=[rnd(SKINS)];
+  if(!locked.age) sel.age=[rnd(AGES)];
+  if(!locked.body) sel.body=[rnd(BODIES)];
+  if(!locked.hair) sel.hair=[rnd(HAIR)];
+  if(!locked.outfit) sel.outfit=[rnd(OUTFITS)];
+  if(!locked.setting) sel.setting=[rnd(SETTINGS)];
+  if(!locked.word) sel.word=[rnd(WORDS)];
+  if(!locked.type) sel.type=[rnd(TYPES)];
+  if(!locked.vibe) sel.vibe=[rnd(VIBES)];
   document.getElementById('customWord').value='';
   generate();
 }
+document.getElementById('fabSurprise').onclick=()=>{ surprise(); };
+document.getElementById('fabCopy').onclick=()=>{
+  let texts=[...document.querySelectorAll('#promptList .ptxt')].map(p=>p.textContent);
+  if(!texts.length){ surprise(); texts=[...document.querySelectorAll('#promptList .ptxt')].map(p=>p.textContent); }
+  if(texts.length) navigator.clipboard.writeText(texts.join('\n\n---\n\n')).then(()=>toast('Copied ✓'));
+};
 document.getElementById('genBtn').onclick=generate;
 document.getElementById('surpriseBtn').onclick=surprise;
 document.getElementById('copyAllBtn').onclick=function(){
