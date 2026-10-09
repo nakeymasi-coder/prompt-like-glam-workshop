@@ -36,6 +36,23 @@
     padding:10px 20px; border-radius:999px; font-weight:600; font-size:.95rem; position:relative; z-index:1;
     box-shadow:0 4px 14px rgba(20,40,70,.18);
   }
+  .kicker{
+    display:inline-block; background:rgba(255,255,255,.16); border:1.5px solid rgba(255,255,255,.45);
+    color:#fff; font-weight:700; font-size:.88rem; letter-spacing:1px; text-transform:uppercase;
+    padding:8px 20px; border-radius:999px; margin-bottom:18px; position:relative; z-index:1;
+  }
+  header.hero .tagline{
+    font-size:clamp(.95rem,2.4vw,1.15rem); font-weight:800; letter-spacing:3px; text-transform:uppercase;
+    margin-top:8px; position:relative; z-index:1; text-shadow:0 1px 8px rgba(20,40,70,.3);
+  }
+  .hero-cta{margin-top:24px; position:relative; z-index:1;}
+  .hero-cta .btn{font-size:1.1rem; padding:16px 36px; box-shadow:0 12px 30px rgba(20,40,70,.35);}
+  .stats{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:24px; position:relative; z-index:1;}
+  .stats span{
+    background:rgba(255,255,255,.94); color:#2B6CB0; font-weight:600; font-size:.9rem;
+    padding:9px 18px; border-radius:999px; box-shadow:0 4px 12px rgba(20,40,70,.16);
+  }
+  .stats b{font-weight:800;}
   section.step{
     background:rgba(255,255,255,.86); border:1px solid #E3ECF5; border-radius:20px;
     padding:26px 22px; margin-top:26px; box-shadow:0 10px 30px rgba(43,108,176,.10);
@@ -150,13 +167,24 @@
 <div class="wrap">
 
   <header class="hero">
+    <div class="kicker">👑 Glam Hustle Hub presents</div>
     <h1>BE <span class="seen">SEEN</span></h1>
-    <p>The Unseen Beauty Prompt Generator — create stunning, dignified AI portraits celebrating the women the world overlooks: survivors, warriors &amp; queens.</p>
+    <p class="tagline">The Unseen Beauty Prompt Generator</p>
+    <p>Build stunning, dignified AI portraits celebrating the women the world overlooks — survivors, warriors &amp; queens. Pick her, style her, crown her with her power word.</p>
+    <div class="hero-cta">
+      <button class="btn btn-primary" id="heroStart" type="button">✨ Start Building Her Portrait</button>
+    </div>
+    <div class="stats">
+      <span><b>50</b> Queens</span>
+      <span><b>50</b> Power Words</span>
+      <span><b>50</b> Typography Styles</span>
+      <span><b>50</b> Art Vibes</span>
+    </div>
     <div class="dignity">🤍 Every portrait celebrates strength — never pity.</div>
   </header>
 
   <!-- STEP 1: HERO -->
-  <section class="step">
+  <section class="step" id="step1">
     <div class="step-head"><div class="step-num">1</div><h2>Choose your queen</h2></div>
     <p class="step-sub">Pick the woman the world needs to see. Each one is written with dignity and beauty first.</p>
     <div class="grid" id="heroGrid"></div>
@@ -942,6 +970,7 @@ document.getElementById('cqAdd').onclick=function(){
   document.getElementById('heroGrid').scrollIntoView({behavior:'smooth', block:'center'});
 };
 document.getElementById('yoursBtn').onclick=()=>document.getElementById('customQueen').scrollIntoView({behavior:'smooth'});
+document.getElementById('heroStart').onclick=()=>document.getElementById('step1').scrollIntoView({behavior:'smooth'});
 
 /* init */
 buildHeroGrid();
