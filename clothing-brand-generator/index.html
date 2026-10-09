@@ -2,1311 +2,366 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Glam's Clothing Brand Prompt Generator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glam's Clothing Brand Prompt Generator — Turn Ideas Into Scroll-Stopping Designs</title>
+<meta name="description" content="Pick your brand vibe, check a few boxes, and get scroll-stopping AI image prompts for every design style. 30 brand types, 7 design styles, endless glam.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --pink:#FF1493; --pink-soft:#ff5fae; --purple:#4A148C; --purple-soft:#7B2FF7;
-    --gold:#D4AF37; --gold-soft:#f3d97b; --ink:#3a2b4d; --muted:#8a7a9e;
-    --card:#ffffff; --blush:#fff5fa; --lav:#f7f0ff; --line:#f2d9e8;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;font-family:'Nunito',system-ui,sans-serif;color:var(--ink);
-    background:linear-gradient(160deg,#fff5fa 0%,#f7f0ff 45%,#fffdf5 100%);min-height:100vh}
-  .wrap{max-width:960px;margin:0 auto;padding:20px 16px 60px}
-  header.hero{text-align:center;padding:34px 18px 26px;border-radius:24px;color:#fff;
-    background:linear-gradient(120deg,var(--pink) 0%,var(--purple-soft) 55%,var(--purple) 100%);
-    box-shadow:0 12px 32px rgba(255,20,147,.28);position:relative;overflow:hidden}
-  header.hero::after{content:"";position:absolute;inset:0;
-    background:radial-gradient(circle at 15% 20%,rgba(255,255,255,.25),transparent 40%),
-               radial-gradient(circle at 85% 80%,rgba(212,175,55,.35),transparent 45%);pointer-events:none}
-  header.hero h1{font-family:'Fredoka',sans-serif;font-size:clamp(26px,5vw,42px);margin:0 0 8px;position:relative;z-index:1}
-  header.hero p{margin:0;font-size:15px;opacity:.95;position:relative;z-index:1}
-  .gold-rule{height:4px;width:120px;margin:14px auto 0;border-radius:99px;
-    background:linear-gradient(90deg,var(--gold-soft),var(--gold),var(--gold-soft));position:relative;z-index:1}
-  .card{background:var(--card);border:2px solid var(--line);border-radius:20px;
-    padding:22px;margin-top:20px;box-shadow:0 6px 20px rgba(74,20,140,.07)}
-  .card h2{font-family:'Fredoka',sans-serif;color:var(--purple);margin:0 0 4px;font-size:22px}
-  .card h2 .step{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;
-    background:linear-gradient(135deg,var(--pink),var(--purple-soft));color:#fff;font-size:15px;margin-right:8px}
-  .sub{color:var(--muted);font-size:13.5px;margin:0 0 14px}
-  label.f-label{display:block;font-weight:800;font-size:13px;color:var(--purple);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.4px}
-  input[type=text],select,textarea{width:100%;padding:12px 14px;border:2px solid var(--line);border-radius:12px;
-    font-family:inherit;font-size:15px;color:var(--ink);background:#fff}
-  input[type=text]:focus,select:focus,textarea:focus{outline:none;border-color:var(--pink);box-shadow:0 0 0 3px rgba(255,20,147,.12)}
-  select{appearance:none;background:#fff url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='%23FF1493'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat right 14px center}
-  .opt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;margin-top:8px}
-  .opt{display:flex;align-items:center;gap:9px;padding:9px 12px;border:2px solid var(--line);border-radius:12px;
-    background:#fff;cursor:pointer;font-size:14px;font-weight:600;transition:.15s;user-select:none}
-  .opt:hover{border-color:var(--pink-soft);transform:translateY(-1px)}
-  .opt.on{border-color:var(--pink);background:linear-gradient(135deg,#fff0f7,#f7f0ff);box-shadow:0 3px 10px rgba(255,20,147,.15)}
-  .opt input{accent-color:var(--pink);width:17px;height:17px;flex:none;cursor:pointer}
-  .design-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-top:8px}
-  .design-card{border:2px solid var(--line);border-radius:14px;padding:12px;background:var(--blush);cursor:pointer;transition:.15s}
-  .design-card:hover{border-color:var(--pink-soft)}
-  .design-card.on{border-color:var(--pink);background:linear-gradient(135deg,#ffe9f4,#f3e9ff);box-shadow:0 4px 14px rgba(255,20,147,.18)}
-  .design-card .t{font-weight:800;font-size:14.5px;display:flex;align-items:center;gap:8px}
-  .design-card .d{font-size:12.5px;color:var(--muted);margin-top:4px}
-  .design-card input{accent-color:var(--pink);width:17px;height:17px;flex:none}
-  .subpanel{border-left:4px solid var(--gold);background:#fffdf7;border-radius:0 14px 14px 0;padding:14px 16px;margin-top:14px}
-  .subpanel h3{font-family:'Fredoka',sans-serif;color:var(--purple);font-size:16px;margin:0 0 4px}
-  .custom-row{display:flex;gap:8px;margin-top:10px}
-  .custom-row input{flex:1}
-  .custom-row .btn{flex:none}
-  .mine{font-size:10px;font-weight:800;border-radius:99px;padding:1px 8px;margin-left:6px;vertical-align:1px;
-    background:linear-gradient(135deg,#FFD700,#ff9d00);color:#5a3d00;white-space:nowrap}
-  .cx{margin-left:auto;flex:none;background:none;border:none;color:#c9a3bd;font-size:18px;cursor:pointer;font-weight:700;line-height:1;padding:0 0 0 8px}
-  .cx:hover{color:#FF1493}
-  .swatch{display:inline-block;width:15px;height:15px;border-radius:50%;border:1px solid rgba(0,0,0,.15);margin-right:2px;vertical-align:-2px}
-  .pal-card{flex-direction:column;align-items:flex-start;gap:6px}
-  .pal-card .pname{font-weight:800;font-size:13.5px;display:flex;align-items:center;gap:8px;width:100%}
-  .pal-card .swatches{display:flex;gap:4px}
-  #output .prompt-card{background:#fff;border:2px solid var(--line);border-radius:16px;padding:18px;margin-top:14px}
-  #output .prompt-card h3{font-family:'Fredoka',sans-serif;color:var(--pink);margin:0 0 6px;font-size:17px}
-  #output .prompt-card h3 .vtag{font-size:11px;background:var(--lav);color:var(--purple);border-radius:99px;padding:2px 10px;margin-left:8px;vertical-align:2px}
-  #output .prompt-card p{white-space:pre-wrap;font-size:14px;line-height:1.65;margin:0 0 12px;background:var(--blush);padding:12px;border-radius:10px}
-  .btn{display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;font-family:'Fredoka',sans-serif;
-    font-weight:600;font-size:16px;padding:13px 26px;border-radius:99px;transition:.15s;color:#fff}
-  .btn-pink{background:linear-gradient(135deg,var(--pink),var(--purple-soft));box-shadow:0 6px 18px rgba(255,20,147,.35)}
-  .btn-gold{background:linear-gradient(135deg,var(--gold),#b8912c);box-shadow:0 6px 18px rgba(212,175,55,.35)}
-  .btn-purple{background:linear-gradient(135deg,var(--purple-soft),var(--purple));box-shadow:0 6px 18px rgba(74,20,140,.3)}
-  .btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
-  .btn.small{font-size:13px;padding:8px 18px}
-  .bottom-bar{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:26px;padding:24px;
-    background:#fff;border:2px dashed var(--pink-soft);border-radius:20px}
-  .empty-note{text-align:center;color:var(--muted);padding:26px;font-size:14.5px}
-  .pill{display:inline-block;background:var(--lav);color:var(--purple);font-size:12px;font-weight:800;
-    border-radius:99px;padding:3px 12px;margin:2px 4px 2px 0}
-  .count-row{display:flex;align-items:center;gap:12px;margin-top:8px}
-  input[type=range]{accent-color:var(--pink);flex:1}
-  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--purple);color:#fff;
-    padding:12px 26px;border-radius:99px;font-weight:700;opacity:0;transition:.3s;pointer-events:none;z-index:99}
-  .toast.show{opacity:1}
-  footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:30px}
-  #promptFab{position:fixed;right:18px;bottom:18px;z-index:50;display:none;
-    box-shadow:0 8px 24px rgba(255,20,147,.45)}
-  @media (max-width:480px){ #promptFab{right:12px;bottom:12px;font-size:14px;padding:11px 20px} }
+:root{
+  --pink:#FF1493; --pink-soft:#FF6EB5; --pink-pale:#FFE3F1;
+  --purple:#4A148C; --purple-deep:#2A0A54; --purple-soft:#9B72CF;
+  --gold:#FFC93C; --gold-deep:#E8A400; --gold-pale:#FFF3D6;
+  --ink:#3A1C5C; --muted:#8A6FAE;
+  --pearl:#FFF9FD;
+  --glass:rgba(255,255,255,.62);
+  --grad:linear-gradient(120deg,var(--pink),var(--purple));
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;color:var(--ink);background:
+  linear-gradient(180deg,#FFF9FD 0%,#FDF3FA 30%,#F8EFFF 65%,#FFF9FD 100%);
+  overflow-x:hidden;min-height:100vh}
+h1,h2,h3,.display{font-family:'Unbounded',sans-serif}
+/* ---------- animated aurora background ---------- */
+.aurora{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;will-change:transform}
+.b1{width:520px;height:520px;left:-140px;top:-120px;background:radial-gradient(circle,#FF9ECF,transparent 70%);animation:drift1 22s ease-in-out infinite alternate}
+.b2{width:460px;height:460px;right:-120px;top:8%;background:radial-gradient(circle,#C9A7F5,transparent 70%);animation:drift2 26s ease-in-out infinite alternate}
+.b3{width:420px;height:420px;left:22%;top:52%;background:radial-gradient(circle,#FFE9A8,transparent 70%);opacity:.55;animation:drift1 30s ease-in-out infinite alternate-reverse}
+.b4{width:380px;height:380px;right:14%;bottom:-140px;background:radial-gradient(circle,#FFB3DD,transparent 70%);animation:drift2 24s ease-in-out infinite alternate-reverse}
+@keyframes drift1{from{transform:translate(0,0) scale(1)}to{transform:translate(90px,60px) scale(1.15)}}
+@keyframes drift2{from{transform:translate(0,0) scale(1.1)}to{transform:translate(-80px,70px) scale(.95)}}
+/* ---------- twinkling sparkles ---------- */
+#sparkles{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.spk{position:absolute;font-size:14px;animation:twinkle var(--d,3s) ease-in-out infinite;opacity:0}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(.6) rotate(0deg)}50%{opacity:.95;transform:scale(1.15) rotate(20deg)}}
+/* ---------- nav ---------- */
+nav{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
+  padding:14px 28px;background:rgba(255,249,253,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,20,147,.14)}
+.logo{font-family:'Unbounded';font-weight:800;font-size:16px;background:var(--grad);
+  -webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.5px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;text-decoration:none;
+  font-family:'Unbounded';font-weight:700;font-size:15px;color:#fff;padding:15px 34px;border-radius:999px;
+  background:linear-gradient(120deg,var(--pink),#C81D7E 55%,var(--purple));background-size:180% 180%;
+  box-shadow:0 10px 30px rgba(255,20,147,.42),inset 0 1px 0 rgba(255,255,255,.35);
+  transition:transform .25s,box-shadow .25s,background-position .5s;animation:btnGlow 3s ease-in-out infinite}
+.btn:hover{transform:translateY(-3px) scale(1.03);background-position:90% 50%;
+  box-shadow:0 16px 42px rgba(255,20,147,.55),inset 0 1px 0 rgba(255,255,255,.4)}
+.btn.ghost{background:rgba(255,255,255,.7);color:var(--purple);border:2px solid rgba(74,20,140,.25);
+  box-shadow:0 6px 18px rgba(74,20,140,.12);animation:none}
+.btn.ghost:hover{border-color:var(--pink);color:var(--pink)}
+@keyframes btnGlow{0%,100%{box-shadow:0 10px 30px rgba(255,20,147,.42),inset 0 1px 0 rgba(255,255,255,.35)}
+  50%{box-shadow:0 10px 40px rgba(255,20,147,.65),0 0 22px rgba(255,201,60,.45),inset 0 1px 0 rgba(255,255,255,.35)}}
+.btn-sm{padding:11px 24px;font-size:13px}
+/* ---------- hero ---------- */
+.hero{position:relative;text-align:center;padding:110px 20px 70px;max-width:1060px;margin:0 auto}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(74,20,140,.06) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(74,20,140,.06) 1px,transparent 1px);
+  background-size:44px 44px;
+  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,#000 30%,transparent 75%);
+  mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,#000 30%,transparent 75%)}
+.badge{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:13px;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--purple);background:var(--glass);border:1px solid rgba(255,20,147,.3);
+  padding:9px 20px;border-radius:999px;backdrop-filter:blur(8px);box-shadow:0 4px 16px rgba(255,20,147,.14);
+  margin-bottom:26px;animation:floaty 5s ease-in-out infinite}
+.hero h1{font-size:clamp(2.1rem,6vw,4.3rem);font-weight:800;line-height:1.12;margin-bottom:22px;letter-spacing:-.5px}
+.shimmer{background:linear-gradient(100deg,var(--pink) 10%,var(--gold-deep) 30%,var(--purple) 50%,var(--pink) 70%);
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:shine 5s linear infinite}
+@keyframes shine{to{background-position:220% center}}
+.hero p.sub{font-size:clamp(1.02rem,2.2vw,1.28rem);color:var(--muted);max-width:660px;margin:0 auto 36px;line-height:1.65}
+.hero p.sub b{color:var(--purple)}
+.cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:70px}
+/* floating brand chips */
+.chip{position:absolute;font-family:'Unbounded';font-weight:700;font-size:12px;letter-spacing:.6px;
+  padding:10px 18px;border-radius:999px;background:var(--glass);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.9);box-shadow:0 8px 24px rgba(74,20,140,.14),inset 0 1px 0 #fff;
+  color:var(--purple);white-space:nowrap;animation:floaty var(--fd,6s) ease-in-out infinite;z-index:1;pointer-events:none}
+.chip.gold{color:#9A6B00;border-color:rgba(255,201,60,.7);box-shadow:0 8px 24px rgba(232,164,0,.22),inset 0 1px 0 #fff}
+.chip.pink{color:#C2147B;border-color:rgba(255,20,147,.45);box-shadow:0 8px 24px rgba(255,20,147,.2),inset 0 1px 0 #fff}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(var(--rr,0deg))}50%{transform:translateY(-16px) rotate(var(--rr,0deg))}}
+/* demo window */
+.demo{position:relative;max-width:720px;margin:0 auto;text-align:left;border-radius:22px;overflow:hidden;
+  background:rgba(255,255,255,.72);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 30px 80px rgba(74,20,140,.18),0 4px 18px rgba(255,20,147,.12);transform:perspective(1200px) rotateX(4deg);
+  transition:transform .5s}
+.demo:hover{transform:perspective(1200px) rotateX(0deg)}
+.demo::before{content:"";position:absolute;inset:0;border-radius:22px;padding:2px;pointer-events:none;
+  background:linear-gradient(135deg,rgba(255,20,147,.55),rgba(255,201,60,.5),rgba(74,20,140,.55));
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude}
+.demo-bar{display:flex;align-items:center;gap:8px;padding:14px 20px;border-bottom:1px solid rgba(74,20,140,.1);
+  font-size:13px;font-weight:600;color:var(--muted)}
+.dot{width:12px;height:12px;border-radius:50%}
+.demo-body{padding:26px 26px 30px;min-height:190px;font-size:15.5px;line-height:1.7}
+.demo-body .prompt-label{font-family:'Unbounded';font-size:11px;letter-spacing:1.5px;color:var(--pink);margin-bottom:10px}
+#typed{white-space:pre-wrap}
+.caret{display:inline-block;width:3px;height:1.15em;background:var(--pink);vertical-align:-3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+/* ---------- marquee ---------- */
+.marquee{overflow:hidden;border-top:1px solid rgba(255,20,147,.2);border-bottom:1px solid rgba(255,20,147,.2);
+  background:rgba(255,255,255,.5);backdrop-filter:blur(6px);padding:16px 0;margin:30px 0 0}
+.marquee-track{display:flex;gap:44px;width:max-content;animation:scrollX 30s linear infinite;
+  font-family:'Unbounded';font-weight:700;font-size:14px;letter-spacing:2px;color:var(--purple);white-space:nowrap}
+.marquee-track span b{color:var(--gold-deep)}
+@keyframes scrollX{to{transform:translateX(-50%)}}
+/* ---------- sections ---------- */
+section{max-width:1060px;margin:0 auto;padding:80px 20px}
+.sec-head{text-align:center;margin-bottom:50px}
+.sec-head .kicker{display:inline-block;font-family:'Unbounded';font-size:12px;letter-spacing:3px;color:var(--pink);
+  text-transform:uppercase;margin-bottom:14px}
+.sec-head h2{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:800;margin-bottom:14px}
+.sec-head p{color:var(--muted);font-size:1.08rem;max-width:620px;margin:0 auto;line-height:1.65}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:10px}
+.stat{background:var(--glass);backdrop-filter:blur(12px);border-radius:20px;padding:28px 12px;text-align:center;
+  border:1px solid rgba(255,255,255,.9);box-shadow:0 12px 34px rgba(74,20,140,.1);transition:transform .3s}
+.stat:hover{transform:translateY(-6px)}
+.stat .num{font-family:'Unbounded';font-weight:800;font-size:clamp(1.6rem,3.4vw,2.4rem);
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .lbl{font-size:13.5px;color:var(--muted);font-weight:600;margin-top:6px}
+/* features */
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.feat{background:var(--glass);backdrop-filter:blur(12px);border-radius:24px;padding:34px 28px;position:relative;
+  border:1px solid rgba(255,255,255,.95);box-shadow:0 14px 40px rgba(74,20,140,.1);
+  transition:transform .35s,box-shadow .35s;transform-style:preserve-3d;will-change:transform}
+.feat:hover{box-shadow:0 24px 60px rgba(255,20,147,.22)}
+.feat .icon{width:58px;height:58px;border-radius:18px;display:flex;align-items:center;justify-content:center;
+  font-size:27px;margin-bottom:20px;background:linear-gradient(135deg,var(--pink-pale),var(--gold-pale));
+  box-shadow:inset 0 2px 6px rgba(255,255,255,.9),0 6px 16px rgba(255,20,147,.18)}
+.feat h3{font-size:1.02rem;margin-bottom:12px;line-height:1.45}
+.feat p{color:var(--muted);line-height:1.65;font-size:.98rem}
+.feat .tag{position:absolute;top:22px;right:22px;font-size:11px;font-weight:700;letter-spacing:1px;color:var(--gold-deep);
+  background:var(--gold-pale);padding:5px 12px;border-radius:999px}
+/* how it works */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:step}
+.step-card{background:var(--glass);backdrop-filter:blur(12px);border-radius:24px;padding:36px 28px;text-align:center;
+  border:1px solid rgba(255,255,255,.95);box-shadow:0 14px 40px rgba(74,20,140,.1);position:relative;transition:transform .3s}
+.step-card:hover{transform:translateY(-6px)}
+.step-num{width:64px;height:64px;margin:0 auto 20px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:'Unbounded';font-weight:800;font-size:1.4rem;color:#fff;background:var(--grad);
+  box-shadow:0 10px 26px rgba(255,20,147,.4)}
+.step-card h3{font-size:1.05rem;margin-bottom:10px}
+.step-card p{color:var(--muted);line-height:1.6;font-size:.97rem}
+/* showcase */
+.shows{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.show{background:#fff;border-radius:20px;overflow:hidden;border:1px solid rgba(255,20,147,.16);
+  box-shadow:0 16px 44px rgba(74,20,140,.12);transition:transform .3s}
+.show:hover{transform:translateY(-6px)}
+.show-head{padding:16px 22px;background:linear-gradient(120deg,#FFF0F7,#F6ECFF);border-bottom:1px solid rgba(255,20,147,.14);
+  font-family:'Unbounded';font-size:12px;font-weight:700;letter-spacing:1px;color:var(--purple)}
+.show-body{padding:22px;font-size:.95rem;line-height:1.7;color:#5A3E7A}
+.show-foot{padding:0 22px 20px}
+/* final cta */
+.final{max-width:1060px;margin:0 auto 90px;padding:0 20px}
+.final-panel{position:relative;overflow:hidden;border-radius:32px;padding:80px 30px;text-align:center;color:#fff;
+  background:linear-gradient(130deg,#FF1493 0%,#A02080 45%,#4A148C 100%)}
+.final-panel::before{content:"";position:absolute;inset:0;opacity:.35;
+  background-image:radial-gradient(circle at 20% 30%,rgba(255,201,60,.8) 0,transparent 22%),
+  radial-gradient(circle at 80% 20%,rgba(255,255,255,.5) 0,transparent 18%),
+  radial-gradient(circle at 65% 80%,rgba(255,201,60,.55) 0,transparent 20%),
+  radial-gradient(circle at 30% 75%,rgba(255,255,255,.35) 0,transparent 16%)}
+.final-panel h2{font-size:clamp(1.7rem,4.4vw,2.9rem);margin-bottom:16px;position:relative}
+.final-panel p{opacity:.92;font-size:1.1rem;margin-bottom:34px;position:relative;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.65}
+.btn-light{background:#fff;color:var(--purple);animation:none;position:relative;
+  box-shadow:0 12px 34px rgba(0,0,0,.25)}
+.btn-light:hover{box-shadow:0 18px 44px rgba(0,0,0,.32)}
+footer{text-align:center;padding:34px 20px;color:var(--muted);font-size:.9rem;border-top:1px solid rgba(255,20,147,.14)}
+footer b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+@media (max-width:860px){
+  .feats,.steps{grid-template-columns:1fr}
+  .shows{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .chip.hide-m{display:none}
+  .hero{padding-top:80px}
+  nav{padding:12px 16px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="aurora"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div></div>
+<div id="sparkles"></div>
 
-  <header class="hero">
-    <h1>👗 Glam's Clothing Brand Prompt Generator</h1>
-    <p>Pick a brand type, check your options, and get premium AI design prompts for every design style you choose.</p>
-    <div class="gold-rule"></div>
-  </header>
+<nav>
+  <div class="logo">✨ Glam's Prompt Studio</div>
+  <a class="btn btn-sm" href="./app/">Launch Generator</a>
+</nav>
 
-  <div class="card" id="setupCard">
-    <h2><span class="step">1</span> Brand Setup</h2>
-    <p class="sub">Start here. Everything begins with "None" — nothing is pre-selected.</p>
-    <label class="f-label" for="brandName">Brand name</label>
-    <input type="text" id="brandName" placeholder="e.g. Crowned & Cozy, Faith Over Fear, Tiny Royals...">
-    <label class="f-label" for="brandTagline">Tagline or vibe <span style="font-weight:600;text-transform:none">(optional)</span></label>
-    <input type="text" id="brandTagline" placeholder="e.g. Bold faith, soft fabrics — or leave blank">
-    <label class="f-label" for="brandType">Clothing brand type</label>
-    <select id="brandType"><option value="">— None — pick a brand type —</option></select>
+<header class="hero">
+  <span class="chip pink" style="top:120px;left:6%;--fd:6s;--rr:-6deg">STREETWEAR</span>
+  <span class="chip gold" style="top:265px;left:7%;--fd:7.5s;--rr:4deg">✦ Y2K</span>
+  <span class="chip" style="top:110px;right:7%;--fd:5.5s;--rr:5deg">BOHO</span>
+  <span class="chip pink hide-m" style="top:230px;right:13%;--fd:8s;--rr:-4deg">GOTHIC</span>
+  <span class="chip gold hide-m" style="top:330px;left:4%;--fd:6.8s;--rr:3deg">✦ LUXURY</span>
+  <span class="chip hide-m" style="top:360px;right:5%;--fd:7.2s;--rr:-5deg">ANIME</span>
+  <span class="chip pink" style="top:470px;left:10%;--fd:5.8s;--rr:6deg">KIDS</span>
+  <span class="chip gold" style="top:480px;right:11%;--fd:6.4s;--rr:-3deg">✦ FAITH</span>
+
+  <div class="badge">✨ New &nbsp;·&nbsp; AI Prompt Tool for Clothing Brands</div>
+  <h1>Turn Your Brand Ideas Into<br><span class="shimmer">Scroll-Stopping Designs</span></h1>
+  <p class="sub">Pick your brand vibe, check a few boxes, and get <b>ready-to-use AI image prompts</b> for every design style — typography, allover patterns, statement tees, mascots, faith designs &amp; more. No designer needed.</p>
+  <div class="cta-row">
+    <a class="btn" href="./app/">🚀 Launch the Generator</a>
+    <a class="btn ghost" href="#how">See How It Works</a>
   </div>
 
-  <div id="brandPanel"></div>
-  <div id="designPanels"></div>
-
-  <div class="card" id="finishCard" style="display:none">
-    <h2><span class="step">2</span> Colors, People &amp; Print Details</h2>
-    <p class="sub">Premium palettes, character styles, and print specs — all curated for your brand type.</p>
-    <div id="colorSection"></div>
-    <div id="peopleSection" style="display:none"></div>
-    <div id="printSection"></div>
+  <div class="demo">
+    <div class="demo-bar"><span class="dot" style="background:#FF5F57"></span><span class="dot" style="background:#FEBC2E"></span><span class="dot" style="background:#28C840"></span><span style="margin-left:8px">✨ prompt-generator · live preview</span></div>
+    <div class="demo-body">
+      <div class="prompt-label">✨ Generating your prompt…</div>
+      <div><span id="typed"></span><span class="caret"></span></div>
+    </div>
   </div>
+</header>
 
-  <div class="card" id="outputCard" style="display:none">
-    <h2><span class="step">3</span> Your Prompts</h2>
-    <p class="sub">One clearly labeled prompt for every design style you picked. Copy one — or copy them all below.</p>
-    <div id="output"></div>
+<div class="marquee"><div class="marquee-track" id="marqueeTrack"></div></div>
+
+<section>
+  <div class="sec-head reveal">
+    <div class="kicker">Why creators love it</div>
+    <h2>Everything Handled, <span class="shimmer">Nothing to Figure Out</span></h2>
+    <p>Every option is curated for your brand type — you just check boxes and copy prompts.</p>
   </div>
-
-  <div class="bottom-bar" id="bottomBar" style="display:none">
-    <button class="btn btn-gold" id="randomBtn">🎲 Randomize</button>
-    <button class="btn btn-pink" id="copyAllBtn">📋 Copy All Prompts</button>
+  <div class="stats reveal">
+    <div class="stat"><div class="num">30</div><div class="lbl">Brand Types</div></div>
+    <div class="stat"><div class="num">7</div><div class="lbl">Design Styles</div></div>
+    <div class="stat"><div class="num">540+</div><div class="lbl">Garment Options</div></div>
+    <div class="stat"><div class="num">420+</div><div class="lbl">Typography Styles</div></div>
   </div>
+</section>
 
-  <footer>Made with 💖 by Celestia for Glam · Glam Hustle Hub</footer>
+<section>
+  <div class="feats">
+    <div class="feat reveal"><span class="tag">★ mine</span><div class="icon">🎯</div><h3>30 Brand Types, Zero Guesswork</h3><p>Streetwear, Y2K, modest wear, Christian apparel, kids, baby, swim, western, anime — pick yours and every option reshapes itself around your vibe.</p></div>
+    <div class="feat reveal"><div class="icon">✍️</div><h3>Your Words, Your Way</h3><p>Add your own brand name, taglines, and custom text anywhere. Hit ＋ Add to save your own options forever — they show up as ★ mine every visit.</p></div>
+    <div class="feat reveal"><div class="icon">🎨</div><h3>7 Design Styles, 7 Prompts</h3><p>Typography logos, allover patterns, statement text, statement + character, mascots, scripture/faith, humor — each gets its own clearly labeled prompt.</p></div>
+    <div class="feat reveal"><div class="icon">👗</div><h3>18 Garments Per Brand</h3><p>Tees, hoodies, crewnecks, tanks, dresses, swim, sets &amp; more — curated per brand type, with blank garment colors and mockup styles.</p></div>
+    <div class="feat reveal"><div class="icon">💎</div><h3>Glam's Signature Typography</h3><p>Jeweled diamond script, chrome liquid letters, rhinestone varsity, glitter stickers, candy letters &amp; more — from Glam's own prompt library, matched to each brand.</p></div>
+    <div class="feat reveal"><div class="icon">🎲</div><h3>Randomize &amp; Copy All</h3><p>Feeling spontaneous? One tap randomizes everything. Copy a single prompt or grab them all at once — then paste straight into your AI image tool.</p></div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="sec-head reveal">
+    <div class="kicker">Dead simple</div>
+    <h2>From Idea to Prompt in <span class="shimmer">60 Seconds</span></h2>
+  </div>
+  <div class="steps">
+    <div class="step-card reveal"><div class="step-num">1</div><h3>Pick Your Brand Type</h3><p>Choose from 30 clothing brand vibes. Everything — garments, fonts, colors — instantly curates itself for you.</p></div>
+    <div class="step-card reveal"><div class="step-num">2</div><h3>Check Your Options</h3><p>Tap the designs you want, check colors and details, add your brand name and custom text. Your prompts build live.</p></div>
+    <div class="step-card reveal"><div class="step-num">3</div><h3>Copy &amp; Create</h3><p>Copy one prompt or all of them, paste into any AI image generator, and watch your clothing designs come to life.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head reveal">
+    <div class="kicker">Fresh out of the generator</div>
+    <h2>Prompts That <span class="shimmer">Actually Slap</span></h2>
+    <p>Real prompt styles the generator writes for you — detailed, print-ready, and tuned for fabric.</p>
+  </div>
+  <div class="shows">
+    <div class="show reveal">
+      <div class="show-head">✨ TYPOGRAPHY / LOGO DESIGN</div>
+      <div class="show-body">"Oversized black hoodie for Y2K glam brand 'Velvet Reign' — chrome liquid letters across the chest, hot pink + gold palette, rhinestone sparkle accents, graphic worked into the fabric weave following the folds, ultra-detailed, studio mockup…"</div>
+      <div class="show-foot"><a class="btn btn-sm" href="./app/">Make Yours</a></div>
+    </div>
+    <div class="show reveal">
+      <div class="show-head">✨ SCRIPTURE / FAITH DESIGN</div>
+      <div class="show-body">"Cream Christian streetwear tee — 'Highly CHOSEN' in faith cursive + bold slab serif, gold foil lettering with soft vintage wash, centered chest placement, print embedded in the cotton texture, cozy faith-based aesthetic…"</div>
+      <div class="show-foot"><a class="btn btn-sm" href="./app/">Make Yours</a></div>
+    </div>
+  </div>
+</section>
+
+<div class="final">
+  <div class="final-panel reveal">
+    <h2>Your Next Bestseller Starts With a Prompt ✨</h2>
+    <p>Join the creators turning blank tees into brands. Free to use — your saved options are always waiting for you.</p>
+    <a class="btn btn-light" href="./app/">🚀 Launch the Generator — It's Free</a>
+  </div>
 </div>
-<div class="toast" id="toast"></div>
-<button class="btn btn-pink" id="promptFab">✨</button>
+
+<footer>Made with 💖 by <b>Glam</b> · Glam's Prompt Studio · Your brand, your words, your empire.</footer>
 
 <script>
-/* ============================================================
-   GLOBAL OPTION POOLS
-============================================================ */
-const DESIGN_TYPES = {
-  "typography":     { name:"Brand Typography / Logo", emoji:"🔤", desc:"The wordmark, logo lettering & brand lettering style." },
-  "pattern":        { name:"Allover Pattern / Print", emoji:"🎨", desc:"Repeating prints & fabric patterns for the line." },
-  "statement":      { name:"Statement Tee (Text Only)", emoji:"💬", desc:"Bold text-only tees — slogans, quotes & sayings." },
-  "statement-char": { name:"Statement Tee with Character", emoji:"🌟", desc:"Text + an illustrated character together on the tee." },
-  "character":      { name:"Character / Mascot", emoji:"🦁", desc:"A standalone brand character or mascot." },
-  "scripture":      { name:"Scripture / Faith Tee", emoji:"📖", desc:"Faith-based tees with verse-inspired messaging." },
-  "humor":          { name:"Humor / Funny Tee", emoji:"😂", desc:"Funny, witty, meme-worthy tee designs." }
-};
-const SECTION_LABEL = {
-  "typography":"Typography styles", "pattern":"Pattern styles", "statement":"Statement themes",
-  "statement-char":"Character types", "character":"Character types",
-  "scripture":"Faith themes", "humor":"Humor themes"
-};
-const PALETTES = {
-  "Neon Nights":["#FF1493","#7B2FF7","#00E5FF","#0D0D0D"],
-  "Bubblegum Pop":["#FF7BAC","#C084FC","#FFFFFF","#FFD700"],
-  "Desert Modest":["#D9A679","#B5651D","#6B7F59","#F5EFE6"],
-  "Kingdom Gold":["#FFD700","#4A148C","#FFF8E7","#B8860B"],
-  "Street Concrete":["#2B2B2B","#8A8A8A","#FFFFFF","#FF5A00"],
-  "Pastel Dream":["#FFC2D1","#BDE0FE","#E4C1F9","#FDFFB6"],
-  "Playground Brights":["#FF3B30","#FFCC00","#007AFF","#34C759"],
-  "Varsity Classic":["#0A1931","#FFFFFF","#C8102E","#9AA0A6"],
-  "Earth Tones":["#6F4E37","#C19A6B","#8A9A5B","#F5F0E1"],
-  "Midnight Luxe":["#0A0A0A","#D4AF37","#0B3D2E","#F5E6C8"],
-  "Ocean Drive":["#00B4D8","#FF6B6B","#F4E1C1","#FFFFFF"],
-  "Sunset Blvd":["#FF6B35","#E91E63","#7B2FF7","#FFD166"],
-  "Monochrome Minimal":["#111111","#FFFFFF","#6E6E6E","#D9D9D9"],
-  "Candy Chrome":["#C0C0C0","#FF9ECF","#C4B5FD","#BFE3FF"],
-  "Forest Camo":["#2D4A22","#5C4A32","#1A1A1A","#A89878"],
-  "Biker Blackout":["#0D0D0D","#C0C0C0","#B3122E","#4A4A4A"],
-  "Ballet Blush":["#F7CAD9","#FFF9F5","#D4AF37","#8D7B68"],
-  "Hip Hop Royalty":["#4A148C","#FFD700","#0D0D0D","#FFFFFF"],
-  "Turbo Flames":["#D7263D","#F46036","#1B1B1B","#C0C0C0"],
-  "Preppy Heritage":["#0F2A44","#1B7A4D","#FFFFFF","#C2B280"],
-  "Boho Sunset":["#B5542D","#D9A441","#2F6F6B","#F7EDE2"],
-  "Goth Noir":["#0A0A0A","#6E0B14","#C0C0C0","#2B0A3D"],
-  "Rave Ultraviolet":["#39FF14","#7B2FF7","#FF1493","#0D0D0D"],
-  "Y2K Frost":["#BFE3FF","#C0C0C0","#D8B4FE","#FFFFFF"],
-  "Sakura Anime":["#FFB7C5","#FFFFFF","#C8102E","#1A1A1A"],
-  "Rock Rebellion":["#111111","#F5F5F5","#B3122E","#D8CFBF"],
-  "Tropical Resort":["#00C2A8","#FF6B6B","#B8E62E","#F4E1C1"],
-  "Cocoa & Cream":["#4B2E2A","#C08A5A","#F7EDE2","#D4AF37"],
-  "Denim Days":["#1F3A5F","#7FA6C9","#FFFFFF","#C2A878"],
-  "Arctic Volt":["#FFFFFF","#BFE3FF","#111111","#CCFF00"]
-};
-const PEOPLE_STYLES = {
-  "Real people": ["Ultra Realistic","Photorealistic","Cinematic Portrait","Studio Photography"],
-  "Cartoon people": ["Chibi","Anime","Pixar-Style 3D","Classic Cartoon","Flat Vector","Sticker Style","Graffiti Character","Watercolor Illustration"]
-};
-const PLACEMENTS = ["Center chest","Oversized front","Full back print","Left chest hit","Sleeve print","Allover print","Pocket area","Hem tag / neck label"];
-const BLANK_COLORS = ["Black","White","Heather grey","Navy","Cream","Sand","Forest green","Burgundy","Royal blue","Hot pink","Lavender","Chocolate","Charcoal","Olive","Baby blue"];
-const MOCKUPS = ["Flat lay product shot","Ghost mannequin","On-model lifestyle photo","Hanging product shot","Close-up fabric detail"];
-const QUALITY_TAGS = ["Premium ultra-detailed","Print-ready vector quality","High-resolution 8K","Soft-hand premium print feel","Perfectly spelled text","Clean vector edges"];
-/* ============================================================
-   BRAND TYPE DATA — each brand only shows what fits it
-============================================================ */
-const BRAND_TYPES = {
-"urban-streetwear": {
-  name:"Urban Streetwear", emoji:"🔥",
-  audiences:["Men","Women","Teens","Young adults 18–30","Skaters","Creatives"],
-  garments:["Oversized tee","Boxy tee","Hoodie","Crewneck sweatshirt","Cargo pants","Denim jacket","Snapback","Beanie","Tote bag","Socks","Long sleeve tee","Tank top","Windbreaker","Track pants","Bucket hat","Dad cap","Crossbody bag","Graphic socks"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Graffiti wildstyle","Bubble letters","Varsity collegiate","Distressed vintage","Chrome 3D","Bold condensed sans","Gothic blackletter","Puff-print bubble","Stencil street","Ransom-note collage","Outlined varsity","Tattoo script","Psychedelic funk","Chrome liquid letters"],
-  patterns:["Allover graffiti tags","Camo remix","Checkerboard","Bandana paisley","Barbed wire repeat","Brick wall texture"],
-  statementThemes:["City pride slogans","Hustle & grind quotes","Neighborhood shoutouts","Money mindset","Street poetry","Born & raised pride"],
-  charTypes:["Graffiti character","Masked figure","Bulldog mascot","Urban fox","Skater kid","Crowned lion"],
-  humorThemes:["Sarcastic street humor","Meme-style jokes","Savage comebacks","City life jokes","Hustle memes","Roast culture"],
-  elements:{
-    typography:["Spray paint drips","Crown","Lightning bolt","Chain links","Barbed wire","Brick texture","Wildstyle arrow","Paint splatter","Stencil star","Rooftop tag"],
-    pattern:["Tags","Stars","Crowns","Dollar signs","Skulls","Arrows","Boombox","Lightning bolts","Spray cans","City blocks"],
-    statement:["Barcode","Caution tape","Spray can","Boombox","City skyline","Crown","Subway token","Mixtape","Brick wall","Street lamp"],
-    "statement-char":["Gold chain","Sneakers","Snapback","Graffiti wall","Boombox","Skateboard","Bandana","Backpack","Mic","Chain wallet"],
-    character:["Gold chain","Snapback","Sneakers","Spray can","Crown","Boombox","Bandana","Spray mask","Hoop earring","Sneaker box"],
-    humor:["Speech bubble","Sarcastic banner","Warning sign","Dice","Cash stack","Crown","Side-eye emoji style","Cash emoji style","Fire emoji style","Clown emoji style"]
-  },
-  palettes:["Neon Nights","Street Concrete","Hip Hop Royalty","Biker Blackout","Sunset Blvd","Monochrome Minimal"]
-},
-"girly-streetwear": {
-  name:"Girly Urban Streetwear", emoji:"💅",
-  audiences:["Women","Teen girls","Young women 18–30","College students","Bestie duos"],
-  garments:["Baby tee","Cropped hoodie","Oversized tee","Joggers","Denim jacket","Bucket hat","Tote bag","Socks","Mini skirt","Tube top","Cardigan","Sweat shorts","Leggings","Denim shorts","Graphic tank","Cozy crewneck","Hair scrunchie set","Crossbody purse"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Y2K bubble letters","Glitter script","Varsity chenille","Puff-print bubble","Neon sign script","Retro groovy","Rhinestone style","Graffiti hearts","Candy script","Jeweled diamond script","Glitter sticker letters","Sapphire glitter capitals","Bratty marker","Pearl letters"],
-  patterns:["Leopard print","Cherry print","Hearts & stars","Pink checkerboard","Butterfly allover","Cowgirl boot stitch"],
-  statementThemes:["Girl power","Self-love era","Soft life quotes","Hot girl hustle","Bestie quotes","Main character energy"],
-  charTypes:["Glam chibi girl","Cartoon diva","Sassy cat","Butterfly girl","Cherry mascot","Star girl"],
-  humorThemes:["Relatable girl humor","Dating jokes","Self-care satire","Bestie roasts","Shopping humor","Delulu era jokes"],
-  elements:{
-    typography:["Glitter","Bows","Hearts","Stars","Cherries","Rhinestones","Sparkle trail","Lip gloss shine","Star stickers","Heart lockets"],
-    pattern:["Bows","Cherries","Butterflies","Stars","Lips","Lightning bolts","Polka dots","Daisies","Smiley faces","Zebra stripes"],
-    statement:["Sparkles","Mirror","Lipstick","Handbag","Butterfly","Crown","Compact","Perfume bottle","Star hair clips","Shopping cart"],
-    "statement-char":["Oversized sunglasses","Hoop earrings","Shopping bags","Milkshake","Butterfly wings","Star wand","Bubble tea","Phone case","Mini skirt","Platform sneakers"],
-    character:["Bow","Hoop earrings","Sunglasses","Handbag","Butterflies","Sparkles","Tiara","Choker","Blush","Beauty mark"],
-    humor:["Speech bubble","Wine glass","Shopping bag","Compact mirror","Sassy hand pose","Heart-eyes emoji style","Iced coffee","Shopping cart","Hair roller","Purse"]
-  },
-  palettes:["Bubblegum Pop","Candy Chrome","Pastel Dream","Neon Nights","Y2K Frost","Sunset Blvd"]
-},
-"muslim-modest": {
-  name:"Muslim Wear / Modest Fashion", emoji:"🧕",
-  audiences:["Women","Teen girls","Mothers","Professionals","New Muslims","Modest fashion lovers"],
-  garments:["Abaya","Hijab","Maxi dress","Modest swimwear (burkini)","Long tunic","Wide-leg pants","Kimono cardigan","Prayer dress","Oversized tee (long)","Skirt","Hijab cap","Abaya belt","Modest jumpsuit","Longline blazer","Pleated skirt","Chiffon hijab","Jersey hijab","Maxi skirt"],
-  designs:["typography","pattern","statement","statement-char","character","scripture","humor"],
-  typography:["Arabic calligraphy style","Elegant serif","Modern minimal sans","Gold foil script","Geometric Kufi-inspired","Soft handwritten","Embroidered script","Luxury thin serif","Diwani-inspired script","Naskh-inspired type","Thuluth-inspired lettering","Minimal geometric sans","Pearl script","Desert modern","Jeweled diamond script"],
-  patterns:["Islamic geometric pattern","Arabesque floral","Moroccan tile","Crescent & star motif","Subtle damask","Henna-inspired lace"],
-  statementThemes:["Modesty is strength","Hijabi pride","Faith & fashion","Covered in confidence","Modest is hottest (tasteful)","Queen of modesty"],
-  charTypes:["Modest cartoon woman","Hijabi chibi girl","Elegant illustrated woman","Modest mother & child","Cartoon abaya girl","Floral woman silhouette"],
-  scriptureThemes:["Bismillah calligraphy","Alhamdulillah","Mashallah","Sabr (patience)","Tawakkul (trust in Allah)","Dua quotes"],
-  humorThemes:["Hijabi life humor","Modest fashion jokes","Relatable Muslim humor","Ramadan jokes","Hijab struggle humor","Wholesome wit"],
-  elements:{
-    typography:["Crescent moon","Geometric star","Gold flourishes","Arabesque frame","Lantern","Floral vine","Star medallion","Palm motif","Mosque silhouette","Henna swirl"],
-    pattern:["Eight-point star","Arabesque","Crescent","Tile motif","Palm leaf","Henna dot","Lanterns","Stars","Domes","Floral lattice"],
-    statement:["Crescent moon","Hijab silhouette","Lantern","Prayer beads","Dome outline","Olive branch","Prayer rug","Rose","Date palm","Tasbih beads"],
-    "statement-char":["Hijab","Abaya flow","Lantern","Crescent moon","Flowers","Prayer mat","Tote bag","Book","Teacup","Garden flowers"],
-    character:["Hijab","Flowing abaya","Crescent","Flowers","Lantern","Stars","Prayer beads","Book","Teapot","Garden gate"],
-    scripture:["Arabic calligraphy","Gold border","Geometric frame","Crescent","Lantern light","Floral medallion","Gold dome","Minaret","Prayer niche","Verse medallion"],
-    humor:["Speech bubble","Hijab cap","Coffee cup","Prayer beads","Sassy sunglasses","Moon & stars","Teacup","Book stack","Shopping bag","Flower pot"]
-  },
-  palettes:["Desert Modest","Kingdom Gold","Earth Tones","Midnight Luxe","Pastel Dream","Monochrome Minimal"]
-},
-"christian-apparel": {
-  name:"Christian Clothing Brand", emoji:"✝️",
-  audiences:["Women","Men","Teens","Church groups","Youth ministry","Families"],
-  garments:["Classic tee","Oversized tee","Hoodie","Crewneck sweatshirt","Long sleeve tee","Tank top","Snapback","Tote bag","Baby onesie","Socks","Raglan tee","Henley","Polo","Quarter-zip","Denim jacket","Beanie","Toddler tee","Apron"],
-  designs:["typography","pattern","statement","statement-char","character","scripture","humor"],
-  typography:["Vintage church script","Bold collegiate","Modern minimal sans","Distressed vintage","Handwritten brush","Elegant serif","Varsity arch","Retro sunshine","Gospel choir style","Stained glass letters","Typewriter faith","Faith cursive + slab serif","Modern worship sans","Heavenly serif"],
-  patterns:["Cross pattern","Dove repeat","Olive branch","Stained glass motif","Subtle fish (ichthys)","Floral cross"],
-  statementThemes:["Faith over fear","Blessed & grateful","Child of God","Grace upon grace","Walk by faith","Kingdom minded"],
-  charTypes:["Cartoon lamb","Dove character","Lion of Judah","Smiling sun","Angel chibi","Shepherd kid"],
-  scriptureThemes:["John 3:16","Philippians 4:13","Jeremiah 29:11","Psalm 23","Romans 8:28","Proverbs 3:5"],
-  humorThemes:["Holy humor","Church-life jokes","Youth group humor","Wholesome puns","Bible puns","Coffee & Jesus jokes"],
-  elements:{
-    typography:["Cross","Dove","Olive branch","Sun rays","Ichthys fish","Crown of light","Wheat stalk","Mustard seed","Anchor cross","Trumpet"],
-    pattern:["Crosses","Doves","Olive leaves","Sunbursts","Stars","Floral vines","Wheat","Anchors","Lilies","Palm branches"],
-    statement:["Cross","Sunrise","Open Bible","Dove","Church silhouette","Hands in prayer","Mustard seed","Anchor","Lily","Lamp"],
-    "statement-char":["Halo","Dove","Cross necklace","Sunshine","Flowers","Clouds","Bible","Sandals","Staff","Basket"],
-    character:["Halo","Dove wings","Cross","Sunshine","Flowers","Star","Shepherd staff","Basket","Sandals","Olive sprig"],
-    scripture:["Open Bible","Scroll","Olive branch","Dove","Sunrise","Stained glass","Wheat sheaf","Lampstand","Altar","Manna jar"],
-    humor:["Speech bubble","Coffee cup","Church pew","Halo","Smiling sun","Dove","Fishing net","Sandals","Basket","Lamp"]
-  },
-  palettes:["Kingdom Gold","Earth Tones","Pastel Dream","Varsity Classic","Sunset Blvd","Midnight Luxe"]
-},
-"christian-streetwear": {
-  name:"Christian Streetwear", emoji:"🙏",
-  audiences:["Teens","Young adults 18–30","Men","Women","Youth groups","Streetwear lovers"],
-  garments:["Oversized tee","Boxy tee","Hoodie","Crewneck sweatshirt","Cargo pants","Snapback","Beanie","Long sleeve tee","Socks","Tote bag","Tank top","Jersey","Windbreaker","Track pants","Bucket hat","Crossbody bag","Graphic socks","Denim jacket"],
-  designs:["typography","pattern","statement","statement-char","character","scripture","humor"],
-  typography:["Graffiti wildstyle","Gothic blackletter","Bold condensed sans","Varsity collegiate","Distressed vintage","Chrome 3D","Bubble letters","Puff-print bubble","Stencil faith","Ransom-note collage","Outlined varsity","Faith cursive + slab serif","Psalm graffiti","Kingdom chrome"],
-  patterns:["Allover crosses","Barbed wire & roses","Checkerboard","Camo remix","Stained glass street","Thorn & crown repeat"],
-  statementThemes:["Saved & street","Faith over fear","Kingdom hustle","Grace gang","Not of this world","Armor of God"],
-  charTypes:["Lion of Judah (street style)","Angel graffiti character","Dove with chain","Crowned cross","Warrior kid","Street saint"],
-  scriptureThemes:["Romans 1:16 (unashamed)","Joshua 1:9 (be strong)","Ephesians 6 (armor)","Psalm 144:1","Matthew 5:16 (let light shine)","2 Timothy 1:7"],
-  humorThemes:["Holy humor","Sanctified sarcasm","Youth pastor jokes","Blessed & unbothered","Church meme humor","Grace upon grace jokes"],
-  elements:{
-    typography:["Thorn crown","Cross","Lightning bolt","Chain","Graffiti drips","Halo","Shield of faith","Sword","Breastplate","Helmet of salvation"],
-    pattern:["Crosses","Thorns","Halos","Lightning","Stars","Chains","Shields","Swords","Trumpets","Crowns of thorns"],
-    statement:["Cross","City skyline","Thorn crown","Dove","Boombox","Sunrise","City on a hill","Salt and light","Unashamed","Kingdom come"],
-    "statement-char":["Gold chain with cross","Halo","Sneakers","Graffiti wall","Dove","Crown","Backpack","Headphones","Skateboard","Wristband"],
-    character:["Halo","Cross chain","Sneakers","Wings","Crown","Lightning","Shield","Sword","Breastplate","Sandals"],
-    scripture:["Cross","Open Bible","Thorn crown","Sunrise rays","Dove","City lights","Scroll seal","Lamp oil","Wheat","Dove feather"],
-    humor:["Speech bubble","Halo","Coffee cup","Sunglasses","Lightning bolt","Crown","Youth group van","Pizza box","Guitar","Campfire"]
-  },
-  palettes:["Neon Nights","Street Concrete","Kingdom Gold","Biker Blackout","Sunset Blvd","Monochrome Minimal"]
-},
-"girls-kids": {
-  name:"Little Girls' Clothing Brand", emoji:"🎀",
-  audiences:["Girls 2–5","Girls 6–10","Tweens","Parents","Grandparents","Gift buyers"],
-  garments:["Toddler tee","Kids tee","Twirl dress","Leggings","Hoodie","Sweatshirt","Tutu skirt","Pajama set","Denim jacket","Hair bow set","Sundress","Shorts","Tank top","Cardigan","Rain boots","Swimsuit","Overalls","Graphic socks"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Playful bubble letters","Glitter script","Rainbow letters","Polka dot letters","Cute handwritten","Puffy 3D letters","Storybook serif","Candy letters","Sprinkle letters","Candy dessert letters","Character alphabet letters","Balloon letters","Soft fabric letters","Starry night letters"],
-  patterns:["Unicorn allover","Rainbow & clouds","Hearts & stars","Mermaid scales","Floral daisy","Butterfly garden"],
-  statementThemes:["Little miss sassy","Daddy's princess","Kind is cool","Dream big little one","Girl power (kid)","Sprinkle kindness"],
-  charTypes:["Unicorn","Mermaid","Fairy","Kitten","Ballerina bunny","Rainbow puppy"],
-  humorThemes:["Silly kid jokes","Sassy toddler humor","Knock-knock style","Animal puns","Snack jokes","Playground humor"],
-  elements:{
-    typography:["Bows","Stars","Hearts","Rainbows","Butterflies","Glitter","Fairy dust","Flower petals","Candy swirls","Polka dots"],
-    pattern:["Unicorns","Rainbows","Hearts","Stars","Flowers","Cupcakes","Balloons","Candy","Teddy bears","Ice cream"],
-    statement:["Crown","Wand","Rainbow","Butterfly","Heart","Star","Magic wand sparkles","Ice cream cone","Teddy bear","Balloon bunch"],
-    "statement-char":["Bow","Wand","Tiara","Butterfly wings","Sparkles","Flower crown","Magic wand","Candy purse","Star hair clips","Rainbow socks"],
-    character:["Bow","Flower crown","Wand","Sparkles","Hearts","Rainbow","Magic carpet","Candy cane","Teddy","Balloon"],
-    humor:["Speech bubble","Giggle stars","Cupcake","Puppy","Balloon","Rainbow","Silly hat","Bubbles","Playground","Tickles"]
-  },
-  palettes:["Pastel Dream","Bubblegum Pop","Playground Brights","Candy Chrome","Tropical Resort","Sunset Blvd"]
-},
-
-"boys-kids": {
-  name:"Little Boys' Clothing Brand", emoji:"🚀",
-  audiences:["Boys 2–5","Boys 6–10","Tweens","Parents","Grandparents","Gift buyers"],
-  garments:["Toddler tee","Kids tee","Hoodie","Sweatshirt","Joggers","Shorts","Pajama set","Denim jacket","Baseball cap","Tank top","Swim trunks","Rain jacket","Overalls","Graphic socks","Polo","Cargo shorts","Long sleeve tee","Beanie"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Bold block letters","Dino letters","Sporty collegiate","Comic book style","Graffiti kid","Puffy 3D letters","Retro arcade","Monster letters","Robot block","Character alphabet letters","Race flag style","Jungle vines","Space cadet","Candy dessert letters"],
-  patterns:["Dinosaur allover","Shark print","Rocket & planets","Construction trucks","Sports balls","Lightning bolts"],
-  statementThemes:["Little dude","Mama's boy","Wild & free","Future MVP","Brave little man","Kind & cool"],
-  charTypes:["T-Rex","Shark","Race car","Robot","Superhero kid","Dino astronaut"],
-  humorThemes:["Silly kid jokes","Dino puns","Fart jokes (tasteful)","Animal puns","Snack jokes","Superhero humor"],
-  elements:{
-    typography:["Lightning bolt","Stars","Dino footprint","Trophy","Skateboard","Flames","Checkered flag","Stopwatch","Medal","Whistle"],
-    pattern:["Dinosaurs","Sharks","Rockets","Stars","Trucks","Lightning","Race flags","Planets","Craters","Tires"],
-    statement:["Trophy","Rocket","Dino","Skateboard","Star","Lightning bolt","Race car","Robot","Pirate hat","Treehouse"],
-    "statement-char":["Cape","Helmet","Sneakers","Trophy","Rocket pack","Star","Goggles","Jetpack","Tool belt","Walkie-talkie"],
-    character:["Cape","Helmet","Lightning bolt","Stars","Sneakers","Shield","Pirate hat","Treasure map","Compass","Spyglass"],
-    humor:["Speech bubble","Giggle stars","Dino","Rocket","Trophy","Star","Rubber duck","Pizza slice","Soccer ball","Silly string"]
-  },
-  palettes:["Playground Brights","Varsity Classic","Ocean Drive","Arctic Volt","Forest Camo","Sunset Blvd"]
-},
-"athletic": {
-  name:"Athletic / Sportswear", emoji:"🏃",
-  audiences:["Men","Women","Teens","Runners","Gym-goers","Team athletes","Yoga & fitness"],
-  garments:["Performance tee","Tank top","Hoodie","Leggings","Joggers","Shorts","Sports bra","Quarter-zip","Duffel bag","Cap","Compression shirt","Track jacket","Gym bag","Headband","Wristbands","Yoga pants","Windbreaker","Crew socks"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Bold italic sport","Varsity collegiate","Jersey block","Modern condensed","Distressed athletic","Neon performance","Minimal sans","Number-style varsity","Stadium bold","Rhinestone varsity","Marathon marker","Scoreboard digital","Locker room stencil","Victory serif"],
-  patterns:["Lightning streaks","Camo performance","Geometric speed lines","Hexagon tech","Abstract motion","Sweat-wicking mesh texture"],
-  statementThemes:["No excuses","Beast mode","Train insane","Stronger every day","Earned not given","Discipline over motivation"],
-  charTypes:["Bulldog athlete","Lion sprinter","Eagle mascot","Boxer character","Wolf pack","Panther"],
-  humorThemes:["Gym humor","Leg day jokes","Runner jokes","Pre-workout humor","Sore-tomorrow jokes","Cardio memes"],
-  elements:{
-    typography:["Lightning bolt","Speed lines","Trophy","Flames","Wings","Stopwatch","Finish line","Whistle","Scoreboard","Laurel wreath"],
-    pattern:["Chevrons","Lightning","Hexagons","Speed lines","Arrows","Waves","Podiums","Medal ribbons","Stopwatches","Gym bags"],
-    statement:["Dumbbell","Trophy","Stopwatch","Flames","Medal","Lightning bolt","Kettlebell","Jump rope","Gym bag","Water bottle"],
-    "statement-char":["Headband","Sweatband","Medal","Dumbbell","Trophy","Lightning","Gym bag","Water bottle","Towel","Wristband"],
-    character:["Medal","Headband","Dumbbell","Trophy","Wings","Lightning bolt","Clipboard","Cone","Megaphone","Towel"],
-    humor:["Speech bubble","Dumbbell","Sweat drop","Trophy","Stopwatch","Protein shaker","Gym selfie","Foam roller","Gym bag","Banana"]
-  },
-  palettes:["Arctic Volt","Street Concrete","Varsity Classic","Neon Nights","Ocean Drive","Monochrome Minimal"]
-},
-"loungewear": {
-  name:"Loungewear", emoji:"🛋️",
-  audiences:["Women","Men","Moms","Work-from-home","College students","Self-care lovers"],
-  garments:["Oversized tee","Hoodie","Crewneck sweatshirt","Joggers","Shorts set","Robe","Pajama set","Tank top","Sweat shorts","Slipper socks","Lounge pants","Cardigan","Cami set","Sweatpants","Hoodie dress","Thermal set","Eye mask","Fuzzy slippers"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Soft handwritten script","Cozy serif","Minimal lowercase","Puffy cloud letters","Retro groovy","Embroidered script","Calm sans","Vintage wash","Snuggle script","Soft fabric letters","Doze letters","Crochet yarn letters","Nap time type","Warm milk serif"],
-  patterns:["Tiny hearts","Clouds & moons","Coffee cups","Stars & moons","Cozy plaid","Floral micro-print"],
-  statementThemes:["But first, coffee","Nap queen","Cozy era","Soft life","Homebody club","Rest is productive"],
-  charTypes:["Sleepy cat","Cozy bear","Sloth","Sleepy moon","Coffee cup character","Pajama puppy"],
-  humorThemes:["Lazy humor","Nap jokes","Coffee addiction jokes","Introvert humor","No-bra club jokes (tasteful)","Cancel-plans jokes"],
-  elements:{
-    typography:["Moon","Stars","Coffee steam","Clouds","Hearts","Blanket fold","Zzz trail","Hot cocoa","Fairy lights","Waffle knit"],
-    pattern:["Moons","Stars","Coffee cups","Hearts","Clouds","Pillows","Cocoa mugs","Slippers","Bathrobes","Throw pillows"],
-    statement:["Coffee cup","Moon","Blanket","Slipper","Candle","Cloud","Hot cocoa","Fairy lights","Book","Fuzzy socks"],
-    "statement-char":["Pajamas","Slippers","Coffee mug","Blanket","Sleep mask","Pillow","Bathrobe","Headband","Face mask","Bun"],
-    character:["Sleep mask","Coffee mug","Blanket","Pillow","Moon","Stars","Teddy bear","Nightcap","Candle","Book stack"],
-    humor:["Speech bubble","Coffee cup","Pillow","Remote control","Sleep mask","Moon","Takeout box","Streaming remote","Laundry pile","Alarm clock"]
-  },
-  palettes:["Pastel Dream","Earth Tones","Cocoa & Cream","Monochrome Minimal","Ballet Blush","Desert Modest"]
-},
-"womens": {
-  name:"Women's Fashion Brand", emoji:"👗",
-  audiences:["Women 18–30","Women 30–50","Women 50+","Professionals","Moms","Brunch club"],
-  garments:["Fitted tee","Oversized tee","Hoodie","Crewneck","Tank top","Cardigan","Denim jacket","Tote bag","Scarf","Cap","Wrap dress","Blouse","Blazer","Maxi skirt","Wide-leg pants","Sweater","Cami","Bucket hat"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Elegant serif","Modern script","Minimal sans","Gold foil lettering","Vintage retro","Bold feminine sans","Handwritten chic","Art deco","Runway serif","Jeweled diamond script","Power suit sans","Champagne script","Soft fabric letters","Pearl minimal"],
-  patterns:["Floral botanical","Polka dots","Abstract brush strokes","Animal print (leopard)","Stripes chic","Paisley luxe"],
-  statementThemes:["Empowered woman","She believed she could","Boss babe","Grace & grit","Woman of faith & fire","Soft & strong"],
-  charTypes:["Fashion illustration woman","Glam chibi woman","Flower woman","Confident cartoon queen","Butterfly woman","Elegant silhouette"],
-  humorThemes:["Wine mom humor","Mom-life jokes","Relatable woman humor","Brunch jokes","Retail therapy humor","Multitasking queen jokes"],
-  elements:{
-    typography:["Flowers","Gold lines","Butterflies","Crowns","Pearls","Sun","Lipstick mark","Perfume spritz","Silk ribbon","Diamond sparkle"],
-    pattern:["Flowers","Leaves","Dots","Butterflies","Waves","Stars","Lipsticks","Pearls","Heels","Silk blouses"],
-    statement:["Crown","Flowers","Wine glass","Butterfly","Sun","Heart","Champagne glass","Shopping bag","Sunglasses","Silk scarf"],
-    "statement-char":["Handbag","Heels","Sunglasses","Flower crown","Coffee cup","Butterflies","Clutch","Silk scarf","Champagne","Red lipstick"],
-    character:["Flower crown","Jewelry","Butterflies","Flowers","Crown","Sparkles","Runway","Spotlight","Crown jewels","Red carpet"],
-    humor:["Speech bubble","Wine glass","Shopping bags","Coffee cup","Heels","Crown","Dry shampoo","Phone charger","Sneaker","Pizza box"]
-  },
-  palettes:["Ballet Blush","Sunset Blvd","Midnight Luxe","Cocoa & Cream","Pastel Dream","Monochrome Minimal"]
-},
-"mens": {
-  name:"Men's Fashion Brand", emoji:"👔",
-  audiences:["Men 18–30","Men 30–50","Men 50+","Professionals","Dads","Groomsmen"],
-  garments:["Classic tee","Henley","Polo","Hoodie","Crewneck","Flannel","Denim jacket","Quarter-zip","Cap","Beanie","Oxford shirt","Chinos","Blazer","Vest","Cargo shorts","Sweatpants","Graphic tee","Work jacket"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Bold block sans","Vintage collegiate","Distressed heritage","Modern minimal","Western slab","Classic serif","Athletic varsity","Outdoor badge","Workshop stencil","Barbershop script","Iron block","Heritage engraved","Trail marker","Foundry serif"],
-  patterns:["Camo classic","Plaid","Stripes","Geometric minimal","Topo map","Houndstooth"],
-  statementThemes:["Dad bod & proud","Built not bought","Legacy over likes","Gentleman's club","Faith family freedom","Grind & grace"],
-  charTypes:["Bulldog","Bear","Eagle","Lion","Stag","Wolf"],
-  humorThemes:["Dad jokes","Grilling humor","Fishing jokes","Man-cave humor","Lawn care jokes","BBQ puns"],
-  elements:{
-    typography:["Shield","Anchor","Mountains","Compass","Antler","Wings","Wrench","Gear","Oak leaf","Hammer"],
-    pattern:["Chevrons","Topo lines","Stars","Stripes","Arrows","Mountains","Pines","Flannels","Axes","Campfires"],
-    statement:["Mountains","Compass","Whiskey glass","Grill","Fishing hook","Shield","Pocket knife","Coffee mug","Leather wallet","Campfire"],
-    "statement-char":["Beard","Cap","Flannel","Boots","Sunglasses","Watch","Duffel bag","Leather belt","Pocket square","Work gloves"],
-    character:["Mountains","Trees","Shield","Stars","Compass","Antler","Axe","Lantern","Pine tree","Canteen"],
-    humor:["Speech bubble","Grill","Fishing rod","Beer mug","Lawn mower","Trophy","Recliner","Remote","Chili pot","Toolbox"]
-  },
-  palettes:["Varsity Classic","Earth Tones","Forest Camo","Denim Days","Monochrome Minimal","Biker Blackout"]
-},
-"plus-size": {
-  name:"Plus Size", emoji:"👑",
-  audiences:["Women","Men","Teens","Curvy fashionistas","Body-positive community","Brides & events"],
-  garments:["Oversized tee","Fitted tee","Hoodie","Crewneck","Tank top","Wrap top","Leggings","Denim jacket","Tote bag","Cap","Wrap dress","Maxi dress","Wide-leg pants","Cardigan","Blouse","Bodycon dress","Jumpsuit","Kimono"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Bold curvy script","Empowered serif","Glitter glam","Retro groovy","Chunky bubble","Gold foil luxe","Confident sans","Vintage badge","Diva script","Jeweled diamond script","Fierce italic","Velvet letters","Rhinestone varsity","Runway bold"],
-  patterns:["Bold florals","Animal print luxe","Polka dots","Tropical leaves","Abstract curves","Geometric glam"],
-  statementThemes:["Thick & thriving","Curves & confidence","Fat & fabulous","Every body is a bikini body","Unapologetically me","Queen energy"],
-  charTypes:["Curvy glam woman","Confident chibi queen","Flower goddess","Butterfly queen","Crowned diva","Mermaid queen"],
-  humorThemes:["Body-positive humor","Thick jokes (empowering)","Snack humor","Mirror pep-talk jokes","Curve jokes","Sassy comebacks"],
-  elements:{
-    typography:["Crowns","Flowers","Butterflies","Gold flourishes","Hearts","Stars","Rhinestone trail","Silk sash","Spotlight beam","Confetti"],
-    pattern:["Flowers","Butterflies","Dots","Leaves","Stars","Hearts","Rhinestones","Sashes","Jeweled crowns","Velvet"],
-    statement:["Crown","Mirror","Flowers","Butterfly","Sparkles","Heart","Spotlight","Red carpet","Champagne","Disco ball"],
-    "statement-char":["Crown","Flower crown","Sunglasses","Handbag","Butterflies","Sparkles","Clutch purse","Statement necklace","Heels","Silk robe"],
-    character:["Crown","Flowers","Butterflies","Jewelry","Sparkles","Hearts","Throne","Scepter","Crown jewels","Velvet rope"],
-    humor:["Speech bubble","Mirror","Crown","Cupcake","Sunglasses","Sparkles","Donut","Taco","Mirror selfie","Shopping spree"]
-  },
-  palettes:["Sunset Blvd","Cocoa & Cream","Neon Nights","Bubblegum Pop","Kingdom Gold","Midnight Luxe"]
-},
-
-"business": {
-  name:"Business Attire", emoji:"💼",
-  audiences:["Professionals","Executives","Entrepreneurs","Realtors","Corporate teams","Job seekers"],
-  garments:["Polo","Button-down","Blazer tee","Quarter-zip","Crewneck","Cardigan","Dress shirt","Vest","Tote bag","Cap (golf)","Blazer","Suit jacket","Dress pants","Tie","Oxford shirt","Sweater vest","Briefcase","Loafers"],
-  designs:["typography","pattern","statement"],
-  typography:["Classic serif","Modern minimal sans","Luxury thin","Corporate bold","Monogram style","Elegant script accent","Clean geometric","Prestige engraved","Boardroom serif","Executive sans","Letterpress classic","Summit modern","Corner office script","Meridian minimal"],
-  patterns:["Subtle pinstripe","Micro geometric","Tonal monogram","Herringbone hint","Minimal dot grid","Textured weave"],
-  statementThemes:["Boss mindset","CEO energy","Dress for the job you want","Built different","Success is a habit","Elevate daily"],
-  elements:{
-    typography:["Laurel","Shield","Crown minimal","Geometric mark","Lines","Monogram frame","Fountain pen","Column","Key","Globe"],
-    pattern:["Pinstripes","Dots","Monograms","Chevrons subtle","Grid","Herringbone","Pens","Keys","Globes","Columns"],
-    statement:["Briefcase","Skyscraper","Pen","Watch","Upward arrow","Laurel","Laptop","Coffee","Handshake","Calendar"]
-  },
-  palettes:["Monochrome Minimal","Midnight Luxe","Preppy Heritage","Denim Days","Varsity Classic","Earth Tones"]
-},
-"motorcycle": {
-  name:"Motorcycle / Biker", emoji:"🏍️",
-  audiences:["Men","Women riders","Riding clubs","Mechanics","Stunt riders","Vintage bike lovers"],
-  garments:["Classic tee","Long sleeve tee","Hoodie","Thermal","Denim jacket","Leather-look tee","Bandana","Beanie","Cap","Tank top","Riding gloves","Leather vest","Flannel","Work boots","Chain wallet","Riding jacket","Sunglasses","Neck gaiter"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Gothic blackletter","Vintage biker script","Distressed heritage","Bold slab","Tattoo lettering","Flame letters","Iron badge","Retro garage","Highway gothic","Piston block","Chrome script","Asphalt stencil","Thunder serif","Chrome liquid letters"],
-  patterns:["Skull repeat","Flame trails","Piston & gear","Barbed wire","Checkered flag","Winged wheel"],
-  statementThemes:["Ride free","Live to ride","Throttle therapy","Two wheels one love","Born to ride","Loud pipes save lives"],
-  charTypes:["Skull rider","Winged wheel","Bulldog biker","Eagle rider","Reaper rider (tasteful)","Piston skull"],
-  humorThemes:["Biker humor","Garage jokes","Chrome & jokes","Helmet hair jokes","Gas & laughs","Road-trip humor"],
-  elements:{
-    typography:["Flames","Wings","Skulls","Chains","Pistons","Lightning","Spark plug","Speedometer","Throttle","Kickstand"],
-    pattern:["Skulls","Flames","Gears","Wings","Stars","Checkers","Pistons","Speedometers","Throttles","Highways"],
-    statement:["Motorcycle","Helmet","Flames","Highway","Piston","Wings","Open road","Sunset highway","Tool roll","Leather saddlebag"],
-    "statement-char":["Helmet","Leather jacket","Goggles","Bandana","Boots","Chain","Riding gloves","Sunglasses","Tool roll","Saddlebag"],
-    character:["Helmet","Wings","Flames","Chain","Goggles","Skull","Bandana skull","Spiked bracelet","Engine","Tailpipe"],
-    humor:["Speech bubble","Helmet","Wrench","Gas pump","Highway sign","Flames","Bug splatter","Sunburn","Gas station","Motel sign"]
-  },
-  palettes:["Biker Blackout","Turbo Flames","Rock Rebellion","Monochrome Minimal","Forest Camo","Sunset Blvd"]
-},
-"dance": {
-  name:"Dance", emoji:"💃",
-  audiences:["Girls","Teens","Women","Dance moms","Studios & teams","Hip-hop dancers","Ballerinas"],
-  garments:["Cropped tee","Tank top","Hoodie","Crewneck","Leggings","Joggers","Leotard-style top","Warm-up jacket","Tote bag","Cap","Sports bra","Dance shorts","Unitard","Leg warmers","Ballet skirt","Mesh leggings","Studio jacket","Duffel bag"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Graffiti wildstyle","Elegant ballet script","Bold hip-hop block","Neon sign","Retro groovy","Spray paint","Puffy bubble","Motion blur letters","Stage light script","Rhinestone varsity","Freestyle marker","Pirouette script","Sapphire glitter capitals","Spotlight sans"],
-  patterns:["Music notes","Neon splatter","Ballet silhouettes","Boombox repeat","Stars & lightning","Stage lights"],
-  statementThemes:["Dance like nobody's watching","Eat sleep dance repeat","Dancer life","Born to move","Practice & slay","Stage ready"],
-  charTypes:["Hip-hop dancer kid","Ballerina","Breakdancer","Cartoon boombox","Dancing shoes character","Disco queen"],
-  humorThemes:["Dance mom humor","Rehearsal jokes","Sore-feet humor","Countdown jokes (5-6-7-8)","Snack-break humor","Competition memes"],
-  elements:{
-    typography:["Music notes","Spotlight","Stars","Sneakers","Boombox","Motion lines","Stage curtain","Marquee lights","Rosin box","Pointe shoes"],
-    pattern:["Notes","Stars","Sneakers","Spotlights","Lightning","Crowns","Curtains","Marquees","Encore roses","Trophies"],
-    statement:["Ballet shoes","Boombox","Spotlight","Trophy","Sneakers","Crown","Stage","Microphone","Judges table","Medal"],
-    "statement-char":["Headphones","Sneakers","Snapback","Tutu","Legwarmers","Mic","Duffel bag","Water bottle","Warm-up booties","Hair spray"],
-    character:["Headphones","Sneakers","Spotlight","Stars","Music notes","Crown","Curtain call","Encore sign","Flower bouquet","Standing ovation"],
-    humor:["Speech bubble","Ballet shoes","Sneakers","Hair bun","Coffee cup","Trophy","Ice pack","Bobby pins","First aid kit","Studio mirror"]
-  },
-  palettes:["Rave Ultraviolet","Neon Nights","Ballet Blush","Sunset Blvd","Bubblegum Pop","Monochrome Minimal"]
-},
-"hiphop": {
-  name:"Hip Hop", emoji:"🎤",
-  audiences:["Men","Women","Teens","Young adults 18–35","Artists & DJs","Streetwear lovers"],
-  garments:["Oversized tee","Boxy tee","Hoodie","Crewneck","Cargo pants","Jersey","Snapback","Beanie","Bucket hat","Socks","Track suit","Denim set","Puffer jacket","Basketball shorts","Tank top","Windbreaker","Bandana","Crossbody bag"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Graffiti wildstyle","Old-school hip-hop block","Chrome 3D","Boom-bap bubble","Gold chain letters","Mixtape style","Bold condensed","Retro 90s","Block party bold","Cipher script","Platinum plaque style","Chrome liquid letters","Freestyle tag","Boombox chrome"],
-  patterns:["Gold chain repeat","Boombox allover","Mic pattern","Crown & vinyl","Graffiti tags","Cassette tape"],
-  statementThemes:["Started from the bottom","Real ones only","Legends never die","Mic drop","Culture over everything","From the block to the top"],
-  charTypes:["MC character","DJ","Gold-chain lion","Boombox character","Crowned mic","B-boy kid"],
-  humorThemes:["Hip-hop memes","Barz jokes","DJ humor","Studio-life jokes","90s nostalgia jokes","Rap-battle humor"],
-  elements:{
-    typography:["Gold chains","Crowns","Mics","Vinyl records","Boomboxes","Spray drips","Platinum plaque","Studio mic","Turntable","Spray cap"],
-    pattern:["Chains","Crowns","Mics","Vinyl","Cassettes","Stars","Plaques","Boomboxes","Mixtapes","Gold teeth"],
-    statement:["Mic","Boombox","Vinyl record","Crown","Gold chain","City skyline","Studio","Stage","Tour bus","Award"],
-    "statement-char":["Gold chain","Snapback","Mic","Boombox","Sneakers","Sunglasses","Studio headphones","Backpack","Jersey","Chain bracelet"],
-    character:["Gold chain","Crown","Mic","Boombox","Sunglasses","Vinyl","Turntable","Studio headphones","Platinum plaque","Spray can"],
-    humor:["Speech bubble","Mic","Boombox","Gold chain","Sunglasses","Crown","Studio snacks","Group chat","Award show","Tour bus"]
-  },
-  palettes:["Hip Hop Royalty","Neon Nights","Street Concrete","Sunset Blvd","Biker Blackout","Candy Chrome"]
-},
-"automotive": {
-  name:"Automotive", emoji:"🏎️",
-  audiences:["Men","Women drivers","Car clubs","Mechanics","Racers","Classic car lovers"],
-  garments:["Classic tee","Long sleeve tee","Hoodie","Crewneck","Mechanic tee","Cap","Beanie","Polo","Tank top","Jacket","Coveralls","Shop shirt","Racing jacket","Pit crew tee","Driving gloves","Sunglasses","Hoodie (zip)","Work pants"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Speed italic","Vintage garage script","Bold racing block","Chrome 3D","Distressed motor","Retro dealership","Number-plate style","Flame letters","Octane italic","Pit lane stencil","Grand prix serif","Chrome liquid letters","Showroom script","Asphalt type"],
-  patterns:["Checkered flag","Tire tread","Piston & gear","Speed lines","Flame trails","Blueprint schematic"],
-  statementThemes:["Built not bought","Horsepower therapy","Eat sleep wrench repeat","American muscle","Zero to sixty","Car guy / car girl life"],
-  charTypes:["Muscle car character","Piston mascot","Turbo snail","Race car kid","Wrench character","Flame car"],
-  humorThemes:["Car guy humor","Mechanic jokes","Check-engine jokes","Gas price humor","Car wash jokes","Traffic memes"],
-  elements:{
-    typography:["Pistons","Flames","Checkered flag","Gears","Speed lines","Wings","Turbo badge","Nitro","Headlight","Exhaust"],
-    pattern:["Checkers","Gears","Tire tracks","Flames","Wrenches","Lightning","Spoilers","Headlights","Rims","Mufflers"],
-    statement:["Classic car","Wrench","Piston","Checkered flag","Speedometer","Flames","Garage","Drag strip","Engine bay","Trophy"],
-    "statement-char":["Racing helmet","Goggles","Checkered flag","Wrench","Sunglasses","Trophy","Driving gloves","Shop rag","Pit pass","Earplugs"],
-    character:["Helmet","Wrench","Flames","Checkered flag","Gears","Trophy","Turbo snail","Racing stripe","Pit board","Fuel can"],
-    humor:["Speech bubble","Wrench","Gas pump","Check-engine light","Traffic cone","Trophy","Oil stain","Parking ticket","Car alarm","Air freshener"]
-  },
-  palettes:["Turbo Flames","Biker Blackout","Varsity Classic","Arctic Volt","Street Concrete","Monochrome Minimal"]
-},
-"skate": {
-  name:"Skatewear", emoji:"🛹",
-  audiences:["Teens","Young adults 18–30","Men","Women skaters","Skaters 10+","Street culture"],
-  garments:["Oversized tee","Boxy tee","Hoodie","Long sleeve tee","Cargo shorts","Beanie","Snapback","Socks","Tote bag","Tank top","Coach jacket","Corduroy pants","Denim shorts","Windbreaker","Bucket hat","Crewneck","Tank (muscle)","Backpack"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Thrasher-style gothic","Graffiti wildstyle","Punk cut-and-paste","Bold condensed","Sticker-bomb letters","Distressed skate","Retro 90s","Hand-drawn marker","Deck graphic style","Grip tape texture","Halfpipe bold","Dripping gothic","Sidewalk chalk","Push serif"],
-  patterns:["Sticker-bomb collage","Checkerboard","Flame & skull","Lightning bolts","Graffiti tags","Concrete texture"],
-  statementThemes:["Skate or die","Push daily","Concrete dreams","Shred season","No comply","Bails & glory"],
-  charTypes:["Skater kid","Skull skater","Bulldog on board","Punk cat","Grim reaper skater (tasteful)","Alien skater"],
-  humorThemes:["Bail memes","Skatepark humor","Sore-ankle jokes","Security-guard jokes","Wax-the-ledge humor","Sponsor-me jokes"],
-  elements:{
-    typography:["Skateboard","Lightning","Skulls","Stars","Spray drips","Chains","Grip tape","Wheel","Truck","Bolt"],
-    pattern:["Boards","Skulls","Lightning","Stars","Flames","Tags","Wheels","Trucks","Bolts","Decks"],
-    statement:["Skateboard","Ramp","Helmet","Lightning bolt","Skull","Stars","Skate shop","Halfpipe","Street spot","Video camera"],
-    "statement-char":["Helmet","Sneakers","Snapback","Knee pads","Backpack","Board","Shoulder bag","Water bottle","Wax","Tool"],
-    character:["Helmet","Board","Sneakers","Lightning","Stars","Skull","Helmet sticker","Elbow pads","Knee pads","Wax"],
-    humor:["Speech bubble","Skateboard","Bandage","Helmet","Ramp","Lightning","Security guard","No skating sign","Bandaid","Ice bag"]
-  },
-  palettes:["Street Concrete","Neon Nights","Biker Blackout","Sunset Blvd","Arctic Volt","Monochrome Minimal"]
-},
-
-"surf": {
-  name:"Surf / Beach", emoji:"🏄",
-  audiences:["Men","Women","Teens","Surfers","Beach lovers","Vacationers"],
-  garments:["Classic tee","Tank top","Rash guard","Hoodie","Board shorts","Snapback","Bucket hat","Tote bag","Tank dress","Socks","Swim trunks","Bikini top","Cover-up","Linen shirt","Beach towel","Flip-flops","Sunglasses","Beach bag"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Retro surf script","Vintage beach badge","Wavy letters","Sun-faded vintage","Bold coastal","Hand-drawn wave","Tiki style","Boardwalk retro","Shaka script","Tide pool type","Driftwood serif","Coral reef style","Lifeguard bold","Sunset gradient letters"],
-  patterns:["Wave repeat","Palm trees","Hibiscus floral","Sunset stripes","Shaka hands","Tropical leaves"],
-  statementThemes:["Salt in the air","Mermaid vibes","Chase the sun","Beach bum life","Good waves only","Sunkissed & salty"],
-  charTypes:["Surfer kid","Wave character","Palm tree mascot","Shark (cute)","Turtle","Mermaid"],
-  humorThemes:["Beach humor","Sunscreen jokes","Sand-everywhere jokes","Seagull memes","Wipeout humor","Vacation-mode jokes"],
-  elements:{
-    typography:["Waves","Palm trees","Sun","Surfboard","Hibiscus","Shells","Shaka hand","Life ring","Beach towel","Sand dollar"],
-    pattern:["Waves","Palms","Suns","Shells","Hibiscus","Fish","Shakas","Life rings","Sand dollars","Beach umbrellas"],
-    statement:["Surfboard","Sunset","Palm tree","Wave","Coconut","Starfish","Beach bonfire","Hammock","Cooler","Beach cruiser"],
-    "statement-char":["Sunglasses","Surfboard","Lei","Flip-flops","Coconut drink","Hat","Wax comb","Leash","Rashie","Board bag"],
-    character:["Sunglasses","Surfboard","Lei","Waves","Sun","Palm","Life ring","Beach ball","Sandcastle","Seashell"],
-    humor:["Speech bubble","Sunscreen","Seagull","Coconut","Flip-flop","Wave","Jellyfish","Crab","Beach umbrella","Pelican"]
-  },
-  palettes:["Ocean Drive","Tropical Resort","Sunset Blvd","Pastel Dream","Earth Tones","Denim Days"]
-},
-"western": {
-  name:"Western / Cowboy", emoji:"🤠",
-  audiences:["Men","Women","Teens","Rodeo fans","Ranchers","Country music lovers"],
-  garments:["Classic tee","Long sleeve tee","Henley","Flannel","Denim jacket","Hoodie","Trucker hat","Bandana","Tank top","Pearl-snap tee","Denim shirt","Cowboy boots","Belt buckle","Ranch jacket","Chaps","Cowboy hat","Duster coat","Graphic socks"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Western slab","Rodeo vintage","Wanted-poster serif","Cattle-brand style","Distressed ranch","Saloon script","Tooled leather letters","Barnwood block","Desperado serif","Frontier bold","Homestead script","Stagecoach style","Branding iron type","Tumbleweed vintage","Rhinestone varsity"],
-  patterns:["Longhorn repeat","Cactus desert","Bandana paisley","Boot stitch","Aztec western","Horseshoe"],
-  statementThemes:["Howdy y'all","Raised on country","Cowboy up","Boots & blessings","Wild west soul","Ranch raised"],
-  charTypes:["Cowboy kid","Longhorn","Horse","Cactus character","Cowgirl","Armadillo"],
-  humorThemes:["Cowboy humor","Rodeo jokes","Howdy memes","Boot-scoot jokes","Ranch-life humor","Yeehaw jokes"],
-  elements:{
-    typography:["Longhorns","Stars","Rope","Boots","Hats","Cactus","Branding iron","Saddle","Sheriff badge","Tumbleweed"],
-    pattern:["Longhorns","Cacti","Stars","Horseshoes","Boots","Roses","Saddles","Badges","Spurs","Bandanas"],
-    statement:["Cowboy hat","Boots","Longhorn","Cactus","Sunset","Lasso","Ranch","Campfire","Prairie","Saloon"],
-    "statement-char":["Cowboy hat","Bandana","Boots","Lasso","Vest","Spurs","Denim vest","Belt buckle","Fringe jacket","Cowboy boots"],
-    character:["Cowboy hat","Bandana","Boots","Lasso","Stars","Cactus","Sheriff badge","Saddle","Campfire","Prairie dog"],
-    humor:["Speech bubble","Cowboy hat","Boots","Cactus","Lasso","Horse","Hay bale","Tractor","Square dance","Chili cookoff"]
-  },
-  palettes:["Earth Tones","Desert Modest","Sunset Blvd","Denim Days","Varsity Classic","Cocoa & Cream"]
-},
-"festival": {
-  name:"Festival / Rave", emoji:"🎪",
-  audiences:["Women","Men","Teens 16+","Young adults 18–30","EDM lovers","Festival crews"],
-  garments:["Cropped tee","Tank top","Oversized tee","Hoodie","Mesh top","Shorts","Bucket hat","Bandana","Tote bag","Socks","Bodysuit","Fishnet top","Sequin jacket","Cargo pants","Platform boots","Fanny pack","Bandana top","Glitter set"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Neon sign","Psychedelic swirl","Y2K chrome","Glitch techno","Trippy bubble","Laser letters","Holographic","Rave flyer style","Mainstage bold","Chrome liquid letters","Kandi bracelet style","Glitter sticker letters","Headliner serif","Candy dessert letters"],
-  patterns:["Neon splatter","Mushroom trippy","Smiley melt","Lightning & stars","Checkerboard rave","Third-eye motif"],
-  statementThemes:["Lost in the music","Good vibes only","Rave babe","PLUR life","Bass face","Festival season"],
-  charTypes:["Trippy mushroom","Alien raver","Smiley character","Disco ball character","Butterfly raver","Cosmic cat"],
-  humorThemes:["Rave humor","Festival memes","Porta-potty jokes","Lost-crew jokes","Glitter-everywhere humor","Afterparty jokes"],
-  elements:{
-    typography:["Lightning","Stars","Mushrooms","Smileys","Aliens","Swirls","Mainstage","Laser beams","Confetti cannon","Ferris wheel"],
-    pattern:["Mushrooms","Stars","Smileys","Lightning","Eyes","Swirls","Lasers","Confetti","Tents","Glow paint"],
-    statement:["Disco ball","Lightning bolt","Mushroom","Alien","Butterfly","Stars","Festival wristband","Food truck","Camping tent","Friendship bracelet"],
-    "statement-char":["Bucket hat","Sunglasses","Glow sticks","Bandana","Butterfly wings","Stars","Fanny pack","Friendship bracelets","Fan","Wristband stack"],
-    character:["Glow sticks","Stars","Mushrooms","Alien eyes","Butterflies","Lightning","Wristband","Fan","Confetti cannon","Tent"],
-    humor:["Speech bubble","Disco ball","Glow stick","Sunglasses","Mushroom","Stars","Lost phone","Porta-potty line","Dust mask","Earplugs"]
-  },
-  palettes:["Rave Ultraviolet","Neon Nights","Candy Chrome","Y2K Frost","Sunset Blvd","Bubblegum Pop"]
-},
-"gothic": {
-  name:"Gothic / Alt", emoji:"🖤",
-  audiences:["Teens","Young adults 18–30","Women","Men","Alt community","Metal fans"],
-  garments:["Oversized tee","Long sleeve tee","Hoodie","Mesh top","Tank top","Beanie","Cargo pants","Denim jacket","Tote bag","Socks","Corset top","Fishnet tights","Platform boots","Choker","Velvet dress","Leather jacket","Striped arm warmers","Mini skirt"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Gothic blackletter","Victorian serif","Distressed dark","Thorn script","Occult minimal","Metal band style","Typewriter dark","Cathedral arch","Crypt serif","Dripping gothic","Horror lettering","Velvet vintage","Graveyard gothic","Midnight manuscript"],
-  patterns:["Bat repeat","Spiderweb","Thorn & rose","Moon phases","Celestial dark","Baroque damask dark"],
-  statementThemes:["Beautiful darkness","Moon child","Stay strange","Dark & lovely","Embrace the shadows","Romantic goth"],
-  charTypes:["Bat character","Black cat","Raven","Moth","Vampire chibi (tasteful)","Gargoyle (cute)"],
-  humorThemes:["Goth humor","Spooky memes","Wednesday-style wit","Dark puns","Alt jokes","Creepy-cute humor"],
-  elements:{
-    typography:["Bats","Roses","Thorns","Moons","Chains","Candles","Iron gate","Gargoyle","Hourglass","Potion bottle"],
-    pattern:["Bats","Webs","Moons","Roses","Stars dark","Skulls subtle","Night skies","Hourglasses","Potions","Thorn vines"],
-    statement:["Moon","Bat","Rose","Candle","Raven","Key","Haunted house","Full moon","Black rose","Tarot card"],
-    "statement-char":["Choker","Boots","Top hat","Cape","Moon","Bat wings","Parasol","Cameo brooch","Lace gloves","Velvet choker"],
-    character:["Moon","Bat wings","Roses","Stars","Candle","Crown dark","Potion bottle","Tarot card","Crystal ball","Spellbook"],
-    humor:["Speech bubble","Bat","Black cat","Moon","Candle","Rose","Black lipstick","Combat boots","Umbrella","Cat ears"]
-  },
-  palettes:["Goth Noir","Biker Blackout","Midnight Luxe","Monochrome Minimal","Rave Ultraviolet","Kingdom Gold"]
-},
-"y2k": {
-  name:"Y2K / Retro", emoji:"✨",
-  audiences:["Women","Teens","Young women 18–30","Nostalgia lovers","College students","Pop culture fans"],
-  garments:["Baby tee","Cropped hoodie","Oversized tee","Tank top","Velour set","Velour pants","Trucker hat","Tote bag","Socks","Cap","Mini skirt","Tube top","Denim mini","Cardigan","Butterfly clips set","Tiny purse","Platform sneakers","Track jacket"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Y2K chrome","Bubble letters","Bling script","Retro groovy","Pixel style","Butterfly letters","Rhinestone","Sticker-book","Flip phone font","Glitter sticker letters","AIM away message","Chrome liquid letters","Pop star serif","Sapphire glitter capitals"],
-  patterns:["Butterfly allover","Cherry print","Smiley faces","Stars & sparkles","Cow print","Flame hearts"],
-  statementThemes:["That's so fetch","Throwback queen","2000s baby","Bling era","Juicy vibes","Retro & proud"],
-  charTypes:["Butterfly girl","Cherry mascot","Flip-phone character","Brats-style doll (generic)","Alien cutie","Star girl"],
-  humorThemes:["2000s nostalgia jokes","Flip-phone humor","Burned-CD jokes","Dial-up memes","Low-rise jokes (tasteful)","Boy-band humor"],
-  elements:{
-    typography:["Butterflies","Stars","Cherries","Hearts","Sparkles","Bling","Tamagotchi","Lip Smackers","Gel pens","Inflatable chair"],
-    pattern:["Butterflies","Cherries","Smileys","Stars","Hearts","Lightning","Tamagotchis","Gel pens","Lip gloss","Inflatable furniture"],
-    statement:["Flip phone","Butterfly","Cherry","Disco ball","Star","CD","Mall","Roller rink","Drive-in","Slumber party"],
-    "statement-char":["Butterfly clips","Tinted sunglasses","Choker","Flip phone","Mini bag","Stars","Tiny purse","Platform sneakers","Hair mascara","Body glitter"],
-    character:["Butterfly wings","Stars","Cherries","Sparkles","Hearts","Crown","Roller skates","CD player","Lip gloss","Inflatable chair"],
-    humor:["Speech bubble","Flip phone","CD","Butterfly","Cherry","Star","Butterfly clips","Mood ring","Beanie Baby","AIM chat"]
-  },
-  palettes:["Y2K Frost","Candy Chrome","Bubblegum Pop","Pastel Dream","Neon Nights","Sunset Blvd"]
-},
-"anime": {
-  name:"Anime / Geek Merch", emoji:"🎌",
-  audiences:["Teens","Young adults 18–35","Men","Women","Cosplayers","Gamers","Collectors"],
-  garments:["Oversized tee","Boxy tee","Hoodie","Long sleeve tee","Crewneck","Jersey","Snapback","Beanie","Tote bag","Socks","Hoodie (zip)","Cargo pants","Windbreaker","Bucket hat","Crossbody bag","Graphic socks","Tank top","Coach jacket"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Japanese-inspired brush","Anime logo style","Pixel retro","Manga sound-effect","Bold shonen","Cyberpunk kanji-style (decorative)","Retro arcade","Graffiti anime","Shojo sparkle script","Seinen bold","Kaiju block","Character alphabet letters","Isekai serif","Mecha stencil"],
-  patterns:["Cherry blossom","Great wave motif","Koi fish","Pixel sprites","Manga panels","Star & cloud (seigaiha)"],
-  statementThemes:["Power of friendship","Main character energy","Level up","Stay kawaii","Senpai vibes","Choose your fighter"],
-  charTypes:["Chibi hero","Kawaii cat","Dragon","Ninja kid","Mecha","Fox spirit"],
-  humorThemes:["Weeb humor","Anime memes","Gamer jokes","Isekai jokes","Waifu jokes (tasteful)","NPC memes"],
-  elements:{
-    typography:["Cherry blossoms","Lightning","Stars","Dragons","Swords","Clouds","Torii gate","Paper fan","Origami","Maneki-neko"],
-    pattern:["Blossoms","Waves","Koi","Stars","Clouds","Pixel hearts","Paper fans","Origami cranes","Lucky cats","Rising suns"],
-    statement:["Katana","Dragon","Blossom","Controller","Lightning","Star","Arcade","Convention","Manga cafe","Karaoke"],
-    "statement-char":["Headphones","Headband","Sword","Backpack","Sneakers","Star pin","Itabag","Plushie","Lanyard","Con badge"],
-    character:["Sword","Blossoms","Lightning","Stars","Clouds","Dragon","Bento box","Paper crane","Daruma","Furoshiki"],
-    humor:["Speech bubble","Controller","Ramen bowl","Cat ears","Lightning","Star","Gachapon","Vending machine","Boba tea","Con crunch"]
-  },
-  palettes:["Sakura Anime","Rave Ultraviolet","Neon Nights","Monochrome Minimal","Y2K Frost","Sunset Blvd"]
-},
-
-"rock": {
-  name:"Rock / Metal Band Merch", emoji:"🎸",
-  audiences:["Men","Women","Teens","Young adults 18–40","Concert-goers","Vinyl collectors"],
-  garments:["Classic tee","Long sleeve tee","Hoodie","Tank top","Denim jacket","Beanie","Snapback","Bandana","Tote bag","Socks","Cutoff tee","Flannel","Leather jacket","Ringer tee","Baseball tee","Work shirt","Sunglasses","Wristband"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Metal band blackletter","Punk cut-and-paste","Grunge distressed","Thrash logo style","Vintage tour script","Stencil military","Tattoo flash","Psychedelic rock","Encore serif","Dripping gothic","Backstage pass style","Amp stack bold","Horror lettering","Roadie stencil"],
-  patterns:["Skull repeat","Lightning & roses","Winged skull","Barbed wire","Flame trails","Setlist collage"],
-  statementThemes:["Rock on","Louder than life","Born to rock","Turn it up","Stage dive","Forever loud"],
-  charTypes:["Skull mascot","Winged guitar","Demon chibi (tasteful)","Snake","Reaper (tasteful)","Bulldog rocker"],
-  humorThemes:["Rock memes","Drummer jokes","Encore jokes","Mosh-pit humor","Tour-bus jokes","Groupie jokes (tasteful)"],
-  elements:{
-    typography:["Skulls","Lightning","Wings","Flames","Chains","Roses","Amp","Encore ticket","Backstage pass","Pick"],
-    pattern:["Skulls","Lightning","Wings","Flames","Stars","Roses","Amps","Encore tickets","Passes","Picks"],
-    statement:["Guitar","Drumsticks","Lightning bolt","Skull","Vinyl","Mic","Tour bus","Stage lights","Crowd","Merch table"],
-    "statement-char":["Leather jacket","Sunglasses","Bandana","Guitar","Boots","Chain","Wristband","Shades","Leather cuff","Band tee"],
-    character:["Guitar","Wings","Lightning","Skull","Flames","Crown","Amp stack","Drum kit","Stage dive","Pyro"],
-    humor:["Speech bubble","Guitar","Drumsticks","Vinyl","Lightning","Skull","Earplugs","Drum solo","Tour laminate","Merch line"]
-  },
-  palettes:["Rock Rebellion","Biker Blackout","Goth Noir","Monochrome Minimal","Turbo Flames","Sunset Blvd"]
-},
-"preppy": {
-  name:"Preppy", emoji:"🎓",
-  audiences:["Women","Men","Teens","College students","Country club","Parents"],
-  garments:["Polo","Crewneck sweatshirt","Quarter-zip","Oxford tee","Tank top","Cardigan","Chino shorts","Cap","Tote bag","Socks","Blazer","Khakis","Rugby shirt","Tennis skirt","Cable-knit sweater","Boat shoes","Swimsuit","Rain jacket"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Collegiate arch","Classic serif","Embroidered script","Ivy league badge","Nautical flags style","Vintage prep","Monogram","Clean sans","Regatta serif","Rhinestone varsity","Clubhouse classic","Equestrian elegant","Legacy lettering","Seersucker style"],
-  patterns:["Stripes (rugby)","Argyle","Gingham","Anchor repeat","Tennis racket motif","Whale & sailboat"],
-  statementThemes:["Country club cutie","Ivy energy","Prep school pride","Tennis & tea","Old money aesthetic","Lacrosse life"],
-  charTypes:["Preppy dog (lab)","Sailboat mascot","Tennis puppy","Whale","Polo horse (generic)","Duck (preppy)"],
-  humorThemes:["Preppy memes","Country club jokes","Brunch humor","Tennis jokes","Lilly-style puns","Yacht jokes"],
-  elements:{
-    typography:["Anchors","Laurels","Shields","Stripes","Bows","Tennis balls","Pineapple","Topiary","Crest","Ribbon"],
-    pattern:["Stripes","Anchors","Argyle diamonds","Whales","Rackets","Bows","Pineapples","Topiaries","Ribbons","Sailboats"],
-    statement:["Tennis racket","Anchor","Sailboat","Golf flag","Laurel","Bow","Yacht","Golf course","Tennis court","Veranda"],
-    "statement-char":["Visor","Sweater tied on shoulders","Pearls","Loafers","Cap","Sunglasses","Cable-knit","Boat shoes","Ribbon belt","Signet ring"],
-    character:["Bow","Laurel","Anchor","Tennis ball","Crown","Stars","Yacht flag","Trophy cup","Laurel wreath","Blazer crest"],
-    humor:["Speech bubble","Tennis racket","Anchor","Teacup","Golf ball","Bow","Caddy","Country club pool","Brunch table","Shopping spree"]
-  },
-  palettes:["Preppy Heritage","Pastel Dream","Varsity Classic","Ocean Drive","Monochrome Minimal","Earth Tones"]
-},
-"boho": {
-  name:"Boho", emoji:"🌙",
-  audiences:["Women","Teens","Festival-goers","Free spirits","Moms","Artists"],
-  garments:["Flowy tee","Tank top","Kimono cardigan","Maxi dress tee","Hoodie","Crop top","Tote bag","Scarf","Wide-leg pants","Cap","Maxi dress","Peasant blouse","Crochet top","Denim shorts","Wrap skirt","Fringe jacket","Sandals","Headband"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Handwritten boho script","Earthy serif","Moon-phase letters","Vintage sun","Feathered letters","Desert retro","Minimal wanderer","Celestial","Wanderer script","Crochet yarn letters","Nomad handwritten","Stardust letters","Soft fabric letters","Terra vintage"],
-  patterns:["Feathers","Dreamcatchers","Sun & moon","Paisley","Desert cactus","Wildflowers"],
-  statementThemes:["Wild & free","Moon child","Wander often","Good vibes tribe","Free spirit","Chase the sun"],
-  charTypes:["Moon goddess","Feathered dreamer","Desert fox","Butterfly woman","Sun character","Wildflower fairy"],
-  humorThemes:["Boho memes","Crystal humor","Plant-mom jokes","Van-life humor","Festival jokes","Wanderlust puns"],
-  elements:{
-    typography:["Moons","Feathers","Suns","Stars","Arrows","Flowers","Compass rose","Wandering star","Desert bloom","Macrame"],
-    pattern:["Feathers","Moons","Suns","Flowers","Arrows","Dreamcatchers","Compasses","Desert blooms","Feather fans","Teepees"],
-    statement:["Moon","Sun","Feather","Dreamcatcher","Van","Cactus","Road trip","Campfire","Desert","Ocean cliff"],
-    "statement-char":["Flower crown","Fringe vest","Layered necklaces","Wide-brim hat","Barefoot","Satchel","Journal","Camera","Guitar","Tote"],
-    character:["Moon","Flowers","Feathers","Stars","Sun","Butterflies","Compass","Hot air balloon","Desert rose","Dreamcatcher moon"],
-    humor:["Speech bubble","Moon","Crystal","Plant","Van","Feather","Succulent","Record player","Thrift haul","Roadside attraction"]
-  },
-  palettes:["Boho Sunset","Desert Modest","Earth Tones","Pastel Dream","Sunset Blvd","Ocean Drive"]
-},
-"luxury": {
-  name:"Luxury Minimal", emoji:"💎",
-  audiences:["Women","Men","Professionals","Executives","Fashion collectors","Minimalists"],
-  garments:["Premium tee","Cashmere crewneck","Silk-blend tee","Polo","Hoodie (elevated)","Tote (leather-look)","Scarf","Cap (minimal)","Tank","Cardigan","Cashmere scarf","Silk shirt","Tailored blazer","Evening dress","Leather tote","Sunglasses","Watch","Loafers"],
-  designs:["typography","pattern","statement"],
-  typography:["Luxury thin serif","High-fashion sans","Monogram emblem","Gold foil minimal","Engraved classic","Modern editorial","Quiet luxury","Art deco luxe","Atelier script","Couture serif","Maison minimal","Heritage engraved","Runway italic","Opulence sans"],
-  patterns:["Tonal monogram","Subtle geometric","Minimal line art","Quilted texture hint","Fine stripe","Marble whisper"],
-  statementThemes:["Less but better","Quiet luxury","Elegance is refusal","Timeless over trendy","Luxury in simplicity","Own your elegance"],
-  elements:{
-    typography:["Thin gold lines","Monogram frame","Crown minimal","Laurel","Geometric mark","Serif flourish","Silk thread","Pearl strand","Champagne coupe","Oyster shell"],
-    pattern:["Monograms","Thin lines","Dots minimal","Geometric","Marble","Stripes fine","Monogram mesh","Quilted diamonds","Satin stripes","Marble veins"],
-    statement:["Diamond","Pearl","Gold bar","Crown minimal","Silk ribbon","Laurel","Penthouse","Yacht deck","Front row","Vintage champagne"]
-  },
-  palettes:["Midnight Luxe","Monochrome Minimal","Kingdom Gold","Cocoa & Cream","Ballet Blush","Denim Days"]
-},
-"swimwear": {
-  name:"Resort / Swimwear", emoji:"🌊",
-  audiences:["Women","Men","Teens","Vacationers","Honeymooners","Pool party crews"],
-  garments:["Tank top","Cover-up tee","Oversized beach tee","Hoodie (beach)","Snapback","Bucket hat","Tote bag","Shorts","Rash guard","Tank dress","Bikini set","One-piece swimsuit","Swim shorts","Beach pants","Sarong","Sun hat","Beach coverall","Water shoes"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Retro resort script","Tropical bold","Sun-faded vintage","Beach badge","Wavy letters","Poolside retro","Minimal coastal","Vacation postcard","Cabana serif","Tiki torch type","Coral script","Boardwalk bold","Lagoon letters","Sunscreen vintage"],
-  patterns:["Palm leaves","Hibiscus","Cabana stripes","Seashells","Pineapples","Ocean waves"],
-  statementThemes:["Beach please","Vacation mode","Salty & sweet","Pool hair don't care","Sunshine state of mind","Mermaid life"],
-  charTypes:["Mermaid","Crab (cute)","Palm tree character","Flamingo","Turtle","Coconut character"],
-  humorThemes:["Vacation memes","Sunscreen jokes","Pool float humor","Seagull jokes","Tan-line jokes","All-inclusive humor"],
-  elements:{
-    typography:["Palms","Waves","Suns","Shells","Hibiscus","Umbrellas","Beach ball","Tiki torch","Coral","Starfish"],
-    pattern:["Palms","Shells","Waves","Pineapples","Hibiscus","Fish","Beach balls","Torches","Corals","Sand dollars"],
-    statement:["Cocktail","Palm tree","Sunset","Flamingo","Beach umbrella","Wave","Tiki bar","Pool float","Beach bonfire","Boardwalk"],
-    "statement-char":["Sunglasses","Sun hat","Lei","Cocktail","Flip-flops","Beach ball","Sarong","Straw hat","Beach read","Cooler"],
-    character:["Sunglasses","Lei","Cocktail","Waves","Sun","Palms","Pool float","Beach bonfire","Tiki mask","Surf shack"],
-    humor:["Speech bubble","Cocktail","Sunscreen","Flamingo","Beach ball","Crab","Pool noodle","Sunburn","Beach towel","Ice cream truck"]
-  },
-  palettes:["Tropical Resort","Ocean Drive","Sunset Blvd","Pastel Dream","Bubblegum Pop","Earth Tones"]
-},
-"baby": {
-  name:"Baby & Toddler", emoji:"👶",
-  audiences:["New parents","Grandparents","Baby shower buyers","Aunts & uncles","Gift buyers","Nurseries"],
-  garments:["Onesie","Toddler tee","Baby hoodie","Pajama set","Romper","Baby cap","Bib","Socks","Toddler sweatshirt","Denim jacket (mini)","Footie pajamas","Baby leggings","Sweater set","Sun hat","Booties","Bodysuit","Tutu","Overalls"],
-  designs:["typography","pattern","statement","statement-char","character","humor"],
-  typography:["Soft rounded letters","Nursery script","Playful bubble","Storybook serif","Polka dot letters","Gentle handwritten","Rainbow letters","Cute puffy","Lullaby script","Crochet yarn letters","Snuggle serif","Character alphabet letters","Candy dessert letters","Nursery rhyme style"],
-  patterns:["Stars & moons","Tiny animals","Rainbows","Polka dots","Safari babies","Clouds"],
-  statementThemes:["Little blessing","New to the crew","Mommy's mini","Daddy's sidekick","Worth the wait","Tiny but mighty"],
-  charTypes:["Baby elephant","Giraffe","Lion cub","Bunny","Teddy bear","Duckling"],
-  humorThemes:["New-parent humor","Milk-drunk jokes","Nap-trap jokes","Diaper humor (tasteful)","Spit-up jokes","Sleep-deprived jokes"],
-  elements:{
-    typography:["Stars","Moons","Hearts","Clouds","Bows","Rainbows","Mobile stars","Nursery blocks","Rubber duck","Milk bottle"],
-    pattern:["Stars","Animals","Rainbows","Dots","Clouds","Hearts","Blocks","Rubber ducks","Bottles","Mobiles"],
-    statement:["Moon","Star","Teddy bear","Bottle","Rattle","Cloud","Crib","Stroller","Play mat","Night light"],
-    "statement-char":["Bonnet","Diaper cover","Rattle","Blanket","Pacifier","Booties","Swaddle","Binky clip","Teether","Sippy cup"],
-    character:["Stars","Clouds","Moon","Hearts","Bows","Blanket","Rocking horse","Xylophone","Pull toy","Shape sorter"],
-    humor:["Speech bubble","Bottle","Rattle","Moon","Teddy bear","Cloud","Spit-up cloth","Diaper bag","Binky","Onesie snap"]
-  },
-  palettes:["Pastel Dream","Playground Brights","Bubblegum Pop","Earth Tones","Ocean Drive","Candy Chrome"]
-}
-};
-/* ============================================================
-   GENERATOR LOGIC
-============================================================ */
-const $ = s => document.querySelector(s);
-const $$ = s => [...document.querySelectorAll(s)];
-const LETTERING_DESIGNS = ["statement","statement-char","scripture","humor"];
-const GRID_DEFS = {}; // group -> {items, palCard} so a single grid can re-render
-
-/* ---------- saved custom options: add once, kept forever ---------- */
-const LS_KEY = "cbpg_customs_v1";
-const GLOBAL_GROUPS = ["palette","people","placement","blank","mockup","quality"];
-function loadCustoms(){
-  try{ return JSON.parse(localStorage.getItem(LS_KEY)||"{}"); }catch(e){ return {}; }
-}
-function writeCustoms(c){
-  try{ localStorage.setItem(LS_KEY, JSON.stringify(c)); return true; }catch(e){ return false; }
-}
-function ckey(group){
-  return (GLOBAL_GROUPS.includes(group) ? "global" : (brandKey()||"none")) + "::" + group;
-}
-function getCustoms(group){
-  const all = loadCustoms();
-  return all[ckey(group)] || [];
-}
-function addCustom(group, val){
-  val = (val||"").trim();
-  if(!val) return "empty";
-  const all = loadCustoms(); const k = ckey(group);
-  all[k] = all[k] || [];
-  if(all[k].some(v=>v.toLowerCase()===val.toLowerCase())) return "dup";
-  all[k].push(val);
-  return writeCustoms(all) ? "ok" : "error";
-}
-function removeCustom(group, val){
-  const all = loadCustoms(); const k = ckey(group);
-  all[k] = (all[k]||[]).filter(v=>v!==val);
-  writeCustoms(all);
-}
-
-function toast(msg){
-  const t = $("#toast"); t.textContent = msg; t.classList.add("show");
-  setTimeout(()=>t.classList.remove("show"), 2200);
-}
-function sample(arr, n){
-  const a = [...arr]; const out = [];
-  n = Math.min(n, a.length);
-  for(let i=0;i<n;i++){ out.push(a.splice(Math.floor(Math.random()*a.length),1)[0]); }
-  return out;
-}
-function pick1(arr){ return arr.length ? arr[Math.floor(Math.random()*arr.length)] : null; }
-function checkedVals(group){ return $$(`[data-group="${group}"]:checked`).map(i=>i.dataset.value); }
-function customVal(id){ const e = document.getElementById(id); return e ? e.value.trim() : ""; }
-function brandKey(){ return $("#brandType").value; }
-function brand(){ return BRAND_TYPES[brandKey()]; }
-
-/* ---------- option grid builder ---------- */
-function boxHtml(v, group, palCard, isCustom){
-  let inner;
-  if(palCard && PALETTES[v]){
-    const sw = PALETTES[v].map(c=>`<span class="swatch" style="background:${c}"></span>`).join("");
-    inner = `<span class="pname"><input type="checkbox" data-group="${group}" data-value="${v}"> ${v}</span><span class="swatches">${sw}</span>`;
-  } else {
-    inner = `<input type="checkbox" data-group="${group}" data-value="${v}"> ${v}`;
+/* twinkling sparkles */
+(function(){
+  const box = document.getElementById('sparkles');
+  const glyphs = ['✦','✧','⋆','✦','✧'];
+  const colors = ['#FFC93C','#FF1493','#9B72CF','#FFC93C','#FF6EB5'];
+  for(let i=0;i<26;i++){
+    const s = document.createElement('span');
+    s.className = 'spk';
+    s.textContent = glyphs[i % glyphs.length];
+    s.style.left = Math.random()*100 + 'vw';
+    s.style.top = Math.random()*100 + 'vh';
+    s.style.color = colors[i % colors.length];
+    s.style.fontSize = (10 + Math.random()*14) + 'px';
+    s.style.setProperty('--d', (2.5 + Math.random()*3.5) + 's');
+    s.style.animationDelay = (Math.random()*4) + 's';
+    box.appendChild(s);
   }
-  const tag = isCustom ? `<span class="mine">★ mine</span><button class="cx" data-del-custom="${group}" data-del-val="${v}" title="Remove this saved option">×</button>` : "";
-  return `<label class="opt${palCard?" pal-card":""}">${inner}${tag}</label>`;
-}
-function optGrid(items, group, palCard){
-  GRID_DEFS[group] = { items, palCard: !!palCard };
-  const customs = getCustoms(group);
-  const boxes = items.map(v=>boxHtml(v,group,palCard,false)).join("")
-    + customs.map(v=>boxHtml(v,group,palCard,true)).join("");
-  return `<div data-grid="${group}"><div style="margin:6px 0 2px;font-size:12px">
-      <a href="#" data-act="all" data-group="${group}" style="color:#FF1493;font-weight:700">select all</a> ·
-      <a href="#" data-act="none" data-group="${group}" style="color:#8a7a9e;font-weight:700">clear</a></div>
-    <div class="opt-grid">${boxes}</div></div>`;
-}
-function customRow(group, placeholder){
-  return `<div class="custom-row"><input type="text" id="custom-${group}" placeholder="${placeholder}"><button class="btn btn-pink small" data-add-custom="${group}">＋ Add</button></div>`;
-}
-// Re-render one option grid (after adding/removing a saved custom).
-function refreshGrid(group){
-  const def = GRID_DEFS[group]; if(!def) return;
-  const wrap = document.querySelector(`[data-grid="${group}"]`); if(!wrap) return;
-  const snap = snapshotSelections();
-  const tmp = document.createElement("div");
-  tmp.innerHTML = optGrid(def.items, group, def.palCard);
-  wrap.replaceWith(tmp.firstElementChild);
-  restoreSelections(snap);
-  generate();
-}
-
-/* ---------- init: brand dropdown ---------- */
-(function initBrandDropdown(){
-  const sel = $("#brandType");
-  Object.keys(BRAND_TYPES).sort((a,b)=>BRAND_TYPES[a].name.localeCompare(BRAND_TYPES[b].name)).forEach(k=>{
-    const b = BRAND_TYPES[k];
-    const o = document.createElement("option");
-    o.value = k; o.textContent = `${b.emoji} ${b.name}`;
-    sel.appendChild(o);
+})();
+/* marquee */
+(function(){
+  const brands = ['STREETWEAR','Y2K','GOTHIC','BOHO','CHRISTIAN APPAREL','KIDS','BABY','LUXURY MINIMAL','ANIME','HIP HOP','WESTERN','SWIMWEAR','PREPPY','FESTIVAL','SKATE'];
+  const half = brands.map(b=>`<span>${b} &nbsp;<b>✦</b></span>`).join('');
+  document.getElementById('marqueeTrack').innerHTML = half + half;
+})();
+/* typewriter demo */
+(function(){
+  const samples = [
+    "Oversized black hoodie, Y2K glam brand \u2018Velvet Reign\u2019 \u2014 chrome liquid letters across the chest, hot pink + gold palette, rhinestone sparkle, print worked into the fabric weave following the folds, ultra-detailed studio mockup\u2026",
+    "Cream Christian streetwear tee \u2014 \u2018Highly CHOSEN\u2019 in faith cursive + bold slab serif, gold foil lettering, soft vintage wash, centered chest placement, cozy faith-based aesthetic\u2026",
+    "Kids\u2019 rainbow tee \u2014 candy dessert letters spelling \u2018Sweet Dreams\u2019, glitter sticker style, pastel palette, playful allover sprinkles, soft cotton texture\u2026"
+  ];
+  const el = document.getElementById('typed');
+  let si = 0, ci = 0, deleting = false;
+  function tick(){
+    const text = samples[si];
+    if(!deleting){
+      ci++;
+      el.textContent = text.slice(0, ci);
+      if(ci >= text.length){ deleting = true; return void setTimeout(tick, 2600); }
+      setTimeout(tick, 18 + Math.random()*30);
+    } else {
+      ci -= 6;
+      if(ci <= 0){ ci = 0; deleting = false; si = (si+1) % samples.length; return void setTimeout(tick, 500); }
+      el.textContent = text.slice(0, ci);
+      setTimeout(tick, 12);
+    }
+  }
+  tick();
+})();
+/* reveal on scroll */
+(function(){
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+/* subtle 3D tilt on feature cards */
+(function(){
+  if(matchMedia('(hover:none)').matches) return;
+  document.querySelectorAll('.feat').forEach(card=>{
+    card.addEventListener('mousemove', e=>{
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left)/r.width - .5, y = (e.clientY - r.top)/r.height - .5;
+      card.style.transform = `perspective(900px) rotateY(${x*7}deg) rotateX(${-y*7}deg) translateY(-6px)`;
+    });
+    card.addEventListener('mouseleave', ()=>{ card.style.transform = ''; });
   });
 })();
-
-/* ---------- render brand panel ---------- */
-function renderBrand(){
-  const key = brandKey();
-  // Only clear the plain container divs. #finishCard, #outputCard and #bottomBar
-  // hold their own inner sections and buttons — wiping them would destroy the
-  // elements renderFinish()/generate() need (and the bottom buttons themselves).
-  $("#brandPanel").innerHTML = "";
-  $("#designPanels").innerHTML = "";
-  $("#finishCard").style.display="none"; $("#outputCard").style.display="none"; $("#bottomBar").style.display="none";
-  if(!key) return;
-  const b = brand();
-  $("#brandPanel").innerHTML = `
-    <div class="card">
-      <h2><span class="step">✦</span> ${b.emoji} ${b.name} — Your Options</h2>
-      <p class="sub">Only options curated for this brand type are shown. Check everything you want in the prompts.<br><span class="mine">★ mine</span> <span style="font-size:12.5px">options you saved with ＋ Add — they're always here.</span></p>
-      <label class="f-label">Who the brand is for</label>
-      ${optGrid(b.audiences,"audience")}
-      ${customRow("audience","＋ Add your own audience (optional)")}
-      <label class="f-label">Garment types</label>
-      ${optGrid(b.garments,"garment")}
-      ${customRow("garment","＋ Add your own garment type (optional)")}
-      <label class="f-label">Design types <span style="font-weight:600;text-transform:none">(each one gets its own prompt)</span></label>
-      <div class="design-grid">
-        ${b.designs.map(d=>{const dt=DESIGN_TYPES[d];return `
-          <label class="design-card" data-design="${d}">
-            <span class="t"><input type="checkbox" data-design-check="${d}"> ${dt.emoji} ${dt.name}</span>
-            <span class="d">${dt.desc}</span>
-          </label>`;}).join("")}
-      </div>
-    </div>`;
-  $("#finishCard").style.display="block";
-  $("#bottomBar").style.display="flex";
-  renderFinish();
-  renderDesignPanels();
-  generate();
-}
-
-function selectedDesigns(){
-  return $$("[data-design-check]:checked").map(i=>i.dataset.designCheck);
-}
-
-/* ---------- keep the user's picks when panels re-render ---------- */
-function snapshotSelections(){
-  const snap = { groups:{}, custom:{}, variations:null };
-  $$("input[data-group]").forEach(cb=>{ if(cb.checked) (snap.groups[cb.dataset.group] ||= []).push(cb.dataset.value); });
-  $$('[id^="custom-"]').forEach(i=>{ if(i.value && i.value.trim()) snap.custom[i.id] = i.value; });
-  const v = $("#variations"); if(v) snap.variations = v.value;
-  return snap;
-}
-function restoreSelections(snap){
-  Object.keys(snap.groups).forEach(g=>{
-    snap.groups[g].forEach(val=>{
-      const cb = document.querySelector(`input[data-group="${g}"][data-value="${val}"]`);
-      if(cb){ cb.checked = true; cb.closest(".opt,.pal-card")?.classList.add("on"); }
-    });
-  });
-  Object.keys(snap.custom).forEach(id=>{ const i = document.getElementById(id); if(i) i.value = snap.custom[id]; });
-  if(snap.variations){ const v = $("#variations"); if(v){ v.value = snap.variations; const c=$("#varCount"); if(c) c.textContent = snap.variations; } }
-}
-// Re-render design + finish panels without losing what the user already checked.
-function refreshDesignPanels(){
-  const snap = snapshotSelections();
-  renderDesignPanels(); renderFinish();
-  restoreSelections(snap);
-  generate();
-}
-
-/* ---------- render per-design panels ---------- */
-function renderDesignPanels(){
-  const b = brand(); if(!b) return;
-  const wrap = $("#designPanels");
-  wrap.innerHTML = selectedDesigns().map(d=>{
-    const dt = DESIGN_TYPES[d];
-    const themeKey = d==="typography" ? "typography" : d==="pattern" ? "patterns"
-      : d==="statement" ? "statementThemes" : d==="scripture" ? "scriptureThemes"
-      : d==="humor" ? "humorThemes" : "charTypes";
-    const themeItems = b[themeKey] || [];
-    const lettering = LETTERING_DESIGNS.includes(d) ? `
-      <label class="f-label">Lettering style</label>${optGrid(b.typography,"lettering-"+d)}` : "";
-    return `
-    <div class="card" id="panel-${d}">
-      <h2 style="font-size:19px">${dt.emoji} ${dt.name}</h2>
-      <p class="sub">${dt.desc} — you'll get a separate prompt for this design type.</p>
-      <div class="subpanel">
-        <h3>${SECTION_LABEL[d]}</h3>
-        ${optGrid(themeItems,"theme-"+d)}
-        ${customRow("theme-"+d,`＋ Add your own ${SECTION_LABEL[d].toLowerCase()} (optional)`)}
-      </div>
-      ${lettering ? `<div class="subpanel"><h3>Lettering</h3>${lettering}
-        ${customRow("lettering-"+d,"＋ Add your own lettering style (optional)")}</div>`:""}
-      <div class="subpanel">
-        <h3>Elements for this design</h3>
-        ${optGrid(b.elements[d]||[],"el-"+d)}
-        ${customRow("el-"+d,"＋ Add your own elements (optional)")}
-      </div>
-    </div>`;
-  }).join("");
-}
-
-/* ---------- render finish card ---------- */
-function renderFinish(){
-  const b = brand(); if(!b) return;
-  const designs = selectedDesigns();
-  const showPeople = designs.includes("statement-char") || designs.includes("character");
-  $("#colorSection").innerHTML = `
-    <label class="f-label">Premium color palettes</label>
-    ${optGrid(b.palettes,"palette",true)}
-    ${customRow("palette","＋ Add your own palette (e.g. rose gold, teal, cream)")}`;
-  $("#peopleSection").style.display = showPeople ? "block" : "none";
-  $("#peopleSection").innerHTML = showPeople ? `
-    <label class="f-label">People & character styles <span style="font-weight:600;text-transform:none">(real + cartoon)</span></label>
-    ${Object.keys(PEOPLE_STYLES).map(cat=>`
-      <div style="font-weight:800;font-size:13px;color:#4A148C;margin:10px 0 2px">${cat}</div>
-      ${optGrid(PEOPLE_STYLES[cat],"people")}`).join("")}
-    ${customRow("people","＋ Add your own character style (optional)")}` : "";
-  $("#printSection").innerHTML = `
-    <label class="f-label">Graphic placement</label>${optGrid(PLACEMENTS,"placement")}
-    ${customRow("placement","＋ Add your own placement (optional)")}
-    <label class="f-label">Garment (blank) color</label>${optGrid(BLANK_COLORS,"blank")}
-    ${customRow("blank","＋ Add your own blank color (optional)")}
-    <label class="f-label">Mockup / presentation</label>${optGrid(MOCKUPS,"mockup")}
-    ${customRow("mockup","＋ Add your own mockup style (optional)")}
-    <label class="f-label">Quality & finish</label>${optGrid(QUALITY_TAGS,"quality")}
-    ${customRow("quality","＋ Add your own quality tag (optional)")}
-    <label class="f-label">Variations per design type: <span id="varCount" style="color:#FF1493">3</span></label>
-    <div class="count-row"><input type="range" id="variations" min="1" max="10" value="3"></div>`;
-  const v = $("#variations");
-  v.addEventListener("input",()=>{ $("#varCount").textContent = v.value; generate(); });
-}
-
-/* ---------- prompt builders ---------- */
-function ctx(){
-  const b = brand();
-  const name = $("#brandName").value.trim() || "Unnamed Brand";
-  const tag = $("#brandTagline").value.trim();
-  const aud = checkedVals("audience"); const gar = checkedVals("garment");
-  const pal = checkedVals("palette"); const cp = customVal("custom-palette");
-  if(cp) pal.push(cp);
-  const palStr = pal.length ? pal.map(p=>{
-    const hex = PALETTES[p] ? ` (${PALETTES[p].join(", ")})` : "";
-    return `${p}${hex}`;
-  }).join("; ") : "designer's choice premium palette";
-  const people = checkedVals("people"); const cpeople = customVal("custom-people");
-  if(cpeople) people.push(cpeople);
-  const place = checkedVals("placement"); const blank = checkedVals("blank");
-  const mock = checkedVals("mockup"); const qual = checkedVals("quality");
-  return { b, name, tag,
-    audStr: aud.length?aud.join(", "):"everyone",
-    garStr: gar.length?sample(gar,1)[0]:"tee",
-    palStr, people, place, blank, mock, qual };
-}
-function themeFor(d){
-  const t = checkedVals("theme-"+d); const c = customVal("custom-theme-"+d);
-  if(c) t.push(c); return t;
-}
-function letterFor(d){
-  const t = checkedVals("lettering-"+d); const c = customVal("custom-lettering-"+d);
-  if(c) t.push(c); return t;
-}
-function elsFor(d){
-  const t = checkedVals("el-"+d); const c = customVal("custom-el-"+d);
-  if(c) t.push(c); return t;
-}
-function fmt(list, fallback){
-  if(!list.length) return fallback;
-  return sample(list, Math.min(3, list.length)).join(", ");
-}
-const NEG = "no watermark, no distorted or misspelled text, no blurry details";
-
-function buildPrompt(d, c){
-  const b = c.b;
-  const intro = `"${c.name}"` + (c.tag?` — "${c.tag}"`:"");
-  const base = `${b.name} clothing brand for ${c.audStr}`;
-  const print = `Printed ${c.place.length?fmt(c.place,"center chest"):"center chest"} on a ${c.blank.length?fmt(c.blank,"black"):"black"} ${c.garStr}, presented as ${c.mock.length?fmt(c.mock,"flat lay product shot"):"flat lay product shot"}`;
-  const qual = c.qual.length ? ` ${sample(c.qual,Math.min(3,c.qual.length)).join(", ")}.` : "";
-  const palLine = `Color palette: ${c.palStr}.`;
-  switch(d){
-    case "typography": return (
-`Premium clothing brand typography / logo design for ${intro} — a ${base}.
-Lettering style: ${fmt(themeFor(d),"signature custom lettering")}. Decorative elements woven into the lettering: ${fmt(elsFor(d),"minimal flourishes")}.
-${palLine} Ultra-clean vector logo quality, perfectly spelled text, balanced composition, print-ready.${qual}
-${print}. Negative prompt: ${NEG}.`);
-    case "pattern": return (
-`Seamless allover fabric pattern for ${intro} — a ${base}.
-Pattern style: ${fmt(themeFor(d),"signature repeating motif")}. Motifs: ${fmt(elsFor(d),"brand-inspired icons")}.
-${palLine} Crisp repeating tile, premium textile print quality.${qual}
-Shown as ${c.mock.length?fmt(c.mock,"flat lay fabric shot"):"flat lay fabric shot"} on ${c.blank.length?fmt(c.blank,"white"):"white"} fabric. Negative prompt: ${NEG}, no visible seams.`);
-    case "statement": return (
-`Bold statement T-shirt design (TEXT ONLY, no illustration) for ${intro} — a ${base}.
-Message themes: ${fmt(themeFor(d),"bold empowering slogans")}. Lettering style: ${fmt(letterFor(d),"bold readable type")}. Accent elements: ${fmt(elsFor(d),"minimal accents")}.
-${palLine} Premium apparel graphic, perfectly spelled text, high-contrast print, centered composition.${qual}
-${print}. Negative prompt: ${NEG}, no illustration.`);
-    case "statement-char": {
-      const ps = c.people.length?fmt(c.people,"ultra realistic"):null;
-      return (
-`Statement T-shirt design with illustrated character for ${intro} — a ${base}.
-Character: ${fmt(themeFor(d),"brand mascot character")}${ps?`, rendered in ${ps} style`:""}, paired with a bold coordinating slogan in the brand's voice. Lettering style: ${fmt(letterFor(d),"bold readable type")}. Supporting elements: ${fmt(elsFor(d),"themed accents")}.
-${palLine} Premium apparel graphic, dynamic composition, perfectly spelled text.${qual}
-${print}. Negative prompt: ${NEG}, no extra limbs, no deformed features.`);
-    }
-    case "character": {
-      const ps = c.people.length?fmt(c.people,"ultra realistic"):null;
-      return (
-`Standalone brand mascot / character design for ${intro} — a ${base}.
-Character: ${fmt(themeFor(d),"original brand mascot")}${ps?`, rendered in ${ps} style`:""}. Signature elements: ${fmt(elsFor(d),"themed accessories")}.
-${palLine} Premium character art, expressive, merch-ready, clean silhouette.${qual}
-Presented as ${c.mock.length?fmt(c.mock,"character turnaround sheet"):"character turnaround sheet"}. Negative prompt: ${NEG}, no extra limbs, no deformed features.`);
-    }
-    case "scripture": return (
-`Faith-based T-shirt design for ${intro} — a ${base}.
-Faith themes: ${fmt(themeFor(d),"uplifting verse-inspired messages")}. Lettering style: ${fmt(letterFor(d),"elegant readable type")}. Reverent decorative elements: ${fmt(elsFor(d),"tasteful accents")}.
-${palLine} Premium apparel graphic, elegant composition, perfectly spelled text.${qual}
-${print}. Negative prompt: ${NEG}, no irreverent imagery.`);
-    case "humor": return (
-`Funny T-shirt design for ${intro} — a ${base}.
-Humor themes: ${fmt(themeFor(d),"witty laugh-out-loud lines")}. Lettering style: ${fmt(letterFor(d),"bold playful type")}. Playful elements: ${fmt(elsFor(d),"fun accents")}.
-${palLine} Premium apparel graphic, bold readable text, punchy composition.${qual}
-${print}. Negative prompt: ${NEG}.`);
-  }
-  return "";
-}
-
-/* ---------- generate output ---------- */
-let lastPrompts = [];
-function generate(){
-  const key = brandKey();
-  const out = $("#output");
-  if(!key){ $("#outputCard").style.display="none"; lastPrompts = []; updateFab(); return; }
-  const designs = selectedDesigns();
-  if(!designs.length){
-    $("#outputCard").style.display="block";
-    out.innerHTML = `<div class="empty-note">👆 Check at least one <b>design type</b> above and your prompts will appear here — one clearly labeled prompt per design type.</div>`;
-    lastPrompts = []; updateFab(); return;
-  }
-  const c = ctx();
-  const vCount = parseInt(($("#variations")||{value:3}).value,10) || 3;
-  lastPrompts = [];
-  let html = "";
-  designs.forEach(d=>{
-    const dt = DESIGN_TYPES[d];
-    for(let v=1; v<=vCount; v++){
-      const p = buildPrompt(d, ctx());
-      const idx = lastPrompts.length;
-      lastPrompts.push({title:`${dt.emoji} ${dt.name}`, prompt:p});
-      html += `<div class="prompt-card">
-        <h3>${dt.emoji} ${dt.name}<span class="vtag">Variation ${v}</span></h3>
-        <p>${p.replace(/</g,"&lt;")}</p>
-        <button class="btn btn-purple small" data-copy="${idx}">📋 Copy this prompt</button>
-      </div>`;
-    }
-  });
-  $("#outputCard").style.display="block";
-  out.innerHTML = html;
-  updateFab();
-}
-
-/* ---------- floating "see your prompts" pill ---------- */
-function updateFab(){
-  const fab = $("#promptFab");
-  if(!fab) return;
-  const oc = $("#outputCard");
-  let inView = false;
-  if(oc && oc.style.display!=="none"){
-    const r = oc.getBoundingClientRect();
-    inView = r.top < window.innerHeight && r.bottom > 0;
-  }
-  const n = lastPrompts.length;
-  fab.style.display = (n>0 && !inView) ? "inline-flex" : "none";
-  fab.innerHTML = `✨ See your ${n} prompt${n===1?"":"s"} ↓`;
-}
-
-/* ---------- copy ---------- */
-function copyText(t, msg){
-  const done = ()=>toast(msg||"Copied! 📋");
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(t).then(done).catch(()=>fallbackCopy(t, done));
-  } else fallbackCopy(t, done);
-}
-function fallbackCopy(t, done){
-  const ta = document.createElement("textarea");
-  ta.value = t; ta.style.position="fixed"; ta.style.opacity="0";
-  document.body.appendChild(ta); ta.select();
-  try{ document.execCommand("copy"); done(); }catch(e){ toast("Copy failed — long-press to copy"); }
-  document.body.removeChild(ta);
-}
-
-/* ---------- randomize ---------- */
-function randomize(){
-  const key = brandKey();
-  if(!key){
-    const keys = Object.keys(BRAND_TYPES);
-    $("#brandType").value = pick1(keys);
-    renderBrand();
-  }
-  const b = brand();
-  const setRandom = (group, min, max)=>{
-    const boxes = $$(`input[data-group="${group}"]`);
-    boxes.forEach(x=>x.checked=false);
-    sample(boxes, min + Math.floor(Math.random()*((max-min)+1))).forEach(x=>x.checked=true);
-    boxes.forEach(x=>x.closest(".opt,.pal-card,.design-card")?.classList.toggle("on", x.checked));
-  };
-  setRandom("audience",1,3); setRandom("garment",1,3);
-  // designs
-  const dcards = $$("[data-design-check]");
-  dcards.forEach(x=>{x.checked=false; x.closest(".design-card").classList.remove("on");});
-  sample(dcards, 2+Math.floor(Math.random()*3)).forEach(x=>{x.checked=true; x.closest(".design-card").classList.add("on");});
-  renderDesignPanels(); renderFinish();
-  selectedDesigns().forEach(d=>{
-    setRandom("theme-"+d,2,4); setRandom("el-"+d,2,4);
-    if(LETTERING_DESIGNS.includes(d)) setRandom("lettering-"+d,1,2);
-  });
-  setRandom("palette",1,2); setRandom("people",1,1);
-  setRandom("placement",1,1); setRandom("blank",1,1); setRandom("mockup",1,1); setRandom("quality",2,3);
-  generate();
-  toast("🎲 Randomized! Fresh ideas below.");
-}
-
-/* ---------- events ---------- */
-document.addEventListener("click", e=>{
-  const del = e.target.closest("[data-del-custom]");
-  if(del){
-    e.preventDefault(); e.stopPropagation();
-    removeCustom(del.dataset.delCustom, del.dataset.delVal);
-    refreshGrid(del.dataset.delCustom);
-    toast("Removed from your saved options");
-    return;
-  }
-  const addB = e.target.closest("[data-add-custom]");
-  if(addB){
-    const g = addB.dataset.addCustom;
-    const inp = document.getElementById("custom-"+g);
-    const val = inp ? inp.value.trim() : "";
-    if(!val){ toast("Type it in the box first ✍️"); if(inp) inp.focus(); return; }
-    const res = addCustom(g, val);
-    if(res==="ok"){
-      if(inp) inp.value = "";
-      refreshGrid(g);
-      const cb = $$(`input[data-group="${g}"]`).find(i=>i.dataset.value===val);
-      if(cb){ cb.checked = true; cb.closest(".opt")?.classList.add("on"); }
-      generate();
-      toast("Saved! It'll be here every time ⭐");
-    } else if(res==="dup"){
-      toast("That's already in your list");
-    } else if(res==="error"){
-      toast("Couldn't save in this browser — it'll work for this session");
-      if(inp) inp.value = "";
-    }
-    return;
-  }
-  const act = e.target.closest("[data-act]");
-  if(act){
-    e.preventDefault();
-    const g = act.dataset.group;
-    $$(`input[data-group="${g}"]`).forEach(x=>{
-      x.checked = act.dataset.act==="all";
-      x.closest(".opt,.pal-card")?.classList.toggle("on", x.checked);
-    });
-    generate(); return;
-  }
-  const card = e.target.closest(".design-card");
-  if(card && !e.target.matches("a")){
-    e.preventDefault(); // stop the label from firing a second synthetic click on the checkbox
-    const cb = card.querySelector("[data-design-check]");
-    cb.checked = !cb.checked;
-    card.classList.toggle("on", cb.checked);
-    refreshDesignPanels(); return;
-  }
-  const opt = e.target.closest(".opt");
-  if(opt && !e.target.matches("a")){
-    e.preventDefault(); // stop the label from firing a second synthetic click on the checkbox
-    const cb = opt.querySelector('input[type="checkbox"]');
-    cb.checked = !cb.checked;
-    opt.classList.toggle("on", cb.checked);
-    generate(); return;
-  }
-  const cp = e.target.closest("[data-copy]");
-  if(cp){ const p = lastPrompts[parseInt(cp.dataset.copy,10)]; if(p) copyText(p.prompt, "Prompt copied! 📋"); return; }
-});
-document.addEventListener("change", e=>{
-  if(e.target.id==="brandType"){ renderBrand(); return; }
-  if(e.target.matches("[data-design-check]")){
-    e.target.closest(".design-card").classList.toggle("on", e.target.checked);
-    refreshDesignPanels(); return;
-  }
-  if(e.target.matches('[data-group]')){
-    e.target.closest(".opt,.pal-card")?.classList.toggle("on", e.target.checked);
-    generate();
-  }
-});
-document.addEventListener("input", e=>{
-  if(e.target.matches('input[type="text"], textarea') && !e.target.id.startsWith("custom-")) generate();
-  if(e.target.id && e.target.id.startsWith("custom-")) generate();
-});
-$("#randomBtn").addEventListener("click", randomize);
-$("#promptFab").addEventListener("click", ()=>{
-  const oc = $("#outputCard");
-  if(oc) oc.scrollIntoView({behavior:"smooth", block:"start"});
-});
-window.addEventListener("scroll", ()=>{ updateFab(); }, {passive:true});
-$("#copyAllBtn").addEventListener("click", ()=>{
-  if(!lastPrompts.length){ toast("Pick a design type first 👆"); return; }
-  const all = lastPrompts.map((p,i)=>`━━━ PROMPT ${i+1}: ${p.title} ━━━\n${p.prompt}`).join("\n\n");
-  copyText(all, `All ${lastPrompts.length} prompts copied! 📋`);
-});
 </script>
 </body>
 </html>
