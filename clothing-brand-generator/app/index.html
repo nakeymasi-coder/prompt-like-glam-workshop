@@ -91,6 +91,107 @@
 </style>
 </head>
 <body>
+<!-- ============================================================
+  GENERATOR LICENSE GATE — insert this whole block immediately
+  after the opening <body> tag of clothing-brand-generator/app/index.html.
+  It is fully self-contained (own styles + own script) and does not
+  touch any existing line of the generator.
+  ============================================================ -->
+<style>
+  /* While the gate is active the generator stays hidden. */
+  body.gen-locked .wrap{ display:none !important; }
+  #genGate{ position:fixed; inset:0; z-index:9999; display:flex;
+    align-items:center; justify-content:center; padding:20px;
+    background:linear-gradient(160deg,#FDFEFF 0%,#EAF2FB 45%,#F8FBFE 100%); }
+  #genGate[hidden]{ display:none !important; }
+  .genGate-card{ width:100%; max-width:440px; background:#fff; border-radius:24px;
+    padding:34px 30px 30px; text-align:center;
+    box-shadow:0 18px 50px rgba(43,108,176,.25); border:1px solid #D9E4F2; }
+  .genGate-badge{ display:inline-block; font-size:12px; font-weight:800; letter-spacing:1.5px;
+    color:#2F6DAE; background:#EAF2FB; border-radius:99px; padding:6px 16px; margin-bottom:14px; }
+  .genGate-card h2{ font-family:'Nunito',system-ui,sans-serif; color:#1C2742;
+    font-size:24px; margin:0 0 8px; }
+  .genGate-card p.sub{ color:#5A6B8C; font-size:14.5px; margin:0 0 20px; line-height:1.55; }
+  #genKeyInput{ width:100%; padding:14px 16px; font-size:16px; border-radius:14px;
+    border:2px solid #D9E4F2; font-family:'Nunito',system-ui,sans-serif; color:#1C2742;
+    margin-bottom:12px; box-sizing:border-box; }
+  #genKeyInput:focus{ outline:none; border-color:#4A90D9; box-shadow:0 0 0 3px rgba(74,144,217,.18); }
+  #genUnlockBtn{ width:100%; padding:14px; font-size:16px; font-weight:800; color:#fff;
+    border:none; border-radius:14px; cursor:pointer; font-family:'Nunito',system-ui,sans-serif;
+    background:linear-gradient(120deg,#4A90D9 0%,#2F6DAE 100%);
+    box-shadow:0 8px 22px rgba(43,108,176,.35); }
+  #genUnlockBtn:disabled{ opacity:.6; cursor:wait; }
+  #genGateMsg{ min-height:22px; font-size:14px; color:#B3122E; margin:10px 0 0; font-weight:600; }
+  #genGateMsg.ok{ color:#1E7B3C; }
+  .genGate-hint{ margin-top:16px; font-size:13px; color:#5A6B8C; line-height:1.6; }
+  .genGate-hint strong{ color:#1C2742; }
+</style>
+<div id="genGate" role="dialog" aria-label="Unlock the generator">
+  <div class="genGate-card">
+    <span class="genGate-badge">BUYERS ONLY</span>
+    <h2>🔑 Unlock Your Generator</h2>
+    <p class="sub">This is the paid version of Glam's Clothing Brand Prompt Generator. Enter the license key from your purchase email to open it up.</p>
+    <input id="genKeyInput" type="text" placeholder="Paste your license key here" autocomplete="off" spellcheck="false">
+    <button id="genUnlockBtn">Unlock My Generator</button>
+    <p id="genGateMsg"></p>
+    <p class="genGate-hint"><strong>Where's my key?</strong><br>It's in the email Payhip sent you right after checkout — look for "license key".<br>Buying now? The key arrives within a couple of minutes of payment.</p>
+  </div>
+</div>
+<script>
+(function(){
+  "use strict";
+  var FLAG = "glamGenLicensedV1";
+  var VERIFY_URL = "https://workshop-poratl.netlify.app/.netlify/functions/verify-generator-license";
+  function readFlag(){ try { return window.localStorage.getItem(FLAG) === "1"; } catch(e){ return false; } }
+  function writeFlag(){ try { window.localStorage.setItem(FLAG, "1"); } catch(e){} }
+  function unlock(){
+    document.body.classList.remove("gen-locked");
+    var g = document.getElementById("genGate");
+    if (g) g.hidden = true;
+  }
+  function lock(){
+    document.body.classList.add("gen-locked");
+    var g = document.getElementById("genGate");
+    if (g) g.hidden = false;
+  }
+  // Initial state: locked unless this browser already unlocked.
+  if (readFlag()) { unlock(); } else { lock(); }
+  var btn = document.getElementById("genUnlockBtn");
+  var input = document.getElementById("genKeyInput");
+  var msg = document.getElementById("genGateMsg");
+  if (!btn || !input) return;
+  function say(t, ok){ if(msg){ msg.textContent = t; msg.className = ok ? "ok" : ""; } }
+  btn.addEventListener("click", async function(){
+    var key = input.value.trim();
+    if (!key) { say("Please paste your license key first."); return; }
+    btn.disabled = true; btn.textContent = "Checking...";
+    say("");
+    try {
+      var res = await fetch(VERIFY_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ licenseKey: key })
+      });
+      var data = null;
+      try { data = await res.json(); } catch(e){}
+      if (!res.ok || !data || !data.success) {
+        say((data && data.message) || "That key didn't work. Double-check it and try again.");
+        return;
+      }
+      writeFlag();
+      unlock();
+      say("Unlocked — welcome in! ✨", true);
+    } catch(e) {
+      say("We couldn't reach the checker right now. Check your connection and try again.");
+    } finally {
+      btn.disabled = false; btn.textContent = "Unlock My Generator";
+    }
+  });
+  input.addEventListener("keydown", function(e){ if (e.key === "Enter") btn.click(); });
+})();
+</script>
+<!-- ================= end GENERATOR LICENSE GATE ================= -->
+
 <div class="wrap">
 
   <header class="hero">
