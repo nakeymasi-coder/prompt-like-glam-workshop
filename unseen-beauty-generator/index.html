@@ -447,6 +447,7 @@ footer{text-align:center; color:#7A8CA0; margin-top:44px; font-size:.9rem;}
     <section class="step">
       <div class="step-head"><div class="step-num">✓</div><h2>My prompts</h2></div>
       <p class="step-sub">Paste these into your favorite AI image tool — Midjourney, DALL·E, Firefly, Ideogram, whatever you love. Tap ♥ to save your favorites.</p>
+      <div class="dignity" style="margin:0 0 16px;">🖼️ Each prompt makes ONE separate image — never a collage.</div>
       <div class="btnrow" style="margin-top:0; margin-bottom:16px;">
         <button class="btn btn-ghost" id="copyAllBtn" type="button">📋 Copy All</button>
       </div>
@@ -846,7 +847,7 @@ function powerWord(){
 function pick(a, i){ return a[i % a.length]; }
 function buildPrompt(qi,si,ai,bi,hi,oi,sei,wi,ti,vi,word){
   const h=HEROES[qi], t=TYPES[ti], v=VIBES[vi];
-  return `Ultra-detailed ${v.prompt} portrait of ${h.prompt}, a woman ${AGES[ai]} with ${SKINS[si]} skin and a ${BODIES[bi]} figure, ${HAIR[hi]}, wearing ${OUTFITS[oi]}, ${SETTINGS[sei]}. The word "${word}" appears as ${t.prompt}, ${t.place}. Empowering, dignified and celebratory mood — strength and beauty, never pity. Radiant lighting, ultra detailed, 8k, professional photography, masterpiece.`;
+  return `Ultra-detailed ${v.prompt} portrait of ${h.prompt}, a woman ${AGES[ai]} with ${SKINS[si]} skin and a ${BODIES[bi]} figure, ${HAIR[hi]}, wearing ${OUTFITS[oi]}, ${SETTINGS[sei]}. The word "${word}" appears as ${t.prompt}, ${t.place}. Empowering, dignified and celebratory mood — strength and beauty, never pity. Radiant lighting, ultra detailed, 8k, professional photography, masterpiece. Render as ONE single portrait on its own separate canvas — never a collage, never multiple panels in one image.`;
 }
 function effIdx(cat, arr, i){
   const s=sel[cat];
@@ -910,13 +911,13 @@ document.getElementById('fabSurprise').onclick=()=>{ surprise(); };
 document.getElementById('fabCopy').onclick=()=>{
   let texts=[...document.querySelectorAll('#promptList .ptxt')].map(p=>p.textContent);
   if(!texts.length){ surprise(); texts=[...document.querySelectorAll('#promptList .ptxt')].map(p=>p.textContent); }
-  if(texts.length) navigator.clipboard.writeText(texts.join('\n\n---\n\n')).then(()=>toast('Copied ✓'));
+  if(texts.length) navigator.clipboard.writeText('Create each image below on its own SEPARATE canvas \u2014 never a collage, never combine them into one image.\n\n' + texts.map((t,i)=>'CREATE IMAGE '+(i+1)+':\n'+t).join('\n\n---\n\n')).then(()=>toast('Copied ✓'));
 };
 document.getElementById('genBtn').onclick=generate;
 document.getElementById('surpriseBtn').onclick=surprise;
 document.getElementById('copyAllBtn').onclick=function(){
   const texts=[...document.querySelectorAll('#promptList .ptxt')].map(p=>p.textContent);
-  navigator.clipboard.writeText(texts.join('\n\n---\n\n')).then(()=>{ toast('All copied ✓'); });
+  navigator.clipboard.writeText('Create each image below on its own SEPARATE canvas \u2014 never a collage, never combine them into one image.\n\n' + texts.map((t,i)=>'CREATE IMAGE '+(i+1)+':\n'+t).join('\n\n---\n\n')).then(()=>{ toast('All copied ✓'); });
 };
 document.getElementById('countRange').oninput=function(){ document.getElementById('countNum').textContent=this.value; };
 
