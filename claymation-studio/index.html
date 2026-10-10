@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claymation Studio — by Glam</title>
+<style>
+  :root{
+    --sapphire:#8FBDEB; --sapphire-deep:#4E8ACB; --sapphire-soft:#DCEBFB;
+    --chrome:#C9CFD8; --chrome-light:#E8EBF0; --pearl:#FCFBF9;
+    --ink:#22303C; --muted:#5A6B7A; --card:#ffffff;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:linear-gradient(170deg,#F4F8FD 0%,#E8EBF0 45%,#FCFBF9 100%);
+    color:var(--ink); min-height:100vh; padding:0 0 70px;
+  }
+  header{text-align:center; padding:34px 18px 8px;}
+  .badge{
+    display:inline-block; font-size:12px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--sapphire-deep); background:var(--sapphire-soft); border:1px solid var(--chrome);
+    padding:7px 16px; border-radius:999px; margin-bottom:12px; font-weight:700;
+  }
+  h1{
+    margin:6px 0 4px; font-size:32px; line-height:1.15;
+    background:linear-gradient(100deg,var(--sapphire-deep),var(--sapphire) 60%,#b9cfe8);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  header p{margin:6px auto 0; color:var(--muted); font-size:15px; max-width:520px; line-height:1.5;}
+  /* sticky step nav */
+  .stepnav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(252,251,249,.92); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--chrome-light);
+    display:flex; justify-content:center; gap:4px; padding:10px 8px; margin-top:14px;
+  }
+  .stepnav a{
+    text-decoration:none; font-size:12.5px; font-weight:700; color:var(--muted);
+    padding:8px 12px; border-radius:999px; white-space:nowrap; transition:all .2s;
+  }
+  .stepnav a .dot{display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--chrome); margin-right:6px; vertical-align:1px; transition:all .2s;}
+  .stepnav a.active{color:#fff; background:linear-gradient(100deg,var(--sapphire-deep),var(--sapphire)); box-shadow:0 4px 12px rgba(78,138,203,.3);}
+  .stepnav a.active .dot{background:#fff;}
+  .wrap{max-width:680px; margin:0 auto; padding:0 16px;}
+  .phase{margin-top:26px; scroll-margin-top:64px;}
+  .phase-head{display:flex; align-items:center; gap:10px; margin-bottom:6px;}
+  .phase-num{
+    width:34px; height:34px; border-radius:50%; flex:none;
+    background:linear-gradient(135deg,var(--sapphire-deep),var(--sapphire));
+    color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:16px;
+    box-shadow:0 4px 12px rgba(78,138,203,.35);
+  }
+  .phase-head h2{margin:0; font-size:20px;}
+  .phase-sub{color:var(--muted); font-size:14px; margin:0 0 4px 44px; line-height:1.5;}
+  .panel{
+    background:var(--card); border-radius:20px; padding:20px; margin-top:12px;
+    box-shadow:0 10px 30px rgba(78,138,203,.10); border:1px solid var(--chrome-light);
+  }
+  .label{font-size:13px; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:var(--sapphire-deep); margin:16px 0 8px;}
+  .label:first-child{margin-top:0;}
+  .chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    border:2px solid var(--chrome-light); background:#fff; color:var(--ink);
+    padding:9px 15px; border-radius:999px; font-size:14px; font-weight:600; cursor:pointer;
+    transition:all .15s ease;
+  }
+  .chip.on{
+    background:linear-gradient(100deg,var(--sapphire-deep),var(--sapphire)); color:#fff; border-color:transparent;
+    box-shadow:0 4px 14px rgba(78,138,203,.35);
+  }
+  input[type=text], textarea{
+    width:100%; padding:13px 15px; border-radius:14px; border:2px solid var(--chrome-light);
+    font-size:15px; outline:none; background:#fff; font-family:inherit; color:var(--ink);
+  }
+  input[type=text]:focus, textarea:focus{border-color:var(--sapphire);}
+  textarea{resize:vertical; min-height:76px; line-height:1.5; font-size:14px;}
+  .btnrow{display:flex; gap:10px; margin-top:16px; flex-wrap:wrap;}
+  button.big{
+    flex:1 1 200px; border:none; border-radius:16px; padding:15px; font-size:16px; font-weight:800;
+    cursor:pointer; color:#fff;
+    background:linear-gradient(100deg,var(--sapphire-deep),var(--sapphire));
+    box-shadow:0 8px 22px rgba(78,138,203,.35);
+  }
+  button.big:active{transform:scale(.98);}
+  button.ghost{
+    border:2px solid var(--chrome); background:var(--pearl); color:var(--muted);
+    border-radius:16px; padding:15px 18px; font-size:16px; font-weight:800; cursor:pointer;
+  }
+  button.ghost:active{transform:scale(.98);}
+  button.small{
+    border:none; background:var(--sapphire-soft); color:var(--sapphire-deep); font-weight:800; font-size:13px;
+    padding:9px 16px; border-radius:999px; cursor:pointer;
+  }
+  button.small.done{background:#dcfce7; color:#166534;}
+  /* scene cards */
+  .scenecard{
+    background:#fff; border:1px solid var(--chrome-light); border-left:5px solid var(--sapphire-deep);
+    border-radius:16px; padding:16px; margin-top:14px; box-shadow:0 6px 18px rgba(78,138,203,.07);
+  }
+  .scenecard .stag{font-size:11px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; color:var(--sapphire-deep); margin-bottom:8px;}
+  .scenecard input[type=text]{margin-bottom:8px; font-weight:700; font-size:15px;}
+  .promptbox{
+    background:var(--pearl); border:1px dashed var(--chrome); border-radius:12px;
+    padding:13px 14px; font-size:13.5px; line-height:1.6; color:var(--ink); white-space:pre-wrap;
+    margin:10px 0; max-height:260px; overflow-y:auto;
+  }
+  .cardbtns{display:flex; gap:8px; flex-wrap:wrap;}
+  .empty{text-align:center; color:#8a94a6; padding:30px 10px; font-size:15px; line-height:1.6;}
+  /* checklist */
+  .checkitem{
+    display:flex; gap:12px; align-items:flex-start; background:#fff;
+    border:1px solid var(--chrome-light); border-radius:14px; padding:13px 15px; margin-top:10px;
+    cursor:pointer; transition:all .15s; font-size:14.5px; line-height:1.5;
+  }
+  .checkitem:hover{border-color:var(--sapphire);}
+  .checkitem input{width:20px; height:20px; margin-top:1px; flex:none; accent-color:var(--sapphire-deep); cursor:pointer;}
+  .checkitem.done{opacity:.55;}
+  .checkitem.done .ct{ text-decoration:line-through; }
+  /* footer */
+  footer{text-align:center; margin-top:40px; padding:0 16px;}
+  .cta-row{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:6px;}
+  .ctabtn{
+    flex:1 1 0; max-width:270px; min-width:200px; text-align:center;
+    display:inline-block; text-decoration:none; color:#fff; font-weight:800; font-size:15px;
+    background:linear-gradient(100deg,var(--sapphire-deep),var(--sapphire));
+    padding:14px 18px; border-radius:999px;
+    box-shadow:0 8px 22px rgba(78,138,203,.35);
+  }
+  .ctabtn:active{transform:scale(.98);}
+  footer .tiny{margin-top:14px; font-size:12px; color:#8a94a6;}
+  footer .tiny b{color:var(--sapphire-deep);}
+  @media(max-width:520px){
+    h1{font-size:26px;}
+    .stepnav a{font-size:11px; padding:7px 9px;}
+    .stepnav a .dot{margin-right:4px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">🏺 Turn topics into claymation magic</div>
+  <h1>Claymation Studio</h1>
+  <p>Turn any topic into an animated claymation infographic — scene plan, image prompts, and animation prompts, ready to build.</p>
+</header>
+
+<nav class="stepnav" id="stepnav">
+  <a href="#phase1" data-ph="phase1"><span class="dot"></span>1 · Topic</a>
+  <a href="#phase2" data-ph="phase2"><span class="dot"></span>2 · Scenes</a>
+  <a href="#phase3" data-ph="phase3"><span class="dot"></span>3 · Images</a>
+  <a href="#phase4" data-ph="phase4"><span class="dot"></span>4 · Video</a>
+  <a href="#phase5" data-ph="phase5"><span class="dot"></span>5 · Build</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- PHASE 1 -->
+  <section class="phase" id="phase1">
+    <div class="phase-head"><div class="phase-num">1</div><h2>Topic Intake</h2></div>
+    <p class="phase-sub">Tell the studio what your claymation is about and who it's for.</p>
+    <div class="panel">
+      <div class="label">Your topic</div>
+      <input type="text" id="topic" placeholder="e.g. how credit scores work">
+      <div class="label">Audience</div>
+      <div class="chips" id="audience"></div>
+      <div class="label">Key points</div>
+      <div class="chips" id="points"></div>
+      <div class="label">Tone</div>
+      <div class="chips" id="tone"></div>
+      <div class="label">Format</div>
+      <div class="chips" id="format"></div>
+      <div class="btnrow">
+        <button class="big" id="genScenes">🎬 Plan My Scenes</button>
+        <button class="ghost" id="surprise" title="Surprise me">🎲</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHASE 2 -->
+  <section class="phase" id="phase2">
+    <div class="phase-head"><div class="phase-num">2</div><h2>Scene Planner</h2></div>
+    <p class="phase-sub">Your scene-by-scene breakdown. Tweak any title or description — the prompts below update automatically.</p>
+    <div class="panel" id="scenePanel">
+      <div class="empty">Hit <b>🎬 Plan My Scenes</b> above and your claymation storyboard appears here.</div>
+    </div>
+  </section>
+
+  <!-- PHASE 3 -->
+  <section class="phase" id="phase3">
+    <div class="phase-head"><div class="phase-num">3</div><h2>Image Prompts</h2></div>
+    <p class="phase-sub">Copy-ready prompts to generate each scene's claymation still (Ideogram, Midjourney, DALL·E, Firefly…).</p>
+    <div class="panel" id="imagePanel">
+      <div class="empty">Your per-scene image prompts will appear here once scenes are planned.</div>
+    </div>
+  </section>
+
+  <!-- PHASE 4 -->
+  <section class="phase" id="phase4">
+    <div class="phase-head"><div class="phase-num">4</div><h2>Video Prompts</h2></div>
+    <p class="phase-sub">Copy-ready 8-second animation prompts — for Google Flow, Vidu, Runway, Pika, and Kling.</p>
+    <div class="panel" id="videoPanel">
+      <div class="empty">Your per-scene animation prompts will appear here once scenes are planned.</div>
+    </div>
+  </section>
+
+  <!-- PHASE 5 -->
+  <section class="phase" id="phase5">
+    <div class="phase-head"><div class="phase-num">5</div><h2>Assembly Checklist</h2></div>
+    <p class="phase-sub">Your build order, start to finish. Tick each step as you go.</p>
+    <div class="panel" id="checkPanel"></div>
+  </section>
+
+  <footer>
+    <div class="cta-row">
+      <a class="ctabtn" href="https://www.skool.com/the-glam-vault-9512" target="_blank" rel="noopener">✨ Join The Glam Vault</a>
+      <a class="ctabtn" href="https://glamhustlehub.com" target="_blank" rel="noopener">🛍️ Shop Glam Hustle Hub</a>
+    </div>
+    <div class="tiny">made with <b>♥</b> by Celestia, Glam's AI assistant</div>
+  </footer>
+
+</div>
+
+<script>
+"use strict";
+/* ---------- helpers ---------- */
+function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function copyText(btn, text){
+  function done(){ var o=btn.textContent; btn.textContent="Copied ✓"; btn.classList.add("done"); setTimeout(function(){btn.textContent=o; btn.classList.remove("done");},1600); }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done).catch(function(){ fallback(); });
+  } else { fallback(); }
+  function fallback(){
+    var ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); done(); }catch(e){}
+    document.body.removeChild(ta);
+  }
+}
+
+/* ---------- state & options ---------- */
+var AUDIENCES=["Kids","Teens","Adults 25-40","Adults 40+","Everyone"];
+var POINTS=["3","4","5"];
+var TONES=["Playful","Educational","Wholesome","Funny"];
+var FORMATS=["Vertical 9:16","Square 1:1","Wide 16:9"];
+var state={ audience:"Everyone", points:"4", tone:"Playful", format:"Vertical 9:16" };
+var scenes=[];
+
+var SAMPLE_TOPICS=["how credit scores work","why the sky is blue","how bees make honey","what compound interest means","how sourdough starter works","why we dream","how photosynthesis works","what inflation does to your money","how the internet actually works","why exercise boosts your mood"];
+
+function chipRow(id, options, current, onPick){
+  var el=document.getElementById(id); el.innerHTML="";
+  options.forEach(function(o){
+    var b=document.createElement("button");
+    b.type="button"; b.className="chip"+(o===current?" on":""); b.textContent=o;
+    b.onclick=function(){ onPick(o); chipRow(id, options, o, onPick); };
+    el.appendChild(b);
+  });
+}
+function renderChips(){
+  chipRow("audience",AUDIENCES,state.audience,function(o){state.audience=o;});
+  chipRow("points",POINTS,state.points,function(o){state.points=o;});
+  chipRow("tone",TONES,state.tone,function(o){state.tone=o;});
+  chipRow("format",FORMATS,state.format,function(o){state.format=o;});
+}
+
+/* ---------- personalization bits ---------- */
+function castLine(){
+  switch(state.audience){
+    case "Kids": return "bouncy clay animal friends (a curious fox, a giggly frog, a wise owl)";
+    case "Teens": return "cool clay teens with oversized sneakers and phone props";
+    case "Adults 25-40": return "relatable clay millennials juggling coffee cups, laptops, and houseplants";
+    case "Adults 40+": return "warm, wise clay characters with reading glasses and cozy cardigans";
+    default: return "a charming mixed clay cast of characters of all ages";
+  }
+}
+function toneWord(){
+  switch(state.tone){
+    case "Educational": return "clear and clever";
+    case "Wholesome": return "warm and heartwarming";
+    case "Funny": return "silly and laugh-out-loud";
+    default: return "playful and bouncy";
+  }
+}
+function aspectLine(){
+  if(state.format==="Square 1:1") return "square 1:1 aspect ratio";
+  if(state.format==="Wide 16:9") return "wide 16:9 aspect ratio";
+  return "vertical 9:16 aspect ratio";
+}
+function capTopic(){
+  var t=document.getElementById("topic").value.trim()||"your topic";
+  return t.charAt(0).toUpperCase()+t.slice(1);
+}
+
+/* ---------- scene generator ---------- */
+var HOOKS={
+  Playful:"A curious clay blob bounces into frame and gasps: 'Wait… what IS {T}?!' The camera zooms into its wide clay eyes.",
+  Educational:"A clay professor character rolls out a tiny chalkboard reading '{T} — in 60 seconds!' and taps it with a pointer.",
+  Wholesome:"A warm clay grandma character waves hello from her cozy clay kitchen: 'Come learn about {T} with me, sweetie!'",
+  Funny:"A clumsy clay character trips over giant letter blocks spelling '{T}' and face-plants: 'Oh no — not again!'"
+};
+var POINT_FRAMES=[
+  {t:"What {T} actually means", g:"The clay cast builds a giant clay question mark, then it morphs — piece by piece — into a glowing lightbulb labeled with the answer."},
+  {t:"The biggest myth about {T}", g:"A clay character dramatically pops a huge balloon labeled 'MYTH' while the cast cheers and confetti made of clay sprinkles flies."},
+  {t:"How {T} works, step by step", g:"A miniature clay conveyor belt carries the steps one by one past the camera; each clay piece clicks into place like a puzzle."},
+  {t:"The #1 mistake people make with {T}", g:"A clay character slips on a clay banana peel labeled with the mistake, then a friend helps them up with the correct move."},
+  {t:"Your first easy win with {T}", g:"The clay cast scores a goal / plants a victory flag together, then does a bouncy stop-motion happy dance."}
+];
+var CTA_LINES=[
+  "The whole clay cast waves at the camera as giant clay letters spell 'FOLLOW for more!' — then they all strike a goofy freeze-frame pose.",
+  "A clay mailbox pops open and letters fly out spelling 'SAVE + SHARE!' while the characters do a celebratory conga line.",
+  "The clay hero holds up a tiny clay megaphone: 'Your turn! Try this and tag me!' — confetti made of clay stars rains down."
+];
+function pickPoints(n){
+  if(n===3) return [POINT_FRAMES[0],POINT_FRAMES[2],POINT_FRAMES[4]];
+  if(n===4) return [POINT_FRAMES[0],POINT_FRAMES[1],POINT_FRAMES[3],POINT_FRAMES[4]];
+  return POINT_FRAMES.slice();
+}
+function generateScenes(){
+  var T=capTopic(), n=parseInt(state.points,10);
+  var hook=HOOKS[state.tone].split("{T}").join(T);
+  var list=[{tag:"Scene 1 · Hook", title:"The Hook — grab attention in 3 seconds", desc:hook+" Starring "+castLine()+"."}];
+  pickPoints(n).forEach(function(p,i){
+    list.push({tag:"Scene "+(i+2)+" · Key point "+(i+1),
+      title:p.t.split("{T}").join(T),
+      desc:p.g+" ("+toneWord()+" energy, starring "+castLine()+", all about "+T+".)"});
+  });
+  list.push({tag:"Scene "+(list.length+1)+" · Call to action",
+    title:"The Call to Action — follow, save, share",
+    desc:CTA_LINES[list.length%CTA_LINES.length]+" The cast reminds viewers what they learned about "+T+"."});
+  scenes=list;
+  renderScenes(); renderPrompts();
+}
+
+/* ---------- prompt builders ---------- */
+var CAM_MOVES=["slow push-in","gentle left-to-right pan","playful orbit around the set","soft crane-up reveal","bouncy handheld-style dolly"];
+function imagePrompt(s,i){
+  return "Handmade claymation still frame, authentic stop-motion style: polymer clay characters with visible fingerprints and handcrafted texture, miniature hand-built clay set, soft warm studio lighting, vibrant saturated colors, shallow depth of field, "+aspectLine()+".\n\nScene: "+s.title+". "+s.desc+"\n\nComposition: main clay character(s) in the foreground, detailed miniature clay props telling the story, cozy handcrafted background. No text, no watermark, no photorealism — pure handmade clay charm.";
+}
+function videoPrompt(s,i){
+  var cam=CAM_MOVES[i%CAM_MOVES.length];
+  return "8-second claymation stop-motion animation, 12fps handcrafted jitter, handmade polymer clay characters, miniature clay set, soft studio lighting.\n\nScene: "+s.title+". "+s.desc+"\n\nMotion & timing:\n• 0–2s: "+cam+" as the scene opens; characters settle into place with bouncy stop-motion easing.\n• 2–6s: the main action plays out — characters move in short snappy stop-motion bursts, props react with squash-and-stretch clay physics.\n• 6–8s: hold on the final beat, subtle character blink or wave, gentle ease-out.\n\nCamera: "+cam+" throughout. Feel: tactile, handmade, "+toneWord()+". Format: "+aspectLine()+". Ready for Google Flow, Vidu, Runway, Pika, or Kling.";
+}
+
+/* ---------- rendering ---------- */
+function renderScenes(){
+  var p=document.getElementById("scenePanel");
+  if(!scenes.length){ p.innerHTML='<div class="empty">Hit <b>🎬 Plan My Scenes</b> above and your claymation storyboard appears here.</div>'; return; }
+  var html="";
+  scenes.forEach(function(s,i){
+    html+='<div class="scenecard"><div class="stag">'+esc(s.tag)+'</div>'
+      +'<input type="text" data-i="'+i+'" data-f="title" value="'+esc(s.title)+'">'
+      +'<textarea data-i="'+i+'" data-f="desc">'+esc(s.desc)+'</textarea></div>';
+  });
+  html+='<div class="btnrow"><button class="ghost" id="regen">↻ Regenerate scenes</button></div>';
+  p.innerHTML=html;
+  p.querySelectorAll("input,textarea").forEach(function(el){
+    el.addEventListener("input",function(){
+      var i=parseInt(el.getAttribute("data-i"),10), f=el.getAttribute("data-f");
+      scenes[i][f]=el.value; renderPrompts();
+    });
+  });
+  document.getElementById("regen").onclick=generateScenes;
+}
+function renderPrompts(){
+  var ip=document.getElementById("imagePanel"), vp=document.getElementById("videoPanel");
+  if(!scenes.length){
+    ip.innerHTML='<div class="empty">Your per-scene image prompts will appear here once scenes are planned.</div>';
+    vp.innerHTML='<div class="empty">Your per-scene animation prompts will appear here once scenes are planned.</div>';
+    return;
+  }
+  var ih="", vh="";
+  scenes.forEach(function(s,i){
+    var p1=imagePrompt(s,i), p2=videoPrompt(s,i);
+    ih+='<div class="scenecard"><div class="stag">'+esc(s.tag)+' · Image</div>'
+      +'<div class="promptbox">'+esc(p1)+'</div>'
+      +'<div class="cardbtns"><button class="small" data-p="'+esc(p1)+'">📋 Copy image prompt</button></div></div>';
+    vh+='<div class="scenecard"><div class="stag">'+esc(s.tag)+' · Animation</div>'
+      +'<div class="promptbox">'+esc(p2)+'</div>'
+      +'<div class="cardbtns"><button class="small" data-p="'+esc(p2)+'">📋 Copy video prompt</button></div></div>';
+  });
+  ih+='<div class="btnrow"><button class="big" id="copyAllImg">📋 Copy all image prompts</button></div>';
+  vh+='<div class="btnrow"><button class="big" id="copyAllVid">📋 Copy all video prompts</button></div>';
+  ip.innerHTML=ih; vp.innerHTML=vh;
+  ip.querySelectorAll("button.small").forEach(function(b){ b.onclick=function(){ copyText(b,b.getAttribute("data-p")); }; });
+  vp.querySelectorAll("button.small").forEach(function(b){ b.onclick=function(){ copyText(b,b.getAttribute("data-p")); }; });
+  document.getElementById("copyAllImg").onclick=function(){ copyText(this, scenes.map(function(s,i){return "SCENE "+(i+1)+" — "+s.title+"\n"+imagePrompt(s,i);}).join("\n\n---\n\n")); };
+  document.getElementById("copyAllVid").onclick=function(){ copyText(this, scenes.map(function(s,i){return "SCENE "+(i+1)+" — "+s.title+"\n"+videoPrompt(s,i);}).join("\n\n---\n\n")); };
+}
+
+/* ---------- checklist ---------- */
+var CHECKS=[
+  "Generate each scene's still image with your image prompts (Ideogram, Midjourney, DALL·E, or Firefly).",
+  "Animate each scene into an 8-second clip with your video prompts (Google Flow, Vidu, Runway, Pika, or Kling).",
+  "Record a voiceover or add on-screen captions for each key point.",
+  "Add music and sound effects — bouncy, playful tracks fit claymation best.",
+  "Assemble the clips in scene order in CapCut, Canva, or Premiere.",
+  "Export in your chosen format (" + "FORMAT" + ") with captions burned in.",
+  "Post it with a hook from your topic — pin a comment asking viewers what to claymate next!"
+];
+function renderChecks(){
+  var p=document.getElementById("checkPanel"), html="";
+  CHECKS.forEach(function(c,i){
+    var txt=c.split("FORMAT").join(state.format);
+    html+='<label class="checkitem" id="chk'+i+'"><input type="checkbox"><span class="ct"><b>Step '+(i+1)+':</b> '+esc(txt)+'</span></label>';
+  });
+  p.innerHTML=html;
+  p.querySelectorAll(".checkitem").forEach(function(l){
+    l.querySelector("input").addEventListener("change",function(){ l.classList.toggle("done",this.checked); });
+  });
+}
+
+/* ---------- nav highlight ---------- */
+function initNav(){
+  var links=document.querySelectorAll("#stepnav a");
+  var secs=["phase1","phase2","phase3","phase4","phase5"].map(function(id){return document.getElementById(id);});
+  function onScroll(){
+    var cur=0;
+    secs.forEach(function(s,i){ if(s.getBoundingClientRect().top<120) cur=i; });
+    links.forEach(function(a,i){ a.classList.toggle("active",i===cur); });
+  }
+  window.addEventListener("scroll",onScroll,{passive:true}); onScroll();
+}
+
+/* ---------- wire up ---------- */
+document.getElementById("genScenes").onclick=function(){
+  var t=document.getElementById("topic").value.trim();
+  if(!t){ document.getElementById("topic").focus(); document.getElementById("topic").style.borderColor="var(--sapphire-deep)"; return; }
+  generateScenes(); renderChecks();
+  document.getElementById("phase2").scrollIntoView({behavior:"smooth"});
+};
+document.getElementById("surprise").onclick=function(){
+  document.getElementById("topic").value=SAMPLE_TOPICS[Math.floor(Math.random()*SAMPLE_TOPICS.length)];
+  state.audience=AUDIENCES[Math.floor(Math.random()*AUDIENCES.length)];
+  state.points=POINTS[Math.floor(Math.random()*POINTS.length)];
+  state.tone=TONES[Math.floor(Math.random()*TONES.length)];
+  state.format=FORMATS[Math.floor(Math.random()*FORMATS.length)];
+  renderChips();
+};
+renderChips(); renderChecks(); initNav();
+</script>
+</body>
+</html>
