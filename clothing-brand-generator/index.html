@@ -3,388 +3,325 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Glam's Clothing Brand Prompt Generator — Turn Ideas Into Scroll-Stopping Designs</title>
-<meta name="description" content="Pick your brand vibe, check a few boxes, and get scroll-stopping AI image prompts for every design style. 30 brand types, 7 design styles, endless glam.">
+<title>Clothing Brand Prompt Generator — Your Brand, Your Words, Your Empire</title>
+<meta name="description" content="Turn your clothing brand ideas into scroll-stopping AI design prompts. No drawing. No designer. Just $27 one-time.">
+<meta property="og:title" content="Clothing Brand Prompt Generator — Turn Your Ideas Into Designs">
+<meta property="og:description" content="No drawing. No designer. Ready-to-use AI prompts for your clothing brand. Only $27 one-time.">
+<meta property="og:image" content="images/thumbnail.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --pink:#3B82C4; --pink-soft:#8FC1F5; --pink-pale:#E3F0FE;
-  --purple:#1E4E8C; --purple-deep:#142E5C; --purple-soft:#7FA8D9;
-  --gold:#C9D6E8; --gold-deep:#8A94A6; --gold-pale:#F0F3F8;
-  --ink:#1C2742; --muted:#5A6B8C;
-  --pearl:#FEFEFF;
-  --glass:rgba(255,255,255,.62);
-  --grad:linear-gradient(120deg,var(--pink),var(--purple));
+  --sapphire:#2E7CD6; --sapphire-deep:#17457E; --sapphire-soft:#9CC4F2; --sapphire-pale:#E7F1FD;
+  --chrome:#C7D2E4; --chrome-deep:#8B98B0; --chrome-pale:#F2F5FA;
+  --pearl:#FDFEFF; --ink:#1B2A44; --muted:#5B6E8F; --black:#101418;
+  --grad:linear-gradient(120deg,#5B9BE8,#2E7CD6 55%,#17457E);
+  --chrome-grad:linear-gradient(135deg,#FFFFFF 0%,#DCE6F4 35%,#AEBDD4 60%,#F4F8FD 100%);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Outfit',sans-serif;color:var(--ink);background:
-  linear-gradient(180deg,#FEFEFF 0%,#F4F8FE 30%,#EAF2FD 65%,#FEFEFF 100%);
-  overflow-x:hidden;min-height:100vh}
-h1,h2,h3,.display{font-family:'Unbounded',sans-serif}
-/* ---------- animated aurora background ---------- */
-.aurora{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
-.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;will-change:transform}
-.b1{width:520px;height:520px;left:-140px;top:-120px;background:radial-gradient(circle,#A9CDF5,transparent 70%);animation:drift1 22s ease-in-out infinite alternate}
-.b2{width:460px;height:460px;right:-120px;top:8%;background:radial-gradient(circle,#DCE9FA,transparent 70%);animation:drift2 26s ease-in-out infinite alternate}
-.b3{width:420px;height:420px;left:22%;top:52%;background:radial-gradient(circle,#E8EEF6,transparent 70%);opacity:.55;animation:drift1 30s ease-in-out infinite alternate-reverse}
-.b4{width:380px;height:380px;right:14%;bottom:-140px;background:radial-gradient(circle,#BFD9F7,transparent 70%);animation:drift2 24s ease-in-out infinite alternate-reverse}
-@keyframes drift1{from{transform:translate(0,0) scale(1)}to{transform:translate(90px,60px) scale(1.15)}}
-@keyframes drift2{from{transform:translate(0,0) scale(1.1)}to{transform:translate(-80px,70px) scale(.95)}}
-/* ---------- twinkling sparkles ---------- */
-#sparkles{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
-.spk{position:absolute;font-size:14px;animation:twinkle var(--d,3s) ease-in-out infinite;opacity:0}
-@keyframes twinkle{0%,100%{opacity:0;transform:scale(.6) rotate(0deg)}50%{opacity:.95;transform:scale(1.15) rotate(20deg)}}
-/* ---------- nav ---------- */
-nav{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
-  padding:14px 28px;background:rgba(255,249,253,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(59,130,196,.14)}
-.logo{font-family:'Unbounded';font-weight:800;font-size:16px;background:var(--grad);
-  -webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.5px}
-.btn{display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;text-decoration:none;
-  font-family:'Unbounded';font-weight:700;font-size:15px;color:#fff;padding:15px 34px;border-radius:999px;
-  background:linear-gradient(120deg,var(--pink),#2B6CB0 55%,var(--purple));background-size:180% 180%;
-  box-shadow:0 10px 30px rgba(59,130,196,.42),inset 0 1px 0 rgba(255,255,255,.35);
-  transition:transform .25s,box-shadow .25s,background-position .5s;animation:btnGlow 3s ease-in-out infinite}
-.btn:hover{transform:translateY(-3px) scale(1.03);background-position:90% 50%;
-  box-shadow:0 16px 42px rgba(59,130,196,.55),inset 0 1px 0 rgba(255,255,255,.4)}
-.btn.ghost{background:rgba(255,255,255,.7);color:var(--purple);border:2px solid rgba(43,108,176,.25);
-  box-shadow:0 6px 18px rgba(43,108,176,.12);animation:none}
-.btn.ghost:hover{border-color:var(--pink);color:var(--pink)}
-@keyframes btnGlow{0%,100%{box-shadow:0 10px 30px rgba(59,130,196,.42),inset 0 1px 0 rgba(255,255,255,.35)}
-  50%{box-shadow:0 10px 40px rgba(59,130,196,.65),0 0 22px rgba(201,210,228,.45),inset 0 1px 0 rgba(255,255,255,.35)}}
-.btn-sm{padding:11px 24px;font-size:13px}
-/* ---------- hero ---------- */
-.hero{position:relative;text-align:center;padding:110px 20px 70px;max-width:1060px;margin:0 auto}
-.hero::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
-  background-image:linear-gradient(rgba(43,108,176,.06) 1px,transparent 1px),
-  linear-gradient(90deg,rgba(43,108,176,.06) 1px,transparent 1px);
-  background-size:44px 44px;
-  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,#000 30%,transparent 75%);
-  mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,#000 30%,transparent 75%)}
-.badge{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:13px;letter-spacing:1.5px;
-  text-transform:uppercase;color:var(--purple);background:var(--glass);border:1px solid rgba(59,130,196,.3);
-  padding:9px 20px;border-radius:999px;backdrop-filter:blur(8px);box-shadow:0 4px 16px rgba(59,130,196,.14);
-  margin-bottom:26px;animation:floaty 5s ease-in-out infinite}
-.hero h1{font-size:clamp(2.1rem,6vw,4.3rem);font-weight:800;line-height:1.12;margin-bottom:22px;letter-spacing:-.5px}
-.shimmer{background:linear-gradient(100deg,var(--pink) 10%,var(--gold-deep) 30%,var(--purple) 50%,var(--pink) 70%);
-  background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;
-  animation:shine 5s linear infinite}
+body{font-family:'Outfit',sans-serif;color:var(--ink);background:linear-gradient(180deg,#FDFEFF 0%,#F3F7FD 40%,#E9F1FB 70%,#FDFEFF 100%);overflow-x:hidden}
+h1,h2,h3{font-family:'Unbounded',sans-serif}
+.wrap{max-width:1020px;margin:0 auto;padding:0 22px}
+/* nav */
+nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:13px 26px;background:rgba(253,254,255,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(46,124,214,.14)}
+.logo{font-family:'Unbounded';font-weight:800;font-size:15px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:none;cursor:pointer;text-decoration:none;font-family:'Unbounded';font-weight:700;font-size:16px;color:#fff;padding:17px 40px;border-radius:999px;background:linear-gradient(120deg,#5B9BE8,#2E7CD6 55%,#17457E);background-size:180% 180%;box-shadow:0 12px 32px rgba(46,124,214,.42),inset 0 1px 0 rgba(255,255,255,.4);transition:transform .25s,box-shadow .25s,background-position .5s}
+.btn:hover{transform:translateY(-3px) scale(1.02);background-position:90% 50%;box-shadow:0 18px 44px rgba(46,124,214,.55)}
+.btn-sm{padding:11px 26px;font-size:13px}
+.btn-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+/* hero */
+.hero{text-align:center;padding:96px 22px 60px;position:relative}
+.hero .badge{display:inline-block;font-weight:700;font-size:12.5px;letter-spacing:2px;text-transform:uppercase;color:var(--sapphire-deep);background:rgba(255,255,255,.7);border:1px solid rgba(46,124,214,.32);padding:10px 22px;border-radius:999px;margin-bottom:26px;box-shadow:0 6px 18px rgba(46,124,214,.14)}
+.hero h1{font-size:clamp(2rem,5.6vw,3.9rem);font-weight:800;line-height:1.15;margin-bottom:22px}
+.hero h1 .shimmer{background:linear-gradient(100deg,#5B9BE8 10%,#8B98B0 35%,#17457E 55%,#5B9BE8 75%);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 5s linear infinite}
 @keyframes shine{to{background-position:220% center}}
-.hero p.sub{font-size:clamp(1.02rem,2.2vw,1.28rem);color:var(--muted);max-width:660px;margin:0 auto 36px;line-height:1.65}
-.hero p.sub b{color:var(--purple)}
-.cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:70px}
-/* floating brand chips */
-.chip{position:absolute;font-family:'Unbounded';font-weight:700;font-size:12px;letter-spacing:.6px;
-  padding:10px 18px;border-radius:999px;background:var(--glass);backdrop-filter:blur(8px);
-  border:1px solid rgba(255,255,255,.9);box-shadow:0 8px 24px rgba(43,108,176,.14),inset 0 1px 0 #fff;
-  color:var(--purple);white-space:nowrap;animation:floaty var(--fd,6s) ease-in-out infinite;z-index:1;pointer-events:none}
-.chip.gold{color:#5A6B8C;border-color:rgba(201,210,228,.7);box-shadow:0 8px 24px rgba(160,175,195,.22),inset 0 1px 0 #fff}
-.chip.pink{color:#2B6CB0;border-color:rgba(59,130,196,.45);box-shadow:0 8px 24px rgba(59,130,196,.2),inset 0 1px 0 #fff}
-@keyframes floaty{0%,100%{transform:translateY(0) rotate(var(--rr,0deg))}50%{transform:translateY(-16px) rotate(var(--rr,0deg))}}
-/* demo window */
-.demo{position:relative;max-width:720px;margin:0 auto;text-align:left;border-radius:22px;overflow:hidden;
-  background:rgba(255,255,255,.72);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.95);
-  box-shadow:0 30px 80px rgba(43,108,176,.18),0 4px 18px rgba(59,130,196,.12);transform:perspective(1200px) rotateX(4deg);
-  transition:transform .5s}
-.demo:hover{transform:perspective(1200px) rotateX(0deg)}
-.demo::before{content:"";position:absolute;inset:0;border-radius:22px;padding:2px;pointer-events:none;
-  background:linear-gradient(135deg,rgba(59,130,196,.55),rgba(201,210,228,.5),rgba(43,108,176,.55));
-  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
-  -webkit-mask-composite:xor;mask-composite:exclude}
-.demo-bar{display:flex;align-items:center;gap:8px;padding:14px 20px;border-bottom:1px solid rgba(43,108,176,.1);
-  font-size:13px;font-weight:600;color:var(--muted)}
-.dot{width:12px;height:12px;border-radius:50%}
-.demo-body{padding:26px 26px 30px;min-height:190px;font-size:15.5px;line-height:1.7}
-.demo-body .prompt-label{font-family:'Unbounded';font-size:11px;letter-spacing:1.5px;color:var(--pink);margin-bottom:10px}
-#typed{white-space:pre-wrap}
-.caret{display:inline-block;width:3px;height:1.15em;background:var(--pink);vertical-align:-3px;animation:blink 1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-/* ---------- marquee ---------- */
-.marquee{overflow:hidden;border-top:1px solid rgba(59,130,196,.2);border-bottom:1px solid rgba(59,130,196,.2);
-  background:rgba(255,255,255,.5);backdrop-filter:blur(6px);padding:16px 0;margin:30px 0 0}
-.marquee-track{display:flex;gap:44px;width:max-content;animation:scrollX 30s linear infinite;
-  font-family:'Unbounded';font-weight:700;font-size:14px;letter-spacing:2px;color:var(--purple);white-space:nowrap}
-.marquee-track span b{color:var(--gold-deep)}
+.hero .sub{font-size:clamp(1.02rem,2.2vw,1.25rem);color:var(--muted);max-width:680px;margin:0 auto 34px;line-height:1.7}
+.hero .sub b{color:var(--sapphire-deep)}
+.hero img.cover{width:min(300px,70vw);border-radius:26px;display:block;margin:34px auto 8px;border:6px solid #fff;box-shadow:0 28px 64px rgba(23,69,126,.28)}
+.price-line{margin:26px 0 8px;font-size:1.05rem;color:var(--muted)}
+.price-line b{color:var(--sapphire-deep);font-size:1.35rem}
+/* marquee */
+.marquee{overflow:hidden;border-top:1px solid rgba(46,124,214,.18);border-bottom:1px solid rgba(46,124,214,.18);background:rgba(255,255,255,.55);padding:15px 0;margin:34px 0 0}
+.marquee-track{display:flex;gap:44px;width:max-content;animation:scrollX 32s linear infinite;font-family:'Unbounded';font-weight:700;font-size:13px;letter-spacing:2px;color:var(--sapphire-deep);white-space:nowrap}
 @keyframes scrollX{to{transform:translateX(-50%)}}
-/* ---------- sections ---------- */
-section{max-width:1060px;margin:0 auto;padding:80px 20px}
-.sec-head{text-align:center;margin-bottom:50px}
-.sec-head .kicker{display:inline-block;font-family:'Unbounded';font-size:12px;letter-spacing:3px;color:var(--pink);
-  text-transform:uppercase;margin-bottom:14px}
-.sec-head h2{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:800;margin-bottom:14px}
-.sec-head p{color:var(--muted);font-size:1.08rem;max-width:620px;margin:0 auto;line-height:1.65}
-/* stats */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:10px}
-.stat{background:var(--glass);backdrop-filter:blur(12px);border-radius:20px;padding:28px 12px;text-align:center;
-  border:1px solid rgba(255,255,255,.9);box-shadow:0 12px 34px rgba(43,108,176,.1);transition:transform .3s}
-.stat:hover{transform:translateY(-6px)}
-.stat .num{font-family:'Unbounded';font-weight:800;font-size:clamp(1.6rem,3.4vw,2.4rem);
-  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.stat .lbl{font-size:13.5px;color:var(--muted);font-weight:600;margin-top:6px}
-/* features */
-.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.feat{background:var(--glass);backdrop-filter:blur(12px);border-radius:24px;padding:34px 28px;position:relative;
-  border:1px solid rgba(255,255,255,.95);box-shadow:0 14px 40px rgba(43,108,176,.1);
-  transition:transform .35s,box-shadow .35s;transform-style:preserve-3d;will-change:transform}
-.feat:hover{box-shadow:0 24px 60px rgba(59,130,196,.22)}
-.feat .icon{width:58px;height:58px;border-radius:18px;display:flex;align-items:center;justify-content:center;
-  font-size:27px;margin-bottom:20px;background:linear-gradient(135deg,var(--pink-pale),var(--gold-pale));
-  box-shadow:inset 0 2px 6px rgba(255,255,255,.9),0 6px 16px rgba(59,130,196,.18)}
-.feat h3{font-size:1.02rem;margin-bottom:12px;line-height:1.45}
-.feat p{color:var(--muted);line-height:1.65;font-size:.98rem}
-.feat .tag{position:absolute;top:22px;right:22px;font-size:11px;font-weight:700;letter-spacing:1px;color:var(--gold-deep);
-  background:var(--gold-pale);padding:5px 12px;border-radius:999px}
-/* how it works */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:step}
-.step-card{background:var(--glass);backdrop-filter:blur(12px);border-radius:24px;padding:36px 28px;text-align:center;
-  border:1px solid rgba(255,255,255,.95);box-shadow:0 14px 40px rgba(43,108,176,.1);position:relative;transition:transform .3s}
-.step-card:hover{transform:translateY(-6px)}
-.step-num{width:64px;height:64px;margin:0 auto 20px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-family:'Unbounded';font-weight:800;font-size:1.4rem;color:#fff;background:var(--grad);
-  box-shadow:0 10px 26px rgba(59,130,196,.4)}
-.step-card h3{font-size:1.05rem;margin-bottom:10px}
-.step-card p{color:var(--muted);line-height:1.6;font-size:.97rem}
+/* sections */
+section{padding:74px 0}
+.kicker{display:inline-block;font-family:'Unbounded';font-size:12px;letter-spacing:3px;color:var(--sapphire);text-transform:uppercase;margin-bottom:14px}
+.sec-head{text-align:center;margin-bottom:46px}
+.sec-head h2{font-size:clamp(1.55rem,3.8vw,2.5rem);font-weight:800;margin-bottom:14px;line-height:1.25}
+.sec-head p{color:var(--muted);font-size:1.06rem;max-width:640px;margin:0 auto;line-height:1.7}
+/* pain */
+.pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.pain-card{background:rgba(255,255,255,.72);border:1px solid rgba(46,124,214,.16);border-radius:20px;padding:26px 24px;box-shadow:0 10px 30px rgba(23,69,126,.08)}
+.pain-card p{line-height:1.7;font-size:1rem;color:#33475F}
+.pain-card p b{color:var(--sapphire-deep)}
+/* shift */
+.shift-panel{border-radius:28px;padding:56px 34px;text-align:center;color:#fff;background:linear-gradient(130deg,#5B9BE8 0%,#2E7CD6 50%,#17457E 100%);position:relative;overflow:hidden}
+.shift-panel::before{content:"🦋";position:absolute;font-size:120px;opacity:.14;top:12px;left:26px;transform:rotate(-18deg)}
+.shift-panel::after{content:"🦋";position:absolute;font-size:90px;opacity:.12;bottom:10px;right:30px;transform:rotate(14deg)}
+.shift-panel h2{font-size:clamp(1.5rem,3.6vw,2.3rem);margin-bottom:18px;position:relative}
+.shift-panel p{font-size:1.1rem;line-height:1.75;max-width:640px;margin:0 auto;opacity:.95;position:relative}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.step{background:rgba(255,255,255,.75);border:1px solid rgba(46,124,214,.16);border-radius:24px;padding:36px 26px;text-align:center;box-shadow:0 14px 38px rgba(23,69,126,.1)}
+.step-num{width:62px;height:62px;margin:0 auto 18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Unbounded';font-weight:800;font-size:1.35rem;color:#fff;background:var(--grad);box-shadow:0 10px 26px rgba(46,124,214,.4)}
+.step h3{font-size:1.02rem;margin-bottom:10px}
+.step p{color:var(--muted);line-height:1.65;font-size:.96rem}
+/* inside */
+.inside{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.in-card{background:rgba(255,255,255,.75);border-radius:22px;padding:30px 28px;border:1px solid rgba(46,124,214,.16);box-shadow:0 12px 34px rgba(23,69,126,.09)}
+.in-card .icon{font-size:30px;margin-bottom:14px}
+.in-card h3{font-size:1.02rem;margin-bottom:10px}
+.in-card p{color:var(--muted);line-height:1.65;font-size:.97rem}
+.in-card p b{color:var(--sapphire-deep)}
+/* money */
+.money{background:linear-gradient(180deg,#101418,#1B2A44);border-radius:28px;padding:60px 36px;color:#fff}
+.money h2{font-size:clamp(1.5rem,3.6vw,2.3rem);margin-bottom:14px;text-align:center}
+.money .lede{text-align:center;color:#C7D2E4;max-width:620px;margin:0 auto 36px;line-height:1.7;font-size:1.05rem}
+.money-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.money-card{background:rgba(255,255,255,.06);border:1px solid rgba(199,210,228,.22);border-radius:20px;padding:28px 24px}
+.money-card .icon{font-size:28px;margin-bottom:12px}
+.money-card h3{font-size:1rem;margin-bottom:10px;color:#fff}
+.money-card p{color:#C7D2E4;line-height:1.65;font-size:.95rem}
 /* showcase */
-.shows{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.show{background:#fff;border-radius:20px;overflow:hidden;border:1px solid rgba(59,130,196,.16);
-  box-shadow:0 16px 44px rgba(43,108,176,.12);transition:transform .3s}
-.show:hover{transform:translateY(-6px)}
-.show img{width:100%;height:340px;object-fit:cover;object-position:top center;display:block}
-.show-head{padding:16px 22px;background:linear-gradient(120deg,#F0F6FE,#EAF1FB);border-bottom:1px solid rgba(59,130,196,.14);
-  font-family:'Unbounded';font-size:12px;font-weight:700;letter-spacing:1px;color:var(--purple)}
-.show-body{padding:18px 22px 22px;font-size:.95rem;line-height:1.65;color:#3E5578}
-/* final cta */
-.final{max-width:1060px;margin:0 auto 90px;padding:0 20px}
-.final-panel{position:relative;overflow:hidden;border-radius:32px;padding:80px 30px;text-align:center;color:#fff;
-  background:linear-gradient(130deg,#3B82C4 0%,#2B6CB0 45%,#1E4E8C 100%)}
-.final-panel::before{content:"";position:absolute;inset:0;opacity:.35;
-  background-image:radial-gradient(circle at 20% 30%,rgba(201,210,228,.8) 0,transparent 22%),
-  radial-gradient(circle at 80% 20%,rgba(255,255,255,.5) 0,transparent 18%),
-  radial-gradient(circle at 65% 80%,rgba(201,210,228,.55) 0,transparent 20%),
-  radial-gradient(circle at 30% 75%,rgba(255,255,255,.35) 0,transparent 16%)}
-.final-panel h2{font-size:clamp(1.7rem,4.4vw,2.9rem);margin-bottom:16px;position:relative}
-.final-panel p{opacity:.92;font-size:1.1rem;margin-bottom:34px;position:relative;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.65}
-.btn-light{background:#fff;color:var(--purple);animation:none;position:relative;
-  box-shadow:0 12px 34px rgba(0,0,0,.25)}
-.btn-light:hover{box-shadow:0 18px 44px rgba(0,0,0,.32)}
-footer{text-align:center;padding:34px 20px;color:var(--muted);font-size:.9rem;border-top:1px solid rgba(59,130,196,.14)}
-footer b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-/* reveal on scroll */
-.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s ease}
+.shows{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.show{background:#fff;border-radius:20px;overflow:hidden;border:1px solid rgba(46,124,214,.16);box-shadow:0 16px 44px rgba(23,69,126,.12)}
+.show img{width:100%;height:330px;object-fit:cover;object-position:top center;display:block}
+.show-cap{padding:18px 22px;font-size:.95rem;line-height:1.65;color:#33475F;border-top:1px solid rgba(46,124,214,.12)}
+.show-cap b{font-family:'Unbounded';font-size:.78rem;letter-spacing:1px;color:var(--sapphire-deep);display:block;margin-bottom:6px}
+/* offer */
+.offer{border-radius:28px;background:#fff;border:2px solid rgba(46,124,214,.3);box-shadow:0 30px 70px rgba(23,69,126,.16);padding:56px 36px;text-align:center}
+.offer h2{font-size:clamp(1.5rem,3.6vw,2.4rem);margin-bottom:30px}
+.stack{max-width:560px;margin:0 auto 30px;text-align:left}
+.stack-item{display:flex;gap:16px;align-items:flex-start;padding:18px 20px;border-bottom:1px solid rgba(46,124,214,.14)}
+.stack-item:last-child{border-bottom:none}
+.stack-item .check{font-size:22px;line-height:1.2}
+.stack-item b{display:block;margin-bottom:4px}
+.stack-item p{color:var(--muted);font-size:.95rem;line-height:1.6}
+.stack-item .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:1px;background:var(--sapphire-pale);color:var(--sapphire-deep);padding:4px 12px;border-radius:999px;margin-left:8px;vertical-align:middle}
+.price-big{font-family:'Unbounded';font-weight:800;font-size:clamp(2.8rem,7vw,4.2rem);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin:6px 0}
+.was{color:var(--muted);text-decoration:line-through;font-size:1.15rem}
+.reassure{margin-top:18px;color:var(--muted);font-size:.95rem}
+/* guarantee */
+.guarantee{display:flex;gap:26px;align-items:center;background:rgba(255,255,255,.75);border:1px solid rgba(46,124,214,.2);border-radius:24px;padding:40px 34px;box-shadow:0 14px 38px rgba(23,69,126,.1)}
+.guarantee .seal{font-size:64px;flex-shrink:0}
+.guarantee h3{font-size:1.15rem;margin-bottom:10px}
+.guarantee p{color:var(--muted);line-height:1.7}
+/* faq */
+.faq-item{background:rgba(255,255,255,.75);border:1px solid rgba(46,124,214,.16);border-radius:18px;margin-bottom:14px;overflow:hidden}
+.faq-q{width:100%;text-align:left;background:none;border:none;cursor:pointer;font-family:'Outfit';font-weight:700;font-size:1.02rem;color:var(--ink);padding:20px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-a p{padding:0 24px 22px;color:var(--muted);line-height:1.7}
+.faq-item.open .faq-a{max-height:300px}
+/* final */
+.final-panel{border-radius:32px;padding:84px 30px;text-align:center;color:#fff;background:linear-gradient(130deg,#5B9BE8 0%,#2E7CD6 50%,#17457E 100%);position:relative;overflow:hidden}
+.final-panel::before{content:"🦋";position:absolute;font-size:150px;opacity:.12;top:20px;right:40px;transform:rotate(16deg)}
+.final-panel h2{font-size:clamp(1.7rem,4.2vw,2.8rem);margin-bottom:16px;position:relative}
+.final-panel p{opacity:.93;font-size:1.08rem;margin:0 auto 30px;max-width:580px;line-height:1.7;position:relative}
+.btn-light{background:#fff;color:var(--sapphire-deep);position:relative;box-shadow:0 14px 36px rgba(0,0,0,.28)}
+.final-price{position:relative;margin-top:20px;font-size:1rem;opacity:.92}
+/* footer */
+.cta-footer{background:#101418;color:#fff;text-align:center;padding:44px 22px 30px;margin-top:80px}
+.cta-footer .twin{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
+.cta-footer .twin a{flex:1 1 220px;max-width:300px;text-decoration:none;font-family:'Unbounded';font-weight:700;font-size:14px;color:#fff;padding:16px 20px;border-radius:999px;border:2px solid rgba(199,210,228,.5);transition:transform .25s,background .25s}
+.cta-footer .twin a:hover{transform:translateY(-2px);background:rgba(199,210,228,.14)}
+.cta-footer .made{font-size:.82rem;color:#8B98B0}
+/* reveal */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
 .reveal.in{opacity:1;transform:none}
-@media (max-width:860px){
-  .feats,.steps{grid-template-columns:1fr}
-  .shows{grid-template-columns:1fr}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .chip.hide-m{display:none}
-  .hero{padding-top:80px}
-  nav{padding:12px 16px}
-}
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
-}
-.price-note{text-align:center;font-size:1.05rem;color:var(--muted);margin:-42px 0 64px}
-.price-note b{color:var(--pink);font-size:1.3rem}
-.price-big{font-family:'Unbounded';font-weight:800;font-size:clamp(2.6rem,7vw,4rem);color:#fff;position:relative;margin:0 0 6px;text-shadow:0 4px 26px rgba(0,0,0,.28)}
-.price-sub{position:relative;opacity:.92;font-size:1.05rem;margin-bottom:28px}
-.product-cover{width:min(300px,72vw);border-radius:24px;display:block;margin:0 auto 30px;position:relative;
-  border:5px solid rgba(255,255,255,.9);box-shadow:0 26px 60px rgba(0,0,0,.35)}
+@media(max-width:860px){.steps,.money-grid{grid-template-columns:1fr}.pain-grid,.inside,.shows{grid-template-columns:1fr}.guarantee{flex-direction:column;text-align:center}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
-<meta property="og:title" content="Clothing Brand Prompt Generator — Turn Your Ideas Into Scroll-Stopping Designs">
-<meta property="og:description" content="30 brand types. 7 design styles. Ready-to-use AI image prompts. Only $27 one-time.">
-<meta property="og:image" content="https://nakeymasi-coder.github.io/prompt-like-glam-workshop/clothing-brand-generator/images/thumbnail.png">
-<meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
-<div class="aurora"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div></div>
-<div id="sparkles"></div>
 
 <nav>
-  <div class="logo">✨ Glam's Prompt Studio</div>
-  <a class="btn btn-sm" href="https://payhip.com/b/TdQJ9">Get Instant Access</a>
+  <div class="logo">🦋 Glam's Prompt Studio</div>
+  <a class="btn btn-sm" href="https://payhip.com/b/bV0si">Get Instant Access</a>
 </nav>
 
+<!-- 1 · HERO -->
 <header class="hero">
-  <span class="chip pink" style="top:120px;left:6%;--fd:6s;--rr:-6deg">STREETWEAR</span>
-  <span class="chip gold" style="top:265px;left:7%;--fd:7.5s;--rr:4deg">✦ Y2K</span>
-  <span class="chip" style="top:110px;right:7%;--fd:5.5s;--rr:5deg">BOHO</span>
-  <span class="chip pink hide-m" style="top:230px;right:13%;--fd:8s;--rr:-4deg">GOTHIC</span>
-  <span class="chip gold hide-m" style="top:330px;left:4%;--fd:6.8s;--rr:3deg">✦ LUXURY</span>
-  <span class="chip hide-m" style="top:360px;right:5%;--fd:7.2s;--rr:-5deg">ANIME</span>
-  <span class="chip pink" style="top:470px;left:10%;--fd:5.8s;--rr:6deg">KIDS</span>
-  <span class="chip gold" style="top:480px;right:11%;--fd:6.4s;--rr:-3deg">✦ FAITH</span>
-
-  <div class="badge">✨ New &nbsp;·&nbsp; AI Prompt Tool for Clothing Brands</div>
-  <h1>Turn Your Brand Ideas Into<br><span class="shimmer">Scroll-Stopping Designs</span></h1>
-  <p class="sub">Pick your brand vibe, check a few boxes, and get <b>ready-to-use AI image prompts</b> for every design style — typography, allover patterns, statement tees, mascots, faith designs &amp; more. No designer needed.</p>
-  <div class="cta-row">
-    <a class="btn" href="https://payhip.com/b/TdQJ9">🚀 Get Instant Access</a>
-    <a class="btn ghost" href="#how">See How It Works</a>
+  <span class="badge">🦋 For the woman building her own clothing brand</span>
+  <h1>Your Clothing Brand Is Already in You.<br><span class="shimmer">This Turns It Into Designs.</span></h1>
+  <p class="sub">You don't need to know how to draw. You don't need to pay a designer. Pick your vibe, tap a few boxes, and get <b>ready-to-use AI prompts</b> that turn what's in your head into real clothing designs — then put them on shirts and <b>get paid</b>.</p>
+  <div class="btn-row">
+    <a class="btn" href="https://payhip.com/b/bV0si">Get Instant Access — $27</a>
   </div>
-  <p class="price-note">Only <b>$27</b> · one-time payment · yours forever</p>
-
-  <div class="demo">
-    <div class="demo-bar"><span class="dot" style="background:#FF5F57"></span><span class="dot" style="background:#FEBC2E"></span><span class="dot" style="background:#28C840"></span><span style="margin-left:8px">✨ prompt-generator · live preview</span></div>
-    <div class="demo-body">
-      <div class="prompt-label">✨ Generating your prompt…</div>
-      <div><span id="typed"></span><span class="caret"></span></div>
-    </div>
-  </div>
+  <p class="price-line">Only <b>$27</b> · one-time payment · yours forever</p>
+  <img class="cover" src="images/thumbnail.png" alt="Clothing Brand Prompt Generator">
 </header>
 
 <div class="marquee"><div class="marquee-track" id="marqueeTrack"></div></div>
 
+<div class="wrap">
+
+<!-- 2 · THE PAIN -->
 <section>
   <div class="sec-head reveal">
-    <div class="kicker">Why creators love it</div>
-    <h2>Everything Handled, <span class="shimmer">Nothing to Figure Out</span></h2>
-    <p>Every option is curated for your brand type — you just check boxes and copy prompts.</p>
+    <span class="kicker">Sound familiar?</span>
+    <h2>You've Got the Vision.<br>Getting It <em>Out</em> Is the Hard Part.</h2>
   </div>
-  <div class="stats reveal">
-    <div class="stat"><div class="num">30</div><div class="lbl">Brand Types</div></div>
-    <div class="stat"><div class="num">7</div><div class="lbl">Design Styles</div></div>
-    <div class="stat"><div class="num">540+</div><div class="lbl">Garment Options</div></div>
-    <div class="stat"><div class="num">420+</div><div class="lbl">Typography Styles</div></div>
+  <div class="pain-grid">
+    <div class="pain-card reveal"><p><b>Brand names living in your notes app</b> — fire ideas you can't do anything with because you "can't draw."</p></div>
+    <div class="pain-card reveal"><p><b>Designers charging hundreds</b> for one graphic, and it still doesn't look like what you pictured.</p></div>
+    <div class="pain-card reveal"><p><b>You can see it so clear in your head</b> — the shirt, the letters, the whole vibe — but every mockup you try looks generic.</p></div>
+    <div class="pain-card reveal"><p><b>Meanwhile everybody else is launching.</b> Women with half your taste are selling tees while your ideas sit in a folder.</p></div>
   </div>
 </section>
 
-<section>
-  <div class="feats">
-    <div class="feat reveal"><span class="tag">★ mine</span><div class="icon">🎯</div><h3>30 Brand Types, Zero Guesswork</h3><p>Streetwear, Y2K, modest wear, Christian apparel, kids, baby, swim, western, anime — pick yours and every option reshapes itself around your vibe.</p></div>
-    <div class="feat reveal"><div class="icon">✍️</div><h3>Your Words, Your Way</h3><p>Add your own brand name, taglines, and custom text anywhere. Hit ＋ Add to save your own options forever — they show up as ★ mine every visit.</p></div>
-    <div class="feat reveal"><div class="icon">🎨</div><h3>7 Design Styles, 7 Prompts</h3><p>Typography logos, allover patterns, statement text, statement + character, mascots, scripture/faith, humor — each gets its own clearly labeled prompt.</p></div>
-    <div class="feat reveal"><div class="icon">👗</div><h3>18 Garments Per Brand</h3><p>Tees, hoodies, crewnecks, tanks, dresses, swim, sets &amp; more — curated per brand type, with blank garment colors and mockup styles.</p></div>
-    <div class="feat reveal"><div class="icon">💎</div><h3>Glam's Signature Typography</h3><p>Jeweled diamond script, chrome liquid letters, rhinestone varsity, glitter stickers, candy letters &amp; more — from Glam's own prompt library, matched to each brand.</p></div>
-    <div class="feat reveal"><div class="icon">🎲</div><h3>Randomize &amp; Copy All</h3><p>Feeling spontaneous? One tap randomizes everything. Copy a single prompt or grab them all at once — then paste straight into your AI image tool.</p></div>
+<!-- 3 · THE SHIFT -->
+<section style="padding-top:0">
+  <div class="shift-panel reveal">
+    <h2>What If the Only Thing Between You and Your Clothing Line Was the Right Words?</h2>
+    <p>AI image tools can draw anything — but only if you tell them exactly what you want, down to the fabric, the lettering, the lighting. That's a whole skill by itself. The Clothing Brand Prompt Generator <b>speaks that language for you</b>: you bring the vision, it writes the prompt, and your design comes out looking like it came from a studio.</p>
   </div>
 </section>
 
-<section id="how">
+<!-- 4 · HOW IT WORKS -->
+<section style="padding-top:0">
   <div class="sec-head reveal">
-    <div class="kicker">Dead simple</div>
-    <h2>From Idea to Prompt in <span class="shimmer">60 Seconds</span></h2>
+    <span class="kicker">Dead simple</span>
+    <h2>From Idea to Design Prompt in 60 Seconds</h2>
   </div>
   <div class="steps">
-    <div class="step-card reveal"><div class="step-num">1</div><h3>Pick Your Brand Type</h3><p>Choose from 30 clothing brand vibes. Everything — garments, fonts, colors — instantly curates itself for you.</p></div>
-    <div class="step-card reveal"><div class="step-num">2</div><h3>Check Your Options</h3><p>Tap the designs you want, check colors and details, add your brand name and custom text. Your prompts build live.</p></div>
-    <div class="step-card reveal"><div class="step-num">3</div><h3>Copy &amp; Create</h3><p>Copy one prompt or all of them, paste into any AI image generator, and watch your clothing designs come to life.</p></div>
+    <div class="step reveal"><div class="step-num">1</div><h3>Pick Your Lane</h3><p>Choose from 30 brand types — streetwear, Y2K, faith-based, kids, luxury minimal, and more. Everything reshapes itself around your vibe.</p></div>
+    <div class="step reveal"><div class="step-num">2</div><h3>Tap Your Details</h3><p>Check the styles, garments, colors, and typography you want. Add your brand name and your own words — your prompt builds live as you tap.</p></div>
+    <div class="step reveal"><div class="step-num">3</div><h3>Copy, Generate, Wear</h3><p>Copy your prompt, paste it into any AI image tool, and watch your design come to life — ready to print, press, and sell.</p></div>
   </div>
 </section>
 
-<section>
+<!-- 5 · WHAT'S INSIDE -->
+<section style="padding-top:0">
   <div class="sec-head reveal">
-    <div class="kicker">Fresh out of the generator</div>
-    <h2>Real Clothes, <span class="shimmer">Real Prompts</span></h2>
-    <p>Actual designs made from actual generator prompts — detailed, print-ready, and tuned for fabric.</p>
+    <span class="kicker">What's inside</span>
+    <h2>Everything Done for You.<br>Nothing Left to Figure Out.</h2>
+  </div>
+  <div class="inside">
+    <div class="in-card reveal"><div class="icon">🎯</div><h3>30 Brand Types — Your Lane, Already Mapped</h3><p>Streetwear, Y2K, modest wear, Christian apparel, kids, baby, swim, western, anime, hip hop… <b>pick yours and every option curates itself</b> — garments, colors, fonts, all of it.</p></div>
+    <div class="in-card reveal"><div class="icon">🎨</div><h3>7 Design Styles — 7 Ready Prompts</h3><p>Typography logos, allover patterns, statement tees, character designs, mascots, scripture &amp; faith, humor — <b>each one gets its own clearly-labeled prompt</b> you can copy in one tap.</p></div>
+    <div class="in-card reveal"><div class="icon">💎</div><h3>12 Signature Typography Styles</h3><p>Jeweled diamond script, chrome liquid letters, rhinestone varsity, glitter stickers, candy letters — <b>straight out of Glam's own prompt library</b>, matched to your brand type.</p></div>
+    <div class="in-card reveal"><div class="icon">✍️</div><h3>Your Words, Saved Forever</h3><p>Add your brand name, taglines, and custom text anywhere. Hit ＋ Add and <b>your own options are saved permanently</b> — they show up every visit, marked ★ mine.</p></div>
+  </div>
+</section>
+
+<!-- 6 · USE IT + GET PAID -->
+<section style="padding-top:0">
+  <div class="money reveal">
+    <span class="kicker" style="display:block;text-align:center">The part that matters</span>
+    <h2>How You'll Use It — and How You'll Get Paid</h2>
+    <p class="lede">This isn't a toy you play with once. It's a production tool. Here's what women are doing with it:</p>
+    <div class="money-grid">
+      <div class="money-card"><div class="icon">👕</div><h3>Print &amp; Press Your Own Tees</h3><p>Generate the design, print it at home, press it onto blanks. Sell at pop-ups, to your followers, or straight from your own site. You keep every dollar.</p></div>
+      <div class="money-card"><div class="icon">🛒</div><h3>Sell the Designs Themselves</h3><p>Package your best prompts and graphics as digital downloads. Design once, sell it a hundred times while you sleep.</p></div>
+      <div class="money-card"><div class="icon">📸</div><h3>Mockups That Pre-Sell</h3><p>Post the AI mockup before you print a single shirt. Take pre-orders, then only print what already sold — zero wasted inventory.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · SHOWCASE -->
+<section style="padding-top:0">
+  <div class="sec-head reveal">
+    <span class="kicker">Fresh out of the generator</span>
+    <h2>Real Prompts. Real Designs.</h2>
+    <p>Actual designs made from actual generator prompts — detailed, print-ready, tuned for fabric.</p>
   </div>
   <div class="shows">
-    <div class="show reveal">
-      <img src="./images/img-hoodie.webp" alt="Black hoodie with camo and gold glam hustle hub lettering" loading="lazy">
-      <div class="show-head">✨ TYPOGRAPHY / STREETWEAR</div>
-      <div class="show-body">Camo + gold "glam hustle hub" lettering on a black hoodie — print worked right into the fleece.</div>
+    <div class="show reveal"><img src="images/img-hoodie.webp" alt="Black hoodie with camo and gold lettering" loading="lazy"><div class="show-cap"><b>✨ Typography / Streetwear</b>Camo + gold "glam hustle hub" lettering on a black hoodie — print worked right into the fleece.</div></div>
+    <div class="show reveal"><img src="images/img-white-tee.webp" alt="White tee with bold graphic" loading="lazy"><div class="show-cap"><b>✨ Statement Tee</b>Bold collegiate graphic on a white tee — coffee-run ready, print sitting in the cotton.</div></div>
+    <div class="show reveal"><img src="images/img-red-tee.webp" alt="Red tee with retro rocket graphic" loading="lazy"><div class="show-cap"><b>✨ Bold Graphic</b>Retro rocket graphic on a red tee — festival energy, colors that pop off the fabric.</div></div>
+    <div class="show reveal"><img src="images/img-pattern-set.webp" alt="Matching allover pattern sports sets" loading="lazy"><div class="show-cap"><b>✨ Allover Pattern</b>Matching mommy-and-me sports pattern sets — the generator does full pattern looks too.</div></div>
+  </div>
+</section>
+
+<!-- 8 · THE OFFER -->
+<section style="padding-top:0">
+  <div class="offer reveal">
+    <span class="kicker">Your instant-access package</span>
+    <h2>Here's Everything You Get</h2>
+    <div class="stack">
+      <div class="stack-item"><span class="check">✅</span><div><b>Clothing Brand Prompt Generator <span class="tag">Core tool</span></b><p>30 brand types, 7 design styles, 12 signature typography styles, permanent custom saves, one-tap copy. Your design studio in a browser tab.</p></div></div>
+      <div class="stack-item"><span class="check">✅</span><div><b>Quick-Start Walkthrough <span class="tag">Bonus</span></b><p>Your first design in 60 seconds flat — even if you've never touched an AI image tool before.</p></div></div>
+      <div class="stack-item"><span class="check">✅</span><div><b>License Key Delivery <span class="tag">Included</span></b><p>Your unique license key arrives by email right after checkout — it unlocks your generator. Keep it somewhere safe.</p></div></div>
+      <div class="stack-item"><span class="check">💎</span><div><b>Order Bump: Typography Prompt Library — $17 <span class="tag">Optional</span></b><p>14 extra hand-built typography prompts to level up your lettering game. Add it at checkout with one click.</p></div></div>
     </div>
-    <div class="show reveal">
-      <img src="./images/img-white-tee.webp" alt="White tee with bold glam hustle hub graphic, coffee run" loading="lazy">
-      <div class="show-head">✨ STATEMENT TEE</div>
-      <div class="show-body">Bold collegiate graphic on a white tee — coffee-run ready, print sitting in the cotton.</div>
-    </div>
-    <div class="show reveal">
-      <img src="./images/img-red-tee.webp" alt="Red tee with retro rocket glam hustle hub graphic at a festival" loading="lazy">
-      <div class="show-head">✨ BOLD GRAPHIC</div>
-      <div class="show-body">Retro rocket graphic on a red tee — festival energy, colors that pop off the fabric.</div>
-    </div>
-    <div class="show reveal">
-      <img src="./images/img-pattern-set.webp" alt="Matching mommy and me allover pattern sports sets" loading="lazy">
-      <div class="show-head">✨ ALLOVER PATTERN</div>
-      <div class="show-body">Matching mommy-and-me sports pattern sets — the generator does full pattern looks too.</div>
+    <p class="was">Regular $54</p>
+    <div class="price-big">$27</div>
+    <p style="color:var(--muted);margin-bottom:28px">one-time payment · no subscription · yours forever</p>
+    <a class="btn" href="https://payhip.com/b/bV0si">🚀 Get Instant Access Now</a>
+    <p class="reassure">🔒 Secure checkout · Instant delivery · Your key emailed immediately</p>
+  </div>
+</section>
+
+<!-- 9 · GUARANTEE -->
+<section style="padding-top:0">
+  <div class="guarantee reveal">
+    <div class="seal">🤝</div>
+    <div>
+      <h3>My Word to You</h3>
+      <p>I'm not going to hit you with fine-print games. If you open the generator and it genuinely isn't what I promised — you can't make a single design you're proud of — email me within 7 days and I'll make it right. I built this for women like us, and I stand behind it like that.</p>
     </div>
   </div>
 </section>
 
-<div class="final">
-  <div class="final-panel reveal" id="get-access">
-    <img class="product-cover" src="images/thumbnail.png" alt="Clothing Brand Prompt Generator — only $27 one-time">
-    <h2>Start Creating Scroll-Stopping Designs Today ✨</h2>
-    <p>Join the creators turning blank tees into brands. Pay once, create forever — your saved options are always waiting for you.</p>
-    <div class="price-big">$27</div>
-    <div class="price-sub">one-time payment · no subscription · yours forever</div>
-    <a class="btn btn-light" href="https://payhip.com/b/TdQJ9">🚀 Get Instant Access Now</a>
+<!-- 10 · FAQ -->
+<section style="padding-top:0">
+  <div class="sec-head reveal">
+    <span class="kicker">Questions, answered</span>
+    <h2>Before You Ask…</h2>
   </div>
-</div>
+  <div style="max-width:720px;margin:0 auto">
+    <div class="faq-item reveal"><button class="faq-q">Do I need design skills? <span>＋</span></button><div class="faq-a"><p>No — that's the whole point. If you can tap boxes on your phone, you can use this. The generator writes the expert-level prompt; you just bring the idea.</p></div></div>
+    <div class="faq-item reveal"><button class="faq-q">What AI tool do I paste the prompts into? <span>＋</span></button><div class="faq-a"><p>Any AI image generator — Midjourney, DALL·E, Ideogram, Leonardo, or whatever you're already using. The prompts are written to work across all of them.</p></div></div>
+    <div class="faq-item reveal"><button class="faq-q">How do I get access after I pay? <span>＋</span></button><div class="faq-a"><p>Instantly. Checkout takes about a minute, your download and your unique license key land in your email right away, and the key unlocks your generator. Save that email.</p></div></div>
+    <div class="faq-item reveal"><button class="faq-q">I'm brand new to AI. Will I be lost? <span>＋</span></button><div class="faq-a"><p>Nope. There's a quick-start walkthrough that gets your first design out in 60 seconds. And the whole thing is tap-and-check — no typing long prompts, no learning curve.</p></div></div>
+    <div class="faq-item reveal"><button class="faq-q">Can I actually sell what I make? <span>＋</span></button><div class="faq-a"><p>Yes. The designs you generate are yours to print, press, and sell — on shirts, hoodies, or as digital products. That's what it's built for.</p></div></div>
+    <div class="faq-item reveal"><button class="faq-q">Is this a subscription? <span>＋</span></button><div class="faq-a"><p>No. One payment of $27, and it's yours forever — including your permanently saved custom options.</p></div></div>
+  </div>
+</section>
 
-<footer>Made with 💖 by <b>Glam</b> · Glam's Prompt Studio · Your brand, your words, your empire.</footer>
+<!-- 11 · FINAL CTA -->
+<section style="padding-top:0">
+  <div class="final-panel reveal">
+    <h2>Your Brand Is Waiting on You, Boo 🦋</h2>
+    <p>Every day those ideas sit in your notes app is a day somebody else launches first. $27. One time. Your designs, your shirts, your empire.</p>
+    <a class="btn btn-light" href="https://payhip.com/b/bV0si">🚀 Get Instant Access — $27</a>
+    <p class="final-price">One-time payment · Instant delivery · License key emailed immediately</p>
+  </div>
+</section>
+
+</div><!-- /wrap -->
+
+<!-- TWIN-BUTTON FOOTER -->
+<footer class="cta-footer">
+  <div class="twin">
+    <a href="https://payhip.com/b/54LoK" target="_blank" rel="noopener">✨ Join The Glam Vault</a>
+    <a href="https://glamhustlehub.com" target="_blank" rel="noopener">🛍️ Shop Glam Hustle Hub</a>
+  </div>
+  <p class="made">made with ♥ by Indigo, Glam's AI assistant</p>
+</footer>
 
 <script>
-/* twinkling sparkles */
 (function(){
-  const box = document.getElementById('sparkles');
-  const glyphs = ['✦','✧','⋆','✦','✧'];
-  const colors = ['#C9D6E8','#3B82C4','#7FA8D9','#C9D6E8','#8FC1F5'];
-  for(let i=0;i<26;i++){
-    const s = document.createElement('span');
-    s.className = 'spk';
-    s.textContent = glyphs[i % glyphs.length];
-    s.style.left = Math.random()*100 + 'vw';
-    s.style.top = Math.random()*100 + 'vh';
-    s.style.color = colors[i % colors.length];
-    s.style.fontSize = (10 + Math.random()*14) + 'px';
-    s.style.setProperty('--d', (2.5 + Math.random()*3.5) + 's');
-    s.style.animationDelay = (Math.random()*4) + 's';
-    box.appendChild(s);
-  }
+  const brands=['STREETWEAR','Y2K','GOTHIC','BOHO','CHRISTIAN APPAREL','KIDS','BABY','LUXURY MINIMAL','ANIME','HIP HOP','WESTERN','SWIMWEAR','PREPPY','FESTIVAL','SKATE'];
+  const half=brands.map(b=>'<span>'+b+' &nbsp;✦</span>').join('');
+  document.getElementById('marqueeTrack').innerHTML=half+half;
 })();
-/* marquee */
-(function(){
-  const brands = ['STREETWEAR','Y2K','GOTHIC','BOHO','CHRISTIAN APPAREL','KIDS','BABY','LUXURY MINIMAL','ANIME','HIP HOP','WESTERN','SWIMWEAR','PREPPY','FESTIVAL','SKATE'];
-  const half = brands.map(b=>`<span>${b} &nbsp;<b>✦</b></span>`).join('');
-  document.getElementById('marqueeTrack').innerHTML = half + half;
-})();
-/* typewriter demo */
-(function(){
-  const samples = [
-    "Oversized black hoodie, Y2K glam brand \u2018Velvet Reign\u2019 \u2014 chrome liquid letters across the chest, hot pink + gold palette, rhinestone sparkle, print worked into the fabric weave following the folds, ultra-detailed studio mockup\u2026",
-    "Cream Christian streetwear tee \u2014 \u2018Highly CHOSEN\u2019 in faith cursive + bold slab serif, gold foil lettering, soft vintage wash, centered chest placement, cozy faith-based aesthetic\u2026",
-    "Kids\u2019 rainbow tee \u2014 candy dessert letters spelling \u2018Sweet Dreams\u2019, glitter sticker style, pastel palette, playful allover sprinkles, soft cotton texture\u2026"
-  ];
-  const el = document.getElementById('typed');
-  let si = 0, ci = 0, deleting = false;
-  function tick(){
-    const text = samples[si];
-    if(!deleting){
-      ci++;
-      el.textContent = text.slice(0, ci);
-      if(ci >= text.length){ deleting = true; return void setTimeout(tick, 2600); }
-      setTimeout(tick, 18 + Math.random()*30);
-    } else {
-      ci -= 6;
-      if(ci <= 0){ ci = 0; deleting = false; si = (si+1) % samples.length; return void setTimeout(tick, 500); }
-      el.textContent = text.slice(0, ci);
-      setTimeout(tick, 12);
-    }
-  }
-  tick();
-})();
-/* reveal on scroll */
-(function(){
-  const io = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  },{threshold:.12});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-})();
-/* subtle 3D tilt on feature cards */
-(function(){
-  if(matchMedia('(hover:none)').matches) return;
-  document.querySelectorAll('.feat').forEach(card=>{
-    card.addEventListener('mousemove', e=>{
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left)/r.width - .5, y = (e.clientY - r.top)/r.height - .5;
-      card.style.transform = `perspective(900px) rotateY(${x*7}deg) rotateX(${-y*7}deg) translateY(-6px)`;
-    });
-    card.addEventListener('mouseleave', ()=>{ card.style.transform = ''; });
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.parentElement;
+    const wasOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!wasOpen)item.classList.add('open');
   });
+});
+(function(){
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 })();
 </script>
 </body>
