@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Curvy Tee Fit Guide — Glam Hustle Hub</title>
+<style>
+  :root{
+    --pink:#FF1493;
+    --purple:#4A148C;
+    --gold:#C9A227;
+    --gold-soft:#F6EBC8;
+    --pearl:#FFFDFB;
+    --blush:#FFF2F8;
+    --ink:#3A2A3F;
+    --muted:#7A6A80;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family: Georgia, 'Times New Roman', serif;
+    background:var(--pearl);
+    color:var(--ink);
+    line-height:1.75;
+    font-size:17px;
+  }
+  .page{max-width:820px;margin:0 auto;padding:0 28px 60px}
+
+  /* ---------- COVER ---------- */
+  .cover{
+    background:linear-gradient(135deg,#FF1493 0%,#B03A8E 55%,#4A148C 100%);
+    color:#fff;
+    border-radius:0 0 34px 34px;
+    padding:64px 40px 54px;
+    text-align:center;
+    margin:0 -28px 44px;
+  }
+  .cover .kicker{
+    display:inline-block;
+    background:rgba(255,255,255,.22);
+    border:1px solid rgba(255,255,255,.55);
+    padding:6px 18px;border-radius:999px;
+    font-family:Verdana,Geneva,sans-serif;
+    font-size:12px;letter-spacing:3px;text-transform:uppercase;
+    margin-bottom:22px;
+  }
+  .cover h1{
+    font-size:52px;line-height:1.12;margin-bottom:14px;
+    text-shadow:0 2px 14px rgba(0,0,0,.18);
+  }
+  .cover h1 .gold{color:#FFE9A8}
+  .cover .tagline{
+    font-size:21px;font-style:italic;opacity:.96;max-width:560px;margin:0 auto 26px;
+  }
+  .cover .byline{
+    font-family:Verdana,Geneva,sans-serif;font-size:13px;letter-spacing:1px;opacity:.9;
+  }
+  .cover .hearts{font-size:26px;margin-top:14px;letter-spacing:8px}
+
+  /* ---------- SECTIONS ---------- */
+  section{margin-bottom:44px}
+  .sec-label{
+    font-family:Verdana,Geneva,sans-serif;
+    font-size:12px;letter-spacing:3px;text-transform:uppercase;
+    color:var(--pink);margin-bottom:6px;
+  }
+  h2{
+    font-size:30px;color:var(--purple);margin-bottom:14px;line-height:1.3;
+  }
+  h3{font-size:20px;color:var(--pink);margin:22px 0 8px}
+  p{margin-bottom:14px}
+  ul,ol{margin:0 0 16px 24px}
+  li{margin-bottom:8px}
+  strong{color:var(--purple)}
+
+  .card{
+    background:#fff;
+    border:1px solid #F3D9E8;
+    border-left:6px solid var(--pink);
+    border-radius:14px;
+    padding:20px 24px;
+    margin:20px 0;
+    box-shadow:0 4px 18px rgba(255,20,147,.07);
+  }
+  .card.purple{border-left-color:var(--purple)}
+  .card.gold{border-left-color:var(--gold);background:#FFFDF4}
+
+  .pullquote{
+    background:var(--blush);
+    border:2px dashed var(--pink);
+    border-radius:16px;
+    padding:24px 28px;
+    margin:24px 0;
+    font-size:20px;font-style:italic;color:var(--purple);
+    text-align:center;
+  }
+  .pullquote .attr{
+    display:block;margin-top:10px;font-size:14px;font-style:normal;
+    font-family:Verdana,Geneva,sans-serif;color:var(--muted);letter-spacing:1px;
+  }
+
+  table{
+    width:100%;border-collapse:collapse;margin:18px 0 24px;font-size:15.5px;
+    font-family:Verdana,Geneva,sans-serif;
+  }
+  th{
+    background:var(--pink);color:#fff;text-align:left;
+    padding:12px 14px;font-size:13px;letter-spacing:1px;text-transform:uppercase;
+  }
+  th:first-child{border-radius:12px 0 0 0}
+  th:last-child{border-radius:0 12px 0 0}
+  td{padding:12px 14px;border-bottom:1px solid #F3D9E8;vertical-align:top;line-height:1.55}
+  tr:last-child td{border-bottom:none}
+  tr:nth-child(even) td{background:#FFF9FC}
+
+  .tip{
+    background:var(--gold-soft);
+    border-radius:12px;padding:14px 18px;margin:16px 0;
+    font-size:15.5px;
+  }
+  .tip::before{content:"💡 ";}
+
+  .checklist{list-style:none;margin-left:0}
+  .checklist li{padding-left:34px;position:relative;margin-bottom:12px}
+  .checklist li::before{
+    content:"✔";position:absolute;left:0;top:0;
+    background:var(--pink);color:#fff;width:22px;height:22px;border-radius:50%;
+    font-size:13px;text-align:center;line-height:22px;font-family:Verdana,sans-serif;
+  }
+
+  .footer{
+    text-align:center;margin-top:56px;padding-top:28px;
+    border-top:2px solid #F3D9E8;color:var(--muted);
+    font-family:Verdana,Geneva,sans-serif;font-size:13px;letter-spacing:1px;
+  }
+  .footer .brand{color:var(--pink);font-weight:bold}
+
+  .cheat{border:3px solid var(--gold);border-radius:18px;padding:28px;background:#fff}
+
+  /* ---------- PRINT ---------- */
+  @media print{
+    body{background:#fff;font-size:12.5pt;line-height:1.6}
+    .page{max-width:100%;padding:0}
+    .cover{margin:0 0 30px;border-radius:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .cover h1{font-size:38pt}
+    section{page-break-inside:avoid}
+    .cheat{page-break-before:always}
+    th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .card,.pullquote,.tip{box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    a{color:var(--purple);text-decoration:none}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="kicker">A Glam Hustle Hub Digital Guide</div>
+    <h1>The Curvy Tee <span class="gold">Fit Guide</span></h1>
+    <p class="tagline">Because "fat girls have money too" — and they deserve tees that actually fit, flatter, and survive the wash.</p>
+    <p class="byline">FOR SHIRT SELLERS WHO WANT PLUS-SIZE CUSTOMERS FOR LIFE</p>
+    <div class="hearts">💗 👑 💗</div>
+  </div>
+
+  <!-- 1. WHY STANDARD TEES FAIL -->
+  <section>
+    <div class="sec-label">Chapter 1</div>
+    <h2>Why Standard Tees Fail Curvy Bodies</h2>
+    <p>Let's say the quiet part out loud: most custom tees were never designed for curvy bodies. They were designed for a straight-size body, then graded up — meaning somebody just made everything bigger without rethinking <em>anything</em> about the shape. Here's what that actually does to your customer:</p>
+    <ul>
+      <li><strong>Tiny armholes.</strong> The #1 complaint. When a pattern is just scaled up, the armhole doesn't grow the way a real arm does. Result: digging, pinching, and a shirt she rips off the second she gets home.</li>
+      <li><strong>The tent-or-sausage trap.</strong> Too small across the bust and it clings and pulls. Size up to fix the bust and now she's swimming in fabric at the waist with sleeves down to her elbows. There is no winning — because the shirt wasn't built for her.</li>
+      <li><strong>Designs placed for somebody else's body.</strong> A graphic centered for a medium lands in a completely different spot on a 3X. Text stretches across the fullest part of the bust and becomes unreadable. A cute little left-chest logo gets swallowed whole.</li>
+      <li><strong>Necklines that choke.</strong> Standard crew necks sit higher and tighter on a fuller bust and shorter neck, turning a cute tee into a turtleneck she didn't order.</li>
+    </ul>
+    <div class="pullquote">
+      "Fat girls have money too. I would gladly spend tons of money on your site if you carried my size."
+      <span class="attr">— A REAL CUSTOMER, ON A THREADLESS FORUM</span>
+    </div>
+    <p>Here's the beautiful part, though: this is <strong>your</strong> opening. Big sellers ignore this customer. You won't. A seller who gets fit right doesn't just make a sale — she makes a customer who tells every curvy friend she has. And trust me, we talk.</p>
+  </section>
+
+  <!-- 2. MEASURE YOURSELF RIGHT -->
+  <section>
+    <div class="sec-label">Chapter 2</div>
+    <h2>Measure Yourself Right</h2>
+    <p>Before you can pick the right size, you need real numbers — not the size you <em>wish</em> you were, not the size you were in 2019. Grab a soft measuring tape (the floppy kind, not the metal toolbox kind) and let's do this in five minutes.</p>
+    <h3>The four numbers that matter</h3>
+    <ol>
+      <li><strong>Bust:</strong> Wrap the tape around the fullest part of your bust, keeping it level all the way around your back. Wear a good everyday bra — not a sports bra squishing everything down, not nothing at all. The tape should be snug but not tight. You should be able to slip one finger under it.</li>
+      <li><strong>Waist:</strong> Find your natural waist — it's usually the narrowest part, about an inch above your belly button. Stand relaxed (no sucking in, gorgeous — we're getting accurate numbers, not auditioning).</li>
+      <li><strong>Hips:</strong> Around the fullest part of your hips and backside, tape level. This one matters because tees that fit the bust sometimes cling at the hip — and nobody wants a shirt that rides up.</li>
+      <li><strong>Height:</strong> Barefoot, back against a wall. Height tells you whether a "long" body will turn a standard tee into a crop top. If you're 5'9" or taller, length matters as much as width.</li>
+    </ol>
+    <div class="tip"><strong>Golden rule:</strong> write the numbers down and measure every six months. Bodies change, and guessing is how returns happen. If you can, have a friend do the bust — it's nearly impossible to keep the tape level on yourself.</div>
+    <div class="tip"><strong>Seller tip:</strong> put a little "how to measure" graphic right in your listings. Customers who measure correctly buy correctly — and they don't return.</div>
+  </section>
+
+  <!-- 3. BLANK BRAND REAL TALK -->
+  <section>
+    <div class="sec-label">Chapter 3</div>
+    <h2>Blank Brand Real Talk</h2>
+    <p>Not all blanks are created equal, and the differences matter <em>more</em> on curvy bodies. Here are the three workhorses, with honest notes on each. (Fit guidance here — always check the manufacturer's current size chart before you order, because brands tweak things.)</p>
+
+    <table>
+      <tr><th>Blank</th><th>Sizes</th><th>The vibe</th><th>Fit notes for curvy bodies</th></tr>
+      <tr>
+        <td><strong>Comfort Colors 1717</strong></td>
+        <td>S – 4XL</td>
+        <td>Heavyweight (6.1&nbsp;oz) garment-dyed ring-spun cotton. Relaxed, boxy, vintage lived-in feel.</td>
+        <td>Runs roomy with a relaxed boxy cut — forgiving across bust and hips. The boxy shape is genuinely curvy-friendly. Heads-up: it's a tubular knit (no side seams), so it can twist a little in the wash, and garment-dyed colors can vary slightly between batches — tell your customers so they're not surprised.</td>
+      </tr>
+      <tr>
+        <td><strong>Gildan 5000 Heavy Cotton</strong></td>
+        <td>S – 5XL</td>
+        <td>Midweight (5.3&nbsp;oz) classic cotton tee. The budget workhorse.</td>
+        <td>The widest size range of the three — all the way to 5XL — and the lowest price, which is why it's everywhere. Classic (boxier) fit. The hand-feel is basic cotton, not silky, and like most tubular knits it can twist slightly after washing. Best pick when your customer wants the biggest size range at the friendliest price.</td>
+      </tr>
+      <tr>
+        <td><strong>Bella+Canvas 3001C</strong></td>
+        <td>XS – 5XL</td>
+        <td>Lightweight (4.2&nbsp;oz) combed ring-spun cotton. Soft, modern, fashion fit with side seams.</td>
+        <td>The softest hand-feel and the most "boutique" look — side seams hold the shirt's shape wash after wash. BUT it runs slimmer and more tapered than the other two. Most curvy customers should <strong>size up one</strong> from their Gildan size. The lighter fabric also shows more, so that size-up gives the skimming (not clinging) fit curvy buyers want.</td>
+      </tr>
+    </table>
+
+    <div class="card">
+      <h3 style="margin-top:0">So which blank for which customer?</h3>
+      <ul>
+        <li><strong>She wants cozy and relaxed, vintage vibes</strong> → Comfort Colors 1717. The boxy cut does the work for you.</li>
+        <li><strong>She wants the biggest size range or the lowest price</strong> → Gildan 5000. Nothing else goes to 5XL this affordably.</li>
+        <li><strong>She wants soft, modern, and boutique-feeling</strong> → Bella+Canvas 3001C — with a size-up note in your listing.</li>
+      </ul>
+    </div>
+    <div class="tip"><strong>When in doubt, stock 2X–3X first.</strong> That's where the loudest unmet demand lives — too many shops stop at XL and call it "inclusive."</div>
+  </section>
+
+  <!-- 4. PICKING THE RIGHT SIZE: EASE -->
+  <section>
+    <div class="sec-label">Chapter 4</div>
+    <h2>Picking the Right Size: The "Ease" Method</h2>
+    <p>Forget everything confusing about junior vs. missy vs. unisex sizing. There's one simple idea that never lies: <strong>ease</strong>. Ease is just the difference between your body measurement and the shirt's measurement. It's the wiggle room.</p>
+    <p>Here's how to use it in plain English:</p>
+    <ol>
+      <li>Take your bust number from Chapter 2.</li>
+      <li>Look at the blank's size chart — find the <em>garment chest</em> measurement (that's the shirt laid flat, measured armpit to armpit, then doubled).</li>
+      <li>Subtract your bust from the garment chest. That number is your ease.</li>
+    </ol>
+    <div class="card purple">
+      <h3 style="margin-top:0">What your ease number means</h3>
+      <ul>
+        <li><strong>2–4 inches of ease → Fitted.</strong> Skims close to the body. Pretty, but on a curvy bust it can pull at buttons of text and cling. Only recommend this if she <em>wants</em> fitted.</li>
+        <li><strong>4–6 inches of ease → Comfortable / true to size.</strong> The sweet spot for most curvy customers. The fabric skims instead of clinging, nothing pulls, she can breathe and move.</li>
+        <li><strong>6–8+ inches of ease → Relaxed / flowy.</strong> The cozy oversized look. Great for Comfort Colors wearers and anyone who likes drape.</li>
+      </ul>
+    </div>
+    <p><strong>The curvy rule of thumb:</strong> aim for at least 4–6 inches of ease at the bust. Then do a gut-check on the hips too — if her hips are fuller than her bust, make sure the shirt's hip area (roughly the bottom hem width) has room as well, or the shirt will ride up and she'll spend all day tugging it down.</p>
+    <div class="tip"><strong>Seller superpower:</strong> translate this into one line in your listings — <em>"For a relaxed fit like the model, choose 4–6 inches bigger than your bust measurement."</em> Watch your "what size should I get?" messages melt away.</div>
+  </section>
+
+  <!-- 5. DESIGN SIZING & PLACEMENT -->
+  <section>
+    <div class="sec-label">Chapter 5</div>
+    <h2>Design Sizing &amp; Placement Rules for Curvy Bodies</h2>
+    <p>This is where most sellers blow it without realizing. A design sized and placed for a medium looks lost, stretched, or just plain wrong on a 3X. These rules fix that:</p>
+
+    <h3>Size the design to the body</h3>
+    <p>The standard chest print most sellers use is about 10–11 inches wide. On a 2X and up, that same print looks like a postage stamp. <strong>Go 1–2 inches wider than standard for 2X–3X, and up to 2–3 inches wider for 4X–5X.</strong> The design should feel proportional to the canvas — a bigger shirt is a bigger canvas, so use it.</p>
+
+    <h3>Place it lower than you think</h3>
+    <p>On a curvy body, the neckline sits higher relative to the bust, so a design placed at "standard" height ends up riding on top of the bust instead of below it. <strong>Start the design about a hand's width — 3 to 4 inches — below the neckline seam on 2X and up</strong> (a little lower for 4X–5X). Center it on the chest, not on the shirt — on fuller busts those aren't the same spot.</p>
+
+    <h3>Keep text off the fullest point</h3>
+    <p>Words stretched across the apex of the bust warp and become hard to read — and nobody wants their shirt's message distorted. Nudge text-based designs slightly above or below the fullest point, or choose designs where the text sits in the upper chest area with graphics below.</p>
+
+    <h3>Necklines matter</h3>
+    <ul>
+      <li><strong>Wider crew necks</strong> sit more comfortably on a fuller bust and shorter neck — no choking.</li>
+      <li><strong>Scoop and V-necks</strong> elongate the neck and draw the eye vertically. Very flattering, very requested.</li>
+      <li>Avoid tight, high ribbed collars on plus sizes unless the blank is specifically cut with a wider neck.</li>
+    </ul>
+
+    <div class="card gold">
+      <h3 style="margin-top:0">🚫 What to avoid</h3>
+      <ul>
+        <li><strong>Tiny left-chest prints on big bodies.</strong> A 3-inch pocket print on a 3X gets visually swallowed. Scale pocket prints up a touch for 2X+.</li>
+        <li><strong>Long vertical text down the bust.</strong> It follows every curve and becomes unreadable.</li>
+        <li><strong>Designs that end right at the widest point.</strong> A graphic whose edge lands exactly at the fullest hip or bust creates a harsh horizontal line. Extend past it or stop well above it.</li>
+        <li><strong>One-size-fits-all gang sheets.</strong> If you're printing the same 10.5" design for every size from S to 4X, your plus customers can tell. Make a second, larger version for 2X+ — it's one extra file and it changes everything.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 6. FABRIC, WASH & CARE -->
+  <section>
+    <div class="sec-label">Chapter 6</div>
+    <h2>Fabric, Wash &amp; Care: Keep Prints Alive</h2>
+    <p>Nothing kills a repeat customer faster than a print that dies in the wash. (Remember the buyers whose brand-new tees were "ruined after the first cold wash"? Yeah. Not you.) Print this care card and ship it with every order:</p>
+    <div class="card">
+      <ul class="checklist">
+        <li><strong>Wash inside out.</strong> This one step does more than anything else — it keeps the print from rubbing against other clothes and the machine drum.</li>
+        <li><strong>Cold water, gentle cycle.</strong> Hot water is the enemy of every print method: DTF, vinyl, screen print, all of them.</li>
+        <li><strong>Skip the high-heat dryer</strong> — or at least tumble dry low. High heat cracks prints and shrinks cotton. Hang-dry is the gold standard if she has the patience.</li>
+        <li><strong>Never iron directly on the design.</strong> Iron inside-out or lay a cloth over the print.</li>
+        <li><strong>No bleach, no fabric softener on the print.</strong> Both break down adhesives and inks over time.</li>
+      </ul>
+    </div>
+    <p><strong>Your secret weapon:</strong> wash-test your own shirts and photograph it. "Here's our design after 20 washes" with a real photo beats any promise you could write. One wash-test photo in your listing is worth a thousand words of "high quality print!!!"</p>
+    <div class="tip"><strong>Fabric note:</strong> 100% cotton (like all three blanks in Chapter 3) can shrink a little on the first hot wash — another reason to preach cold water. Pre-shrunk doesn't mean <em>never</em>-shrinks.</div>
+  </section>
+
+  <!-- 7. SELLER'S LISTING CHECKLIST -->
+  <section>
+    <div class="sec-label">Chapter 7</div>
+    <h2>The Seller's Listing Checklist</h2>
+    <p>You can have the best-fitting tee on the internet and still lose the sale if your listing doesn't <em>prove</em> it. Plus-size buyers have been burned before — they're shopping with their guard up. Here's exactly what to put in every listing to win them over:</p>
+    <ul class="checklist">
+      <li><strong>A real size chart</strong> — garment measurements (chest, length), not just "S / M / L." Borrow it from the blank manufacturer's chart and put it in the photos, not buried in the description.</li>
+      <li><strong>Model measurements + the size she's wearing.</strong> "Model is 5'6", bust 44", wearing 2X" tells a curvy buyer more than ten adjectives.</li>
+      <li><strong>Photos on curvy bodies.</strong> Not one token photo — show the design on 2X and 3X bodies styled well. If you can't hire models yet, AI mockups on plus-size bodies are a legitimate starting point (just keep them honest and un-retouched).</li>
+      <li><strong>Honest fit notes in plain words.</strong> "Runs roomy — size down for a fitted look" or "Fashion fit — size up one for a relaxed fit." One line. It builds trust instantly.</li>
+      <li><strong>A wash-test photo.</strong> "After 20 washes" with a real picture. This single image answers the fear every buyer has.</li>
+      <li><strong>Fabric content and weight.</strong> "100% ring-spun cotton, 6.1 oz" tells an experienced buyer exactly what she's getting.</li>
+      <li><strong>Care instructions in the listing.</strong> Inside out, cold wash, low heat. It protects your prints <em>and</em> cuts down on "the design peeled!" complaints.</li>
+      <li><strong>Size-inclusive language.</strong> Say "2X–5X" proudly in the title. Never "plus sizes available (upcharge applies)" as an afterthought — and think hard before charging extra for bigger sizes. Nothing says "you're an inconvenience" like a fat tax.</li>
+    </ul>
+    <div class="pullquote">
+      Answer "will this actually fit me?" before she has to ask — and she'll buy from you instead of the shop that made her guess.
+      <span class="attr">— YOUR NEW LISTING PHILOSOPHY</span>
+    </div>
+  </section>
+
+  <!-- 8. CHEAT SHEET -->
+  <section class="cheat">
+    <div class="sec-label">Tear-Out Quick Reference</div>
+    <h2>⚡ The One-Page Cheat Sheet</h2>
+    <p>Print this page and tape it next to your heat press.</p>
+
+    <h3>Blank at a glance</h3>
+    <table>
+      <tr><th>Blank</th><th>Sizes</th><th>Fit</th><th>Size-up rule</th><th>Best for</th></tr>
+      <tr><td><strong>Comfort Colors 1717</strong></td><td>S–4XL</td><td>Roomy, boxy, relaxed</td><td>True to size (size down for fitted)</td><td>Vintage cozy vibes</td></tr>
+      <tr><td><strong>Gildan 5000</strong></td><td>S–5XL</td><td>Classic, boxier</td><td>True to size</td><td>Biggest range, lowest price</td></tr>
+      <tr><td><strong>Bella+Canvas 3001C</strong></td><td>XS–5XL</td><td>Slim, fashion fit</td><td>Size UP one for curvy</td><td>Soft boutique feel</td></tr>
+    </table>
+
+    <h3>Ease in 10 seconds</h3>
+    <p><strong>Garment chest − your bust = ease.</strong> 2–4" = fitted &nbsp;•&nbsp; 4–6" = comfortable (the sweet spot) &nbsp;•&nbsp; 6–8"+ = relaxed</p>
+
+    <h3>Design rules</h3>
+    <ul>
+      <li><strong>Width:</strong> go 1–2" wider than standard for 2X–3X, up to 2–3" wider for 4X–5X</li>
+      <li><strong>Placement:</strong> start 3–4" below the neckline seam on 2X+; center on the chest, not the shirt</li>
+      <li><strong>Text:</strong> keep it off the fullest bust point — nudge above or below</li>
+      <li><strong>Pocket prints:</strong> scale up slightly for 2X+, tiny prints get swallowed</li>
+      <li><strong>Necklines:</strong> wider crews, scoops &amp; V-necks flatter fuller busts</li>
+    </ul>
+
+    <h3>Care card (ship with every order)</h3>
+    <p>🧺 Wash <strong>inside out</strong> • ❄️ <strong>Cold</strong> water, gentle • 🔥 <strong>Low heat</strong> or hang dry • 🚫 No bleach • 🚫 Never iron directly on the print</p>
+
+    <h3>Listing must-haves</h3>
+    <p>Real size chart in photos • Model measurements + size worn • Curvy body photos • Honest fit note • Wash-test photo • Fabric details • Care instructions • Proud "2X–5X" in the title</p>
+  </section>
+
+  <!-- 9. WHAT'S NEXT -->
+  <section>
+    <div class="sec-label">Keep Going, Gorgeous</div>
+    <h2>💫 What's Next, Gorgeous?</h2>
+
+    <div class="pullquote">
+      The perfected tee is coming — one hero design, sizes 2X–5X, printed only for pre-orders. No closets full of unsold shirts. Just your size, your fit, made for you.
+      <span class="attr">— THE $39 PRE-ORDER TEE DROP</span>
+    </div>
+    <p style="text-align:center;margin:22px 0">
+      <a href="https://muse.ai/s/curvy-tee-fit-finder-dn6gxexhxaxixuxkj" target="_blank" rel="noopener" style="display:inline-block;background:linear-gradient(100deg,#FF1493,#4A148C);color:#fff;font-family:Verdana,Geneva,sans-serif;font-weight:700;font-size:16px;padding:16px 34px;border-radius:999px;text-decoration:none;box-shadow:0 8px 20px rgba(255,20,147,.30);">Take the Fit Finder quiz &amp; join the list 💕</a>
+    </p>
+    <p style="text-align:center;font-size:15px;color:var(--muted)">Join the waitlist and you'll be first to know when pre-orders open.</p>
+
+    <div class="card gold">
+      <h3 style="margin-top:0">Selling your own tees? Meet the Mockup Mini-Pack — $17 📸</h3>
+      <p>The perfect companion to this guide: listing-ready mockup photos showing designs on real plus-size bodies. Because nobody buys a tee they can't picture on themselves — and this is how you earn a curvy buyer's trust before she ever clicks "add to cart."</p>
+    </div>
+  </section>
+
+  <div class="footer">
+    <p style="margin-bottom:18px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a href="https://www.skool.com/the-glam-vault-9512" target="_blank" rel="noopener" style="flex:1 1 220px;max-width:280px;display:inline-block;background:linear-gradient(100deg,#FF1493,#4A148C);color:#fff;font-weight:700;font-size:15px;padding:15px 28px;border-radius:999px;text-decoration:none;box-shadow:0 8px 20px rgba(255,20,147,.30);letter-spacing:0;text-align:center;">✨ Join The Glam Vault</a>
+      <a href="https://glamhustlehub.com" target="_blank" rel="noopener" style="flex:1 1 220px;max-width:280px;display:inline-block;background:linear-gradient(100deg,#8E9AAF,#4A5568);color:#fff;font-weight:700;font-size:15px;padding:15px 28px;border-radius:999px;text-decoration:none;box-shadow:0 8px 20px rgba(120,130,150,.35);letter-spacing:0;text-align:center;">🛍️ Shop Glam Hustle Hub</a>
+    </p>
+    <p><span class="brand">GLAM HUSTLE HUB</span> • THE CURVY TEE FIT GUIDE</p>
+    <p style="margin-top:8px">Made with love for sellers who fit everybody. 💗</p>
+    <p style="margin-top:6px;font-size:11px;opacity:.75">made with ♥ by Celestia, Glam's AI assistant</p>
+  </div>
+
+</div>
+</body>
+</html>
