@@ -61,12 +61,15 @@ export default async (req) => {
       );
     }
 
+    if (!Netlify.env.get("PAYHIP_BRAND_WORLD_SECRET")) {
+      return new Response(JSON.stringify({ success: false, message: "Build Your Brand World verification is temporarily unavailable. Please contact support." }), { status: 503, headers });
+    }
+
     const brandWorldProducts = [
       {
         date: "October 30 - November 1, 2026",
         secret:
-          Netlify.env.get("PAYHIP_BRAND_WORLD_SECRET") ||
-          "prod_sk_yp4q2_2cb45a8fa52a50aee47e68735d239eb04c207878",
+          Netlify.env.get("PAYHIP_BRAND_WORLD_SECRET"),
       },
     ];
 
