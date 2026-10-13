@@ -1,93 +1,43 @@
+// Configure PAYHIP_PROMPT_WORKSHOP_SECRET in Netlify before publishing.
+// Use the product secret for Payhip product kJPIl (Prompt Generator Workshop).
+const reply = (status, data) => new Response(JSON.stringify(data), {
+  status,
+  headers: { "Content-Type": "application/json" },
+});
+
 export default async (req) => {
+  if (req.method !== "POST") {
+    return reply(405, { success: false, message: "Please submit your access key using the workshop form." });
+  }
+
+  let body;
+  try { body = await req.json(); }
+  catch { return reply(400, { success: false, message: "Please enter your Prompt Generator Workshop access key." }); }
+  const licenseKey = typeof body?.licenseKey === "string" ? body.licenseKey.trim() : "";
+  if (!licenseKey || licenseKey.length > 200) {
+    return reply(400, { success: false, message: "Please enter your Prompt Generator Workshop access key." });
+  }
+
+  const productSecret = Netlify.env.get("PAYHIP_PROMPT_WORKSHOP_SECRET");
+  if (!productSecret) {
+    return reply(503, { success: false, message: "Prompt Generator Workshop verification is temporarily unavailable. Please contact support." });
+  }
+
   try {
-    const body = await req.json();
-    const licenseKey = body.licenseKey;
-
-    if (!licenseKey) {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          message: "Please enter your Website Workshop access key.",
-        }),
-        {
-          status: 400,
-          headers: { "Content-Type": "application/json" },
-        },
-      );
+    const response = await fetch(`https://payhip.com/api/v2/license/verify?license_key=${encodeURIComponent(licenseKey)}`, {
+      method: "GET",
+      headers: { "product-secret-key": productSecret },
+    });
+    const result = await response.json();
+    if (response.ok && result?.data?.enabled === true) {
+      return reply(200, { success: true, workshop: "prompt-generator-workshop", message: "Prompt Generator Workshop unlocked." });
     }
-
-    const websiteProducts = [
-      {
-        date: "August 22",
-        secret: Netlify.env.get("PAYHIP_WEBSITE_AUG22_SECRET"),
-      },
-      {
-        date: "August 23",
-        secret: Netlify.env.get("PAYHIP_WEBSITE_AUG23_SECRET"),
-      },
-      {
-        date: "August 29",
-        secret: Netlify.env.get("PAYHIP_WEBSITE_AUG29_SECRET"),
-      },
-      {
-        date: "August 30",
-        secret: Netlify.env.get("PAYHIP_WEBSITE_AUG30_SECRET"),
-      },
-    ];
-
-    for (const product of websiteProducts) {
-      if (!product.secret) continue;
-
-      const response = await fetch(
-        `https://payhip.com/api/v2/license/verify?license_key=${encodeURIComponent(
-          licenseKey,
-        )}`,
-        {
-          method: "GET",
-          headers: {
-            "product-secret-key": product.secret,
-          },
-        },
-      );
-
-      const result = await response.json();
-
-      if (response.ok && result?.data?.enabled) {
-        return new Response(
-          JSON.stringify({
-            success: true,
-            workshop: "website-workshop",
-            workshopDate: product.date,
-            message: `Website Workshop unlocked for ${product.date}.`,
-          }),
-          {
-            status: 200,
-            headers: { "Content-Type": "application/json" },
-          },
-        );
-      }
+    if (!response.ok && response.status !== 401 && response.status !== 403 && response.status !== 404) {
+      return reply(502, { success: false, message: "We could not verify your access key. Please try again." });
     }
-
-    return new Response(
-      JSON.stringify({
-        success: false,
-        message: "That Website Workshop access key is invalid or inactive.",
-      }),
-      {
-        status: 401,
-        headers: { "Content-Type": "application/json" },
-      },
-    );
-  } catch (error) {
-    return new Response(
-      JSON.stringify({
-        success: false,
-        message: "We could not verify your access key. Please try again.",
-      }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      },
-    );
+    return reply(401, { success: false, message: "That Prompt Generator Workshop access key is invalid or inactive." });
+  } catch {
+    return reply(502, { success: false, message: "We could not verify your access key. Please try again." });
   }
 };
+
