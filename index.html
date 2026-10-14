@@ -191,7 +191,7 @@
     clearTimeout(timer);
     timer = null;
     activation++;
-    if (screen) screen.inert = false;
+    if (screen) screen.inert = Boolean(document.getElementById('cinemaIntro') && !document.getElementById('cinemaIntro').hidden);
     if (videoStage) videoStage.setAttribute('aria-hidden', 'true');
 
     if (!transition) return;
