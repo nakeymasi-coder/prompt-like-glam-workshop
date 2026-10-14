@@ -1,0 +1,1483 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>Home Services Prompt Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&family=Jost:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+    <style>
+      :root{
+        color-scheme: light dark;
+        --bg:#f4f8fd;
+        --bg-grad:linear-gradient(160deg,#fdfdff 0%,#eef4fc 55%,#e3edf9 100%);
+        --card:#ffffff;
+        --card-soft:#f6f9fe;
+        --ink:#182540;
+        --ink-soft:#4c5d78;
+        --sapphire:#0f52ba;
+        --sapphire-deep:#0a3a86;
+        --sapphire-soft:#dcebfb;
+        --sapphire-pale:#eef5ff;
+        --silver:#aebdd1;
+        --silver-light:#e6edf6;
+        --line:#d7e2f0;
+        --shadow:0 10px 30px rgba(15,82,186,.10);
+        --shadow-sm:0 3px 10px rgba(15,82,186,.08);
+        --radius:16px;
+        --btn-grad:linear-gradient(135deg,#2f6fd0 0%,#0f52ba 55%,#0a3a86 100%);
+        --chrome:linear-gradient(120deg,#f4f7fb 0%,#c9d6e8 30%,#ffffff 50%,#b3c3da 72%,#eef3fa 100%);
+      }
+      @media (prefers-color-scheme: dark){
+        :root{
+          --bg:#081831;
+          --bg-grad:linear-gradient(160deg,#0b2247 0%,#081831 60%,#061224 100%);
+          --card:#0e2547;
+          --card-soft:#123058;
+          --ink:#eef4ff;
+          --ink-soft:#b9cbe8;
+          --sapphire:#5b93e8;
+          --sapphire-deep:#c9dcfb;
+          --sapphire-soft:#1b3a6b;
+          --sapphire-pale:#122c55;
+          --silver:#7e93b5;
+          --silver-light:#1d3c6e;
+          --line:#23406e;
+          --shadow:0 10px 30px rgba(0,0,0,.35);
+          --shadow-sm:0 3px 10px rgba(0,0,0,.3);
+          --btn-grad:linear-gradient(135deg,#3d7bd6 0%,#2f6fd0 55%,#1c4f9e 100%);
+          --chrome:linear-gradient(120deg,#274a7d 0%,#47679c 30%,#31548a 50%,#223f6c 72%,#2c4f86 100%);
+        }
+      }
+      *{box-sizing:border-box}
+      html{scroll-behavior:smooth}
+      body{
+        margin:0;
+        font-family:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;
+        background:var(--bg-grad);
+        background-color:var(--bg);
+        color:var(--ink);
+        line-height:1.55;
+        -webkit-font-smoothing:antialiased;
+      }
+      .wrap{max-width:1060px;margin:0 auto;padding:22px 16px 40px}
+
+      /* ---------- Hero ---------- */
+      .hero{
+        position:relative;
+        background:var(--card);
+        border:1px solid var(--line);
+        border-radius:22px;
+        box-shadow:var(--shadow);
+        padding:30px 26px 24px;
+        overflow:hidden;
+      }
+      .hero::before{
+        content:"";position:absolute;inset:0 0 auto 0;height:6px;background:var(--chrome);
+      }
+      .hero h1{
+        font-family:"Playfair Display",serif;
+        font-weight:800;
+        font-size:clamp(1.7rem,4.6vw,2.6rem);
+        line-height:1.12;
+        margin:6px 0 8px;
+        color:var(--ink);
+      }
+      .hero h1 .accent{color:var(--sapphire)}
+      .hero p{margin:0 0 6px;color:var(--ink-soft);font-size:1.02rem;max-width:62ch}
+      .hero .howto{font-size:.94rem;color:var(--ink-soft)}
+      .hero .howto strong{color:var(--sapphire)}
+      .bfly{position:absolute;color:var(--sapphire);opacity:.16;pointer-events:none}
+      .bfly.b1{width:92px;top:16px;right:20px;transform:rotate(14deg)}
+      .bfly.b2{width:52px;bottom:14px;right:120px;transform:rotate(-18deg);opacity:.10}
+      .steps-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+      .steps-row span{
+        font-size:.82rem;font-weight:600;letter-spacing:.02em;
+        background:var(--sapphire-pale);color:var(--sapphire-deep);
+        border:1px solid var(--sapphire-soft);
+        padding:5px 11px;border-radius:999px;
+      }
+      @media (prefers-color-scheme: dark){.steps-row span{color:#cfe2ff}}
+
+      /* ---------- Sections ---------- */
+      section.card{
+        background:var(--card);
+        border:1px solid var(--line);
+        border-radius:var(--radius);
+        box-shadow:var(--shadow-sm);
+        padding:20px 20px 8px;
+        margin-top:18px;
+      }
+      .sec-head{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+      .sec-num{
+        font-family:"Playfair Display",serif;font-weight:800;
+        color:#fff;background:var(--btn-grad);
+        width:30px;height:30px;border-radius:50%;
+        display:inline-flex;align-items:center;justify-content:center;
+        font-size:.95rem;flex:none;
+        box-shadow:var(--shadow-sm);
+      }
+      .sec-head h2{font-family:"Playfair Display",serif;font-size:1.28rem;margin:0;font-weight:700}
+      .sec-sub{color:var(--ink-soft);font-size:.92rem;margin:2px 0 12px 40px}
+      .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px}
+      .grid .full{grid-column:1/-1}
+      @media (max-width:640px){.grid{grid-template-columns:1fr}.sec-sub{margin-left:0}}
+      .field{margin-bottom:12px}
+      .field label{
+        display:block;font-weight:600;font-size:.9rem;margin-bottom:5px;color:var(--ink);
+      }
+      .field label .opt{font-weight:400;color:var(--ink-soft);font-size:.82rem}
+      select,input[type="text"],textarea{
+        width:100%;
+        font:inherit;font-size:.97rem;color:var(--ink);
+        background:var(--card-soft);
+        border:1.5px solid var(--line);
+        border-radius:10px;
+        padding:10px 12px;
+        appearance:none;
+      }
+      select{
+        background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%230f52ba' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+        background-repeat:no-repeat;background-position:right 12px center;
+        padding-right:34px;
+      }
+      select:focus,input:focus,textarea:focus{
+        outline:2px solid var(--sapphire);outline-offset:1px;border-color:var(--sapphire);
+      }
+      textarea{resize:vertical;min-height:64px}
+      .custom-wrap{display:none;margin-top:8px}
+      .custom-wrap.show{display:block}
+      .hint{font-size:.8rem;color:var(--ink-soft);margin-top:4px}
+
+      /* ---------- Style chips ---------- */
+      .chips{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 10px}
+      .chip{
+        font:inherit;font-size:.88rem;font-weight:500;
+        background:var(--card-soft);color:var(--ink);
+        border:1.5px solid var(--line);border-radius:999px;
+        padding:7px 14px;cursor:pointer;
+        transition:border-color .15s,background .15s,color .15s;
+      }
+      .chip:hover{border-color:var(--sapphire)}
+      .chip.on{
+        background:var(--btn-grad);color:#fff;border-color:var(--sapphire-deep);
+        box-shadow:var(--shadow-sm);
+      }
+      .chip .x{margin-left:6px;font-weight:700;opacity:.75}
+      .add-row{display:flex;gap:8px;flex-wrap:wrap}
+      .add-row input{flex:1 1 220px}
+      .mini-btn{
+        font:inherit;font-weight:600;font-size:.9rem;cursor:pointer;
+        background:var(--sapphire-pale);color:var(--sapphire-deep);
+        border:1.5px solid var(--sapphire-soft);border-radius:10px;padding:9px 16px;
+      }
+      @media (prefers-color-scheme: dark){.mini-btn{color:#cfe2ff}}
+      .mini-btn:hover{border-color:var(--sapphire)}
+      .count-note{font-size:.85rem;color:var(--ink-soft);margin:0 0 10px}
+      .count-note strong{color:var(--sapphire)}
+      .dgroup-label{font-weight:600;font-size:.85rem;color:var(--ink-soft);margin:12px 0 0}
+
+      /* ---------- Output ---------- */
+      #outputSection{display:none}
+      #outputSection.show{display:block}
+      .prompt-card{
+        border:1.5px solid var(--sapphire-soft);
+        background:var(--sapphire-pale);
+        border-radius:14px;padding:16px;margin:0 0 14px;
+      }
+      @media (prefers-color-scheme: dark){.prompt-card{background:var(--card-soft)}}
+      .prompt-card h3{
+        margin:0 0 8px;font-size:1rem;font-weight:700;color:var(--sapphire-deep);
+        display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center;
+      }
+      @media (prefers-color-scheme: dark){.prompt-card h3{color:#cfe2ff}}
+      .prompt-card h3 .tag{
+        font-size:.75rem;font-weight:600;background:var(--card);
+        border:1px solid var(--line);border-radius:999px;padding:2px 9px;color:var(--ink-soft);
+      }
+      .prompt-text{
+        white-space:pre-wrap;word-wrap:break-word;
+        font-size:.95rem;background:var(--card);color:var(--ink);
+        border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:0 0 10px;
+      }
+      .card-btns{display:flex;gap:8px;flex-wrap:wrap}
+      .card-btns button{
+        font:inherit;font-size:.86rem;font-weight:600;cursor:pointer;
+        border-radius:999px;padding:7px 14px;
+        background:var(--card);color:var(--sapphire-deep);border:1.5px solid var(--sapphire-soft);
+      }
+      @media (prefers-color-scheme: dark){.card-btns button{color:#cfe2ff}}
+      .card-btns button:hover{border-color:var(--sapphire)}
+
+      /* ---------- Library ---------- */
+      .lib-item{
+        border:1px solid var(--line);border-radius:12px;background:var(--card-soft);
+        padding:12px 14px;margin-bottom:10px;
+      }
+      .lib-item h4{margin:0 0 4px;font-size:.95rem}
+      .lib-item p{
+        margin:0 0 8px;font-size:.86rem;color:var(--ink-soft);
+        display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+      }
+      .lib-empty{color:var(--ink-soft);font-size:.93rem;padding:4px 0 14px}
+
+      /* ---------- Bottom action bar ---------- */
+      .action-bar{
+        margin-top:22px;
+        background:var(--card);
+        border:1.5px solid var(--sapphire-soft);
+        border-radius:18px;box-shadow:var(--shadow);
+        padding:14px;
+      }
+      .action-bar .bar-label{
+        font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+        color:var(--ink-soft);margin:0 0 10px;text-align:center;
+      }
+      .bar-btns{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
+      .bar-btns button{
+        font:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+        border-radius:999px;padding:11px 20px;border:1.5px solid var(--sapphire-soft);
+        background:var(--card);color:var(--sapphire-deep);
+        transition:transform .12s, box-shadow .12s;
+      }
+      @media (prefers-color-scheme: dark){.bar-btns button{color:#cfe2ff}}
+      .bar-btns button:hover{transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+      .bar-btns button.primary{
+        background:var(--btn-grad);color:#fff;border-color:var(--sapphire-deep);
+        font-size:1.02rem;padding:12px 26px;
+      }
+      @media (max-width:640px){.bar-btns button{flex:1 1 44%;padding:11px 8px;font-size:.9rem}.bar-btns button.primary{flex:1 1 100%}}
+
+      /* ---------- CTA footer ---------- */
+      .cta-footer{margin-top:30px;text-align:center}
+      .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+      .cta-row a{
+        flex:1 1 220px;max-width:340px;
+        display:inline-block;text-decoration:none;text-align:center;
+        font-weight:700;font-size:1rem;
+        padding:14px 18px;border-radius:999px;
+        color:#fff;background:var(--btn-grad);
+        border:1.5px solid var(--sapphire-deep);
+        box-shadow:var(--shadow-sm);
+      }
+      .cta-row a.shop{
+        background:var(--chrome);color:var(--sapphire-deep);
+        border-color:var(--silver);
+      }
+      @media (prefers-color-scheme: dark){.cta-row a.shop{color:#eaf2ff}}
+      .made-line{margin-top:14px;font-size:.85rem;color:var(--ink-soft)}
+      .made-line .heart{color:#d64570}
+
+      /* ---------- Toast ---------- */
+      #toast{
+        position:fixed;left:50%;bottom:92px;transform:translateX(-50%) translateY(20px);
+        background:#182540;color:#f4f8fd;
+        font-size:.9rem;font-weight:600;
+        padding:10px 18px;border-radius:999px;
+        opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:50;
+        box-shadow:var(--shadow);max-width:88vw;text-align:center;
+      }
+      @media (prefers-color-scheme: dark){#toast{background:#eef4ff;color:#0e2547}}
+      #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+      @media (prefers-reduced-motion: reduce){
+        html{scroll-behavior:auto}
+        .bar-btns button,.chip{transition:none}
+        #toast{transition:none}
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+
+      <!-- ================= HERO ================= -->
+      <header class="hero">
+        <svg class="bfly b1" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M50 52 C38 30 18 18 8 26 C-1 33 6 52 26 56 C10 60 2 72 8 82 C14 91 36 84 50 62 C64 84 86 91 92 82 C98 72 90 60 74 56 C94 52 101 33 92 26 C82 18 62 30 50 52 Z"/></svg>
+        <svg class="bfly b2" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M50 52 C38 30 18 18 8 26 C-1 33 6 52 26 56 C10 60 2 72 8 82 C14 91 36 84 50 62 C64 84 86 91 92 82 C98 72 90 60 74 56 C94 52 101 33 92 26 C82 18 62 30 50 52 Z"/></svg>
+        <h1>Home Services <span class="accent">Prompt Generator</span></h1>
+        <p>Premium, ready-to-paste design prompts for every trade that keeps a home beautiful, safe, and sale-ready — logos, tees, flyers, websites, trade show pieces, and more.</p>
+        <p class="howto">Pick your trade, tap every <strong>design piece</strong> and <strong>design style</strong> you love — you get <strong>one numbered Premium Creative Commission for every piece × style pairing</strong>, each requesting up to 10 variations. Every dropdown has a <strong>Custom</strong> option, so nothing boxes you in.</p>
+        <div class="steps-row">
+          <span>1 · Your Business</span><span>2 · What You're Creating</span><span>3 · Design Styles</span><span>4 · Fonts &amp; Lettering</span><span>5 · Colors &amp; Finishes</span><span>6 · Mark, Mascot &amp; Mood</span>
+        </div>
+      </header>
+
+      <!-- ================= 1 · BUSINESS ================= -->
+      <section class="card" aria-labelledby="h-business">
+        <div class="sec-head"><span class="sec-num">1</span><h2 id="h-business">Your Business</h2></div>
+        <p class="sec-sub">Start with a quick preset if you want — it starts on None, so you're always in control.</p>
+        <div class="grid">
+          <div class="field full">
+            <label for="preset">Quick-Start Preset</label>
+            <select id="preset">
+              <option value="">— None — start from scratch</option>
+              <option value="logo-launch">Logo Launch — premium logo + lettering</option>
+              <option value="crew-tee">Crew Tee Drop — bold work shirts for the team</option>
+              <option value="trade-show">Trade Show Ready — banner &amp; booth presence</option>
+              <option value="social-pack">Social Media Pack — scroll-stopping posts</option>
+              <option value="door-hanger">Neighborhood Blitz — door hangers &amp; flyers</option>
+              <option value="brand-kit">Full Brand Kit — business card starter</option>
+            </select>
+            <p class="hint">Choosing a preset fills in the sections below. You can change anything after.</p>
+          </div>
+          <div class="field">
+            <label for="bizName">Business Name</label>
+            <input type="text" id="bizName" placeholder="e.g. Sapphire Home Pros LLC" autocomplete="off" />
+          </div>
+          <div class="field">
+            <label for="tagline">Tagline / Slogan <span class="opt">(optional)</span></label>
+            <input type="text" id="tagline" placeholder="e.g. We Keep Homes Sale-Ready" autocomplete="off" />
+          </div>
+          <div class="field">
+            <label for="trade">Trade / Service</label>
+            <select id="trade" data-custom="tradeCustomWrap">
+              <option value="">— None —</option>
+              <optgroup label="Repair &amp; Maintenance">
+                <option>Handyman</option>
+                <option>Appliance Repair</option>
+                <option>Plumber</option>
+                <option>Electrician</option>
+                <option>HVAC Heating &amp; Cooling</option>
+                <option>Carpenter</option>
+                <option>Locksmith</option>
+                <option>Garage Door Repair</option>
+                <option>Chimney Sweep</option>
+                <option>Septic Service</option>
+              </optgroup>
+              <optgroup label="Exterior &amp; Grounds">
+                <option>Roofer</option>
+                <option>Landscaper</option>
+                <option>Lawn Care</option>
+                <option>Tree Service</option>
+                <option>Pool Service</option>
+                <option>Pest Control</option>
+                <option>Pressure Washing</option>
+                <option>Exterior Painter</option>
+                <option>Concrete &amp; Paving</option>
+                <option>Fence &amp; Deck Builder</option>
+              </optgroup>
+              <optgroup label="Interior &amp; Living">
+                <option>Interior Decorator / Designer</option>
+                <option>Housekeeper / Maid Service</option>
+                <option>Carpet &amp; Flooring</option>
+                <option>Window Treatments</option>
+                <option>TV Mounting &amp; Installation</option>
+                <option>Cable &amp; Internet Installer</option>
+                <option>Smart Home Installer</option>
+                <option>Home Organizer</option>
+                <option>Moving Company</option>
+              </optgroup>
+              <optgroup label="Construction &amp; Inspection">
+                <option>General Contractor / Construction</option>
+                <option>Kitchen &amp; Bath Remodeler</option>
+                <option>Home Builder</option>
+                <option>Home Inspector / Field Inspector</option>
+                <option>Foundation Repair</option>
+                <option>Solar Installer</option>
+              </optgroup>
+              <optgroup label="Property, Protection &amp; Finance">
+                <option>Home Warranty Company</option>
+                <option>Homeowners Insurance</option>
+                <option>Mortgage Lender</option>
+                <option>Property Preservation</option>
+                <option>Home Staging</option>
+                <option>Real Estate Team</option>
+              </optgroup>
+              <option value="__custom">✎ Custom — write my own…</option>
+            </select>
+            <div class="custom-wrap" id="tradeCustomWrap">
+              <input type="text" id="tradeCustom" placeholder="Type your trade or service…" autocomplete="off" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="audience">Ideal Customer</label>
+            <select id="audience" data-custom="audienceCustomWrap">
+              <option value="">— None —</option>
+              <option>Homeowners</option>
+              <option>Busy moms &amp; families</option>
+              <option>Luxury homeowners</option>
+              <option>First-time home buyers</option>
+              <option>Seniors aging in place</option>
+              <option>Landlords &amp; property managers</option>
+              <option>Realtors &amp; home sellers</option>
+              <option>New construction builders</option>
+              <option>Homeowners ready to sell</option>
+              <option>Commercial property owners</option>
+              <option value="__custom">✎ Custom — write my own…</option>
+            </select>
+            <div class="custom-wrap" id="audienceCustomWrap">
+              <input type="text" id="audienceCustom" placeholder="Who should this design speak to?" autocomplete="off" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="specialty">Specialty</label>
+            <select id="specialty" data-custom="specialtyCustomWrap">
+              <option value="">— None —</option>
+              <optgroup label="Service Focus">
+                <option>Full-Service Repairs</option>
+                <option>Emergency / 24-7 Response</option>
+                <option>New Installations</option>
+                <option>Remodels &amp; Renovations</option>
+                <option>Inspections &amp; Estimates</option>
+                <option>Maintenance Plans &amp; Tune-Ups</option>
+              </optgroup>
+              <optgroup label="Client Focus">
+                <option>Luxury &amp; High-End Homes</option>
+                <option>Rentals &amp; Property Management</option>
+                <option>Insurance &amp; Warranty Work</option>
+                <option>New Construction</option>
+                <option>Seniors &amp; Accessibility</option>
+                <option>Eco-Friendly / Green Solutions</option>
+              </optgroup>
+              <option value="__custom">✎ Custom — write my own…</option>
+            </select>
+            <div class="custom-wrap" id="specialtyCustomWrap">
+              <input type="text" id="specialtyCustom" placeholder="Type your specialty…" autocomplete="off" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="cta">Call to Action</label>
+            <select id="cta" data-custom="ctaCustomWrap">
+              <option value="">— None —</option>
+              <option>Call Now for a Free Estimate</option>
+              <option>Call for Same-Day Service</option>
+              <option>Book Your Appointment Online</option>
+              <option>Get My Free Quote</option>
+              <option>Schedule Service Today</option>
+              <option>Request a Free Inspection</option>
+              <option>Text Us to Book</option>
+              <option>Claim the Current Offer</option>
+              <option>Join the Maintenance Plan</option>
+              <option value="__custom">✎ Custom — write my own…</option>
+            </select>
+            <div class="custom-wrap" id="ctaCustomWrap">
+              <input type="text" id="ctaCustom" placeholder="Write your call to action…" autocomplete="off" />
+            </div>
+          </div>
+          <div class="field full">
+            <label for="area">City / Service Area <span class="opt">(optional)</span></label>
+            <input type="text" id="area" placeholder="e.g. serving Elkhart &amp; South Bend, Indiana" autocomplete="off" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 2 · DELIVERABLE ================= -->
+      <section class="card" aria-labelledby="h-create">
+        <div class="sec-head"><span class="sec-num">2</span><h2 id="h-create">What You're Creating</h2></div>
+                <p class="sec-sub">Tap every piece you want in this run — each piece pairs with every design style you pick in Section 3, and every pairing becomes its own numbered commission.</p>
+        <div id="deliverableGroups"></div>
+        <div class="add-row">
+          <input type="text" id="customDeliverable" placeholder="Add your own design piece…" autocomplete="off" />
+          <button type="button" class="mini-btn" id="addDeliverableBtn">+ Add Piece</button>
+        </div>
+        <p class="count-note" id="deliverableCount">No pieces selected yet — your commissions will default to a Logo, or tap pieces above.</p>
+        <div class="grid" style="margin-top:4px">
+          <div class="field">
+            <label for="variations">Variations per Commission</label>
+            <select id="variations">
+              <option value="1">1 variation</option>
+              <option value="2">2 variations</option>
+              <option value="3">3 variations</option>
+              <option value="4" selected>4 variations</option>
+              <option value="5">5 variations</option>
+              <option value="6">6 variations</option>
+              <option value="7">7 variations</option>
+              <option value="8">8 variations</option>
+              <option value="9">9 variations</option>
+              <option value="10">10 variations</option>
+            </select>
+            <p class="hint">Each commission asks the design tool for this many distinct variations to choose from (1–10).</p>
+          </div>
+          <div class="field">
+            <label for="composition">Composition</label>
+            <select id="composition" data-custom="compositionCustomWrap">
+              <option value="">— None —</option>
+              <option>Full-Bleed</option>
+              <option>Centered Emblem</option>
+              <option>Asymmetric Editorial</option>
+              <option>Badge Layout</option>
+              <option>Circular Badge</option>
+              <option>Split Layout</option>
+              <option>Stacked Lockup</option>
+              <option>Horizontal Lockup</option>
+              <option>Diagonal Dynamic</option>
+              <option>Framed Border Layout</option>
+              <option value="__custom">✎ Custom — write my own…</option>
+            </select>
+            <div class="custom-wrap" id="compositionCustomWrap">
+              <input type="text" id="compositionCustom" placeholder="Describe the layout…" autocomplete="off" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 3 · STYLES ================= -->
+      <section class="card" aria-labelledby="h-styles">
+        <div class="sec-head"><span class="sec-num">3</span><h2 id="h-styles">Design Styles</h2></div>
+        <p class="sec-sub">Tap every style you love — each one pairs with every piece you picked in Section 2 for its own commission.</p>
+        <div class="chips" id="styleChips" role="group" aria-label="Design styles"></div>
+        <div class="add-row">
+          <input type="text" id="customStyle" placeholder="Add your own design style…" autocomplete="off" />
+          <button type="button" class="mini-btn" id="addStyleBtn">+ Add Style</button>
+        </div>
+        <p class="count-note" id="styleCount">No styles selected yet — your commissions will use a polished premium default style, or tap styles above.</p>
+      </section>
+
+      <!-- ================= 4 · FONTS ================= -->
+      <section class="card" aria-labelledby="h-fonts">
+        <div class="sec-head"><span class="sec-num">4</span><h2 id="h-fonts">Fonts &amp; Lettering</h2></div>
+        <p class="sec-sub">Original, never-before-seen letterforms — the kind of lettering nobody else has.</p>
+        <div class="grid">
+          <div class="field">
+            <label for="font">Lettering / Font Style</label>
+            <select id="font" data-custom="fontCustomWrap">
+              <option value="">— None —</option>
+              <optgroup label="Hand-Crafted &amp; Script">
+                <option>Hand-Lettered Script</option>
+                <option>Brush Calligraphy</option>
+                <option>Graffiti Tag Lettering</option>
+                <option>Neon Sign Script</option>
+              </optgroup>
+              <optgroup label="Bold &amp; Playful">
+                <option>Chunky Bubble Letters</option>
+                <option>Cartoon Pop Letters</option>
+                <option>Retro 70s Groovy Letters</option>
+                <option>Varsity Collegiate Block</option>
+              </optgroup>
+              <optgroup label="Premium &amp; Classic">
+                <option>Elegant High-Contrast Serif</option>
+                <option>Luxury Gold Serif</option>
+                <option>Engraved Vintage Lettering</option>
+                <option>Art Deco Lettering</option>
+              </optgroup>
+              <optgroup label="Tough &amp; Industrial">
+                <option>Chrome 3D Letters</option>
+                <option>Industrial Stencil</option>
+                <option>Western Slab</option>
+                <option>Distressed Workwear Type</option>
+              </optgroup>
+              <optgroup label="Clean &amp; Modern">
+                <option>Modern Minimal Sans</option>
+                <option>Geometric Rounded Sans</option>
+                <option>Outline Hollow Letters</option>
+              </optgroup>
+              <option value="__custom">✎ Custom — write my own…</option>
+            </select>
+            <div class="custom-wrap" id="fontCustomWrap">
+              <input type="text" id="fontCustom" placeholder="Describe your dream lettering…" autocomplete="off" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="treatment">Lettering Treatment / Effect</label>
+            <select id="treatment" data-custom="treatmentCustomWrap">
+              <option value="">— None —</option>
+              <option>Chrome Silver Shine</option>
+              <option>Gold Metallic Foil</option>
+              <option>Glitter Sparkle</option>
+              <option>Holographic Rainbow</option>
+              <option>Sapphire Ombre Gradient</option>
+              <option>Embossed / Raised</option>
+              <option>Drop-Shadow Pop</option>
+              <option>Rhinestone Studded</option>
+              <option>Wood-Carved</option>
+              <option>Neon Glow</option>
+              <option value="__custom">✎ Custom — write my own…</option>
+            </select>
+            <div class="custom-wrap" id="treatmentCustomWrap">
+              <input type="text" id="treatmentCustom" placeholder="Describe the lettering effect…" autocomplete="off" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="nameTreatment">Name Treatment</label>
+            <select id="nameTreatment" data-custom="nameTreatmentCustomWrap">
+              <option value="">— None —</option>
+              <option>Business Name + Tagline</option>
+              <option>Business Name Only</option>
+              <option>Monogram + Name</option>
+              <option>Monogram Only</option>
+              <option>Name + Tagline + Location</option>
+              <option>Tagline-Led, Name Secondary</option>
+              <option value="__custom">✎ Custom — write my own…</option>
+            </select>
+            <div class="custom-wrap" id="nameTreatmentCustomWrap">
+              <input type="text" id="nameTreatmentCustom" placeholder="Describe how the name should appear…" autocomplete="off" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 5 · COLOR & FINISH ================= -->
+      <section class="card" aria-labelledby="h-color">
+        <div class="sec-head"><span class="sec-num">5</span><h2 id="h-color">Colors &amp; Finishes</h2></div>
+        <p class="sec-sub">Palette and finish together — how the piece looks <em>and</em> how it feels.</p>
+        <div class="grid">
+          <div class="field">
+            <label for="palette">Color Palette</label>
+            <select id="palette" data-custom="paletteCustomWrap">
+              <option value="">— None —</option>
+              <optgroup label="Signature &amp; Luxury">
+                <option>Sapphire, Chrome Silver &amp; Pearl White</option>
+                <option>Navy &amp; Gold</option>
+                <option>Black &amp; Gold Luxury</option>
+                <option>Emerald &amp; Cream</option>
+              </optgroup>
+              <optgroup label="Bold &amp; Bright">
+                <option>Bold Red, Black &amp; White</option>
+                <option>Teal &amp; Coral Pop</option>
+                <option>Sunshine Yellow &amp; Charcoal</option>
+                <option>Neon Brights on Black</option>
+                <option>Sunset Ombre</option>
+              </optgroup>
+              <optgroup label="Earthy &amp; Natural">
+                <option>Sage Green &amp; Warm Wood Tones</option>
+                <option>Terracotta &amp; Sand</option>
+                <option>Forest Green &amp; Cream</option>
+              </optgroup>
+              <optgroup label="Soft &amp; Clean">
+                <option>Soft Pastels</option>
+                <option>Clean White &amp; Sky Blue</option>
+                <option>Blush, Pearl &amp; Silver</option>
+                <option>Monochrome Black &amp; White</option>
+              </optgroup>
+              <optgroup label="Classic">
+                <option>Patriotic Red, White &amp; Blue</option>
+                <option>Retro Orange, Brown &amp; Cream</option>
+              </optgroup>
+              <option value="__custom">✎ Custom — write my own…</option>
+            </select>
+            <div class="custom-wrap" id="paletteCustomWrap">
+              <input type="text" id="paletteCustom" placeholder="Name your colors…" autocomplete="off" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="finish">Finish / Texture</label>
+            <select id="finish" data-custom="finishCustomWrap">
+              <option value="">— None —</option>
+              <option>Metallic Chrome</option>
+              <option>Matte</option>
+              <option>Glossy</option>
+              <option>Metallic Foil</option>
+              <option>Glitter</option>
+              <option>Holographic</option>
+              <option>Embroidered / Stitched Look</option>
+              <option>Raised 3D Puff Print</option>
+              <option>Distressed Vintage Wash</option>
+              <option>Watercolor Texture</option>
+              <option>Clean Flat Vector</option>
+              <option value="__custom">✎ Custom — write my own…</option>
+            </select>
+            <div class="custom-wrap" id="finishCustomWrap">
+              <input type="text" id="finishCustom" placeholder="Describe the finish…" autocomplete="off" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 6 · MASCOT & MOOD ================= -->
+      <section class="card" aria-labelledby="h-mascot">
+        <div class="sec-head"><span class="sec-num">6</span><h2 id="h-mascot">Brand Mark, Mascot &amp; Mood</h2></div>
+        <p class="sec-sub">The mark and personality behind the brand, a character people remember, and anything else on your heart.</p>
+        <div class="grid">
+          <div class="field">
+            <label for="brandMark">Brand Mark</label>
+            <select id="brandMark" data-custom="brandMarkCustomWrap">
+              <option value="">— None —</option>
+              <optgroup label="Symbol Marks">
+                <option>Handcrafted Symbol</option>
+                <option>Abstract Mark</option>
+                <option>Tool-Crafted Symbol</option>
+                <option>Emblem / Badge Mark</option>
+              </optgroup>
+              <optgroup label="Letter Marks">
+                <option>Monogram</option>
+                <option>Wordmark Only</option>
+              </optgroup>
+              <optgroup label="Character Marks">
+                <option>Mascot Character</option>
+                <option>Animal Mascot</option>
+              </optgroup>
+              <option value="__custom">✎ Custom — describe my own…</option>
+            </select>
+            <div class="custom-wrap" id="brandMarkCustomWrap">
+              <input type="text" id="brandMarkCustom" placeholder="Describe your brand mark…" autocomplete="off" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="personality">Brand Personality</label>
+            <select id="personality" data-custom="personalityCustomWrap">
+              <option value="">— None —</option>
+              <option>Elegant &amp; Luxurious</option>
+              <option>Bold &amp; Rugged</option>
+              <option>Friendly &amp; Approachable</option>
+              <option>Modern &amp; Minimal</option>
+              <option>Playful &amp; Fun</option>
+              <option>Trustworthy &amp; Dependable</option>
+              <option>Premium &amp; Polished</option>
+              <option>Down-to-Earth &amp; Honest</option>
+              <option value="__custom">✎ Custom — write my own…</option>
+            </select>
+            <div class="custom-wrap" id="personalityCustomWrap">
+              <input type="text" id="personalityCustom" placeholder="Describe the personality…" autocomplete="off" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="mascot">Mascot / Character</label>
+            <select id="mascot" data-custom="mascotCustomWrap">
+              <option value="">— None — no mascot</option>
+              <optgroup label="People">
+                <option>Friendly Handyman Hero</option>
+                <option>Lady Boss Contractor</option>
+                <option>Cheerful Cleaning Pro</option>
+                <option>Retro Service Pro</option>
+              </optgroup>
+              <optgroup label="Characters &amp; Creatures">
+                <option>Cute Smiling House Character</option>
+                <option>Happy Tool Crew (wrench, brush &amp; hammer buddies)</option>
+                <option>Wise Owl Inspector</option>
+                <option>Busy Bee Mascot</option>
+                <option>Loyal Dog Helper</option>
+                <option>Helpful Robot Assistant</option>
+              </optgroup>
+              <option value="__custom">✎ Custom — describe my own…</option>
+            </select>
+            <div class="custom-wrap" id="mascotCustomWrap">
+              <input type="text" id="mascotCustom" placeholder="Describe your mascot…" autocomplete="off" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="mood">Mood / Vibe</label>
+            <select id="mood" data-custom="moodCustomWrap">
+              <option value="">— None —</option>
+              <option>Trustworthy &amp; Professional</option>
+              <option>Fun &amp; Friendly</option>
+              <option>Luxury &amp; High-End</option>
+              <option>Bold &amp; Tough</option>
+              <option>Warm &amp; Welcoming</option>
+              <option>Clean &amp; Minimal</option>
+              <option>Playful &amp; Colorful</option>
+              <option>Faith-Filled &amp; Uplifting</option>
+              <option value="__custom">✎ Custom — write my own…</option>
+            </select>
+            <div class="custom-wrap" id="moodCustomWrap">
+              <input type="text" id="moodCustom" placeholder="Describe the vibe…" autocomplete="off" />
+            </div>
+          </div>
+          <div class="field full">
+            <label for="details">Extra Details <span class="opt">(icons, tools, phone number, offers, anything)</span></label>
+            <textarea id="details" placeholder="e.g. include a gold wrench icon, 'Licensed &amp; Insured' badge, and a $49 tune-up offer"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= OUTPUT ================= -->
+      <section class="card" id="outputSection" aria-labelledby="h-output">
+        <div class="sec-head"><span class="sec-num">✓</span><h2 id="h-output">Your Creative Commissions</h2></div>
+        <p class="sec-sub">One numbered Premium Creative Commission per piece × style pairing, ready to paste into your design tool. Copy one, save the keepers to your library, or download them all.</p>
+        <div id="outputList"></div>
+      </section>
+
+      <!-- ================= LIBRARY ================= -->
+      <section class="card" aria-labelledby="h-library">
+        <div class="sec-head"><span class="sec-num">♥</span><h2 id="h-library">Prompt Library</h2></div>
+        <p class="sec-sub">Your saved keepers live here — they're saved in this browser, so they'll still be here when you come back. Download the library as a TXT file anytime for a backup.</p>
+        <div id="libraryList"></div>
+        <div class="card-btns" style="margin-bottom:14px">
+          <button type="button" id="libDownloadBtn">⬇ Download Library (.txt)</button>
+          <button type="button" id="libClearBtn">Clear Library</button>
+        </div>
+      </section>
+
+      <!-- ================= ACTION BAR (bottom) ================= -->
+      <div class="action-bar" role="group" aria-label="Generator actions">
+        <p class="bar-label">Generate · Copy · Save — all right here at the bottom</p>
+        <div class="bar-btns">
+          <button type="button" class="primary" id="generateBtn">✨ Generate Commissions</button>
+          <button type="button" id="surpriseBtn">🎲 Surprise Me</button>
+          <button type="button" id="copyAllBtn">📋 Copy All Commissions</button>
+          <button type="button" id="downloadAllBtn">⬇ Download All (.txt)</button>
+          <button type="button" id="saveAllBtn">♥ Save All to Library</button>
+          <button type="button" id="clearBtn">🧹 Clear All</button>
+        </div>
+      </div>
+
+      <!-- ================= CTA FOOTER ================= -->
+      <footer class="cta-footer">
+        <div class="cta-row">
+          <a href="https://payhip.com/b/54LoK" target="_blank" rel="noopener">✨ Join The Glam Vault</a>
+          <a class="shop" href="https://glamhustlehub.com" target="_blank" rel="noopener">🛍️ Shop Glam Hustle Hub</a>
+        </div>
+        <p class="made-line">made with <span class="heart">♥</span> by Indigo, Glam's AI assistant</p>
+      </footer>
+
+    </div>
+    <div id="toast" role="status" aria-live="polite"></div>
+
+    <script>
+      "use strict";
+      var $ = function(id){ return document.getElementById(id); };
+
+      /* ============ toast ============ */
+      var toastTimer = null;
+      function toast(msg){
+        var t = $("toast");
+        t.textContent = msg;
+        t.classList.add("show");
+        if(toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(function(){ t.classList.remove("show"); }, 2400);
+      }
+
+      /* ============ custom-field reveal ============ */
+      document.querySelectorAll("select[data-custom]").forEach(function(sel){
+        sel.addEventListener("change", function(){
+          var wrap = $(sel.getAttribute("data-custom"));
+          if(wrap) wrap.classList.toggle("show", sel.value === "__custom");
+        });
+      });
+      function syncCustomWrap(sel){
+        var wrapId = sel.getAttribute("data-custom");
+        if(wrapId){ var w = $(wrapId); if(w) w.classList.toggle("show", sel.value === "__custom"); }
+      }
+      function fieldVal(selId, customId){
+        var sel = $(selId);
+        if(!sel) return "";
+        if(sel.value === "__custom"){
+          var c = $(customId);
+          return c ? c.value.trim() : "";
+        }
+        return sel.value.trim();
+      }
+      /* Set a select by matching option text (plain options carry text as value). */
+      function setSelect(id, value){
+        var sel = $(id);
+        if(!sel) return;
+        sel.value = "";
+        if(value){
+          for(var i = 0; i < sel.options.length; i++){
+            if(sel.options[i].text === value || sel.options[i].value === value){ sel.selectedIndex = i; break; }
+          }
+        }
+        syncCustomWrap(sel);
+      }
+
+      /* ============ design styles ============ */
+      var STYLES = [
+        "Minimalist Modern","Luxury Premium","Vintage Retro","Bold Streetwear",
+        "Rustic Craftsman","Playful Cartoon","Chibi Cute","3D Pixar-Style Render",
+        "Flat Vector Illustration","Watercolor","Elegant Line Art","Graffiti Street Art",
+        "Art Deco","Mid-Century Modern","Distressed Grunge","Neon Glow",
+        "Photorealistic","Hand-Drawn Sketch","Geometric Abstract","Americana Patriotic",
+        "Kawaii","Comic Book","Boho Chic","Industrial Stencil"
+      ];
+      var selectedStyles = {};
+      function renderChips(){
+        var box = $("styleChips");
+        box.innerHTML = "";
+        var ordered = STYLES.slice();
+        Object.keys(selectedStyles).forEach(function(k){ if(ordered.indexOf(k) === -1) ordered.push(k); });
+        ordered.forEach(function(name){
+          var b = document.createElement("button");
+          b.type = "button";
+          b.className = "chip" + (selectedStyles[name] ? " on" : "");
+          b.setAttribute("aria-pressed", selectedStyles[name] ? "true" : "false");
+          b.textContent = name;
+          if(STYLES.indexOf(name) === -1){
+            var x = document.createElement("span");
+            x.className = "x"; x.textContent = " ×"; x.title = "Remove style";
+            x.addEventListener("click", function(ev){
+              ev.stopPropagation();
+              delete selectedStyles[name];
+              renderChips();
+            });
+            b.appendChild(x);
+          }
+          b.addEventListener("click", function(){
+            if(selectedStyles[name]) delete selectedStyles[name];
+            else selectedStyles[name] = true;
+            renderChips();
+          });
+          box.appendChild(b);
+        });
+        updateCounts();
+      }
+      function addCustomStyle(){
+        var v = $("customStyle").value.trim();
+        if(!v) return;
+        selectedStyles[v] = true;
+        $("customStyle").value = "";
+        renderChips();
+        toast("Style added: " + v);
+      }
+      $("addStyleBtn").addEventListener("click", addCustomStyle);
+      $("customStyle").addEventListener("keydown", function(e){ if(e.key === "Enter"){ e.preventDefault(); addCustomStyle(); } });
+
+      /* ============ deliverable specs ============ */
+      var SPECS = {
+        "Logo": "a scalable vector logo with a memorable icon mark plus the business wordmark, balanced composition, works in full color and in one color, transparent background, no mockup",
+        "Business Card": "a premium business card design, front and back, with clear space for name, phone, website and a QR code, print-ready layout with bleed",
+        "Letterhead & Invoice Design": "a clean branded letterhead and invoice template design with logo header, contact block and elegant divider lines, print-ready",
+        "Vehicle Decal / Truck Wrap": "a bold vehicle wrap / truck decal design that reads clearly from a distance, logo and phone number large, designed for a work truck side panel",
+        "Uniform Logo Patch": "an embroidered-look uniform logo patch design, compact badge shape, readable at small size, limited thread colors",
+        "T-Shirt Design": "a print-ready t-shirt graphic, centered chest composition, bold readable artwork, transparent background, design file only — no photo mockup, no model",
+        "Hoodie Design": "a print-ready hoodie graphic, bold chest composition with a small left-chest emblem variation, transparent background, design file only — no photo mockup",
+        "Tote Bag Design": "a tote bag print design, one strong centered composition sized for a canvas tote, colors that print cleanly on natural canvas, transparent background",
+        "Book Bag / Backpack Design": "a backpack / book bag front-panel print design, fun durable composition sized for the front pocket panel, transparent background, design file only",
+        "Notebook / Journal Cover": "a notebook cover design, full-bleed front cover art with the title in the featured lettering, spine-friendly margins, print-ready",
+        "Apron Design": "an apron chest print design, compact centered composition that reads at a distance, transparent background, design file only",
+        "Cap / Hat Design": "an embroidered cap logo design, small front-panel composition, bold simplified shapes that stitch cleanly, limited colors",
+        "Flyer": "a high-converting promotional flyer design, strong headline at top, clear offer block, services list, phone number and QR code space, print-ready with bleed",
+        "Door Hanger": "a door hanger design with a die-cut hole at top, bold headline, special offer block and contact strip at the bottom, print-ready",
+        "Banner": "a large-format banner design, huge headline readable from across the street, logo, one clear call to action and phone number, print-ready",
+        "Retractable Banner": "a tall retractable banner stand design, vertical layout, logo at top, headline, benefit bullets with icons, photo area and contact footer, print-ready",
+        "Trade Show Booth Backdrop": "a trade show booth backdrop design, wide 10ft layout, giant logo and headline readable from 20 feet away, supporting service icons along the bottom, print-ready",
+        "Yard Sign": "a yard sign design, extremely bold and simple, business name, one service line and a big phone number, readable from a moving car, high contrast",
+        "Postcard / Mailer": "a direct-mail postcard design, front with bold offer and artwork, back with message area, address block and call to action, print-ready",
+        "Brochure": "a tri-fold brochure design, cover panel with headline and artwork, inside panels with services, icons and testimonial space, print-ready",
+        "Website Homepage Design": "a website homepage hero section design, modern web layout, headline, sub-headline, call-to-action button, trust badges and service cards below the fold, desktop and mobile friendly composition",
+        "Landing Page Design": "a high-converting landing page design, hero with headline and booking form area, benefit sections, before-and-after gallery strip and sticky call-to-action, modern web layout",
+        "Social Media Post": "a scroll-stopping square social media post design, bold headline text, eye-catching artwork, space for a caption offer, platform-ready 1:1 composition",
+        "Social Media Cover Banner": "a wide social media cover banner design, logo and headline on the left, service artwork on the right, safe zones respected, crisp at banner size",
+        "Profile Logo / Avatar": "a circular profile avatar logo design, single bold icon or mascot face, instantly recognizable at tiny sizes, transparent background",
+        "Email Header": "a wide email header banner design, logo, headline and one call to action, clean layout that reads on mobile inboxes"
+      };
+
+
+      /* ============ commission reference tables ============ */
+      var ASPECTS = {
+        "Logo": "Vector master file (SVG / EPS / PDF) on a square 1:1 artboard with a transparent background; provide stacked and horizontal lockups",
+        "Business Card": "3.5in x 2in finished size, front and back, 300 DPI CMYK with 0.125in bleed",
+        "Letterhead & Invoice Design": "US Letter 8.5in x 11in, print-ready with clean margins",
+        "Vehicle Decal / Truck Wrap": "Wide vehicle side-panel proportions (approx. 16:9 working area), readable from 30+ feet",
+        "Uniform Logo Patch": "Compact badge approx. 3in wide, embroidery-ready with limited thread colors",
+        "T-Shirt Design": "Chest print up to 12in wide, 4500 x 5400 px at 300 DPI, transparent PNG",
+        "Hoodie Design": "Front chest print up to 11in wide plus a small left-chest emblem, transparent PNG at 300 DPI",
+        "Tote Bag Design": "Print area approx. 10in x 10in centered on a natural canvas tote, transparent background",
+        "Book Bag / Backpack Design": "Front pocket panel print, approx. 16:10 area, transparent background",
+        "Notebook / Journal Cover": "Full-bleed front cover 6in x 9in with spine-safe margins, print-ready",
+        "Apron Design": "Chest print approx. 9in wide, transparent background",
+        "Cap / Hat Design": "Front panel embroidery area approx. 4.25in x 2.25in, simplified bold shapes",
+        "Flyer": "8.5in x 11in (US Letter), front and back where used, 300 DPI CMYK with 0.125in bleed",
+        "Door Hanger": "4.25in x 11in with a die-cut hanger hole at top, front and back, 300 DPI CMYK with 0.125in bleed",
+        "Banner": "Large format, e.g. 6ft x 3ft (2:1), vector or 150 DPI at full size",
+        "Retractable Banner": "33in x 81in vertical, with a 6in bottom safety zone for the stand hardware",
+        "Trade Show Booth Backdrop": "10ft x 8ft wide format, readable from 20 feet away",
+        "Yard Sign": "24in x 18in horizontal, ultra-bold type, maximum contrast",
+        "Postcard / Mailer": "6in x 9in, front and back, 300 DPI CMYK with 0.125in bleed",
+        "Brochure": "Tri-fold 8.5in x 11in (six panels), 300 DPI CMYK with 0.125in bleed",
+        "Website Homepage Design": "Responsive web layout — 1440px desktop design width with a 16:9 hero reference and clear mobile stacking",
+        "Landing Page Design": "Responsive landing page layout for desktop and mobile, above-the-fold hero with booking form / CTA",
+        "Social Media Post": "Square 1:1 master (1080 x 1080 px), adaptable to 4:5 portrait",
+        "Social Media Cover Banner": "Wide banner 1640 x 924 px with platform safe zones respected",
+        "Profile Logo / Avatar": "Square 1:1, circular-crop safe, legible at 98 px",
+        "Email Header": "Wide header 1200 x 400 px (2x retina), readable in mobile inboxes"
+      };
+      /* Each deliverable renders ONLY its own requirements block — keyed by
+         deliverable name, never shared across pieces. */
+      var REQ_BY_PIECE = {
+        "Logo": "Logo requirements: a distinctive, ownable identity mark with a strong silhouette that passes the monochrome test — it must work in solid black and in solid white. It must stay legible at small sizes (invoice corner, favicon, embroidered patch). Define the symbol / wordmark relationship clearly, with stacked and horizontal lockups. Avoid generic stock icons and overused roof-and-house silhouettes unless the concept genuinely justifies them.",
+        "Business Card": "Business card requirements: design the front and back separately at the standard 3.5in x 2in size, 300 DPI CMYK with 0.125in bleed and a clear safe area keeping all critical text away from trim edges. Keep the name, phone, website and QR code crisp and legible at true size, with a clear hierarchy: business name first, person's name and title second, contact details last.",
+        "Letterhead & Invoice Design": "Letterhead & invoice requirements: a US Letter 8.5in x 11in layout with a clean logo header, a tidy contact block and elegant divider lines. The invoice version must include clearly labeled fields for line items, subtotal, tax and total, with figures that stay perfectly readable. Print-ready with clean margins, and it must still look sharp printed in plain black and white.",
+        "Vehicle Decal / Truck Wrap": "Vehicle wrap requirements: design for a work truck side panel and keep every word readable from 30+ feet at road speed — business name, one core service and phone number oversized, with minimal copy overall. Keep critical text clear of door handles, seams, windows and wheel wells, use maximum contrast, and describe how the design wraps the panel edges.",
+        "Uniform Logo Patch": "Uniform patch requirements: a compact badge, approx. 3in wide, that embroiders cleanly — bold simplified shapes, a limited thread-color palette, and no fine detail, tiny text or gradients that stitching cannot reproduce. It must stay legible at chest size and hold its shape on a stitched border.",
+        "T-Shirt Design": "T-shirt requirements: clean, print-ready standalone artwork with proper print separation, bold legible type and a transparent background. Size and place the artwork realistically for a standard chest print area (up to 12in wide), with ink colors limited to what screen print or DTF reproduces cleanly. Design file only — no photo mockup and no model.",
+        "Hoodie Design": "Hoodie requirements: clean, print-ready standalone artwork with proper print separation, bold legible type and a transparent background. Provide a bold front chest composition (up to 11in wide) plus a small left-chest emblem version, with ink colors limited to what reproduces cleanly on fleece. Design file only — no photo mockup and no model.",
+        "Tote Bag Design": "Tote bag requirements: one strong centered composition sized for a natural canvas tote print area (approx. 10in x 10in), delivered as standalone artwork with a transparent background and proper print separation. Use bold legible type and a limited palette that prints cleanly on natural canvas. Design file only — no photo mockup.",
+        "Book Bag / Backpack Design": "Backpack requirements: a front pocket panel print design (approx. 16:10 area) delivered as standalone artwork with a transparent background and proper print separation. Use bold, durable shapes and legible type that survive an abrasion-prone surface, with colors limited to what reproduces cleanly. Design file only — no photo mockup.",
+        "Notebook / Journal Cover": "Notebook cover requirements: a full-bleed front cover design at 6in x 9in, print-ready at 300 DPI with spine-safe margins so no critical art or text is lost at the binding edge. Feature the title prominently in the chosen lettering, and keep the composition balanced as a standalone cover — no back cover or mockup unless requested.",
+        "Apron Design": "Apron requirements: a compact centered chest print design (approx. 9in wide) delivered as standalone artwork with a transparent background and proper print separation. Bold legible type that reads at a distance, with ink colors limited to what reproduces cleanly on fabric. Design file only — no photo mockup and no model.",
+        "Cap / Hat Design": "Cap requirements: an embroidered front-panel logo sized to approx. 4.25in x 2.25in — bold simplified shapes that stitch cleanly, a limited thread-color palette, and no fine detail, tiny text or gradients. It must stay instantly recognizable at small size. Design file only — no photo mockup.",
+        "Flyer": "Flyer requirements: an 8.5in x 11in print-ready design (front and back where used), 300 DPI CMYK with 0.125in bleed and a clear safe area keeping all critical text away from trim edges. Describe the front and back separately, with a clear hierarchy: headline first, offer second, services list third, phone number and QR code space last.",
+        "Door Hanger": "Door hanger requirements: a 4.25in x 11in print-ready design, front and back, 300 DPI CMYK with 0.125in bleed. Keep the die-cut hanger hole at the top completely clear of critical art and text. Describe the front and back separately, with a clear hierarchy: bold headline first, special offer block second, contact strip along the bottom last.",
+        "Banner": "Banner requirements: a large-format design (e.g. 6ft x 3ft), vector or 150 DPI at full size, with a huge headline readable from across the street. Keep copy minimal — logo, one clear call to action and phone number — and keep all critical elements inside a safe margin away from grommets and hems.",
+        "Retractable Banner": "Retractable banner requirements: a tall vertical 33in x 81in design with a clear top-to-bottom hierarchy — logo at the top, headline next, benefit bullets with icons in the middle, a photo area, and a contact footer. Keep all critical content out of the bottom 6in safety zone reserved for the stand hardware, and make the headline readable from across a trade show aisle.",
+        "Trade Show Booth Backdrop": "Trade show backdrop requirements: a wide 10ft x 8ft format with a giant logo and headline readable from 20 feet away, and supporting service icons arranged along the bottom. Keep copy minimal and oversized — this piece is read at a distance, never up close — and keep critical elements away from the frame edges.",
+        "Yard Sign": "Yard sign requirements: a 24in x 18in horizontal design that is extremely bold and simple — business name, one service line and a big phone number, readable from a moving car. Maximum contrast, very few words, and no detail that disappears at road speed.",
+        "Postcard / Mailer": "Postcard requirements: a 6in x 9in direct-mail design, front and back, 300 DPI CMYK with 0.125in bleed. Describe the front and back separately: the front carries the bold offer and artwork; the back carries the message area, the address block and the call to action, with the mailing indicia area kept clear.",
+        "Brochure": "Brochure requirements: a tri-fold 8.5in x 11in design (six panels), 300 DPI CMYK with 0.125in bleed, described panel by panel in correct fold order. The cover panel leads with the headline and artwork; the inside panels carry the services, icons and testimonial space, with a clear hierarchy on every panel and all critical text inside the safe area.",
+        "Website Homepage Design": "Website homepage requirements: a homepage design covering the hero (headline, sub-headline and booking call-to-action), trust signals, a services section, a how-it-works process, a reviews area, a service-area note, and a final booking / contact section with a sticky call-to-action. Include conversion copy direction for each section — benefit-led and written for the ideal customer — in a responsive layout designed at 1440px desktop width with clear mobile stacking.",
+        "Landing Page Design": "Landing page requirements: a single-goal landing page design — a hero with one headline, a supporting sub-headline and a booking form / call-to-action area above the fold, followed by benefit sections, a before-and-after gallery strip and a sticky call-to-action. Strip away anything that distracts from the one conversion goal, and include conversion copy direction for each section, benefit-led and written for the ideal customer, in a responsive desktop and mobile layout.",
+        "Social Media Post": "Social media post requirements: a scroll-stopping square 1:1 post visual (1080 x 1080 px master, adaptable to 4:5 portrait) with a bold headline on the graphic, eye-catching artwork and clear space for the caption offer. Pair it with caption copy direction, a clear call to action and an audience-specific value proposition aimed squarely at the ideal customer. Every claim must be truthful and verifiable — no invented discounts, ratings or guarantees the business has not provided.",
+        "Social Media Cover Banner": "Social media cover banner requirements: a wide cover banner (1640 x 924 px) with the logo and headline on the left and service artwork on the right, all critical elements kept inside the platform safe zones and clear of the profile-picture overlap area. It must stay crisp and legible at banner size and at small preview sizes — a brand banner only, with no ad copy, no offer text and no call-to-action block.",
+        "Profile Logo / Avatar": "Profile avatar requirements: a circular profile avatar design built around a single bold icon or mascot face, instantly recognizable at tiny sizes (legible at 98 px) and safe inside a circular crop — keep the key shape centered with clear margin from the edges. Deliver on a square 1:1 artboard with a transparent background.",
+        "Email Header": "Email header requirements: create a wide email header banner design at 1200 x 400 px (2x retina) with a clean logo lockup, a headline and one clear call to action. Keep the layout clean and uncluttered so it reads instantly in mobile inboxes, design for safe rendering across major email clients (Gmail, Outlook, Apple Mail), and never rely on web fonts for critical text — the headline and call to action must stay crisp and readable in a web-safe fallback."
+      };
+      var REQ_DEFAULT = "Deliverable requirements: design this piece to its real production or platform dimensions at print-ready or platform-ready resolution, with a clear hierarchy — headline first, supporting message second, contact / call-to-action last — and keep all critical text inside a safe area, away from trim, fold or crop edges.";
+      var STYLE_LENS = {
+        "Minimalist Modern": "strips the brand down to one confident mark and generous breathing room, so the company reads as established, organized and easy to trust",
+        "Luxury Premium": "treats the trade like a concierge service — refined detailing, restrained richness and quiet confidence that supports premium pricing",
+        "Vintage Retro": "borrows the honest, hand-painted signage of a family business that has been doing it right for decades, giving the brand instant heritage",
+        "Bold Streetwear": "gives the crew the energy of a drop-only streetwear brand — loud, confident artwork homeowners remember and neighbors ask about",
+        "Rustic Craftsman": "leans into real materials, hand-tool honesty and workshop warmth — the look of someone who builds things to last",
+        "Playful Cartoon": "turns the trade into friendly characters and bright storytelling, lowering the stress homeowners feel about letting a stranger into the house",
+        "Chibi Cute": "shrinks the brand into an adorable, collectible character world that begs to be shared, saved and screenshotted",
+        "3D Pixar-Style Render": "renders the brand like a beloved animated film — soft light, expressive characters and instant emotional warmth",
+        "Flat Vector Illustration": "keeps everything crisp, geometric and endlessly reproducible, so the brand looks identical on a truck, a tee and a phone screen",
+        "Watercolor": "softens the trade with hand-painted washes and organic edges — perfect for a brand selling care, calm and a beautiful home",
+        "Elegant Line Art": "draws the whole brand in one refined, continuous line language — quiet, artistic and unmistakably upscale",
+        "Graffiti Street Art": "channels mural energy and spray-can confidence, making this the boldest brand on the block",
+        "Art Deco": "frames the trade in 1920s geometry, symmetry and gold-toned glamour — craftsmanship presented like architecture",
+        "Mid-Century Modern": "uses atomic-era shapes and optimistic color, the design language of the classic American home this trade protects",
+        "Distressed Grunge": "wears the scuffs of real work proudly — texture and grit that say this crew actually shows up and gets the job done",
+        "Neon Glow": "lights the brand up like a sign that never closes, built for urgency and after-dark visibility",
+        "Photorealistic": "shows the finished result in rich, true-to-life detail, selling the homeowner the after photo before the job even starts",
+        "Hand-Drawn Sketch": "keeps the pencil lines and workshop-notebook honesty of a craftsperson thinking on paper",
+        "Geometric Abstract": "builds the brand from bold shapes and smart negative space — modern, ownable and impossible to confuse with a competitor",
+        "Americana Patriotic": "wraps the trade in stars, stripes and small-town pride — local, loyal and built in the USA",
+        "Kawaii": "makes the brand irresistibly sweet and friendly, turning everyday service into characters customers want to collect",
+        "Comic Book": "tells the brand story in panels, bursts and hero poses — the crew as the superheroes of the home",
+        "Boho Chic": "layers earthy texture and free-spirited pattern for a warm boutique feel, made for homes that value soul over sameness",
+        "Industrial Stencil": "stamps the brand like it is marked on a crate, a truck and a job site — utilitarian, tough and instantly readable"
+      };
+
+      /* ============ presets ============ */
+      var PRESETS = {
+        "logo-launch": { deliverables:["Logo"], styles:["Luxury Premium","Minimalist Modern"], font:"Elegant High-Contrast Serif", treatment:"Chrome Silver Shine", palette:"Sapphire, Chrome Silver & Pearl White", finish:"Clean Flat Vector", mood:"Trustworthy & Professional", variations:"4", brandMark:"Handcrafted Symbol", composition:"Centered Emblem", personality:"Elegant & Luxurious", nameTreatment:"Business Name + Tagline", cta:"Book Your Appointment Online" },
+        "crew-tee":   { deliverables:["T-Shirt Design"], styles:["Bold Streetwear","Vintage Retro","Distressed Grunge"], font:"Varsity Collegiate Block", treatment:"Drop-Shadow Pop", palette:"Bold Red, Black & White", finish:"Distressed Vintage Wash", mood:"Bold & Tough", variations:"6", brandMark:"Mascot Character", personality:"Bold & Rugged", nameTreatment:"Business Name Only" },
+        "trade-show": { deliverables:["Retractable Banner","Trade Show Booth Backdrop"], styles:["Minimalist Modern","Luxury Premium"], font:"Modern Minimal Sans", treatment:"", palette:"Navy & Gold", finish:"Glossy", mood:"Trustworthy & Professional", variations:"3", composition:"Asymmetric Editorial", personality:"Premium & Polished", nameTreatment:"Business Name + Tagline", cta:"Schedule Service Today" },
+        "social-pack":{ deliverables:["Social Media Post"], styles:["Playful Cartoon","Neon Glow","Flat Vector Illustration"], font:"Chunky Bubble Letters", treatment:"Glitter Sparkle", palette:"Teal & Coral Pop", finish:"Glossy", mood:"Playful & Colorful", variations:"6", personality:"Playful & Fun", cta:"Get My Free Quote" },
+        "door-hanger":{ deliverables:["Door Hanger","Flyer"], styles:["Flat Vector Illustration","Bold Streetwear"], font:"Chunky Bubble Letters", treatment:"Drop-Shadow Pop", palette:"Sunshine Yellow & Charcoal", finish:"Glossy", mood:"Fun & Friendly", variations:"4", composition:"Badge Layout", personality:"Friendly & Approachable", cta:"Call Now for a Free Estimate" },
+        "brand-kit":  { deliverables:["Business Card","Logo"], styles:["Luxury Premium","Art Deco"], font:"Luxury Gold Serif", treatment:"Gold Metallic Foil", palette:"Black & Gold Luxury", finish:"Metallic Foil", mood:"Luxury & High-End", variations:"4", brandMark:"Monogram", composition:"Centered Emblem", personality:"Elegant & Luxurious", nameTreatment:"Monogram + Name" }
+      };
+      $("preset").addEventListener("change", function(){
+        var p = PRESETS[this.value];
+        if(!p) return;
+        setDeliverables(p.deliverables || []);
+        setSelect("font", p.font);
+        setSelect("treatment", p.treatment);
+        setSelect("palette", p.palette);
+        setSelect("finish", p.finish);
+        setSelect("mood", p.mood);
+        ["specialty","cta","brandMark","composition","personality","nameTreatment"].forEach(function(id){
+          setSelect(id, p[id] || "");
+        });
+        $("variations").value = p.variations;
+        selectedStyles = {};
+        p.styles.forEach(function(s){ selectedStyles[s] = true; });
+        renderChips();
+        toast("Preset loaded — tweak anything, then hit Generate.");
+      });
+
+      /* ============ deliverable chips ============ */
+      var DELIVERABLE_GROUPS = [
+        { label:"Brand Identity", items:["Logo","Business Card","Letterhead & Invoice Design","Vehicle Decal / Truck Wrap","Uniform Logo Patch"] },
+        { label:"Apparel & Merch", items:["T-Shirt Design","Hoodie Design","Tote Bag Design","Book Bag / Backpack Design","Notebook / Journal Cover","Apron Design","Cap / Hat Design"] },
+        { label:"Print & Events", items:["Flyer","Door Hanger","Banner","Retractable Banner","Trade Show Booth Backdrop","Yard Sign","Postcard / Mailer","Brochure"] },
+        { label:"Digital & Social", items:["Website Homepage Design","Landing Page Design","Social Media Post","Social Media Cover Banner","Profile Logo / Avatar","Email Header"] }
+      ];
+      var ALL_DELIVERABLES = [];
+      DELIVERABLE_GROUPS.forEach(function(g){ g.items.forEach(function(n){ ALL_DELIVERABLES.push(n); }); });
+      var selectedDeliverables = {};
+      function isCustomDeliverable(name){ return ALL_DELIVERABLES.indexOf(name) === -1; }
+      function renderDeliverableChips(){
+        var box = $("deliverableGroups");
+        box.innerHTML = "";
+        function chipFor(name){
+          var b = document.createElement("button");
+          b.type = "button";
+          b.className = "chip" + (selectedDeliverables[name] ? " on" : "");
+          b.setAttribute("aria-pressed", selectedDeliverables[name] ? "true" : "false");
+          b.textContent = name;
+          if(isCustomDeliverable(name)){
+            var x = document.createElement("span");
+            x.className = "x"; x.textContent = " ×"; x.title = "Remove piece";
+            x.addEventListener("click", function(ev){
+              ev.stopPropagation();
+              delete selectedDeliverables[name];
+              renderDeliverableChips();
+            });
+            b.appendChild(x);
+          }
+          b.addEventListener("click", function(){
+            if(selectedDeliverables[name]) delete selectedDeliverables[name];
+            else selectedDeliverables[name] = true;
+            renderDeliverableChips();
+          });
+          return b;
+        }
+        DELIVERABLE_GROUPS.forEach(function(g){
+          var lab = document.createElement("p");
+          lab.className = "dgroup-label"; lab.textContent = g.label;
+          var row = document.createElement("div");
+          row.className = "chips";
+          g.items.forEach(function(n){ row.appendChild(chipFor(n)); });
+          box.appendChild(lab); box.appendChild(row);
+        });
+        var customs = Object.keys(selectedDeliverables).filter(isCustomDeliverable);
+        if(customs.length){
+          var lab2 = document.createElement("p");
+          lab2.className = "dgroup-label"; lab2.textContent = "Your Custom Pieces";
+          var row2 = document.createElement("div");
+          row2.className = "chips";
+          customs.forEach(function(n){ row2.appendChild(chipFor(n)); });
+          box.appendChild(lab2); box.appendChild(row2);
+        }
+        updateCounts();
+      }
+      function setDeliverables(names){
+        selectedDeliverables = {};
+        (names || []).forEach(function(n){ selectedDeliverables[n] = true; });
+        renderDeliverableChips();
+      }
+      function addCustomDeliverable(){
+        var v = $("customDeliverable").value.trim();
+        if(!v) return;
+        selectedDeliverables[v] = true;
+        $("customDeliverable").value = "";
+        renderDeliverableChips();
+        toast("Piece added: " + v);
+      }
+      $("addDeliverableBtn").addEventListener("click", addCustomDeliverable);
+      $("customDeliverable").addEventListener("keydown", function(e){ if(e.key === "Enter"){ e.preventDefault(); addCustomDeliverable(); } });
+
+      function updateCounts(){
+        var p = Object.keys(selectedDeliverables).length;
+        var st = Object.keys(selectedStyles).length;
+        var total = p * Math.max(st, 1);
+        var dc = $("deliverableCount");
+        if(dc){
+          dc.innerHTML = p === 0
+            ? "No pieces selected yet — your commissions will default to a Logo, or tap pieces above."
+            : "<strong>" + p + " piece" + (p === 1 ? "" : "s") + " selected</strong> — paired with your styles below, that's " + total + " commission" + (total === 1 ? "" : "s") + " in one run.";
+        }
+        var sc = $("styleCount");
+        if(sc){
+          sc.innerHTML = st === 0
+            ? "No styles selected yet — your commissions will use a polished premium default style, or tap styles above."
+            : "<strong>" + st + " style" + (st === 1 ? "" : "s") + " selected</strong> — every piece above gets a commission in each of these styles.";
+        }
+      }
+
+      /* ============ commission building ============ */
+      function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+      function pad3(n){ return ("00" + n).slice(-3); }
+      function pad2(n){ return ("0" + n).slice(-2); }
+
+      function directorBrief(style, trade, personality){
+        var lens = STYLE_LENS[style] || ("reinterprets " + style + " specifically for this trade — its tools, its customers and the moment a homeowner decides who to trust");
+        var tradeName = trade || "home services";
+        var feel = personality ? (" The personality is " + personality.toLowerCase() + " throughout, so the piece makes one clear promise instead of just decorating.") : "";
+        return "For a " + tradeName + " business, this direction " + lens + "." + feel + " The result must be beautiful, premium, inventive and memorable — design that suits a real, profitable service business and earns trust at first glance, never a generic industry template.";
+      }
+
+      function buildCommission(num, piece, style){
+        var biz      = $("bizName").value.trim();
+        var tagline  = $("tagline").value.trim();
+        var trade    = fieldVal("trade","tradeCustom");
+        var specialty= fieldVal("specialty","specialtyCustom");
+        var audience = fieldVal("audience","audienceCustom");
+        var cta      = fieldVal("cta","ctaCustom");
+        var area     = $("area").value.trim();
+        var font     = fieldVal("font","fontCustom");
+        var treat    = fieldVal("treatment","treatmentCustom");
+        var nameTreat= fieldVal("nameTreatment","nameTreatmentCustom");
+        var palette  = fieldVal("palette","paletteCustom");
+        var finish   = fieldVal("finish","finishCustom");
+        var brandMark= fieldVal("brandMark","brandMarkCustom");
+        var comp     = fieldVal("composition","compositionCustom");
+        var personality = fieldVal("personality","personalityCustom");
+        var mascot   = fieldVal("mascot","mascotCustom");
+        var mood     = fieldVal("mood","moodCustom");
+        var details  = $("details").value.trim();
+        var n        = parseInt($("variations").value, 10) || 4;
+
+        var labels = [];
+        for(var i = 1; i <= n; i++) labels.push(pad2(i));
+
+        var bizLine = biz ? ('"' + biz + '"') : "Business name not supplied — reserve a clean, clearly-marked editable space for the business name";
+        if(tagline) bizLine += ' — tagline: "' + tagline + '"';
+        if(area) bizLine += " — serving " + area;
+
+        var typoLine = font ? font : "an original lettering direction chosen for this style, custom-drawn for this brand";
+        if(treat) typoLine += ", finished with a " + treat + " effect";
+        typoLine += ". Push for unique letterform concepts: bespoke ligatures, creative negative space and custom character interactions wherever they serve the design. Preserve the exact spelling of the business name and keep every word crisp and readable — describe fresh typographic concepts rather than claiming exclusive ownership of any existing font.";
+
+        var markLine = brandMark || "Designer's choice — an ownable mark direction matched to the style";
+        if(mascot) markLine += "; feature " + mascot + " as the memorable face of the brand, woven naturally into the design";
+
+        var brief = directorBrief(style, trade, personality || mood);
+        if(details) brief += " Client-specified elements to work in: " + details + ".";
+
+        var req = REQ_BY_PIECE[piece] || REQ_DEFAULT;
+        var spec = SPECS[piece];
+        if(spec) req += " Piece specifics: create " + spec + ".";
+
+        var L = [];
+        L.push("PREMIUM HOME-SERVICE CREATIVE COMMISSION #" + pad3(num));
+        L.push("");
+        L.push("DESIGN DELIVERABLE: " + piece);
+        L.push("EXCLUSIVE DESIGN STYLE: " + style);
+        L.push("REQUESTED VARIATIONS: Exactly " + n + " distinct alternative" + (n === 1 ? "" : "s") + ", each separately labeled " + labels.join(", ") + ". No collage and no combined sheet — every variation is its own standalone concept.");
+        L.push("BUSINESS: " + bizLine);
+        L.push("INDUSTRY: " + (trade ? trade + " (home services)" : "Home services"));
+        L.push("SPECIALTY: " + (specialty || "Designer's choice — the most in-demand, profitable specialty for this trade"));
+        L.push("IDEAL CUSTOMER: " + (audience || "Homeowners who value quality, reliability and a home kept in top condition"));
+        L.push("CALL TO ACTION: " + (cta || "Designer's choice — one clear, honest call to action matched to this deliverable"));
+        L.push("CREATIVE DIRECTOR'S BRIEF: " + brief);
+        L.push("TYPOGRAPHY: " + typoLine);
+        L.push("PALETTE: " + (palette || "Designer's choice — a premium palette suited to the trade and style, with strong contrast"));
+        L.push("BRAND MARK: " + markLine);
+        L.push("COMPOSITION: " + (comp || "Designer's choice — the strongest layout for this deliverable in this style"));
+        L.push("BRAND PERSONALITY: " + (personality || mood || "Premium, trustworthy and memorable"));
+        L.push("FINISH: " + (finish || "Designer's choice — a finish that flatters the palette and reproduces cleanly"));
+        L.push("ASPECT / FORMAT: " + (ASPECTS[piece] || "Format matched to the deliverable — print-ready or platform-ready as appropriate, high resolution"));
+        L.push("NAME TREATMENT: " + (nameTreat || "Business Name + Tagline"));
+        L.push("DELIVERABLE REQUIREMENTS: " + req);
+        L.push("VARIATION STRATEGY: Create exactly " + n + " materially distinct directions inside this one style — change the typography concept, the composition, the graphical structure and the art direction from direction to direction while preserving every brand fact above. For every direction, specify: the core image / design prompt, the layout, the fonts / lettering approach, the palette, the main message, the production details, and a short rationale for its conversion appeal.");
+        L.push("QUALITY RULES: No watermarks. No invented certifications, licenses, awards, testimonials, ratings, phone numbers or social handles. No recognizable copied logos, no licensed characters, no irrelevant decorative filler, no illegible microtext, no chaotic overcrowding, and no obvious off-the-shelf stock visuals. Maintain strong contrast and accessibility. If exact rendered text is unreliable in the design tool, specify clean editable text placement rather than inventing text. Reproduce all client-supplied text exactly as written. Favor real-world print and web feasibility.");
+        return L.join("\n");
+      }
+
+      var currentPrompts = [];
+      function generate(){
+        var pieces = Object.keys(selectedDeliverables);
+        if(!pieces.length) pieces = ["Logo"];
+        var styles = Object.keys(selectedStyles);
+        if(!styles.length) styles = ["Premium Signature Default"];
+        currentPrompts = [];
+        var num = 0;
+        pieces.forEach(function(piece){
+          styles.forEach(function(style){
+            num++;
+            currentPrompts.push({
+              num: num,
+              style: style,
+              piece: piece,
+              title: "Commission " + pad3(num) + " — " + piece + " · " + style,
+              text: buildCommission(num, piece, style)
+            });
+          });
+        });
+        var box = $("outputList");
+        box.innerHTML = "";
+        currentPrompts.forEach(function(p, i){
+          var card = document.createElement("div");
+          card.className = "prompt-card";
+          var h = document.createElement("h3");
+          h.innerHTML = esc(p.title) + ' <span class="tag">Commission ' + pad3(p.num) + " of " + pad3(currentPrompts.length) + "</span>";
+          var pre = document.createElement("p");
+          pre.className = "prompt-text";
+          pre.textContent = p.text;
+          var btns = document.createElement("div");
+          btns.className = "card-btns";
+          btns.innerHTML =
+            '<button type="button" data-act="copy" data-i="' + i + '">📋 Copy Commission</button>' +
+            '<button type="button" data-act="save" data-i="' + i + '">♥ Save to Library</button>' +
+            '<button type="button" data-act="dl" data-i="' + i + '">⬇ Download (.txt)</button>';
+          btns.addEventListener("click", function(e){
+            var b = e.target.closest("button");
+            if(!b) return;
+            var idx = parseInt(b.getAttribute("data-i"), 10);
+            var item = currentPrompts[idx];
+            if(b.getAttribute("data-act") === "copy") copyText(item.text, "Commission copied");
+            if(b.getAttribute("data-act") === "save") saveToLibrary(item);
+            if(b.getAttribute("data-act") === "dl") downloadTxt(slugify(item.title) + ".txt", item.title + "\n\n" + item.text);
+          });
+          card.appendChild(h); card.appendChild(pre); card.appendChild(btns);
+          box.appendChild(card);
+        });
+        $("outputSection").classList.add("show");
+        $("outputSection").scrollIntoView({ behavior:"smooth", block:"start" });
+        toast(currentPrompts.length + " commission" + (currentPrompts.length === 1 ? "" : "s") + " generated — one per piece × style");
+      }
+
+      /* ============ clipboard & download ============ */
+      function copyText(text, okMsg){
+        function done(){ toast(okMsg || "Copied"); }
+        function fallback(){
+          var ta = document.createElement("textarea");
+          ta.value = text;
+          ta.style.position = "fixed"; ta.style.opacity = "0";
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand("copy"); done(); }
+          catch(e){ toast("Copy blocked — long-press the text to copy"); }
+          document.body.removeChild(ta);
+        }
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(text).then(done, fallback);
+        } else fallback();
+      }
+      function downloadTxt(filename, content){
+        var blob = new Blob([content], { type:"text/plain;charset=utf-8" });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url; a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 800);
+        toast("Downloaded " + filename);
+      }
+      function slugify(s){
+        return s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,60) || "prompt";
+      }
+      function allPromptsText(){
+        return currentPrompts.map(function(p){
+          return "===== " + p.title.toUpperCase() + " =====\n\n" + p.text;
+        }).join("\n\n\n");
+      }
+
+      /* ============ library (persistent in this browser) ============ */
+      var LIB_KEY = "hspg-prompt-library-v1";
+      var library = [];
+      function loadLibrary(){
+        try{
+          var raw = localStorage.getItem(LIB_KEY);
+          if(raw){
+            var arr = JSON.parse(raw);
+            if(Object.prototype.toString.call(arr) === "[object Array]"){
+              library = arr.filter(function(x){ return x && x.title && x.text; });
+            }
+          }
+        }catch(e){ library = []; }
+      }
+      function persistLibrary(){
+        try{ localStorage.setItem(LIB_KEY, JSON.stringify(library)); }catch(e){}
+      }
+      function renderLibrary(){
+        var box = $("libraryList");
+        box.innerHTML = "";
+        if(!library.length){
+          var d = document.createElement("p");
+          d.className = "lib-empty";
+          d.textContent = "Nothing saved yet. Generate prompts above and tap ♥ Save on the keepers.";
+          box.appendChild(d);
+          return;
+        }
+        library.forEach(function(item, i){
+          var div = document.createElement("div");
+          div.className = "lib-item";
+          var h = document.createElement("h4");
+          h.textContent = item.title;
+          var p = document.createElement("p");
+          p.textContent = item.text;
+          var btns = document.createElement("div");
+          btns.className = "card-btns";
+          btns.innerHTML =
+            '<button type="button" data-act="copy">📋 Copy</button>' +
+            '<button type="button" data-act="dl">⬇ Download</button>' +
+            '<button type="button" data-act="rm">Remove</button>';
+          btns.addEventListener("click", function(e){
+            var b = e.target.closest("button");
+            if(!b) return;
+            var act = b.getAttribute("data-act");
+            if(act === "copy") copyText(item.text, "Prompt copied");
+            if(act === "dl") downloadTxt(slugify(item.title) + ".txt", item.title + "\n\n" + item.text);
+            if(act === "rm"){ library.splice(i, 1); persistLibrary(); renderLibrary(); toast("Removed from library"); }
+          });
+          div.appendChild(h); div.appendChild(p); div.appendChild(btns);
+          box.appendChild(div);
+        });
+      }
+      function saveToLibrary(item){
+        var dupe = library.some(function(x){ return x.text === item.text; });
+        if(dupe){ toast("Already in your library"); return; }
+        library.push({ title:item.title, text:item.text });
+        persistLibrary();
+        renderLibrary();
+        toast("Saved to library ♥");
+      }
+      $("libDownloadBtn").addEventListener("click", function(){
+        if(!library.length){ toast("Library is empty — save a prompt first"); return; }
+        var body = library.map(function(p, i){
+          return "===== " + (i + 1) + ": " + p.title + " =====\n\n" + p.text;
+        }).join("\n\n\n");
+        downloadTxt("home-services-prompt-library.txt", "HOME SERVICES PROMPT LIBRARY\n\n" + body);
+      });
+      $("libClearBtn").addEventListener("click", function(){
+        if(!library.length){ toast("Library is already empty"); return; }
+        library = [];
+        persistLibrary();
+        renderLibrary();
+        toast("Library cleared");
+      });
+
+      /* ============ randomize (Surprise Me) ============ */
+      function randomOptionText(sel){
+        var opts = [];
+        for(var i = 0; i < sel.options.length; i++){
+          var o = sel.options[i];
+          if(o.value && o.value !== "__custom") opts.push(o.text);
+          else if(!o.value && o.text && o.text.indexOf("— None") === -1 && o.parentNode && o.parentNode.tagName === "OPTGROUP") opts.push(o.text);
+        }
+        // plain options have value === text automatically
+        if(!opts.length){
+          for(var j = 0; j < sel.options.length; j++){
+            var t = sel.options[j].text;
+            if(sel.options[j].value !== "" && sel.options[j].value !== "__custom") opts.push(t);
+          }
+        }
+        return opts.length ? opts[Math.floor(Math.random() * opts.length)] : "";
+      }
+      function surprise(){
+        ["trade","audience","specialty","cta","font","treatment","nameTreatment","palette","finish","brandMark","composition","personality","mascot","mood"].forEach(function(id){
+          setSelect(id, randomOptionText($(id)));
+        });
+        var dpool = ALL_DELIVERABLES.slice();
+        var dcount = 1 + Math.floor(Math.random() * 2); // 1–2 pieces
+        var dpicks = [];
+        for(var d = 0; d < dcount; d++){ dpicks.push(dpool.splice(Math.floor(Math.random() * dpool.length), 1)[0]); }
+        setDeliverables(dpicks);
+        $("variations").value = String(3 + Math.floor(Math.random() * 6)); // 3–8
+        selectedStyles = {};
+        var pool = STYLES.slice();
+        var count = 2 + Math.floor(Math.random() * 3); // 2–4 styles
+        for(var i = 0; i < count; i++){
+          var idx = Math.floor(Math.random() * pool.length);
+          selectedStyles[pool.splice(idx, 1)[0]] = true;
+        }
+        renderChips();
+        generate();
+        toast("Surprise picks loaded & generated 🎲");
+      }
+
+      /* ============ clear all ============ */
+      function clearAll(){
+        $("preset").value = "";
+        ["bizName","tagline","area","details","customStyle","customDeliverable"].forEach(function(id){ $(id).value = ""; });
+        ["trade","audience","specialty","cta","font","treatment","nameTreatment","palette","finish","brandMark","composition","personality","mascot","mood"].forEach(function(id){ setSelect(id, ""); });
+        ["tradeCustom","audienceCustom","specialtyCustom","ctaCustom","fontCustom","treatmentCustom","nameTreatmentCustom","paletteCustom","finishCustom","brandMarkCustom","compositionCustom","personalityCustom","mascotCustom","moodCustom"].forEach(function(id){ $(id).value = ""; });
+        $("variations").value = "4";
+        selectedStyles = {};
+        renderChips();
+        selectedDeliverables = {};
+        renderDeliverableChips();
+        currentPrompts = [];
+        $("outputList").innerHTML = "";
+        $("outputSection").classList.remove("show");
+        window.scrollTo({ top:0, behavior:"smooth" });
+        toast("All cleared — fresh canvas");
+      }
+
+      /* ============ action bar wiring ============ */
+      $("generateBtn").addEventListener("click", generate);
+      $("surpriseBtn").addEventListener("click", surprise);
+      $("copyAllBtn").addEventListener("click", function(){
+        if(!currentPrompts.length){ toast("Generate commissions first"); return; }
+        copyText(allPromptsText(), currentPrompts.length + " commissions copied");
+      });
+      $("downloadAllBtn").addEventListener("click", function(){
+        if(!currentPrompts.length){ toast("Generate commissions first"); return; }
+        downloadTxt("home-services-commissions.txt", "PREMIUM HOME-SERVICE CREATIVE COMMISSIONS\n\n" + allPromptsText());
+      });
+      $("saveAllBtn").addEventListener("click", function(){
+        if(!currentPrompts.length){ toast("Generate commissions first"); return; }
+        var before = library.length;
+        currentPrompts.forEach(function(p){
+          if(!library.some(function(x){ return x.text === p.text; })) library.push({ title:p.title, text:p.text });
+        });
+        persistLibrary();
+        renderLibrary();
+        toast(library.length > before ? "Saved to library ♥" : "Those are already in your library");
+      });
+      $("clearBtn").addEventListener("click", clearAll);
+
+      /* ============ init ============ */
+      renderChips();
+      renderDeliverableChips();
+      loadLibrary();
+      renderLibrary();
+    </script>
+  </body>
+</html>
