@@ -319,6 +319,12 @@
               <option value="social-pack">Social Media Pack — scroll-stopping posts</option>
               <option value="door-hanger">Neighborhood Blitz — door hangers &amp; flyers</option>
               <option value="brand-kit">Full Brand Kit — business card starter</option>
+              <option value="premium-cleaning">Premium Cleaning — industry preset</option>
+              <option value="hvac-emergency">HVAC &amp; Emergency — industry preset</option>
+              <option value="landscaping-lawn">Landscaping &amp; Lawn — industry preset</option>
+              <option value="property-preservation">Property Preservation — industry preset</option>
+              <option value="luxury-interiors">Luxury Interiors — industry preset</option>
+              <option value="roofing-pro">Premium Roofing — industry preset</option>
             </select>
             <p class="hint">Choosing a preset fills in the sections below. You can change anything after.</p>
           </div>
@@ -334,57 +340,111 @@
             <label for="trade">Trade / Service</label>
             <select id="trade" data-custom="tradeCustomWrap">
               <option value="">— None —</option>
-              <optgroup label="Repair &amp; Maintenance">
-                <option>Handyman</option>
-                <option>Appliance Repair</option>
-                <option>Plumber</option>
-                <option>Electrician</option>
-                <option>HVAC Heating &amp; Cooling</option>
-                <option>Carpenter</option>
-                <option>Locksmith</option>
-                <option>Garage Door Repair</option>
-                <option>Chimney Sweep</option>
-                <option>Septic Service</option>
-              </optgroup>
-              <optgroup label="Exterior &amp; Grounds">
-                <option>Roofer</option>
-                <option>Landscaper</option>
-                <option>Lawn Care</option>
-                <option>Tree Service</option>
-                <option>Pool Service</option>
-                <option>Pest Control</option>
-                <option>Pressure Washing</option>
-                <option>Exterior Painter</option>
-                <option>Concrete &amp; Paving</option>
-                <option>Fence &amp; Deck Builder</option>
-              </optgroup>
-              <optgroup label="Interior &amp; Living">
-                <option>Interior Decorator / Designer</option>
-                <option>Housekeeper / Maid Service</option>
-                <option>Carpet &amp; Flooring</option>
-                <option>Window Treatments</option>
-                <option>TV Mounting &amp; Installation</option>
-                <option>Cable &amp; Internet Installer</option>
-                <option>Smart Home Installer</option>
-                <option>Home Organizer</option>
-                <option>Moving Company</option>
-              </optgroup>
-              <optgroup label="Construction &amp; Inspection">
-                <option>General Contractor / Construction</option>
-                <option>Kitchen &amp; Bath Remodeler</option>
-                <option>Home Builder</option>
-                <option>Home Inspector / Field Inspector</option>
-                <option>Foundation Repair</option>
-                <option>Solar Installer</option>
-              </optgroup>
-              <optgroup label="Property, Protection &amp; Finance">
-                <option>Home Warranty Company</option>
-                <option>Homeowners Insurance</option>
-                <option>Mortgage Lender</option>
-                <option>Property Preservation</option>
-                <option>Home Staging</option>
-                <option>Real Estate Team</option>
-              </optgroup>
+              <option>Appliance Repair</option>
+              <option>Architectural Design</option>
+              <option>Asbestos Abatement</option>
+              <option>Basement Waterproofing</option>
+              <option>Bathroom Remodeling</option>
+              <option>Cabinet Making &amp; Refinishing</option>
+              <option>Carpentry</option>
+              <option>Carpet Cleaning</option>
+              <option>Chimney &amp; Fireplace Services</option>
+              <option>Cleaning &amp; Housekeeping</option>
+              <option>Concrete &amp; Masonry</option>
+              <option>Construction &amp; General Contracting</option>
+              <option>Deck &amp; Patio Building</option>
+              <option>Demolition</option>
+              <option>Door &amp; Window Installation</option>
+              <option>Drywall &amp; Plaster</option>
+              <option>Electrical Services</option>
+              <option>Energy Auditing</option>
+              <option>Fencing</option>
+              <option>Field Inspections</option>
+              <option>Fire &amp; Water Damage Restoration</option>
+              <option>Flooring &amp; Tile</option>
+              <option>Foundation Repair</option>
+              <option>Garage Door Services</option>
+              <option>Gutter Installation &amp; Cleaning</option>
+              <option>Handyman Services</option>
+              <option>Hardscaping</option>
+              <option>Home Accessibility Modifications</option>
+              <option>Home Automation &amp; Smart Home</option>
+              <option>Home Inspection</option>
+              <option>Home Maintenance Plans</option>
+              <option>Home Preservation / Property Preservation</option>
+              <option>Home Security Systems</option>
+              <option>Home Staging</option>
+              <option>Home Warranty Services</option>
+              <option>Homeowners Insurance</option>
+              <option>HVAC &amp; Ventilation</option>
+              <option>Insulation</option>
+              <option>Interior Decorating &amp; Design</option>
+              <option>Internet / Cable / Fiber Installation</option>
+              <option>Junk Removal</option>
+              <option>Kitchen Remodeling</option>
+              <option>Landscaping</option>
+              <option>Lawn Care</option>
+              <option>Lenders / Mortgage Services</option>
+              <option>Locksmith Services</option>
+              <option>Mold Remediation</option>
+              <option>Moving &amp; Storage</option>
+              <option>Painting &amp; Wall Coverings</option>
+              <option>Pest Control</option>
+              <option>Plumbing</option>
+              <option>Pool &amp; Spa Services</option>
+              <option>Pressure Washing</option>
+              <option>Property Management</option>
+              <option>Radon Mitigation</option>
+              <option>Real Estate Photography</option>
+              <option>Roofing</option>
+              <option>Septic Tank Services</option>
+              <option>Siding</option>
+              <option>Solar Installation &amp; Maintenance</option>
+              <option>Storm &amp; Disaster Restoration</option>
+              <option>Structural Engineering</option>
+              <option>Surveying</option>
+              <option>Termite Treatment</option>
+              <option>Tree Services</option>
+              <option>TV Mounting &amp; Home Theater</option>
+              <option>Water Filtration</option>
+              <option>Well Pump Services</option>
+              <option>Window Cleaning</option>
+              <option>Winterization &amp; Vacancy Services</option>
+              <option>Handyman</option>
+              <option>Plumber</option>
+              <option>Electrician</option>
+              <option>HVAC Heating &amp; Cooling</option>
+              <option>Carpenter</option>
+              <option>Locksmith</option>
+              <option>Garage Door Repair</option>
+              <option>Chimney Sweep</option>
+              <option>Septic Service</option>
+              <option>Roofer</option>
+              <option>Landscaper</option>
+              <option>Tree Service</option>
+              <option>Pool Service</option>
+              <option>Exterior Painter</option>
+              <option>Concrete &amp; Paving</option>
+              <option>Fence &amp; Deck Builder</option>
+              <option>Interior Decorator / Designer</option>
+              <option>Housekeeper / Maid Service</option>
+              <option>Carpet &amp; Flooring</option>
+              <option>Window Treatments</option>
+              <option>TV Mounting &amp; Installation</option>
+              <option>Cable &amp; Internet Installer</option>
+              <option>Smart Home Installer</option>
+              <option>Home Organizer</option>
+              <option>Moving Company</option>
+              <option>General Contractor / Construction</option>
+              <option>Kitchen &amp; Bath Remodeler</option>
+              <option>Home Builder</option>
+              <option>Home Inspector / Field Inspector</option>
+              <option>Solar Installer</option>
+              <option>Home Warranty Company</option>
+              <option>Mortgage Lender</option>
+              <option>Property Preservation</option>
+              <option>Real Estate Team</option>
+              <option>✎ Custom — write my own…</option>
               <option value="__custom">✎ Custom — write my own…</option>
             </select>
             <div class="custom-wrap" id="tradeCustomWrap">
@@ -395,7 +455,21 @@
             <label for="audience">Ideal Customer</label>
             <select id="audience" data-custom="audienceCustomWrap">
               <option value="">— None —</option>
+              <option>Builders &amp; Developers</option>
+              <option>Busy Families</option>
+              <option>Commercial Property Owners</option>
+              <option>First-Time Homebuyers</option>
+              <option>High-End Homeowners</option>
+              <option>HOA Communities</option>
+              <option>Home Sellers</option>
               <option>Homeowners</option>
+              <option>Investors &amp; Landlords</option>
+              <option>Lenders &amp; Banks</option>
+              <option>Luxury Property Owners</option>
+              <option>Property Managers</option>
+              <option>Real Estate Agents</option>
+              <option>Retirees &amp; Aging-in-Place</option>
+              <option>Short-Term Rental Hosts</option>
               <option>Busy moms &amp; families</option>
               <option>Luxury homeowners</option>
               <option>First-time home buyers</option>
@@ -404,7 +478,7 @@
               <option>Realtors &amp; home sellers</option>
               <option>New construction builders</option>
               <option>Homeowners ready to sell</option>
-              <option>Commercial property owners</option>
+              <option>✎ Custom — write my own…</option>
               <option value="__custom">✎ Custom — write my own…</option>
             </select>
             <div class="custom-wrap" id="audienceCustomWrap">
@@ -415,22 +489,44 @@
             <label for="specialty">Specialty</label>
             <select id="specialty" data-custom="specialtyCustomWrap">
               <option value="">— None —</option>
-              <optgroup label="Service Focus">
-                <option>Full-Service Repairs</option>
-                <option>Emergency / 24-7 Response</option>
-                <option>New Installations</option>
-                <option>Remodels &amp; Renovations</option>
-                <option>Inspections &amp; Estimates</option>
-                <option>Maintenance Plans &amp; Tune-Ups</option>
-              </optgroup>
-              <optgroup label="Client Focus">
-                <option>Luxury &amp; High-End Homes</option>
-                <option>Rentals &amp; Property Management</option>
-                <option>Insurance &amp; Warranty Work</option>
-                <option>New Construction</option>
-                <option>Seniors &amp; Accessibility</option>
-                <option>Eco-Friendly / Green Solutions</option>
-              </optgroup>
+              <option>24/7 Emergency Service</option>
+              <option>Annual Preventive Maintenance</option>
+              <option>Assessment &amp; Inspection</option>
+              <option>Bathroom Renovation</option>
+              <option>Cleaning &amp; Sanitation</option>
+              <option>Commercial Property Service</option>
+              <option>Custom Build &amp; Installation</option>
+              <option>Damage Restoration</option>
+              <option>Design Consultation</option>
+              <option>Energy-Efficiency Upgrade</option>
+              <option>Equipment Installation</option>
+              <option>Full Property Make-Ready</option>
+              <option>Installation &amp; Replacement</option>
+              <option>Interior Upgrade</option>
+              <option>Luxury Home Service</option>
+              <option>New Construction</option>
+              <option>One-Time Repair</option>
+              <option>Outdoor Beautification</option>
+              <option>Property Preservation / REO</option>
+              <option>Recurring Maintenance</option>
+              <option>Remodeling &amp; Renovation</option>
+              <option>Rental Turnover</option>
+              <option>Repair &amp; Troubleshooting</option>
+              <option>Residential Property Service</option>
+              <option>Seasonal Service</option>
+              <option>Smart Home Setup</option>
+              <option>Full-Service Repairs</option>
+              <option>Emergency / 24-7 Response</option>
+              <option>New Installations</option>
+              <option>Remodels &amp; Renovations</option>
+              <option>Inspections &amp; Estimates</option>
+              <option>Maintenance Plans &amp; Tune-Ups</option>
+              <option>Luxury &amp; High-End Homes</option>
+              <option>Rentals &amp; Property Management</option>
+              <option>Insurance &amp; Warranty Work</option>
+              <option>Seniors &amp; Accessibility</option>
+              <option>Eco-Friendly / Green Solutions</option>
+              <option>✎ Custom — write my own…</option>
               <option value="__custom">✎ Custom — write my own…</option>
             </select>
             <div class="custom-wrap" id="specialtyCustomWrap">
@@ -441,6 +537,14 @@
             <label for="cta">Call to Action</label>
             <select id="cta" data-custom="ctaCustomWrap">
               <option value="">— None —</option>
+              <option>Book a Free Estimate</option>
+              <option>Book Your Service</option>
+              <option>Call for Emergency Service</option>
+              <option>Get a Free Quote</option>
+              <option>Request an Inspection</option>
+              <option>Schedule a Consultation</option>
+              <option>Schedule Your Maintenance</option>
+              <option>Visit Our Website</option>
               <option>Call Now for a Free Estimate</option>
               <option>Call for Same-Day Service</option>
               <option>Book Your Appointment Online</option>
@@ -450,6 +554,7 @@
               <option>Text Us to Book</option>
               <option>Claim the Current Offer</option>
               <option>Join the Maintenance Plan</option>
+              <option>✎ Custom — write my own…</option>
               <option value="__custom">✎ Custom — write my own…</option>
             </select>
             <div class="custom-wrap" id="ctaCustomWrap">
@@ -459,6 +564,10 @@
           <div class="field full">
             <label for="area">City / Service Area <span class="opt">(optional)</span></label>
             <input type="text" id="area" placeholder="e.g. serving Elkhart &amp; South Bend, Indiana" autocomplete="off" />
+          </div>
+          <div class="field">
+            <label for="offer">Signature Offer / Competitive Advantage <span class="opt">(optional)</span></label>
+            <input type="text" id="offer" placeholder="e.g. $49 tune-up special, licensed &amp; insured" autocomplete="off" />
           </div>
         </div>
       </section>
@@ -494,9 +603,19 @@
             <label for="composition">Composition</label>
             <select id="composition" data-custom="compositionCustomWrap">
               <option value="">— None —</option>
-              <option>Full-Bleed</option>
-              <option>Centered Emblem</option>
               <option>Asymmetric Editorial</option>
+              <option>Centered Hero</option>
+              <option>Clean Grid System</option>
+              <option>Diagonal Motion</option>
+              <option>Framed Badge</option>
+              <option>Full-Bleed</option>
+              <option>High Contrast Minimal</option>
+              <option>Layered 3D Depth</option>
+              <option>Left-Aligned Editorial</option>
+              <option>Oversized Typography First</option>
+              <option>Premium Negative Space</option>
+              <option>Symmetrical</option>
+              <option>Centered Emblem</option>
               <option>Badge Layout</option>
               <option>Circular Badge</option>
               <option>Split Layout</option>
@@ -504,10 +623,28 @@
               <option>Horizontal Lockup</option>
               <option>Diagonal Dynamic</option>
               <option>Framed Border Layout</option>
+              <option>✎ Custom — write my own…</option>
               <option value="__custom">✎ Custom — write my own…</option>
             </select>
             <div class="custom-wrap" id="compositionCustomWrap">
               <input type="text" id="compositionCustom" placeholder="Describe the layout…" autocomplete="off" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="ratio">Preferred Aspect Ratio</label>
+            <select id="ratio" data-custom="ratioCustomWrap">
+              <option value="">— None —</option>
+              <option>1:1 Square</option>
+              <option>3:2 Landscape</option>
+              <option>4:3 Landscape</option>
+              <option>4:5 Portrait</option>
+              <option>9:16 Vertical</option>
+              <option>16:9 Widescreen</option>
+              <option>Print-Ready Format Appropriate to Product</option>
+              <option value="__custom">✐ Custom — write my own…</option>
+            </select>
+            <div class="custom-wrap" id="ratioCustomWrap">
+              <input type="text" id="ratioCustom" placeholder="e.g. 4:5 portrait" autocomplete="off" />
             </div>
           </div>
         </div>
@@ -534,35 +671,44 @@
             <label for="font">Lettering / Font Style</label>
             <select id="font" data-custom="fontCustomWrap">
               <option value="">— None —</option>
-              <optgroup label="Hand-Crafted &amp; Script">
-                <option>Hand-Lettered Script</option>
-                <option>Brush Calligraphy</option>
-                <option>Graffiti Tag Lettering</option>
-                <option>Neon Sign Script</option>
-              </optgroup>
-              <optgroup label="Bold &amp; Playful">
-                <option>Chunky Bubble Letters</option>
-                <option>Cartoon Pop Letters</option>
-                <option>Retro 70s Groovy Letters</option>
-                <option>Varsity Collegiate Block</option>
-              </optgroup>
-              <optgroup label="Premium &amp; Classic">
-                <option>Elegant High-Contrast Serif</option>
-                <option>Luxury Gold Serif</option>
-                <option>Engraved Vintage Lettering</option>
-                <option>Art Deco Lettering</option>
-              </optgroup>
-              <optgroup label="Tough &amp; Industrial">
-                <option>Chrome 3D Letters</option>
-                <option>Industrial Stencil</option>
-                <option>Western Slab</option>
-                <option>Distressed Workwear Type</option>
-              </optgroup>
-              <optgroup label="Clean &amp; Modern">
-                <option>Modern Minimal Sans</option>
-                <option>Geometric Rounded Sans</option>
-                <option>Outline Hollow Letters</option>
-              </optgroup>
+              <option>Architectural Drafting Letterforms</option>
+              <option>Art Deco Geometric Display</option>
+              <option>Bespoke Connected Script</option>
+              <option>Bold Block Lettering</option>
+              <option>Brutalist Extended Condensed</option>
+              <option>Chiseled Engraved Serif</option>
+              <option>Contemporary Luxury Serif</option>
+              <option>Custom Character-Integrated Lettering</option>
+              <option>Experimental Modular Typography</option>
+              <option>Hand-Painted Sign Lettering</option>
+              <option>Interlocking Monogram</option>
+              <option>Kinetic Oversized Type</option>
+              <option>Minimal Editorial Sans</option>
+              <option>Retro Dimensional Type</option>
+              <option>Sculpted Chrome Lettering</option>
+              <option>Soft Modern Rounded Sans</option>
+              <option>Stencil / Industrial Lettering</option>
+              <option>Vintage Badge Lettering</option>
+              <option>Hand-Lettered Script</option>
+              <option>Brush Calligraphy</option>
+              <option>Graffiti Tag Lettering</option>
+              <option>Neon Sign Script</option>
+              <option>Chunky Bubble Letters</option>
+              <option>Cartoon Pop Letters</option>
+              <option>Retro 70s Groovy Letters</option>
+              <option>Varsity Collegiate Block</option>
+              <option>Elegant High-Contrast Serif</option>
+              <option>Luxury Gold Serif</option>
+              <option>Engraved Vintage Lettering</option>
+              <option>Art Deco Lettering</option>
+              <option>Chrome 3D Letters</option>
+              <option>Industrial Stencil</option>
+              <option>Western Slab</option>
+              <option>Distressed Workwear Type</option>
+              <option>Modern Minimal Sans</option>
+              <option>Geometric Rounded Sans</option>
+              <option>Outline Hollow Letters</option>
+              <option>✎ Custom — write my own…</option>
               <option value="__custom">✎ Custom — write my own…</option>
             </select>
             <div class="custom-wrap" id="fontCustomWrap">
@@ -595,10 +741,13 @@
               <option value="">— None —</option>
               <option>Business Name + Tagline</option>
               <option>Business Name Only</option>
+              <option>Logo Symbol Only</option>
+              <option>Typography-First Name Treatment</option>
               <option>Monogram + Name</option>
               <option>Monogram Only</option>
               <option>Name + Tagline + Location</option>
               <option>Tagline-Led, Name Secondary</option>
+              <option>✎ Custom — write my own…</option>
               <option value="__custom">✎ Custom — write my own…</option>
             </select>
             <div class="custom-wrap" id="nameTreatmentCustomWrap">
@@ -617,34 +766,36 @@
             <label for="palette">Color Palette</label>
             <select id="palette" data-custom="paletteCustomWrap">
               <option value="">— None —</option>
-              <optgroup label="Signature &amp; Luxury">
-                <option>Sapphire, Chrome Silver &amp; Pearl White</option>
-                <option>Navy &amp; Gold</option>
-                <option>Black &amp; Gold Luxury</option>
-                <option>Emerald &amp; Cream</option>
-              </optgroup>
-              <optgroup label="Bold &amp; Bright">
-                <option>Bold Red, Black &amp; White</option>
-                <option>Teal &amp; Coral Pop</option>
-                <option>Sunshine Yellow &amp; Charcoal</option>
-                <option>Neon Brights on Black</option>
-                <option>Sunset Ombre</option>
-              </optgroup>
-              <optgroup label="Earthy &amp; Natural">
-                <option>Sage Green &amp; Warm Wood Tones</option>
-                <option>Terracotta &amp; Sand</option>
-                <option>Forest Green &amp; Cream</option>
-              </optgroup>
-              <optgroup label="Soft &amp; Clean">
-                <option>Soft Pastels</option>
-                <option>Clean White &amp; Sky Blue</option>
-                <option>Blush, Pearl &amp; Silver</option>
-                <option>Monochrome Black &amp; White</option>
-              </optgroup>
-              <optgroup label="Classic">
-                <option>Patriotic Red, White &amp; Blue</option>
-                <option>Retro Orange, Brown &amp; Cream</option>
-              </optgroup>
+              <option>Black &amp; Champagne Gold</option>
+              <option>Bold Multicolor</option>
+              <option>Caribbean Sapphire Blue, Silver &amp; White</option>
+              <option>Charcoal &amp; Electric Lime</option>
+              <option>Cobalt Blue &amp; Vivid Orange</option>
+              <option>Deep Emerald &amp; Brass</option>
+              <option>Earthy Olive &amp; Sand</option>
+              <option>Forest Green &amp; Warm Cream</option>
+              <option>Midnight Navy &amp; Copper</option>
+              <option>Monochrome Black &amp; White</option>
+              <option>Premium Jewel Tones</option>
+              <option>Terracotta &amp; Natural Linen</option>
+              <option>Sapphire, Chrome Silver &amp; Pearl White</option>
+              <option>Navy &amp; Gold</option>
+              <option>Black &amp; Gold Luxury</option>
+              <option>Emerald &amp; Cream</option>
+              <option>Bold Red, Black &amp; White</option>
+              <option>Teal &amp; Coral Pop</option>
+              <option>Sunshine Yellow &amp; Charcoal</option>
+              <option>Neon Brights on Black</option>
+              <option>Sunset Ombre</option>
+              <option>Sage Green &amp; Warm Wood Tones</option>
+              <option>Terracotta &amp; Sand</option>
+              <option>Forest Green &amp; Cream</option>
+              <option>Soft Pastels</option>
+              <option>Clean White &amp; Sky Blue</option>
+              <option>Blush, Pearl &amp; Silver</option>
+              <option>Patriotic Red, White &amp; Blue</option>
+              <option>Retro Orange, Brown &amp; Cream</option>
+              <option>✎ Custom — write my own…</option>
               <option value="__custom">✎ Custom — write my own…</option>
             </select>
             <div class="custom-wrap" id="paletteCustomWrap">
@@ -655,7 +806,19 @@
             <label for="finish">Finish / Texture</label>
             <select id="finish" data-custom="finishCustomWrap">
               <option value="">— None —</option>
+              <option>Clean Flat Vector</option>
+              <option>Die-Cut Sticker</option>
+              <option>Embossed Foil</option>
+              <option>Embroidery-Ready Simplification</option>
+              <option>High-Resolution Digital</option>
+              <option>Layered Paper Cut</option>
               <option>Metallic Chrome</option>
+              <option>Offset Print</option>
+              <option>Photorealistic Commercial</option>
+              <option>Premium Screen Print</option>
+              <option>Raised Spot UV</option>
+              <option>Textured Letterpress</option>
+              <option>Vintage Distressed Ink</option>
               <option>Matte</option>
               <option>Glossy</option>
               <option>Metallic Foil</option>
@@ -665,7 +828,7 @@
               <option>Raised 3D Puff Print</option>
               <option>Distressed Vintage Wash</option>
               <option>Watercolor Texture</option>
-              <option>Clean Flat Vector</option>
+              <option>✎ Custom — write my own…</option>
               <option value="__custom">✎ Custom — write my own…</option>
             </select>
             <div class="custom-wrap" id="finishCustomWrap">
@@ -684,20 +847,26 @@
             <label for="brandMark">Brand Mark</label>
             <select id="brandMark" data-custom="brandMarkCustomWrap">
               <option value="">— None —</option>
-              <optgroup label="Symbol Marks">
-                <option>Handcrafted Symbol</option>
-                <option>Abstract Mark</option>
-                <option>Tool-Crafted Symbol</option>
-                <option>Emblem / Badge Mark</option>
-              </optgroup>
-              <optgroup label="Letter Marks">
-                <option>Monogram</option>
-                <option>Wordmark Only</option>
-              </optgroup>
-              <optgroup label="Character Marks">
-                <option>Mascot Character</option>
-                <option>Animal Mascot</option>
-              </optgroup>
+              <option>Abstract Monogram</option>
+              <option>Architectural Symbol</option>
+              <option>Combination Mark</option>
+              <option>Custom Lettermark</option>
+              <option>Emblem / Seal</option>
+              <option>Geometric Icon</option>
+              <option>Handcrafted Symbol</option>
+              <option>Lettering-Only Wordmark</option>
+              <option>Mascot (Original)</option>
+              <option>Negative-Space Mark</option>
+              <option>Professional Service Badge</option>
+              <option>Symbol-Only Mark</option>
+              <option>Abstract Mark</option>
+              <option>Tool-Crafted Symbol</option>
+              <option>Emblem / Badge Mark</option>
+              <option>Monogram</option>
+              <option>Wordmark Only</option>
+              <option>Mascot Character</option>
+              <option>Animal Mascot</option>
+              <option>✎ Custom — describe my own…</option>
               <option value="__custom">✎ Custom — describe my own…</option>
             </select>
             <div class="custom-wrap" id="brandMarkCustomWrap">
@@ -708,7 +877,18 @@
             <label for="personality">Brand Personality</label>
             <select id="personality" data-custom="personalityCustomWrap">
               <option value="">— None —</option>
+              <option>Approachable &amp; Neighborly</option>
+              <option>Bold &amp; Fearless</option>
+              <option>Dependable &amp; Professional</option>
+              <option>Eco-Conscious &amp; Natural</option>
               <option>Elegant &amp; Luxurious</option>
+              <option>Energetic &amp; Colorful</option>
+              <option>Expert &amp; Technical</option>
+              <option>Family-Owned &amp; Warm</option>
+              <option>High-End &amp; Exclusive</option>
+              <option>Modern &amp; Forward Thinking</option>
+              <option>Playful &amp; Creative</option>
+              <option>Strong &amp; Industrial</option>
               <option>Bold &amp; Rugged</option>
               <option>Friendly &amp; Approachable</option>
               <option>Modern &amp; Minimal</option>
@@ -716,6 +896,7 @@
               <option>Trustworthy &amp; Dependable</option>
               <option>Premium &amp; Polished</option>
               <option>Down-to-Earth &amp; Honest</option>
+              <option>✎ Custom — write my own…</option>
               <option value="__custom">✎ Custom — write my own…</option>
             </select>
             <div class="custom-wrap" id="personalityCustomWrap">
@@ -765,7 +946,7 @@
             </div>
           </div>
           <div class="field full">
-            <label for="details">Extra Details <span class="opt">(icons, tools, phone number, offers, anything)</span></label>
+            <label for="details">Extra Creative Instructions <span class="opt">(exact wording, things to avoid, icons, tools, anything)</span></label>
             <textarea id="details" placeholder="e.g. include a gold wrench icon, 'Licensed &amp; Insured' badge, and a $49 tune-up offer"></textarea>
           </div>
         </div>
@@ -785,6 +966,7 @@
         <div id="libraryList"></div>
         <div class="card-btns" style="margin-bottom:14px">
           <button type="button" id="libDownloadBtn">⬇ Download Library (.txt)</button>
+          <button type="button" id="libJsonBtn">⬇ Download Library (.json)</button>
           <button type="button" id="libClearBtn">Clear Library</button>
         </div>
       </section>
@@ -863,12 +1045,61 @@
 
       /* ============ design styles ============ */
       var STYLES = [
-        "Minimalist Modern","Luxury Premium","Vintage Retro","Bold Streetwear",
-        "Rustic Craftsman","Playful Cartoon","Chibi Cute","3D Pixar-Style Render",
-        "Flat Vector Illustration","Watercolor","Elegant Line Art","Graffiti Street Art",
-        "Art Deco","Mid-Century Modern","Distressed Grunge","Neon Glow",
-        "Photorealistic","Hand-Drawn Sketch","Geometric Abstract","Americana Patriotic",
-        "Kawaii","Comic Book","Boho Chic","Industrial Stencil"
+        "3D Chrome & Metallic",
+        "3D Clay / Soft Sculpture",
+        "Abstract Geometry",
+        "Architectural Editorial",
+        "Art Deco Luxury",
+        "Bold Maximalist",
+        "Bold Typography",
+        "Brutalist Industrial",
+        "Clean Corporate",
+        "Cinematic Photorealism",
+        "Colorful Pop Art",
+        "Contemporary Minimalism",
+        "Custom Character + Typography",
+        "Cut-Paper Collage",
+        "Eco-Organic",
+        "Elegant Monogram",
+        "Futuristic Tech",
+        "Geometric Bauhaus",
+        "Hand-Drawn Craft",
+        "High-End Editorial",
+        "Illustrated Mascot",
+        "Industrial Blueprint",
+        "Isometric 3D",
+        "Luxury Black-Tie",
+        "Mixed-Media Texture",
+        "Modern Retro",
+        "Neon Night",
+        "Premium Vintage Badge",
+        "Realistic Product Photography",
+        "Streetwear / Urban",
+        "Swiss Grid",
+        "Watercolor / Artisan",
+        "Minimalist Modern",
+        "Luxury Premium",
+        "Vintage Retro",
+        "Bold Streetwear",
+        "Rustic Craftsman",
+        "Playful Cartoon",
+        "Chibi Cute",
+        "3D Pixar-Style Render",
+        "Flat Vector Illustration",
+        "Elegant Line Art",
+        "Graffiti Street Art",
+        "Art Deco",
+        "Mid-Century Modern",
+        "Distressed Grunge",
+        "Neon Glow",
+        "Photorealistic",
+        "Hand-Drawn Sketch",
+        "Geometric Abstract",
+        "Americana Patriotic",
+        "Kawaii",
+        "Comic Book",
+        "Boho Chic",
+        "Industrial Stencil"
       ];
       var selectedStyles = {};
       function renderChips(){
@@ -914,96 +1145,188 @@
 
       /* ============ deliverable specs ============ */
       var SPECS = {
-        "Logo": "a scalable vector logo with a memorable icon mark plus the business wordmark, balanced composition, works in full color and in one color, transparent background, no mockup",
-        "Business Card": "a premium business card design, front and back, with clear space for name, phone, website and a QR code, print-ready layout with bleed",
-        "Letterhead & Invoice Design": "a clean branded letterhead and invoice template design with logo header, contact block and elegant divider lines, print-ready",
-        "Vehicle Decal / Truck Wrap": "a bold vehicle wrap / truck decal design that reads clearly from a distance, logo and phone number large, designed for a work truck side panel",
+        "Logo / brand mark": "a scalable vector logo with a memorable icon mark plus the business wordmark, balanced composition, works in full color and in one color, transparent background, no mockup",
+        "Logo variations / identity system": "a complete logo identity system — primary logo plus stacked, horizontal, icon-only and one-color variations, with clear-space and minimum-size guidance",
+        "Business card (front and back)": "a premium business card design, front and back, with clear space for name, phone, website and a QR code, print-ready layout with bleed",
+        "Letterhead & invoice": "a clean branded letterhead and invoice template design with logo header, contact block and elegant divider lines, print-ready",
+        "Estimate / quote template": "a branded estimate and quote template with line-item rows, a totals block, terms area and signature line, clean and print-ready",
+        "Vehicle wrap / service van": "a bold vehicle wrap / truck decal design that reads clearly from a distance, logo and phone number large, designed for a work truck side panel",
+        "Yard sign": "a yard sign design, extremely bold and simple, business name, one service line and a big phone number, readable from a moving car, high contrast",
+        "Door hanger": "a door hanger design with a die-cut hole at top, bold headline, special offer block and contact strip at the bottom, print-ready",
+        "Service sticker / decal": "a die-cut service sticker / decal design, bold simplified artwork that reads at a glance, limited colors, kiss-cut ready",
+        "Thank-you card": "a warm branded thank-you card design with a gratitude headline on the front and message space inside, print-ready",
+        "Presentation folder": "a branded presentation folder with cover artwork, logo and tagline, inside pockets with business-card slits, print-ready",
+        "Work order / checklist": "a clean branded work order and checklist form with task rows, checkboxes, a tech signature area and customer approval block, print-ready",
         "Uniform Logo Patch": "an embroidered-look uniform logo patch design, compact badge shape, readable at small size, limited thread colors",
-        "T-Shirt Design": "a print-ready t-shirt graphic, centered chest composition, bold readable artwork, transparent background, design file only — no photo mockup, no model",
-        "Hoodie Design": "a print-ready hoodie graphic, bold chest composition with a small left-chest emblem variation, transparent background, design file only — no photo mockup",
-        "Tote Bag Design": "a tote bag print design, one strong centered composition sized for a canvas tote, colors that print cleanly on natural canvas, transparent background",
-        "Book Bag / Backpack Design": "a backpack / book bag front-panel print design, fun durable composition sized for the front pocket panel, transparent background, design file only",
-        "Notebook / Journal Cover": "a notebook cover design, full-bleed front cover art with the title in the featured lettering, spine-friendly margins, print-ready",
-        "Apron Design": "an apron chest print design, compact centered composition that reads at a distance, transparent background, design file only",
-        "Cap / Hat Design": "an embroidered cap logo design, small front-panel composition, bold simplified shapes that stitch cleanly, limited colors",
+        "T-shirt artwork": "a print-ready t-shirt graphic, centered chest composition, bold readable artwork, transparent background, design file only — no photo mockup, no model",
+        "Polo shirt / uniform embroidery": "a left-chest polo embroidery design, simplified bold artwork that stitches cleanly, limited thread colors, design file only",
+        "Hoodie design": "a print-ready hoodie graphic, bold chest composition with a small left-chest emblem variation, transparent background, design file only — no photo mockup",
+        "Tote bag": "a tote bag print design, one strong centered composition sized for a canvas tote, colors that print cleanly on natural canvas, transparent background",
+        "Notebook cover": "a notebook cover design, full-bleed front cover art with the title in the featured lettering, spine-friendly margins, print-ready",
+        "Backpack / book bag": "a backpack / book bag front-panel print design, fun durable composition sized for the front pocket panel, transparent background, design file only",
+        "Hat / cap embroidery": "an embroidered cap logo design, small front-panel composition, bold simplified shapes that stitch cleanly, limited colors",
+        "Water bottle / tumbler": "a water bottle / tumbler wraparound design, bold composition that reads from every angle, clean and durable-looking, design file only",
+        "Work apron": "an apron chest print design, compact centered composition that reads at a distance, transparent background, design file only",
+        "Safety vest design": "a safety-vest back print, ultra-bold lettering readable from far away, high contrast on hi-vis backgrounds, design file only",
         "Flyer": "a high-converting promotional flyer design, strong headline at top, clear offer block, services list, phone number and QR code space, print-ready with bleed",
-        "Door Hanger": "a door hanger design with a die-cut hole at top, bold headline, special offer block and contact strip at the bottom, print-ready",
-        "Banner": "a large-format banner design, huge headline readable from across the street, logo, one clear call to action and phone number, print-ready",
-        "Retractable Banner": "a tall retractable banner stand design, vertical layout, logo at top, headline, benefit bullets with icons, photo area and contact footer, print-ready",
-        "Trade Show Booth Backdrop": "a trade show booth backdrop design, wide 10ft layout, giant logo and headline readable from 20 feet away, supporting service icons along the bottom, print-ready",
-        "Yard Sign": "a yard sign design, extremely bold and simple, business name, one service line and a big phone number, readable from a moving car, high contrast",
-        "Postcard / Mailer": "a direct-mail postcard design, front with bold offer and artwork, back with message area, address block and call to action, print-ready",
-        "Brochure": "a tri-fold brochure design, cover panel with headline and artwork, inside panels with services, icons and testimonial space, print-ready",
-        "Website Homepage Design": "a website homepage hero section design, modern web layout, headline, sub-headline, call-to-action button, trust badges and service cards below the fold, desktop and mobile friendly composition",
-        "Landing Page Design": "a high-converting landing page design, hero with headline and booking form area, benefit sections, before-and-after gallery strip and sticky call-to-action, modern web layout",
-        "Social Media Post": "a scroll-stopping square social media post design, bold headline text, eye-catching artwork, space for a caption offer, platform-ready 1:1 composition",
+        "Brochure / tri-fold": "a tri-fold brochure design, cover panel with headline and artwork, inside panels with services, icons and testimonial space, print-ready",
+        "Postcard / mailer": "a direct-mail postcard design, front with bold offer and artwork, back with message area, address block and call to action, print-ready",
+        "Large outdoor banner": "a large-format banner design, huge headline readable from across the street, logo, one clear call to action and phone number, print-ready",
+        "Retractable banner / pull-up stand": "a tall retractable banner stand design, vertical layout, logo at top, headline, benefit bullets with icons, photo area and contact footer, print-ready",
+        "Trade show booth / exhibit": "a trade show booth backdrop design, wide 10ft layout, giant logo and headline readable from 20 feet away, supporting service icons along the bottom, print-ready",
+        "Trade show table cover": "a fitted trade show table cover with front-panel artwork — logo, headline and call to action readable from across the aisle",
+        "Pop-up event backdrop": "a pop-up event backdrop with a step-and-repeat style logo pattern and one hero message, print-ready",
+        "Digital billboard": "a digital billboard design, seven words or fewer, giant type, extreme contrast, readable at highway speed",
+        "Lead magnet / service guide": "a lead magnet / service guide cover and interior spread design with premium guide feel and clear chapter hierarchy, web-ready PDF layout",
+        "Website design + full website-generation prompt": "a website homepage hero section design, modern web layout, headline, sub-headline, call-to-action button, trust badges and service cards below the fold, desktop and mobile friendly composition",
+        "Landing page + conversion copy": "a high-converting landing page design, hero with headline and booking form area, benefit sections, before-and-after gallery strip and sticky call-to-action, modern web layout",
+        "Social media feed post": "a scroll-stopping square social media post design, bold headline text, eye-catching artwork, space for a caption offer, platform-ready 1:1 composition",
+        "Social media carousel": "a swipeable 5-slide social media carousel, one idea per slide, consistent branded frame, hook on slide one and CTA on the last",
+        "Social media story": "a vertical 9:16 social media story design with a bold top headline, tap-forward pacing and sticker-safe zones respected",
+        "Social media ad creative": "a scroll-stopping social media ad creative with a bold hook headline, thumb-stopping visual and a clear CTA button area, platform-ready",
+        "Reel / short video storyboard": "a 6-frame vertical reel storyboard, one visual beat per frame with caption and on-screen-text notes, shoot-ready",
+        "Email marketing graphic": "an email marketing graphic set — header banner, section dividers and a CTA button graphic in one cohesive branded system, web-ready",
+        "Email Header": "a wide email header banner design, logo, headline and one call to action, clean layout that reads on mobile inboxes",
         "Social Media Cover Banner": "a wide social media cover banner design, logo and headline on the left, service artwork on the right, safe zones respected, crisp at banner size",
         "Profile Logo / Avatar": "a circular profile avatar logo design, single bold icon or mascot face, instantly recognizable at tiny sizes, transparent background",
-        "Email Header": "a wide email header banner design, logo, headline and one call to action, clean layout that reads on mobile inboxes"
+        "Google Business Profile graphic": "a Google Business Profile cover graphic with the business name and top service readable in the cropped preview, trustworthy and clean",
+        "Digital ad campaign kit": "a coordinated digital ad campaign kit — one hero visual adapted to square, portrait and landscape sizes with matching headlines, platform-ready"
       };
 
 
       /* ============ commission reference tables ============ */
       var ASPECTS = {
-        "Logo": "Vector master file (SVG / EPS / PDF) on a square 1:1 artboard with a transparent background; provide stacked and horizontal lockups",
-        "Business Card": "3.5in x 2in finished size, front and back, 300 DPI CMYK with 0.125in bleed",
-        "Letterhead & Invoice Design": "US Letter 8.5in x 11in, print-ready with clean margins",
-        "Vehicle Decal / Truck Wrap": "Wide vehicle side-panel proportions (approx. 16:9 working area), readable from 30+ feet",
+        "Logo / brand mark": "Vector master file (SVG / EPS / PDF) on a square 1:1 artboard with a transparent background; provide stacked and horizontal lockups",
+        "Logo variations / identity system": "Vector master files (SVG / EPS / PDF) with all lockups on 1:1 artboards, transparent backgrounds",
+        "Business card (front and back)": "3.5in x 2in finished size, front and back, 300 DPI CMYK with 0.125in bleed",
+        "Letterhead & invoice": "US Letter 8.5in x 11in, print-ready with clean margins",
+        "Estimate / quote template": "US Letter 8.5in x 11in, print-ready with clean margins",
+        "Vehicle wrap / service van": "Wide vehicle side-panel proportions (approx. 16:9 working area), readable from 30+ feet",
+        "Yard sign": "24in x 18in horizontal, ultra-bold type, maximum contrast",
+        "Door hanger": "4.25in x 11in with a die-cut hanger hole at top, front and back, 300 DPI CMYK with 0.125in bleed",
+        "Service sticker / decal": "Die-cut vector file, approx. 3in x 4in working area, kiss-cut ready",
+        "Thank-you card": "Folded 5in x 7in (flat 10in x 7in), front and inside, 300 DPI CMYK",
+        "Presentation folder": "9in x 12in folder, front + inside pockets, 300 DPI CMYK with bleed",
+        "Work order / checklist": "US Letter 8.5in x 11in, print-ready with clean margins",
         "Uniform Logo Patch": "Compact badge approx. 3in wide, embroidery-ready with limited thread colors",
-        "T-Shirt Design": "Chest print up to 12in wide, 4500 x 5400 px at 300 DPI, transparent PNG",
-        "Hoodie Design": "Front chest print up to 11in wide plus a small left-chest emblem, transparent PNG at 300 DPI",
-        "Tote Bag Design": "Print area approx. 10in x 10in centered on a natural canvas tote, transparent background",
-        "Book Bag / Backpack Design": "Front pocket panel print, approx. 16:10 area, transparent background",
-        "Notebook / Journal Cover": "Full-bleed front cover 6in x 9in with spine-safe margins, print-ready",
-        "Apron Design": "Chest print approx. 9in wide, transparent background",
-        "Cap / Hat Design": "Front panel embroidery area approx. 4.25in x 2.25in, simplified bold shapes",
+        "T-shirt artwork": "Chest print up to 12in wide, 4500 x 5400 px at 300 DPI, transparent PNG",
+        "Polo shirt / uniform embroidery": "Left-chest area approx. 3.5in wide, embroidery-ready vector with limited colors",
+        "Hoodie design": "Front chest print up to 11in wide plus a small left-chest emblem, transparent PNG at 300 DPI",
+        "Tote bag": "Print area approx. 10in x 10in centered on a natural canvas tote, transparent background",
+        "Notebook cover": "Full-bleed front cover 6in x 9in with spine-safe margins, print-ready",
+        "Backpack / book bag": "Front pocket panel print, approx. 16:10 area, transparent background",
+        "Hat / cap embroidery": "Front panel embroidery area approx. 4.25in x 2.25in, simplified bold shapes",
+        "Water bottle / tumbler": "Wraparound print area approx. 9in x 4in, 300 DPI, transparent background",
+        "Work apron": "Chest print approx. 9in wide, transparent background",
+        "Safety vest design": "Back panel print approx. 10in x 8in, ultra-bold type, high contrast",
         "Flyer": "8.5in x 11in (US Letter), front and back where used, 300 DPI CMYK with 0.125in bleed",
-        "Door Hanger": "4.25in x 11in with a die-cut hanger hole at top, front and back, 300 DPI CMYK with 0.125in bleed",
-        "Banner": "Large format, e.g. 6ft x 3ft (2:1), vector or 150 DPI at full size",
-        "Retractable Banner": "33in x 81in vertical, with a 6in bottom safety zone for the stand hardware",
-        "Trade Show Booth Backdrop": "10ft x 8ft wide format, readable from 20 feet away",
-        "Yard Sign": "24in x 18in horizontal, ultra-bold type, maximum contrast",
-        "Postcard / Mailer": "6in x 9in, front and back, 300 DPI CMYK with 0.125in bleed",
-        "Brochure": "Tri-fold 8.5in x 11in (six panels), 300 DPI CMYK with 0.125in bleed",
-        "Website Homepage Design": "Responsive web layout — 1440px desktop design width with a 16:9 hero reference and clear mobile stacking",
-        "Landing Page Design": "Responsive landing page layout for desktop and mobile, above-the-fold hero with booking form / CTA",
-        "Social Media Post": "Square 1:1 master (1080 x 1080 px), adaptable to 4:5 portrait",
+        "Brochure / tri-fold": "Tri-fold 8.5in x 11in (six panels), 300 DPI CMYK with 0.125in bleed",
+        "Postcard / mailer": "6in x 9in, front and back, 300 DPI CMYK with 0.125in bleed",
+        "Large outdoor banner": "Large format, e.g. 6ft x 3ft (2:1), vector or 150 DPI at full size",
+        "Retractable banner / pull-up stand": "33in x 81in vertical, with a 6in bottom safety zone for the stand hardware",
+        "Trade show booth / exhibit": "10ft x 8ft wide format, readable from 20 feet away",
+        "Trade show table cover": "Fitted 6ft table cover, front panel hero zone, print-ready",
+        "Pop-up event backdrop": "Approx. 8ft wide pop-up backdrop, 150 DPI at full size, photo-friendly",
+        "Digital billboard": "Digital billboard proportions (e.g. 14:48), extreme contrast, 3-second readability",
+        "Lead magnet / service guide": "US Letter PDF layout, cover + interior spread, web-ready",
+        "Website design + full website-generation prompt": "Responsive web layout — 1440px desktop design width with a 16:9 hero reference and clear mobile stacking",
+        "Landing page + conversion copy": "Responsive landing page layout for desktop and mobile, above-the-fold hero with booking form / CTA",
+        "Social media feed post": "Square 1:1 master (1080 x 1080 px), adaptable to 4:5 portrait",
+        "Social media carousel": "Square 1:1, 5 slides at 1080 x 1080 px each",
+        "Social media story": "Vertical 9:16, 1080 x 1920 px, safe zones respected",
+        "Social media ad creative": "Square 1:1 master (1080 x 1080 px), adaptable to 4:5 and 9:16",
+        "Reel / short video storyboard": "6 frames, vertical 9:16 reference, shoot-ready notes per frame",
+        "Email marketing graphic": "Header 1200 x 400 px + dividers + CTA button, web-ready, email-client safe",
+        "Email Header": "Wide header 1200 x 400 px (2x retina), readable in mobile inboxes",
         "Social Media Cover Banner": "Wide banner 1640 x 924 px with platform safe zones respected",
         "Profile Logo / Avatar": "Square 1:1, circular-crop safe, legible at 98 px",
-        "Email Header": "Wide header 1200 x 400 px (2x retina), readable in mobile inboxes"
+        "Google Business Profile graphic": "Wide cover format per Google Business Profile specs, crop-safe center",
+        "Digital ad campaign kit": "1:1, 4:5 and 16:9 adaptations, 1080 px masters, platform-ready"
       };
       /* Each deliverable renders ONLY its own requirements block — keyed by
          deliverable name, never shared across pieces. */
       var REQ_BY_PIECE = {
-        "Logo": "Logo requirements: a distinctive, ownable identity mark with a strong silhouette that passes the monochrome test — it must work in solid black and in solid white. It must stay legible at small sizes (invoice corner, favicon, embroidered patch). Define the symbol / wordmark relationship clearly, with stacked and horizontal lockups. Avoid generic stock icons and overused roof-and-house silhouettes unless the concept genuinely justifies them.",
-        "Business Card": "Business card requirements: design the front and back separately at the standard 3.5in x 2in size, 300 DPI CMYK with 0.125in bleed and a clear safe area keeping all critical text away from trim edges. Keep the name, phone, website and QR code crisp and legible at true size, with a clear hierarchy: business name first, person's name and title second, contact details last.",
-        "Letterhead & Invoice Design": "Letterhead & invoice requirements: a US Letter 8.5in x 11in layout with a clean logo header, a tidy contact block and elegant divider lines. The invoice version must include clearly labeled fields for line items, subtotal, tax and total, with figures that stay perfectly readable. Print-ready with clean margins, and it must still look sharp printed in plain black and white.",
-        "Vehicle Decal / Truck Wrap": "Vehicle wrap requirements: design for a work truck side panel and keep every word readable from 30+ feet at road speed — business name, one core service and phone number oversized, with minimal copy overall. Keep critical text clear of door handles, seams, windows and wheel wells, use maximum contrast, and describe how the design wraps the panel edges.",
+        "Logo / brand mark": "Logo requirements: a distinctive, ownable identity mark with a strong silhouette that passes the monochrome test — it must work in solid black and in solid white. It must stay legible at small sizes (invoice corner, favicon, embroidered patch). Define the symbol / wordmark relationship clearly, with stacked and horizontal lockups. Avoid generic stock icons and overused roof-and-house silhouettes unless the concept genuinely justifies them.",
+        "Logo variations / identity system": "Identity system requirements: deliver the primary logo plus its approved variations — stacked lockup, horizontal lockup, icon-only mark and a one-color version. Every variation must pass the monochrome test and stay legible at small sizes. Include clear-space rules and minimum-size guidance so the system stays consistent everywhere it appears.",
+        "Business card (front and back)": "Business card requirements: design the front and back separately at the standard 3.5in x 2in size, 300 DPI CMYK with 0.125in bleed and a clear safe area keeping all critical text away from trim edges. Keep the name, phone, website and QR code crisp and legible at true size, with a clear hierarchy: business name first, person's name and title second, contact details last.",
+        "Letterhead & invoice": "Letterhead & invoice requirements: a US Letter 8.5in x 11in layout with a clean logo header, a tidy contact block and elegant divider lines. The invoice version must include clearly labeled fields for line items, subtotal, tax and total, with figures that stay perfectly readable. Print-ready with clean margins, and it must still look sharp printed in plain black and white.",
+        "Estimate / quote template": "Estimate template requirements: a US Letter layout with a branded header, numbered line-item rows with quantity/rate/amount columns, a totals block, a terms area and signature lines for tech and customer. Must look professional enough to justify premium pricing and be easy to fill out on site.",
+        "Vehicle wrap / service van": "Vehicle wrap requirements: design for a work truck side panel and keep every word readable from 30+ feet at road speed — business name, one core service and phone number oversized, with minimal copy overall. Keep critical text clear of door handles, seams, windows and wheel wells, use maximum contrast, and describe how the design wraps the panel edges.",
+        "Yard sign": "Yard sign requirements: a 24in x 18in horizontal design that is extremely bold and simple — business name, one service line and a big phone number, readable from a moving car. Maximum contrast, very few words, and no detail that disappears at road speed.",
+        "Door hanger": "Door hanger requirements: a 4.25in x 11in print-ready design, front and back, 300 DPI CMYK with 0.125in bleed. Keep the die-cut hanger hole at the top completely clear of critical art and text. Describe the front and back separately, with a clear hierarchy: bold headline first, special offer block second, contact strip along the bottom last.",
+        "Service sticker / decal": "Sticker requirements: a die-cut-ready design with bold simplified shapes, a limited color palette and no fine detail that would vanish at small sizes. Must include the business name, one service line and a phone number, and read clearly stuck to equipment or a furnace.",
+        "Thank-you card": "Thank-you card requirements: a folded card design — front with a heartfelt gratitude headline in the brand lettering, inside with generous blank message space and a small logo footer. Should feel personal and premium, the kind of card a homeowner keeps on the fridge.",
+        "Presentation folder": "Presentation folder requirements: a standard 9in x 12in folder — front cover with hero artwork, logo and tagline; inside left and right pockets with business-card slits. Must feel substantial and premium in a client's hands.",
+        "Work order / checklist": "Work order requirements: a US Letter form with a branded header, numbered task rows with checkboxes, materials/parts lines, tech signature and date fields, and a customer approval signature block. Must be scannable at a glance on a clipboard and easy to complete with a pen.",
         "Uniform Logo Patch": "Uniform patch requirements: a compact badge, approx. 3in wide, that embroiders cleanly — bold simplified shapes, a limited thread-color palette, and no fine detail, tiny text or gradients that stitching cannot reproduce. It must stay legible at chest size and hold its shape on a stitched border.",
-        "T-Shirt Design": "T-shirt requirements: clean, print-ready standalone artwork with proper print separation, bold legible type and a transparent background. Size and place the artwork realistically for a standard chest print area (up to 12in wide), with ink colors limited to what screen print or DTF reproduces cleanly. Design file only — no photo mockup and no model.",
-        "Hoodie Design": "Hoodie requirements: clean, print-ready standalone artwork with proper print separation, bold legible type and a transparent background. Provide a bold front chest composition (up to 11in wide) plus a small left-chest emblem version, with ink colors limited to what reproduces cleanly on fleece. Design file only — no photo mockup and no model.",
-        "Tote Bag Design": "Tote bag requirements: one strong centered composition sized for a natural canvas tote print area (approx. 10in x 10in), delivered as standalone artwork with a transparent background and proper print separation. Use bold legible type and a limited palette that prints cleanly on natural canvas. Design file only — no photo mockup.",
-        "Book Bag / Backpack Design": "Backpack requirements: a front pocket panel print design (approx. 16:10 area) delivered as standalone artwork with a transparent background and proper print separation. Use bold, durable shapes and legible type that survive an abrasion-prone surface, with colors limited to what reproduces cleanly. Design file only — no photo mockup.",
-        "Notebook / Journal Cover": "Notebook cover requirements: a full-bleed front cover design at 6in x 9in, print-ready at 300 DPI with spine-safe margins so no critical art or text is lost at the binding edge. Feature the title prominently in the chosen lettering, and keep the composition balanced as a standalone cover — no back cover or mockup unless requested.",
-        "Apron Design": "Apron requirements: a compact centered chest print design (approx. 9in wide) delivered as standalone artwork with a transparent background and proper print separation. Bold legible type that reads at a distance, with ink colors limited to what reproduces cleanly on fabric. Design file only — no photo mockup and no model.",
-        "Cap / Hat Design": "Cap requirements: an embroidered front-panel logo sized to approx. 4.25in x 2.25in — bold simplified shapes that stitch cleanly, a limited thread-color palette, and no fine detail, tiny text or gradients. It must stay instantly recognizable at small size. Design file only — no photo mockup.",
+        "T-shirt artwork": "T-shirt requirements: clean, print-ready standalone artwork with proper print separation, bold legible type and a transparent background. Size and place the artwork realistically for a standard chest print area (up to 12in wide), with ink colors limited to what screen print or DTF reproduces cleanly. Design file only — no photo mockup and no model.",
+        "Polo shirt / uniform embroidery": "Embroidery requirements: a left-chest design sized approx. 3.5in wide — bold simplified shapes, no fine lines or tiny text, limited thread colors. Must stitch cleanly on polo fabric and read as premium, not promotional.",
+        "Hoodie design": "Hoodie requirements: clean, print-ready standalone artwork with proper print separation, bold legible type and a transparent background. Provide a bold front chest composition (up to 11in wide) plus a small left-chest emblem version, with ink colors limited to what reproduces cleanly on fleece. Design file only — no photo mockup and no model.",
+        "Tote bag": "Tote bag requirements: one strong centered composition sized for a natural canvas tote print area (approx. 10in x 10in), delivered as standalone artwork with a transparent background and proper print separation. Use bold legible type and a limited palette that prints cleanly on natural canvas. Design file only — no photo mockup.",
+        "Notebook cover": "Notebook cover requirements: a full-bleed front cover design at 6in x 9in, print-ready at 300 DPI with spine-safe margins so no critical art or text is lost at the binding edge. Feature the title prominently in the chosen lettering, and keep the composition balanced as a standalone cover — no back cover or mockup unless requested.",
+        "Backpack / book bag": "Backpack requirements: a front pocket panel print design (approx. 16:10 area) delivered as standalone artwork with a transparent background and proper print separation. Use bold, durable shapes and legible type that survive an abrasion-prone surface, with colors limited to what reproduces cleanly. Design file only — no photo mockup.",
+        "Hat / cap embroidery": "Cap requirements: an embroidered front-panel logo sized to approx. 4.25in x 2.25in — bold simplified shapes that stitch cleanly, a limited thread-color palette, and no fine detail, tiny text or gradients. It must stay instantly recognizable at small size. Design file only — no photo mockup.",
+        "Water bottle / tumbler": "Tumbler requirements: a wraparound design for a standard 20–30oz tumbler — one continuous composition that reads from every angle, bold simplified artwork, no critical detail lost at the seam. Design file only, no product photo.",
+        "Work apron": "Apron requirements: a compact centered chest print design (approx. 9in wide) delivered as standalone artwork with a transparent background and proper print separation. Bold legible type that reads at a distance, with ink colors limited to what reproduces cleanly on fabric. Design file only — no photo mockup and no model.",
+        "Safety vest design": "Safety vest requirements: a back-panel print design — business name in ultra-bold type plus one service line, maximum contrast against hi-vis yellow/orange/lime. Must be readable from 50+ feet. Design file only.",
         "Flyer": "Flyer requirements: an 8.5in x 11in print-ready design (front and back where used), 300 DPI CMYK with 0.125in bleed and a clear safe area keeping all critical text away from trim edges. Describe the front and back separately, with a clear hierarchy: headline first, offer second, services list third, phone number and QR code space last.",
-        "Door Hanger": "Door hanger requirements: a 4.25in x 11in print-ready design, front and back, 300 DPI CMYK with 0.125in bleed. Keep the die-cut hanger hole at the top completely clear of critical art and text. Describe the front and back separately, with a clear hierarchy: bold headline first, special offer block second, contact strip along the bottom last.",
-        "Banner": "Banner requirements: a large-format design (e.g. 6ft x 3ft), vector or 150 DPI at full size, with a huge headline readable from across the street. Keep copy minimal — logo, one clear call to action and phone number — and keep all critical elements inside a safe margin away from grommets and hems.",
-        "Retractable Banner": "Retractable banner requirements: a tall vertical 33in x 81in design with a clear top-to-bottom hierarchy — logo at the top, headline next, benefit bullets with icons in the middle, a photo area, and a contact footer. Keep all critical content out of the bottom 6in safety zone reserved for the stand hardware, and make the headline readable from across a trade show aisle.",
-        "Trade Show Booth Backdrop": "Trade show backdrop requirements: a wide 10ft x 8ft format with a giant logo and headline readable from 20 feet away, and supporting service icons arranged along the bottom. Keep copy minimal and oversized — this piece is read at a distance, never up close — and keep critical elements away from the frame edges.",
-        "Yard Sign": "Yard sign requirements: a 24in x 18in horizontal design that is extremely bold and simple — business name, one service line and a big phone number, readable from a moving car. Maximum contrast, very few words, and no detail that disappears at road speed.",
-        "Postcard / Mailer": "Postcard requirements: a 6in x 9in direct-mail design, front and back, 300 DPI CMYK with 0.125in bleed. Describe the front and back separately: the front carries the bold offer and artwork; the back carries the message area, the address block and the call to action, with the mailing indicia area kept clear.",
-        "Brochure": "Brochure requirements: a tri-fold 8.5in x 11in design (six panels), 300 DPI CMYK with 0.125in bleed, described panel by panel in correct fold order. The cover panel leads with the headline and artwork; the inside panels carry the services, icons and testimonial space, with a clear hierarchy on every panel and all critical text inside the safe area.",
-        "Website Homepage Design": "Website homepage requirements: a homepage design covering the hero (headline, sub-headline and booking call-to-action), trust signals, a services section, a how-it-works process, a reviews area, a service-area note, and a final booking / contact section with a sticky call-to-action. Include conversion copy direction for each section — benefit-led and written for the ideal customer — in a responsive layout designed at 1440px desktop width with clear mobile stacking.",
-        "Landing Page Design": "Landing page requirements: a single-goal landing page design — a hero with one headline, a supporting sub-headline and a booking form / call-to-action area above the fold, followed by benefit sections, a before-and-after gallery strip and a sticky call-to-action. Strip away anything that distracts from the one conversion goal, and include conversion copy direction for each section, benefit-led and written for the ideal customer, in a responsive desktop and mobile layout.",
-        "Social Media Post": "Social media post requirements: a scroll-stopping square 1:1 post visual (1080 x 1080 px master, adaptable to 4:5 portrait) with a bold headline on the graphic, eye-catching artwork and clear space for the caption offer. Pair it with caption copy direction, a clear call to action and an audience-specific value proposition aimed squarely at the ideal customer. Every claim must be truthful and verifiable — no invented discounts, ratings or guarantees the business has not provided.",
+        "Brochure / tri-fold": "Brochure requirements: a tri-fold 8.5in x 11in design (six panels), 300 DPI CMYK with 0.125in bleed, described panel by panel in correct fold order. The cover panel leads with the headline and artwork; the inside panels carry the services, icons and testimonial space, with a clear hierarchy on every panel and all critical text inside the safe area.",
+        "Postcard / mailer": "Postcard requirements: a 6in x 9in direct-mail design, front and back, 300 DPI CMYK with 0.125in bleed. Describe the front and back separately: the front carries the bold offer and artwork; the back carries the message area, the address block and the call to action, with the mailing indicia area kept clear.",
+        "Large outdoor banner": "Banner requirements: a large-format design (e.g. 6ft x 3ft), vector or 150 DPI at full size, with a huge headline readable from across the street. Keep copy minimal — logo, one clear call to action and phone number — and keep all critical elements inside a safe margin away from grommets and hems.",
+        "Retractable banner / pull-up stand": "Retractable banner requirements: a tall vertical 33in x 81in design with a clear top-to-bottom hierarchy — logo at the top, headline next, benefit bullets with icons in the middle, a photo area, and a contact footer. Keep all critical content out of the bottom 6in safety zone reserved for the stand hardware, and make the headline readable from across a trade show aisle.",
+        "Trade show booth / exhibit": "Trade show backdrop requirements: a wide 10ft x 8ft format with a giant logo and headline readable from 20 feet away, and supporting service icons arranged along the bottom. Keep copy minimal and oversized — this piece is read at a distance, never up close — and keep critical elements away from the frame edges.",
+        "Trade show table cover": "Table cover requirements: a fitted 6ft table cover design — front panel with a giant logo, one headline and one call to action, all readable from across the aisle. Keep the design bold and uncluttered; the table does the talking.",
+        "Pop-up event backdrop": "Backdrop requirements: a wide pop-up backdrop (approx. 8ft) with a repeating logo pattern and one hero message in the center. Must photograph well — this is the selfie wall — with even pattern density and no dead zones.",
+        "Digital billboard": "Billboard requirements: seven words or fewer, giant type, extreme contrast — readable at highway speed in under 3 seconds. Business name, one promise, one contact. Nothing else. If it can't be read at 65 mph, it fails.",
+        "Lead magnet / service guide": "Lead magnet requirements: a cover plus one interior spread for a downloadable service guide — premium guide feel, clear chapter hierarchy, scannable tips layout and a soft CTA to book. Designed to trade for an email address, so it must look worth downloading.",
+        "Website design + full website-generation prompt": "Website homepage requirements: a homepage design covering the hero (headline, sub-headline and booking call-to-action), trust signals, a services section, a how-it-works process, a reviews area, a service-area note, and a final booking / contact section with a sticky call-to-action. Include conversion copy direction for each section — benefit-led and written for the ideal customer — in a responsive layout designed at 1440px desktop width with clear mobile stacking.",
+        "Landing page + conversion copy": "Landing page requirements: a single-goal landing page design — a hero with one headline, a supporting sub-headline and a booking form / call-to-action area above the fold, followed by benefit sections, a before-and-after gallery strip and a sticky call-to-action. Strip away anything that distracts from the one conversion goal, and include conversion copy direction for each section, benefit-led and written for the ideal customer, in a responsive desktop and mobile layout.",
+        "Social media feed post": "Social media post requirements: a scroll-stopping square 1:1 post visual (1080 x 1080 px master, adaptable to 4:5 portrait) with a bold headline on the graphic, eye-catching artwork and clear space for the caption offer. Pair it with caption copy direction, a clear call to action and an audience-specific value proposition aimed squarely at the ideal customer. Every claim must be truthful and verifiable — no invented discounts, ratings or guarantees the business has not provided.",
+        "Social media carousel": "Carousel requirements: 5 square slides telling one story — slide one is the hook, slides two through four deliver the value (tips, before/after, proof), slide five is the call to action. One consistent branded frame across all slides, thumb-stopping first slide.",
+        "Social media story": "Story requirements: a vertical 9:16 design (1080 x 1920 px) with a bold headline in the top third, key message centered, and all critical content inside the safe zone — clear of the profile header, reply bar and sticker areas. Built for tap-forward pacing.",
+        "Social media ad creative": "Ad creative requirements: one thumb-stopping visual with a bold hook headline (5 words or fewer), a clear call-to-action button area and an audience-specific value proposition. Every claim must be truthful and verifiable — no invented discounts, ratings or guarantees. Platform-ready for feed placement.",
+        "Reel / short video storyboard": "Storyboard requirements: 6 frames in vertical 9:16 — each frame shows the visual beat, the on-screen text and the caption/voiceover note. Frame one hooks in under 2 seconds, the middle frames deliver the transformation, the last frame is the CTA. Shoot-ready for a phone camera.",
+        "Email marketing graphic": "Email graphic requirements: a coordinated set — a header banner (1200 x 400 px), two section dividers and one CTA button graphic, all in a single branded system. Must render cleanly in Gmail, Outlook and Apple Mail with web-safe font fallbacks for critical text.",
+        "Email Header": "Email header requirements: create a wide email header banner design at 1200 x 400 px (2x retina) with a clean logo lockup, a headline and one clear call to action. Keep the layout clean and uncluttered so it reads instantly in mobile inboxes, design for safe rendering across major email clients (Gmail, Outlook, Apple Mail), and never rely on web fonts for critical text — the headline and call to action must stay crisp and readable in a web-safe fallback.",
         "Social Media Cover Banner": "Social media cover banner requirements: a wide cover banner (1640 x 924 px) with the logo and headline on the left and service artwork on the right, all critical elements kept inside the platform safe zones and clear of the profile-picture overlap area. It must stay crisp and legible at banner size and at small preview sizes — a brand banner only, with no ad copy, no offer text and no call-to-action block.",
         "Profile Logo / Avatar": "Profile avatar requirements: a circular profile avatar design built around a single bold icon or mascot face, instantly recognizable at tiny sizes (legible at 98 px) and safe inside a circular crop — keep the key shape centered with clear margin from the edges. Deliver on a square 1:1 artboard with a transparent background.",
-        "Email Header": "Email header requirements: create a wide email header banner design at 1200 x 400 px (2x retina) with a clean logo lockup, a headline and one clear call to action. Keep the layout clean and uncluttered so it reads instantly in mobile inboxes, design for safe rendering across major email clients (Gmail, Outlook, Apple Mail), and never rely on web fonts for critical text — the headline and call to action must stay crisp and readable in a web-safe fallback."
+        "Google Business Profile graphic": "GBP graphic requirements: a cover graphic where the business name and top service stay readable inside Google's cropped preview on both desktop and mobile. Clean, trustworthy, no clutter — this is often the first impression in local search.",
+        "Digital ad campaign kit": "Ad kit requirements: one hero visual adapted to three sizes — square 1:1, portrait 4:5 and landscape 16:9 — each with a matching headline and CTA. One consistent campaign look across all sizes, platform-ready for Meta and Google placements."
       };
       var REQ_DEFAULT = "Deliverable requirements: design this piece to its real production or platform dimensions at print-ready or platform-ready resolution, with a clear hierarchy — headline first, supporting message second, contact / call-to-action last — and keep all critical text inside a safe area, away from trim, fold or crop edges.";
       var STYLE_LENS = {
+        "3D Chrome & Metallic": "dips the brand in liquid chrome and mirror shine, turning the trade into a trophy that looks expensive from across the street",
+        "3D Clay / Soft Sculpture": "sculpts the brand like soft clay — puffy, touchable, friendly shapes that make a serious trade feel warm and approachable",
+        "Abstract Geometry": "builds the brand from pure shape and color tension — gallery-grade abstraction that makes the trade look visionary",
+        "Architectural Editorial": "presents the trade like a spread in an architecture magazine — structured, precise and quietly prestigious",
+        "Art Deco Luxury": "doubles down on 1920s opulence — bolder gold, richer geometry, unapologetic luxury that supports premium pricing",
+        "Bold Maximalist": "goes gloriously over the top — pattern on pattern, color on color — for a brand too confident to whisper",
+        "Bold Typography": "lets giant, fearless lettering do all the talking — the business name as the entire brand, impossible to ignore",
+        "Brutalist Industrial": "strips the brand to raw concrete-and-steel honesty — heavyweight type and hard edges for crews that do the heavy lifting",
+        "Clean Corporate": "polishes the trade into a crisp, boardroom-ready identity — the safe premium choice for commercial clients",
+        "Cinematic Photorealism": "shoots the brand like a film still — dramatic light and true-to-life detail that sell the finished result",
+        "Colorful Pop Art": "explodes the trade into comic-bright color and halftone attitude — the loudest, happiest brand in the neighborhood",
+        "Contemporary Minimalism": "says everything with almost nothing — one confident mark and wide-open space that reads as established and trustworthy",
+        "Custom Character + Typography": "fuses a one-of-a-kind character with bespoke lettering into a single locked-up brand world",
+        "Cut-Paper Collage": "layers torn-paper texture and playful composition — handmade charm with designer polish",
+        "Eco-Organic": "grows the brand from leaves, soil and sunlight — honest, sustainable warmth for green-minded homeowners",
+        "Elegant Monogram": "distills the business into a single refined monogram — quiet luxury that belongs on a truck and a thank-you card alike",
+        "Futuristic Tech": "wires the trade for tomorrow — sleek gradients, smart-home glow and precision that promise cutting-edge service",
+        "Geometric Bauhaus": "builds the brand from primary-color geometry and grid discipline — a century-old design language that still feels modern",
+        "Hand-Drawn Craft": "keeps every line hand-drawn and human — sketchbook honesty that says a real craftsperson is behind the work",
+        "High-End Editorial": "art-directs the trade like a luxury magazine feature — dramatic, tailored and dripping with aspiration",
+        "Illustrated Mascot": "gives the business a mascot with personality — a character customers remember, request and take selfies with",
+        "Industrial Blueprint": "drafts the brand like an engineering plan — white lines on blueprint blue, technical and exact",
+        "Isometric 3D": "builds the trade as a tiny 3D world — playful dimensional scenes that make services instantly understandable",
+        "Luxury Black-Tie": "dresses the trade in tuxedo black and champagne — after-hours elegance for the most premium positioning",
+        "Mixed-Media Texture": "collages photography, paint and type into rich layered artwork — depth and craft in every pixel",
+        "Modern Retro": "remixes mid-century optimism with a contemporary edge — nostalgic warmth, fresh execution",
+        "Neon Night": "wires the brand in glowing tubes and midnight color — built for urgency, nightlife and being remembered",
+        "Premium Vintage Badge": "stamps the brand like a heritage seal — established, trustworthy and proudly old-school in the best way",
+        "Realistic Product Photography": "shows the actual finished work in crisp commercial photography — the after photo as the entire sales pitch",
+        "Streetwear / Urban": "dresses the crew like a streetwear label — bold graphics and city attitude homeowners want to wear",
+        "Swiss Grid": "locks the brand into Swiss typographic precision — grid, hierarchy and clarity that convert",
+        "Watercolor / Artisan": "softens the trade with hand-painted washes and organic edges — perfect for a brand selling care, calm and a beautiful home",
         "Minimalist Modern": "strips the brand down to one confident mark and generous breathing room, so the company reads as established, organized and easy to trust",
         "Luxury Premium": "treats the trade like a concierge service — refined detailing, restrained richness and quiet confidence that supports premium pricing",
         "Vintage Retro": "borrows the honest, hand-painted signage of a family business that has been doing it right for decades, giving the brand instant heritage",
@@ -1013,7 +1336,6 @@
         "Chibi Cute": "shrinks the brand into an adorable, collectible character world that begs to be shared, saved and screenshotted",
         "3D Pixar-Style Render": "renders the brand like a beloved animated film — soft light, expressive characters and instant emotional warmth",
         "Flat Vector Illustration": "keeps everything crisp, geometric and endlessly reproducible, so the brand looks identical on a truck, a tee and a phone screen",
-        "Watercolor": "softens the trade with hand-painted washes and organic edges — perfect for a brand selling care, calm and a beautiful home",
         "Elegant Line Art": "draws the whole brand in one refined, continuous line language — quiet, artistic and unmistakably upscale",
         "Graffiti Street Art": "channels mural energy and spray-can confidence, making this the boldest brand on the block",
         "Art Deco": "frames the trade in 1920s geometry, symmetry and gold-toned glamour — craftsmanship presented like architecture",
@@ -1032,24 +1354,25 @@
 
       /* ============ presets ============ */
       var PRESETS = {
-        "logo-launch": { deliverables:["Logo"], styles:["Luxury Premium","Minimalist Modern"], font:"Elegant High-Contrast Serif", treatment:"Chrome Silver Shine", palette:"Sapphire, Chrome Silver & Pearl White", finish:"Clean Flat Vector", mood:"Trustworthy & Professional", variations:"4", brandMark:"Handcrafted Symbol", composition:"Centered Emblem", personality:"Elegant & Luxurious", nameTreatment:"Business Name + Tagline", cta:"Book Your Appointment Online" },
-        "crew-tee":   { deliverables:["T-Shirt Design"], styles:["Bold Streetwear","Vintage Retro","Distressed Grunge"], font:"Varsity Collegiate Block", treatment:"Drop-Shadow Pop", palette:"Bold Red, Black & White", finish:"Distressed Vintage Wash", mood:"Bold & Tough", variations:"6", brandMark:"Mascot Character", personality:"Bold & Rugged", nameTreatment:"Business Name Only" },
-        "trade-show": { deliverables:["Retractable Banner","Trade Show Booth Backdrop"], styles:["Minimalist Modern","Luxury Premium"], font:"Modern Minimal Sans", treatment:"", palette:"Navy & Gold", finish:"Glossy", mood:"Trustworthy & Professional", variations:"3", composition:"Asymmetric Editorial", personality:"Premium & Polished", nameTreatment:"Business Name + Tagline", cta:"Schedule Service Today" },
-        "social-pack":{ deliverables:["Social Media Post"], styles:["Playful Cartoon","Neon Glow","Flat Vector Illustration"], font:"Chunky Bubble Letters", treatment:"Glitter Sparkle", palette:"Teal & Coral Pop", finish:"Glossy", mood:"Playful & Colorful", variations:"6", personality:"Playful & Fun", cta:"Get My Free Quote" },
-        "door-hanger":{ deliverables:["Door Hanger","Flyer"], styles:["Flat Vector Illustration","Bold Streetwear"], font:"Chunky Bubble Letters", treatment:"Drop-Shadow Pop", palette:"Sunshine Yellow & Charcoal", finish:"Glossy", mood:"Fun & Friendly", variations:"4", composition:"Badge Layout", personality:"Friendly & Approachable", cta:"Call Now for a Free Estimate" },
-        "brand-kit":  { deliverables:["Business Card","Logo"], styles:["Luxury Premium","Art Deco"], font:"Luxury Gold Serif", treatment:"Gold Metallic Foil", palette:"Black & Gold Luxury", finish:"Metallic Foil", mood:"Luxury & High-End", variations:"4", brandMark:"Monogram", composition:"Centered Emblem", personality:"Elegant & Luxurious", nameTreatment:"Monogram + Name" }
+        "logo-launch": { deliverables:["Logo / brand mark"], styles:["Luxury Premium","Minimalist Modern"], font:"Elegant High-Contrast Serif", treatment:"Chrome Silver Shine", palette:"Sapphire, Chrome Silver & Pearl White", finish:"Clean Flat Vector", mood:"Trustworthy & Professional", variations:"4", brandMark:"Handcrafted Symbol", composition:"Centered Emblem", personality:"Elegant & Luxurious", nameTreatment:"Business Name + Tagline", cta:"Book Your Appointment Online" },
+        "crew-tee":   { deliverables:["T-shirt artwork"], styles:["Bold Streetwear","Vintage Retro","Distressed Grunge"], font:"Varsity Collegiate Block", treatment:"Drop-Shadow Pop", palette:"Bold Red, Black & White", finish:"Distressed Vintage Wash", mood:"Bold & Tough", variations:"6", brandMark:"Mascot Character", personality:"Bold & Rugged", nameTreatment:"Business Name Only" },
+        "trade-show": { deliverables:["Retractable banner / pull-up stand","Trade show booth / exhibit"], styles:["Minimalist Modern","Luxury Premium"], font:"Modern Minimal Sans", treatment:"", palette:"Navy & Gold", finish:"Glossy", mood:"Trustworthy & Professional", variations:"3", composition:"Asymmetric Editorial", personality:"Premium & Polished", nameTreatment:"Business Name + Tagline", cta:"Schedule Service Today" },
+        "social-pack":{ deliverables:["Social media feed post"], styles:["Playful Cartoon","Neon Glow","Flat Vector Illustration"], font:"Chunky Bubble Letters", treatment:"Glitter Sparkle", palette:"Teal & Coral Pop", finish:"Glossy", mood:"Playful & Colorful", variations:"6", personality:"Playful & Fun", cta:"Get My Free Quote" },
+        "door-hanger":{ deliverables:["Door hanger","Flyer"], styles:["Flat Vector Illustration","Bold Streetwear"], font:"Chunky Bubble Letters", treatment:"Drop-Shadow Pop", palette:"Sunshine Yellow & Charcoal", finish:"Glossy", mood:"Fun & Friendly", variations:"4", composition:"Badge Layout", personality:"Friendly & Approachable", cta:"Call Now for a Free Estimate" },
+        "brand-kit":  { deliverables:["Business card (front and back)","Logo / brand mark"], styles:["Luxury Premium","Art Deco"], font:"Luxury Gold Serif", treatment:"Gold Metallic Foil", palette:"Black & Gold Luxury", finish:"Metallic Foil", mood:"Luxury & High-End", variations:"4", brandMark:"Monogram", composition:"Centered Emblem", personality:"Elegant & Luxurious", nameTreatment:"Monogram + Name" },
+        "roofing-pro": {"trade": "Roofing", "specialty": "Installation & Replacement", "audience": "Homeowners", "palette": "Midnight Navy & Copper", "personality": "Dependable & Professional", "styles": ["Architectural Editorial", "3D Chrome & Metallic"], "deliverables": ["Logo / brand mark", "Business card (front and back)", "Vehicle wrap / service van", "Website design + full website-generation prompt"]},
+        "luxury-interiors": {"trade": "Interior Decorating & Design", "specialty": "Design Consultation", "audience": "Luxury Property Owners", "palette": "Premium Jewel Tones", "personality": "Elegant & Luxurious", "styles": ["High-End Editorial", "Art Deco Luxury"], "deliverables": ["Logo / brand mark", "Tote bag", "Brochure / tri-fold", "Social media carousel"]},
+        "property-preservation": {"trade": "Home Preservation / Property Preservation", "specialty": "Property Preservation / REO", "audience": "Lenders & Banks", "palette": "Caribbean Sapphire Blue, Silver & White", "personality": "Expert & Technical", "styles": ["Clean Corporate", "Industrial Blueprint"], "deliverables": ["Logo / brand mark", "Website design + full website-generation prompt", "Work order / checklist", "Presentation folder"]},
+        "landscaping-lawn": {"trade": "Landscaping", "specialty": "Outdoor Beautification", "audience": "Homeowners", "palette": "Forest Green & Warm Cream", "personality": "Eco-Conscious & Natural", "styles": ["Eco-Organic", "Hand-Drawn Craft"], "deliverables": ["T-shirt artwork", "Vehicle wrap / service van", "Yard sign", "Social media feed post"]},
+        "hvac-emergency": {"trade": "HVAC & Ventilation", "specialty": "24/7 Emergency Service", "audience": "Homeowners", "palette": "Cobalt Blue & Vivid Orange", "personality": "Dependable & Professional", "styles": ["Bold Typography", "Isometric 3D"], "deliverables": ["Logo / brand mark", "Flyer", "Website design + full website-generation prompt", "Retractable banner / pull-up stand"]},
+        "premium-cleaning": {"trade": "Cleaning & Housekeeping", "specialty": "Recurring Maintenance", "audience": "Busy Families", "palette": "Caribbean Sapphire Blue, Silver & White", "personality": "Elegant & Luxurious", "styles": ["Contemporary Minimalism", "Colorful Pop Art"], "deliverables": ["Logo / brand mark", "T-shirt artwork", "Social media ad creative", "Door hanger"]}
       };
       $("preset").addEventListener("change", function(){
         var p = PRESETS[this.value];
         if(!p) return;
         setDeliverables(p.deliverables || []);
-        setSelect("font", p.font);
-        setSelect("treatment", p.treatment);
-        setSelect("palette", p.palette);
-        setSelect("finish", p.finish);
-        setSelect("mood", p.mood);
-        ["specialty","cta","brandMark","composition","personality","nameTreatment"].forEach(function(id){
-          setSelect(id, p[id] || "");
+        ["font","treatment","palette","finish","mood","trade","specialty","cta","brandMark","composition","personality","nameTreatment"].forEach(function(id){
+          if(p[id] !== undefined) setSelect(id, p[id]);
         });
         $("variations").value = p.variations;
         selectedStyles = {};
@@ -1060,11 +1383,61 @@
 
       /* ============ deliverable chips ============ */
       var DELIVERABLE_GROUPS = [
-        { label:"Brand Identity", items:["Logo","Business Card","Letterhead & Invoice Design","Vehicle Decal / Truck Wrap","Uniform Logo Patch"] },
-        { label:"Apparel & Merch", items:["T-Shirt Design","Hoodie Design","Tote Bag Design","Book Bag / Backpack Design","Notebook / Journal Cover","Apron Design","Cap / Hat Design"] },
-        { label:"Print & Events", items:["Flyer","Door Hanger","Banner","Retractable Banner","Trade Show Booth Backdrop","Yard Sign","Postcard / Mailer","Brochure"] },
-        { label:"Digital & Social", items:["Website Homepage Design","Landing Page Design","Social Media Post","Social Media Cover Banner","Profile Logo / Avatar","Email Header"] }
-      ];
+              { label: "Brand Identity", items: [
+                        "Logo / brand mark",
+                        "Logo variations / identity system",
+                        "Business card (front and back)",
+                        "Letterhead & invoice",
+                        "Estimate / quote template",
+                        "Vehicle wrap / service van",
+                        "Yard sign",
+                        "Door hanger",
+                        "Service sticker / decal",
+                        "Thank-you card",
+                        "Presentation folder",
+                        "Work order / checklist",
+                        "Uniform Logo Patch"
+              ] },
+              { label: "Apparel & Merch", items: [
+                        "T-shirt artwork",
+                        "Polo shirt / uniform embroidery",
+                        "Hoodie design",
+                        "Tote bag",
+                        "Notebook cover",
+                        "Backpack / book bag",
+                        "Hat / cap embroidery",
+                        "Water bottle / tumbler",
+                        "Work apron",
+                        "Safety vest design"
+              ] },
+              { label: "Print & Signage", items: [
+                        "Flyer",
+                        "Brochure / tri-fold",
+                        "Postcard / mailer",
+                        "Large outdoor banner",
+                        "Retractable banner / pull-up stand",
+                        "Trade show booth / exhibit",
+                        "Trade show table cover",
+                        "Pop-up event backdrop",
+                        "Digital billboard",
+                        "Lead magnet / service guide"
+              ] },
+              { label: "Digital & Social", items: [
+                        "Website design + full website-generation prompt",
+                        "Landing page + conversion copy",
+                        "Social media feed post",
+                        "Social media carousel",
+                        "Social media story",
+                        "Social media ad creative",
+                        "Reel / short video storyboard",
+                        "Email marketing graphic",
+                        "Email Header",
+                        "Social Media Cover Banner",
+                        "Profile Logo / Avatar",
+                        "Google Business Profile graphic",
+                        "Digital ad campaign kit"
+              ] }
+            ];
       var ALL_DELIVERABLES = [];
       DELIVERABLE_GROUPS.forEach(function(g){ g.items.forEach(function(n){ ALL_DELIVERABLES.push(n); }); });
       var selectedDeliverables = {};
@@ -1179,6 +1552,8 @@
         var mascot   = fieldVal("mascot","mascotCustom");
         var mood     = fieldVal("mood","moodCustom");
         var details  = $("details").value.trim();
+        var offer    = $("offer").value.trim();
+        var ratio    = fieldVal("ratio","ratioCustom");
         var n        = parseInt($("variations").value, 10) || 4;
 
         var labels = [];
@@ -1213,6 +1588,7 @@
         L.push("SPECIALTY: " + (specialty || "Designer's choice — the most in-demand, profitable specialty for this trade"));
         L.push("IDEAL CUSTOMER: " + (audience || "Homeowners who value quality, reliability and a home kept in top condition"));
         L.push("CALL TO ACTION: " + (cta || "Designer's choice — one clear, honest call to action matched to this deliverable"));
+        L.push("SIGNATURE OFFER: " + (offer || "Designer's choice — one believable competitive advantage matched to this trade"));
         L.push("CREATIVE DIRECTOR'S BRIEF: " + brief);
         L.push("TYPOGRAPHY: " + typoLine);
         L.push("PALETTE: " + (palette || "Designer's choice — a premium palette suited to the trade and style, with strong contrast"));
@@ -1220,7 +1596,7 @@
         L.push("COMPOSITION: " + (comp || "Designer's choice — the strongest layout for this deliverable in this style"));
         L.push("BRAND PERSONALITY: " + (personality || mood || "Premium, trustworthy and memorable"));
         L.push("FINISH: " + (finish || "Designer's choice — a finish that flatters the palette and reproduces cleanly"));
-        L.push("ASPECT / FORMAT: " + (ASPECTS[piece] || "Format matched to the deliverable — print-ready or platform-ready as appropriate, high resolution"));
+        L.push("ASPECT / FORMAT: " + (ASPECTS[piece] || "Format matched to the deliverable — print-ready or platform-ready as appropriate, high resolution") + (ratio ? " — preferred aspect ratio: " + ratio : ""));
         L.push("NAME TREATMENT: " + (nameTreat || "Business Name + Tagline"));
         L.push("DELIVERABLE REQUIREMENTS: " + req);
         L.push("VARIATION STRATEGY: Create exactly " + n + " materially distinct directions inside this one style — change the typography concept, the composition, the graphical structure and the art direction from direction to direction while preserving every brand fact above. For every direction, specify: the core image / design prompt, the layout, the fonts / lettering approach, the palette, the main message, the production details, and a short rationale for its conversion appeal.");
@@ -1231,7 +1607,7 @@
       var currentPrompts = [];
       function generate(){
         var pieces = Object.keys(selectedDeliverables);
-        if(!pieces.length) pieces = ["Logo"];
+        if(!pieces.length) pieces = ["Logo / brand mark"];
         var styles = Object.keys(selectedStyles);
         if(!styles.length) styles = ["Premium Signature Default"];
         currentPrompts = [];
@@ -1384,6 +1760,16 @@
           return "===== " + (i + 1) + ": " + p.title + " =====\n\n" + p.text;
         }).join("\n\n\n");
         downloadTxt("home-services-prompt-library.txt", "HOME SERVICES PROMPT LIBRARY\n\n" + body);
+      $("libJsonBtn").addEventListener("click", function(){
+        if(!library.length){ toast("Library is empty — save a prompt first"); return; }
+        var blob = new Blob([JSON.stringify(library, null, 2)], {type:"application/json"});
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "home-services-prompt-library.json";
+        document.body.appendChild(a); a.click();
+        setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 800);
+        toast("Library downloaded as JSON");
+      });
       });
       $("libClearBtn").addEventListener("click", function(){
         if(!library.length){ toast("Library is already empty"); return; }
