@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="Glam's Inner Circle rewards app — check your Glow Points and claim rewards." />
+<meta name="theme-color" content="#0f52ba" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Inner Circle" />
+<link rel="manifest" href="manifest.json" />
+<link rel="apple-touch-icon" href="icon-192.png" />
+<link rel="icon" href="icon-192.png" />
+<title>Inner Circle Rewards — Glam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&family=Jost:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg-grad:linear-gradient(160deg,#fdfdff 0%,#eef4fc 55%,#e3edf9 100%);
+  --card:#ffffff; --card-soft:#f6f9fe;
+  --ink:#182540; --ink-soft:#4c5d78;
+  --sapphire:#0f52ba; --sapphire-deep:#0a3a86; --sapphire-pale:#eef5ff;
+  --silver:#aebdd1; --line:#d7e2f0;
+  --shadow:0 10px 30px rgba(15,82,186,.10); --shadow-sm:0 3px 10px rgba(15,82,186,.08);
+  --radius:18px; --btn-grad:linear-gradient(135deg,#2f6fd0 0%,#0f52ba 55%,#0a3a86 100%);
+  --gold-grad:linear-gradient(135deg,#8a6a2f,#d4af37 55%,#8a6a2f);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg-grad);color:var(--ink);min-height:100vh}
+.wrap{max-width:520px;margin:0 auto;padding:20px 16px 60px}
+.topbar{text-align:center;padding:18px 0 6px}
+.topbar .mark{font-size:2rem}
+h1{font-family:"Playfair Display",serif;font-weight:800;font-size:1.7rem;margin:.2em 0 0}
+.tag{color:var(--ink-soft);font-size:.95rem;margin:6px 0 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:22px 20px;margin-top:16px}
+.hidden{display:none!important}
+label{display:block;font-weight:600;margin-bottom:8px}
+input[type=email]{width:100%;padding:14px 16px;font-size:1.05rem;border:1.5px solid var(--line);border-radius:14px;font-family:inherit;background:#fff;color:var(--ink)}
+input[type=email]:focus{outline:none;border-color:var(--sapphire);box-shadow:0 0 0 3px rgba(15,82,186,.12)}
+.btn{display:block;width:100%;margin-top:14px;padding:15px;border:0;border-radius:999px;background:var(--btn-grad);color:#fff;font-weight:700;font-size:1.05rem;font-family:inherit;cursor:pointer;box-shadow:0 8px 22px rgba(15,82,186,.25)}
+.btn:disabled{opacity:.55;cursor:default;box-shadow:none}
+.btn.ghost{background:#fff;color:var(--sapphire-deep);border:1.5px solid var(--line);box-shadow:none;margin-top:10px}
+.err{background:#fdeef0;border:1px solid #f3c2cb;color:#8a2b3a;border-radius:12px;padding:12px 14px;margin-top:12px;font-size:.95rem}
+.okmsg{background:#eaf7ee;border:1px solid #bfe6c9;color:#1e6b34;border-radius:12px;padding:12px 14px;margin-top:12px;font-size:.95rem}
+.hint{font-size:.88rem;color:var(--ink-soft);margin-top:12px;line-height:1.6;text-align:center}
+.hint a{color:var(--sapphire)}
+/* balance */
+.balance{text-align:center;padding:30px 20px 24px;position:relative;overflow:hidden}
+.balance::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:linear-gradient(90deg,#0f52ba,#7fb2f0 35%,#ffffff 50%,#c9d6e8 65%,#0f52ba)}
+.pts{font-family:"Playfair Display",serif;font-size:3.4rem;font-weight:800;line-height:1;margin:4px 0}
+.pts-label{font-size:.85rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+.tier{margin-top:12px}
+.vip-badge{display:inline-block;background:var(--gold-grad);color:#fff;font-weight:700;padding:8px 20px;border-radius:999px;font-size:.95rem}
+.progress{margin-top:14px;text-align:left}
+.progress .plabel{font-size:.85rem;color:var(--ink-soft);margin-bottom:6px}
+.bar{height:10px;background:var(--sapphire-pale);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.bar > div{height:100%;background:var(--btn-grad);border-radius:999px;transition:width .6s ease}
+.vip .bar > div{background:var(--gold-grad)}
+h2.sec{font-family:"Playfair Display",serif;font-size:1.25rem;margin:26px 0 4px}
+.reward{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:16px;margin-top:10px}
+.reward .cost{flex:0 0 auto;min-width:74px;text-align:center;font-weight:700;color:#fff;background:var(--btn-grad);border-radius:999px;padding:8px 10px;font-size:.9rem}
+.reward .info{flex:1}
+.reward .info strong{display:block;font-size:1rem}
+.reward .info small{color:var(--ink-soft);font-size:.85rem}
+.reward .claim{flex:0 0 auto;border:0;border-radius:999px;background:var(--btn-grad);color:#fff;font-weight:700;padding:10px 18px;font-family:inherit;cursor:pointer}
+.reward .claim:disabled{opacity:.45;cursor:default}
+.reward.locked{opacity:.75}
+.act{display:flex;justify-content:space-between;gap:10px;padding:11px 2px;border-bottom:1px solid var(--line);font-size:.93rem}
+.act:last-child{border-bottom:0}
+.act .d{color:var(--ink-soft);font-size:.8rem;white-space:nowrap}
+.act .p{font-weight:700;white-space:nowrap}
+.act .p.neg{color:#b3541e}.act .p.pos{color:#1e6b34}
+.claim-pending{background:#fff8e6;border:1px solid #ecd9a0;border-radius:12px;padding:12px 14px;margin-top:10px;font-size:.93rem}
+.claim-pending code{background:#fff;border:1px solid #ecd9a0;border-radius:6px;padding:2px 8px;font-weight:700}
+.install{background:var(--sapphire-pale);border:1px dashed var(--sapphire);border-radius:14px;padding:14px 16px;margin-top:16px;font-size:.9rem;line-height:1.6;color:var(--sapphire-deep)}
+.install button{float:right;border:0;background:none;font-size:1.1rem;cursor:pointer;color:var(--sapphire-deep)}
+.switch{text-align:center;margin-top:18px}
+.switch button{background:none;border:0;color:var(--sapphire);font-family:inherit;font-size:.92rem;cursor:pointer;text-decoration:underline}
+footer{text-align:center;margin-top:34px;color:var(--ink-soft);font-size:.82rem}
+footer .heart{color:#e2557a}
+.spinner{width:22px;height:22px;border:3px solid var(--line);border-top-color:var(--sapphire);border-radius:50%;margin:18px auto;animation:spin 0.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="mark">🦋</div>
+    <h1>Inner Circle Rewards</h1>
+    <p class="tag">Your Glow Points, right in your pocket</p>
+  </div>
+
+  <!-- login -->
+  <div class="card" id="view-login">
+    <label for="email">Email you shop with</label>
+    <input type="email" id="email" placeholder="you@example.com" autocomplete="email" inputmode="email" />
+    <button class="btn" id="lookupBtn">See my points 💎</button>
+    <div class="err hidden" id="loginErr"></div>
+    <div class="spinner hidden" id="loginSpin"></div>
+    <p class="hint">Use the email from your Payhip purchases.<br />New here? <a href="../">How the Inner Circle works</a></p>
+  </div>
+
+  <!-- dashboard -->
+  <div id="view-dash" class="hidden">
+    <div class="card balance" id="balanceCard">
+      <div class="pts-label">Glow Points</div>
+      <div class="pts" id="ptsNum">0</div>
+      <div class="tier" id="tierSlot"></div>
+      <div class="progress" id="vipProgress">
+        <div class="plabel" id="vipLabel"></div>
+        <div class="bar"><div id="vipBar" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div id="pendingSlot"></div>
+
+    <h2 class="sec">Claim a reward 🎁</h2>
+    <div id="rewardsSlot"></div>
+
+    <h2 class="sec">Recent activity</h2>
+    <div class="card" style="padding:6px 16px" id="activitySlot"></div>
+
+    <div class="install" id="installHint">
+      <button id="installX" aria-label="dismiss">✕</button>
+      📱 <strong>Make it an app:</strong> tap Share → <strong>Add to Home Screen</strong> and your rewards live on your phone like any other app.
+    </div>
+
+    <div class="switch"><button id="switchBtn">Not you? Use a different email</button></div>
+  </div>
+
+  <footer>Made with <span class="heart">♥</span> by Indigo for Glam's Inner Circle</footer>
+</div>
+
+<script>
+"use strict";
+var API = "https://workshop-poratl.netlify.app/.netlify/functions";
+var $ = function(id){ return document.getElementById(id); };
+
+function saveEmail(e){ try{ localStorage.setItem("ic_email", e); }catch(_){} }
+function savedEmail(){ try{ return localStorage.getItem("ic_email") || ""; }catch(_){ return ""; } }
+function showErr(id, msg){ var el=$(id); el.textContent=msg; el.classList.remove("hidden"); }
+function hideErr(id){ $(id).classList.add("hidden"); }
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+
+async function api(path, data){
+  var res = await fetch(API + path, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+  return res.json();
+}
+
+var currentEmail = "";
+
+async function lookup(email, silent){
+  hideErr("loginErr");
+  if(!silent){ $("loginSpin").classList.remove("hidden"); $("lookupBtn").disabled = true; }
+  try{
+    var r = await api("/inner-circle-lookup", { email: email });
+    if(!silent){ $("loginSpin").classList.add("hidden"); $("lookupBtn").disabled = false; }
+    if(!r.success){ showErr("loginErr", r.message || "Something went wrong."); return; }
+    if(!r.found){ showErr("loginErr", r.message); return; }
+    currentEmail = email;
+    saveEmail(email);
+    renderDash(r);
+  }catch(e){
+    if(!silent){ $("loginSpin").classList.add("hidden"); $("lookupBtn").disabled = false; }
+    showErr("loginErr", "Couldn't reach the rewards service. Check your connection and try again.");
+  }
+}
+
+function renderDash(r){
+  $("view-login").classList.add("hidden");
+  $("view-dash").classList.remove("hidden");
+  $("ptsNum").textContent = r.points;
+  var vip = r.tier === "vip";
+  $("balanceCard").classList.toggle("vip", vip);
+  $("tierSlot").innerHTML = vip
+    ? '<span class="vip-badge">👑 VIP MEMBER</span>'
+    : '<span style="color:var(--ink-soft);font-size:.92rem">Inner Circle Member</span>';
+  var pct = Math.round((r.vipProgress || 0) * 100);
+  $("vipLabel").textContent = vip
+    ? "VIP for life — enjoy it! 👑"
+    : (r.lifetime + " lifetime points — " + (r.vipThreshold - r.lifetime) + " to VIP");
+  $("vipBar").style.width = pct + "%";
+
+  var pc = "";
+  (r.pendingClaims || []).forEach(function(c){
+    pc += '<div class="claim-pending">🎁 <strong>' + esc(c.rewardName) + '</strong> is on its way!<br><span style="color:var(--ink-soft);font-size:.85rem">Claim code <code>' + esc(c.code) + '</code> · Glam sends it within 24 hours.</span></div>';
+  });
+  $("pendingSlot").innerHTML = pc;
+
+  var rh = "";
+  (r.rewards || []).forEach(function(rw){
+    var can = rw.canClaim && r.points >= rw.cost;
+    rh += '<div class="reward' + (can ? "" : " locked") + '">'
+      + '<span class="cost">' + rw.cost + ' pts</span>'
+      + '<span class="info"><strong>' + esc(rw.name) + '</strong><small>' + esc(rw.blurb || "") + '</small></span>'
+      + '<button class="claim" data-rid="' + esc(rw.id) + '"' + (can ? "" : " disabled") + '>' + (can ? "Claim" : "🔒") + '</button>'
+      + '</div>';
+  });
+  $("rewardsSlot").innerHTML = rh;
+  var btns = $("rewardsSlot").querySelectorAll(".claim");
+  for(var i=0;i<btns.length;i++){
+    (function(b){
+      b.addEventListener("click", function(){ claimReward(b.getAttribute("data-rid"), b); });
+    })(btns[i]);
+  }
+
+  var ah = "";
+  var acts = r.activity || [];
+  if(!acts.length) ah = '<div class="act"><span style="color:var(--ink-soft)">No activity yet — your points will show up here.</span><span></span></div>';
+  acts.forEach(function(a){
+    var cls = a.points < 0 ? "neg" : "pos";
+    var sign = a.points > 0 ? "+" : "";
+    ah += '<div class="act"><span>' + esc(a.label) + '<br><span class="d">' + esc(a.date || "") + '</span></span>'
+      + '<span class="p ' + cls + '">' + sign + a.points + '</span></div>';
+  });
+  $("activitySlot").innerHTML = ah;
+  window.scrollTo(0,0);
+}
+
+async function claimReward(rewardId, btn){
+  var rw = null;
+  if(!confirm("Claim this reward? Glam will send it to you within 24 hours.")) return;
+  btn.disabled = true; btn.textContent = "…";
+  try{
+    var r = await api("/inner-circle-claim", { email: currentEmail, rewardId: rewardId });
+    if(r.success){
+      alert(r.message);
+      lookup(currentEmail, true);
+    }else{
+      alert(r.message || "Couldn't claim that reward.");
+      lookup(currentEmail, true);
+    }
+  }catch(e){
+    alert("Couldn't reach the rewards service. Try again in a moment.");
+    btn.disabled = false; btn.textContent = "Claim";
+  }
+}
+
+$("lookupBtn").addEventListener("click", function(){
+  var e = $("email").value.trim();
+  if(!e){ showErr("loginErr", "Enter the email you shop with."); return; }
+  lookup(e, false);
+});
+$("email").addEventListener("keydown", function(ev){ if(ev.key === "Enter"){ $("lookupBtn").click(); } });
+$("switchBtn").addEventListener("click", function(){
+  try{ localStorage.removeItem("ic_email"); }catch(_){}
+  currentEmail = "";
+  $("email").value = "";
+  $("view-dash").classList.add("hidden");
+  $("view-login").classList.remove("hidden");
+});
+$("installX").addEventListener("click", function(){ $("installHint").style.display = "none"; });
+
+// auto sign-in if remembered
+(function(){
+  var e = savedEmail();
+  if(e){
+    $("email").value = e;
+    $("view-login").classList.add("hidden");
+    var spin = document.createElement("div");
+    spin.className = "spinner"; spin.id = "bootSpin";
+    $("view-login").parentNode.insertBefore(spin, $("view-login"));
+    lookup(e, true).then(function(){ var s=$("bootSpin"); if(s) s.remove(); });
+  }
+})();
+</script>
+</body>
+</html>
