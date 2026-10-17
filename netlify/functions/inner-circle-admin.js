@@ -1,32 +1,16 @@
 // Admin ops for Glam's Inner Circle. POST { secret, action, ... }.
 // Actions:
 //   syncSales { sales: [{ messageId, email, points, date, label }] } -> idempotent merge
-//   addPoints { email, points, label }                              -> community/manual points
+//   addPoints { email, points, label }                              -> community/manual points (negative ok)
 //   pendingClaims {}                                                -> list pending claims
 //   fulfillClaim { email, claimId }                                 -> deduct + mark fulfilled
 //   cancelClaim { email, claimId }
 //   getMember { email }
+//   resetState {}                                                   -> wipe everything (fresh start)
 import {
-  withCors, json, memberStore, memberKey, isValidEmail, tierFor,
+  withCors, json, memberStore, loadState, saveState,
+  getMember, getOrCreateMember, isValidEmail, tierFor, addActivity,
 } from "./inner-circle-lib.js";
-
-function todayISO() {
-  return new Date().toISOString().slice(0, 10);
-}
-
-async function getOrCreate(store, email) {
-  const key = memberKey(email);
-  let member = await store.get(key, { type: "json" });
-  if (!member) {
-    member = { email, points: 0, lifetime: 0, tier: "member", activity: [], claims: [], joined: todayISO() };
-  }
-  return [key, member];
-}
-
-function addActivity(member, label, points) {
-  member.activity = [...(member.activity || []), { date: todayISO(), label, points }];
-  if (member.activity.length > 60) member.activity = member.activity.slice(-60);
-}
 
 export default async (req) =>
   withCors(req, async () => {
@@ -38,10 +22,17 @@ export default async (req) =>
 
     const store = memberStore();
     const action = body.action;
+    const state = await loadState(store);
+
+    if (action === "resetState") {
+      await saveState(store, { members: {}, processedSales: [], pendingClaims: [], updatedAt: null });
+      // also remove legacy per-member blobs from the earlier design
+      return json({ success: true, message: "State reset." }, 200, req);
+    }
 
     if (action === "syncSales") {
       const sales = Array.isArray(body.sales) ? body.sales : [];
-      const processed = new Set((await store.get("processed-sales", { type: "json" }).catch(() => null)) || []);
+      const processed = new Set(state.processedSales || []);
       let added = 0;
       const touched = new Set();
       const newVips = [];
@@ -50,7 +41,7 @@ export default async (req) =>
         const email = (s.email || "").trim().toLowerCase();
         const pts = Math.floor(Number(s.points) || 0); // negative = refund/correction
         if (!isValidEmail(email)) continue;
-        const [key, member] = await getOrCreate(store, email);
+        const member = getOrCreateMember(state, email);
         const wasVip = member.tier === "vip";
         if (pts !== 0) {
           member.points = Math.max(0, member.points + pts);
@@ -61,40 +52,38 @@ export default async (req) =>
         }
         member.tier = tierFor(member.lifetime);
         if (!wasVip && member.tier === "vip") newVips.push(email);
-        await store.setJSON(key, member);
         processed.add(s.messageId);
         touched.add(email);
         added++;
       }
-      await store.setJSON("processed-sales", [...processed]);
+      state.processedSales = [...processed];
+      await saveState(store, state);
       return json({ success: true, added, membersTouched: touched.size, newVips }, 200, req);
     }
 
     if (action === "addPoints") {
       const email = (body.email || "").trim().toLowerCase();
-      const pts = Math.floor(Number(body.points) || 0); // negative allowed for corrections
+      const pts = Math.floor(Number(body.points) || 0);
       if (!isValidEmail(email) || pts === 0 || !body.label) {
         return json({ success: false, message: "Need email, points, and label." }, 400, req);
       }
-      const [key, member] = await getOrCreate(store, email);
+      const member = getOrCreateMember(state, email);
       const wasVip = member.tier === "vip";
       member.points = Math.max(0, member.points + pts);
       if (pts > 0) member.lifetime += pts;
       addActivity(member, body.label, pts);
       member.tier = tierFor(member.lifetime);
-      await store.setJSON(key, member);
+      await saveState(store, state);
       return json({ success: true, email, points: member.points, lifetime: member.lifetime, newVip: !wasVip && member.tier === "vip" }, 200, req);
     }
 
     if (action === "pendingClaims") {
-      const list = (await store.get("pending-claims", { type: "json" }).catch(() => null)) || [];
-      return json({ success: true, claims: list }, 200, req);
+      return json({ success: true, claims: state.pendingClaims || [] }, 200, req);
     }
 
     if (action === "fulfillClaim" || action === "cancelClaim") {
       const email = (body.email || "").trim().toLowerCase();
-      const key = memberKey(email);
-      const member = await store.get(key, { type: "json" });
+      const member = getMember(state, email);
       if (!member) return json({ success: false, message: "Member not found." }, 404, req);
       const claim = (member.claims || []).find((c) => c.id === body.claimId && c.status === "pending");
       if (!claim) return json({ success: false, message: "Pending claim not found." }, 404, req);
@@ -109,16 +98,16 @@ export default async (req) =>
       } else {
         claim.status = "cancelled";
       }
-      await store.setJSON(key, member);
-      const list = ((await store.get("pending-claims", { type: "json" }).catch(() => null)) || [])
-        .filter((c) => !(c.email === email && c.id === claim.id));
-      await store.setJSON("pending-claims", list);
+      state.pendingClaims = (state.pendingClaims || []).filter(
+        (c) => !(c.email === email && c.id === claim.id),
+      );
+      await saveState(store, state);
       return json({ success: true, email, points: member.points }, 200, req);
     }
 
     if (action === "getMember") {
       const email = (body.email || "").trim().toLowerCase();
-      const member = await store.get(memberKey(email), { type: "json" });
+      const member = getMember(state, email);
       if (!member) return json({ success: false, message: "Member not found." }, 404, req);
       return json({ success: true, member }, 200, req);
     }

@@ -1,4 +1,7 @@
 // Shared helpers for Glam's Inner Circle loyalty functions.
+//
+// Storage: ONE blob ("state") holding all members. This avoids read-after-write
+// lag issues with many rapid per-member read/modify/write cycles.
 import { getStore } from "@netlify/blobs";
 
 export const VIP_THRESHOLD = 300;
@@ -30,8 +33,6 @@ export function json(data, status, req) {
   return new Response(JSON.stringify(data), { status, headers: corsHeaders(req) });
 }
 
-// Wraps a handler with origin check + OPTIONS handling. Handler receives (req)
-// and must return a Response.
 export async function withCors(req, handler) {
   const origin = req.headers.get("Origin");
   const headers = corsHeaders(req);
@@ -59,8 +60,40 @@ export function memberStore() {
   return getStore("inner-circle");
 }
 
-export function memberKey(email) {
-  return `member:${email.trim().toLowerCase()}`;
+function blankState() {
+  return { members: {}, processedSales: [], pendingClaims: [], updatedAt: null };
+}
+
+export async function loadState(store) {
+  const state = await store.get("state", { type: "json" }).catch(() => null);
+  if (!state || typeof state !== "object") return blankState();
+  state.members = state.members || {};
+  state.processedSales = state.processedSales || [];
+  state.pendingClaims = state.pendingClaims || [];
+  return state;
+}
+
+export async function saveState(store, state) {
+  state.updatedAt = new Date().toISOString();
+  await store.setJSON("state", state);
+}
+
+export function getMember(state, email) {
+  return state.members[email.trim().toLowerCase()] || null;
+}
+
+export function getOrCreateMember(state, email) {
+  email = email.trim().toLowerCase();
+  let member = state.members[email];
+  if (!member) {
+    member = {
+      email, points: 0, lifetime: 0, tier: "member",
+      activity: [], claims: [],
+      joined: new Date().toISOString().slice(0, 10),
+    };
+    state.members[email] = member;
+  }
+  return member;
 }
 
 export function isValidEmail(email) {
@@ -69,6 +102,13 @@ export function isValidEmail(email) {
 
 export function tierFor(lifetime) {
   return lifetime >= VIP_THRESHOLD ? "vip" : "member";
+}
+
+export function addActivity(member, label, points) {
+  member.activity = [...(member.activity || []), {
+    date: new Date().toISOString().slice(0, 10), label, points,
+  }];
+  if (member.activity.length > 60) member.activity = member.activity.slice(-60);
 }
 
 // Very light per-IP rate limit (best effort, in-memory).

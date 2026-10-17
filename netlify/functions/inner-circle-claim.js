@@ -2,7 +2,8 @@
 // Indigo fulfills via the admin function, which deducts the points then.
 import {
   REWARDS, withCors, json,
-  memberStore, memberKey, isValidEmail, rateLimited, claimCode,
+  memberStore, loadState, saveState, getMember,
+  isValidEmail, rateLimited, claimCode,
 } from "./inner-circle-lib.js";
 
 export default async (req) =>
@@ -21,8 +22,8 @@ export default async (req) =>
     }
 
     const store = memberStore();
-    const key = memberKey(email);
-    const member = await store.get(key, { type: "json" });
+    const state = await loadState(store);
+    const member = getMember(state, email);
     if (!member) {
       return json({ success: false, message: "No Inner Circle account found for that email yet." }, 404, req);
     }
@@ -45,12 +46,8 @@ export default async (req) =>
       createdAt: new Date().toISOString(),
     };
     member.claims = [...(member.claims || []), claim];
-    await store.setJSON(key, member);
-
-    const pending = await store.get("pending-claims", { type: "json" }).catch(() => null);
-    const list = Array.isArray(pending) ? pending : [];
-    list.push({ email, ...claim });
-    await store.setJSON("pending-claims", list);
+    state.pendingClaims.push({ email, ...claim });
+    await saveState(store, state);
 
     return json({
       success: true,

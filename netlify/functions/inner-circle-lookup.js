@@ -2,7 +2,7 @@
 // Public (rate-limited). Never lists other members.
 import {
   REWARDS, VIP_THRESHOLD, withCors, json,
-  memberStore, memberKey, isValidEmail, rateLimited,
+  memberStore, loadState, getMember, isValidEmail, rateLimited,
 } from "./inner-circle-lib.js";
 
 export default async (req) =>
@@ -16,8 +16,8 @@ export default async (req) =>
       return json({ success: false, message: "Please enter a valid email address." }, 400, req);
     }
 
-    const store = memberStore();
-    const member = await store.get(memberKey(email), { type: "json" });
+    const state = await loadState(memberStore());
+    const member = getMember(state, email);
     if (!member) {
       return json({
         success: true,
