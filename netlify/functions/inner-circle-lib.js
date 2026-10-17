@@ -61,7 +61,11 @@ export function memberStore() {
 }
 
 function blankState() {
-  return { members: {}, processedSales: [], pendingClaims: [], updatedAt: null };
+  return { members: {}, processedSales: [], updatedAt: null };
+}
+
+export function claimKey(code) {
+  return `claim:${code}`;
 }
 
 export async function loadState(store) {

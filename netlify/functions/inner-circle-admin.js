@@ -9,7 +9,7 @@
 //   resetState {}                                                   -> wipe everything (fresh start)
 import {
   withCors, json, memberStore, loadState, saveState,
-  getMember, getOrCreateMember, isValidEmail, tierFor, addActivity,
+  getMember, getOrCreateMember, isValidEmail, tierFor, addActivity, claimKey,
 } from "./inner-circle-lib.js";
 
 export default async (req) =>
@@ -78,31 +78,37 @@ export default async (req) =>
     }
 
     if (action === "pendingClaims") {
-      return json({ success: true, claims: state.pendingClaims || [] }, 200, req);
+      const listed = await store.list({ prefix: "claim:" }).catch(() => ({ blobs: [] }));
+      const claims = [];
+      for (const b of listed.blobs || []) {
+        const c = await store.get(b.key, { type: "json" }).catch(() => null);
+        if (c && c.status === "pending") {
+          claims.push({ code: b.key.split(":")[1], ...c });
+        }
+      }
+      claims.sort((a, b2) => (a.createdAt < b2.createdAt ? -1 : 1));
+      return json({ success: true, claims }, 200, req);
     }
 
     if (action === "fulfillClaim" || action === "cancelClaim") {
       const email = (body.email || "").trim().toLowerCase();
-      const member = getMember(state, email);
-      if (!member) return json({ success: false, message: "Member not found." }, 404, req);
-      const claim = (member.claims || []).find((c) => c.id === body.claimId && c.status === "pending");
-      if (!claim) return json({ success: false, message: "Pending claim not found." }, 404, req);
+      const key = claimKey(body.claimId);
+      const claim = await store.get(key, { type: "json" }).catch(() => null);
+      if (!claim || claim.status !== "pending" || claim.email !== email) {
+        return json({ success: false, message: "Pending claim not found." }, 404, req);
+      }
       if (action === "fulfillClaim") {
+        const member = getMember(state, email);
+        if (!member) return json({ success: false, message: "Member not found." }, 404, req);
         if (member.points < claim.cost) {
           return json({ success: false, message: `Insufficient points (${member.points} < ${claim.cost}).` }, 400, req);
         }
         member.points -= claim.cost;
-        claim.status = "fulfilled";
-        claim.fulfilledAt = new Date().toISOString();
         addActivity(member, `Redeemed: ${claim.rewardName}`, -claim.cost);
-      } else {
-        claim.status = "cancelled";
+        await saveState(store, state);
       }
-      state.pendingClaims = (state.pendingClaims || []).filter(
-        (c) => !(c.email === email && c.id === claim.id),
-      );
-      await saveState(store, state);
-      return json({ success: true, email, points: member.points }, 200, req);
+      await store.delete(key).catch(() => {});
+      return json({ success: true, email }, 200, req);
     }
 
     if (action === "getMember") {

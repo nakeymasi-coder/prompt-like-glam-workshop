@@ -1,10 +1,21 @@
-// POST { email, rewardId } -> creates a PENDING claim (no points deducted yet).
-// Indigo fulfills via the admin function, which deducts the points then.
+// POST { email, rewardId } -> creates a PENDING claim as its own blob.
+// Claims never read-modify-write shared state, so concurrent claims can't
+// clobber each other. Indigo fulfills via the admin function.
 import {
   REWARDS, withCors, json,
-  memberStore, loadState, saveState, getMember,
-  isValidEmail, rateLimited, claimCode,
+  memberStore, loadState, getMember,
+  isValidEmail, rateLimited, claimCode, claimKey,
 } from "./inner-circle-lib.js";
+
+async function findMemberWithRetry(store, email) {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const state = await loadState(store);
+    const member = getMember(state, email);
+    if (member) return member;
+    await new Promise((r) => setTimeout(r, 5000));
+  }
+  return null;
+}
 
 export default async (req) =>
   withCors(req, async () => {
@@ -22,36 +33,33 @@ export default async (req) =>
     }
 
     const store = memberStore();
-    const state = await loadState(store);
-    const member = getMember(state, email);
+    const member = await findMemberWithRetry(store, email);
     if (!member) {
       return json({ success: false, message: "No Inner Circle account found for that email yet." }, 404, req);
     }
     if (member.points < reward.cost) {
       return json({ success: false, message: `You need ${reward.cost} points for that — you have ${member.points}.` }, 400, req);
     }
-    const alreadyPending = (member.claims || []).some(
-      (c) => c.status === "pending" && c.rewardId === reward.id,
-    );
-    if (alreadyPending) {
-      return json({ success: false, message: "You already have a pending claim for that reward — it's on its way!" }, 400, req);
+
+    // one pending claim per reward at a time (best-effort check)
+    const listed = await store.list({ prefix: "claim:" }).catch(() => ({ blobs: [] }));
+    for (const b of listed.blobs || []) {
+      const c = await store.get(b.key, { type: "json" }).catch(() => null);
+      if (c && c.email === email && c.rewardId === reward.id && c.status === "pending") {
+        return json({ success: false, message: "You already have a pending claim for that reward — it's on its way!" }, 400, req);
+      }
     }
 
+    const code = claimCode();
     const claim = {
-      id: claimCode(),
-      rewardId: reward.id,
-      rewardName: reward.name,
-      cost: reward.cost,
-      status: "pending",
-      createdAt: new Date().toISOString(),
+      email, rewardId: reward.id, rewardName: reward.name, cost: reward.cost,
+      status: "pending", createdAt: new Date().toISOString(),
     };
-    member.claims = [...(member.claims || []), claim];
-    state.pendingClaims.push({ email, ...claim });
-    await saveState(store, state);
+    await store.setJSON(claimKey(code), claim);
 
     return json({
       success: true,
-      claimCode: claim.id,
-      message: `You're in! Your ${reward.name} is on its way — Glam will send it within 24 hours. Your claim code is ${claim.id}.`,
+      claimCode: code,
+      message: `You're in! Your ${reward.name} is on its way — Glam will send it within 24 hours. Your claim code is ${code}.`,
     }, 200, req);
   });

@@ -26,7 +26,17 @@ export default async (req) =>
       }, 200, req);
     }
 
-    const pendingClaims = (member.claims || []).filter((c) => c.status === "pending");
+    // member's pending claims live in their own blobs
+    const store = memberStore();
+    const pendingClaims = [];
+    const listed = await store.list({ prefix: "claim:" }).catch(() => ({ blobs: [] }));
+    for (const b of listed.blobs || []) {
+      const c = await store.get(b.key, { type: "json" }).catch(() => null);
+      if (c && c.email === email && c.status === "pending") {
+        pendingClaims.push({ code: b.key.split(":")[1], rewardName: c.rewardName, createdAt: c.createdAt });
+      }
+    }
+
     return json({
       success: true,
       found: true,
@@ -38,6 +48,6 @@ export default async (req) =>
       vipProgress: Math.min(1, member.lifetime / VIP_THRESHOLD),
       rewards: REWARDS.map((r) => ({ ...r, canClaim: member.points >= r.cost })),
       activity: (member.activity || []).slice(-12).reverse(),
-      pendingClaims: pendingClaims.map((c) => ({ code: c.id, rewardName: c.rewardName, createdAt: c.createdAt })),
+      pendingClaims,
     }, 200, req);
   });
