@@ -1,17 +1,16 @@
 // POST { email, rewardId } -> creates a PENDING claim as its own blob.
-// Claims never read-modify-write shared state, so concurrent claims can't
-// clobber each other. Indigo fulfills via the admin function.
+// The write is independent (no shared read-modify-write), so concurrent
+// claims can't clobber each other. Indigo fulfills via the admin function.
 import {
   REWARDS, withCors, json,
-  memberStore, loadState, getMember,
-  isValidEmail, rateLimited, claimCode, claimKey,
+  memberStore, getMemberEvents, summarize,
+  isValidEmail, rateLimited, claimCode, claimKey, todayISO,
 } from "./inner-circle-lib.js";
 
-async function findMemberWithRetry(store, email) {
+async function summarizeWithRetry(store, email) {
   for (let attempt = 0; attempt < 3; attempt++) {
-    const state = await loadState(store);
-    const member = getMember(state, email);
-    if (member) return member;
+    const events = await getMemberEvents(store, email);
+    if (events.length) return summarize(events);
     await new Promise((r) => setTimeout(r, 5000));
   }
   return null;
@@ -33,12 +32,12 @@ export default async (req) =>
     }
 
     const store = memberStore();
-    const member = await findMemberWithRetry(store, email);
-    if (!member) {
+    const s = await summarizeWithRetry(store, email);
+    if (!s) {
       return json({ success: false, message: "No Inner Circle account found for that email yet." }, 404, req);
     }
-    if (member.points < reward.cost) {
-      return json({ success: false, message: `You need ${reward.cost} points for that — you have ${member.points}.` }, 400, req);
+    if (s.points < reward.cost) {
+      return json({ success: false, message: `You need ${reward.cost} points for that — you have ${s.points}.` }, 400, req);
     }
 
     // one pending claim per reward at a time (best-effort check)
@@ -51,11 +50,10 @@ export default async (req) =>
     }
 
     const code = claimCode();
-    const claim = {
+    await store.setJSON(claimKey(code), {
       email, rewardId: reward.id, rewardName: reward.name, cost: reward.cost,
       status: "pending", createdAt: new Date().toISOString(),
-    };
-    await store.setJSON(claimKey(code), claim);
+    });
 
     return json({
       success: true,

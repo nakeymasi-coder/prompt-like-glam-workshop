@@ -1,7 +1,11 @@
 // Shared helpers for Glam's Inner Circle loyalty functions.
 //
-// Storage: ONE blob ("state") holding all members. This avoids read-after-write
-// lag issues with many rapid per-member read/modify/write cycles.
+// Storage model: EVENT SOURCING. Every point change is its own immutable blob:
+//   ev:<email>:<kind>:<unique-id>  -> { email, points, date, label, kind }
+//   claim:<CODE>                  -> { email, rewardId, rewardName, cost, status, createdAt }
+//
+// Reads aggregate a member's events. Writes never read-modify-write shared
+// state, so concurrent writes can't clobber each other.
 import { getStore } from "@netlify/blobs";
 
 export const VIP_THRESHOLD = 300;
@@ -60,44 +64,16 @@ export function memberStore() {
   return getStore("inner-circle");
 }
 
-function blankState() {
-  return { members: {}, processedSales: [], updatedAt: null };
+export function eventKey(email, kind, id) {
+  return `ev:${email.trim().toLowerCase()}:${kind}:${id}`;
 }
 
 export function claimKey(code) {
   return `claim:${code}`;
 }
 
-export async function loadState(store) {
-  const state = await store.get("state", { type: "json" }).catch(() => null);
-  if (!state || typeof state !== "object") return blankState();
-  state.members = state.members || {};
-  state.processedSales = state.processedSales || [];
-  state.pendingClaims = state.pendingClaims || [];
-  return state;
-}
-
-export async function saveState(store, state) {
-  state.updatedAt = new Date().toISOString();
-  await store.setJSON("state", state);
-}
-
-export function getMember(state, email) {
-  return state.members[email.trim().toLowerCase()] || null;
-}
-
-export function getOrCreateMember(state, email) {
-  email = email.trim().toLowerCase();
-  let member = state.members[email];
-  if (!member) {
-    member = {
-      email, points: 0, lifetime: 0, tier: "member",
-      activity: [], claims: [],
-      joined: new Date().toISOString().slice(0, 10),
-    };
-    state.members[email] = member;
-  }
-  return member;
+export function newEventId() {
+  return `${Date.now().toString(36)}${Math.floor(Math.random() * 1e6).toString(36)}`;
 }
 
 export function isValidEmail(email) {
@@ -108,11 +84,52 @@ export function tierFor(lifetime) {
   return lifetime >= VIP_THRESHOLD ? "vip" : "member";
 }
 
-export function addActivity(member, label, points) {
-  member.activity = [...(member.activity || []), {
-    date: new Date().toISOString().slice(0, 10), label, points,
-  }];
-  if (member.activity.length > 60) member.activity = member.activity.slice(-60);
+// All of a member's point events, oldest first.
+export async function getMemberEvents(store, email) {
+  email = email.trim().toLowerCase();
+  const listed = await store.list({ prefix: `ev:${email}:` }).catch(() => ({ blobs: [] }));
+  const events = [];
+  for (const b of listed.blobs || []) {
+    const e = await store.get(b.key, { type: "json" }).catch(() => null);
+    if (e && typeof e.points === "number") events.push(e);
+  }
+  events.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+  return events;
+}
+
+// Fold events into balance/lifetime/tier/activity.
+export function summarize(events) {
+  let points = 0;
+  let lifetime = 0;
+  const activity = [];
+  for (const e of events) {
+    const p = Math.floor(Number(e.points) || 0);
+    points += p;
+    if (p > 0) lifetime += p;
+    activity.push({ date: e.date || "", label: e.label || "", points: p });
+  }
+  points = Math.max(0, points);
+  return {
+    points,
+    lifetime,
+    tier: tierFor(lifetime),
+    joined: events.length ? events[0].date || "" : "",
+    activity: activity.slice(-60),
+  };
+}
+
+// All pending claim blobs.
+export async function listPendingClaims(store) {
+  const listed = await store.list({ prefix: "claim:" }).catch(() => ({ blobs: [] }));
+  const claims = [];
+  for (const b of listed.blobs || []) {
+    const c = await store.get(b.key, { type: "json" }).catch(() => null);
+    if (c && c.status === "pending") {
+      claims.push({ code: b.key.split(":")[1], ...c });
+    }
+  }
+  claims.sort((a, b) => (a.createdAt < b.createdAt ? -1 : 1));
+  return claims;
 }
 
 // Very light per-IP rate limit (best effort, in-memory).
@@ -131,4 +148,8 @@ export function claimCode() {
   let s = "";
   for (let i = 0; i < 6; i++) s += chars[Math.floor(Math.random() * chars.length)];
   return `GLAM-${s}`;
+}
+
+export function todayISO() {
+  return new Date().toISOString().slice(0, 10);
 }

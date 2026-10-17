@@ -2,7 +2,8 @@
 // Public (rate-limited). Never lists other members.
 import {
   REWARDS, VIP_THRESHOLD, withCors, json,
-  memberStore, loadState, getMember, isValidEmail, rateLimited,
+  memberStore, getMemberEvents, summarize,
+  isValidEmail, rateLimited,
 } from "./inner-circle-lib.js";
 
 export default async (req) =>
@@ -16,20 +17,20 @@ export default async (req) =>
       return json({ success: false, message: "Please enter a valid email address." }, 400, req);
     }
 
-    const state = await loadState(memberStore());
-    const member = getMember(state, email);
-    if (!member) {
+    const store = memberStore();
+    const events = await getMemberEvents(store, email);
+    if (!events.length) {
       return json({
         success: true,
         found: false,
         message: "No Inner Circle account found for that email yet — it appears automatically after your first Payhip purchase.",
       }, 200, req);
     }
+    const s = summarize(events);
 
-    // member's pending claims live in their own blobs
-    const store = memberStore();
-    const pendingClaims = [];
+    // member's pending claims
     const listed = await store.list({ prefix: "claim:" }).catch(() => ({ blobs: [] }));
+    const pendingClaims = [];
     for (const b of listed.blobs || []) {
       const c = await store.get(b.key, { type: "json" }).catch(() => null);
       if (c && c.email === email && c.status === "pending") {
@@ -41,13 +42,13 @@ export default async (req) =>
       success: true,
       found: true,
       email,
-      points: member.points,
-      lifetime: member.lifetime,
-      tier: member.tier,
+      points: s.points,
+      lifetime: s.lifetime,
+      tier: s.tier,
       vipThreshold: VIP_THRESHOLD,
-      vipProgress: Math.min(1, member.lifetime / VIP_THRESHOLD),
-      rewards: REWARDS.map((r) => ({ ...r, canClaim: member.points >= r.cost })),
-      activity: (member.activity || []).slice(-12).reverse(),
+      vipProgress: Math.min(1, s.lifetime / VIP_THRESHOLD),
+      rewards: REWARDS.map((r) => ({ ...r, canClaim: s.points >= r.cost })),
+      activity: s.activity.slice(-12).reverse(),
       pendingClaims,
     }, 200, req);
   });
