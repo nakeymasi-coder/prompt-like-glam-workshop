@@ -48,13 +48,13 @@ export default async (req) =>
       for (const s of sales) {
         if (!s.messageId || processed.has(s.messageId)) continue;
         const email = (s.email || "").trim().toLowerCase();
-        const pts = Math.max(0, Math.floor(Number(s.points) || 0));
+        const pts = Math.floor(Number(s.points) || 0); // negative = refund/correction
         if (!isValidEmail(email)) continue;
         const [key, member] = await getOrCreate(store, email);
         const wasVip = member.tier === "vip";
-        if (pts > 0) {
-          member.points += pts;
-          member.lifetime += pts;
+        if (pts !== 0) {
+          member.points = Math.max(0, member.points + pts);
+          if (pts > 0) member.lifetime += pts; // refunds don't erase lifetime (VIP is sticky)
           addActivity(member, s.label || `Purchase (${s.date || "Payhip"})`, pts);
         } else {
           addActivity(member, s.label || "Joined the Inner Circle", 0);
@@ -72,14 +72,14 @@ export default async (req) =>
 
     if (action === "addPoints") {
       const email = (body.email || "").trim().toLowerCase();
-      const pts = Math.max(0, Math.floor(Number(body.points) || 0));
-      if (!isValidEmail(email) || pts <= 0 || !body.label) {
+      const pts = Math.floor(Number(body.points) || 0); // negative allowed for corrections
+      if (!isValidEmail(email) || pts === 0 || !body.label) {
         return json({ success: false, message: "Need email, points, and label." }, 400, req);
       }
       const [key, member] = await getOrCreate(store, email);
       const wasVip = member.tier === "vip";
-      member.points += pts;
-      member.lifetime += pts;
+      member.points = Math.max(0, member.points + pts);
+      if (pts > 0) member.lifetime += pts;
       addActivity(member, body.label, pts);
       member.tier = tierFor(member.lifetime);
       await store.setJSON(key, member);
