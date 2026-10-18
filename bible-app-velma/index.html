@@ -598,7 +598,8 @@ function tapCell(idx){
   if(!gameSel || wordGame.done) return;
   var g=gameSel; var cols=g.grid[0].length;
   var foundCells={}; for(var w=0;w<g.words.length;w++){ if(wordGame.found.indexOf(g.words[w].word)>=0){ var cells=g.words[w].cells; for(var c=0;c<cells.length;c++) foundCells[cells[c][0]*cols+cells[c][1]]=true; } }
-  if(foundCells[idx]) return;
+  var unfoundCells={}; for(var wu=0;wu<g.words.length;wu++){ if(wordGame.found.indexOf(g.words[wu].word)<0){ var ucells=g.words[wu].cells; for(var cu=0;cu<ucells.length;cu++) unfoundCells[ucells[cu][0]*cols+ucells[cu][1]]=true; } }
+  if(foundCells[idx] && !unfoundCells[idx]) return;
   var pos=wordGame.selected.indexOf(idx);
   if(pos>=0){ wordGame.selected.splice(pos,1); render(); return; }
   var next=wordGame.selected.concat([idx]);
