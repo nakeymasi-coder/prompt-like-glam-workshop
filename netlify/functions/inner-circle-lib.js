@@ -153,3 +153,79 @@ export function claimCode() {
 export function todayISO() {
   return new Date().toISOString().slice(0, 10);
 }
+
+// ---- Member profiles ----
+
+export function profileKey(email) {
+  return `profile:${email.trim().toLowerCase()}`;
+}
+
+// displayName + photo (data URL). Per-member blob; only the member writes it,
+// so there's no shared read-modify-write contention.
+export async function getProfile(store, email) {
+  const p = await store.get(profileKey(email), { type: "json" }).catch(() => null);
+  if (p && typeof p === "object") return p;
+  return null;
+}
+
+export function defaultDisplayName(email) {
+  const base = email.split("@")[0].replace(/[._-]+/g, " ").trim();
+  return base ? base.replace(/\b\w/g, (c) => c.toUpperCase()) : "Member";
+}
+
+// ---- Admin hub auth ----
+// Glam sets INNER_CIRCLE_ADMIN_PASSWORD in Netlify env. The auth function
+// trades it for a 24h HMAC-signed token; admin read/write actions (except
+// syncSales, which stays secret-only) accept secret OR token.
+
+import { createHmac, timingSafeEqual } from "crypto";
+
+const TOKEN_TTL_MS = 24 * 60 * 60 * 1000;
+
+export function issueAdminToken(syncSecret) {
+  const expiry = Date.now() + TOKEN_TTL_MS;
+  const sig = createHmac("sha256", syncSecret).update(`admin:${expiry}`).digest("hex");
+  return `${expiry}.${sig}`;
+}
+
+export function verifyAdminToken(syncSecret, token) {
+  if (typeof token !== "string") return false;
+  const parts = token.split(".");
+  if (parts.length !== 2) return false;
+  const expiry = Number(parts[0]);
+  if (!Number.isFinite(expiry) || expiry < Date.now()) return false;
+  const expected = createHmac("sha256", syncSecret).update(`admin:${expiry}`).digest("hex");
+  try {
+    return timingSafeEqual(Buffer.from(parts[1], "utf8"), Buffer.from(expected, "utf8"));
+  } catch {
+    return false;
+  }
+}
+
+export function isAuthorized(body) {
+  const syncSecret = Netlify.env.get("INNER_CIRCLE_SYNC_SECRET");
+  if (!syncSecret) return false;
+  if (body.secret && body.secret === syncSecret) return true;
+  if (body.token && verifyAdminToken(syncSecret, body.token)) return true;
+  return false;
+}
+
+// Unique member emails from event keys alone (no blob reads).
+export async function listMemberEmails(store) {
+  const listed = await store.list({ prefix: "ev:" }).catch(() => ({ blobs: [] }));
+  const emails = new Set();
+  const counts = {};
+  for (const b of listed.blobs || []) {
+    const m = /^ev:([^:]+):/.exec(b.key);
+    if (m) {
+      emails.add(m[1]);
+      counts[m[1]] = (counts[m[1]] || 0) + 1;
+    }
+  }
+  return [...emails].sort().map((email) => ({ email, events: counts[email] }));
+}
+
+// Strip the "Purchase: " prefix the sync writes, for clean display.
+export function productNameFromLabel(label) {
+  return (label || "").replace(/^Purchase:\s*/i, "").trim() || "Purchase";
+}

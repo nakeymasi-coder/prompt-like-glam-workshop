@@ -1,31 +1,32 @@
-// Admin ops for Glam's Inner Circle. POST { secret, action, ... }.
-// Every point change is an independent event blob — no shared read-modify-write.
+// Admin ops for Glam's Inner Circle. POST { secret|token, action, ... }.
+// Auth: full sync secret, or the 24h hub token (issued by inner-circle-admin-auth).
+// syncSales stays secret-only. Every point change is an independent event blob.
 // Actions:
-//   syncSales { sales: [{ messageId, email, points, date, label }] }  (idempotent by key)
-//   addPoints { email, points, label }                                (negative ok)
+//   syncSales { sales: [{ messageId, email, points, date, label, product?, amount? }] }
+//   addPoints { email, points, label }
 //   pendingClaims {}
-//   fulfillClaim { email, claimId }    -> writes a negative-point redeem event
-//   cancelClaim { email, claimId }
-//   getMember { email }                -> aggregated summary
-//   wipeAll {}                         -> delete every ev:* and claim:* blob (fresh start)
+//   fulfillClaim { email, claimId } | cancelClaim { email, claimId }
+//   getMember { email }            -> full detail incl. profile + purchases
+//   listMembers {}                 -> [{ email, events }]
+//   wipeAll {}
 import {
-  withCors, json, memberStore,
+  withCors, json, memberStore, isAuthorized,
   getMemberEvents, summarize, listPendingClaims,
   isValidEmail, eventKey, claimKey, newEventId, todayISO,
+  getProfile, defaultDisplayName, listMemberEmails, productNameFromLabel,
 } from "./inner-circle-lib.js";
 
 export default async (req) =>
   withCors(req, async () => {
     const body = await req.json().catch(() => ({}));
-    const secret = Netlify.env.get("INNER_CIRCLE_SYNC_SECRET");
-    if (!secret || body.secret !== secret) {
-      return json({ success: false, message: "Not authorized." }, 403, req);
-    }
-
-    const store = memberStore();
     const action = body.action;
 
     if (action === "syncSales") {
+      const syncSecret = Netlify.env.get("INNER_CIRCLE_SYNC_SECRET");
+      if (!syncSecret || body.secret !== syncSecret) {
+        return json({ success: false, message: "Not authorized." }, 403, req);
+      }
+      const store = memberStore();
       const sales = Array.isArray(body.sales) ? body.sales : [];
       let added = 0;
       const touched = new Set();
@@ -37,12 +38,19 @@ export default async (req) =>
         await store.setJSON(eventKey(email, "sale", s.messageId), {
           email, points: pts, date: s.date || todayISO(),
           label: s.label || "Purchase", kind: "sale",
+          product: s.product || productNameFromLabel(s.label),
+          amount: s.amount != null ? Number(s.amount) : null,
         });
         touched.add(email);
         added++;
       }
       return json({ success: true, added, membersTouched: touched.size }, 200, req);
     }
+
+    if (!isAuthorized(body)) {
+      return json({ success: false, message: "Not authorized." }, 403, req);
+    }
+    const store = memberStore();
 
     if (action === "addPoints") {
       const email = (body.email || "").trim().toLowerCase();
@@ -91,19 +99,40 @@ export default async (req) =>
       const events = await getMemberEvents(store, email);
       if (!events.length) return json({ success: false, message: "Member not found." }, 404, req);
       const s = summarize(events);
-      return json({ success: true, member: { email, ...s } }, 200, req);
+      const profile = (await getProfile(store, email)) || {};
+      const purchases = events
+        .filter((e) => e.kind === "sale")
+        .map((e) => ({
+          date: e.date, product: e.product || productNameFromLabel(e.label),
+          amount: e.amount, points: Math.floor(Number(e.points) || 0),
+        }))
+        .reverse();
+      return json({
+        success: true,
+        member: {
+          email,
+          displayName: profile.displayName || defaultDisplayName(email),
+          photo: profile.photo || "",
+          ...s,
+          purchases,
+        },
+      }, 200, req);
+    }
+
+    if (action === "listMembers") {
+      const members = await listMemberEmails(store);
+      return json({ success: true, count: members.length, members }, 200, req);
     }
 
     if (action === "wipeAll") {
       let deleted = 0;
-      for (const prefix of ["ev:", "claim:"]) {
+      for (const prefix of ["ev:", "claim:", "profile:", "photo:"]) {
         const listed = await store.list({ prefix }).catch(() => ({ blobs: [] }));
         for (const b of listed.blobs || []) {
           await store.delete(b.key).catch(() => {});
           deleted++;
         }
       }
-      // also clear the legacy single-blob state from the earlier design
       await store.delete("state").catch(() => {});
       return json({ success: true, deleted }, 200, req);
     }

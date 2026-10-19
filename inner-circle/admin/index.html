@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#0f52ba" />
+<title>Inner Circle HQ — Glam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&family=Jost:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg-grad:linear-gradient(160deg,#fdfdff 0%,#eef4fc 55%,#e3edf9 100%);
+  --card:#ffffff; --card-soft:#f6f9fe;
+  --ink:#182540; --ink-soft:#4c5d78;
+  --sapphire:#0f52ba; --sapphire-deep:#0a3a86; --sapphire-pale:#eef5ff;
+  --line:#d7e2f0;
+  --shadow-sm:0 3px 10px rgba(15,82,186,.08);
+  --radius:18px; --btn-grad:linear-gradient(135deg,#2f6fd0 0%,#0f52ba 55%,#0a3a86 100%);
+  --gold-grad:linear-gradient(135deg,#8a6a2f,#d4af37 55%,#8a6a2f);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg-grad);color:var(--ink);min-height:100vh}
+.wrap{max-width:640px;margin:0 auto;padding:20px 16px 110px}
+.topbar{text-align:center;padding:18px 0 6px}
+.topbar .mark{font-size:2rem}
+h1{font-family:"Playfair Display",serif;font-weight:800;font-size:1.6rem;margin:.2em 0 0}
+.tag{color:var(--ink-soft);font-size:.92rem;margin:6px 0 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:22px 20px;margin-top:16px}
+.hidden{display:none!important}
+label{display:block;font-weight:600;margin-bottom:8px}
+input[type=password],input[type=text],input[type=email],input[type=number]{width:100%;padding:14px 16px;font-size:1.05rem;border:1.5px solid var(--line);border-radius:14px;font-family:inherit;background:#fff;color:var(--ink)}
+input:focus{outline:none;border-color:var(--sapphire);box-shadow:0 0 0 3px rgba(15,82,186,.12)}
+.btn{display:block;width:100%;margin-top:14px;padding:15px;border:0;border-radius:999px;background:var(--btn-grad);color:#fff;font-weight:700;font-size:1.05rem;font-family:inherit;cursor:pointer;box-shadow:0 8px 22px rgba(15,82,186,.25)}
+.btn:disabled{opacity:.55;cursor:default;box-shadow:none}
+.btn.small{width:auto;display:inline-block;padding:9px 20px;font-size:.9rem;margin:8px 6px 0 0}
+.btn.danger{background:#fff;color:#a33;border:1.5px solid #e5b6b6;box-shadow:none}
+.btn.ghost{background:#fff;color:var(--sapphire-deep);border:1.5px solid var(--line);box-shadow:none}
+.err{background:#fdeef0;border:1px solid #f3c2cb;color:#8a2b3a;border-radius:12px;padding:12px 14px;margin-top:12px;font-size:.95rem}
+.okmsg{background:#eaf7ee;border:1px solid #bfe6c9;color:#1e6b34;border-radius:12px;padding:12px 14px;margin-top:12px;font-size:.95rem}
+.hint{font-size:.88rem;color:var(--ink-soft);margin-top:12px;line-height:1.6}
+h2.sec{font-family:"Playfair Display",serif;font-size:1.25rem;margin:26px 0 4px}
+/* member list */
+.mrow{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-sm);padding:12px 14px;margin-top:8px;cursor:pointer}
+.mrow .em{flex:1;min-width:0;font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mrow .vip{flex:0 0 auto;font-size:.75rem;font-weight:700}
+.mrow .chev{color:var(--ink-soft)}
+/* detail */
+.dhead{display:flex;gap:14px;align-items:center}
+.davatar{width:72px;height:72px;border-radius:50%;border:2px solid var(--sapphire);background:var(--btn-grad);color:#fff;font-family:"Playfair Display",serif;font-weight:800;font-size:1.8rem;display:flex;align-items:center;justify-content:center;overflow:hidden;flex:0 0 auto}
+.davatar img{width:100%;height:100%;object-fit:cover}
+.dname{font-family:"Playfair Display",serif;font-size:1.3rem;font-weight:700}
+.demail{color:var(--ink-soft);font-size:.88rem;word-break:break-all}
+.vip-badge{display:inline-block;background:var(--gold-grad);color:#fff;font-weight:700;padding:6px 16px;border-radius:999px;font-size:.85rem;margin-top:6px}
+.stat-row{display:flex;gap:10px;margin-top:14px}
+.stat{flex:1;background:var(--card-soft);border:1px solid var(--line);border-radius:14px;padding:12px 8px;text-align:center}
+.stat .n{font-family:"Playfair Display",serif;font-weight:800;font-size:1.5rem}
+.stat .l{font-size:.75rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em}
+.pur{display:flex;gap:10px;align-items:center;padding:10px 2px;border-bottom:1px solid var(--line);font-size:.9rem}
+.pur:last-child{border-bottom:0}
+.pur .info{flex:1;min-width:0}
+.pur .info strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+.pur .info small{color:var(--ink-soft);font-size:.78rem}
+.pur .g{color:#1e6b34;font-weight:700;white-space:nowrap}
+.act{display:flex;justify-content:space-between;gap:10px;padding:9px 2px;border-bottom:1px solid var(--line);font-size:.88rem}
+.act:last-child{border-bottom:0}
+.act .d{color:var(--ink-soft);font-size:.76rem}
+.act .p{font-weight:700;white-space:nowrap}
+.act .p.neg{color:#b3541e}.act .p.pos{color:#1e6b34}
+.claimbox{background:#fff8e6;border:1px solid #ecd9a0;border-radius:12px;padding:12px 14px;margin-top:10px;font-size:.9rem}
+.claimbox code{background:#fff;border:1px solid #ecd9a0;border-radius:6px;padding:2px 8px;font-weight:700}
+.back{background:none;border:0;color:var(--sapphire);font-family:inherit;font-size:.92rem;cursor:pointer;margin-top:14px}
+/* tabs */
+.tabbar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);display:flex;z-index:50;padding-bottom:env(safe-area-inset-bottom)}
+.tabbar button{flex:1;border:0;background:none;font-family:inherit;padding:10px 4px 8px;color:var(--ink-soft);font-size:.75rem;font-weight:600;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
+.tabbar button .ti{font-size:1.35rem}
+.tabbar button.active{color:var(--sapphire)}
+.spinner{width:22px;height:22px;border:3px solid var(--line);border-top-color:var(--sapphire);border-radius:50%;margin:18px auto;animation:spin 0.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.cta{margin-top:34px;text-align:center}
+.cta .row{display:flex;gap:10px;justify-content:center}
+.cta a{flex:1;max-width:220px;display:inline-block;padding:13px 10px;border-radius:999px;font-weight:700;font-size:.92rem;text-decoration:none}
+.cta .join{background:var(--btn-grad);color:#fff;box-shadow:0 6px 18px rgba(15,82,186,.25)}
+.cta .shop{background:#fff;color:var(--sapphire-deep);border:1.5px solid var(--line)}
+.cta .made{margin-top:12px;font-size:.82rem;color:var(--ink-soft)}
+.cta .made .heart{color:#e2557a}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="mark">🦋</div>
+    <h1>Inner Circle HQ</h1>
+    <p class="tag">Glam's command center — members only behind this door</p>
+  </div>
+
+  <!-- password gate -->
+  <div class="card" id="view-gate">
+    <label for="pw">HQ password</label>
+    <input type="password" id="pw" placeholder="••••••••" autocomplete="current-password" />
+    <button class="btn" id="pwBtn">Unlock HQ 🔓</button>
+    <div class="err hidden" id="pwErr"></div>
+    <div class="spinner hidden" id="pwSpin"></div>
+  </div>
+
+  <!-- hub -->
+  <div id="view-hub" class="hidden">
+    <section id="htab-members">
+      <h2 class="sec" style="margin-top:14px">Members 👥 <span id="mcount" style="font-size:.85rem;color:var(--ink-soft)"></span></h2>
+      <input type="text" id="msearch" placeholder="Search by email…" autocomplete="off" />
+      <div id="mlist"></div>
+      <div id="mdetail"></div>
+    </section>
+    <section id="htab-claims" class="hidden">
+      <h2 class="sec" style="margin-top:14px">Pending claims 🎁</h2>
+      <p class="hint">Rewards members claimed in the app, waiting for you to send. Fulfill after you deliver the reward via Payhip.</p>
+      <div id="claimsList"></div>
+    </section>
+    <nav class="tabbar" id="htabbar">
+      <button data-tab="members" class="active"><span class="ti">👥</span>Members</button>
+      <button data-tab="claims"><span class="ti">🎁</span>Claims <span id="claimBadge"></span></button>
+    </nav>
+  </div>
+
+  <div class="cta">
+    <div class="row">
+      <a class="join" href="https://payhip.com/b/54LoK" target="_blank" rel="noopener">✨ Join The Glam Vault</a>
+      <a class="shop" href="https://glamhustlehub.com" target="_blank" rel="noopener">🛍️ Shop Glam Hustle Hub</a>
+    </div>
+    <div class="made">made with <span class="heart">♥</span> by Indigo, Glam's AI assistant</div>
+  </div>
+</div>
+
+<script>
+"use strict";
+var API = "https://workshop-poratl.netlify.app/.netlify/functions";
+var $ = function(id){ return document.getElementById(id); };
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+function token(){ try{ return localStorage.getItem("ic_admin_token") || ""; }catch(_){ return ""; } }
+function saveToken(t){ try{ localStorage.setItem("ic_admin_token", t); }catch(_){} }
+function clearToken(){ try{ localStorage.removeItem("ic_admin_token"); }catch(_){} }
+
+async function admin(action, extra){
+  var body = Object.assign({ token: token(), action: action }, extra || {});
+  var res = await fetch(API + "/inner-circle-admin", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body)
+  });
+  var r = await res.json();
+  if(res.status === 401 || res.status === 403){ clearToken(); showGate(); throw new Error("auth"); }
+  return r;
+}
+
+function showGate(){
+  $("view-hub").classList.add("hidden");
+  $("view-gate").classList.remove("hidden");
+}
+
+async function unlock(pw){
+  $("pwErr").classList.add("hidden");
+  $("pwSpin").classList.remove("hidden");
+  $("pwBtn").disabled = true;
+  try{
+    var res = await fetch(API + "/inner-circle-admin-auth", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password: pw })
+    });
+    var r = await res.json();
+    $("pwSpin").classList.add("hidden");
+    $("pwBtn").disabled = false;
+    if(!r.success){ var e=$("pwErr"); e.textContent = r.message || "Wrong password."; e.classList.remove("hidden"); return; }
+    saveToken(r.token);
+    $("pw").value = "";
+    $("view-gate").classList.add("hidden");
+    $("view-hub").classList.remove("hidden");
+    boot();
+  }catch(e){
+    $("pwSpin").classList.add("hidden");
+    $("pwBtn").disabled = false;
+    var e2=$("pwErr"); e2.textContent = "Couldn't reach the service. Try again."; e2.classList.remove("hidden");
+  }
+}
+
+var allMembers = [];
+var memberDetailCache = {};
+
+function htab(name){
+  $("htab-members").classList.toggle("hidden", name !== "members");
+  $("htab-claims").classList.toggle("hidden", name !== "claims");
+  var bs = $("htabbar").querySelectorAll("button");
+  for(var i=0;i<bs.length;i++) bs[i].classList.toggle("active", bs[i].getAttribute("data-tab") === name);
+  if(name === "claims") loadClaims();
+}
+
+async function boot(){
+  try{
+    var r = await admin("listMembers", {});
+    allMembers = r.members || [];
+    $("mcount").textContent = "· " + allMembers.length;
+    renderMlist("");
+    loadClaims(true);
+  }catch(e){ /* auth handled in admin() */ }
+}
+
+function renderMlist(q){
+  q = (q || "").toLowerCase();
+  var h = "";
+  var shown = 0;
+  for(var i=0;i<allMembers.length && shown<60;i++){
+    var m = allMembers[i];
+    if(q && m.email.toLowerCase().indexOf(q) < 0) continue;
+    shown++;
+    h += '<div class="mrow" data-em="' + esc(m.email) + '"><span class="em">' + esc(m.email) + '</span><span class="chev">›</span></div>';
+  }
+  if(!shown) h = '<p class="hint">No members match that search.</p>';
+  else if(q) h = '<p class="hint">' + shown + ' match' + (shown===1?"":"es") + '.</p>' + h;
+  $("mlist").innerHTML = h;
+  var rows = $("mlist").querySelectorAll(".mrow");
+  for(var j=0;j<rows.length;j++){
+    (function(row){ row.addEventListener("click", function(){ openMember(row.getAttribute("data-em")); }); })(rows[j]);
+  }
+}
+
+async function openMember(email){
+  $("mlist").innerHTML = '<div class="spinner"></div>';
+  try{
+    var r = await admin("getMember", { email: email });
+    if(!r.success){ renderMlist($("msearch").value); return; }
+    renderDetail(r.member);
+  }catch(e){ renderMlist($("msearch").value); }
+}
+
+function renderDetail(m){
+  var vip = m.tier === "vip";
+  var initial = (m.displayName || "?").charAt(0).toUpperCase();
+  var h = '<div class="card"><div class="dhead">'
+    + '<div class="davatar">' + (m.photo ? '<img src="' + m.photo + '" alt="" />' : esc(initial)) + '</div>'
+    + '<div><div class="dname">' + esc(m.displayName) + '</div><div class="demail">' + esc(m.email) + '</div>'
+    + (vip ? '<span class="vip-badge">👑 VIP</span>' : '<div class="hint" style="margin:4px 0 0">Member</div>')
+    + '</div></div>'
+    + '<div class="stat-row"><div class="stat"><div class="n">' + m.points + '</div><div class="l">Points</div></div>'
+    + '<div class="stat"><div class="n">' + m.lifetime + '</div><div class="l">Lifetime</div></div>'
+    + '<div class="stat"><div class="n">' + m.purchases.length + '</div><div class="l">Orders</div></div></div>';
+
+  h += '<h2 class="sec">Purchases 🛍️</h2>';
+  if(!m.purchases.length) h += '<p class="hint">No purchases on record.</p>';
+  m.purchases.forEach(function(p){
+    h += '<div class="pur"><span class="info"><strong>' + esc(p.product) + '</strong><small>' + esc(p.date || "")
+      + (p.amount != null ? " · $" + Number(p.amount).toFixed(2) : "") + '</small></span><span class="g">+' + p.points + ' pts</span></div>';
+  });
+
+  h += '<h2 class="sec">Points activity</h2>';
+  var acts = (m.activity || []).slice().reverse();
+  if(!acts.length) h += '<p class="hint">Nothing yet.</p>';
+  acts.forEach(function(a){
+    var cls = a.points < 0 ? "neg" : "pos";
+    var sign = a.points > 0 ? "+" : "";
+    h += '<div class="act"><span>' + esc(a.label) + '<br><span class="d">' + esc(a.date || "") + '</span></span><span class="p ' + cls + '">' + sign + a.points + '</span></div>';
+  });
+
+  h += '<h2 class="sec">Add Glow Points ➕</h2>'
+    + '<div style="display:flex;gap:8px"><input type="number" id="apPts" placeholder="Points" style="flex:0 0 110px" />'
+    + '<input type="text" id="apLabel" placeholder="Reason (e.g. TikTok live 10/19)" /></div>'
+    + '<button class="btn small" id="apBtn">Add points</button><div class="err hidden" id="apErr"></div><div class="okmsg hidden" id="apOk"></div>';
+
+  h += '<div style="margin-top:6px"><button class="back" id="backBtn">‹ Back to members</button></div></div>';
+  $("mdetail").innerHTML = h;
+  $("mlist").innerHTML = "";
+  $("backBtn").addEventListener("click", function(){ $("mdetail").innerHTML = ""; renderMlist($("msearch").value); });
+  $("apBtn").addEventListener("click", function(){ addPointsTo(m.email); });
+}
+
+async function addPointsTo(email){
+  var pts = parseInt($("apPts").value, 10);
+  var label = $("apLabel").value.trim();
+  var err = $("apErr"), ok = $("apOk");
+  err.classList.add("hidden"); ok.classList.add("hidden");
+  if(!pts || !label){ err.textContent = "Enter points and a reason."; err.classList.remove("hidden"); return; }
+  if(!confirm("Add " + pts + " Glow Points to " + email + " (" + label + ")?")) return;
+  try{
+    var r = await admin("addPoints", { email: email, points: pts, label: label });
+    if(r.success){
+      ok.textContent = pts + " points added! ✨"; ok.classList.remove("hidden");
+      setTimeout(function(){ openMember(email); }, 1200);
+    }else{ err.textContent = r.message || "Couldn't add points."; err.classList.remove("hidden"); }
+  }catch(e){ /* auth handled */ }
+}
+
+async function loadClaims(silentBadge){
+  try{
+    var r = await admin("pendingClaims", {});
+    var claims = r.claims || [];
+    $("claimBadge").textContent = claims.length ? "(" + claims.length + ")" : "";
+    var h = "";
+    if(!claims.length) h = '<div class="card" style="padding:18px">No pending claims — everything\'s fulfilled. 🎉</div>';
+    claims.forEach(function(c){
+      h += '<div class="claimbox"><strong>' + esc(c.rewardName) + '</strong><br>'
+        + '<span style="color:var(--ink-soft);font-size:.85rem">' + esc(c.email) + ' · code <code>' + esc(c.code) + '</code> · ' + esc((c.createdAt || "").slice(0,10)) + '</span><br>'
+        + '<button class="btn small" data-fulfill="' + esc(c.code) + '" data-em="' + esc(c.email) + '">Mark fulfilled ✅</button>'
+        + '<button class="btn small danger" data-cancel="' + esc(c.code) + '" data-em="' + esc(c.email) + '">Cancel</button></div>';
+    });
+    $("claimsList").innerHTML = h;
+    bindClaimButtons();
+  }catch(e){ /* auth handled */ }
+}
+
+function bindClaimButtons(){
+  var fs = document.querySelectorAll("[data-fulfill]");
+  for(var i=0;i<fs.length;i++){
+    (function(b){ b.addEventListener("click", function(){ settleClaim(b.getAttribute("data-em"), b.getAttribute("data-fulfill"), "fulfillClaim"); }); })(fs[i]);
+  }
+  var cs = document.querySelectorAll("[data-cancel]");
+  for(var j=0;j<cs.length;j++){
+    (function(b){ b.addEventListener("click", function(){ settleClaim(b.getAttribute("data-em"), b.getAttribute("data-cancel"), "cancelClaim"); }); })(cs[j]);
+  }
+}
+
+async function settleClaim(email, code, action){
+  var verb = action === "fulfillClaim" ? "fulfilled (points deducted)" : "cancelled";
+  if(!confirm("Mark claim " + code + " as " + verb + "?")) return;
+  try{
+    var r = await admin(action, { email: email, claimId: code });
+    if(r.success){ loadClaims(); }
+    else alert(r.message || "Couldn't update that claim.");
+  }catch(e){ /* auth handled */ }
+}
+
+$("pwBtn").addEventListener("click", function(){
+  var pw = $("pw").value;
+  if(!pw) return;
+  unlock(pw);
+});
+$("pw").addEventListener("keydown", function(ev){ if(ev.key === "Enter"){ $("pwBtn").click(); } });
+$("msearch").addEventListener("input", function(){ renderMlist($("msearch").value); });
+var hbs = $("htabbar").querySelectorAll("button");
+for(var i=0;i<hbs.length;i++){
+  (function(b){ b.addEventListener("click", function(){ htab(b.getAttribute("data-tab")); }); })(hbs[i]);
+}
+
+// try saved token
+(function(){
+  if(token()){
+    $("view-gate").classList.add("hidden");
+    $("view-hub").classList.remove("hidden");
+    boot();
+  }
+})();
+</script>
+</body>
+</html>

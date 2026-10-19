@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="description" content="Glam's Inner Circle rewards app — check your Glow Points and claim rewards." />
+<meta name="description" content="Glam's Inner Circle rewards app — your Glow Points, purchases, and rewards in your pocket." />
 <meta name="theme-color" content="#0f52ba" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -28,7 +28,7 @@
 }
 *{box-sizing:border-box}
 body{margin:0;font-family:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg-grad);color:var(--ink);min-height:100vh}
-.wrap{max-width:520px;margin:0 auto;padding:20px 16px 60px}
+.wrap{max-width:520px;margin:0 auto;padding:20px 16px 110px}
 .topbar{text-align:center;padding:18px 0 6px}
 .topbar .mark{font-size:2rem}
 h1{font-family:"Playfair Display",serif;font-weight:800;font-size:1.7rem;margin:.2em 0 0}
@@ -36,15 +36,22 @@ h1{font-family:"Playfair Display",serif;font-weight:800;font-size:1.7rem;margin:
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:22px 20px;margin-top:16px}
 .hidden{display:none!important}
 label{display:block;font-weight:600;margin-bottom:8px}
-input[type=email]{width:100%;padding:14px 16px;font-size:1.05rem;border:1.5px solid var(--line);border-radius:14px;font-family:inherit;background:#fff;color:var(--ink)}
-input[type=email]:focus{outline:none;border-color:var(--sapphire);box-shadow:0 0 0 3px rgba(15,82,186,.12)}
+input[type=email],input[type=text],input[type=number]{width:100%;padding:14px 16px;font-size:1.05rem;border:1.5px solid var(--line);border-radius:14px;font-family:inherit;background:#fff;color:var(--ink)}
+input:focus{outline:none;border-color:var(--sapphire);box-shadow:0 0 0 3px rgba(15,82,186,.12)}
 .btn{display:block;width:100%;margin-top:14px;padding:15px;border:0;border-radius:999px;background:var(--btn-grad);color:#fff;font-weight:700;font-size:1.05rem;font-family:inherit;cursor:pointer;box-shadow:0 8px 22px rgba(15,82,186,.25)}
 .btn:disabled{opacity:.55;cursor:default;box-shadow:none}
 .btn.ghost{background:#fff;color:var(--sapphire-deep);border:1.5px solid var(--line);box-shadow:none;margin-top:10px}
+.btn.small{width:auto;display:inline-block;padding:10px 22px;font-size:.95rem;margin-top:10px}
 .err{background:#fdeef0;border:1px solid #f3c2cb;color:#8a2b3a;border-radius:12px;padding:12px 14px;margin-top:12px;font-size:.95rem}
 .okmsg{background:#eaf7ee;border:1px solid #bfe6c9;color:#1e6b34;border-radius:12px;padding:12px 14px;margin-top:12px;font-size:.95rem}
 .hint{font-size:.88rem;color:var(--ink-soft);margin-top:12px;line-height:1.6;text-align:center}
 .hint a{color:var(--sapphire)}
+/* app header */
+.apphead{display:flex;align-items:center;gap:14px;padding:14px 4px 2px}
+.avatar{width:58px;height:58px;border-radius:50%;border:2px solid var(--sapphire);background:var(--btn-grad);color:#fff;font-family:"Playfair Display",serif;font-weight:800;font-size:1.5rem;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;flex:0 0 auto;padding:0}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.hello{font-family:"Playfair Display",serif;font-size:1.35rem;font-weight:700}
+.hellosub{color:var(--ink-soft);font-size:.88rem}
 /* balance */
 .balance{text-align:center;padding:30px 20px 24px;position:relative;overflow:hidden}
 .balance::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:linear-gradient(90deg,#0f52ba,#7fb2f0 35%,#ffffff 50%,#c9d6e8 65%,#0f52ba)}
@@ -73,14 +80,43 @@ h2.sec{font-family:"Playfair Display",serif;font-size:1.25rem;margin:26px 0 4px}
 .act .p.neg{color:#b3541e}.act .p.pos{color:#1e6b34}
 .claim-pending{background:#fff8e6;border:1px solid #ecd9a0;border-radius:12px;padding:12px 14px;margin-top:10px;font-size:.93rem}
 .claim-pending code{background:#fff;border:1px solid #ecd9a0;border-radius:6px;padding:2px 8px;font-weight:700}
+/* purchases */
+.pur{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:14px 16px;margin-top:10px}
+.pur .bag{flex:0 0 auto;width:44px;height:44px;border-radius:14px;background:var(--sapphire-pale);display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.pur .info{flex:1;min-width:0}
+.pur .info strong{display:block;font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pur .info small{color:var(--ink-soft);font-size:.82rem}
+.pur .pts-got{flex:0 0 auto;font-weight:700;color:#1e6b34;font-size:.95rem;white-space:nowrap}
+/* profile */
+.profcov{text-align:center;padding:26px 20px 20px}
+.pavatar{width:110px;height:110px;border-radius:50%;border:3px solid var(--sapphire);background:var(--btn-grad);color:#fff;font-family:"Playfair Display",serif;font-weight:800;font-size:2.6rem;display:flex;align-items:center;justify-content:center;overflow:hidden;margin:0 auto;cursor:pointer;position:relative;padding:0}
+.pavatar img{width:100%;height:100%;object-fit:cover}
+.pavatar .cam{position:absolute;bottom:2px;right:2px;background:#fff;border:1px solid var(--line);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.field{margin-top:16px;text-align:left}
+.stat-row{display:flex;gap:10px;margin-top:16px}
+.stat{flex:1;background:var(--card-soft);border:1px solid var(--line);border-radius:14px;padding:12px 8px;text-align:center}
+.stat .n{font-family:"Playfair Display",serif;font-weight:800;font-size:1.4rem}
+.stat .l{font-size:.78rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em}
 .install{background:var(--sapphire-pale);border:1px dashed var(--sapphire);border-radius:14px;padding:14px 16px;margin-top:16px;font-size:.9rem;line-height:1.6;color:var(--sapphire-deep)}
 .install button{float:right;border:0;background:none;font-size:1.1rem;cursor:pointer;color:var(--sapphire-deep)}
 .switch{text-align:center;margin-top:18px}
 .switch button{background:none;border:0;color:var(--sapphire);font-family:inherit;font-size:.92rem;cursor:pointer;text-decoration:underline}
-footer{text-align:center;margin-top:34px;color:var(--ink-soft);font-size:.82rem}
-footer .heart{color:#e2557a}
+/* tab bar */
+.tabbar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);display:flex;z-index:50;padding-bottom:env(safe-area-inset-bottom)}
+.tabbar button{flex:1;border:0;background:none;font-family:inherit;padding:10px 4px 8px;color:var(--ink-soft);font-size:.72rem;font-weight:600;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
+.tabbar button .ti{font-size:1.35rem}
+.tabbar button.active{color:var(--sapphire)}
+/* CTA footer */
+.cta{margin-top:34px;text-align:center}
+.cta .row{display:flex;gap:10px;justify-content:center}
+.cta a{flex:1;max-width:220px;display:inline-block;padding:13px 10px;border-radius:999px;font-weight:700;font-size:.92rem;text-decoration:none}
+.cta .join{background:var(--btn-grad);color:#fff;box-shadow:0 6px 18px rgba(15,82,186,.25)}
+.cta .shop{background:#fff;color:var(--sapphire-deep);border:1.5px solid var(--line)}
+.cta .made{margin-top:12px;font-size:.82rem;color:var(--ink-soft)}
+.cta .made .heart{color:#e2557a}
 .spinner{width:22px;height:22px;border:3px solid var(--line);border-top-color:var(--sapphire);border-radius:50%;margin:18px auto;animation:spin 0.8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+footer.site{text-align:center;margin-top:10px;color:var(--ink-soft);font-size:.82rem}
 </style>
 </head>
 <body>
@@ -101,36 +137,86 @@ footer .heart{color:#e2557a}
     <p class="hint">Use the email from your Payhip purchases.<br />New here? <a href="../">How the Inner Circle works</a></p>
   </div>
 
-  <!-- dashboard -->
-  <div id="view-dash" class="hidden">
-    <div class="card balance" id="balanceCard">
-      <div class="pts-label">Glow Points</div>
-      <div class="pts" id="ptsNum">0</div>
-      <div class="tier" id="tierSlot"></div>
-      <div class="progress" id="vipProgress">
-        <div class="plabel" id="vipLabel"></div>
-        <div class="bar"><div id="vipBar" style="width:0%"></div></div>
+  <!-- app -->
+  <div id="view-app" class="hidden">
+    <div class="apphead">
+      <button class="avatar" id="avatarBtn" aria-label="Open profile"><span id="avatarTxt">?</span></button>
+      <div>
+        <div class="hello" id="helloName">Hey there</div>
+        <div class="hellosub" id="helloTier">Inner Circle Member</div>
       </div>
     </div>
 
-    <div id="pendingSlot"></div>
+    <!-- HOME -->
+    <section id="tab-home">
+      <div class="card balance" id="balanceCard">
+        <div class="pts-label">Glow Points</div>
+        <div class="pts" id="ptsNum">0</div>
+        <div class="tier" id="tierSlot"></div>
+        <div class="progress">
+          <div class="plabel" id="vipLabel"></div>
+          <div class="bar"><div id="vipBar" style="width:0%"></div></div>
+        </div>
+      </div>
+      <div id="pendingSlot"></div>
+      <h2 class="sec">Claim a reward 🎁</h2>
+      <div id="rewardsSlot"></div>
+      <h2 class="sec">Recent activity</h2>
+      <div class="card" style="padding:6px 16px" id="activitySlot"></div>
+    </section>
 
-    <h2 class="sec">Claim a reward 🎁</h2>
-    <div id="rewardsSlot"></div>
+    <!-- PURCHASES -->
+    <section id="tab-purchases" class="hidden">
+      <h2 class="sec" style="margin-top:14px">My purchases 🛍️</h2>
+      <p class="hint" style="text-align:left;margin:4px 0 0">Every Payhip order, with the Glow Points it earned you.</p>
+      <div id="purchasesSlot"></div>
+    </section>
 
-    <h2 class="sec">Recent activity</h2>
-    <div class="card" style="padding:6px 16px" id="activitySlot"></div>
+    <!-- PROFILE -->
+    <section id="tab-profile" class="hidden">
+      <div class="card profcov">
+        <button class="pavatar" id="pavatarBtn" aria-label="Change photo"><span id="pavatarTxt">?</span><span class="cam">📷</span></button>
+        <div class="field">
+          <label for="displayName">Profile name</label>
+          <input type="text" id="displayName" maxlength="40" placeholder="What should we call you?" />
+        </div>
+        <div class="field">
+          <label for="profEmail">Email (can't be changed)</label>
+          <input type="email" id="profEmail" disabled />
+        </div>
+        <button class="btn small" id="saveProfileBtn">Save profile 💾</button>
+        <div class="err hidden" id="profErr"></div>
+        <div class="okmsg hidden" id="profOk"></div>
+        <div class="stat-row">
+          <div class="stat"><div class="n" id="statPts">0</div><div class="l">Points</div></div>
+          <div class="stat"><div class="n" id="statLife">0</div><div class="l">Lifetime</div></div>
+          <div class="stat"><div class="n" id="statPur">0</div><div class="l">Orders</div></div>
+        </div>
+      </div>
+      <div class="install" id="installHint">
+        <button id="installX" aria-label="dismiss">✕</button>
+        📱 <strong>Make it an app:</strong> tap Share → <strong>Add to Home Screen</strong> and your rewards live on your phone like any other app.
+      </div>
+      <div class="switch"><button id="switchBtn">Not you? Use a different email</button></div>
+    </section>
 
-    <div class="install" id="installHint">
-      <button id="installX" aria-label="dismiss">✕</button>
-      📱 <strong>Make it an app:</strong> tap Share → <strong>Add to Home Screen</strong> and your rewards live on your phone like any other app.
-    </div>
-
-    <div class="switch"><button id="switchBtn">Not you? Use a different email</button></div>
+    <nav class="tabbar" id="tabbar">
+      <button data-tab="home" class="active"><span class="ti">🏠</span>Home</button>
+      <button data-tab="purchases"><span class="ti">🛍️</span>Purchases</button>
+      <button data-tab="profile"><span class="ti">👤</span>Profile</button>
+    </nav>
   </div>
 
-  <footer>Made with <span class="heart">♥</span> by Indigo for Glam's Inner Circle</footer>
+  <div class="cta">
+    <div class="row">
+      <a class="join" href="https://payhip.com/b/54LoK" target="_blank" rel="noopener">✨ Join The Glam Vault</a>
+      <a class="shop" href="https://glamhustlehub.com" target="_blank" rel="noopener">🛍️ Shop Glam Hustle Hub</a>
+    </div>
+    <div class="made">made with <span class="heart">♥</span> by Indigo, Glam's AI assistant</div>
+  </div>
+  <footer class="site">Glam's Inner Circle · Glow Points never expire</footer>
 </div>
+<input type="file" id="photoInput" accept="image/*" class="hidden" />
 
 <script>
 "use strict";
@@ -141,6 +227,7 @@ function saveEmail(e){ try{ localStorage.setItem("ic_email", e); }catch(_){} }
 function savedEmail(){ try{ return localStorage.getItem("ic_email") || ""; }catch(_){ return ""; } }
 function showErr(id, msg){ var el=$(id); el.textContent=msg; el.classList.remove("hidden"); }
 function hideErr(id){ $(id).classList.add("hidden"); }
+function flashOk(id, msg){ var el=$(id); el.textContent=msg; el.classList.remove("hidden"); setTimeout(function(){ el.classList.add("hidden"); }, 4000); }
 function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
 
 async function api(path, data){
@@ -153,6 +240,18 @@ async function api(path, data){
 }
 
 var currentEmail = "";
+var currentData = null;
+var pendingPhoto = null; // data URL waiting to be saved
+
+function setAvatar(photo, name){
+  var initial = (name || "?").trim().charAt(0).toUpperCase() || "?";
+  $("avatarBtn").innerHTML = photo
+    ? '<img src="' + photo + '" alt="profile photo" />'
+    : esc(initial);
+  $("pavatarBtn").innerHTML = photo
+    ? '<img src="' + photo + '" alt="profile photo" /><span class="cam">📷</span>'
+    : esc(initial) + '<span class="cam">📷</span>';
+}
 
 async function lookup(email, silent){
   hideErr("loginErr");
@@ -163,19 +262,26 @@ async function lookup(email, silent){
     if(!r.success){ showErr("loginErr", r.message || "Something went wrong."); return; }
     if(!r.found){ showErr("loginErr", r.message); return; }
     currentEmail = email;
+    currentData = r;
     saveEmail(email);
-    renderDash(r);
+    renderApp(r);
   }catch(e){
     if(!silent){ $("loginSpin").classList.add("hidden"); $("lookupBtn").disabled = false; }
     showErr("loginErr", "Couldn't reach the rewards service. Check your connection and try again.");
   }
 }
 
-function renderDash(r){
+function renderApp(r){
   $("view-login").classList.add("hidden");
-  $("view-dash").classList.remove("hidden");
-  $("ptsNum").textContent = r.points;
+  $("view-app").classList.remove("hidden");
+  var name = r.displayName || "Hey there";
+  $("helloName").textContent = "Hey, " + name + " 💎";
   var vip = r.tier === "vip";
+  $("helloTier").textContent = vip ? "👑 VIP Member" : "Inner Circle Member";
+  setAvatar(r.photo || "", name);
+
+  // home
+  $("ptsNum").textContent = r.points;
   $("balanceCard").classList.toggle("vip", vip);
   $("tierSlot").innerHTML = vip
     ? '<span class="vip-badge">👑 VIP MEMBER</span>'
@@ -219,40 +325,134 @@ function renderDash(r){
       + '<span class="p ' + cls + '">' + sign + a.points + '</span></div>';
   });
   $("activitySlot").innerHTML = ah;
+
+  // purchases
+  var ph = "";
+  var purs = r.purchases || [];
+  if(!purs.length) ph = '<div class="card" style="padding:18px">No purchases yet — your Payhip orders will appear here automatically. 🛍️</div>';
+  purs.forEach(function(p){
+    ph += '<div class="pur"><span class="bag">🛍️</span>'
+      + '<span class="info"><strong>' + esc(p.product) + '</strong><small>' + esc(p.date || "") + '</small></span>'
+      + '<span class="pts-got">+' + p.points + ' pts</span></div>';
+  });
+  $("purchasesSlot").innerHTML = ph;
+
+  // profile
+  $("displayName").value = r.displayName || "";
+  $("profEmail").value = r.email || currentEmail;
+  $("statPts").textContent = r.points;
+  $("statLife").textContent = r.lifetime;
+  $("statPur").textContent = purs.length;
+  pendingPhoto = null;
+}
+
+function switchTab(name){
+  ["home","purchases","profile"].forEach(function(t){
+    $("tab-" + t).classList.toggle("hidden", t !== name);
+  });
+  var btns = $("tabbar").querySelectorAll("button");
+  for(var i=0;i<btns.length;i++){
+    btns[i].classList.toggle("active", btns[i].getAttribute("data-tab") === name);
+  }
   window.scrollTo(0,0);
 }
 
 async function claimReward(rewardId, btn){
-  var rw = null;
   if(!confirm("Claim this reward? Glam will send it to you within 24 hours.")) return;
   btn.disabled = true; btn.textContent = "…";
   try{
     var r = await api("/inner-circle-claim", { email: currentEmail, rewardId: rewardId });
     if(r.success){
       alert(r.message);
-      lookup(currentEmail, true);
     }else{
       alert(r.message || "Couldn't claim that reward.");
-      lookup(currentEmail, true);
     }
+    lookup(currentEmail, true);
   }catch(e){
     alert("Couldn't reach the rewards service. Try again in a moment.");
     btn.disabled = false; btn.textContent = "Claim";
   }
 }
 
+// photo: pick -> resize -> preview -> save with profile
+function fileToResizedDataURL(file, maxSize, quality){
+  return new Promise(function(resolve, reject){
+    var img = new Image();
+    img.onload = function(){
+      try{
+        var scale = Math.min(1, maxSize / Math.max(img.width, img.height));
+        var w = Math.max(1, Math.round(img.width * scale));
+        var h = Math.max(1, Math.round(img.height * scale));
+        var c = document.createElement("canvas");
+        c.width = w; c.height = h;
+        c.getContext("2d").drawImage(img, 0, 0, w, h);
+        var url = c.toDataURL("image/jpeg", quality);
+        URL.revokeObjectURL(img.src);
+        resolve(url);
+      }catch(e){ reject(e); }
+    };
+    img.onerror = function(){ reject(new Error("bad image")); };
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+async function saveProfile(){
+  hideErr("profErr");
+  var name = $("displayName").value.trim();
+  if(!name){ showErr("profErr", "Give yourself a profile name first."); return; }
+  var btn = $("saveProfileBtn");
+  btn.disabled = true; btn.textContent = "Saving…";
+  try{
+    var r = await api("/inner-circle-profile", {
+      email: currentEmail,
+      displayName: name,
+      photo: pendingPhoto
+    });
+    btn.disabled = false; btn.textContent = "Save profile 💾";
+    if(!r.success){ showErr("profErr", r.message || "Couldn't save your profile."); return; }
+    flashOk("profOk", "Profile saved! ✨");
+    pendingPhoto = null;
+    lookup(currentEmail, true);
+  }catch(e){
+    btn.disabled = false; btn.textContent = "Save profile 💾";
+    showErr("profErr", "Couldn't reach the rewards service. Try again in a moment.");
+  }
+}
+
+// events
 $("lookupBtn").addEventListener("click", function(){
   var e = $("email").value.trim();
   if(!e){ showErr("loginErr", "Enter the email you shop with."); return; }
   lookup(e, false);
 });
 $("email").addEventListener("keydown", function(ev){ if(ev.key === "Enter"){ $("lookupBtn").click(); } });
+var tabBtns = $("tabbar").querySelectorAll("button");
+for(var i=0;i<tabBtns.length;i++){
+  (function(b){ b.addEventListener("click", function(){ switchTab(b.getAttribute("data-tab")); }); })(tabBtns[i]);
+}
+$("avatarBtn").addEventListener("click", function(){ switchTab("profile"); });
+$("pavatarBtn").addEventListener("click", function(){ $("photoInput").click(); });
+$("photoInput").addEventListener("change", function(){
+  var f = $("photoInput").files && $("photoInput").files[0];
+  if(!f) return;
+  fileToResizedDataURL(f, 256, 0.72).then(function(url){
+    pendingPhoto = url;
+    var nm = $("displayName").value || (currentData && currentData.displayName) || "?";
+    setAvatar(url, nm);
+    flashOk("profOk", "Photo ready — tap Save profile to keep it. 📷");
+  }).catch(function(){
+    showErr("profErr", "That photo didn't work — try a different one.");
+  });
+  $("photoInput").value = "";
+});
+$("saveProfileBtn").addEventListener("click", saveProfile);
 $("switchBtn").addEventListener("click", function(){
   try{ localStorage.removeItem("ic_email"); }catch(_){}
-  currentEmail = "";
+  currentEmail = ""; currentData = null;
   $("email").value = "";
-  $("view-dash").classList.add("hidden");
+  $("view-app").classList.add("hidden");
   $("view-login").classList.remove("hidden");
+  switchTab("home");
 });
 $("installX").addEventListener("click", function(){ $("installHint").style.display = "none"; });
 

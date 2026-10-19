@@ -4,6 +4,7 @@ import {
   REWARDS, VIP_THRESHOLD, withCors, json,
   memberStore, getMemberEvents, summarize,
   isValidEmail, rateLimited,
+  getProfile, defaultDisplayName, productNameFromLabel,
 } from "./inner-circle-lib.js";
 
 export default async (req) =>
@@ -27,6 +28,15 @@ export default async (req) =>
       }, 200, req);
     }
     const s = summarize(events);
+    const profile = (await getProfile(store, email)) || {};
+    const purchases = events
+      .filter((e) => e.kind === "sale")
+      .map((e) => ({
+        date: e.date,
+        product: e.product || productNameFromLabel(e.label),
+        points: Math.floor(Number(e.points) || 0),
+      }))
+      .reverse();
 
     // member's pending claims
     const listed = await store.list({ prefix: "claim:" }).catch(() => ({ blobs: [] }));
@@ -42,6 +52,8 @@ export default async (req) =>
       success: true,
       found: true,
       email,
+      displayName: profile.displayName || defaultDisplayName(email),
+      photo: profile.photo || "",
       points: s.points,
       lifetime: s.lifetime,
       tier: s.tier,
@@ -49,6 +61,7 @@ export default async (req) =>
       vipProgress: Math.min(1, s.lifetime / VIP_THRESHOLD),
       rewards: REWARDS.map((r) => ({ ...r, canClaim: s.points >= r.cost })),
       activity: s.activity.slice(-12).reverse(),
+      purchases,
       pendingClaims,
     }, 200, req);
   });
