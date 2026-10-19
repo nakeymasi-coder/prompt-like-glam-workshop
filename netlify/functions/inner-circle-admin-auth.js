@@ -10,7 +10,7 @@ export default async (req) =>
     }
     const body = await req.json().catch(() => ({}));
     const password = body.password || "";
-    const expected = Netlify.env.get("INNER_CIRCLE_ADMIN_PASSWORD");
+    const expected = (Netlify.env.get("INNER_CIRCLE_ADMIN_PASSWORD") || "").trim();
     const syncSecret = Netlify.env.get("INNER_CIRCLE_SYNC_SECRET");
     let ok = false;
     if (expected && syncSecret && typeof password === "string" && password.length > 0) {
