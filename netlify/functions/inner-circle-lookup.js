@@ -1,7 +1,7 @@
 // POST { email } -> member balance, rewards, recent activity.
 // Public (rate-limited). Never lists other members.
 import {
-  REWARDS, VIP_THRESHOLD, vipForPurchases, withCors, json,
+  REWARDS, VIP_THRESHOLD, vipForPurchases, rewardMonth, validGiftCatalog, withCors, json,
   memberStore, getMemberEvents, summarize,
   isValidEmail, rateLimited,
   getProfile, defaultDisplayName, productNameFromLabel,
@@ -48,7 +48,15 @@ export default async (req) =>
       }
     }
 
+    const month = rewardMonth();
+    const giftItems = await store.get("gift-catalog:" + month,{type:"json",consistency:"strong"});
+    let monthlyGiftClaim = null;
+    for (const b of listed.blobs || []) {
+      const c = await store.get(b.key,{type:"json",consistency:"strong"});
+      if(c && c.email===email && c.kind==="vip-monthly" && c.month===month) monthlyGiftClaim={name:c.rewardName,status:c.status};
+    }
     return json({
+      monthlyGift: {month,items:validGiftCatalog(giftItems)?giftItems:[],claim:monthlyGiftClaim},
       success: true,
       found: true,
       email,
