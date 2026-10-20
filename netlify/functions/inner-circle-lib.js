@@ -91,7 +91,7 @@ export async function getMemberEvents(store, email) {
   const events = [];
   for (const b of listed.blobs || []) {
     const e = await store.get(b.key, { type: "json" }).catch(() => null);
-    if (e && typeof e.points === "number") events.push(e);
+    if (e && typeof e.points === "number") events.push({ ...e, _key: b.key });
   }
   events.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
   return events;
