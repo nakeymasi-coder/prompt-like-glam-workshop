@@ -276,3 +276,13 @@ export function validGiftCatalog(items) {
       typeof p.name==="string" && p.name.trim().length>0 && p.name.length<=120 &&
       typeof p.url==="string" && /^https:\/\/payhip.com\/b\/[a-zA-Z0-9]+$/.test(p.url));
 }
+
+export function validBirthday(value) {
+  if(typeof value !== "string" || !/^\d{2}-\d{2}$/.test(value)) return false;
+  const [month,day]=value.split("-").map(Number);
+  const d=new Date(Date.UTC(2000,month-1,day));
+  return d.getUTCMonth()===month-1 && d.getUTCDate()===day;
+}
+export function birthdayAvailable(birthday, now=new Date()) {
+  return validBirthday(birthday) && birthday.slice(0,2)===rewardMonth(now).slice(5,7);
+}
