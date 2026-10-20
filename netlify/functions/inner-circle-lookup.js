@@ -1,7 +1,7 @@
 // POST { email } -> member balance, rewards, recent activity.
 // Public (rate-limited). Never lists other members.
 import {
-  REWARDS, VIP_THRESHOLD, withCors, json,
+  REWARDS, VIP_THRESHOLD, vipForPurchases, withCors, json,
   memberStore, getMemberEvents, summarize,
   isValidEmail, rateLimited,
   getProfile, defaultDisplayName, productNameFromLabel,
@@ -57,6 +57,7 @@ export default async (req) =>
       points: s.points,
       lifetime: s.lifetime,
       tier: s.tier,
+      ...vipForPurchases(events),
       vipThreshold: VIP_THRESHOLD,
       vipProgress: Math.min(1, s.lifetime / VIP_THRESHOLD),
       rewards: REWARDS.map((r) => ({ ...r, canClaim: s.points >= r.cost })),
