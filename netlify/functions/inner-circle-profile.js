@@ -1,7 +1,7 @@
 // Member profile: display name + photo. POST { email, displayName?, photo? }.
 // Photo is a data URL (client resizes to ~256px JPEG first). Stored as one
 // per-member blob — only the member writes their own, so no contention.
-import {
+import { verifyMemberToken,
   withCors, json, memberStore, getMemberEvents,
   getProfile, profileKey, isValidEmail, rateLimited,
 } from "./inner-circle-lib.js";
@@ -19,6 +19,7 @@ export default async (req) =>
       return json({ success: false, message: "Please enter a valid email address." }, 400, req);
     }
 
+    if (!verifyMemberToken(email, body.memberToken)) return json({success:false,message:"Verify your purchase email with your personal access code."},401,req);
     const store = memberStore();
     const events = await getMemberEvents(store, email);
     if (!events.length) {
