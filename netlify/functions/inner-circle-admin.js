@@ -11,7 +11,7 @@
 //   wipeAll {}
 import {
   withCors, json, memberStore, isAuthorized,
-  getMemberEvents, summarize, listPendingClaims, vipForPurchases, rewardMonth, validGiftCatalog,
+  getMemberEvents, summarize, listPendingClaims, vipForPurchases, rewardMonth, validGiftCatalog, validBirthday, profileKey,
   isValidEmail, eventKey, claimKey, newEventId, todayISO,
   getProfile, defaultDisplayName, listMemberEmails, productNameFromLabel,
 } from "./inner-circle-lib.js";
@@ -56,6 +56,14 @@ export default async (req) =>
     }
     const store = memberStore();
 
+    if (action === "setBirthday") {
+      const email=typeof body.email==="string"?body.email.trim().toLowerCase():"";
+      if(!isValidEmail(email)||!validBirthday(body.birthday)) return json({success:false,message:"Use a valid birthday month and day (MM-DD)."},400,req);
+      if(!(await getMemberEvents(store,email)).length) return json({success:false,message:"Member not found."},404,req);
+      const previous=await getProfile(store,email)||{};
+      await store.setJSON(profileKey(email),{...previous,birthday:body.birthday,birthdayVerifiedAt:new Date().toISOString()});
+      return json({success:true},200,req);
+    }
     if (action === "getGiftCatalog") {
       const month = rewardMonth();
       const items = await store.get("gift-catalog:" + month, {type:"json",consistency:"strong"}) || [];
@@ -111,7 +119,7 @@ export default async (req) =>
       if (!claim || claim.status !== "pending" || claim.email !== email) {
         return json({ success: false, message: "Pending claim not found." }, 404, req);
       }
-      if (action === "fulfillClaim" && claim.kind !== "vip-monthly") {
+      if (action === "fulfillClaim" && !["vip-monthly","vip-birthday","vip-discount"].includes(claim.kind)) {
         const events = await getMemberEvents(store, email);
         const s = summarize(events);
         if (s.points < claim.cost) {
@@ -122,7 +130,7 @@ export default async (req) =>
           label: `Redeemed: ${claim.rewardName}`, kind: "redeem",
         });
       }
-      if (claim.kind === "vip-monthly" && action === "fulfillClaim") {
+      if (["vip-monthly","vip-birthday","vip-discount"].includes(claim.kind) && action === "fulfillClaim") {
         await store.setJSON(key,{...claim,status:"fulfilled",fulfilledAt:new Date().toISOString()});
       } else {
         await store.delete(key).catch(() => {});
@@ -153,6 +161,7 @@ export default async (req) =>
           email,
           displayName: profile.displayName || defaultDisplayName(email),
           photo: profile.photo || "",
+          birthday: profile.birthday || "",
           ...s,
           ...vipForPurchases(events),
           legacyVip: s.tier === "vip",
