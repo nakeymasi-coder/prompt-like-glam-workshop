@@ -263,3 +263,16 @@ export function vipForPurchases(events, now = new Date()) {
     vipNeedsReview: events.some(e => e.kind === "sale" && e.vipEligible == null)
   };
 }
+
+export function rewardMonth(now = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-US", {timeZone:"America/New_York",year:"numeric",month:"2-digit"}).formatToParts(now);
+  return parts.find(p=>p.type==="year").value + "-" + parts.find(p=>p.type==="month").value;
+}
+export function validGiftCatalog(items) {
+  return Array.isArray(items) && items.length === 5 &&
+    new Set(items.map(p=>p.id)).size === 5 &&
+    items.some(p=>p.generator === true) &&
+    items.every(p=>typeof p.id==="string" && /^[a-z0-9-]{1,50}$/.test(p.id) &&
+      typeof p.name==="string" && p.name.trim().length>0 && p.name.length<=120 &&
+      typeof p.url==="string" && /^https:\/\/payhip.com\/b\/[a-zA-Z0-9]+$/.test(p.url));
+}
