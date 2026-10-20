@@ -131,7 +131,7 @@ footer.site{text-align:center;margin-top:10px;color:var(--ink-soft);font-size:.8
   <div class="card" id="view-login">
     <label for="email">Email you shop with</label>
     <input type="email" id="email" placeholder="you@example.com" autocomplete="email" inputmode="email" />
-    <button class="btn" id="lookupBtn">See my points 💎</button>
+    <label for="accessCode" style="margin-top:14px">Personal access code</label><input type="password" id="accessCode" placeholder="Code sent to your purchase email" autocomplete="one-time-code" /><p class="hint">First visit or expired access? Ask Glam to send a personal code to your Payhip purchase email.</p><button class="btn" id="lookupBtn">Open my rewards</button>
     <div class="err hidden" id="loginErr"></div>
     <div class="spinner hidden" id="loginSpin"></div>
     <p class="hint">Use the email from your Payhip purchases.<br />New here? <a href="../">How the Inner Circle works</a></p>
@@ -230,13 +230,22 @@ function hideErr(id){ $(id).classList.add("hidden"); }
 function flashOk(id, msg){ var el=$(id); el.textContent=msg; el.classList.remove("hidden"); setTimeout(function(){ el.classList.add("hidden"); }, 4000); }
 function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
 
+function memberToken(email){try{return localStorage.getItem("ic_member_token:"+email)||"";}catch(_){return "";}}
+function saveMemberToken(email,token){try{localStorage.setItem("ic_member_token:"+email,token);}catch(_){}}
 async function api(path, data){
+  if(path!=="/inner-circle-member-auth")data=Object.assign({},data,{memberToken:memberToken(data.email||currentEmail)});
   var res = await fetch(API + path, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
   });
-  return res.json();
+  var result=await res.json();
+  if(res.status===401){
+    $("view-app").classList.add("hidden");$("view-login").classList.remove("hidden");
+    try{localStorage.removeItem("ic_member_token:"+(data.email||currentEmail));}catch(_){}
+    showErr("loginErr",result.message||"Please enter your personal access code.");
+  }
+  return result;
 }
 
 var currentEmail = "";
@@ -257,6 +266,17 @@ async function lookup(email, silent){
   hideErr("loginErr");
   if(!silent){ $("loginSpin").classList.remove("hidden"); $("lookupBtn").disabled = true; }
   try{
+    email=email.trim().toLowerCase();
+    if(!memberToken(email)){
+      var code=$("accessCode").value.trim();
+      if(!code)throw new Error("access-required");
+      var auth=await api("/inner-circle-member-auth",{email:email,code:code});
+      if(!auth.success){
+        $("view-login").classList.remove("hidden");showErr("loginErr",auth.message);
+        $("loginSpin").classList.add("hidden");$("lookupBtn").disabled=false;return;
+      }
+      saveMemberToken(email,auth.memberToken);$("accessCode").value="";
+    }
     var r = await api("/inner-circle-lookup", { email: email });
     if(!silent){ $("loginSpin").classList.add("hidden"); $("lookupBtn").disabled = false; }
     if(!r.success){ showErr("loginErr", r.message || "Something went wrong."); return; }
@@ -267,7 +287,8 @@ async function lookup(email, silent){
     renderApp(r);
   }catch(e){
     if(!silent){ $("loginSpin").classList.add("hidden"); $("lookupBtn").disabled = false; }
-    showErr("loginErr", "Couldn't reach the rewards service. Check your connection and try again.");
+    $("view-login").classList.remove("hidden");
+    showErr("loginErr", e.message==="access-required" ? "Enter the personal code sent to your purchase email." : "Couldn't reach the rewards service. Check your connection and try again.");
   }
 }
 
@@ -458,6 +479,7 @@ $("lookupBtn").addEventListener("click", function(){
   lookup(e, false);
 });
 $("email").addEventListener("keydown", function(ev){ if(ev.key === "Enter"){ $("lookupBtn").click(); } });
+$("accessCode").addEventListener("keydown", function(ev){ if(ev.key === "Enter"){ $("lookupBtn").click(); } });
 var tabBtns = $("tabbar").querySelectorAll("button");
 for(var i=0;i<tabBtns.length;i++){
   (function(b){ b.addEventListener("click", function(){ switchTab(b.getAttribute("data-tab")); }); })(tabBtns[i]);
@@ -479,7 +501,7 @@ $("photoInput").addEventListener("change", function(){
 });
 $("saveProfileBtn").addEventListener("click", saveProfile);
 $("switchBtn").addEventListener("click", function(){
-  try{ localStorage.removeItem("ic_email"); }catch(_){}
+  try{ localStorage.removeItem("ic_member_token:"+currentEmail); localStorage.removeItem("ic_email"); }catch(_){}
   currentEmail = ""; currentData = null;
   $("email").value = "";
   $("view-app").classList.add("hidden");
