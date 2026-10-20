@@ -1,6 +1,6 @@
 // POST { email } -> member balance, rewards, recent activity.
 // Public (rate-limited). Never lists other members.
-import {
+import { verifyMemberToken,
   REWARDS, VIP_THRESHOLD, vipForPurchases, rewardMonth, validGiftCatalog, birthdayAvailable, withCors, json,
   memberStore, getMemberEvents, summarize,
   isValidEmail, rateLimited,
@@ -18,6 +18,7 @@ export default async (req) =>
       return json({ success: false, message: "Please enter a valid email address." }, 400, req);
     }
 
+    if (!verifyMemberToken(email, body.memberToken)) return json({success:false,message:"Verify your purchase email with your personal access code."},401,req);
     const store = memberStore();
     const events = await getMemberEvents(store, email);
     if (!events.length) {
