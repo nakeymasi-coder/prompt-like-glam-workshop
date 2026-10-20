@@ -33,6 +33,7 @@ export default async (req) =>
 
     const prev = (await getProfile(store, email)) || {};
     const profile = {
+      ...prev,
       displayName: displayName || prev.displayName || "",
       photo: photo !== null ? photo : (prev.photo || ""),
       updatedAt: new Date().toISOString(),
