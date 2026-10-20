@@ -158,7 +158,7 @@ footer.site{text-align:center;margin-top:10px;color:var(--ink-soft);font-size:.8
           <div class="bar"><div id="vipBar" style="width:0%"></div></div>
         </div>
       </div>
-      <div class="card"><strong>Your VIP benefits</strong><p>Choose one monthly gift from a rotating VIP collection, save 15% on regularly priced eligible tools and resources, and receive one $10 birthday shop reward each year.</p><p class="hint" style="text-align:left">Spend $300 in eligible purchases within 12 months to unlock 12 months of VIP. Keep earning Glow Points on the amount paid. Discounts and point rewards do not stack. Workshops, memberships, custom builds, and ongoing AI usage are excluded. Gift selection and reward delivery are handled by Glam.</p></div><div id="pendingSlot"></div>
+      <div class="card"><strong>Your VIP benefits</strong><p>Choose one monthly gift from a rotating VIP collection, save 15% on regularly priced eligible tools and resources, and receive one $10 birthday shop reward each year.</p><p class="hint" style="text-align:left">Spend $300 in eligible purchases within 12 months to unlock 12 months of VIP. Keep earning Glow Points on the amount paid. Discounts and point rewards do not stack. Workshops, memberships, custom builds, and ongoing AI usage are excluded. Gift selection and reward delivery are handled by Glam.</p></div><div id="monthlyGiftSlot"></div><div id="pendingSlot"></div>
       <h2 class="sec">Claim a reward 🎁</h2>
       <div id="rewardsSlot"></div>
       <h2 class="sec">Recent activity</h2>
@@ -293,6 +293,7 @@ function renderApp(r){
     : "$" + Number(r.vipEligibleSpend || 0).toFixed(2) + " of $300 eligible spending in the last 12 months" + (r.vipNeedsReview ? " · purchase eligibility review pending" : "");
   $("vipBar").style.width = pct + "%";
 
+  renderMonthlyGifts(r, vip);
   var pc = "";
   (r.pendingClaims || []).forEach(function(c){
     pc += '<div class="claim-pending">🎁 <strong>' + esc(c.rewardName) + '</strong> is on its way!<br><span style="color:var(--ink-soft);font-size:.85rem">Claim code <code>' + esc(c.code) + '</code> · Glam sends it within 24 hours.</span></div>';
@@ -345,6 +346,29 @@ function renderApp(r){
   $("statLife").textContent = r.lifetime;
   $("statPur").textContent = purs.length;
   pendingPhoto = null;
+}
+
+
+function renderMonthlyGifts(r,vip){
+  var slot=$("monthlyGiftSlot"), gift=r.monthlyGift||{};
+  if(!vip){slot.innerHTML="";return;}
+  var h='<div class="card"><h2 class="sec" style="margin-top:0">Choose your monthly VIP gift</h2>';
+  if(gift.claim) h+='<p>'+esc(gift.claim.name)+' · '+esc(gift.claim.status)+'</p>';
+  else if(!(gift.items||[]).length) h+='<p>Your five monthly choices are being prepared. Check back soon.</p>';
+  else {
+    h+='<p>Choose one gift this month. No Glow Points needed. Glam verifies and delivers your selection.</p>';
+    gift.items.forEach(function(p){h+='<div class="reward"><span class="info"><strong>'+esc(p.name)+'</strong><small>'+(p.generator?'Generator':'VIP gift')+'</small></span><button class="claim" data-gift="'+esc(p.id)+'">Choose</button></div>';});
+  }
+  slot.innerHTML=h+'</div>';
+  slot.querySelectorAll("[data-gift]").forEach(function(b){b.onclick=async function(){
+    if(!confirm("Choose this as your one VIP gift for this month?"))return;
+    slot.querySelectorAll("[data-gift]").forEach(function(x){x.disabled=true;});
+    try{
+      var result=await api("/inner-circle-vip-gift",{email:currentEmail,giftId:b.getAttribute("data-gift")});
+      alert(result.message||"Please try again.");
+      await lookup(currentEmail,true);
+    }catch(e){alert("Could not request your gift. Try again.");renderMonthlyGifts(currentData,true);}
+  };});
 }
 
 function switchTab(name){
