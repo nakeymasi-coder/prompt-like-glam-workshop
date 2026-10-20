@@ -106,7 +106,7 @@ h2.sec{font-family:"Playfair Display",serif;font-size:1.25rem;margin:26px 0 4px}
 
   <!-- hub -->
   <div id="view-hub" class="hidden">
-    <section id="htab-members">
+    <section id="htab-members"><div class="card"><h2 class="sec" style="margin-top:0">Monthly VIP gift collection</h2><p class="hint">Choose five products for this month. Mark at least one generator. Members choose one gift; fulfillment is manual through Payhip.</p><div id="giftEditor"></div><button class="btn" id="saveGiftsBtn">Save monthly choices</button><p id="giftMessage" class="hint"></p></div>
       <h2 class="sec" style="margin-top:14px">Members 👥 <span id="mcount" style="font-size:.85rem;color:var(--ink-soft)"></span></h2>
       <input type="text" id="msearch" placeholder="Search by email…" autocomplete="off" />
       <div id="mlist"></div>
@@ -196,6 +196,7 @@ function htab(name){
 }
 
 async function boot(){
+  loadGiftEditor();
   try{
     var r = await admin("listMembers", {});
     allMembers = r.members || [];
@@ -325,6 +326,7 @@ async function loadClaims(silentBadge){
     claims.forEach(function(c){
       h += '<div class="claimbox"><strong>' + esc(c.rewardName) + '</strong><br>'
         + '<span style="color:var(--ink-soft);font-size:.85rem">' + esc(c.email) + ' · code <code>' + esc(c.code) + '</code> · ' + esc((c.createdAt || "").slice(0,10)) + '</span><br>'
+        + (c.productUrl ? '<br><a href="' + esc(c.productUrl) + '" target="_blank" rel="noopener">Open selected Payhip product</a><br>' : '')
         + '<button class="btn small" data-fulfill="' + esc(c.code) + '" data-em="' + esc(c.email) + '">Mark fulfilled ✅</button>'
         + '<button class="btn small danger" data-cancel="' + esc(c.code) + '" data-em="' + esc(c.email) + '">Cancel</button></div>';
     });
@@ -345,7 +347,7 @@ function bindClaimButtons(){
 }
 
 async function settleClaim(email, code, action){
-  var verb = action === "fulfillClaim" ? "fulfilled (points deducted)" : "cancelled";
+  var verb = action === "fulfillClaim" ? "fulfilled after delivery (VIP monthly gifts cost no points)" : "cancelled";
   if(!confirm("Mark claim " + code + " as " + verb + "?")) return;
   try{
     var r = await admin(action, { email: email, claimId: code });
@@ -364,6 +366,28 @@ $("msearch").addEventListener("input", function(){ renderMlist($("msearch").valu
 var hbs = $("htabbar").querySelectorAll("button");
 for(var i=0;i<hbs.length;i++){
   (function(b){ b.addEventListener("click", function(){ htab(b.getAttribute("data-tab")); }); })(hbs[i]);
+}
+
+
+async function loadGiftEditor(){
+  try{
+    const r=await admin("getGiftCatalog",{});
+    if(!r.success)return;
+    document.getElementById("giftMessage").textContent="Collection: "+r.month;
+    document.getElementById("giftEditor").innerHTML=Array.from({length:5},(_,i)=>{
+      const p=r.items[i]||{};
+      return '<div class="field"><label>Choice '+(i+1)+'</label><input type="text" id="giftName'+i+'" placeholder="Product name" value="'+esc(p.name||'')+'"><input type="text" id="giftUrl'+i+'" placeholder="https://payhip.com/b/..." value="'+esc(p.url||'')+'"><label><input type="checkbox" id="giftGen'+i+'" '+(p.generator?'checked':'')+'> Generator</label></div>';
+    }).join("");
+    document.getElementById("saveGiftsBtn").onclick=async function(){
+      this.disabled=true;
+      try{
+        const items=Array.from({length:5},(_,i)=>({id:"choice-"+(i+1),name:document.getElementById("giftName"+i).value.trim(),url:document.getElementById("giftUrl"+i).value.trim(),generator:document.getElementById("giftGen"+i).checked}));
+        const saved=await admin("saveGiftCatalog",{month:r.month,items});
+        document.getElementById("giftMessage").textContent=saved.success?"Five monthly choices saved.":saved.message;
+      }catch(e){document.getElementById("giftMessage").textContent="Could not save. Try again.";}
+      finally{this.disabled=false;}
+    };
+  }catch(e){}
 }
 
 // try saved token
