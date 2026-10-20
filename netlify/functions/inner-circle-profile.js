@@ -3,7 +3,7 @@
 // per-member blob — only the member writes their own, so no contention.
 import { verifyMemberToken,
   withCors, json, memberStore, getMemberEvents,
-  getProfile, profileKey, isValidEmail, rateLimited,
+  getProfile, profileKey, safePhoto, isValidEmail, rateLimited,
 } from "./inner-circle-lib.js";
 
 const MAX_PHOTO_CHARS = 220000; // ~160KB data URL cap
@@ -28,7 +28,7 @@ export default async (req) =>
 
     const displayName = typeof body.displayName === "string" ? body.displayName.trim().slice(0, 40) : null;
     const photo = typeof body.photo === "string" ? body.photo : null;
-    if (photo && (photo.length > MAX_PHOTO_CHARS || !/^data:image\/(jpeg|png|webp);base64,/.test(photo))) {
+    if (body.photo !== undefined && body.photo !== null && (typeof body.photo !== "string" || (photo && !safePhoto(photo)))) {
       return json({ success: false, message: "That photo didn't upload right — try a smaller one." }, 400, req);
     }
 
@@ -40,5 +40,6 @@ export default async (req) =>
       updatedAt: new Date().toISOString(),
     };
     await store.setJSON(profileKey(email), profile);
-    return json({ success: true, profile: { displayName: profile.displayName, photo: profile.photo } }, 200, req);
+    return json({ success: true, profile: { displayName: profile.displayName, photo: safePhoto(profile.photo) } }, 200, req);
   });
+

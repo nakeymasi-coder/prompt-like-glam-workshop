@@ -4,7 +4,7 @@ import { verifyMemberToken,
   REWARDS, VIP_THRESHOLD, vipForPurchases, rewardMonth, validGiftCatalog, birthdayAvailable, withCors, json,
   memberStore, getMemberEvents, summarize,
   isValidEmail, rateLimited,
-  getProfile, defaultDisplayName, productNameFromLabel,
+  getProfile, safePhoto, defaultDisplayName, productNameFromLabel,
 } from "./inner-circle-lib.js";
 
 export default async (req) =>
@@ -64,7 +64,7 @@ export default async (req) =>
       found: true,
       email,
       displayName: profile.displayName || defaultDisplayName(email),
-      photo: profile.photo || "",
+      photo: safePhoto(profile.photo),
       points: s.points,
       lifetime: s.lifetime,
       tier: s.tier,
@@ -77,3 +77,4 @@ export default async (req) =>
       pendingClaims,
     }, 200, req);
   });
+

@@ -27,6 +27,7 @@ export function corsHeaders(req) {
   return {
     "Content-Type": "application/json",
     Vary: "Origin",
+    "Cache-Control": "no-store",
     ...(origin && ALLOWED_ORIGINS.has(origin)
       ? { "Access-Control-Allow-Origin": origin }
       : {}),
@@ -306,3 +307,6 @@ export function verifyMemberToken(email, token, now=Date.now()) {
   const signature=createHmac("sha256",secret).update("member:"+email+":"+expiry).digest("hex");
   return timingSafeEqual(Buffer.from(parts[1],"hex"),Buffer.from(signature,"hex"));
 }
+
+
+export function safePhoto(photo){return typeof photo === "string" && photo.length <= 220000 && /^data:image\/(jpeg|png|webp);base64,(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(photo) && photo.split(',')[1].length > 0 ? photo : "";}

@@ -133,7 +133,9 @@ h2.sec{font-family:"Playfair Display",serif;font-size:1.25rem;margin:26px 0 4px}
 </div>
 
 <script>
+
 "use strict";
+function safePhoto(photo){return typeof photo === "string" && photo.length <= 220000 && /^data:image\/(jpeg|png|webp);base64,(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(photo) && photo.split(',')[1].length > 0 ? photo : "";}
 var API = "https://workshop-poratl.netlify.app/.netlify/functions";
 var $ = function(id){ return document.getElementById(id); };
 function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
@@ -238,7 +240,7 @@ function renderDetail(m){
   var vip = m.vipPolicyVersion === 2 ? m.vipActive === true : m.tier === "vip";
   var initial = (m.displayName || "?").charAt(0).toUpperCase();
   var h = '<div class="card"><div class="dhead">'
-    + '<div class="davatar">' + (m.photo ? '<img src="' + m.photo + '" alt="" />' : esc(initial)) + '</div>'
+    + '<div class="davatar">' + (safePhoto(m.photo) ? '<img src="' + esc(safePhoto(m.photo)) + '" alt="" />' : esc(initial)) + '</div>'
     + '<div><div class="dname">' + esc(m.displayName) + '</div><div class="demail">' + esc(m.email) + '</div>'
     + (vip ? '<span class="vip-badge">👑 VIP</span>' : '<div class="hint" style="margin:4px 0 0">Member</div>')
     + '</div></div>'
@@ -417,3 +419,4 @@ async function loadGiftEditor(){
 </script>
 </body>
 </html>
+
