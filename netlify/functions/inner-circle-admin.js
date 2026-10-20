@@ -11,7 +11,7 @@
 //   wipeAll {}
 import {
   withCors, json, memberStore, isAuthorized,
-  getMemberEvents, summarize, listPendingClaims, vipForPurchases,
+  getMemberEvents, summarize, listPendingClaims, vipForPurchases, rewardMonth, validGiftCatalog,
   isValidEmail, eventKey, claimKey, newEventId, todayISO,
   getProfile, defaultDisplayName, listMemberEmails, productNameFromLabel,
 } from "./inner-circle-lib.js";
@@ -56,6 +56,18 @@ export default async (req) =>
     }
     const store = memberStore();
 
+    if (action === "getGiftCatalog") {
+      const month = rewardMonth();
+      const items = await store.get("gift-catalog:" + month, {type:"json",consistency:"strong"}) || [];
+      return json({success:true,month,items},200,req);
+    }
+    if (action === "saveGiftCatalog") {
+      if (body.month !== rewardMonth() || !validGiftCatalog(body.items)) {
+        return json({success:false,message:"Provide five unique Payhip products, including at least one generator, for the current month."},400,req);
+      }
+      await store.setJSON("gift-catalog:" + body.month,body.items);
+      return json({success:true},200,req);
+    }
     if (action === "classifySale") {
       const email = (body.email || "").trim().toLowerCase();
       if (!isValidEmail(email) || typeof body.key !== "string" ||
@@ -99,7 +111,7 @@ export default async (req) =>
       if (!claim || claim.status !== "pending" || claim.email !== email) {
         return json({ success: false, message: "Pending claim not found." }, 404, req);
       }
-      if (action === "fulfillClaim") {
+      if (action === "fulfillClaim" && claim.kind !== "vip-monthly") {
         const events = await getMemberEvents(store, email);
         const s = summarize(events);
         if (s.points < claim.cost) {
@@ -110,7 +122,11 @@ export default async (req) =>
           label: `Redeemed: ${claim.rewardName}`, kind: "redeem",
         });
       }
-      await store.delete(key).catch(() => {});
+      if (claim.kind === "vip-monthly" && action === "fulfillClaim") {
+        await store.setJSON(key,{...claim,status:"fulfilled",fulfilledAt:new Date().toISOString()});
+      } else {
+        await store.delete(key).catch(() => {});
+      }
       return json({ success: true, email }, 200, req);
     }
 
