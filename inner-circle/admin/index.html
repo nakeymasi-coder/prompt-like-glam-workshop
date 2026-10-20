@@ -114,7 +114,7 @@ h2.sec{font-family:"Playfair Display",serif;font-size:1.25rem;margin:26px 0 4px}
     </section>
     <section id="htab-claims" class="hidden">
       <h2 class="sec" style="margin-top:14px">Pending claims 🎁</h2>
-      <p class="hint">Rewards members claimed in the app, waiting for you to send. Fulfill after you deliver the reward via Payhip.</p>
+      <p class="hint">Verify the member against their Payhip purchase email before delivery. Send gifts or personal coupons to that email, then mark fulfilled. VIP benefits cost no points. Use a restricted eligible collection and one-use coupons; do not stack with point rewards.</p>
       <div id="claimsList"></div>
     </section>
     <nav class="tabbar" id="htabbar">
@@ -269,6 +269,7 @@ function renderDetail(m){
     h += '<div class="act"><span>' + esc(a.label) + '<br><span class="d">' + esc(a.date || "") + '</span></span><span class="p ' + cls + '">' + sign + a.points + '</span></div>';
   });
 
+  h += '<h2 class="sec">Birthday reward</h2><p class="hint">Confirm the member’s birthday month and day. No year needed. Birthday coupons are verified and delivered to the purchase email.</p><label for="birthdayDay">Birthday (MM-DD)</label><input type="text" id="birthdayDay" maxlength="5" placeholder="05-22" value="'+esc(m.birthday||'')+'"><button class="btn small" id="saveBirthdayBtn">Save verified birthday</button>';
   h += '<h2 class="sec">Add Glow Points ➕</h2>'
     + '<div style="display:flex;gap:8px"><input type="number" id="apPts" placeholder="Points" style="flex:0 0 110px" />'
     + '<input type="text" id="apLabel" placeholder="Reason (e.g. TikTok live 10/19)" /></div>'
@@ -279,6 +280,12 @@ function renderDetail(m){
   $("mlist").innerHTML = "";
   $("backBtn").addEventListener("click", function(){ $("mdetail").innerHTML = ""; renderMlist($("msearch").value); });
   $("apBtn").addEventListener("click", function(){ addPointsTo(m.email); });
+  $("saveBirthdayBtn").onclick=async function(){
+    this.disabled=true;
+    try{const result=await admin("setBirthday",{email:m.email,birthday:$("birthdayDay").value.trim()});alert(result.success?"Birthday saved.":result.message);}
+    catch(e){alert("Could not save birthday.");}
+    finally{this.disabled=false;}
+  };
   document.querySelectorAll("[data-review]").forEach(function(b) {
     b.addEventListener("click", async function() {
       var currency = prompt("Verified three-letter purchase currency (for example USD):");
@@ -347,7 +354,7 @@ function bindClaimButtons(){
 }
 
 async function settleClaim(email, code, action){
-  var verb = action === "fulfillClaim" ? "fulfilled after delivery (VIP monthly gifts cost no points)" : "cancelled";
+  var verb = action === "fulfillClaim" ? "fulfilled after delivery (VIP benefits cost no points)" : "cancelled";
   if(!confirm("Mark claim " + code + " as " + verb + "?")) return;
   try{
     var r = await admin(action, { email: email, claimId: code });
