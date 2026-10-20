@@ -178,7 +178,7 @@ export function defaultDisplayName(email) {
 // trades it for a 24h HMAC-signed token; admin read/write actions (except
 // syncSales, which stays secret-only) accept secret OR token.
 
-import { createHmac, timingSafeEqual } from "crypto";
+import { createHmac, timingSafeEqual, randomBytes, createHash } from "crypto";
 
 const TOKEN_TTL_MS = 24 * 60 * 60 * 1000;
 
@@ -285,4 +285,24 @@ export function validBirthday(value) {
 }
 export function birthdayAvailable(birthday, now=new Date()) {
   return validBirthday(birthday) && birthday.slice(0,2)===rewardMonth(now).slice(5,7);
+}
+
+export function accessCodeHash(code) {
+  return createHash("sha256").update(code).digest("hex");
+}
+export function newMemberAccessCode() { return randomBytes(24).toString("hex"); }
+export function issueMemberToken(email, now=Date.now()) {
+  const secret=Netlify.env.get("INNER_CIRCLE_SYNC_SECRET");
+  if(!secret) throw new Error("Member access is not configured");
+  const expiry=now+30*24*60*60*1000;
+  const signature=createHmac("sha256",secret).update("member:"+email+":"+expiry).digest("hex");
+  return expiry+"."+signature;
+}
+export function verifyMemberToken(email, token, now=Date.now()) {
+  const secret=Netlify.env.get("INNER_CIRCLE_SYNC_SECRET");
+  if(!secret||typeof token!=="string")return false;
+  const parts=token.split("."), expiry=Number(parts[0]);
+  if(parts.length!==2||!Number.isFinite(expiry)||expiry<=now||expiry>now+30*24*60*60*1000||!/^[a-f0-9]{64}$/.test(parts[1]))return false;
+  const signature=createHmac("sha256",secret).update("member:"+email+":"+expiry).digest("hex");
+  return timingSafeEqual(Buffer.from(parts[1],"hex"),Buffer.from(signature,"hex"));
 }
