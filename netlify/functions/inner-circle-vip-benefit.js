@@ -1,10 +1,11 @@
 import { createHash, randomUUID } from "crypto";
-import {withCors,json,memberStore,getMemberEvents,vipForPurchases,getProfile,isValidEmail,rateLimited,rewardMonth,birthdayAvailable,claimKey} from "./inner-circle-lib.js";
+import {verifyMemberToken,withCors,json,memberStore,getMemberEvents,vipForPurchases,getProfile,isValidEmail,rateLimited,rewardMonth,birthdayAvailable,claimKey} from "./inner-circle-lib.js";
 export default async req=>withCors(req,async()=>{
   if(rateLimited(req,10))return json({success:false,message:"Please wait a minute and try again."},429,req);
   const body=await req.json().catch(()=>({}));
   const email=typeof body.email==="string"?body.email.trim().toLowerCase():"";
   if(!isValidEmail(email)||!["birthday","discount"].includes(body.benefit))return json({success:false,message:"Choose a valid VIP benefit."},400,req);
+    if (!verifyMemberToken(email, body.memberToken)) return json({success:false,message:"Verify your purchase email with your personal access code."},401,req);
   const store=memberStore(), events=await getMemberEvents(store,email);
   if(!vipForPurchases(events).vipActive)return json({success:false,message:"This benefit requires active VIP status."},403,req);
   const month=rewardMonth(), year=month.slice(0,4);
