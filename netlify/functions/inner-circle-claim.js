@@ -1,7 +1,7 @@
 // POST { email, rewardId } -> creates a PENDING claim as its own blob.
 // The write is independent (no shared read-modify-write), so concurrent
 // claims can't clobber each other. Indigo fulfills via the admin function.
-import {
+import { verifyMemberToken,
   REWARDS, withCors, json,
   memberStore, getMemberEvents, summarize,
   isValidEmail, rateLimited, claimCode, claimKey, todayISO,
@@ -31,6 +31,7 @@ export default async (req) =>
       return json({ success: false, message: "That reward doesn't exist." }, 400, req);
     }
 
+    if (!verifyMemberToken(email, body.memberToken)) return json({success:false,message:"Verify your purchase email with your personal access code."},401,req);
     const store = memberStore();
     const s = await summarizeWithRetry(store, email);
     if (!s) {
