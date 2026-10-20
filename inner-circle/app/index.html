@@ -158,7 +158,7 @@ footer.site{text-align:center;margin-top:10px;color:var(--ink-soft);font-size:.8
           <div class="bar"><div id="vipBar" style="width:0%"></div></div>
         </div>
       </div>
-      <div class="card"><strong>Your VIP benefits</strong><p>Choose one monthly gift from a rotating VIP collection, save 15% on regularly priced eligible tools and resources, and receive one $10 birthday shop reward each year.</p><p class="hint" style="text-align:left">Spend $300 in eligible purchases within 12 months to unlock 12 months of VIP. Keep earning Glow Points on the amount paid. Discounts and point rewards do not stack. Workshops, memberships, custom builds, and ongoing AI usage are excluded. Gift selection and reward delivery are handled by Glam.</p></div><div id="monthlyGiftSlot"></div><div id="pendingSlot"></div>
+      <div class="card"><strong>Your VIP benefits</strong><p>Choose one monthly gift from a rotating VIP collection, save 15% on regularly priced eligible tools and resources, and receive one $10 birthday shop reward each year.</p><p class="hint" style="text-align:left">Spend $300 in eligible purchases within 12 months to unlock 12 months of VIP. Keep earning Glow Points on the amount paid. Discounts and point rewards do not stack. Workshops, memberships, custom builds, and ongoing AI usage are excluded. Gift selection and reward delivery are handled by Glam.</p></div><div id="vipBenefitSlot"></div><div id="monthlyGiftSlot"></div><div id="pendingSlot"></div>
       <h2 class="sec">Claim a reward 🎁</h2>
       <div id="rewardsSlot"></div>
       <h2 class="sec">Recent activity</h2>
@@ -293,6 +293,13 @@ function renderApp(r){
     : "$" + Number(r.vipEligibleSpend || 0).toFixed(2) + " of $300 eligible spending in the last 12 months" + (r.vipNeedsReview ? " · purchase eligibility review pending" : "");
   $("vipBar").style.width = pct + "%";
 
+  $("vipBenefitSlot").innerHTML = vip ? '<div class="card"><strong>Your VIP savings</strong><p>Personal coupons are verified and delivered by Glam to your purchase email.</p><button class="btn" data-benefit="discount">Request my 15% discount</button><button class="btn ghost" data-benefit="birthday">Request my $10 birthday reward</button><p class="hint">Birthday rewards: once per year during your birthday month. Ask Glam to record your month and day; no birth year needed. Excludes workshops, memberships, custom builds, ongoing AI usage, and discounted products for the 15% benefit. No stacking with point rewards.</p></div>' : '';
+  $("vipBenefitSlot").querySelectorAll("[data-benefit]").forEach(function(b){b.onclick=async function(){
+    b.disabled=true;
+    try{var result=await api("/inner-circle-vip-benefit",{email:currentEmail,benefit:b.getAttribute("data-benefit")});alert(result.message||"Please try again.");await lookup(currentEmail,true);}
+    catch(e){alert("Could not submit. Try again.");}
+    finally{b.disabled=false;}
+  };});
   renderMonthlyGifts(r, vip);
   var pc = "";
   (r.pendingClaims || []).forEach(function(c){
