@@ -1,7 +1,7 @@
 // POST { email } -> member balance, rewards, recent activity.
 // Public (rate-limited). Never lists other members.
 import {
-  REWARDS, VIP_THRESHOLD, vipForPurchases, rewardMonth, validGiftCatalog, withCors, json,
+  REWARDS, VIP_THRESHOLD, vipForPurchases, rewardMonth, validGiftCatalog, birthdayAvailable, withCors, json,
   memberStore, getMemberEvents, summarize,
   isValidEmail, rateLimited,
   getProfile, defaultDisplayName, productNameFromLabel,
@@ -57,6 +57,8 @@ export default async (req) =>
     }
     return json({
       monthlyGift: {month,items:validGiftCatalog(giftItems)?giftItems:[],claim:monthlyGiftClaim},
+      birthdayOnFile: !!profile.birthdayVerifiedAt,
+      birthdayRewardAvailable: !!profile.birthdayVerifiedAt && birthdayAvailable(profile.birthday),
       success: true,
       found: true,
       email,
