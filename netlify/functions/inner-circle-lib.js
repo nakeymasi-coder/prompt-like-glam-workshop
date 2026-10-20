@@ -229,3 +229,37 @@ export async function listMemberEmails(store) {
 export function productNameFromLabel(label) {
   return (label || "").replace(/^Purchase:\s*/i, "").trim() || "Purchase";
 }
+
+/**
+ * VIP v2 is based only on verified eligible USD spending.
+ * Existing events/claims are never rewritten. Unclassified sales require review.
+ */
+export function vipForPurchases(events, now = new Date()) {
+  const addMonths = (date, months) => {
+    const d = new Date(date), day = d.getUTCDate();
+    d.setUTCDate(1); d.setUTCMonth(d.getUTCMonth() + months);
+    const last = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 0)).getUTCDate();
+    d.setUTCDate(Math.min(day, last)); return d;
+  };
+  const sales = events.filter(e =>
+    e.kind === "sale" && e.vipEligible === true && e.currency === "USD" &&
+    Number.isFinite(e.amount) && e.amount > 0 &&
+    Number.isFinite(Date.parse(e.date)) && new Date(e.date) <= now
+  ).sort((a,b) => new Date(a.date) - new Date(b.date));
+  let expires = null;
+  for (const sale of sales) {
+    const at = new Date(sale.date), start = addMonths(at, -12);
+    const total = sales.filter(e => new Date(e.date) > start && new Date(e.date) <= at)
+      .reduce((sum,e) => sum + Math.round(e.amount * 100), 0);
+    if (total >= 30000 && (!expires || at >= expires)) expires = addMonths(at, 12);
+  }
+  const start = addMonths(now, -12);
+  const spendCents = sales.filter(e => new Date(e.date) > start)
+    .reduce((sum,e) => sum + Math.round(e.amount * 100), 0);
+  return {
+    vipPolicyVersion: 2, vipActive: !!expires && now < expires,
+    vipExpiresAt: expires ? expires.toISOString().slice(0,10) : null,
+    vipEligibleSpend: spendCents / 100,
+    vipNeedsReview: events.some(e => e.kind === "sale" && e.vipEligible == null)
+  };
+}
