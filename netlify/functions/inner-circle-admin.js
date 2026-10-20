@@ -10,7 +10,7 @@
 //   listMembers {}                 -> [{ email, events }]
 //   wipeAll {}
 import {
-  withCors, json, memberStore, isAuthorized,
+  isolationCredential, withCors, json, memberStore, isAuthorized,
   getMemberEvents, summarize, listPendingClaims, vipForPurchases, rewardMonth, validGiftCatalog, validBirthday, profileKey, newMemberAccessCode, accessCodeHash,
   isValidEmail, eventKey, claimKey, newEventId, todayISO,
   getProfile, defaultDisplayName, listMemberEmails, productNameFromLabel,
@@ -22,7 +22,7 @@ export default async (req) =>
     const action = body.action;
 
     if (action === "syncSales") {
-      const syncSecret = Netlify.env.get("INNER_CIRCLE_SYNC_SECRET");
+      const syncSecret = isolationCredential("SYNC_SECRET");
       if (!syncSecret || body.secret !== syncSecret) {
         return json({ success: false, message: "Not authorized." }, 403, req);
       }
@@ -198,3 +198,4 @@ export default async (req) =>
 
     return json({ success: false, message: "Unknown action." }, 400, req);
   });
+

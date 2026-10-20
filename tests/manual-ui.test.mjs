@@ -7,7 +7,7 @@ function setup(fetch, saved='buyer@example.test', authenticated=true){
  const els=new Map();
  function element(id){if(!els.has(id)){const classes=new Set(id==='view-app'?['hidden']:[]);els.set(id,{id,value:'',disabled:false,textContent:'',style:{},classList:{add:c=>classes.add(c),remove:c=>classes.delete(c),contains:c=>classes.has(c),toggle:(c,on)=>on?classes.add(c):classes.delete(c)},listeners:{},addEventListener(e,f){this.listeners[e]=f;},querySelectorAll:()=>[],parentNode:{insertBefore(e){els.set(e.id,e);}},remove(){els.delete(this.id);}});}return els.get(id);}
  const timers=new Map();let serial=0;
- const context=vm.createContext({document:{getElementById:element,createElement:()=>({...element('created')})},localStorage:{getItem:k=>k==='ic_email'?saved:authenticated?'fixture':'',setItem(){},removeItem(){}},fetch,AbortController,console,confirm:()=>true,alert:()=>{},setTimeout:(f,ms)=>{timers.set(++serial,{f,ms});return serial;},clearTimeout:id=>timers.delete(id),window:{scrollTo(){}}});
+ const context=vm.createContext({document:{getElementById:element,createElement:()=>({...element('created')})},localStorage:{getItem:k=>k==='ic_email'?saved:authenticated?'fixture':'',setItem(){},removeItem(){}},fetch,AbortController,console,confirm:()=>true,alert:()=>{},setTimeout:(f,ms)=>{timers.set(++serial,{f,ms});return serial;},clearTimeout:id=>timers.delete(id),window:{location:{hostname:"workshop-poratl.netlify.app",origin:"https://workshop-poratl.netlify.app"},scrollTo(){}}});
  vm.runInContext(source,context);return {context,element,timers};
 }
 const settle=async()=>{for(let i=0;i<12;i++) await Promise.resolve();};

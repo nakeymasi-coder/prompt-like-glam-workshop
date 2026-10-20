@@ -220,7 +220,10 @@ footer.site{text-align:center;margin-top:10px;color:var(--ink-soft);font-size:.8
 
 <script>
 "use strict";
-var API = "https://workshop-poratl.netlify.app/.netlify/functions";
+// Netlify pages stay on their own deployment. Only the established GitHub site uses production fallback.
+var API = window.location.hostname === "nakeymasi-coder.github.io"
+  ? "https://workshop-poratl.netlify.app/.netlify/functions"
+  : window.location.origin + "/.netlify/functions";
 var $ = function(id){ return document.getElementById(id); };
 
 function saveEmail(e){ try{ localStorage.setItem("ic_email", e); }catch(_){} }

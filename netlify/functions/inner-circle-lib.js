@@ -19,8 +19,39 @@ export const REWARDS = [
 export const ALLOWED_ORIGINS = new Set([
   "https://nakeymasi-coder.github.io",
   "https://workshop-poratl.netlify.app",
-  "https://deploy-preview-2--workshop-poratl.netlify.app",
 ]);
+
+// Runtime values must be Functions-scoped, not build-only variables.
+export function runtimeIsolation() {
+  const env=globalThis.Netlify?.env;
+  const mode=env?.get("INNER_CIRCLE_RUNTIME_MODE");
+  const context=env?.get("CONTEXT");
+  if(mode==="production") {
+    if(context && context!=="production")throw Error("Runtime context mismatch");
+    return {mode,store:"inner-circle",origin:"https://workshop-poratl.netlify.app"};
+  }
+  if(mode!=="preview")throw Error("Runtime isolation is not configured");
+  if(context && context!=="deploy-preview")throw Error("Runtime context mismatch");
+  const id=env?.get("INNER_CIRCLE_PREVIEW_ID");
+  if(typeof id!=="string" || !/^[1-9][0-9]{0,8}$/.test(id))throw Error("Preview identifier is missing or invalid");
+  return {mode,store:"inner-circle-preview-"+id,origin:"https://deploy-preview-"+id+"--workshop-poratl.netlify.app"};
+}
+export function isolationCredential(name) {
+  const config=runtimeIsolation(),env=Netlify.env;
+  if(config.mode==="production")return env.get("INNER_CIRCLE_"+name);
+  const value=env.get("INNER_CIRCLE_PREVIEW_"+name);
+  if(typeof value!=="string" || value.length<24 || value===env.get("INNER_CIRCLE_"+name))throw Error("Independent preview credentials are not configured");
+  return value;
+}
+function validateIsolationRequest(req) {
+  const config=runtimeIsolation();
+  if(new URL(req.url).origin!==config.origin)throw Error("Request does not match configured environment");
+  if(config.mode==="preview") {isolationCredential("SYNC_SECRET");isolationCredential("ADMIN_PASSWORD");}
+  return config;
+}
+function allowedOrigin(origin) {
+  try {const config=runtimeIsolation();return config.mode==="preview" ? origin===config.origin : ALLOWED_ORIGINS.has(origin);}catch{return false;}
+}
 
 export function corsHeaders(req) {
   const origin = req.headers.get("Origin");
@@ -28,7 +59,7 @@ export function corsHeaders(req) {
     "Content-Type": "application/json",
     Vary: "Origin",
     "Cache-Control": "no-store",
-    ...(origin && ALLOWED_ORIGINS.has(origin)
+    ...(origin && allowedOrigin(origin)
       ? { "Access-Control-Allow-Origin": origin }
       : {}),
   };
@@ -39,9 +70,10 @@ export function json(data, status, req) {
 }
 
 export async function withCors(req, handler) {
+  try {validateIsolationRequest(req);} catch {return json({success:false,message:"This rewards environment is not configured for safe access."},503,req);}
   const origin = req.headers.get("Origin");
   const headers = corsHeaders(req);
-  if (origin && !ALLOWED_ORIGINS.has(origin)) {
+  if (origin && !allowedOrigin(origin)) {
     return new Response(JSON.stringify({ success: false, message: "This origin is not allowed." }), { status: 403, headers });
   }
   if (req.method === "OPTIONS") {
@@ -62,7 +94,9 @@ export async function withCors(req, handler) {
 }
 
 export function memberStore() {
-  return getStore("inner-circle");
+  const config=runtimeIsolation();
+  if(config.mode==="preview"){isolationCredential("SYNC_SECRET");isolationCredential("ADMIN_PASSWORD");}
+  return getStore(config.store);
 }
 
 export function eventKey(email, kind, id) {
@@ -204,7 +238,7 @@ export function verifyAdminToken(syncSecret, token) {
 }
 
 export function isAuthorized(body) {
-  const syncSecret = Netlify.env.get("INNER_CIRCLE_SYNC_SECRET");
+  const syncSecret = isolationCredential("SYNC_SECRET");
   if (!syncSecret) return false;
   if (body.secret && body.secret === syncSecret) return true;
   if (body.token && verifyAdminToken(syncSecret, body.token)) return true;
@@ -293,14 +327,14 @@ export function accessCodeHash(code) {
 }
 export function newMemberAccessCode() { return randomBytes(24).toString("hex"); }
 export function issueMemberToken(email, now=Date.now()) {
-  const secret=Netlify.env.get("INNER_CIRCLE_SYNC_SECRET");
+  const secret=isolationCredential("SYNC_SECRET");
   if(!secret) throw new Error("Member access is not configured");
   const expiry=now+30*24*60*60*1000;
   const signature=createHmac("sha256",secret).update("member:"+email+":"+expiry).digest("hex");
   return expiry+"."+signature;
 }
 export function verifyMemberToken(email, token, now=Date.now()) {
-  const secret=Netlify.env.get("INNER_CIRCLE_SYNC_SECRET");
+  const secret=isolationCredential("SYNC_SECRET");
   if(!secret||typeof token!=="string")return false;
   const parts=token.split("."), expiry=Number(parts[0]);
   if(parts.length!==2||!Number.isFinite(expiry)||expiry<=now||expiry>now+30*24*60*60*1000||!/^[a-f0-9]{64}$/.test(parts[1]))return false;
