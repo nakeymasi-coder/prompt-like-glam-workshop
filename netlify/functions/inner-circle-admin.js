@@ -11,7 +11,7 @@
 //   wipeAll {}
 import {
   withCors, json, memberStore, isAuthorized,
-  getMemberEvents, summarize, listPendingClaims, vipForPurchases, rewardMonth, validGiftCatalog, validBirthday, profileKey,
+  getMemberEvents, summarize, listPendingClaims, vipForPurchases, rewardMonth, validGiftCatalog, validBirthday, profileKey, newMemberAccessCode, accessCodeHash,
   isValidEmail, eventKey, claimKey, newEventId, todayISO,
   getProfile, defaultDisplayName, listMemberEmails, productNameFromLabel,
 } from "./inner-circle-lib.js";
@@ -56,6 +56,14 @@ export default async (req) =>
     }
     const store = memberStore();
 
+    if (action === "issueMemberAccess") {
+      const email=typeof body.email==="string"?body.email.trim().toLowerCase():"";
+      if(!isValidEmail(email)||!(await getMemberEvents(store,email)).length) return json({success:false,message:"Member not found."},404,req);
+      const code=newMemberAccessCode();
+      const expiresAt=Date.now()+7*24*60*60*1000;
+      await store.setJSON("member-access:"+accessCodeHash(code),{email,expiresAt,used:false});
+      return json({success:true,code,expiresAt,message:"Deliver this one-use access code only to the verified Payhip purchase email. It expires in seven days."},200,req);
+    }
     if (action === "setBirthday") {
       const email=typeof body.email==="string"?body.email.trim().toLowerCase():"";
       if(!isValidEmail(email)||!validBirthday(body.birthday)) return json({success:false,message:"Use a valid birthday month and day (MM-DD)."},400,req);
