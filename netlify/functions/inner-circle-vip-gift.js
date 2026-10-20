@@ -1,10 +1,11 @@
 import { createHash } from "crypto";
-import { withCors,json,memberStore,getMemberEvents,vipForPurchases,isValidEmail,rateLimited,rewardMonth,validGiftCatalog,claimKey } from "./inner-circle-lib.js";
+import { verifyMemberToken, withCors,json,memberStore,getMemberEvents,vipForPurchases,isValidEmail,rateLimited,rewardMonth,validGiftCatalog,claimKey } from "./inner-circle-lib.js";
 export default async req => withCors(req,async()=>{
   if(rateLimited(req,10)) return json({success:false,message:"Please wait a minute and try again."},429,req);
   const body=await req.json().catch(()=>({}));
   const email=typeof body.email==="string"?body.email.trim().toLowerCase():"";
   if(!isValidEmail(email)) return json({success:false,message:"Enter your purchase email."},400,req);
+    if (!verifyMemberToken(email, body.memberToken)) return json({success:false,message:"Verify your purchase email with your personal access code."},401,req);
   const store=memberStore();
   const status=vipForPurchases(await getMemberEvents(store,email));
   if(!status.vipActive) return json({success:false,message:"This gift is available to active VIP members."},403,req);
