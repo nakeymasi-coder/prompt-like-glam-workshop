@@ -234,7 +234,7 @@ async function openMember(email){
 }
 
 function renderDetail(m){
-  var vip = m.tier === "vip";
+  var vip = m.vipPolicyVersion === 2 ? m.vipActive === true : m.tier === "vip";
   var initial = (m.displayName || "?").charAt(0).toUpperCase();
   var h = '<div class="card"><div class="dhead">'
     + '<div class="davatar">' + (m.photo ? '<img src="' + m.photo + '" alt="" />' : esc(initial)) + '</div>'
@@ -245,11 +245,18 @@ function renderDetail(m){
     + '<div class="stat"><div class="n">' + m.lifetime + '</div><div class="l">Lifetime</div></div>'
     + '<div class="stat"><div class="n">' + m.purchases.length + '</div><div class="l">Orders</div></div></div>';
 
-  h += '<h2 class="sec">Purchases 🛍️</h2>';
+  h += '<p class="hint">VIP eligible spending: $' + Number(m.vipEligibleSpend || 0).toFixed(2)
+    + ' / $300 in the last 12 months.'
+    + (m.vipExpiresAt ? ' VIP end date: ' + esc(m.vipExpiresAt) + '.' : '')
+    + (m.legacyVip ? ' Previous points-based VIP: review existing benefits before migration.' : '')
+    + '</p>';
+  h += '<h2 class="sec">Purchases</h2><p class="hint">Verify amounts and currency against Payhip before including eligible tools and resources. Exclude workshops, memberships, custom builds, and ongoing AI usage.</p>';
   if(!m.purchases.length) h += '<p class="hint">No purchases on record.</p>';
   m.purchases.forEach(function(p){
     h += '<div class="pur"><span class="info"><strong>' + esc(p.product) + '</strong><small>' + esc(p.date || "")
-      + (p.amount != null ? " · $" + Number(p.amount).toFixed(2) : "") + '</small></span><span class="g">+' + p.points + ' pts</span></div>';
+      + (p.amount != null ? " · $" + Number(p.amount).toFixed(2) : "") + '</small></span><span class="g">+' + p.points + ' pts</span></div>'
+      + '<div class="hint">VIP: ' + (p.vipEligible === true ? 'Eligible' : p.vipEligible === false ? 'Excluded' : 'Needs review') + ' · ' + esc(p.currency || 'Currency unverified')
+      + ' <button type="button" class="btn small" data-review="' + esc(p.key || '') + '">Review order</button></div>';
   });
 
   h += '<h2 class="sec">Points activity</h2>';
@@ -271,6 +278,25 @@ function renderDetail(m){
   $("mlist").innerHTML = "";
   $("backBtn").addEventListener("click", function(){ $("mdetail").innerHTML = ""; renderMlist($("msearch").value); });
   $("apBtn").addEventListener("click", function(){ addPointsTo(m.email); });
+  document.querySelectorAll("[data-review]").forEach(function(b) {
+    b.addEventListener("click", async function() {
+      var currency = prompt("Verified three-letter purchase currency (for example USD):");
+      if (!currency) return;
+      currency = currency.trim().toUpperCase();
+      if (!/^[A-Z]{3}$/.test(currency)) { alert("Enter a three-letter currency."); return; }
+      var choice = prompt("Type INCLUDE for eligible tools/resources, or EXCLUDE for workshops, memberships, custom builds, or ongoing AI usage:");
+      if (!choice) return;
+      choice = choice.trim().toUpperCase();
+      if (choice !== "INCLUDE" && choice !== "EXCLUDE") { alert("Enter INCLUDE or EXCLUDE."); return; }
+      if (!confirm("Save this order as " + choice + " with currency " + currency + "? Existing points will remain unchanged.")) return;
+      b.disabled = true;
+      try {
+        var result = await admin("classifySale", {email:m.email, key:b.getAttribute("data-review"), currency:currency, vipEligible:choice === "INCLUDE"});
+        if (!result.success) alert(result.message || "Could not save.");
+        await openMember(m.email);
+      } catch(e) { b.disabled = false; }
+    });
+  });
 }
 
 async function addPointsTo(email){
