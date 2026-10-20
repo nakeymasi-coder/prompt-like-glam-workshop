@@ -269,6 +269,7 @@ function renderDetail(m){
     h += '<div class="act"><span>' + esc(a.label) + '<br><span class="d">' + esc(a.date || "") + '</span></span><span class="p ' + cls + '">' + sign + a.points + '</span></div>';
   });
 
+  h += '<h2 class="sec">Member access</h2><p class="hint">Issue a one-use access code and deliver it only to this member’s verified Payhip purchase email. Valid seven days; signed-in access lasts 30 days.</p><button class="btn small" id="issueAccessBtn">Create personal access code</button><p class="hint" id="memberAccessMessage" style="overflow-wrap:anywhere"></p>';
   h += '<h2 class="sec">Birthday reward</h2><p class="hint">Confirm the member’s birthday month and day. No year needed. Birthday coupons are verified and delivered to the purchase email.</p><label for="birthdayDay">Birthday (MM-DD)</label><input type="text" id="birthdayDay" maxlength="5" placeholder="05-22" value="'+esc(m.birthday||'')+'"><button class="btn small" id="saveBirthdayBtn">Save verified birthday</button>';
   h += '<h2 class="sec">Add Glow Points ➕</h2>'
     + '<div style="display:flex;gap:8px"><input type="number" id="apPts" placeholder="Points" style="flex:0 0 110px" />'
@@ -280,6 +281,14 @@ function renderDetail(m){
   $("mlist").innerHTML = "";
   $("backBtn").addEventListener("click", function(){ $("mdetail").innerHTML = ""; renderMlist($("msearch").value); });
   $("apBtn").addEventListener("click", function(){ addPointsTo(m.email); });
+  $("issueAccessBtn").onclick=async function(){
+    this.disabled=true;
+    try{
+      const result=await admin("issueMemberAccess",{email:m.email});
+      $("memberAccessMessage").textContent=result.success ? "Send only to "+m.email+": "+result.code+" — "+result.message : result.message;
+    }catch(e){$("memberAccessMessage").textContent="Could not create a code. Try again.";}
+    finally{this.disabled=false;}
+  };
   $("saveBirthdayBtn").onclick=async function(){
     this.disabled=true;
     try{const result=await admin("setBirthday",{email:m.email,birthday:$("birthdayDay").value.trim()});alert(result.success?"Birthday saved.":result.message);}
