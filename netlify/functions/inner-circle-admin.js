@@ -11,7 +11,7 @@
 //   wipeAll {}
 import {
   withCors, json, memberStore, isAuthorized,
-  getMemberEvents, summarize, listPendingClaims,
+  getMemberEvents, summarize, listPendingClaims, vipForPurchases,
   isValidEmail, eventKey, claimKey, newEventId, todayISO,
   getProfile, defaultDisplayName, listMemberEmails, productNameFromLabel,
 } from "./inner-circle-lib.js";
@@ -35,11 +35,15 @@ export default async (req) =>
         const email = (s.email || "").trim().toLowerCase();
         const pts = Math.floor(Number(s.points) || 0);
         if (!isValidEmail(email)) continue;
-        await store.setJSON(eventKey(email, "sale", s.messageId), {
+        const saleKey = eventKey(email, "sale", s.messageId);
+        const previous = await store.get(saleKey, { type: "json" }).catch(() => null);
+        await store.setJSON(saleKey, {
           email, points: pts, date: s.date || todayISO(),
           label: s.label || "Purchase", kind: "sale",
           product: s.product || productNameFromLabel(s.label),
-          amount: s.amount != null ? Number(s.amount) : null,
+          amount: s.amount != null && Number.isFinite(Number(s.amount)) ? Number(s.amount) : (previous?.amount ?? null),
+          currency: typeof s.currency === "string" ? s.currency.toUpperCase() : (previous?.currency ?? null),
+          vipEligible: typeof s.vipEligible === "boolean" ? s.vipEligible : (previous?.vipEligible ?? null),
         });
         touched.add(email);
         added++;
@@ -51,6 +55,25 @@ export default async (req) =>
       return json({ success: false, message: "Not authorized." }, 403, req);
     }
     const store = memberStore();
+
+    if (action === "classifySale") {
+      const email = (body.email || "").trim().toLowerCase();
+      if (!isValidEmail(email) || typeof body.key !== "string" ||
+          !body.key.startsWith(`ev:${email}:sale:`) ||
+          typeof body.vipEligible !== "boolean" || !/^[A-Z]{3}$/.test(body.currency || "")) {
+        return json({ success: false, message: "Choose an order, eligibility, and verified currency." }, 400, req);
+      }
+      const sale = await store.get(body.key, { type: "json" });
+      if (!sale || sale.kind !== "sale" || sale.email !== email) {
+        return json({ success: false, message: "Sale not found." }, 404, req);
+      }
+      if (body.vipEligible && (!Number.isFinite(sale.amount) || sale.amount <= 0)) {
+        return json({ success: false, message: "Verify the amount paid in the purchase sync before including this order." }, 400, req);
+      }
+      await store.setJSON(body.key, { ...sale, vipEligible: body.vipEligible,
+        currency: body.currency, eligibilityReviewedAt: new Date().toISOString() });
+      return json({ success: true }, 200, req);
+    }
 
     if (action === "addPoints") {
       const email = (body.email || "").trim().toLowerCase();
@@ -104,6 +127,7 @@ export default async (req) =>
         .filter((e) => e.kind === "sale")
         .map((e) => ({
           date: e.date, product: e.product || productNameFromLabel(e.label),
+          key: e._key, vipEligible: e.vipEligible, currency: e.currency,
           amount: e.amount, points: Math.floor(Number(e.points) || 0),
         }))
         .reverse();
@@ -114,6 +138,8 @@ export default async (req) =>
           displayName: profile.displayName || defaultDisplayName(email),
           photo: profile.photo || "",
           ...s,
+          ...vipForPurchases(events),
+          legacyVip: s.tier === "vip",
           purchases,
         },
       }, 200, req);
