@@ -158,7 +158,7 @@ footer.site{text-align:center;margin-top:10px;color:var(--ink-soft);font-size:.8
           <div class="bar"><div id="vipBar" style="width:0%"></div></div>
         </div>
       </div>
-      <div id="pendingSlot"></div>
+      <div class="card"><strong>Your VIP benefits</strong><p>Choose one monthly gift from a rotating VIP collection, save 15% on regularly priced eligible tools and resources, and receive one $10 birthday shop reward each year.</p><p class="hint" style="text-align:left">Spend $300 in eligible purchases within 12 months to unlock 12 months of VIP. Keep earning Glow Points on the amount paid. Discounts and point rewards do not stack. Workshops, memberships, custom builds, and ongoing AI usage are excluded. Gift selection and reward delivery are handled by Glam.</p></div><div id="pendingSlot"></div>
       <h2 class="sec">Claim a reward 🎁</h2>
       <div id="rewardsSlot"></div>
       <h2 class="sec">Recent activity</h2>
@@ -276,7 +276,7 @@ function renderApp(r){
   $("view-app").classList.remove("hidden");
   var name = r.displayName || "Hey there";
   $("helloName").textContent = "Hey, " + name + " 💎";
-  var vip = r.tier === "vip";
+  var vip = r.vipPolicyVersion === 2 ? r.vipActive === true : r.tier === "vip";
   $("helloTier").textContent = vip ? "👑 VIP Member" : "Inner Circle Member";
   setAvatar(r.photo || "", name);
 
@@ -286,10 +286,11 @@ function renderApp(r){
   $("tierSlot").innerHTML = vip
     ? '<span class="vip-badge">👑 VIP MEMBER</span>'
     : '<span style="color:var(--ink-soft);font-size:.92rem">Inner Circle Member</span>';
-  var pct = Math.round((r.vipProgress || 0) * 100);
-  $("vipLabel").textContent = vip
-    ? "VIP for life — enjoy it! 👑"
-    : (r.lifetime + " lifetime points — " + (r.vipThreshold - r.lifetime) + " to VIP");
+  var pct = r.vipPolicyVersion === 2 ? Math.min(100, Math.round((r.vipEligibleSpend || 0) / 300 * 100)) : 0;
+  $("vipLabel").textContent = r.vipPolicyVersion !== 2
+    ? "VIP eligibility is being updated — existing benefits are under review."
+    : vip ? "VIP through " + r.vipExpiresAt
+    : "$" + Number(r.vipEligibleSpend || 0).toFixed(2) + " of $300 eligible spending in the last 12 months" + (r.vipNeedsReview ? " · purchase eligibility review pending" : "");
   $("vipBar").style.width = pct + "%";
 
   var pc = "";
