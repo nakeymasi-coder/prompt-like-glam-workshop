@@ -329,7 +329,7 @@ async function settleClaim(email, code, action){
 }
 
 $("pwBtn").addEventListener("click", function(){
-  var pw = $("pw").value;
+    var pw = $("pw").value.trim();
   if(!pw) return;
   unlock(pw);
 });
