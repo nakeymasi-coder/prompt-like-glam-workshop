@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Prompt Breakdown — Prompt It Right, Say It Right to Your AI</title>
+<meta name="description" content="The Prompt Breakdown: prompt engineering, plain and simple. Simone and Desi teach beginners 40+ how to talk to AI and get better answers the first time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#17102b; --paper:#fff6e9; --pink:#ff2e9a; --purple:#7b2ff7; --cyan:#00d9ff;
+  --lime:#b6ff2e; --yellow:#ffd62e; --orange:#ff7a1a; --violet-deep:#241245;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Space Grotesk',system-ui,sans-serif;background:var(--violet-deep);color:var(--ink);overflow-x:hidden}
+::selection{background:var(--pink);color:#fff}
+h1,h2,h3,.display{font-family:'Archivo Black',system-ui,sans-serif;text-transform:uppercase;line-height:.95}
+img{max-width:100%;display:block}
+button{font-family:inherit;cursor:pointer}
+
+/* ---------- ticker ---------- */
+.ticker{background:var(--lime);border-bottom:4px solid var(--ink);overflow:hidden;white-space:nowrap;padding:.45rem 0;position:relative;z-index:5}
+.ticker-track{display:inline-block;animation:tick 26s linear infinite;font-family:'Archivo Black';font-size:.95rem;letter-spacing:.06em}
+.ticker span{margin:0 1.2rem}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;background:
+  radial-gradient(circle at 12% 18%, rgba(0,217,255,.35), transparent 42%),
+  radial-gradient(circle at 88% 12%, rgba(255,46,154,.4), transparent 45%),
+  radial-gradient(circle at 78% 88%, rgba(182,255,46,.28), transparent 40%),
+  linear-gradient(160deg,#2a1360 0%, #4b159e 48%, #8f1bb0 100%);
+  color:#fff;padding:3.2rem 1.2rem 5.2rem;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.16) 1.6px, transparent 1.7px);background-size:26px 26px;pointer-events:none}
+.hero-inner{position:relative;max-width:1120px;margin:0 auto;text-align:center;z-index:2}
+.kicker{display:inline-block;background:var(--yellow);color:var(--ink);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);padding:.35rem .9rem;font-weight:700;letter-spacing:.14em;font-size:.8rem;transform:rotate(-2deg)}
+.title{font-size:clamp(2.6rem,9.5vw,6.2rem);margin:1.1rem 0 .4rem;color:#fff;
+  text-shadow:4px 4px 0 var(--pink), 8px 8px 0 var(--cyan), 12px 12px 0 rgba(23,16,43,.9);letter-spacing:.01em}
+.title .row2{background:linear-gradient(92deg,var(--yellow),var(--orange),var(--pink),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(4px 4px 0 rgba(23,16,43,.9))}
+.tagline{font-size:clamp(1.05rem,3vw,1.5rem);font-weight:700;letter-spacing:.02em}
+.descriptor{display:inline-block;margin-top:.7rem;background:#fff;color:var(--ink);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);padding:.3rem .85rem;font-weight:700;transform:rotate(1.2deg)}
+.hero-photo{margin:2.2rem auto 0;max-width:640px;background:#fff;padding:.7rem .7rem 2.6rem;border:4px solid var(--ink);box-shadow:10px 12px 0 rgba(23,16,43,.85);transform:rotate(-1.6deg);position:relative}
+.hero-photo figcaption{font-family:'Archivo Black';color:var(--ink);margin-top:.55rem;font-size:.95rem;letter-spacing:.05em}
+.tape{position:absolute;width:110px;height:28px;background:rgba(255,214,46,.85);border:2px solid rgba(23,16,43,.35);top:-16px;left:50%;transform:translateX(-50%) rotate(-3deg)}
+.hero-cta{margin-top:2.4rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.55rem;border:4px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:.85rem 1.5rem;font-family:'Archivo Black';font-size:1rem;text-transform:uppercase;text-decoration:none;transition:transform .12s, box-shadow .12s;background:#fff;color:var(--ink)}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:9px 9px 0 var(--ink)}
+.btn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+.btn-pink{background:var(--pink);color:#fff}
+.btn-cyan{background:var(--cyan);color:var(--ink)}
+.btn-lime{background:var(--lime);color:var(--ink)}
+
+/* floating deco */
+.phones{position:absolute;width:clamp(90px,15vw,170px);z-index:1;border:4px solid var(--ink);box-shadow:7px 8px 0 rgba(23,16,43,.55)}
+.sticker-img{border:4px solid var(--ink);box-shadow:7px 7px 0 var(--ink);animation:bob 4.2s ease-in-out infinite}
+.ep-cover{width:150px;height:150px;object-fit:cover;border:4px solid var(--ink);box-shadow:6px 6px 0 var(--ink);transform:rotate(-2deg)}
+.phones.left{left:2%;top:110px;animation:bob 3.4s ease-in-out infinite}
+.phones.right{right:2%;top:300px;animation:bob 4.1s ease-in-out infinite reverse}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-16px) rotate(5deg)}}
+.vinyl{position:absolute;width:clamp(110px,17vw,190px);height:auto;aspect-ratio:1;border-radius:50%;right:4%;top:64px;z-index:1;
+  background:repeating-radial-gradient(circle,#14101f 0 3px,#221a38 3px 6px);border:4px solid var(--ink);
+  animation:spin 7s linear infinite;box-shadow:8px 10px 0 rgba(23,16,43,.5)}
+.vinyl::after{content:"";position:absolute;inset:34%;border-radius:50%;background:var(--pink);border:3px solid var(--ink)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sticker{position:absolute;font-family:'Archivo Black';font-size:.78rem;padding:.5rem .7rem;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);z-index:3;text-transform:uppercase}
+.sticker.s1{background:var(--cyan);left:4%;bottom:120px;transform:rotate(-8deg);animation:wiggle 2.6s ease-in-out infinite}
+.sticker.s2{background:var(--orange);color:#fff;right:5%;bottom:170px;transform:rotate(7deg);animation:wiggle 3.1s ease-in-out infinite reverse}
+@keyframes wiggle{0%,100%{rotate:-3deg}50%{rotate:4deg}}
+
+/* ---------- equalizer ---------- */
+.eq{display:flex;gap:5px;justify-content:center;align-items:flex-end;height:54px;background:var(--ink);padding:8px 0 0;border-top:4px solid var(--ink);border-bottom:4px solid var(--ink)}
+.eq i{width:12px;background:linear-gradient(180deg,var(--pink),var(--yellow));animation:eqb 1s ease-in-out infinite;animation-play-state:paused;opacity:.45;height:30%}
+.eq i:nth-child(3n){background:linear-gradient(180deg,var(--cyan),var(--purple))}
+.eq i:nth-child(4n){background:linear-gradient(180deg,var(--lime),var(--cyan))}
+body.playing .eq i{animation-play-state:running;opacity:1}
+@keyframes eqb{0%,100%{height:22%}50%{height:96%}}
+
+/* ---------- sections ---------- */
+section{padding:4.2rem 1.2rem}
+.wrap{max-width:1120px;margin:0 auto}
+.sec-head{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.6rem}
+.sec-head h2{font-size:clamp(1.7rem,5vw,2.7rem)}
+.sec-tag{background:var(--ink);color:#fff;padding:.3rem .8rem;font-family:'Archivo Black';font-size:.78rem;transform:rotate(-2deg);letter-spacing:.08em}
+.paper{background:var(--paper);background-image:radial-gradient(rgba(23,16,43,.09) 1.4px, transparent 1.5px);background-size:22px 22px}
+.purple-sec{background:linear-gradient(165deg,#341268,#5b1fa6 60%,#7b2ff7);color:#fff}
+.pink-sec{background:linear-gradient(160deg,#ff2e9a,#c9188f 55%,#8f1bb0);color:#fff}
+
+/* episode player */
+.ep-card{background:#fff;border:4px solid var(--ink);box-shadow:10px 10px 0 var(--ink);padding:1.4rem;display:grid;grid-template-columns:150px 1fr;gap:1.3rem;align-items:center;transform:rotate(-.4deg)}
+.ep-badge{width:110px;height:110px;border:4px solid var(--ink);background:conic-gradient(from 40deg,var(--pink),var(--yellow),var(--cyan),var(--lime),var(--pink));display:flex;align-items:center;justify-content:center;text-align:center;font-family:'Archivo Black';font-size:.8rem;padding:.4rem;animation:spin 14s linear infinite}
+.ep-badge span{background:#fff;border:3px solid var(--ink);border-radius:50%;width:64px;height:64px;display:flex;align-items:center;justify-content:center;animation:spin 14s linear infinite reverse}
+.ep-meta h3{font-size:clamp(1.25rem,3.4vw,1.8rem);margin-bottom:.35rem}
+.ep-meta p{font-size:1rem;max-width:58ch}
+.learn{margin:.8rem 0 0 1.1rem;font-weight:500}
+.learn li{margin:.25rem 0}
+.player{margin-top:1.1rem;background:var(--ink);border:3px solid var(--ink);padding:.8rem;display:flex;align-items:center;gap:.9rem;flex-wrap:wrap}
+.play-btn{width:58px;height:58px;border-radius:50%;border:3px solid #fff;background:var(--pink);color:#fff;font-size:1.35rem;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .1s}
+.play-btn:hover{transform:scale(1.08)}
+.progress-wrap{flex:1;min-width:180px}
+.progress{height:16px;background:#fff;border:2px solid #fff;cursor:pointer;position:relative}
+.progress-fill{height:100%;width:0%;background:repeating-linear-gradient(45deg,var(--lime) 0 10px,var(--cyan) 10px 20px)}
+.time{color:#fff;font-weight:700;font-variant-numeric:tabular-nums;font-size:.95rem}
+
+/* hosts */
+.hosts{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.8rem}
+.host-card{background:#fff;color:var(--ink);border:4px solid var(--ink);box-shadow:9px 9px 0 var(--ink);padding:1rem;transition:transform .18s}
+.host-card:hover{transform:rotate(-1deg) translateY(-6px)}
+.host-card.des{transform:rotate(.6deg)}
+.host-card.des:hover{transform:rotate(1.4deg) translateY(-6px)}
+.host-card img{border:3px solid var(--ink);aspect-ratio:4/3;object-fit:cover;width:100%}
+.host-role{display:inline-block;margin:.8rem 0 .3rem;background:var(--purple);color:#fff;font-family:'Archivo Black';font-size:.75rem;padding:.28rem .7rem;letter-spacing:.08em}
+.host-role.d{background:var(--orange)}
+.host-card h3{font-size:1.5rem}
+.host-card p{margin-top:.4rem;font-size:.98rem}
+
+/* builder */
+.builder{background:#fff;border:4px solid var(--ink);box-shadow:10px 10px 0 var(--ink);padding:1.5rem;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem;margin:.7rem 0 1.1rem}
+.chip{border:3px solid var(--ink);background:var(--paper);padding:.45rem .9rem;font-weight:700;box-shadow:3px 3px 0 var(--ink);transition:transform .1s}
+.chip:hover{transform:translate(-1px,-1px)}
+.chip.on{background:var(--pink);color:#fff}
+.builder label{font-family:'Archivo Black';font-size:.85rem;text-transform:uppercase;letter-spacing:.05em}
+.builder input[type=text]{width:100%;margin-top:.5rem;border:3px solid var(--ink);padding:.8rem;font:inherit;font-size:1.05rem;background:#fffef8}
+.prompt-out{margin-top:1.2rem;background:var(--violet-deep);color:#fff;border:3px solid var(--ink);padding:1.1rem;font-size:1.15rem;min-height:96px;position:relative}
+.prompt-out .who{color:var(--yellow);font-weight:700}
+.builder .row{display:flex;gap:.8rem;margin-top:1rem;flex-wrap:wrap}
+.copied{background:var(--lime)!important}
+
+/* homework */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem}
+.step{background:#fff;color:var(--ink);border:4px solid var(--ink);box-shadow:8px 8px 0 var(--ink);padding:1.2rem;position:relative}
+.step .num{position:absolute;top:-20px;left:-14px;width:48px;height:48px;border-radius:50%;border:3px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:'Archivo Black';font-size:1.15rem}
+.step h3{margin:.4rem 0 .4rem;font-size:1.15rem}
+
+/* wall */
+.wall-form{display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:1.4rem}
+.wall-form input{flex:1;min-width:210px;border:3px solid var(--ink);padding:.75rem;font:inherit;background:#fff}
+.wall{display:flex;flex-wrap:wrap;gap:1rem}
+.note{width:200px;min-height:130px;padding:.8rem;border:3px solid var(--ink);box-shadow:5px 6px 0 rgba(23,16,43,.8);font-weight:500;font-size:.92rem;position:relative;animation:pop .3s ease}
+.note b{display:block;font-family:'Archivo Black';font-size:.72rem;margin-bottom:.35rem;text-transform:uppercase}
+@keyframes pop{from{transform:scale(.8);opacity:0}}
+
+/* faq */
+.faq details{background:#fff;color:var(--ink);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);margin-bottom:.9rem;padding:1rem 1.2rem}
+.faq summary{font-family:'Archivo Black';cursor:pointer;text-transform:uppercase;font-size:.98rem}
+.faq p{margin-top:.6rem}
+
+/* footer */
+footer{background:var(--ink);color:#fff;text-align:center;padding:3.4rem 1.2rem 2.4rem;position:relative;overflow:hidden}
+footer .big{font-size:clamp(1.6rem,6vw,3rem);text-shadow:3px 3px 0 var(--pink),6px 6px 0 var(--cyan)}
+footer p{margin-top:.7rem;opacity:.92}
+.tiny{margin-top:1.6rem;font-size:.8rem;opacity:.65}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+.sparkle{position:fixed;width:9px;height:9px;pointer-events:none;z-index:99;background:var(--yellow);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);animation:spark .7s ease-out forwards}
+@keyframes spark{to{transform:translateY(-26px) rotate(120deg) scale(.2);opacity:0}}
+
+@media (max-width:640px){
+  .ep-card{grid-template-columns:1fr}
+  .ep-cover{margin:0 auto}
+  .phones.right{display:none}
+  .sticker.s2{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01s!important;animation-iteration-count:1!important;transition-duration:.01s!important}
+}
+</style>
+</head>
+<body>
+
+<div class="ticker" aria-hidden="true"><div class="ticker-track" id="tickerTrack"></div></div>
+
+<header class="hero">
+  <img class="phones left" src="assets/headphones.webp" alt="" aria-hidden="true">
+  <img class="phones right" src="assets/headphones.webp" alt="" aria-hidden="true">
+  <div class="vinyl" aria-hidden="true"></div>
+  <div class="sticker s1">★ 100% beginner friendly ★</div>
+  <div class="sticker s2">Made for the 40+ crew</div>
+
+  <div class="hero-inner">
+    <span class="kicker">🎧 A PODCAST ABOUT TALKING TO AI</span>
+    <h1 class="title">THE PROMPT<br><span class="row2">BREAKDOWN</span></h1>
+    <p class="tagline">Prompt It Right — Say It Right to Your AI</p>
+    <div><span class="descriptor">PROMPT ENGINEERING, PLAIN AND SIMPLE</span></div>
+
+    <figure class="hero-photo">
+      <div class="tape"></div>
+      <img src="assets/studio.webp" alt="Simone and Desi in The Prompt Breakdown studio, seated at the podcast table with microphones">
+      <figcaption>YOUR HOSTS: SIMONE &amp; DESI — ON THE MIC 🎙️</figcaption>
+    </figure>
+
+    <div class="hero-cta">
+      <button class="btn btn-pink" id="heroPlay">▶ Play Episode 1</button>
+      <a class="btn btn-cyan" href="#builder">🪑 Try the Chair Trick</a>
+      <a class="btn btn-lime" href="#hosts">Meet the Hosts</a>
+    </div>
+  </div>
+</header>
+
+<div class="eq" aria-hidden="true" id="eq"></div>
+
+<section class="paper" id="episode">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-tag">NOW PLAYING</span><h2>Episode 1 is here!</h2></div>
+    <article class="ep-card reveal">
+      <img class="ep-cover" src="assets/ep1-cover.webp" alt="Episode 1 artwork: cartoon Simone and Desi wearing colorful headphones, laughing at a podcast microphone with a boombox">
+      <div class="ep-meta">
+        <h3>Start With “Act As”</h3>
+        <p>Desi typed “write me a caption” and got back the driest caption ever written. Simone shows her the one step almost everybody skips: telling your AI <b>who to act as</b> first — so you get a better answer the first time.</p>
+        <ul class="learn">
+          <li>Why a plain question gets a plain, guessing answer</li>
+          <li>The four little words that change everything: “Act as a…”</li>
+          <li>Role first, then the details — what you want, who it's for, how long, what tone</li>
+        </ul>
+        <div class="player">
+          <button class="play-btn" id="playBtn" aria-label="Play or pause Episode 1">▶</button>
+          <div class="progress-wrap">
+            <div class="progress" id="progress" role="slider" aria-label="Episode progress"><div class="progress-fill" id="progressFill"></div></div>
+          </div>
+          <span class="time"><span id="curTime">0:00</span> / <span id="durTime">2:51</span></span>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="purple-sec" id="hosts">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-tag" style="background:var(--pink)">THE VOICES</span><h2>Meet your hosts</h2></div>
+    <div class="hosts">
+      <article class="host-card reveal">
+        <img src="assets/simone.webp" alt="Simone Bell in the studio — black blazer, white top, gold bamboo hoops">
+        <span class="host-role">THE TEACHER</span>
+        <h3>Simone Bell</h3>
+        <p>Confident, plain-spoken, with a little sass. Simone breaks every prompt down into steps anybody can follow — no tech talk, no talking down. If there's a chair to name, she'll name it.</p>
+      </article>
+      <article class="host-card des reveal">
+        <img src="assets/desi.webp" alt="Desi Brooks in the studio — cropped denim jacket, copper-auburn waves">
+        <span class="host-role d">THE TESTER</span>
+        <h3>Desiree “Desi” Brooks</h3>
+        <p>Smart, funny, and brand new to prompts — just like you. Desi asks the questions you're thinking, tries every trick out loud, and reacts honestly when it works (and when it doesn't).</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="pink-sec" id="builder">
+  <div class="wrap">
+    <img class="sticker-img reveal" src="assets/boombox.webp" alt="" aria-hidden="true" style="float:right;width:clamp(110px,18vw,170px);margin:0 0 1rem 1.2rem;transform:rotate(3deg)">
+    <div class="sec-head reveal"><span class="sec-tag" style="background:var(--ink)">INTERACTIVE TOY</span><h2 style="color:#fff">Name that chair 🪑</h2></div>
+    <p class="reveal" style="max-width:62ch;font-weight:500;margin-bottom:1.2rem">This is the whole Episode 1 lesson, as a toy. Pick who your AI should <b>act as</b>, say what you need, and watch your prompt build itself. Then steal it — go paste it into your AI and try it for real.</p>
+    <div class="builder reveal">
+      <label>Step 1 — Pick a chair (who should your AI act as?)</label>
+      <div class="chips" id="roleChips"></div>
+      <label for="wantInput">Step 2 — What do you want?</label>
+      <input type="text" id="wantInput" placeholder="Try: write me a caption for my photo in the red dress" autocomplete="off">
+      <div class="prompt-out" id="promptOut" aria-live="polite"></div>
+      <div class="row">
+        <button class="btn btn-pink" id="copyBtn" style="font-size:.9rem;padding:.65rem 1.1rem">📋 Copy my prompt</button>
+        <button class="btn btn-cyan" id="diceBtn" style="font-size:.9rem;padding:.65rem 1.1rem">🎲 Surprise me</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="paper" id="homework">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-tag">FROM EPISODE 1</span><h2>Your homework 📚</h2></div>
+    <div class="steps">
+      <div class="step reveal"><div class="num" style="background:var(--cyan)">1</div><h3>Pick your regular</h3><p>Take one thing you ask your AI all the time — a caption, an email, a plan, anything.</p></div>
+      <div class="step reveal"><div class="num" style="background:var(--yellow)">2</div><h3>Name the chair</h3><p>Before you ask, start with “Act as a…” and name who it should be — a coach, a tutor, a caption writer.</p></div>
+      <div class="step reveal"><div class="num" style="background:var(--lime)">3</div><h3>Talk back</h3><p>First answer not it? Adjust the chair. New role, sharper details. You are allowed to talk back to it.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="purple-sec" id="wall">
+  <div class="wrap">
+    <img class="sticker-img reveal" src="assets/cassette.webp" alt="" aria-hidden="true" style="float:right;width:clamp(110px,18vw,170px);margin:0 0 1rem 1.2rem;transform:rotate(-3deg)">
+    <div class="sec-head reveal"><span class="sec-tag" style="background:var(--yellow);color:var(--ink)">SAY IT BACK</span><h2>The prompt wall 🧱✨</h2></div>
+    <p class="reveal" style="max-width:60ch;font-weight:500;margin-bottom:1.2rem">Did the chair trick work for you? Slap your first “Act as…” prompt on the wall. (It lives on this page only — a little fridge door for your wins.)</p>
+    <form class="wall-form reveal" id="wallForm">
+      <input type="text" id="wallName" placeholder="Your name" maxlength="24" autocomplete="off">
+      <input type="text" id="wallText" placeholder="Act as a… (what did you try?)" maxlength="110" autocomplete="off" style="flex:2">
+      <button class="btn btn-lime" type="submit" style="font-size:.9rem;padding:.65rem 1.1rem">📌 Stick it up</button>
+    </form>
+    <div class="wall" id="wallBoard">
+      <div class="note" style="background:var(--yellow);transform:rotate(-2deg)"><b>Simone says</b>Role first, then your request. That's the whole recipe.</div>
+      <div class="note" style="background:#ffb3dd;transform:rotate(1.6deg)"><b>Desi tried it</b>Act as a friendly money coach… and it did NOT make me feel bad about my card. It worked!</div>
+      <div class="note" style="background:#a8ecff;transform:rotate(-1deg)"><b>Your turn</b>The wall is waiting on your first prompt. Go on — name that chair. 🪑</div>
+    </div>
+  </div>
+</section>
+
+<section class="paper faq" id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-tag">REAL QUICK</span><h2>Questions? We got you</h2></div>
+    <details class="reveal"><summary>What is The Prompt Breakdown?</summary><p>A podcast that teaches you how to write prompts — the instructions you give an AI — in plain, simple language. Every episode breaks one prompt skill down so you can use it the same day.</p></details>
+    <details class="reveal"><summary>Who is it for?</summary><p>Beginners 40 and over who already use AI but feel like their answers come back weak, dry, or just… off. If you type a question and get back the cleaning-supplies answer, this show is yours.</p></details>
+    <details class="reveal"><summary>What do I need to follow along?</summary><p>Just whatever AI you already chat with and something you ask it all the time. Simone teaches, Desi tests it out loud — you try it right along with her.</p></details>
+    <details class="reveal"><summary>Where do new episodes land?</summary><p>Right here. Episode 1, “Start With ‘Act As’,” is up top and ready to play — and more episodes are on the way.</p></details>
+  </div>
+</section>
+
+<footer>
+  <img src="assets/headphones.webp" alt="" aria-hidden="true" style="width:96px;height:96px;object-fit:cover;border:3px solid #fff;margin:0 auto .6rem;transform:rotate(-3deg)">
+  <div class="big display">THE PROMPT BREAKDOWN</div>
+  <p><b>Prompt It Right — Say It Right to Your AI</b><br>Prompt engineering, plain and simple. Headphones recommended. Volume UP. 🔊</p>
+  <p class="tiny">© 2026 The Prompt Breakdown · A show about talking to AI like you mean it.</p>
+</footer>
+
+<audio id="epAudio" src="assets/ep1.mp3" preload="metadata"></audio>
+
+<script>
+(function(){
+  "use strict";
+  /* ticker */
+  var phrase = "PROMPT IT RIGHT ★ SAY IT RIGHT TO YOUR AI ★ EPISODE 1 OUT NOW ★ NAME THAT CHAIR ★ ";
+  document.getElementById('tickerTrack').textContent = phrase.repeat(4);
+
+  /* equalizer bars */
+  var eq = document.getElementById('eq'), bars = '';
+  for (var i=0;i<48;i++){ bars += '<i style="animation-delay:'+(Math.random()*0.9).toFixed(2)+'s;animation-duration:'+(0.6+Math.random()*0.9).toFixed(2)+'s"></i>'; }
+  eq.innerHTML = bars;
+
+  /* audio player */
+  var audio = document.getElementById('epAudio'),
+      playBtn = document.getElementById('playBtn'),
+      heroPlay = document.getElementById('heroPlay'),
+      fill = document.getElementById('progressFill'),
+      prog = document.getElementById('progress'),
+      cur = document.getElementById('curTime'), dur = document.getElementById('durTime');
+  function fmt(s){ if(!isFinite(s)) s=0; s=Math.max(0,Math.floor(s)); return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2); }
+  function setIcon(){ var p = audio.paused; playBtn.textContent = p?'▶':'⏸'; heroPlay.textContent = p?'▶ Play Episode 1':'⏸ Pause Episode 1'; document.body.classList.toggle('playing', !p); }
+  function toggle(){ if(audio.paused){ audio.play(); } else { audio.pause(); } }
+  playBtn.addEventListener('click', toggle);
+  heroPlay.addEventListener('click', function(){ toggle(); document.getElementById('episode').scrollIntoView({behavior:'smooth'}); });
+  audio.addEventListener('play', setIcon); audio.addEventListener('pause', setIcon); audio.addEventListener('ended', setIcon);
+  audio.addEventListener('loadedmetadata', function(){ dur.textContent = fmt(audio.duration); });
+  audio.addEventListener('timeupdate', function(){ if(audio.duration){ fill.style.width = (audio.currentTime/audio.duration*100)+'%'; } cur.textContent = fmt(audio.currentTime); });
+  prog.addEventListener('click', function(e){ var r = prog.getBoundingClientRect(); if(audio.duration){ audio.currentTime = (e.clientX-r.left)/r.width*audio.duration; } });
+
+  /* prompt builder */
+  var roles = ['a friendly money coach','a fun social media coach','a business coach','a patient tutor','a meal planner','a caption writer','a workout buddy'];
+  var samples = ['help me plan paying off one card without making me feel bad about it','write me a short caption for a photo of me in a red dress — make it confident, not stiff','should this be thirty-seven dollars or fifty-seven? Lay out the why','explain fractions to my grandbaby like a story, nice and slow','plan five easy dinners for somebody who is tired of chicken','write a caption that sounds like me on my best day','build me a gentle walking plan I will actually do'];
+  var role = roles[1], want = '';
+  var chipsEl = document.getElementById('roleChips'), out = document.getElementById('promptOut'),
+      input = document.getElementById('wantInput'), copyBtn = document.getElementById('copyBtn');
+  roles.forEach(function(r, idx){
+    var b = document.createElement('button'); b.type='button'; b.className='chip'+(r===role?' on':''); b.textContent = 'Act as '+r;
+    b.addEventListener('click', function(){ role=r; chipsEl.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on')}); b.classList.add('on'); render(); });
+    chipsEl.appendChild(b);
+  });
+  function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function render(){
+    var w = want.trim();
+    out.innerHTML = '<span class="who">Act as '+esc(role)+'.</span> ' + (w ? esc(w.charAt(0).toUpperCase()+w.slice(1)) : '<span style="opacity:.6">…now type what you want in Step 2, and watch it land right here.</span>');
+  }
+  input.addEventListener('input', function(){ want = input.value; render(); });
+  document.getElementById('diceBtn').addEventListener('click', function(){
+    var i = Math.floor(Math.random()*roles.length); role = roles[i]; want = samples[i]; input.value = want;
+    chipsEl.querySelectorAll('.chip').forEach(function(c, ci){ c.classList.toggle('on', ci===i); });
+    render();
+  });
+  copyBtn.addEventListener('click', function(){
+    var text = 'Act as '+role+'. '+(want.trim()? want.trim().charAt(0).toUpperCase()+want.trim().slice(1) : '');
+    function done(){ copyBtn.textContent='✅ Copied! Go paste it'; copyBtn.classList.add('copied'); setTimeout(function(){ copyBtn.textContent='📋 Copy my prompt'; copyBtn.classList.remove('copied'); }, 2200); }
+    if (navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(done, done); } else { done(); }
+  });
+  render();
+
+  /* prompt wall */
+  var wallColors = ['#ffd62e','#ffb3dd','#a8ecff','#d3ffa8','#ffe3ae','#e3c8ff'];
+  document.getElementById('wallForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('wallName').value.trim() || 'Anonymous glow-getter';
+    var text = document.getElementById('wallText').value.trim();
+    if(!text){ document.getElementById('wallText').focus(); return; }
+    var d = document.createElement('div'); d.className='note';
+    d.style.background = wallColors[Math.floor(Math.random()*wallColors.length)];
+    d.style.transform = 'rotate('+(Math.random()*4-2).toFixed(1)+'deg)';
+    d.innerHTML = '<b>'+esc(name)+'</b>'+esc(text);
+    document.getElementById('wallBoard').prepend(d);
+    document.getElementById('wallText').value='';
+  });
+
+  /* scroll reveal */
+  var io = new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } }); }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  /* sparkle trail (desktop, light touch) */
+  var last = 0;
+  document.addEventListener('pointermove', function(e){
+    var now = Date.now(); if(now-last < 90 || e.pointerType !== 'mouse') return; last = now;
+    var s = document.createElement('div'); s.className='sparkle';
+    s.style.left = (e.clientX-4)+'px'; s.style.top = (e.clientY-4)+'px';
+    s.style.background = ['#ffd62e','#ff2e9a','#00d9ff','#b6ff2e'][Math.floor(Math.random()*4)];
+    document.body.appendChild(s); setTimeout(function(){ s.remove(); }, 720);
+  });
+})();
+</script>
+</body>
+</html>
