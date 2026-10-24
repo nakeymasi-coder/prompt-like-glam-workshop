@@ -1,6 +1,6 @@
 // Trades Glam's admin password for a 24h signed token for the admin hub.
 // POST { password } -> { success, token }
-import { withCors, json, issueAdminToken, rateLimited } from "./inner-circle-lib.js";
+import { isolationCredential, withCors, json, issueAdminToken, rateLimited } from "./inner-circle-lib.js";
 import { timingSafeEqual } from "crypto";
 
 export default async (req) =>
@@ -10,8 +10,8 @@ export default async (req) =>
     }
     const body = await req.json().catch(() => ({}));
     const password = body.password || "";
-    const expected = (Netlify.env.get("INNER_CIRCLE_ADMIN_PASSWORD") || "").trim();
-    const syncSecret = Netlify.env.get("INNER_CIRCLE_SYNC_SECRET");
+    const expected = (isolationCredential("ADMIN_PASSWORD") || "").trim();
+    const syncSecret = isolationCredential("SYNC_SECRET");
     let ok = false;
     if (expected && syncSecret && typeof password === "string" && password.length > 0) {
       try {
@@ -23,3 +23,4 @@ export default async (req) =>
     }
     return json({ success: true, token: issueAdminToken(syncSecret) }, 200, req);
   });
+

@@ -19,15 +19,47 @@ export const REWARDS = [
 export const ALLOWED_ORIGINS = new Set([
   "https://nakeymasi-coder.github.io",
   "https://workshop-poratl.netlify.app",
-  "https://deploy-preview-2--workshop-poratl.netlify.app",
 ]);
+
+// Runtime values must be Functions-scoped, not build-only variables.
+export function runtimeIsolation() {
+  const env=globalThis.Netlify?.env;
+  const mode=env?.get("INNER_CIRCLE_RUNTIME_MODE");
+  const context=env?.get("CONTEXT");
+  if(mode==="production") {
+    if(context && context!=="production")throw Error("Runtime context mismatch");
+    return {mode,store:"inner-circle",origin:"https://workshop-poratl.netlify.app"};
+  }
+  if(mode!=="preview")throw Error("Runtime isolation is not configured");
+  if(context && context!=="deploy-preview")throw Error("Runtime context mismatch");
+  const id=env?.get("INNER_CIRCLE_PREVIEW_ID");
+  if(typeof id!=="string" || !/^[1-9][0-9]{0,8}$/.test(id))throw Error("Preview identifier is missing or invalid");
+  return {mode,store:"inner-circle-preview-"+id,origin:"https://deploy-preview-"+id+"--workshop-poratl.netlify.app"};
+}
+export function isolationCredential(name) {
+  const config=runtimeIsolation(),env=Netlify.env;
+  if(config.mode==="production")return env.get("INNER_CIRCLE_"+name);
+  const value=env.get("INNER_CIRCLE_PREVIEW_"+name);
+  if(typeof value!=="string" || value.length<24 || value===env.get("INNER_CIRCLE_"+name))throw Error("Independent preview credentials are not configured");
+  return value;
+}
+function validateIsolationRequest(req) {
+  const config=runtimeIsolation();
+  if(new URL(req.url).origin!==config.origin)throw Error("Request does not match configured environment");
+  if(config.mode==="preview") {isolationCredential("SYNC_SECRET");isolationCredential("ADMIN_PASSWORD");}
+  return config;
+}
+function allowedOrigin(origin) {
+  try {const config=runtimeIsolation();return config.mode==="preview" ? origin===config.origin : ALLOWED_ORIGINS.has(origin);}catch{return false;}
+}
 
 export function corsHeaders(req) {
   const origin = req.headers.get("Origin");
   return {
     "Content-Type": "application/json",
     Vary: "Origin",
-    ...(origin && ALLOWED_ORIGINS.has(origin)
+    "Cache-Control": "no-store",
+    ...(origin && allowedOrigin(origin)
       ? { "Access-Control-Allow-Origin": origin }
       : {}),
   };
@@ -38,9 +70,10 @@ export function json(data, status, req) {
 }
 
 export async function withCors(req, handler) {
+  try {validateIsolationRequest(req);} catch {return json({success:false,message:"This rewards environment is not configured for safe access."},503,req);}
   const origin = req.headers.get("Origin");
   const headers = corsHeaders(req);
-  if (origin && !ALLOWED_ORIGINS.has(origin)) {
+  if (origin && !allowedOrigin(origin)) {
     return new Response(JSON.stringify({ success: false, message: "This origin is not allowed." }), { status: 403, headers });
   }
   if (req.method === "OPTIONS") {
@@ -61,7 +94,9 @@ export async function withCors(req, handler) {
 }
 
 export function memberStore() {
-  return getStore("inner-circle");
+  const config=runtimeIsolation();
+  if(config.mode==="preview"){isolationCredential("SYNC_SECRET");isolationCredential("ADMIN_PASSWORD");}
+  return getStore(config.store);
 }
 
 export function eventKey(email, kind, id) {
@@ -91,7 +126,7 @@ export async function getMemberEvents(store, email) {
   const events = [];
   for (const b of listed.blobs || []) {
     const e = await store.get(b.key, { type: "json" }).catch(() => null);
-    if (e && typeof e.points === "number") events.push(e);
+    if (e && typeof e.points === "number") events.push({ ...e, _key: b.key });
   }
   events.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
   return events;
@@ -178,7 +213,7 @@ export function defaultDisplayName(email) {
 // trades it for a 24h HMAC-signed token; admin read/write actions (except
 // syncSales, which stays secret-only) accept secret OR token.
 
-import { createHmac, timingSafeEqual } from "crypto";
+import { createHmac, timingSafeEqual, randomBytes, createHash } from "crypto";
 
 const TOKEN_TTL_MS = 24 * 60 * 60 * 1000;
 
@@ -203,7 +238,7 @@ export function verifyAdminToken(syncSecret, token) {
 }
 
 export function isAuthorized(body) {
-  const syncSecret = Netlify.env.get("INNER_CIRCLE_SYNC_SECRET");
+  const syncSecret = isolationCredential("SYNC_SECRET");
   if (!syncSecret) return false;
   if (body.secret && body.secret === syncSecret) return true;
   if (body.token && verifyAdminToken(syncSecret, body.token)) return true;
@@ -229,3 +264,83 @@ export async function listMemberEmails(store) {
 export function productNameFromLabel(label) {
   return (label || "").replace(/^Purchase:\s*/i, "").trim() || "Purchase";
 }
+
+/**
+ * VIP v2 is based only on verified eligible USD spending.
+ * Existing events/claims are never rewritten. Unclassified sales require review.
+ */
+export function vipForPurchases(events, now = new Date()) {
+  const addMonths = (date, months) => {
+    const d = new Date(date), day = d.getUTCDate();
+    d.setUTCDate(1); d.setUTCMonth(d.getUTCMonth() + months);
+    const last = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 0)).getUTCDate();
+    d.setUTCDate(Math.min(day, last)); return d;
+  };
+  const sales = events.filter(e =>
+    e.kind === "sale" && e.vipEligible === true && e.currency === "USD" &&
+    Number.isFinite(e.amount) && e.amount > 0 &&
+    Number.isFinite(Date.parse(e.date)) && new Date(e.date) <= now
+  ).sort((a,b) => new Date(a.date) - new Date(b.date));
+  let expires = null;
+  for (const sale of sales) {
+    const at = new Date(sale.date), start = addMonths(at, -12);
+    const total = sales.filter(e => new Date(e.date) > start && new Date(e.date) <= at)
+      .reduce((sum,e) => sum + Math.round(e.amount * 100), 0);
+    if (total >= 30000 && (!expires || at >= expires)) expires = addMonths(at, 12);
+  }
+  const start = addMonths(now, -12);
+  const spendCents = sales.filter(e => new Date(e.date) > start)
+    .reduce((sum,e) => sum + Math.round(e.amount * 100), 0);
+  return {
+    vipPolicyVersion: 2, vipActive: !!expires && now < expires,
+    vipExpiresAt: expires ? expires.toISOString().slice(0,10) : null,
+    vipEligibleSpend: spendCents / 100,
+    vipNeedsReview: events.some(e => e.kind === "sale" && e.vipEligible == null)
+  };
+}
+
+export function rewardMonth(now = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-US", {timeZone:"America/New_York",year:"numeric",month:"2-digit"}).formatToParts(now);
+  return parts.find(p=>p.type==="year").value + "-" + parts.find(p=>p.type==="month").value;
+}
+export function validGiftCatalog(items) {
+  return Array.isArray(items) && items.length === 5 &&
+    new Set(items.map(p=>p.id)).size === 5 &&
+    items.some(p=>p.generator === true) &&
+    items.every(p=>typeof p.id==="string" && /^[a-z0-9-]{1,50}$/.test(p.id) &&
+      typeof p.name==="string" && p.name.trim().length>0 && p.name.length<=120 &&
+      typeof p.url==="string" && /^https:\/\/payhip.com\/b\/[a-zA-Z0-9]+$/.test(p.url));
+}
+
+export function validBirthday(value) {
+  if(typeof value !== "string" || !/^\d{2}-\d{2}$/.test(value)) return false;
+  const [month,day]=value.split("-").map(Number);
+  const d=new Date(Date.UTC(2000,month-1,day));
+  return d.getUTCMonth()===month-1 && d.getUTCDate()===day;
+}
+export function birthdayAvailable(birthday, now=new Date()) {
+  return validBirthday(birthday) && birthday.slice(0,2)===rewardMonth(now).slice(5,7);
+}
+
+export function accessCodeHash(code) {
+  return createHash("sha256").update(code).digest("hex");
+}
+export function newMemberAccessCode() { return randomBytes(24).toString("hex"); }
+export function issueMemberToken(email, now=Date.now()) {
+  const secret=isolationCredential("SYNC_SECRET");
+  if(!secret) throw new Error("Member access is not configured");
+  const expiry=now+30*24*60*60*1000;
+  const signature=createHmac("sha256",secret).update("member:"+email+":"+expiry).digest("hex");
+  return expiry+"."+signature;
+}
+export function verifyMemberToken(email, token, now=Date.now()) {
+  const secret=isolationCredential("SYNC_SECRET");
+  if(!secret||typeof token!=="string")return false;
+  const parts=token.split("."), expiry=Number(parts[0]);
+  if(parts.length!==2||!Number.isFinite(expiry)||expiry<=now||expiry>now+30*24*60*60*1000||!/^[a-f0-9]{64}$/.test(parts[1]))return false;
+  const signature=createHmac("sha256",secret).update("member:"+email+":"+expiry).digest("hex");
+  return timingSafeEqual(Buffer.from(parts[1],"hex"),Buffer.from(signature,"hex"));
+}
+
+
+export function safePhoto(photo){return typeof photo === "string" && photo.length <= 220000 && /^data:image\/(jpeg|png|webp);base64,(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(photo) && photo.split(',')[1].length > 0 ? photo : "";}

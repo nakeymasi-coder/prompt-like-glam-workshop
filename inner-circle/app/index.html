@@ -36,7 +36,7 @@ h1{font-family:"Playfair Display",serif;font-weight:800;font-size:1.7rem;margin:
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:22px 20px;margin-top:16px}
 .hidden{display:none!important}
 label{display:block;font-weight:600;margin-bottom:8px}
-input[type=email],input[type=text],input[type=number]{width:100%;padding:14px 16px;font-size:1.05rem;border:1.5px solid var(--line);border-radius:14px;font-family:inherit;background:#fff;color:var(--ink)}
+input[type=email],input[type=text],input[type=number],input[type=password]{width:100%;padding:14px 16px;font-size:1.05rem;border:1.5px solid var(--line);border-radius:14px;font-family:inherit;background:#fff;color:var(--ink)}
 input:focus{outline:none;border-color:var(--sapphire);box-shadow:0 0 0 3px rgba(15,82,186,.12)}
 .btn{display:block;width:100%;margin-top:14px;padding:15px;border:0;border-radius:999px;background:var(--btn-grad);color:#fff;font-weight:700;font-size:1.05rem;font-family:inherit;cursor:pointer;box-shadow:0 8px 22px rgba(15,82,186,.25)}
 .btn:disabled{opacity:.55;cursor:default;box-shadow:none}
@@ -131,7 +131,7 @@ footer.site{text-align:center;margin-top:10px;color:var(--ink-soft);font-size:.8
   <div class="card" id="view-login">
     <label for="email">Email you shop with</label>
     <input type="email" id="email" placeholder="you@example.com" autocomplete="email" inputmode="email" />
-    <button class="btn" id="lookupBtn">See my points 💎</button>
+    <label for="accessCode" style="margin-top:14px">Personal access code</label><input type="password" id="accessCode" placeholder="Code sent to your purchase email" autocomplete="one-time-code" /><p class="hint">First visit or expired access? Ask Glam to send a personal code to your Payhip purchase email.</p><button class="btn" id="lookupBtn">Open my rewards</button>
     <div class="err hidden" id="loginErr"></div>
     <div class="spinner hidden" id="loginSpin"></div>
     <p class="hint">Use the email from your Payhip purchases.<br />New here? <a href="../">How the Inner Circle works</a></p>
@@ -158,7 +158,7 @@ footer.site{text-align:center;margin-top:10px;color:var(--ink-soft);font-size:.8
           <div class="bar"><div id="vipBar" style="width:0%"></div></div>
         </div>
       </div>
-      <div id="pendingSlot"></div>
+      <div class="card"><strong>Your VIP benefits</strong><p>Choose one monthly gift from a rotating VIP collection, save 15% on regularly priced eligible tools and resources, and receive one $10 birthday shop reward each year.</p><p class="hint" style="text-align:left">Spend $300 in eligible purchases within 12 months to unlock 12 months of VIP. Keep earning Glow Points on the amount paid. Discounts and point rewards do not stack. Workshops, memberships, custom builds, and ongoing AI usage are excluded. Gift selection and reward delivery are handled by Glam.</p></div><div id="vipBenefitSlot"></div><div id="monthlyGiftSlot"></div><div id="pendingSlot"></div>
       <h2 class="sec">Claim a reward 🎁</h2>
       <div id="rewardsSlot"></div>
       <h2 class="sec">Recent activity</h2>
@@ -220,7 +220,10 @@ footer.site{text-align:center;margin-top:10px;color:var(--ink-soft);font-size:.8
 
 <script>
 "use strict";
-var API = "https://workshop-poratl.netlify.app/.netlify/functions";
+// Netlify pages stay on their own deployment. Only the established GitHub site uses production fallback.
+var API = window.location.hostname === "nakeymasi-coder.github.io"
+  ? "https://workshop-poratl.netlify.app/.netlify/functions"
+  : window.location.origin + "/.netlify/functions";
 var $ = function(id){ return document.getElementById(id); };
 
 function saveEmail(e){ try{ localStorage.setItem("ic_email", e); }catch(_){} }
@@ -230,45 +233,94 @@ function hideErr(id){ $(id).classList.add("hidden"); }
 function flashOk(id, msg){ var el=$(id); el.textContent=msg; el.classList.remove("hidden"); setTimeout(function(){ el.classList.add("hidden"); }, 4000); }
 function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
 
-async function api(path, data){
-  var res = await fetch(API + path, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data)
-  });
-  return res.json();
+var memoryTokens = Object.create(null);
+var accountGeneration=0, lookupGeneration=0, lookupInFlight=false, queuedLookup=null;
+var currentEmail="", currentData=null, pendingPhoto=null;
+function memberToken(email){if(memoryTokens[email])return memoryTokens[email];try{return localStorage.getItem("ic_member_token:"+email)||"";}catch(_){return "";}}
+function saveMemberToken(email,token){memoryTokens[email]=token;try{localStorage.setItem("ic_member_token:"+email,token);}catch(_){}}
+function recoverLogin(message,clearToken){
+  var email=currentEmail || $("email").value.trim().toLowerCase();
+  if(clearToken){delete memoryTokens[email];try{localStorage.removeItem("ic_member_token:"+email);}catch(_){}}
+  accountGeneration++;lookupGeneration++;lookupInFlight=false;queuedLookup=null;
+  currentEmail="";currentData=null;pendingPhoto=null;$("accessCode").value="";
+  $("view-app").classList.add("hidden");$("view-login").classList.remove("hidden");
+  $("loginSpin").classList.add("hidden");$("lookupBtn").disabled=false;
+  $("saveProfileBtn").disabled=false;$("saveProfileBtn").textContent="Save profile 💾";
+  var spin=$("bootSpin");if(spin)spin.remove();
+  if(message)showErr("loginErr",message);
 }
-
-var currentEmail = "";
-var currentData = null;
-var pendingPhoto = null; // data URL waiting to be saved
-
-function setAvatar(photo, name){
-  var initial = (name || "?").trim().charAt(0).toUpperCase() || "?";
-  $("avatarBtn").innerHTML = photo
-    ? '<img src="' + photo + '" alt="profile photo" />'
-    : esc(initial);
-  $("pavatarBtn").innerHTML = photo
-    ? '<img src="' + photo + '" alt="profile photo" /><span class="cam">📷</span>'
-    : esc(initial) + '<span class="cam">📷</span>';
-}
-
-async function lookup(email, silent){
-  hideErr("loginErr");
-  if(!silent){ $("loginSpin").classList.remove("hidden"); $("lookupBtn").disabled = true; }
+async function api(path,data){
+  var generation=accountGeneration;
+  if(path!=="/inner-circle-member-auth")data=Object.assign({},data,{memberToken:memberToken(data.email||currentEmail)});
+  var controller=new AbortController(),timer=null;
+  // Read/auth recovery only. Auth timeout can consume a one-use code; never auto-retry.
+  if(path==="/inner-circle-lookup" || path==="/inner-circle-member-auth")timer=setTimeout(function(){controller.abort();},15000);
   try{
-    var r = await api("/inner-circle-lookup", { email: email });
-    if(!silent){ $("loginSpin").classList.add("hidden"); $("lookupBtn").disabled = false; }
-    if(!r.success){ showErr("loginErr", r.message || "Something went wrong."); return; }
-    if(!r.found){ showErr("loginErr", r.message); return; }
-    currentEmail = email;
-    currentData = r;
-    saveEmail(email);
-    renderApp(r);
-  }catch(e){
-    if(!silent){ $("loginSpin").classList.add("hidden"); $("lookupBtn").disabled = false; }
-    showErr("loginErr", "Couldn't reach the rewards service. Check your connection and try again.");
+    var res=await fetch(API+path,{method:"POST",cache:"no-store",signal:controller.signal,headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+    var result=await res.json();
+    if(!result || typeof result.success!=="boolean")throw Error("Invalid service response");
+    if(path==="/inner-circle-member-auth" && res.status>=500)throw Error("Uncertain code redemption");
+    if(res.status===401 && generation===accountGeneration && path!=="/inner-circle-member-auth")recoverLogin(result.message||"Enter your personal access code.",true);
+    return result;
+  }finally{if(timer!==null)clearTimeout(timer);}
+}
+function safePhoto(photo){return typeof photo === "string" && photo.length <= 220000 && /^data:image\/(jpeg|png|webp);base64,(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(photo) && photo.split(',')[1].length > 0 ? photo : "";}
+function setAvatar(photo,name){
+ var initial=String(name||"?").trim().charAt(0).toUpperCase()||"?";photo=safePhoto(photo);
+ $("avatarBtn").innerHTML=photo?'<img src="'+esc(photo)+'" alt="profile photo" />':esc(initial);
+ $("pavatarBtn").innerHTML=(photo?'<img src="'+esc(photo)+'" alt="profile photo" />':esc(initial))+'<span class="cam">📷</span>';
+}
+function validMemberResponse(r){
+  if(!r || typeof r !== "object" || typeof r.email !== "string" ||
+     typeof r.displayName !== "string" || typeof r.photo !== "string" ||
+     !Number.isFinite(r.points) || !Number.isFinite(r.lifetime) ||
+     !Number.isFinite(r.vipThreshold) || !Number.isFinite(r.vipProgress)) return false;
+  if(r.vipPolicyVersion !== undefined){
+    if(r.vipPolicyVersion !== 2 || typeof r.vipActive !== "boolean" ||
+       typeof r.vipNeedsReview !== "boolean" || !Number.isFinite(r.vipEligibleSpend) ||
+       r.vipEligibleSpend < 0 || !(r.vipExpiresAt === null ||
+         (typeof r.vipExpiresAt === "string" && /^\d{4}-\d{2}-\d{2}$/.test(r.vipExpiresAt)))) return false;
+    var gift = r.monthlyGift;
+    if(!gift || typeof gift !== "object" || !/^\d{4}-\d{2}$/.test(gift.month || "") ||
+       !Array.isArray(gift.items) || !gift.items.every(function(p){
+         return p && typeof p.id === "string" && typeof p.name === "string" &&
+           typeof p.url === "string" && (p.generator === undefined || typeof p.generator === "boolean");
+       }) || !(gift.claim === null || (gift.claim && typeof gift.claim.name === "string" &&
+         typeof gift.claim.status === "string"))) return false;
   }
+  return ["pendingClaims", "rewards", "activity", "purchases"].every(function(key){
+    return Array.isArray(r[key]) && r[key].every(function(item){
+      return item && typeof item === "object" &&
+        ((key !== "activity" && key !== "purchases") || Number.isFinite(item.points)) &&
+        (key !== "rewards" || Number.isFinite(item.cost));
+    });
+  });
+}
+async function lookup(email,silent){
+ if(lookupInFlight){if(silent)queuedLookup={email:email};return;}
+ lookupInFlight=true;var generation=++lookupGeneration,account=accountGeneration,authPending=false;
+ hideErr("loginErr");$("loginSpin").classList.remove("hidden");$("lookupBtn").disabled=true;
+ try{
+  email=email.trim().toLowerCase();
+  if(!memberToken(email)){
+   var code=$("accessCode").value.trim();if(!code)throw Error("access-required");
+   authPending=true;var auth=await api("/inner-circle-member-auth",{email:email,code:code});
+   if(generation!==lookupGeneration||account!==accountGeneration)return;
+   if(!auth.success){authPending=false;throw Error(auth.message||"Access code could not be verified.");}
+   if(typeof auth.memberToken!=="string"||!auth.memberToken)throw Error("Invalid session response");
+   saveMemberToken(email,auth.memberToken);$("accessCode").value="";authPending=false;
+  }
+  var r=await api("/inner-circle-lookup",{email:email});
+  if(generation!==lookupGeneration||account!==accountGeneration)return;
+  if(!r.success||!r.found)throw Error(r.message||"Could not load your rewards.");
+  if(!validMemberResponse(r)||r.email!==email)throw Error("Invalid rewards response. Please try again.");
+  renderApp(r);currentEmail=email;currentData=r;saveEmail(email);
+ }catch(e){
+  if(generation!==lookupGeneration||account!==accountGeneration)return;
+  recoverLogin(authPending?"We could not confirm whether your one-use code was redeemed. Do not retry it automatically. Ask Glam for a fresh code sent to your purchase email.":e.message==="access-required"?"Enter the personal code sent to your purchase email.":e.name==="AbortError"?"Loading timed out. Please try again.":e.message||"Could not load your rewards.",false);
+ }finally{
+  if(generation===lookupGeneration){lookupInFlight=false;$("loginSpin").classList.add("hidden");$("lookupBtn").disabled=false;var boot=$("bootSpin");if(boot)boot.remove();var next=queuedLookup;queuedLookup=null;if(next)await lookup(next.email,true);}
+ }
 }
 
 function renderApp(r){
@@ -276,7 +328,7 @@ function renderApp(r){
   $("view-app").classList.remove("hidden");
   var name = r.displayName || "Hey there";
   $("helloName").textContent = "Hey, " + name + " 💎";
-  var vip = r.tier === "vip";
+  var vip = r.vipPolicyVersion === 2 ? r.vipActive === true : r.tier === "vip";
   $("helloTier").textContent = vip ? "👑 VIP Member" : "Inner Circle Member";
   setAvatar(r.photo || "", name);
 
@@ -286,12 +338,21 @@ function renderApp(r){
   $("tierSlot").innerHTML = vip
     ? '<span class="vip-badge">👑 VIP MEMBER</span>'
     : '<span style="color:var(--ink-soft);font-size:.92rem">Inner Circle Member</span>';
-  var pct = Math.round((r.vipProgress || 0) * 100);
-  $("vipLabel").textContent = vip
-    ? "VIP for life — enjoy it! 👑"
-    : (r.lifetime + " lifetime points — " + (r.vipThreshold - r.lifetime) + " to VIP");
+  var pct = r.vipPolicyVersion === 2 ? Math.min(100, Math.round((r.vipEligibleSpend || 0) / 300 * 100)) : 0;
+  $("vipLabel").textContent = r.vipPolicyVersion !== 2
+    ? "VIP eligibility is being updated — existing benefits are under review."
+    : vip ? "VIP through " + r.vipExpiresAt
+    : "$" + Number(r.vipEligibleSpend || 0).toFixed(2) + " of $300 eligible spending in the last 12 months" + (r.vipNeedsReview ? " · purchase eligibility review pending" : "");
   $("vipBar").style.width = pct + "%";
 
+  $("vipBenefitSlot").innerHTML = vip ? '<div class="card"><strong>Your VIP savings</strong><p>Personal coupons are verified and delivered by Glam to your purchase email.</p><button class="btn" data-benefit="discount">Request my 15% discount</button><button class="btn ghost" data-benefit="birthday">Request my $10 birthday reward</button><p class="hint">Birthday rewards: once per year during your birthday month. Ask Glam to record your month and day; no birth year needed. Excludes workshops, memberships, custom builds, ongoing AI usage, and discounted products for the 15% benefit. No stacking with point rewards.</p></div>' : '';
+  $("vipBenefitSlot").querySelectorAll("[data-benefit]").forEach(function(b){b.onclick=async function(){
+    var generation=accountGeneration,email=currentEmail; b.disabled=true;
+    try{var result=await api("/inner-circle-vip-benefit",{email:email,benefit:b.getAttribute("data-benefit")});if(generation!==accountGeneration)return;alert(result.message||"Please try again.");await lookup(email,true);}
+    catch(e){if(generation!==accountGeneration)return;alert("The result is uncertain. Check your requests before trying again.");await lookup(email,true);}
+    finally{if(generation===accountGeneration)b.disabled=false;}
+  };});
+  renderMonthlyGifts(r, vip);
   var pc = "";
   (r.pendingClaims || []).forEach(function(c){
     pc += '<div class="claim-pending">🎁 <strong>' + esc(c.rewardName) + '</strong> is on its way!<br><span style="color:var(--ink-soft);font-size:.85rem">Claim code <code>' + esc(c.code) + '</code> · Glam sends it within 24 hours.</span></div>';
@@ -346,6 +407,31 @@ function renderApp(r){
   pendingPhoto = null;
 }
 
+
+function renderMonthlyGifts(r,vip){
+  var slot=$("monthlyGiftSlot"), gift=(r&&r.monthlyGift)||{};
+  if(!r||!vip){slot.innerHTML="";return;}
+  var h='<div class="card"><h2 class="sec" style="margin-top:0">Choose your monthly VIP gift</h2>';
+  if(gift.claim) h+='<p>'+esc(gift.claim.name)+' · '+esc(gift.claim.status)+'</p>';
+  else if(!(gift.items||[]).length) h+='<p>Your five monthly choices are being prepared. Check back soon.</p>';
+  else {
+    h+='<p>Choose one gift this month. No Glow Points needed. Glam verifies and delivers your selection.</p>';
+    gift.items.forEach(function(p){h+='<div class="reward"><span class="info"><strong>'+esc(p.name)+'</strong><small>'+(p.generator?'Generator':'VIP gift')+'</small></span><button class="claim" data-gift="'+esc(p.id)+'">Choose</button></div>';});
+  }
+  slot.innerHTML=h+'</div>';
+  slot.querySelectorAll("[data-gift]").forEach(function(b){b.onclick=async function(){
+    if(!confirm("Choose this as your one VIP gift for this month?"))return;
+    var generation=accountGeneration,email=currentEmail;
+    slot.querySelectorAll("[data-gift]").forEach(function(x){x.disabled=true;});
+    try{
+      var result=await api("/inner-circle-vip-gift",{email:email,giftId:b.getAttribute("data-gift")});
+      if(generation!==accountGeneration)return;
+      alert(result.message||"Please try again.");
+      await lookup(email,true);
+    }catch(e){if(generation!==accountGeneration)return;alert("The gift request result is uncertain. Check your requests before trying again.");await lookup(email,true);}
+  };});
+}
+
 function switchTab(name){
   ["home","purchases","profile"].forEach(function(t){
     $("tab-" + t).classList.toggle("hidden", t !== name);
@@ -359,18 +445,21 @@ function switchTab(name){
 
 async function claimReward(rewardId, btn){
   if(!confirm("Claim this reward? Glam will send it to you within 24 hours.")) return;
+  var generation=accountGeneration,email=currentEmail;
   btn.disabled = true; btn.textContent = "…";
   try{
-    var r = await api("/inner-circle-claim", { email: currentEmail, rewardId: rewardId });
+    var r = await api("/inner-circle-claim", { email: email, rewardId: rewardId });
+    if(generation!==accountGeneration)return;
     if(r.success){
       alert(r.message);
     }else{
       alert(r.message || "Couldn't claim that reward.");
     }
-    lookup(currentEmail, true);
+    await lookup(email, true);
   }catch(e){
-    alert("Couldn't reach the rewards service. Try again in a moment.");
-    btn.disabled = false; btn.textContent = "Claim";
+    if(generation!==accountGeneration)return;
+    alert("The claim result is uncertain. Check your requests before trying again.");
+    await lookup(email,true);
   }
 }
 
@@ -400,20 +489,23 @@ async function saveProfile(){
   hideErr("profErr");
   var name = $("displayName").value.trim();
   if(!name){ showErr("profErr", "Give yourself a profile name first."); return; }
+  var generation=accountGeneration,email=currentEmail;
   var btn = $("saveProfileBtn");
   btn.disabled = true; btn.textContent = "Saving…";
   try{
     var r = await api("/inner-circle-profile", {
-      email: currentEmail,
+      email: email,
       displayName: name,
       photo: pendingPhoto
     });
+    if(generation!==accountGeneration)return;
     btn.disabled = false; btn.textContent = "Save profile 💾";
     if(!r.success){ showErr("profErr", r.message || "Couldn't save your profile."); return; }
     flashOk("profOk", "Profile saved! ✨");
     pendingPhoto = null;
-    lookup(currentEmail, true);
+    await lookup(email, true);
   }catch(e){
+    if(generation!==accountGeneration)return;
     btn.disabled = false; btn.textContent = "Save profile 💾";
     showErr("profErr", "Couldn't reach the rewards service. Try again in a moment.");
   }
@@ -426,6 +518,7 @@ $("lookupBtn").addEventListener("click", function(){
   lookup(e, false);
 });
 $("email").addEventListener("keydown", function(ev){ if(ev.key === "Enter"){ $("lookupBtn").click(); } });
+$("accessCode").addEventListener("keydown", function(ev){ if(ev.key === "Enter"){ $("lookupBtn").click(); } });
 var tabBtns = $("tabbar").querySelectorAll("button");
 for(var i=0;i<tabBtns.length;i++){
   (function(b){ b.addEventListener("click", function(){ switchTab(b.getAttribute("data-tab")); }); })(tabBtns[i]);
@@ -435,20 +528,23 @@ $("pavatarBtn").addEventListener("click", function(){ $("photoInput").click(); }
 $("photoInput").addEventListener("change", function(){
   var f = $("photoInput").files && $("photoInput").files[0];
   if(!f) return;
+  var generation=accountGeneration;
   fileToResizedDataURL(f, 256, 0.72).then(function(url){
+    if(generation!==accountGeneration)return;
     pendingPhoto = url;
     var nm = $("displayName").value || (currentData && currentData.displayName) || "?";
     setAvatar(url, nm);
     flashOk("profOk", "Photo ready — tap Save profile to keep it. 📷");
   }).catch(function(){
+    if(generation!==accountGeneration)return;
     showErr("profErr", "That photo didn't work — try a different one.");
   });
   $("photoInput").value = "";
 });
 $("saveProfileBtn").addEventListener("click", saveProfile);
 $("switchBtn").addEventListener("click", function(){
-  try{ localStorage.removeItem("ic_email"); }catch(_){}
-  currentEmail = ""; currentData = null;
+  try{ localStorage.removeItem("ic_member_token:"+currentEmail); localStorage.removeItem("ic_email"); }catch(_){}
+  recoverLogin("",true);
   $("email").value = "";
   $("view-app").classList.add("hidden");
   $("view-login").classList.remove("hidden");
@@ -471,3 +567,4 @@ $("installX").addEventListener("click", function(){ $("installHint").style.displ
 </script>
 </body>
 </html>
+

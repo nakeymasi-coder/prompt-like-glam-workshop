@@ -106,7 +106,7 @@ h2.sec{font-family:"Playfair Display",serif;font-size:1.25rem;margin:26px 0 4px}
 
   <!-- hub -->
   <div id="view-hub" class="hidden">
-    <section id="htab-members">
+    <section id="htab-members"><div class="card"><h2 class="sec" style="margin-top:0">Monthly VIP gift collection</h2><p class="hint">Choose five products for this month. Mark at least one generator. Members choose one gift; fulfillment is manual through Payhip.</p><div id="giftEditor"></div><button class="btn" id="saveGiftsBtn">Save monthly choices</button><p id="giftMessage" class="hint"></p></div>
       <h2 class="sec" style="margin-top:14px">Members 👥 <span id="mcount" style="font-size:.85rem;color:var(--ink-soft)"></span></h2>
       <input type="text" id="msearch" placeholder="Search by email…" autocomplete="off" />
       <div id="mlist"></div>
@@ -114,7 +114,7 @@ h2.sec{font-family:"Playfair Display",serif;font-size:1.25rem;margin:26px 0 4px}
     </section>
     <section id="htab-claims" class="hidden">
       <h2 class="sec" style="margin-top:14px">Pending claims 🎁</h2>
-      <p class="hint">Rewards members claimed in the app, waiting for you to send. Fulfill after you deliver the reward via Payhip.</p>
+      <p class="hint">Verify the member against their Payhip purchase email before delivery. Send gifts or personal coupons to that email, then mark fulfilled. VIP benefits cost no points. Use a restricted eligible collection and one-use coupons; do not stack with point rewards.</p>
       <div id="claimsList"></div>
     </section>
     <nav class="tabbar" id="htabbar">
@@ -133,8 +133,13 @@ h2.sec{font-family:"Playfair Display",serif;font-size:1.25rem;margin:26px 0 4px}
 </div>
 
 <script>
+
 "use strict";
-var API = "https://workshop-poratl.netlify.app/.netlify/functions";
+function safePhoto(photo){return typeof photo === "string" && photo.length <= 220000 && /^data:image\/(jpeg|png|webp);base64,(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(photo) && photo.split(',')[1].length > 0 ? photo : "";}
+// Netlify pages stay on their own deployment. Only the established GitHub site uses production fallback.
+var API = window.location.hostname === "nakeymasi-coder.github.io"
+  ? "https://workshop-poratl.netlify.app/.netlify/functions"
+  : window.location.origin + "/.netlify/functions";
 var $ = function(id){ return document.getElementById(id); };
 function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
 function token(){ try{ return localStorage.getItem("ic_admin_token") || ""; }catch(_){ return ""; } }
@@ -196,6 +201,7 @@ function htab(name){
 }
 
 async function boot(){
+  loadGiftEditor();
   try{
     var r = await admin("listMembers", {});
     allMembers = r.members || [];
@@ -234,10 +240,10 @@ async function openMember(email){
 }
 
 function renderDetail(m){
-  var vip = m.tier === "vip";
+  var vip = m.vipPolicyVersion === 2 ? m.vipActive === true : m.tier === "vip";
   var initial = (m.displayName || "?").charAt(0).toUpperCase();
   var h = '<div class="card"><div class="dhead">'
-    + '<div class="davatar">' + (m.photo ? '<img src="' + m.photo + '" alt="" />' : esc(initial)) + '</div>'
+    + '<div class="davatar">' + (safePhoto(m.photo) ? '<img src="' + esc(safePhoto(m.photo)) + '" alt="" />' : esc(initial)) + '</div>'
     + '<div><div class="dname">' + esc(m.displayName) + '</div><div class="demail">' + esc(m.email) + '</div>'
     + (vip ? '<span class="vip-badge">👑 VIP</span>' : '<div class="hint" style="margin:4px 0 0">Member</div>')
     + '</div></div>'
@@ -245,11 +251,18 @@ function renderDetail(m){
     + '<div class="stat"><div class="n">' + m.lifetime + '</div><div class="l">Lifetime</div></div>'
     + '<div class="stat"><div class="n">' + m.purchases.length + '</div><div class="l">Orders</div></div></div>';
 
-  h += '<h2 class="sec">Purchases 🛍️</h2>';
+  h += '<p class="hint">VIP eligible spending: $' + Number(m.vipEligibleSpend || 0).toFixed(2)
+    + ' / $300 in the last 12 months.'
+    + (m.vipExpiresAt ? ' VIP end date: ' + esc(m.vipExpiresAt) + '.' : '')
+    + (m.legacyVip ? ' Previous points-based VIP: review existing benefits before migration.' : '')
+    + '</p>';
+  h += '<h2 class="sec">Purchases</h2><p class="hint">Verify amounts and currency against Payhip before including eligible tools and resources. Exclude workshops, memberships, custom builds, and ongoing AI usage.</p>';
   if(!m.purchases.length) h += '<p class="hint">No purchases on record.</p>';
   m.purchases.forEach(function(p){
     h += '<div class="pur"><span class="info"><strong>' + esc(p.product) + '</strong><small>' + esc(p.date || "")
-      + (p.amount != null ? " · $" + Number(p.amount).toFixed(2) : "") + '</small></span><span class="g">+' + p.points + ' pts</span></div>';
+      + (p.amount != null ? " · $" + Number(p.amount).toFixed(2) : "") + '</small></span><span class="g">+' + p.points + ' pts</span></div>'
+      + '<div class="hint">VIP: ' + (p.vipEligible === true ? 'Eligible' : p.vipEligible === false ? 'Excluded' : 'Needs review') + ' · ' + esc(p.currency || 'Currency unverified')
+      + ' <button type="button" class="btn small" data-review="' + esc(p.key || '') + '">Review order</button></div>';
   });
 
   h += '<h2 class="sec">Points activity</h2>';
@@ -261,6 +274,8 @@ function renderDetail(m){
     h += '<div class="act"><span>' + esc(a.label) + '<br><span class="d">' + esc(a.date || "") + '</span></span><span class="p ' + cls + '">' + sign + a.points + '</span></div>';
   });
 
+  h += '<h2 class="sec">Member access</h2><p class="hint">Issue a one-use access code and deliver it only to this member’s verified Payhip purchase email. Valid seven days; signed-in access lasts 30 days.</p><button class="btn small" id="issueAccessBtn">Create personal access code</button><p class="hint" id="memberAccessMessage" style="overflow-wrap:anywhere"></p>';
+  h += '<h2 class="sec">Birthday reward</h2><p class="hint">Confirm the member’s birthday month and day. No year needed. Birthday coupons are verified and delivered to the purchase email.</p><label for="birthdayDay">Birthday (MM-DD)</label><input type="text" id="birthdayDay" maxlength="5" placeholder="05-22" value="'+esc(m.birthday||'')+'"><button class="btn small" id="saveBirthdayBtn">Save verified birthday</button>';
   h += '<h2 class="sec">Add Glow Points ➕</h2>'
     + '<div style="display:flex;gap:8px"><input type="number" id="apPts" placeholder="Points" style="flex:0 0 110px" />'
     + '<input type="text" id="apLabel" placeholder="Reason (e.g. TikTok live 10/19)" /></div>'
@@ -271,6 +286,39 @@ function renderDetail(m){
   $("mlist").innerHTML = "";
   $("backBtn").addEventListener("click", function(){ $("mdetail").innerHTML = ""; renderMlist($("msearch").value); });
   $("apBtn").addEventListener("click", function(){ addPointsTo(m.email); });
+  $("issueAccessBtn").onclick=async function(){
+    this.disabled=true;
+    try{
+      const result=await admin("issueMemberAccess",{email:m.email});
+      $("memberAccessMessage").textContent=result.success ? "Send only to "+m.email+": "+result.code+" — "+result.message : result.message;
+    }catch(e){$("memberAccessMessage").textContent="Could not create a code. Try again.";}
+    finally{this.disabled=false;}
+  };
+  $("saveBirthdayBtn").onclick=async function(){
+    this.disabled=true;
+    try{const result=await admin("setBirthday",{email:m.email,birthday:$("birthdayDay").value.trim()});alert(result.success?"Birthday saved.":result.message);}
+    catch(e){alert("Could not save birthday.");}
+    finally{this.disabled=false;}
+  };
+  document.querySelectorAll("[data-review]").forEach(function(b) {
+    b.addEventListener("click", async function() {
+      var currency = prompt("Verified three-letter purchase currency (for example USD):");
+      if (!currency) return;
+      currency = currency.trim().toUpperCase();
+      if (!/^[A-Z]{3}$/.test(currency)) { alert("Enter a three-letter currency."); return; }
+      var choice = prompt("Type INCLUDE for eligible tools/resources, or EXCLUDE for workshops, memberships, custom builds, or ongoing AI usage:");
+      if (!choice) return;
+      choice = choice.trim().toUpperCase();
+      if (choice !== "INCLUDE" && choice !== "EXCLUDE") { alert("Enter INCLUDE or EXCLUDE."); return; }
+      if (!confirm("Save this order as " + choice + " with currency " + currency + "? Existing points will remain unchanged.")) return;
+      b.disabled = true;
+      try {
+        var result = await admin("classifySale", {email:m.email, key:b.getAttribute("data-review"), currency:currency, vipEligible:choice === "INCLUDE"});
+        if (!result.success) alert(result.message || "Could not save.");
+        await openMember(m.email);
+      } catch(e) { b.disabled = false; }
+    });
+  });
 }
 
 async function addPointsTo(email){
@@ -299,6 +347,7 @@ async function loadClaims(silentBadge){
     claims.forEach(function(c){
       h += '<div class="claimbox"><strong>' + esc(c.rewardName) + '</strong><br>'
         + '<span style="color:var(--ink-soft);font-size:.85rem">' + esc(c.email) + ' · code <code>' + esc(c.code) + '</code> · ' + esc((c.createdAt || "").slice(0,10)) + '</span><br>'
+        + (c.productUrl ? '<br><a href="' + esc(c.productUrl) + '" target="_blank" rel="noopener">Open selected Payhip product</a><br>' : '')
         + '<button class="btn small" data-fulfill="' + esc(c.code) + '" data-em="' + esc(c.email) + '">Mark fulfilled ✅</button>'
         + '<button class="btn small danger" data-cancel="' + esc(c.code) + '" data-em="' + esc(c.email) + '">Cancel</button></div>';
     });
@@ -319,7 +368,7 @@ function bindClaimButtons(){
 }
 
 async function settleClaim(email, code, action){
-  var verb = action === "fulfillClaim" ? "fulfilled (points deducted)" : "cancelled";
+  var verb = action === "fulfillClaim" ? "fulfilled after delivery (VIP benefits cost no points)" : "cancelled";
   if(!confirm("Mark claim " + code + " as " + verb + "?")) return;
   try{
     var r = await admin(action, { email: email, claimId: code });
@@ -340,6 +389,28 @@ for(var i=0;i<hbs.length;i++){
   (function(b){ b.addEventListener("click", function(){ htab(b.getAttribute("data-tab")); }); })(hbs[i]);
 }
 
+
+async function loadGiftEditor(){
+  try{
+    const r=await admin("getGiftCatalog",{});
+    if(!r.success)return;
+    document.getElementById("giftMessage").textContent="Collection: "+r.month;
+    document.getElementById("giftEditor").innerHTML=Array.from({length:5},(_,i)=>{
+      const p=r.items[i]||{};
+      return '<div class="field"><label>Choice '+(i+1)+'</label><input type="text" id="giftName'+i+'" placeholder="Product name" value="'+esc(p.name||'')+'"><input type="text" id="giftUrl'+i+'" placeholder="https://payhip.com/b/..." value="'+esc(p.url||'')+'"><label><input type="checkbox" id="giftGen'+i+'" '+(p.generator?'checked':'')+'> Generator</label></div>';
+    }).join("");
+    document.getElementById("saveGiftsBtn").onclick=async function(){
+      this.disabled=true;
+      try{
+        const items=Array.from({length:5},(_,i)=>({id:"choice-"+(i+1),name:document.getElementById("giftName"+i).value.trim(),url:document.getElementById("giftUrl"+i).value.trim(),generator:document.getElementById("giftGen"+i).checked}));
+        const saved=await admin("saveGiftCatalog",{month:r.month,items});
+        document.getElementById("giftMessage").textContent=saved.success?"Five monthly choices saved.":saved.message;
+      }catch(e){document.getElementById("giftMessage").textContent="Could not save. Try again.";}
+      finally{this.disabled=false;}
+    };
+  }catch(e){}
+}
+
 // try saved token
 (function(){
   if(token()){
@@ -351,3 +422,4 @@ for(var i=0;i<hbs.length;i++){
 </script>
 </body>
 </html>
+
