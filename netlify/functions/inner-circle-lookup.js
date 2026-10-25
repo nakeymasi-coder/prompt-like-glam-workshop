@@ -1,10 +1,10 @@
 // POST { email } -> member balance, rewards, recent activity.
 // Public (rate-limited). Never lists other members.
-import {
-  REWARDS, VIP_THRESHOLD, withCors, json,
+import { verifyMemberToken,
+  REWARDS, VIP_THRESHOLD, vipForPurchases, rewardMonth, validGiftCatalog, birthdayAvailable, withCors, json,
   memberStore, getMemberEvents, summarize,
   isValidEmail, rateLimited,
-  getProfile, defaultDisplayName, productNameFromLabel,
+  getProfile, safePhoto, defaultDisplayName, productNameFromLabel,
 } from "./inner-circle-lib.js";
 
 export default async (req) =>
@@ -18,6 +18,7 @@ export default async (req) =>
       return json({ success: false, message: "Please enter a valid email address." }, 400, req);
     }
 
+    if (!verifyMemberToken(email, body.memberToken)) return json({success:false,message:"Verify your purchase email with your personal access code."},401,req);
     const store = memberStore();
     const events = await getMemberEvents(store, email);
     if (!events.length) {
@@ -48,15 +49,26 @@ export default async (req) =>
       }
     }
 
+    const month = rewardMonth();
+    const giftItems = await store.get("gift-catalog:" + month,{type:"json",consistency:"strong"});
+    let monthlyGiftClaim = null;
+    for (const b of listed.blobs || []) {
+      const c = await store.get(b.key,{type:"json",consistency:"strong"});
+      if(c && c.email===email && c.kind==="vip-monthly" && c.month===month) monthlyGiftClaim={name:c.rewardName,status:c.status};
+    }
     return json({
+      monthlyGift: {month,items:validGiftCatalog(giftItems)?giftItems:[],claim:monthlyGiftClaim},
+      birthdayOnFile: !!profile.birthdayVerifiedAt,
+      birthdayRewardAvailable: !!profile.birthdayVerifiedAt && birthdayAvailable(profile.birthday),
       success: true,
       found: true,
       email,
       displayName: profile.displayName || defaultDisplayName(email),
-      photo: profile.photo || "",
+      photo: safePhoto(profile.photo),
       points: s.points,
       lifetime: s.lifetime,
       tier: s.tier,
+      ...vipForPurchases(events),
       vipThreshold: VIP_THRESHOLD,
       vipProgress: Math.min(1, s.lifetime / VIP_THRESHOLD),
       rewards: REWARDS.map((r) => ({ ...r, canClaim: s.points >= r.cost })),
@@ -65,3 +77,4 @@ export default async (req) =>
       pendingClaims,
     }, 200, req);
   });
+

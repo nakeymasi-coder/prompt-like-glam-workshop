@@ -1,9 +1,9 @@
 // Member profile: display name + photo. POST { email, displayName?, photo? }.
 // Photo is a data URL (client resizes to ~256px JPEG first). Stored as one
 // per-member blob — only the member writes their own, so no contention.
-import {
+import { verifyMemberToken,
   withCors, json, memberStore, getMemberEvents,
-  getProfile, profileKey, isValidEmail, rateLimited,
+  getProfile, profileKey, safePhoto, isValidEmail, rateLimited,
 } from "./inner-circle-lib.js";
 
 const MAX_PHOTO_CHARS = 220000; // ~160KB data URL cap
@@ -19,6 +19,7 @@ export default async (req) =>
       return json({ success: false, message: "Please enter a valid email address." }, 400, req);
     }
 
+    if (!verifyMemberToken(email, body.memberToken)) return json({success:false,message:"Verify your purchase email with your personal access code."},401,req);
     const store = memberStore();
     const events = await getMemberEvents(store, email);
     if (!events.length) {
@@ -27,16 +28,18 @@ export default async (req) =>
 
     const displayName = typeof body.displayName === "string" ? body.displayName.trim().slice(0, 40) : null;
     const photo = typeof body.photo === "string" ? body.photo : null;
-    if (photo && (photo.length > MAX_PHOTO_CHARS || !/^data:image\/(jpeg|png|webp);base64,/.test(photo))) {
+    if (body.photo !== undefined && body.photo !== null && (typeof body.photo !== "string" || (photo && !safePhoto(photo)))) {
       return json({ success: false, message: "That photo didn't upload right — try a smaller one." }, 400, req);
     }
 
     const prev = (await getProfile(store, email)) || {};
     const profile = {
+      ...prev,
       displayName: displayName || prev.displayName || "",
       photo: photo !== null ? photo : (prev.photo || ""),
       updatedAt: new Date().toISOString(),
     };
     await store.setJSON(profileKey(email), profile);
-    return json({ success: true, profile: { displayName: profile.displayName, photo: profile.photo } }, 200, req);
+    return json({ success: true, profile: { displayName: profile.displayName, photo: safePhoto(profile.photo) } }, 200, req);
   });
+
