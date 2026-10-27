@@ -134,9 +134,10 @@
     <input id="genKeyInput" type="text" placeholder="Paste your license key here" autocomplete="off" spellcheck="false">
     <button id="genUnlockBtn">Unlock My Generator</button>
     <p id="genGateMsg"></p>
-    <p class="genGate-hint"><strong>Where's my key?</strong><br>It's in the email Payhip sent you right after checkout — look for "license key".<br>Buying now? The key arrives within a couple of minutes of payment.</p>
+    <p class="genGate-hint"><strong>Where's my key?</strong><br>It's in the email Payhip sent you right after checkout — look for "license key".<br>Purchased on Glam Hustle Hub? Open your generator from My Account on the store.</p>
   </div>
 </div>
+<script src="../../glam-store-client.js"></script>
 <script>
 (function(){
   "use strict";
@@ -188,6 +189,16 @@
     }
   });
   input.addEventListener("keydown", function(e){ if (e.key === "Enter") btn.click(); });
+  async function checkStoreAccess(initial){
+    if(!window.GlamStoreAccess) return;
+    var claim=initial && window.GlamStoreAccess.hasIncoming();
+    var active=await window.GlamStoreAccess.check("3b456086-de57-42c8-b883-dfc1796cd61f",claim);
+    if(active || readFlag()) unlock(); else lock();
+    if(claim && !active) say("We couldn’t confirm your store purchase. Open a fresh link from My Account on Glam Hustle Hub.");
+  }
+  checkStoreAccess(true);
+  setInterval(function(){checkStoreAccess(false);},60000);
+  window.addEventListener("focus",function(){checkStoreAccess(false);});
 })();
 </script>
 <!-- ================= end GENERATOR LICENSE GATE ================= -->
@@ -1423,3 +1434,4 @@ $("#copyAllBtn").addEventListener("click", ()=>{
 </script>
 </body>
 </html>
+

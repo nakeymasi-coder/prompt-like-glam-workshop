@@ -5886,7 +5886,8 @@ body .brand-block::before{
       rel="stylesheet"
     />
     <script src="https://unpkg.com/lucide@latest"></script>
-  </head>
+  <script src="./glam-store-client.js"></script>
+</head>
   <body>
     <a class="skip-link" href="#portal-home">Skip to content</a>
     <div class="app-shell">
@@ -10900,6 +10901,7 @@ End with:
 “Your Build Plan is ready. Stay in this same ChatGPT conversation so I can use everything we already decided when we move to the next step.”`;
 
   const state = {
+    storeAccess: {prompt:false, brandWorld:false},
     currentPage: "portal-home",
     notes: [],
     activeNoteId: null,
@@ -10919,6 +10921,7 @@ End with:
   document.addEventListener("DOMContentLoaded", init);
 
   async function init() {
+    await syncStoreWorkshopAccess(true);
     cacheDom();
     bindNavigation();
     restoreLastPage();
@@ -10951,6 +10954,11 @@ End with:
     bindKeyboardSupport();
     updatePortalProgress();
     refreshIcons();
+    const purchasedWorkshop = new URLSearchParams(location.search).get("store_product");
+    if (purchasedWorkshop === "prompt" && state.storeAccess.prompt) showPage("prompt-dashboard");
+    if (purchasedWorkshop === "brand-world" && state.storeAccess.brandWorld) showPage("brand-world-workshop");
+    setInterval(() => syncStoreWorkshopAccess(false), 60000);
+    window.addEventListener("focus", () => syncStoreWorkshopAccess(false));
   }
 
   function cacheDom() {
@@ -11071,7 +11079,7 @@ End with:
 
   // EXISTING INDIVIDUAL WORKSHOP ACCESS
   if (pageId === "prompt-dashboard") {
-    const hasPromptAccess = readStorage(
+    const hasPromptAccess = state.storeAccess.prompt || readStorage(
       STORAGE.promptWorkshopAccess,
       false,
     );
@@ -11085,7 +11093,7 @@ End with:
   } else if (
     pageId === "brand-world-workshop" &&
     !state.communityIsAdmin &&
-    !readStorage(STORAGE.brandWorldWorkshopAccess, false)
+    !(state.storeAccess.brandWorld || readStorage(STORAGE.brandWorldWorkshopAccess, false))
   ) {
     return showPage("brand-world-access", { save, focus });
   } else if (pageId === "website-dashboard") {
@@ -11283,6 +11291,32 @@ function restoreLastPage() {
     return page?.querySelector("h1")?.textContent.trim() || pageId;
   }
 
+  async function syncStoreWorkshopAccess(initial) {
+    const bridge = window.GlamStoreAccess;
+    if (!bridge) return;
+    const requested = new URLSearchParams(location.search).get("store_product");
+    const hadToken = initial && bridge.hasIncoming();
+    const prompt = "b2131878-96e7-48df-95e3-32089e32a237";
+    const brand = "45f717c0-05d7-4cd7-b3e2-694469377ba7";
+    state.storeAccess.prompt = await bridge.check(prompt, hadToken && requested === "prompt");
+    state.storeAccess.brandWorld = await bridge.check(brand, hadToken && requested === "brand-world");
+    if (!initial) {
+      const pairs = [
+        ["promptWorkshopLockedState", "promptWorkshopUnlockedState", state.storeAccess.prompt || readStorage(STORAGE.promptWorkshopAccess, false)],
+        ["brandWorldLockedState", "brandWorldUnlockedState", state.storeAccess.brandWorld || readStorage(STORAGE.brandWorldWorkshopAccess, false) || state.communityIsAdmin]
+      ];
+      for (const [locked, unlocked, active] of pairs) {
+        if (document.getElementById(locked)) document.getElementById(locked).hidden = Boolean(active);
+        if (document.getElementById(unlocked)) document.getElementById(unlocked).hidden = !active;
+      }
+      if ((state.currentPage === "prompt-dashboard" && !pairs[0][2]) || (state.currentPage === "brand-world-workshop" && !pairs[1][2])) showPage(state.currentPage, {save:false,focus:false});
+    }
+    if (hadToken) {
+      const ok = requested === "prompt" ? state.storeAccess.prompt : requested === "brand-world" && state.storeAccess.brandWorld;
+      if (!ok) setTimeout(() => showToast("We couldn’t confirm your store purchase. Open a fresh link from My Account or contact Glam."), 0);
+    }
+  }
+
   function bindWorkshopCards() {
     document.getElementById("continueBtn")?.addEventListener("click", () => {
       const lastPage = readStorage(STORAGE.lastPage, null);
@@ -11385,7 +11419,7 @@ function restoreLastPage() {
 
     if (!unlockBtn || !licenseInput || !lockedState || !unlockedState) return;
 
-    const savedAccess = readStorage(STORAGE.brandWorldWorkshopAccess, false);
+    const savedAccess = (state.storeAccess.brandWorld || readStorage(STORAGE.brandWorldWorkshopAccess, false));
 
     if (savedAccess === true || state.communityIsAdmin) {
       lockedState.hidden = true;
@@ -11477,7 +11511,7 @@ function restoreLastPage() {
 
     if (!unlockBtn || !licenseInput || !lockedState || !unlockedState) return;
 
-    const savedAccess = readStorage(STORAGE.promptWorkshopAccess, false);
+    const savedAccess = (state.storeAccess.prompt || readStorage(STORAGE.promptWorkshopAccess, false));
 
     if (savedAccess === true) {
       lockedState.hidden = true;
@@ -12566,9 +12600,9 @@ state.communityClient.auth.onAuthStateChange((event, nextSession) => {
 
   function hasWorkshopCommunityAccess() {
     return Boolean(
-      readStorage(STORAGE.promptWorkshopAccess, false) ||
+      (state.storeAccess.prompt || readStorage(STORAGE.promptWorkshopAccess, false)) ||
         readStorage(STORAGE.websiteWorkshopAccess, false) ||
-        readStorage(STORAGE.brandWorldWorkshopAccess, false),
+        (state.storeAccess.brandWorld || readStorage(STORAGE.brandWorldWorkshopAccess, false)),
     );
   }
 
@@ -15919,4 +15953,5 @@ async function saveBackRoomReplays() {
     </script>
   </body>
 </html>
+
 
