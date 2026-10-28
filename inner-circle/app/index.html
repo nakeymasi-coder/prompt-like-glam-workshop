@@ -4,9 +4,9 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="description" content="Glam's Inner Circle rewards app — your Glow Points, purchases, and rewards in your pocket." />
-<meta name="theme-color" content="#0f52ba" />
+<meta name="theme-color" content="#0a2a5e" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="Inner Circle" />
 <link rel="manifest" href="manifest.json" />
 <link rel="apple-touch-icon" href="icon-192.png" />
@@ -17,205 +17,301 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&family=Jost:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
 <style>
 :root{
-  --bg-grad:linear-gradient(160deg,#fdfdff 0%,#eef4fc 55%,#e3edf9 100%);
-  --card:#ffffff; --card-soft:#f6f9fe;
-  --ink:#182540; --ink-soft:#4c5d78;
-  --sapphire:#0f52ba; --sapphire-deep:#0a3a86; --sapphire-pale:#eef5ff;
-  --silver:#aebdd1; --line:#d7e2f0;
-  --shadow:0 10px 30px rgba(15,82,186,.10); --shadow-sm:0 3px 10px rgba(15,82,186,.08);
-  --radius:18px; --btn-grad:linear-gradient(135deg,#2f6fd0 0%,#0f52ba 55%,#0a3a86 100%);
+  --sapphire:#0f52ba; --sapphire-deep:#0a3a86; --navy:#0a2a5e; --navy2:#071f47;
+  --ink:#182540; --ink-soft:#5a6b87;
+  --pale:#eef5ff; --line:#d9e4f2; --card:#ffffff;
+  --gold:#d4af37; --gold-deep:#8a6a2f;
+  --btn-grad:linear-gradient(135deg,#2f6fd0 0%,#0f52ba 55%,#0a3a86 100%);
+  --card-grad:linear-gradient(150deg,#1450a8 0%,#0a3a86 48%,#071f47 100%);
   --gold-grad:linear-gradient(135deg,#8a6a2f,#d4af37 55%,#8a6a2f);
+  --shadow:0 14px 34px rgba(7,31,71,.22);
+  --r-lg:26px; --r-md:18px;
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg-grad);color:var(--ink);min-height:100vh}
-.wrap{max-width:520px;margin:0 auto;padding:20px 16px 110px}
-.topbar{text-align:center;padding:18px 0 6px}
-.topbar .mark{font-size:2rem}
-h1{font-family:"Playfair Display",serif;font-weight:800;font-size:1.7rem;margin:.2em 0 0}
-.tag{color:var(--ink-soft);font-size:.95rem;margin:6px 0 0}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:22px 20px;margin-top:16px}
+html,body{height:100%}
+body{margin:0;font-family:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);
+  background:radial-gradient(1100px 700px at 15% -10%,#2f6fd0 0%,transparent 55%),radial-gradient(900px 650px at 110% 110%,#7fb2f0 0%,transparent 50%),linear-gradient(160deg,#0a2a5e,#071f47 70%);
+  min-height:100dvh}
+.stage{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:26px 14px}
+.phone{width:min(420px,100%);height:min(880px,94dvh);background:#0b1220;border-radius:50px;padding:11px;box-shadow:0 40px 90px rgba(0,0,0,.5),0 0 0 2px #2a3648;position:relative;flex:0 0 auto}
+.phone::after{content:"";position:absolute;top:24px;left:50%;transform:translateX(-50%);width:112px;height:26px;background:#0b1220;border-radius:999px;z-index:60}
+.screen{position:relative;height:100%;border-radius:40px;overflow:hidden;background:linear-gradient(180deg,#f7faff 0%,#eef4fc 100%);display:flex;flex-direction:column}
+@media (max-width:560px){
+  .stage{padding:0}
+  .phone{width:100%;height:100dvh;border-radius:0;padding:0;box-shadow:none}
+  .phone::after{display:none}
+  .screen{border-radius:0}
+}
+.statusbar{display:flex;justify-content:space-between;align-items:center;padding:14px 26px 4px;font-size:.8rem;font-weight:600;color:var(--ink);flex:0 0 auto}
+.statusbar .sicons{letter-spacing:.12em;font-size:.72rem;color:var(--ink-soft)}
+.scroll{flex:1;overflow-y:auto;padding:6px 18px 22px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.scroll::-webkit-scrollbar{display:none}
 .hidden{display:none!important}
-label{display:block;font-weight:600;margin-bottom:8px}
-input[type=email],input[type=text],input[type=number]{width:100%;padding:14px 16px;font-size:1.05rem;border:1.5px solid var(--line);border-radius:14px;font-family:inherit;background:#fff;color:var(--ink)}
+/* splash / login */
+.splash{text-align:center;padding:34px 10px 8px}
+.splash .orb{width:96px;height:96px;margin:0 auto;border-radius:32px;background:var(--card-grad);display:flex;align-items:center;justify-content:center;font-size:2.9rem;box-shadow:var(--shadow)}
+.splash h1{font-family:"Playfair Display",serif;font-weight:800;font-size:1.85rem;margin:16px 0 0;color:var(--navy)}
+.splash .tag{color:var(--ink-soft);margin:6px 0 0;font-size:.98rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:0 8px 24px rgba(15,82,186,.08);padding:22px 20px;margin-top:18px}
+label{display:block;font-weight:600;margin-bottom:8px;font-size:.95rem}
+input[type=email],input[type=text]{width:100%;padding:14px 16px;font-size:1.05rem;border:1.5px solid var(--line);border-radius:14px;font-family:inherit;background:#fff;color:var(--ink)}
 input:focus{outline:none;border-color:var(--sapphire);box-shadow:0 0 0 3px rgba(15,82,186,.12)}
+input:disabled{background:#f2f6fc;color:var(--ink-soft)}
 .btn{display:block;width:100%;margin-top:14px;padding:15px;border:0;border-radius:999px;background:var(--btn-grad);color:#fff;font-weight:700;font-size:1.05rem;font-family:inherit;cursor:pointer;box-shadow:0 8px 22px rgba(15,82,186,.25)}
 .btn:disabled{opacity:.55;cursor:default;box-shadow:none}
-.btn.ghost{background:#fff;color:var(--sapphire-deep);border:1.5px solid var(--line);box-shadow:none;margin-top:10px}
-.btn.small{width:auto;display:inline-block;padding:10px 22px;font-size:.95rem;margin-top:10px}
+.btn.small{width:auto;display:inline-block;padding:10px 24px;font-size:.95rem;margin-top:12px}
 .err{background:#fdeef0;border:1px solid #f3c2cb;color:#8a2b3a;border-radius:12px;padding:12px 14px;margin-top:12px;font-size:.95rem}
 .okmsg{background:#eaf7ee;border:1px solid #bfe6c9;color:#1e6b34;border-radius:12px;padding:12px 14px;margin-top:12px;font-size:.95rem}
-.hint{font-size:.88rem;color:var(--ink-soft);margin-top:12px;line-height:1.6;text-align:center}
+.hint{font-size:.88rem;color:var(--ink-soft);margin-top:14px;line-height:1.6;text-align:center}
 .hint a{color:var(--sapphire)}
+.spinner{width:24px;height:24px;border:3px solid var(--line);border-top-color:var(--sapphire);border-radius:50%;margin:18px auto;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 /* app header */
-.apphead{display:flex;align-items:center;gap:14px;padding:14px 4px 2px}
-.avatar{width:58px;height:58px;border-radius:50%;border:2px solid var(--sapphire);background:var(--btn-grad);color:#fff;font-family:"Playfair Display",serif;font-weight:800;font-size:1.5rem;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;flex:0 0 auto;padding:0}
+.apphead{display:flex;align-items:center;gap:12px;padding:12px 2px 2px}
+.avatar{width:52px;height:52px;border-radius:50%;border:2px solid #fff;outline:2px solid var(--sapphire);background:var(--btn-grad);color:#fff;font-family:"Playfair Display",serif;font-weight:800;font-size:1.35rem;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;flex:0 0 auto;padding:0}
 .avatar img{width:100%;height:100%;object-fit:cover}
-.hello{font-family:"Playfair Display",serif;font-size:1.35rem;font-weight:700}
-.hellosub{color:var(--ink-soft);font-size:.88rem}
-/* balance */
-.balance{text-align:center;padding:30px 20px 24px;position:relative;overflow:hidden}
-.balance::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:linear-gradient(90deg,#0f52ba,#7fb2f0 35%,#ffffff 50%,#c9d6e8 65%,#0f52ba)}
-.pts{font-family:"Playfair Display",serif;font-size:3.4rem;font-weight:800;line-height:1;margin:4px 0}
-.pts-label{font-size:.85rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
-.tier{margin-top:12px}
-.vip-badge{display:inline-block;background:var(--gold-grad);color:#fff;font-weight:700;padding:8px 20px;border-radius:999px;font-size:.95rem}
-.progress{margin-top:14px;text-align:left}
-.progress .plabel{font-size:.85rem;color:var(--ink-soft);margin-bottom:6px}
-.bar{height:10px;background:var(--sapphire-pale);border:1px solid var(--line);border-radius:999px;overflow:hidden}
-.bar > div{height:100%;background:var(--btn-grad);border-radius:999px;transition:width .6s ease}
-.vip .bar > div{background:var(--gold-grad)}
-h2.sec{font-family:"Playfair Display",serif;font-size:1.25rem;margin:26px 0 4px}
-.reward{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:16px;margin-top:10px}
-.reward .cost{flex:0 0 auto;min-width:74px;text-align:center;font-weight:700;color:#fff;background:var(--btn-grad);border-radius:999px;padding:8px 10px;font-size:.9rem}
-.reward .info{flex:1}
+.hello{font-family:"Playfair Display",serif;font-size:1.28rem;font-weight:700;line-height:1.15}
+.tierchip{display:inline-block;margin-top:3px;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--sapphire-deep);background:var(--pale);border:1px solid var(--line);padding:3px 10px;border-radius:999px}
+.tierchip.vip{background:var(--gold-grad);color:#fff;border-color:transparent}
+/* member card */
+.mcard{margin-top:14px;border-radius:28px;background:var(--card-grad);color:#fff;padding:22px 22px 20px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.mcard::before{content:"🦋";position:absolute;right:-14px;top:-20px;font-size:7.5rem;opacity:.13;transform:rotate(14deg)}
+.mcard::after{content:"";position:absolute;inset:auto -30% -65% -30%;height:70%;background:radial-gradient(closest-side,rgba(127,178,240,.4),transparent);pointer-events:none}
+.mcard .brand{font-size:.72rem;letter-spacing:.24em;font-weight:700;color:#c9dcf7;text-transform:uppercase}
+.mcard .ptsrow{display:flex;align-items:baseline;gap:10px;margin-top:8px;position:relative;z-index:1}
+.mcard .pts{font-family:"Playfair Display",serif;font-size:3.3rem;font-weight:800;line-height:1}
+.mcard .ptslabel{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:#c9dcf7;font-weight:600}
+.mcard .meta{display:flex;gap:8px;margin-top:16px;position:relative;z-index:1}
+.mcard .meta .m{flex:1;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:9px 10px;text-align:center}
+.mcard .meta .m .n{font-weight:700;font-size:1.02rem}
+.mcard .meta .m .l{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#c9dcf7}
+.mcard .vipwrap{margin-top:16px;position:relative;z-index:1}
+.mcard .viplabel{font-size:.82rem;color:#e6eefb;margin-bottom:7px;display:flex;justify-content:space-between;gap:8px}
+.mcard .bar{height:9px;background:rgba(255,255,255,.18);border-radius:999px;overflow:hidden}
+.mcard .bar>div{height:100%;background:linear-gradient(90deg,#7fb2f0,#fff);border-radius:999px;transition:width .7s ease}
+.mcard.vip .bar>div{background:var(--gold-grad)}
+/* next reward banner */
+.nextr{margin-top:14px;border-radius:var(--r-md);background:#fff8e6;border:1px solid #ecd9a0;color:#6d5310;padding:13px 16px;font-size:.94rem;display:flex;gap:10px;align-items:center}
+.nextr.ready{background:#eaf7ee;border-color:#bfe6c9;color:#1e6b34}
+.nextr .big{font-size:1.3rem}
+/* sections */
+h2.sec{font-family:"Playfair Display",serif;font-size:1.22rem;margin:24px 0 2px;color:var(--navy);display:flex;align-items:center;gap:8px}
+.secsub{color:var(--ink-soft);font-size:.87rem;margin:2px 0 0}
+/* earn grid */
+.earn{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.earn .tile{background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 14px 12px;box-shadow:0 4px 14px rgba(15,82,186,.06)}
+.earn .tile .ic{font-size:1.45rem}
+.earn .tile .v{font-weight:800;color:var(--sapphire-deep);font-size:1.05rem;margin-top:4px}
+.earn .tile .t{font-size:.86rem;color:var(--ink-soft);line-height:1.35;margin-top:1px}
+/* rewards */
+.reward{background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:0 4px 14px rgba(15,82,186,.06);padding:16px;margin-top:10px}
+.reward .rrow{display:flex;gap:12px;align-items:center}
+.reward .cost{flex:0 0 auto;min-width:70px;text-align:center;font-weight:800;color:#fff;background:var(--btn-grad);border-radius:999px;padding:8px 8px;font-size:.88rem}
+.reward .info{flex:1;min-width:0}
 .reward .info strong{display:block;font-size:1rem}
 .reward .info small{color:var(--ink-soft);font-size:.85rem}
-.reward .claim{flex:0 0 auto;border:0;border-radius:999px;background:var(--btn-grad);color:#fff;font-weight:700;padding:10px 18px;font-family:inherit;cursor:pointer}
-.reward .claim:disabled{opacity:.45;cursor:default}
-.reward.locked{opacity:.75}
-.act{display:flex;justify-content:space-between;gap:10px;padding:11px 2px;border-bottom:1px solid var(--line);font-size:.93rem}
-.act:last-child{border-bottom:0}
-.act .d{color:var(--ink-soft);font-size:.8rem;white-space:nowrap}
-.act .p{font-weight:700;white-space:nowrap}
-.act .p.neg{color:#b3541e}.act .p.pos{color:#1e6b34}
-.claim-pending{background:#fff8e6;border:1px solid #ecd9a0;border-radius:12px;padding:12px 14px;margin-top:10px;font-size:.93rem}
+.reward .claim{flex:0 0 auto;border:0;border-radius:999px;background:var(--btn-grad);color:#fff;font-weight:700;padding:10px 18px;font-family:inherit;cursor:pointer;font-size:.95rem}
+.reward .claim:disabled{background:#e6edf7;color:#8fa3bd;cursor:default}
+.reward .rprog{margin-top:12px}
+.reward .rprog .bar{height:8px;background:var(--pale);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.reward .rprog .bar>div{height:100%;background:var(--btn-grad);border-radius:999px;transition:width .6s ease}
+.reward .rprog .rl{display:flex;justify-content:space-between;font-size:.78rem;color:var(--ink-soft);margin-top:5px}
+.reward.ready{border-color:#bfe6c9;background:#f4fbf5}
+.claim-pending{background:#fff8e6;border:1px solid #ecd9a0;border-radius:14px;padding:13px 15px;margin-top:12px;font-size:.93rem}
 .claim-pending code{background:#fff;border:1px solid #ecd9a0;border-radius:6px;padding:2px 8px;font-weight:700}
+/* activity timeline */
+.timeline{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:0 8px 24px rgba(15,82,186,.08);padding:8px 18px;margin-top:12px}
+.act{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.act:last-child{border-bottom:0}
+.act .dot{flex:0 0 auto;width:11px;height:11px;border-radius:50%;background:var(--sapphire);margin-top:5px;box-shadow:0 0 0 4px var(--pale)}
+.act .dot.neg{background:#b3541e;box-shadow:0 0 0 4px #fbeee3}
+.act .body{flex:1;min-width:0;font-size:.94rem}
+.act .d{color:var(--ink-soft);font-size:.8rem}
+.act .p{font-weight:800;white-space:nowrap}
+.act .p.neg{color:#b3541e}.act .p.pos{color:#1e6b34}
 /* purchases */
-.pur{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:14px 16px;margin-top:10px}
-.pur .bag{flex:0 0 auto;width:44px;height:44px;border-radius:14px;background:var(--sapphire-pale);display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.pursum{margin-top:14px;border-radius:var(--r-lg);background:var(--card-grad);color:#fff;padding:18px 20px;display:flex;gap:10px;box-shadow:var(--shadow)}
+.pursum .s{flex:1;text-align:center}
+.pursum .s .n{font-family:"Playfair Display",serif;font-weight:800;font-size:1.6rem}
+.pursum .s .l{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#c9dcf7}
+.pur{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:0 4px 14px rgba(15,82,186,.06);padding:14px 16px;margin-top:10px}
+.pur .bag{flex:0 0 auto;width:46px;height:46px;border-radius:15px;background:var(--pale);display:flex;align-items:center;justify-content:center;font-size:1.35rem}
 .pur .info{flex:1;min-width:0}
 .pur .info strong{display:block;font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pur .info small{color:var(--ink-soft);font-size:.82rem}
-.pur .pts-got{flex:0 0 auto;font-weight:700;color:#1e6b34;font-size:.95rem;white-space:nowrap}
+.pur .pts-got{flex:0 0 auto;font-weight:800;color:#1e6b34;font-size:.95rem;white-space:nowrap}
+.empty{background:var(--card);border:1px dashed var(--line);border-radius:var(--r-md);padding:18px;margin-top:12px;color:var(--ink-soft);font-size:.94rem;text-align:center}
 /* profile */
-.profcov{text-align:center;padding:26px 20px 20px}
-.pavatar{width:110px;height:110px;border-radius:50%;border:3px solid var(--sapphire);background:var(--btn-grad);color:#fff;font-family:"Playfair Display",serif;font-weight:800;font-size:2.6rem;display:flex;align-items:center;justify-content:center;overflow:hidden;margin:0 auto;cursor:pointer;position:relative;padding:0}
+.profcov{margin-top:12px;border-radius:28px;background:var(--card-grad);color:#fff;text-align:center;padding:26px 20px 22px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.profcov::before{content:"🦋";position:absolute;left:-12px;bottom:-24px;font-size:6.5rem;opacity:.12;transform:rotate(-12deg)}
+.pavatar{width:104px;height:104px;border-radius:50%;border:3px solid rgba(255,255,255,.85);background:rgba(255,255,255,.14);color:#fff;font-family:"Playfair Display",serif;font-weight:800;font-size:2.5rem;display:flex;align-items:center;justify-content:center;overflow:hidden;margin:0 auto;cursor:pointer;position:relative;padding:0;z-index:1}
 .pavatar img{width:100%;height:100%;object-fit:cover}
-.pavatar .cam{position:absolute;bottom:2px;right:2px;background:#fff;border:1px solid var(--line);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.pavatar .cam{position:absolute;bottom:2px;right:2px;background:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.profcov .pname{font-family:"Playfair Display",serif;font-weight:800;font-size:1.4rem;margin-top:12px;position:relative;z-index:1}
+.profcov .pmail{color:#c9dcf7;font-size:.9rem;position:relative;z-index:1}
+.stat-row{display:flex;gap:10px;margin-top:14px}
+.stat{flex:1;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px 6px;text-align:center;box-shadow:0 4px 14px rgba(15,82,186,.06)}
+.stat .n{font-family:"Playfair Display",serif;font-weight:800;font-size:1.45rem;color:var(--navy)}
+.stat .l{font-size:.72rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.09em}
 .field{margin-top:16px;text-align:left}
-.stat-row{display:flex;gap:10px;margin-top:16px}
-.stat{flex:1;background:var(--card-soft);border:1px solid var(--line);border-radius:14px;padding:12px 8px;text-align:center}
-.stat .n{font-family:"Playfair Display",serif;font-weight:800;font-size:1.4rem}
-.stat .l{font-size:.78rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em}
-.install{background:var(--sapphire-pale);border:1px dashed var(--sapphire);border-radius:14px;padding:14px 16px;margin-top:16px;font-size:.9rem;line-height:1.6;color:var(--sapphire-deep)}
+.install{background:var(--pale);border:1px dashed var(--sapphire);border-radius:14px;padding:14px 16px;margin-top:16px;font-size:.9rem;line-height:1.6;color:var(--sapphire-deep)}
 .install button{float:right;border:0;background:none;font-size:1.1rem;cursor:pointer;color:var(--sapphire-deep)}
 .switch{text-align:center;margin-top:18px}
 .switch button{background:none;border:0;color:var(--sapphire);font-family:inherit;font-size:.92rem;cursor:pointer;text-decoration:underline}
+/* more from glam / footer */
+.more{margin-top:26px}
+.more .row{display:flex;gap:10px}
+.more a{flex:1;display:inline-block;text-align:center;padding:13px 8px;border-radius:999px;font-weight:700;font-size:.9rem;text-decoration:none}
+.more .join{background:var(--btn-grad);color:#fff;box-shadow:0 6px 18px rgba(15,82,186,.25)}
+.more .shop{background:#fff;color:var(--sapphire-deep);border:1.5px solid var(--line)}
+.made{text-align:center;margin-top:14px;font-size:.82rem;color:var(--ink-soft)}
+.made .heart{color:#e2557a}
+.footline{text-align:center;color:var(--ink-soft);font-size:.8rem;margin-top:6px}
 /* tab bar */
-.tabbar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);display:flex;z-index:50;padding-bottom:env(safe-area-inset-bottom)}
-.tabbar button{flex:1;border:0;background:none;font-family:inherit;padding:10px 4px 8px;color:var(--ink-soft);font-size:.72rem;font-weight:600;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
-.tabbar button .ti{font-size:1.35rem}
-.tabbar button.active{color:var(--sapphire)}
-/* CTA footer */
-.cta{margin-top:34px;text-align:center}
-.cta .row{display:flex;gap:10px;justify-content:center}
-.cta a{flex:1;max-width:220px;display:inline-block;padding:13px 10px;border-radius:999px;font-weight:700;font-size:.92rem;text-decoration:none}
-.cta .join{background:var(--btn-grad);color:#fff;box-shadow:0 6px 18px rgba(15,82,186,.25)}
-.cta .shop{background:#fff;color:var(--sapphire-deep);border:1.5px solid var(--line)}
-.cta .made{margin-top:12px;font-size:.82rem;color:var(--ink-soft)}
-.cta .made .heart{color:#e2557a}
-.spinner{width:22px;height:22px;border:3px solid var(--line);border-top-color:var(--sapphire);border-radius:50%;margin:18px auto;animation:spin 0.8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-footer.site{text-align:center;margin-top:10px;color:var(--ink-soft);font-size:.82rem}
+.tabbar{flex:0 0 auto;display:flex;background:rgba(255,255,255,.97);border-top:1px solid var(--line);padding:8px 10px calc(10px + env(safe-area-inset-bottom))}
+.tabbar button{flex:1;border:0;background:none;font-family:inherit;padding:7px 4px 5px;color:#8fa3bd;font-size:.72rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;border-radius:16px}
+.tabbar button .ti{font-size:1.3rem;line-height:1;filter:grayscale(.6);opacity:.75}
+.tabbar button.active{color:var(--sapphire);background:var(--pale)}
+.tabbar button.active .ti{filter:none;opacity:1}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="topbar">
-    <div class="mark">🦋</div>
-    <h1>Inner Circle Rewards</h1>
-    <p class="tag">Your Glow Points, right in your pocket</p>
-  </div>
+<div class="stage">
+ <div class="phone">
+  <div class="screen">
+   <div class="statusbar"><span id="clock">--:--</span><span class="sicons">5G&nbsp;▂▄▆&nbsp;🔋</span></div>
+   <div class="scroll" id="scrollBox">
 
-  <!-- login -->
-  <div class="card" id="view-login">
-    <label for="email">Email you shop with</label>
-    <input type="email" id="email" placeholder="you@example.com" autocomplete="email" inputmode="email" />
-    <button class="btn" id="lookupBtn">See my points 💎</button>
-    <div class="err hidden" id="loginErr"></div>
-    <div class="spinner hidden" id="loginSpin"></div>
-    <p class="hint">Use the email from your Payhip purchases.<br />New here? <a href="../">How the Inner Circle works</a></p>
-  </div>
-
-  <!-- app -->
-  <div id="view-app" class="hidden">
-    <div class="apphead">
-      <button class="avatar" id="avatarBtn" aria-label="Open profile"><span id="avatarTxt">?</span></button>
-      <div>
-        <div class="hello" id="helloName">Hey there</div>
-        <div class="hellosub" id="helloTier">Inner Circle Member</div>
+    <!-- LOGIN -->
+    <div id="view-login">
+      <div class="splash">
+        <div class="orb">🦋</div>
+        <h1>Inner Circle</h1>
+        <p class="tag">Your Glow Points, right in your pocket</p>
+      </div>
+      <div class="card">
+        <label for="email">Email you shop with</label>
+        <input type="email" id="email" placeholder="you@example.com" autocomplete="email" inputmode="email" />
+        <button class="btn" id="lookupBtn">See my points 💎</button>
+        <div class="err hidden" id="loginErr"></div>
+        <div class="spinner hidden" id="loginSpin"></div>
+        <p class="hint">Use the email from your Payhip purchases.<br />New here? <a href="../">How the Inner Circle works</a></p>
+      </div>
+      <div class="earn" style="margin-top:16px">
+        <div class="tile"><div class="ic">💎</div><div class="v">Earn</div><div class="t">Every $1, live, referral and win post adds Glow Points</div></div>
+        <div class="tile"><div class="ic">🎁</div><div class="v">Cash in</div><div class="t">Discounts and free products at 50, 100 and 200 points</div></div>
+        <div class="tile"><div class="ic">👑</div><div class="v">Go VIP</div><div class="t">300 lifetime points unlocks VIP — and points never expire</div></div>
+        <div class="tile"><div class="ic">📱</div><div class="v">Keep it</div><div class="t">Add it to your home screen and it lives like a real app</div></div>
       </div>
     </div>
 
-    <!-- HOME -->
-    <section id="tab-home">
-      <div class="card balance" id="balanceCard">
-        <div class="pts-label">Glow Points</div>
-        <div class="pts" id="ptsNum">0</div>
-        <div class="tier" id="tierSlot"></div>
-        <div class="progress">
-          <div class="plabel" id="vipLabel"></div>
-          <div class="bar"><div id="vipBar" style="width:0%"></div></div>
+    <!-- APP -->
+    <div id="view-app" class="hidden">
+      <div class="apphead">
+        <button class="avatar" id="avatarBtn" aria-label="Open profile"><span id="avatarTxt">?</span></button>
+        <div>
+          <div class="hello" id="helloName">Hey there</div>
+          <span class="tierchip" id="helloTier">Inner Circle Member</span>
         </div>
       </div>
-      <div id="pendingSlot"></div>
-      <h2 class="sec">Claim a reward 🎁</h2>
-      <div id="rewardsSlot"></div>
-      <h2 class="sec">Recent activity</h2>
-      <div class="card" style="padding:6px 16px" id="activitySlot"></div>
-    </section>
 
-    <!-- PURCHASES -->
-    <section id="tab-purchases" class="hidden">
-      <h2 class="sec" style="margin-top:14px">My purchases 🛍️</h2>
-      <p class="hint" style="text-align:left;margin:4px 0 0">Every Payhip order, with the Glow Points it earned you.</p>
-      <div id="purchasesSlot"></div>
-    </section>
+      <!-- HOME -->
+      <section id="tab-home">
+        <div class="mcard" id="balanceCard">
+          <div class="brand">Glam's Inner Circle · Member Card</div>
+          <div class="ptsrow"><span class="pts" id="ptsNum">0</span><span class="ptslabel">Glow<br />Points</span></div>
+          <div class="meta">
+            <div class="m"><div class="n" id="metaLife">0</div><div class="l">Lifetime</div></div>
+            <div class="m"><div class="n" id="metaTier">Member</div><div class="l">Status</div></div>
+            <div class="m"><div class="n" id="metaNext">—</div><div class="l">Next reward</div></div>
+          </div>
+          <div class="vipwrap">
+            <div class="viplabel"><span id="vipLabel">Your road to VIP</span><span id="vipPct"></span></div>
+            <div class="bar"><div id="vipBar" style="width:0%"></div></div>
+          </div>
+        </div>
 
-    <!-- PROFILE -->
-    <section id="tab-profile" class="hidden">
-      <div class="card profcov">
-        <button class="pavatar" id="pavatarBtn" aria-label="Change photo"><span id="pavatarTxt">?</span><span class="cam">📷</span></button>
-        <div class="field">
-          <label for="displayName">Profile name</label>
-          <input type="text" id="displayName" maxlength="40" placeholder="What should we call you?" />
+        <div id="nextSlot"></div>
+        <div id="pendingSlot"></div>
+
+        <h2 class="sec">Ways to earn ✨</h2>
+        <p class="secsub">Do what you're already doing — get rewarded for it.</p>
+        <div class="earn">
+          <div class="tile"><div class="ic">🛍️</div><div class="v">1 pt per $1</div><div class="t">Every Payhip purchase, added automatically</div></div>
+          <div class="tile"><div class="ic">🎥</div><div class="v">10 pts</div><div class="t">Show up to a TikTok live, then drop a 🦋 in the Glow Up Society</div></div>
+          <div class="tile"><div class="ic">💌</div><div class="v">25 pts</div><div class="t">Bring a friend who makes a purchase</div></div>
+          <div class="tile"><div class="ic">🏆</div><div class="v">10 pts</div><div class="t">Post a win or a result in the Glow Up Society</div></div>
         </div>
-        <div class="field">
-          <label for="profEmail">Email (can't be changed)</label>
-          <input type="email" id="profEmail" disabled />
+
+        <h2 class="sec" id="rewardsHead">Claim a reward 🎁</h2>
+        <p class="secsub">Your points, your pick. Glam sends claimed rewards within 24 hours.</p>
+        <div id="rewardsSlot"></div>
+
+        <h2 class="sec">Recent activity</h2>
+        <div class="timeline" id="activitySlot"></div>
+      </section>
+
+      <!-- PURCHASES -->
+      <section id="tab-purchases" class="hidden">
+        <div class="pursum">
+          <div class="s"><div class="n" id="purCount">0</div><div class="l">Orders</div></div>
+          <div class="s"><div class="n" id="purPts">0</div><div class="l">Points earned</div></div>
         </div>
-        <button class="btn small" id="saveProfileBtn">Save profile 💾</button>
-        <div class="err hidden" id="profErr"></div>
-        <div class="okmsg hidden" id="profOk"></div>
+        <h2 class="sec">My purchases 🛍️</h2>
+        <p class="secsub">Every Payhip order, with the Glow Points it earned you.</p>
+        <div id="purchasesSlot"></div>
+      </section>
+
+      <!-- PROFILE -->
+      <section id="tab-profile" class="hidden">
+        <div class="profcov">
+          <button class="pavatar" id="pavatarBtn" aria-label="Change photo"><span id="pavatarTxt">?</span><span class="cam">📷</span></button>
+          <div class="pname" id="profNameBig">Inner Circle Member</div>
+          <div class="pmail" id="profMailSmall"></div>
+        </div>
         <div class="stat-row">
           <div class="stat"><div class="n" id="statPts">0</div><div class="l">Points</div></div>
           <div class="stat"><div class="n" id="statLife">0</div><div class="l">Lifetime</div></div>
           <div class="stat"><div class="n" id="statPur">0</div><div class="l">Orders</div></div>
         </div>
-      </div>
-      <div class="install" id="installHint">
-        <button id="installX" aria-label="dismiss">✕</button>
-        📱 <strong>Make it an app:</strong> tap Share → <strong>Add to Home Screen</strong> and your rewards live on your phone like any other app.
-      </div>
-      <div class="switch"><button id="switchBtn">Not you? Use a different email</button></div>
-    </section>
-
-    <nav class="tabbar" id="tabbar">
-      <button data-tab="home" class="active"><span class="ti">🏠</span>Home</button>
-      <button data-tab="purchases"><span class="ti">🛍️</span>Purchases</button>
-      <button data-tab="profile"><span class="ti">👤</span>Profile</button>
-    </nav>
-  </div>
-
-  <div class="cta">
-    <div class="row">
-      <a class="join" href="https://payhip.com/b/54LoK" target="_blank" rel="noopener">✨ Join The Glam Vault</a>
-      <a class="shop" href="https://glamhustlehub.com" target="_blank" rel="noopener">🛍️ Shop Glam Hustle Hub</a>
+        <div class="card" style="margin-top:14px">
+          <div class="field" style="margin-top:0">
+            <label for="displayName">Profile name</label>
+            <input type="text" id="displayName" maxlength="40" placeholder="What should we call you?" />
+          </div>
+          <div class="field">
+            <label for="profEmail">Email (can't be changed)</label>
+            <input type="email" id="profEmail" disabled />
+          </div>
+          <button class="btn small" id="saveProfileBtn">Save profile 💾</button>
+          <div class="err hidden" id="profErr"></div>
+          <div class="okmsg hidden" id="profOk"></div>
+        </div>
+        <div class="install" id="installHint">
+          <button id="installX" aria-label="dismiss">✕</button>
+          📱 <strong>Make it an app:</strong> tap Share → <strong>Add to Home Screen</strong> and your rewards live on your phone like any other app.
+        </div>
+        <div class="more">
+          <div class="row">
+            <a class="join" href="https://payhip.com/b/54LoK" target="_blank" rel="noopener">✨ Join The Glam Vault</a>
+            <a class="shop" href="https://glamhustlehub.com" target="_blank" rel="noopener">🛍️ Shop Glam Hustle Hub</a>
+          </div>
+          <div class="made">made with <span class="heart">♥</span> by Indigo, Glam's AI assistant</div>
+          <div class="footline">Glam's Inner Circle · Glow Points never expire</div>
+        </div>
+        <div class="switch"><button id="switchBtn">Not you? Use a different email</button></div>
+      </section>
     </div>
-    <div class="made">made with <span class="heart">♥</span> by Indigo, Glam's AI assistant</div>
-  </div>
-  <footer class="site">Glam's Inner Circle · Glow Points never expire</footer>
-</div>
+
+   </div><!-- /scroll -->
+   <nav class="tabbar hidden" id="tabbar">
+     <button data-tab="home" class="active"><span class="ti">🏠</span>Home</button>
+     <button data-tab="purchases"><span class="ti">🛍️</span>Purchases</button>
+     <button data-tab="profile"><span class="ti">👤</span>Profile</button>
+   </nav>
+  </div><!-- /screen -->
+ </div><!-- /phone -->
+</div><!-- /stage -->
 <input type="file" id="photoInput" accept="image/*" class="hidden" />
 
 <script>
@@ -241,7 +337,17 @@ async function api(path, data){
 
 var currentEmail = "";
 var currentData = null;
-var pendingPhoto = null; // data URL waiting to be saved
+var pendingPhoto = null;
+
+function tickClock(){
+  try{
+    var d = new Date();
+    var h = d.getHours() % 12; if(h === 0) h = 12;
+    var m = d.getMinutes(); if(m < 10) m = "0" + m;
+    $("clock").textContent = h + ":" + m;
+  }catch(_){}
+}
+tickClock(); setInterval(tickClock, 20000);
 
 function setAvatar(photo, name){
   var initial = (name || "?").trim().charAt(0).toUpperCase() || "?";
@@ -274,23 +380,43 @@ async function lookup(email, silent){
 function renderApp(r){
   $("view-login").classList.add("hidden");
   $("view-app").classList.remove("hidden");
-  var name = r.displayName || "Hey there";
-  $("helloName").textContent = "Hey, " + name + " 💎";
+  $("tabbar").classList.remove("hidden");
+  var name = r.displayName || "Inner Circle Member";
+  $("helloName").textContent = "Hey, " + (r.displayName || "there") + " 💎";
   var vip = r.tier === "vip";
-  $("helloTier").textContent = vip ? "👑 VIP Member" : "Inner Circle Member";
+  var chip = $("helloTier");
+  chip.textContent = vip ? "👑 VIP Member" : "Inner Circle Member";
+  chip.classList.toggle("vip", vip);
   setAvatar(r.photo || "", name);
 
-  // home
+  // member card
   $("ptsNum").textContent = r.points;
   $("balanceCard").classList.toggle("vip", vip);
-  $("tierSlot").innerHTML = vip
-    ? '<span class="vip-badge">👑 VIP MEMBER</span>'
-    : '<span style="color:var(--ink-soft);font-size:.92rem">Inner Circle Member</span>';
+  $("metaLife").textContent = r.lifetime;
+  $("metaTier").textContent = vip ? "👑 VIP" : "Member";
+  var rewards = r.rewards || [];
+  var readyOne = null, nextOne = null;
+  rewards.forEach(function(rw){
+    var can = rw.canClaim && r.points >= rw.cost;
+    if(can && !readyOne) readyOne = rw;
+    if(!can && r.points < rw.cost && !nextOne) nextOne = rw;
+  });
+  $("metaNext").textContent = readyOne ? "Ready 🎁" : (nextOne ? nextOne.cost + " pts" : "—");
   var pct = Math.round((r.vipProgress || 0) * 100);
   $("vipLabel").textContent = vip
     ? "VIP for life — enjoy it! 👑"
-    : (r.lifetime + " lifetime points — " + (r.vipThreshold - r.lifetime) + " to VIP");
+    : ("Road to VIP — " + r.lifetime + " of " + r.vipThreshold + " lifetime points");
+  $("vipPct").textContent = vip ? "100%" : (pct + "%");
   $("vipBar").style.width = pct + "%";
+
+  // next-reward banner
+  if(readyOne){
+    $("nextSlot").innerHTML = '<div class="nextr ready"><span class="big">🎁</span><span><strong>You\'ve got a reward waiting.</strong><br />' + esc(readyOne.name) + ' is ready to claim below.</span></div>';
+  }else if(nextOne){
+    $("nextSlot").innerHTML = '<div class="nextr"><span class="big">💎</span><span><strong>So close —</strong> you\'re ' + (nextOne.cost - r.points) + ' pts away from <strong>' + esc(nextOne.name) + '</strong>.</span></div>';
+  }else{
+    $("nextSlot").innerHTML = "";
+  }
 
   var pc = "";
   (r.pendingClaims || []).forEach(function(c){
@@ -299,14 +425,18 @@ function renderApp(r){
   $("pendingSlot").innerHTML = pc;
 
   var rh = "";
-  (r.rewards || []).forEach(function(rw){
+  rewards.forEach(function(rw){
     var can = rw.canClaim && r.points >= rw.cost;
-    rh += '<div class="reward' + (can ? "" : " locked") + '">'
-      + '<span class="cost">' + rw.cost + ' pts</span>'
+    var rpct = rw.cost > 0 ? Math.min(100, Math.round((r.points / rw.cost) * 100)) : 0;
+    rh += '<div class="reward' + (can ? " ready" : "") + '">'
+      + '<div class="rrow"><span class="cost">' + rw.cost + ' pts</span>'
       + '<span class="info"><strong>' + esc(rw.name) + '</strong><small>' + esc(rw.blurb || "") + '</small></span>'
-      + '<button class="claim" data-rid="' + esc(rw.id) + '"' + (can ? "" : " disabled") + '>' + (can ? "Claim" : "🔒") + '</button>'
+      + '<button class="claim" data-rid="' + esc(rw.id) + '"' + (can ? "" : " disabled") + '>' + (can ? "Claim" : "🔒") + '</button></div>'
+      + '<div class="rprog"><div class="bar"><div style="width:' + rpct + '%"></div></div>'
+      + '<div class="rl"><span>' + (can ? "Ready to claim 🎉" : (r.points + " of " + rw.cost + " pts")) + '</span><span>' + (can ? "" : ((rw.cost - r.points) + " to go")) + '</span></div></div>'
       + '</div>';
   });
+  if(!rewards.length) rh = '<div class="empty">Rewards will show up here.</div>';
   $("rewardsSlot").innerHTML = rh;
   var btns = $("rewardsSlot").querySelectorAll(".claim");
   for(var i=0;i<btns.length;i++){
@@ -317,19 +447,24 @@ function renderApp(r){
 
   var ah = "";
   var acts = r.activity || [];
-  if(!acts.length) ah = '<div class="act"><span style="color:var(--ink-soft)">No activity yet — your points will show up here.</span><span></span></div>';
+  if(!acts.length) ah = '<div class="act"><span class="dot"></span><span class="body" style="color:var(--ink-soft)">No activity yet — your points will show up here.</span><span></span></div>';
   acts.forEach(function(a){
     var cls = a.points < 0 ? "neg" : "pos";
     var sign = a.points > 0 ? "+" : "";
-    ah += '<div class="act"><span>' + esc(a.label) + '<br><span class="d">' + esc(a.date || "") + '</span></span>'
+    ah += '<div class="act"><span class="dot ' + (a.points < 0 ? "neg" : "") + '"></span>'
+      + '<span class="body">' + esc(a.label) + '<br><span class="d">' + esc(a.date || "") + '</span></span>'
       + '<span class="p ' + cls + '">' + sign + a.points + '</span></div>';
   });
   $("activitySlot").innerHTML = ah;
 
   // purchases
-  var ph = "";
   var purs = r.purchases || [];
-  if(!purs.length) ph = '<div class="card" style="padding:18px">No purchases yet — your Payhip orders will appear here automatically. 🛍️</div>';
+  var totPts = 0;
+  purs.forEach(function(p){ totPts += (p.points || 0); });
+  $("purCount").textContent = purs.length;
+  $("purPts").textContent = totPts;
+  var ph = "";
+  if(!purs.length) ph = '<div class="empty">No purchases yet — your Payhip orders will appear here automatically. 🛍️</div>';
   purs.forEach(function(p){
     ph += '<div class="pur"><span class="bag">🛍️</span>'
       + '<span class="info"><strong>' + esc(p.product) + '</strong><small>' + esc(p.date || "") + '</small></span>'
@@ -338,6 +473,8 @@ function renderApp(r){
   $("purchasesSlot").innerHTML = ph;
 
   // profile
+  $("profNameBig").textContent = name;
+  $("profMailSmall").textContent = r.email || currentEmail;
   $("displayName").value = r.displayName || "";
   $("profEmail").value = r.email || currentEmail;
   $("statPts").textContent = r.points;
@@ -354,7 +491,7 @@ function switchTab(name){
   for(var i=0;i<btns.length;i++){
     btns[i].classList.toggle("active", btns[i].getAttribute("data-tab") === name);
   }
-  window.scrollTo(0,0);
+  $("scrollBox").scrollTo(0,0);
 }
 
 async function claimReward(rewardId, btn){
@@ -374,7 +511,6 @@ async function claimReward(rewardId, btn){
   }
 }
 
-// photo: pick -> resize -> preview -> save with profile
 function fileToResizedDataURL(file, maxSize, quality){
   return new Promise(function(resolve, reject){
     var img = new Image();
@@ -451,6 +587,7 @@ $("switchBtn").addEventListener("click", function(){
   currentEmail = ""; currentData = null;
   $("email").value = "";
   $("view-app").classList.add("hidden");
+  $("tabbar").classList.add("hidden");
   $("view-login").classList.remove("hidden");
   switchTab("home");
 });
@@ -461,11 +598,8 @@ $("installX").addEventListener("click", function(){ $("installHint").style.displ
   var e = savedEmail();
   if(e){
     $("email").value = e;
-    $("view-login").classList.add("hidden");
-    var spin = document.createElement("div");
-    spin.className = "spinner"; spin.id = "bootSpin";
-    $("view-login").parentNode.insertBefore(spin, $("view-login"));
-    lookup(e, true).then(function(){ var s=$("bootSpin"); if(s) s.remove(); });
+    $("loginSpin").classList.remove("hidden");
+    lookup(e, true).then(function(){ $("loginSpin").classList.add("hidden"); });
   }
 })();
 </script>
