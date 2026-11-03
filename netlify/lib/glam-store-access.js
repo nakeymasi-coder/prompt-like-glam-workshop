@@ -6,12 +6,18 @@ export const PRODUCTS = Object.freeze({
 });
 const ORIGINS=new Set(['https://glamhustlehub.com','https://www.glamhustlehub.com','https://glam-hustle-hub-staging.lovable.app']);
 const PORTAL='https://workshop-poratl.netlify.app';
+const NEW_STORE_PATHS=Object.freeze({'/api/public/access/exchange':'/functions/storeAccessExchange','/api/public/access/status':'/functions/storeAccessStatus'});
 const MAX_AGE=7*86400;
 const cookieName=product=>'__Host-ghh-'+PRODUCTS[product].key;
 const response=(status,data,extra={})=>Response.json(data,{status,headers:{'Cache-Control':'no-store',...extra}});
 export function makeStoreAccess({storeFactory,fetcher=fetch,origin,enabled=false,now=()=>Date.now()}) {
   async function request(path,body,grant) {
-    const r=await fetcher(origin+path,{method:'POST',headers:{'Content-Type':'application/json',...(grant?{Authorization:'Bearer '+grant}:{})},body:JSON.stringify(body),redirect:'error',signal:AbortSignal.timeout(10000)});
+    const init=()=>({method:'POST',headers:{'Content-Type':'application/json',...(grant?{Authorization:'Bearer '+grant}:{})},body:JSON.stringify(body),redirect:'error',signal:AbortSignal.timeout(10000)});
+    let r=await fetcher(origin+path,init());
+    // When the store moves to its new host, the same domain answers the old address with a web page (or
+    // nothing) instead of store data. Only then is the request sent to the new store's address on the SAME
+    // trusted domain. While the current store answers with data (including errors), nothing changes.
+    if(!(r.headers.get('content-type')||'').includes('application/json')) r=await fetcher(origin+NEW_STORE_PATHS[path],init());
     if(!r.ok) throw new Error('Store verification failed');
     return r.json();
   }

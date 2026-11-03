@@ -43,3 +43,17 @@ test('store rejection or network error never creates access',async()=>{
  }
 });
 test('unknown products rejected before contacting store',async()=>{const s=setup();assert.equal((await s.request({product_id:'other',token:'token'})).status,400);assert.equal(s.calls.length,0);});
+// Store move: data answers (including errors) from the current store are used as-is; a web page or empty
+// answer means the domain has moved, so the same request goes to the new store's address on the same domain.
+test('store move: current store data used as-is, web page or empty answers switch to the new address',async()=>{
+ const live=(url)=>Response.json(url.endsWith('Exchange')||url.endsWith('/exchange')?{mode:'live',product_id:product,sub:'buyer',grant}:{active:true,mode:'live',product_id:product});
+ const moved=(url)=>url.includes('/api/public/access/')?(url.endsWith('/exchange')?new Response('<html></html>',{headers:{'content-type':'text/html'}}):new Response(null,{status:404})):live(url);
+ for(const [answer,expect] of [[live,['https://glamhustlehub.com/api/public/access/exchange','https://glamhustlehub.com/api/public/access/status']],[moved,['https://glamhustlehub.com/api/public/access/exchange','https://glamhustlehub.com/functions/storeAccessExchange','https://glamhustlehub.com/api/public/access/status','https://glamhustlehub.com/functions/storeAccessStatus']]]){
+  const urls=[];const s=setup({origin:'https://glamhustlehub.com',fetcher:async(url,opts)=>{urls.push(url);assert.equal(opts.redirect,'error');return answer(url);}});
+  const r=await s.request({product_id:product,token:'signed-token'});assert.equal(r.status,200);
+  assert.equal((await s.request({product_id:product},r.headers.get('set-cookie').split(';')[0])).status,200);
+  assert.deepEqual(urls,expect);
+ }
+ const urls=[];const s=setup({origin:'https://glamhustlehub.com',fetcher:async url=>{urls.push(url);return Response.json({error:'token_already_used'},{status:409});}});
+ assert.equal((await s.request({product_id:product,token:'token'})).status,403);assert.equal(urls.length,1);assert.equal(s.records.size,0);
+});
