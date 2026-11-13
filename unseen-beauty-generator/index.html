@@ -342,11 +342,11 @@ footer{text-align:center; color:#7A8CA0; margin-top:44px; font-size:.9rem;}
   <div class="genGate-card">
     <span class="genGate-badge">BUYERS ONLY</span>
     <h2>🔑 Unlock Be Seen</h2>
-    <p class="sub">This is the full Be Seen Unseen Beauty Prompt Generator — 50 queens, 50 power words, 50 typography styles, 50 art vibes. Enter the license key from your purchase email to open it up.</p>
+    <p class="sub">This is the full Be Seen Unseen Beauty Prompt Generator — 50 women, 50 power words, 50 lettering styles, 53 art vibes. Already have a license key from an earlier purchase? Paste it below.</p>
     <input id="genKeyInput" type="text" placeholder="Paste your license key here" autocomplete="off" spellcheck="false">
     <button id="genUnlockBtn">Unlock Be Seen</button>
     <p id="genGateMsg"></p>
-    <p class="genGate-hint"><strong>Where's my key?</strong><br>It's in the email Payhip sent you right after checkout — look for "license key".<br>Buying now? The key arrives within a couple of minutes of payment.</p>
+    <p class="genGate-hint"><strong>Bought it on Glam Hustle Hub?</strong><br>Open Be Seen from <a href="https://glamhustlehub.com/account" style="color:#1C2742;font-weight:800">My Account</a> — no key needed.<br><strong>Don't have it yet?</strong> <a href="https://glamhustlehub.com/products/be-seen-the-full-unseen-beauty-prompt-generator" style="color:#1C2742;font-weight:800">Get Be Seen at glamhustlehub.com</a></p>
   </div>
 </div>
 <script>
@@ -947,7 +947,7 @@ function powerWord(){
 function pick(a, i){ return a[i % a.length]; }
 function buildPrompt(qi,si,ai,bi,hi,oi,sei,wi,ti,vi,word){
   const h=HEROES[qi], t=TYPES[ti], v=VIBES[vi];
-  return `Ultra-detailed ${v.prompt} portrait of ${h.prompt}, a woman ${AGES[ai]} with ${SKINS[si]} skin and a ${BODIES[bi]} figure, ${HAIR[hi]}, wearing ${OUTFITS[oi]}, ${SETTINGS[sei]}. The word "${word}" appears as ${t.prompt}, ${t.place}. Empowering, dignified and celebratory mood — strength and beauty, never pity. Radiant lighting, ultra detailed, 8k, professional photography, masterpiece. Render as ONE single portrait on its own separate canvas — never a collage, never multiple panels in one image.`;
+  return `Ultra-detailed ${v.prompt} portrait of ${h.prompt}, a woman ${AGES[ai]} with ${SKINS[si]} skin and ${/^[aeiou]/i.test(BODIES[bi])?'an':'a'} ${BODIES[bi]} figure, ${HAIR[hi]}, wearing ${OUTFITS[oi]}, ${SETTINGS[sei]}. The word "${word}" appears as ${t.prompt}, ${t.place}. Empowering, dignified and celebratory mood — strength and beauty, never pity. Radiant lighting, ultra detailed, 8k, professional photography, masterpiece. Render as ONE single portrait on its own separate canvas — never a collage, never multiple panels in one image.`;
 }
 function effIdx(cat, arr, i){
   const s=sel[cat];
