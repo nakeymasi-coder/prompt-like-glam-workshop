@@ -195,7 +195,7 @@ h2.sec{font-family:"Playfair Display",serif;font-size:1.22rem;margin:24px 0 2px;
         <button class="btn" id="lookupBtn">See my points 💎</button>
         <div class="err hidden" id="loginErr"></div>
         <div class="spinner hidden" id="loginSpin"></div>
-        <p class="hint">Use the email from your Payhip purchases.<br />New here? <a href="../">How the Inner Circle works</a></p>
+        <p class="hint">Use the email from your purchases.<br />New here? <a href="../">How the Inner Circle works</a></p>
       </div>
       <div class="earn" style="margin-top:16px">
         <div class="tile"><div class="ic">💎</div><div class="v">Earn</div><div class="t">Every $1, live, referral and win post adds Glow Points</div></div>
@@ -237,7 +237,7 @@ h2.sec{font-family:"Playfair Display",serif;font-size:1.22rem;margin:24px 0 2px;
         <h2 class="sec">Ways to earn ✨</h2>
         <p class="secsub">Do what you're already doing — get rewarded for it.</p>
         <div class="earn">
-          <div class="tile"><div class="ic">🛍️</div><div class="v">1 pt per $1</div><div class="t">Every Payhip purchase, added automatically</div></div>
+          <div class="tile"><div class="ic">🛍️</div><div class="v">1 pt per $1</div><div class="t">Every purchase, added automatically</div></div>
           <div class="tile"><div class="ic">🎥</div><div class="v">10 pts</div><div class="t">Show up to a TikTok live, then drop a 🦋 in the Glow Up Society</div></div>
           <div class="tile"><div class="ic">💌</div><div class="v">25 pts</div><div class="t">Bring a friend who makes a purchase</div></div>
           <div class="tile"><div class="ic">🏆</div><div class="v">10 pts</div><div class="t">Post a win or a result in the Glow Up Society</div></div>
@@ -258,7 +258,7 @@ h2.sec{font-family:"Playfair Display",serif;font-size:1.22rem;margin:24px 0 2px;
           <div class="s"><div class="n" id="purPts">0</div><div class="l">Points earned</div></div>
         </div>
         <h2 class="sec">My purchases 🛍️</h2>
-        <p class="secsub">Every Payhip order, with the Glow Points it earned you.</p>
+        <p class="secsub">Every order, with the Glow Points it earned you.</p>
         <div id="purchasesSlot"></div>
       </section>
 
@@ -464,7 +464,7 @@ function renderApp(r){
   $("purCount").textContent = purs.length;
   $("purPts").textContent = totPts;
   var ph = "";
-  if(!purs.length) ph = '<div class="empty">No purchases yet — your Payhip orders will appear here automatically. 🛍️</div>';
+  if(!purs.length) ph = '<div class="empty">No purchases yet — your orders will appear here automatically. 🛍️</div>';
   purs.forEach(function(p){
     ph += '<div class="pur"><span class="bag">🛍️</span>'
       + '<span class="info"><strong>' + esc(p.product) + '</strong><small>' + esc(p.date || "") + '</small></span>'
