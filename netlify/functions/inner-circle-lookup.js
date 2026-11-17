@@ -24,7 +24,7 @@ export default async (req) =>
       return json({
         success: true,
         found: false,
-        message: "No Inner Circle account found for that email yet — it appears automatically after your first Payhip purchase.",
+        message: "No Inner Circle account found for that email yet — it appears automatically after your first purchase at glamhustlehub.com.",
       }, 200, req);
     }
     const s = summarize(events);
